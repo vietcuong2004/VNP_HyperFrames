@@ -102,7 +102,7 @@ graph TD
     ```bash
     npm run render
     ```
-*   **Đầu ra (Output)**: Tệp video MP4 thành phẩm chất lượng cao nằm trong thư mục `renders/` với định dạng tên: `renders/my-video_YYYY-MM-DD_HH-MM-SS.mp4`.
+*   **Đầu ra (Output)**: Tệp video MP4 thành phẩm chất lượng cao nằm trong thư mục `renders/` với định dạng tên: `renders/VNP_HyperFrames_YYYY-MM-DD_HH-MM-SS.mp4`.
 
 # Cấu trúc dự án:
 
