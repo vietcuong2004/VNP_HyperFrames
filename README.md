@@ -4,7 +4,7 @@ Tài liệu này hướng dẫn chi tiết từng bước tạo video Review Git
 
 ---
 
-## ⚡ Cực Nhanh: Luồng Tự Động Hóa Hoàn Toàn (End-to-End Pipeline)
+## ⚡Cách chạy cực nhanh: Luồng Tự Động Hóa Hoàn Toàn (End-to-End Pipeline)
 
 Nếu muốn tạo nhanh video review cho một repository GitHub bất kỳ, bạn chỉ cần chạy một câu lệnh duy nhất:
 
@@ -16,6 +16,20 @@ node run_pipeline.js <github_repo_url>
 ```bash
 node run_pipeline.js https://github.com/pnpm/pnpm
 ```
+## 🖥️ Cách xem giao diện UI Studio (Preview)
+
+Để xem trước (preview) dòng thời gian của video, nghe thử âm thanh, phụ đề karaoke và các chuyển động trực quan trên giao diện đồ họa Studio:
+
+![alt text](image-1.png)
+1. Khởi động máy chủ xem thử:
+   ```bash
+   npm run dev
+   ```
+2. Mở trình duyệt web và truy cập:
+   ```
+   http://localhost:3002
+   ```
+   *(Hoặc truy cập trực tiếp dự án tại: [http://localhost:3002#project/VNP_HyperFrames](http://localhost:3002#project/VNP_HyperFrames))*
 
 ### Sơ đồ hoạt động của Pipeline:
 
@@ -33,10 +47,7 @@ graph TD
 ---
 
 > [!IMPORTANT]
-> Tất cả các bước thực hiện thủ công dưới đây đều được chạy từ bên trong thư mục `my-video/`. Vui lòng chuyển thư mục trước khi thực hiện:
-> ```bash
-> cd my-video
-> ```
+> Tất cả các bước thực hiện thủ công dưới đây đều được chạy trực tiếp từ thư mục gốc của dự án `VNP_HyperFrames`.
 
 ### Bước 1: Thu thập thông tin repo và tạo kịch bản (`generate_repo_data.js`)
 *   **Mô tả**: Tách thông tin `owner` và `repo` từ đường dẫn GitHub, gọi API công khai của GitHub để lấy: tên dự án, mô tả, số sao, ngôn ngữ lập trình chính. Sau đó, kết hợp các thông tin này vào mẫu kịch bản tiếng Việt có cấu trúc 8 phân cảnh review chuẩn.
@@ -44,7 +55,7 @@ graph TD
     ```bash
     node generate_repo_data.js https://github.com/pnpm/pnpm
     ```
-*   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic tại: `data/github-review.json` (Đường dẫn tuyệt đối: [github-review.json](file:///d:/hyperframes/my-video/data/github-review.json))
+*   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic tại: `data/github-review.json` (Đường dẫn tuyệt đối: [github-review.json](file:///d:/VNP_HyperFrames/data/github-review.json))
 
 ---
 
