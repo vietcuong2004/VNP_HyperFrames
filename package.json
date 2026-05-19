@@ -1,0 +1,20 @@
+{
+  "name": "my-video",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.6.24 preview",
+    "check": "npx --yes hyperframes@0.6.24 lint && npx --yes hyperframes@0.6.24 validate && npx --yes hyperframes@0.6.24 inspect",
+    "render": "npx --yes hyperframes@0.6.24 render --workers=2",
+    "publish": "npx --yes hyperframes@0.6.24 publish",
+    "generate:news": "node generate.mjs data/sample-news.json",
+    "generate:motivation": "node generate.mjs data/sample-motivation.json",
+    "generate:finance": "node generate.mjs data/sample-finance.json",
+    "render:news": "node generate.mjs data/sample-news.json && npx --yes hyperframes@0.6.24 render --workers=2",
+    "render:motivation": "node generate.mjs data/sample-motivation.json && npx --yes hyperframes@0.6.24 render --workers=2",
+    "render:finance": "node generate.mjs data/sample-finance.json && npx --yes hyperframes@0.6.24 render --workers=2"
+  },
+  "dependencies": {
+    "puppeteer": "^25.0.4"
+  }
+}
