@@ -179,6 +179,11 @@ export default function (data, css) {
       <div class="bg"></div>
       ${particlesHTML}
       
+      <div class="top-header">
+        <img class="top-avatar" src="./assets/logo/shiba.png" />
+        <div class="top-username">SHIBA NEWS 24H</div>
+      </div>
+      
       ${scenesHTML}
       
       <!-- Subtitles Area -->
