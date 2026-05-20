@@ -10,132 +10,202 @@
     "image": "nginx",
     "description": "Official build of Nginx.",
     "star_count": 21279,
-    "pull_count": 13021504554
+    "pull_count": 13021786627
   },
   "scenes": [
     {
       "assets": [
         "character shiba explaining something.png"
       ],
-      "sfx": "yeah_tre_con.mp3",
+      "sfx": "Ding 2.mp3",
       "repo_url": "hub.docker.com/_/nginx",
-      "voice": "library/nginx phù hợp với format container quick start. Image này dùng để chạy hoặc làm nền cho service: Official build of Nginx..",
+      "voice": "library/nginx là một Docker image nên bắt đầu bằng cách rất thực dụng: image này chạy service gì, pull thế nào, map port ra sao, và có cần volume hay env không. Official build of Nginx..",
       "visual": "Chụp Docker Hub, tag và mô tả image.",
       "headline_line1": "NGINX",
       "headline_line2": "CONTAINER QUICK START",
       "audio_start": 0.5,
-      "audio_duration": 9.03,
+      "audio_duration": 16.22,
       "audio_path": "assets/audio/github-review_scene_1.wav",
       "transcript": [
         {
           "text": "library/nginx",
           "start": 0.5,
-          "end": 0.91
+          "end": 0.95
         },
         {
-          "text": "phù",
-          "start": 0.91,
-          "end": 1.32
+          "text": "là",
+          "start": 0.95,
+          "end": 1.4
         },
         {
-          "text": "hợp",
-          "start": 1.32,
-          "end": 1.73
+          "text": "một",
+          "start": 1.4,
+          "end": 1.85
         },
         {
-          "text": "với",
-          "start": 1.73,
-          "end": 2.14
+          "text": "Docker",
+          "start": 1.85,
+          "end": 2.3
         },
         {
-          "text": "format",
-          "start": 2.14,
-          "end": 2.55
+          "text": "image",
+          "start": 2.3,
+          "end": 2.75
         },
         {
-          "text": "container",
-          "start": 2.55,
-          "end": 2.96
+          "text": "nên",
+          "start": 2.75,
+          "end": 3.2
         },
         {
-          "text": "quick",
-          "start": 2.96,
-          "end": 3.37
+          "text": "bắt",
+          "start": 3.2,
+          "end": 3.65
         },
         {
-          "text": "start.",
-          "start": 3.37,
-          "end": 3.79
+          "text": "đầu",
+          "start": 3.65,
+          "end": 4.11
         },
         {
-          "text": "Image",
-          "start": 3.79,
-          "end": 4.2
+          "text": "bằng",
+          "start": 4.11,
+          "end": 4.56
+        },
+        {
+          "text": "cách",
+          "start": 4.56,
+          "end": 5.01
+        },
+        {
+          "text": "rất",
+          "start": 5.01,
+          "end": 5.46
+        },
+        {
+          "text": "thực",
+          "start": 5.46,
+          "end": 5.91
+        },
+        {
+          "text": "dụng:",
+          "start": 5.91,
+          "end": 6.36
+        },
+        {
+          "text": "image",
+          "start": 6.36,
+          "end": 6.81
         },
         {
           "text": "này",
-          "start": 4.2,
-          "end": 4.61
-        },
-        {
-          "text": "dùng",
-          "start": 4.61,
-          "end": 5.02
-        },
-        {
-          "text": "để",
-          "start": 5.02,
-          "end": 5.43
+          "start": 6.81,
+          "end": 7.26
         },
         {
           "text": "chạy",
-          "start": 5.43,
-          "end": 5.84
+          "start": 7.26,
+          "end": 7.71
         },
         {
-          "text": "hoặc",
-          "start": 5.84,
-          "end": 6.25
+          "text": "service",
+          "start": 7.71,
+          "end": 8.16
         },
         {
-          "text": "làm",
-          "start": 6.25,
-          "end": 6.66
+          "text": "gì,",
+          "start": 8.16,
+          "end": 8.61
         },
         {
-          "text": "nền",
-          "start": 6.66,
-          "end": 7.07
+          "text": "pull",
+          "start": 8.61,
+          "end": 9.06
         },
         {
-          "text": "cho",
-          "start": 7.07,
-          "end": 7.48
+          "text": "thế",
+          "start": 9.06,
+          "end": 9.51
         },
         {
-          "text": "service:",
-          "start": 7.48,
-          "end": 7.89
+          "text": "nào,",
+          "start": 9.51,
+          "end": 9.96
+        },
+        {
+          "text": "map",
+          "start": 9.96,
+          "end": 10.41
+        },
+        {
+          "text": "port",
+          "start": 10.41,
+          "end": 10.87
+        },
+        {
+          "text": "ra",
+          "start": 10.87,
+          "end": 11.32
+        },
+        {
+          "text": "sao,",
+          "start": 11.32,
+          "end": 11.77
+        },
+        {
+          "text": "và",
+          "start": 11.77,
+          "end": 12.22
+        },
+        {
+          "text": "có",
+          "start": 12.22,
+          "end": 12.67
+        },
+        {
+          "text": "cần",
+          "start": 12.67,
+          "end": 13.12
+        },
+        {
+          "text": "volume",
+          "start": 13.12,
+          "end": 13.57
+        },
+        {
+          "text": "hay",
+          "start": 13.57,
+          "end": 14.02
+        },
+        {
+          "text": "env",
+          "start": 14.02,
+          "end": 14.47
+        },
+        {
+          "text": "không.",
+          "start": 14.47,
+          "end": 14.92
         },
         {
           "text": "Official",
-          "start": 7.89,
-          "end": 8.3
+          "start": 14.92,
+          "end": 15.37
         },
         {
           "text": "build",
-          "start": 8.3,
-          "end": 8.71
+          "start": 15.37,
+          "end": 15.82
         },
         {
           "text": "of",
-          "start": 8.71,
-          "end": 9.12
+          "start": 15.82,
+          "end": 16.27
         },
         {
           "text": "Nginx..",
-          "start": 9.12,
-          "end": 9.53
+          "start": 16.27,
+          "end": 16.72
         }
       ]
     },
@@ -149,129 +219,129 @@
       "headline_line1": "CHỌN TAG",
       "headline_line2": "RỒI PULL IMAGE",
       "btn_text": "$ docker pull nginx",
-      "audio_start": 10.73,
-      "audio_duration": 8.1,
+      "audio_start": 17.92,
+      "audio_duration": 9.55,
       "audio_path": "assets/audio/github-review_scene_2.wav",
       "transcript": [
         {
           "text": "Bước",
-          "start": 10.73,
-          "end": 11.07
+          "start": 17.92,
+          "end": 18.32
         },
         {
           "text": "đầu",
-          "start": 11.07,
-          "end": 11.4
+          "start": 18.32,
+          "end": 18.72
         },
         {
           "text": "tiên",
-          "start": 11.4,
-          "end": 11.74
+          "start": 18.72,
+          "end": 19.11
         },
         {
           "text": "là",
-          "start": 11.74,
-          "end": 12.08
+          "start": 19.11,
+          "end": 19.51
         },
         {
           "text": "pull",
-          "start": 12.08,
-          "end": 12.42
+          "start": 19.51,
+          "end": 19.91
         },
         {
           "text": "image",
-          "start": 12.42,
-          "end": 12.75
+          "start": 19.91,
+          "end": 20.31
         },
         {
           "text": "và",
-          "start": 12.75,
-          "end": 13.09
+          "start": 20.31,
+          "end": 20.71
         },
         {
           "text": "chọn",
-          "start": 13.09,
-          "end": 13.43
+          "start": 20.71,
+          "end": 21.1
         },
         {
           "text": "tag",
-          "start": 13.43,
-          "end": 13.77
+          "start": 21.1,
+          "end": 21.5
         },
         {
           "text": "rõ",
-          "start": 13.77,
-          "end": 14.1
+          "start": 21.5,
+          "end": 21.9
         },
         {
           "text": "ràng.",
-          "start": 14.1,
-          "end": 14.44
+          "start": 21.9,
+          "end": 22.3
         },
         {
           "text": "Nếu",
-          "start": 14.44,
-          "end": 14.78
+          "start": 22.3,
+          "end": 22.7
         },
         {
           "text": "làm",
-          "start": 14.78,
-          "end": 15.12
+          "start": 22.7,
+          "end": 23.09
         },
         {
           "text": "production,",
-          "start": 15.12,
-          "end": 15.45
+          "start": 23.09,
+          "end": 23.49
         },
         {
           "text": "tránh",
-          "start": 15.45,
-          "end": 15.79
+          "start": 23.49,
+          "end": 23.89
         },
         {
           "text": "phụ",
-          "start": 15.79,
-          "end": 16.13
+          "start": 23.89,
+          "end": 24.29
         },
         {
           "text": "thuộc",
-          "start": 16.13,
-          "end": 16.47
+          "start": 24.29,
+          "end": 24.69
         },
         {
           "text": "vào",
-          "start": 16.47,
-          "end": 16.8
+          "start": 24.69,
+          "end": 25.08
         },
         {
           "text": "latest",
-          "start": 16.8,
-          "end": 17.14
+          "start": 25.08,
+          "end": 25.48
         },
         {
           "text": "khi",
-          "start": 17.14,
-          "end": 17.48
+          "start": 25.48,
+          "end": 25.88
         },
         {
           "text": "chưa",
-          "start": 17.48,
-          "end": 17.82
+          "start": 25.88,
+          "end": 26.28
         },
         {
           "text": "kiểm",
-          "start": 17.82,
-          "end": 18.15
+          "start": 26.28,
+          "end": 26.68
         },
         {
           "text": "soát",
-          "start": 18.15,
-          "end": 18.49
+          "start": 26.68,
+          "end": 27.07
         },
         {
           "text": "version.",
-          "start": 18.49,
-          "end": 18.83
+          "start": 27.07,
+          "end": 27.47
         }
       ]
     },
@@ -288,139 +358,139 @@
       "bento1_desc": "Map đúng cổng service",
       "bento2_title": "Volume",
       "bento3_title": "Env",
-      "audio_start": 20.03,
-      "audio_duration": 8.14,
+      "audio_start": 28.68,
+      "audio_duration": 9.6,
       "audio_path": "assets/audio/github-review_scene_3.wav",
       "transcript": [
         {
           "text": "Tiếp",
-          "start": 20.03,
-          "end": 20.34
+          "start": 28.68,
+          "end": 29.05
         },
         {
           "text": "theo",
-          "start": 20.34,
-          "end": 20.66
+          "start": 29.05,
+          "end": 29.42
         },
         {
           "text": "là",
-          "start": 20.66,
-          "end": 20.97
+          "start": 29.42,
+          "end": 29.79
         },
         {
           "text": "xác",
-          "start": 20.97,
-          "end": 21.28
+          "start": 29.79,
+          "end": 30.16
         },
         {
           "text": "định",
-          "start": 21.28,
-          "end": 21.6
+          "start": 30.16,
+          "end": 30.53
         },
         {
           "text": "port,",
-          "start": 21.6,
-          "end": 21.91
+          "start": 30.53,
+          "end": 30.9
         },
         {
           "text": "volume",
-          "start": 21.91,
-          "end": 22.22
+          "start": 30.9,
+          "end": 31.26
         },
         {
           "text": "và",
-          "start": 22.22,
-          "end": 22.53
+          "start": 31.26,
+          "end": 31.63
         },
         {
           "text": "biến",
-          "start": 22.53,
-          "end": 22.85
+          "start": 31.63,
+          "end": 32.0
         },
         {
           "text": "môi",
-          "start": 22.85,
-          "end": 23.16
+          "start": 32.0,
+          "end": 32.37
         },
         {
           "text": "trường.",
-          "start": 23.16,
-          "end": 23.47
+          "start": 32.37,
+          "end": 32.74
         },
         {
           "text": "Đây",
-          "start": 23.47,
-          "end": 23.79
+          "start": 32.74,
+          "end": 33.11
         },
         {
           "text": "là",
-          "start": 23.79,
-          "end": 24.1
+          "start": 33.11,
+          "end": 33.48
         },
         {
           "text": "ba",
-          "start": 24.1,
-          "end": 24.41
+          "start": 33.48,
+          "end": 33.85
         },
         {
           "text": "thứ",
-          "start": 24.41,
-          "end": 24.73
+          "start": 33.85,
+          "end": 34.22
         },
         {
           "text": "quyết",
-          "start": 24.73,
-          "end": 25.04
+          "start": 34.22,
+          "end": 34.59
         },
         {
           "text": "định",
-          "start": 25.04,
-          "end": 25.35
+          "start": 34.59,
+          "end": 34.96
         },
         {
           "text": "container",
-          "start": 25.35,
-          "end": 25.66
+          "start": 34.96,
+          "end": 35.33
         },
         {
           "text": "chạy",
-          "start": 25.66,
-          "end": 25.98
+          "start": 35.33,
+          "end": 35.7
         },
         {
           "text": "được",
-          "start": 25.98,
-          "end": 26.29
+          "start": 35.7,
+          "end": 36.06
         },
         {
           "text": "trong",
-          "start": 26.29,
-          "end": 26.6
+          "start": 36.06,
+          "end": 36.43
         },
         {
           "text": "môi",
-          "start": 26.6,
-          "end": 26.92
+          "start": 36.43,
+          "end": 36.8
         },
         {
           "text": "trường",
-          "start": 26.92,
-          "end": 27.23
+          "start": 36.8,
+          "end": 37.17
         },
         {
           "text": "thật",
-          "start": 27.23,
-          "end": 27.54
+          "start": 37.17,
+          "end": 37.54
         },
         {
           "text": "hay",
-          "start": 27.54,
-          "end": 27.86
+          "start": 37.54,
+          "end": 37.91
         },
         {
           "text": "không.",
-          "start": 27.86,
-          "end": 28.17
+          "start": 37.91,
+          "end": 38.28
         }
       ]
     },
@@ -434,124 +504,124 @@
       "headline_line1": "RUN THỬ",
       "headline_line2": "TRƯỚC KHI DEPLOY",
       "btn_text": "$ docker run nginx",
-      "audio_start": 29.37,
-      "audio_duration": 7.59,
+      "audio_start": 39.48,
+      "audio_duration": 8.95,
       "audio_path": "assets/audio/github-review_scene_4.wav",
       "transcript": [
         {
           "text": "Lệnh",
-          "start": 29.37,
-          "end": 29.7
+          "start": 39.48,
+          "end": 39.87
         },
         {
           "text": "chạy",
-          "start": 29.7,
-          "end": 30.03
+          "start": 39.87,
+          "end": 40.26
         },
         {
           "text": "thử",
-          "start": 30.03,
-          "end": 30.36
+          "start": 40.26,
+          "end": 40.65
         },
         {
           "text": "nên",
-          "start": 30.36,
-          "end": 30.69
+          "start": 40.65,
+          "end": 41.04
         },
         {
           "text": "đơn",
-          "start": 30.69,
-          "end": 31.02
+          "start": 41.04,
+          "end": 41.43
         },
         {
           "text": "giản",
-          "start": 31.02,
-          "end": 31.35
+          "start": 41.43,
+          "end": 41.82
         },
         {
           "text": "trước,",
-          "start": 31.35,
-          "end": 31.68
+          "start": 41.82,
+          "end": 42.2
         },
         {
           "text": "ví",
-          "start": 31.68,
-          "end": 32.01
+          "start": 42.2,
+          "end": 42.59
         },
         {
           "text": "dụ",
-          "start": 32.01,
-          "end": 32.34
+          "start": 42.59,
+          "end": 42.98
         },
         {
           "text": "docker",
-          "start": 32.34,
-          "end": 32.67
+          "start": 42.98,
+          "end": 43.37
         },
         {
           "text": "run",
-          "start": 32.67,
-          "end": 33.0
+          "start": 43.37,
+          "end": 43.76
         },
         {
           "text": "nginx.",
-          "start": 33.0,
-          "end": 33.33
+          "start": 43.76,
+          "end": 44.15
         },
         {
           "text": "Sau",
-          "start": 33.33,
-          "end": 33.66
+          "start": 44.15,
+          "end": 44.54
         },
         {
           "text": "đó",
-          "start": 33.66,
-          "end": 33.99
+          "start": 44.54,
+          "end": 44.93
         },
         {
           "text": "mới",
-          "start": 33.99,
-          "end": 34.32
+          "start": 44.93,
+          "end": 45.32
         },
         {
           "text": "thêm",
-          "start": 34.32,
-          "end": 34.65
+          "start": 45.32,
+          "end": 45.71
         },
         {
           "text": "port,",
-          "start": 34.65,
-          "end": 34.98
+          "start": 45.71,
+          "end": 46.1
         },
         {
           "text": "volume",
-          "start": 34.98,
-          "end": 35.31
+          "start": 46.1,
+          "end": 46.49
         },
         {
           "text": "và",
-          "start": 35.31,
-          "end": 35.64
+          "start": 46.49,
+          "end": 46.88
         },
         {
           "text": "cấu",
-          "start": 35.64,
-          "end": 35.97
+          "start": 46.88,
+          "end": 47.26
         },
         {
           "text": "hình",
-          "start": 35.97,
-          "end": 36.3
+          "start": 47.26,
+          "end": 47.65
         },
         {
           "text": "bảo",
-          "start": 36.3,
-          "end": 36.63
+          "start": 47.65,
+          "end": 48.04
         },
         {
           "text": "mật.",
-          "start": 36.63,
-          "end": 36.96
+          "start": 48.04,
+          "end": 48.43
         }
       ]
     },
@@ -559,7 +629,7 @@
       "assets": [
         "character shiba explaining something.png"
       ],
-      "sfx": "yeah_tre_con.mp3",
+      "sfx": "Ding 2.mp3",
       "voice": "Kết luận: với Docker image, video phải giúp người xem chạy được container, hiểu tag nào nên dùng và biết những cấu hình tối thiểu trước production.",
       "visual": "Outro checklist Docker.",
       "headline_line1": "PIN TAG",
@@ -568,147 +638,147 @@
       "bento2_title": "Run",
       "bento3_title": "Port",
       "bento4_title": "Volume",
-      "audio_start": 38.16,
-      "audio_duration": 9.93,
+      "audio_start": 49.63,
+      "audio_duration": 11.71,
       "audio_path": "assets/audio/github-review_scene_5.wav",
       "transcript": [
         {
           "text": "Kết",
-          "start": 38.16,
-          "end": 38.53
+          "start": 49.63,
+          "end": 50.06
         },
         {
           "text": "luận:",
-          "start": 38.53,
-          "end": 38.9
+          "start": 50.06,
+          "end": 50.5
         },
         {
           "text": "với",
-          "start": 38.9,
-          "end": 39.26
+          "start": 50.5,
+          "end": 50.93
         },
         {
           "text": "Docker",
-          "start": 39.26,
-          "end": 39.63
+          "start": 50.93,
+          "end": 51.37
         },
         {
           "text": "image,",
-          "start": 39.63,
-          "end": 40.0
+          "start": 51.37,
+          "end": 51.8
         },
         {
           "text": "video",
-          "start": 40.0,
-          "end": 40.37
+          "start": 51.8,
+          "end": 52.23
         },
         {
           "text": "phải",
-          "start": 40.37,
-          "end": 40.73
+          "start": 52.23,
+          "end": 52.67
         },
         {
           "text": "giúp",
-          "start": 40.73,
-          "end": 41.1
+          "start": 52.67,
+          "end": 53.1
         },
         {
           "text": "người",
-          "start": 41.1,
-          "end": 41.47
+          "start": 53.1,
+          "end": 53.53
         },
         {
           "text": "xem",
-          "start": 41.47,
-          "end": 41.84
+          "start": 53.53,
+          "end": 53.97
         },
         {
           "text": "chạy",
-          "start": 41.84,
-          "end": 42.2
+          "start": 53.97,
+          "end": 54.4
         },
         {
           "text": "được",
-          "start": 42.2,
-          "end": 42.57
+          "start": 54.4,
+          "end": 54.84
         },
         {
           "text": "container,",
-          "start": 42.57,
-          "end": 42.94
+          "start": 54.84,
+          "end": 55.27
         },
         {
           "text": "hiểu",
-          "start": 42.94,
-          "end": 43.31
+          "start": 55.27,
+          "end": 55.7
         },
         {
           "text": "tag",
-          "start": 43.31,
-          "end": 43.68
+          "start": 55.7,
+          "end": 56.14
         },
         {
           "text": "nào",
-          "start": 43.68,
-          "end": 44.04
+          "start": 56.14,
+          "end": 56.57
         },
         {
           "text": "nên",
-          "start": 44.04,
-          "end": 44.41
+          "start": 56.57,
+          "end": 57.0
         },
         {
           "text": "dùng",
-          "start": 44.41,
-          "end": 44.78
+          "start": 57.0,
+          "end": 57.44
         },
         {
           "text": "và",
-          "start": 44.78,
-          "end": 45.15
+          "start": 57.44,
+          "end": 57.87
         },
         {
           "text": "biết",
-          "start": 45.15,
-          "end": 45.51
+          "start": 57.87,
+          "end": 58.31
         },
         {
           "text": "những",
-          "start": 45.51,
-          "end": 45.88
+          "start": 58.31,
+          "end": 58.74
         },
         {
           "text": "cấu",
-          "start": 45.88,
-          "end": 46.25
+          "start": 58.74,
+          "end": 59.17
         },
         {
           "text": "hình",
-          "start": 46.25,
-          "end": 46.62
+          "start": 59.17,
+          "end": 59.61
         },
         {
           "text": "tối",
-          "start": 46.62,
-          "end": 46.99
+          "start": 59.61,
+          "end": 60.04
         },
         {
           "text": "thiểu",
-          "start": 46.99,
-          "end": 47.35
+          "start": 60.04,
+          "end": 60.47
         },
         {
           "text": "trước",
-          "start": 47.35,
-          "end": 47.72
+          "start": 60.47,
+          "end": 60.91
         },
         {
           "text": "production.",
-          "start": 47.72,
-          "end": 48.09
+          "start": 60.91,
+          "end": 61.34
         }
       ]
     }
   ],
-  "duration": 51
+  "duration": 64
 }

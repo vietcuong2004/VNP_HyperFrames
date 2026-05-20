@@ -1,4 +1,4 @@
-import { execFileSync } from "child_process";
+import { spawnSync } from "child_process";
 
 const targetUrl = process.argv[2];
 const isWindows = process.platform === "win32";
@@ -15,7 +15,9 @@ if (!targetUrl) {
 }
 
 function run(command, args) {
-  execFileSync(command, args, { stdio: "inherit" });
+  const result = spawnSync(command, args, { stdio: "inherit", shell: isWindows });
+  if (result.error) throw result.error;
+  if (result.status !== 0) throw new Error(`Command ${command} failed with exit code ${result.status}`);
 }
 
 try {

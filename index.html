@@ -7,6 +7,37 @@
 body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Plus Jakarta Sans", "Space Grotesk", "Inter", sans-serif; }
 .bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a1a0d 0%, #050505 80%); }
 
+.source-web .bg {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(0, 210, 255, 0.22) 0%, rgba(0, 210, 255, 0) 34%),
+    radial-gradient(circle at 82% 30%, rgba(253, 240, 28, 0.18) 0%, rgba(253, 240, 28, 0) 32%),
+    linear-gradient(180deg, #071017 0%, #050505 78%);
+}
+
+.source-web .headline-line2 {
+  background: linear-gradient(90deg, #00d2ff, #fdf01c, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.source-web .browser-frame {
+  border-color: rgba(0, 210, 255, 0.24);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 55px rgba(0, 210, 255, 0.18);
+}
+
+.source-web .browser-header {
+  background: #0b1720;
+}
+
+.source-web .action-btn {
+  border-color: rgba(0, 210, 255, 0.35);
+  background: rgba(0, 210, 255, 0.06);
+}
+
+.source-web .captions {
+  border-color: rgba(0, 210, 255, 0.28);
+}
+
 /* Animated Star Particles */
 .particles-container { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .particle-star { position: absolute; border-radius: 50%; opacity: 0.6; }
@@ -548,18 +579,18 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 </head>
 <body>
-  <div id="root" data-composition-id="news-multi" data-duration="51" data-width="1080" data-height="1920" data-start="0">
-    <audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="51" data-volume="0.3" loop></audio>
-<audio id="tts-scene1" src="./assets/audio/github-review_scene_1.wav" data-track-index="1" data-start="0.5" data-duration="9.03" data-volume="1.0"></audio>
-<audio id="sfx-scene1" src="./assets/sound-effect/yeah_tre_con.mp3" data-track-index="2" data-start="0.5" data-duration="1" data-volume="0.8"></audio>
-<audio id="tts-scene2" src="./assets/audio/github-review_scene_2.wav" data-track-index="1" data-start="10.73" data-duration="8.1" data-volume="1.0"></audio>
-<audio id="tts-scene3" src="./assets/audio/github-review_scene_3.wav" data-track-index="1" data-start="20.03" data-duration="8.14" data-volume="1.0"></audio>
-<audio id="sfx-scene3" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="20.03" data-duration="1" data-volume="0.8"></audio>
-<audio id="tts-scene4" src="./assets/audio/github-review_scene_4.wav" data-track-index="1" data-start="29.37" data-duration="7.59" data-volume="1.0"></audio>
-<audio id="tts-scene5" src="./assets/audio/github-review_scene_5.wav" data-track-index="1" data-start="38.16" data-duration="9.93" data-volume="1.0"></audio>
+  <div id="root" class="source-docker format-container_quick_start theme-docker" data-composition-id="news-multi" data-duration="64" data-width="1080" data-height="1920" data-start="0">
+    <audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="64" data-volume="0.3" loop></audio>
+<audio id="tts-scene1" src="./assets/audio/github-review_scene_1.wav" data-track-index="1" data-start="0.5" data-duration="16.22" data-volume="1.0"></audio>
+<audio id="sfx-scene1" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="0.5" data-duration="1" data-volume="0.8"></audio>
+<audio id="tts-scene2" src="./assets/audio/github-review_scene_2.wav" data-track-index="1" data-start="17.92" data-duration="9.55" data-volume="1.0"></audio>
+<audio id="tts-scene3" src="./assets/audio/github-review_scene_3.wav" data-track-index="1" data-start="28.68" data-duration="9.6" data-volume="1.0"></audio>
+<audio id="sfx-scene3" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="28.68" data-duration="1" data-volume="0.8"></audio>
+<audio id="tts-scene4" src="./assets/audio/github-review_scene_4.wav" data-track-index="1" data-start="39.48" data-duration="8.95" data-volume="1.0"></audio>
+<audio id="tts-scene5" src="./assets/audio/github-review_scene_5.wav" data-track-index="1" data-start="49.63" data-duration="11.71" data-volume="1.0"></audio>
 
 
-    <div id="main-clip" class="clip" data-start="0" data-duration="51" data-track-index="3">
+    <div id="main-clip" class="clip" data-start="0" data-duration="64" data-track-index="3">
       <div class="bg"></div>
       <div class="particles-container"><div class="particle-star particle-green p-anim" style="width:2px; height:2px; top:1535.5259029250192px; left:588.9586788280576px;"></div><div class="particle-star particle-green p-anim" style="width:3.569890517434942px; height:3.569890517434942px; top:632.6718196883576px; left:564.6973520454776px;"></div><div class="particle-star particle-green p-anim" style="width:5.880993330547426px; height:5.880993330547426px; top:1766.284509041543px; left:797.7507367319777px;"></div><div class="particle-star particle-green p-anim" style="width:5.674001668463916px; height:5.674001668463916px; top:1145.1231563722104px; left:360.1147201735148px;"></div><div class="particle-star particle-white p-anim" style="width:3.6885709907046476px; height:3.6885709907046476px; top:224.27374659860106px; left:407.89639844377234px;"></div><div class="particle-star particle-purple p-anim" style="width:4.662801010879775px; height:4.662801010879775px; top:455.35559069928695px; left:21.23276730206271px;"></div><div class="particle-star particle-green p-anim" style="width:5.332718809853759px; height:5.332718809853759px; top:1536.730279927201px; left:364.20659095929295px;"></div><div class="particle-star particle-purple p-anim" style="width:2.431763400373711px; height:2.431763400373711px; top:1413.7129213923345px; left:524.7595076730795px;"></div><div class="particle-star particle-purple p-anim" style="width:4.690272104100586px; height:4.690272104100586px; top:1528.785507073212px; left:634.6024329709326px;"></div><div class="particle-star particle-green p-anim" style="width:4.83496910073336px; height:4.83496910073336px; top:1571.8122668458136px; left:829.1233232848754px;"></div><div class="particle-star particle-purple p-anim" style="width:3.5884565074029524px; height:3.5884565074029524px; top:1230.2568547147985px; left:207.29236457424122px;"></div><div class="particle-star particle-purple p-anim" style="width:5.668708344712286px; height:5.668708344712286px; top:189.40121615183898px; left:991.5646523256873px;"></div><div class="particle-star particle-green p-anim" style="width:3.7885677438189305px; height:3.7885677438189305px; top:1632.5659832752308px; left:207.78043110905855px;"></div><div class="particle-star particle-green p-anim" style="width:2.655247746628447px; height:2.655247746628447px; top:1741.3322435210603px; left:85.06296351828496px;"></div><div class="particle-star particle-green p-anim" style="width:2.969836048725483px; height:2.969836048725483px; top:195.76452651078853px; left:775.7141000385309px;"></div><div class="particle-star particle-white p-anim" style="width:5.426804031838401px; height:5.426804031838401px; top:174.63485295288024px; left:355.1076229717728px;"></div><div class="particle-star particle-white p-anim" style="width:2.7135204296719166px; height:2.7135204296719166px; top:1355.647688683166px; left:21.580439099489013px;"></div><div class="particle-star particle-purple p-anim" style="width:3.509769967673492px; height:3.509769967673492px; top:1665.665646303924px; left:976.3216972953524px;"></div><div class="particle-star particle-purple p-anim" style="width:4.487277313852246px; height:4.487277313852246px; top:780.9357763713535px; left:263.2599087196286px;"></div><div class="particle-star particle-purple p-anim" style="width:2.3092366739983845px; height:2.3092366739983845px; top:127.31628965545667px; left:128.94814866565866px;"></div><div class="particle-star particle-green p-anim" style="width:5.629847360720305px; height:5.629847360720305px; top:1130.5035517027904px; left:742.447420430326px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0938556615874404px; height:3.0938556615874404px; top:1716.259190737776px; left:195.2082629036886px;"></div><div class="particle-star particle-purple p-anim" style="width:3.3361033271394263px; height:3.3361033271394263px; top:1560.6371598624548px; left:740.9506847751618px;"></div><div class="particle-star particle-green p-anim" style="width:2.981082994971075px; height:2.981082994971075px; top:340.21059454044007px; left:475.54250945300737px;"></div><div class="particle-star particle-white p-anim" style="width:2.6425008613077807px; height:2.6425008613077807px; top:1232.298306504208px; left:616.8762158707614px;"></div><div class="particle-star particle-green p-anim" style="width:2.9228469061708893px; height:2.9228469061708893px; top:415.1907554643117px; left:304.7443614471922px;"></div><div class="particle-star particle-purple p-anim" style="width:4.412972973270371px; height:4.412972973270371px; top:1068.37534038566px; left:760.7136744288073px;"></div><div class="particle-star particle-white p-anim" style="width:3.6916789999486355px; height:3.6916789999486355px; top:1122.7608525493224px; left:87.99790379453043px;"></div><div class="particle-star particle-white p-anim" style="width:5.325307687064196px; height:5.325307687064196px; top:260.9009332248206px; left:551.3295157581888px;"></div><div class="particle-star particle-white p-anim" style="width:5.867347892552061px; height:5.867347892552061px; top:1667.2163794618655px; left:256.8303267231022px;"></div><div class="particle-star particle-purple p-anim" style="width:5.8580470264969335px; height:5.8580470264969335px; top:1528.216142326005px; left:431.8811632851066px;"></div><div class="particle-star particle-purple p-anim" style="width:5.824032719079696px; height:5.824032719079696px; top:1282.716862806683px; left:224.99064055640702px;"></div><div class="particle-star particle-white p-anim" style="width:2.2779440263730066px; height:2.2779440263730066px; top:622.0607916782683px; left:865.66315070575px;"></div><div class="particle-star particle-purple p-anim" style="width:3.718072432315239px; height:3.718072432315239px; top:990.331940667761px; left:464.2661541623238px;"></div><div class="particle-star particle-white p-anim" style="width:2.628012898090674px; height:2.628012898090674px; top:334.5703136134716px; left:251.8968664185104px;"></div><div class="particle-star particle-green p-anim" style="width:3.4763252035190817px; height:3.4763252035190817px; top:104.98406753008567px; left:420.2484337896567px;"></div><div class="particle-star particle-purple p-anim" style="width:2.71620581739262px; height:2.71620581739262px; top:1755.1594550569007px; left:121.47569184503482px;"></div><div class="particle-star particle-green p-anim" style="width:4.7851705267239595px; height:4.7851705267239595px; top:1492.2684012358786px; left:588.0606005231914px;"></div><div class="particle-star particle-green p-anim" style="width:2.104748047007888px; height:2.104748047007888px; top:777.2735692683909px; left:972.6774501627324px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0801848282280844px; height:3.0801848282280844px; top:1075.1307716375777px; left:428.0579328452359px;"></div><div class="particle-star particle-white p-anim" style="width:4.1001612631371245px; height:4.1001612631371245px; top:354.9885848517988px; left:186.85617354039096px;"></div><div class="particle-star particle-green p-anim" style="width:5.53651949671621px; height:5.53651949671621px; top:90.38502802313815px; left:441.5138155709792px;"></div><div class="particle-star particle-green p-anim" style="width:3.744003027342842px; height:3.744003027342842px; top:1759.4411675504944px; left:344.1252548768898px;"></div><div class="particle-star particle-white p-anim" style="width:3.060008282023773px; height:3.060008282023773px; top:1595.0515123047808px; left:86.30311745526342px;"></div><div class="particle-star particle-white p-anim" style="width:3.8043483396759257px; height:3.8043483396759257px; top:1085.071066021601px; left:899.0440741810016px;"></div><div class="particle-star particle-white p-anim" style="width:2.2790289679760463px; height:2.2790289679760463px; top:1722.4989058748179px; left:892.5950869757799px;"></div><div class="particle-star particle-green p-anim" style="width:2.768037130474113px; height:2.768037130474113px; top:1505.6581586905395px; left:256.3201799959279px;"></div><div class="particle-star particle-green p-anim" style="width:5.5371421122254105px; height:5.5371421122254105px; top:188.3722487646537px; left:218.56782913586358px;"></div><div class="particle-star particle-white p-anim" style="width:2.83370940318855px; height:2.83370940318855px; top:1030.1372938413806px; left:966.5390627094894px;"></div><div class="particle-star particle-green p-anim" style="width:2.8865274695999688px; height:2.8865274695999688px; top:296.29052856698763px; left:606.1563656924045px;"></div><div class="particle-star particle-white p-anim" style="width:5.9056475347679225px; height:5.9056475347679225px; top:1258.1746374035447px; left:361.9334793071539px;"></div><div class="particle-star particle-purple p-anim" style="width:4.082236481510336px; height:4.082236481510336px; top:193.2978819973414px; left:416.846187156043px;"></div><div class="particle-star particle-green p-anim" style="width:5.588442979067622px; height:5.588442979067622px; top:385.4899108153404px; left:952.2041783677923px;"></div><div class="particle-star particle-purple p-anim" style="width:2.577276928444917px; height:2.577276928444917px; top:1625.0531419507752px; left:67.52407750307611px;"></div><div class="particle-star particle-purple p-anim" style="width:3.1825023104902357px; height:3.1825023104902357px; top:208.90961308673468px; left:20.403730133039062px;"></div><div class="particle-star particle-white p-anim" style="width:3.518543511752796px; height:3.518543511752796px; top:1190.7431957914014px; left:986.3978321271134px;"></div><div class="particle-star particle-purple p-anim" style="width:3.6804051938161138px; height:3.6804051938161138px; top:881.1370745273052px; left:1058.8949897472048px;"></div><div class="particle-star particle-green p-anim" style="width:3.743605762036168px; height:3.743605762036168px; top:847.7063941152664px; left:408.9962966384337px;"></div><div class="particle-star particle-purple p-anim" style="width:3.7641244805054157px; height:3.7641244805054157px; top:915.2259827631497px; left:245.39551275243866px;"></div><div class="particle-star particle-white p-anim" style="width:3.7783622700808337px; height:3.7783622700808337px; top:915.7530612154005px; left:734.2609291146073px;"></div></div>
       
@@ -722,7 +753,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
     // Animate Particles Floating
     gsap.utils.toArray('.p-anim').forEach((p, i) => {
       const pDur = 3 + (i % 4);
-      const pRepeat = Math.max(1, Math.floor(51 / pDur) - 1);
+      const pRepeat = Math.max(1, Math.floor(64 / pDur) - 1);
       tl.to(p, { 
         y: "-=100", 
         x: (i%2===0 ? "+=30" : "-=30"),
@@ -751,75 +782,75 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
       
       
         tl.from("#char-scene1", { y: 20, duration: 0.2, ease: "power2.out" }, 0.5);
-        tl.to("#char-scene1", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 0.7);
-        tl.to("#scene1", { opacity: 0, duration: 0.3 }, 10.43);
-tl.set("#scene1", { visibility: "hidden" }, 10.73);
+        tl.to("#char-scene1", { y: -30, duration: 2, repeat: 7, yoyo: true, ease: "sine.inOut" }, 0.7);
+        tl.to("#scene1", { opacity: 0, duration: 0.3 }, 17.62);
+tl.set("#scene1", { visibility: "hidden" }, 17.92);
 
       // Scene 2
-      tl.set("#scene2", { visibility: "visible" }, 10.610000000000001);
-      tl.to("#scene2", { opacity: 1, duration: 0.1 }, 10.63);
+      tl.set("#scene2", { visibility: "visible" }, 17.8);
+      tl.to("#scene2", { opacity: 1, duration: 0.1 }, 17.82);
       
-        tl.from("#hl1-scene2", { y: -20, duration: 0.2, ease: "power3.out" }, 10.73);
-        tl.from("#hl2-scene2", { y: 20, duration: 0.2, ease: "power3.out" }, 10.73);
-        tl.from("#bc-scene2-1", { y: 20, duration: 0.2, ease: "power3.out" }, 10.73);
-        tl.from("#bc-scene2-2", { y: 20, duration: 0.2, ease: "power3.out" }, 10.73);
-        tl.from("#bc-scene2-3", { y: 20, duration: 0.2, ease: "power3.out" }, 10.73);
+        tl.from("#hl1-scene2", { y: -20, duration: 0.2, ease: "power3.out" }, 17.92);
+        tl.from("#hl2-scene2", { y: 20, duration: 0.2, ease: "power3.out" }, 17.92);
+        tl.from("#bc-scene2-1", { y: 20, duration: 0.2, ease: "power3.out" }, 17.92);
+        tl.from("#bc-scene2-2", { y: 20, duration: 0.2, ease: "power3.out" }, 17.92);
+        tl.from("#bc-scene2-3", { y: 20, duration: 0.2, ease: "power3.out" }, 17.92);
       
       
-        tl.from("#char-scene2", { y: 20, duration: 0.2, ease: "power2.out" }, 10.73);
-        tl.to("#char-scene2", { y: -30, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 10.93);
-        tl.to("#scene2", { opacity: 0, duration: 0.3 }, 19.73);
-tl.set("#scene2", { visibility: "hidden" }, 20.03);
+        tl.from("#char-scene2", { y: 20, duration: 0.2, ease: "power2.out" }, 17.92);
+        tl.to("#char-scene2", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 18.12);
+        tl.to("#scene2", { opacity: 0, duration: 0.3 }, 28.38);
+tl.set("#scene2", { visibility: "hidden" }, 28.68);
 
       // Scene 3
-      tl.set("#scene3", { visibility: "visible" }, 19.91);
-      tl.to("#scene3", { opacity: 1, duration: 0.1 }, 19.93);
+      tl.set("#scene3", { visibility: "visible" }, 28.56);
+      tl.to("#scene3", { opacity: 1, duration: 0.1 }, 28.58);
       
-        tl.from("#hl1-scene3", { y: -20, duration: 0.2, ease: "power3.out" }, 20.03);
-        tl.from("#hl2-scene3", { y: 20, duration: 0.2, ease: "power3.out" }, 20.03);
-        tl.from("#bc-scene3-1", { y: 20, duration: 0.2, ease: "power3.out" }, 20.03);
-        tl.from("#bc-scene3-2", { y: 20, duration: 0.2, ease: "power3.out" }, 20.03);
-        tl.from("#bc-scene3-3", { y: 20, duration: 0.2, ease: "power3.out" }, 20.03);
-        tl.from("#bc-scene3-4", { y: 20, duration: 0.2, ease: "power3.out" }, 20.03);
+        tl.from("#hl1-scene3", { y: -20, duration: 0.2, ease: "power3.out" }, 28.68);
+        tl.from("#hl2-scene3", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
+        tl.from("#bc-scene3-1", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
+        tl.from("#bc-scene3-2", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
+        tl.from("#bc-scene3-3", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
+        tl.from("#bc-scene3-4", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
       
       
-        tl.from("#char-scene3", { y: 20, duration: 0.2, ease: "power2.out" }, 20.03);
-        tl.to("#char-scene3", { y: -30, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 20.23);
-        tl.to("#scene3", { opacity: 0, duration: 0.3 }, 29.07);
-tl.set("#scene3", { visibility: "hidden" }, 29.37);
+        tl.from("#char-scene3", { y: 20, duration: 0.2, ease: "power2.out" }, 28.68);
+        tl.to("#char-scene3", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 28.88);
+        tl.to("#scene3", { opacity: 0, duration: 0.3 }, 39.18);
+tl.set("#scene3", { visibility: "hidden" }, 39.48);
 
       // Scene 4
-      tl.set("#scene4", { visibility: "visible" }, 29.25);
-      tl.to("#scene4", { opacity: 1, duration: 0.1 }, 29.27);
+      tl.set("#scene4", { visibility: "visible" }, 39.36);
+      tl.to("#scene4", { opacity: 1, duration: 0.1 }, 39.379999999999995);
       
-        tl.from("#glow-scene4", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, 29.37);
-        tl.from("#hl1-scene4", { y: -20, duration: 0.2, ease: "power3.out" }, 29.37);
-        tl.from("#hl2-scene4", { y: 20, duration: 0.2, ease: "power3.out" }, 29.37);
-        tl.from("#btn-scene4", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, 29.37);
+        tl.from("#glow-scene4", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, 39.48);
+        tl.from("#hl1-scene4", { y: -20, duration: 0.2, ease: "power3.out" }, 39.48);
+        tl.from("#hl2-scene4", { y: 20, duration: 0.2, ease: "power3.out" }, 39.48);
+        tl.from("#btn-scene4", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, 39.48);
       
       
-        tl.from("#char-scene4", { y: 20, duration: 0.2, ease: "power2.out" }, 29.37);
-        tl.to("#char-scene4", { y: -30, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 29.57);
-        tl.to("#scene4", { opacity: 0, duration: 0.3 }, 37.86);
-tl.set("#scene4", { visibility: "hidden" }, 38.16);
+        tl.from("#char-scene4", { y: 20, duration: 0.2, ease: "power2.out" }, 39.48);
+        tl.to("#char-scene4", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 39.68);
+        tl.to("#scene4", { opacity: 0, duration: 0.3 }, 49.330000000000005);
+tl.set("#scene4", { visibility: "hidden" }, 49.63);
 
       // Scene 5
-      tl.set("#scene5", { visibility: "visible" }, 38.04);
-      tl.to("#scene5", { opacity: 1, duration: 0.1 }, 38.059999999999995);
+      tl.set("#scene5", { visibility: "visible" }, 49.510000000000005);
+      tl.to("#scene5", { opacity: 1, duration: 0.1 }, 49.53);
       
-        tl.from("#hl1-scene5", { y: -20, duration: 0.2, ease: "power3.out" }, 38.16);
-        tl.from("#hl2-scene5", { y: 20, duration: 0.2, ease: "power3.out" }, 38.16);
-        tl.from("#bc-scene5-1", { y: 20, duration: 0.2, ease: "power3.out" }, 38.16);
-        tl.from("#bc-scene5-2", { y: 20, duration: 0.2, ease: "power3.out" }, 38.16);
-        tl.from("#bc-scene5-3", { y: 20, duration: 0.2, ease: "power3.out" }, 38.16);
+        tl.from("#hl1-scene5", { y: -20, duration: 0.2, ease: "power3.out" }, 49.63);
+        tl.from("#hl2-scene5", { y: 20, duration: 0.2, ease: "power3.out" }, 49.63);
+        tl.from("#bc-scene5-1", { y: 20, duration: 0.2, ease: "power3.out" }, 49.63);
+        tl.from("#bc-scene5-2", { y: 20, duration: 0.2, ease: "power3.out" }, 49.63);
+        tl.from("#bc-scene5-3", { y: 20, duration: 0.2, ease: "power3.out" }, 49.63);
       
       
-        tl.from("#char-scene5", { y: 20, duration: 0.2, ease: "power2.out" }, 38.16);
-        tl.to("#char-scene5", { y: -30, duration: 2, repeat: 5, yoyo: true, ease: "sine.inOut" }, 38.36);
+        tl.from("#char-scene5", { y: 20, duration: 0.2, ease: "power2.out" }, 49.63);
+        tl.to("#char-scene5", { y: -30, duration: 2, repeat: 6, yoyo: true, ease: "sine.inOut" }, 49.830000000000005);
         
 
     // Karaoke Subtitles Grouping by Scene (Complete Sentences)
-    const subtitleBlocks = [{"words":[{"text":"library/nginx","start":0.5,"end":0.91},{"text":"phù","start":0.91,"end":1.32},{"text":"hợp","start":1.32,"end":1.73},{"text":"với","start":1.73,"end":2.14},{"text":"format","start":2.14,"end":2.55},{"text":"container","start":2.55,"end":2.96}],"start":0.5,"end":2.96},{"words":[{"text":"quick","start":2.96,"end":3.37},{"text":"start.","start":3.37,"end":3.79},{"text":"Image","start":3.79,"end":4.2},{"text":"này","start":4.2,"end":4.61},{"text":"dùng","start":4.61,"end":5.02},{"text":"để","start":5.02,"end":5.43}],"start":2.96,"end":5.43},{"words":[{"text":"chạy","start":5.43,"end":5.84},{"text":"hoặc","start":5.84,"end":6.25},{"text":"làm","start":6.25,"end":6.66},{"text":"nền","start":6.66,"end":7.07},{"text":"cho","start":7.07,"end":7.48},{"text":"service:","start":7.48,"end":7.89}],"start":5.43,"end":7.89},{"words":[{"text":"Official","start":7.89,"end":8.3},{"text":"build","start":8.3,"end":8.71},{"text":"of","start":8.71,"end":9.12},{"text":"Nginx..","start":9.12,"end":9.53}],"start":7.89,"end":9.53},{"words":[{"text":"Bước","start":10.73,"end":11.07},{"text":"đầu","start":11.07,"end":11.4},{"text":"tiên","start":11.4,"end":11.74},{"text":"là","start":11.74,"end":12.08},{"text":"pull","start":12.08,"end":12.42},{"text":"image","start":12.42,"end":12.75}],"start":10.73,"end":12.75},{"words":[{"text":"và","start":12.75,"end":13.09},{"text":"chọn","start":13.09,"end":13.43},{"text":"tag","start":13.43,"end":13.77},{"text":"rõ","start":13.77,"end":14.1},{"text":"ràng.","start":14.1,"end":14.44},{"text":"Nếu","start":14.44,"end":14.78}],"start":12.75,"end":14.78},{"words":[{"text":"làm","start":14.78,"end":15.12},{"text":"production,","start":15.12,"end":15.45},{"text":"tránh","start":15.45,"end":15.79},{"text":"phụ","start":15.79,"end":16.13},{"text":"thuộc","start":16.13,"end":16.47},{"text":"vào","start":16.47,"end":16.8}],"start":14.78,"end":16.8},{"words":[{"text":"latest","start":16.8,"end":17.14},{"text":"khi","start":17.14,"end":17.48},{"text":"chưa","start":17.48,"end":17.82},{"text":"kiểm","start":17.82,"end":18.15},{"text":"soát","start":18.15,"end":18.49},{"text":"version.","start":18.49,"end":18.83}],"start":16.8,"end":18.83},{"words":[{"text":"Tiếp","start":20.03,"end":20.34},{"text":"theo","start":20.34,"end":20.66},{"text":"là","start":20.66,"end":20.97},{"text":"xác","start":20.97,"end":21.28},{"text":"định","start":21.28,"end":21.6},{"text":"port,","start":21.6,"end":21.91}],"start":20.03,"end":21.91},{"words":[{"text":"volume","start":21.91,"end":22.22},{"text":"và","start":22.22,"end":22.53},{"text":"biến","start":22.53,"end":22.85},{"text":"môi","start":22.85,"end":23.16},{"text":"trường.","start":23.16,"end":23.47},{"text":"Đây","start":23.47,"end":23.79}],"start":21.91,"end":23.79},{"words":[{"text":"là","start":23.79,"end":24.1},{"text":"ba","start":24.1,"end":24.41},{"text":"thứ","start":24.41,"end":24.73},{"text":"quyết","start":24.73,"end":25.04},{"text":"định","start":25.04,"end":25.35},{"text":"container","start":25.35,"end":25.66}],"start":23.79,"end":25.66},{"words":[{"text":"chạy","start":25.66,"end":25.98},{"text":"được","start":25.98,"end":26.29},{"text":"trong","start":26.29,"end":26.6},{"text":"môi","start":26.6,"end":26.92},{"text":"trường","start":26.92,"end":27.23},{"text":"thật","start":27.23,"end":27.54}],"start":25.66,"end":27.54},{"words":[{"text":"hay","start":27.54,"end":27.86},{"text":"không.","start":27.86,"end":28.17}],"start":27.54,"end":28.17},{"words":[{"text":"Lệnh","start":29.37,"end":29.7},{"text":"chạy","start":29.7,"end":30.03},{"text":"thử","start":30.03,"end":30.36},{"text":"nên","start":30.36,"end":30.69},{"text":"đơn","start":30.69,"end":31.02},{"text":"giản","start":31.02,"end":31.35}],"start":29.37,"end":31.35},{"words":[{"text":"trước,","start":31.35,"end":31.68},{"text":"ví","start":31.68,"end":32.01},{"text":"dụ","start":32.01,"end":32.34},{"text":"docker","start":32.34,"end":32.67},{"text":"run","start":32.67,"end":33},{"text":"nginx.","start":33,"end":33.33}],"start":31.35,"end":33.33},{"words":[{"text":"Sau","start":33.33,"end":33.66},{"text":"đó","start":33.66,"end":33.99},{"text":"mới","start":33.99,"end":34.32},{"text":"thêm","start":34.32,"end":34.65},{"text":"port,","start":34.65,"end":34.98},{"text":"volume","start":34.98,"end":35.31}],"start":33.33,"end":35.31},{"words":[{"text":"và","start":35.31,"end":35.64},{"text":"cấu","start":35.64,"end":35.97},{"text":"hình","start":35.97,"end":36.3},{"text":"bảo","start":36.3,"end":36.63},{"text":"mật.","start":36.63,"end":36.96}],"start":35.31,"end":36.96},{"words":[{"text":"Kết","start":38.16,"end":38.53},{"text":"luận:","start":38.53,"end":38.9},{"text":"với","start":38.9,"end":39.26},{"text":"Docker","start":39.26,"end":39.63},{"text":"image,","start":39.63,"end":40},{"text":"video","start":40,"end":40.37}],"start":38.16,"end":40.37},{"words":[{"text":"phải","start":40.37,"end":40.73},{"text":"giúp","start":40.73,"end":41.1},{"text":"người","start":41.1,"end":41.47},{"text":"xem","start":41.47,"end":41.84},{"text":"chạy","start":41.84,"end":42.2},{"text":"được","start":42.2,"end":42.57}],"start":40.37,"end":42.57},{"words":[{"text":"container,","start":42.57,"end":42.94},{"text":"hiểu","start":42.94,"end":43.31},{"text":"tag","start":43.31,"end":43.68},{"text":"nào","start":43.68,"end":44.04},{"text":"nên","start":44.04,"end":44.41},{"text":"dùng","start":44.41,"end":44.78}],"start":42.57,"end":44.78},{"words":[{"text":"và","start":44.78,"end":45.15},{"text":"biết","start":45.15,"end":45.51},{"text":"những","start":45.51,"end":45.88},{"text":"cấu","start":45.88,"end":46.25},{"text":"hình","start":46.25,"end":46.62},{"text":"tối","start":46.62,"end":46.99}],"start":44.78,"end":46.99},{"words":[{"text":"thiểu","start":46.99,"end":47.35},{"text":"trước","start":47.35,"end":47.72},{"text":"production.","start":47.72,"end":48.09}],"start":46.99,"end":48.09}];
+    const subtitleBlocks = [{"words":[{"text":"library/nginx","start":0.5,"end":0.95},{"text":"là","start":0.95,"end":1.4},{"text":"một","start":1.4,"end":1.85},{"text":"Docker","start":1.85,"end":2.3},{"text":"image","start":2.3,"end":2.75},{"text":"nên","start":2.75,"end":3.2}],"start":0.5,"end":3.2},{"words":[{"text":"bắt","start":3.2,"end":3.65},{"text":"đầu","start":3.65,"end":4.11},{"text":"bằng","start":4.11,"end":4.56},{"text":"cách","start":4.56,"end":5.01},{"text":"rất","start":5.01,"end":5.46},{"text":"thực","start":5.46,"end":5.91}],"start":3.2,"end":5.91},{"words":[{"text":"dụng:","start":5.91,"end":6.36},{"text":"image","start":6.36,"end":6.81},{"text":"này","start":6.81,"end":7.26},{"text":"chạy","start":7.26,"end":7.71},{"text":"service","start":7.71,"end":8.16},{"text":"gì,","start":8.16,"end":8.61}],"start":5.91,"end":8.61},{"words":[{"text":"pull","start":8.61,"end":9.06},{"text":"thế","start":9.06,"end":9.51},{"text":"nào,","start":9.51,"end":9.96},{"text":"map","start":9.96,"end":10.41},{"text":"port","start":10.41,"end":10.87},{"text":"ra","start":10.87,"end":11.32}],"start":8.61,"end":11.32},{"words":[{"text":"sao,","start":11.32,"end":11.77},{"text":"và","start":11.77,"end":12.22},{"text":"có","start":12.22,"end":12.67},{"text":"cần","start":12.67,"end":13.12},{"text":"volume","start":13.12,"end":13.57},{"text":"hay","start":13.57,"end":14.02}],"start":11.32,"end":14.02},{"words":[{"text":"env","start":14.02,"end":14.47},{"text":"không.","start":14.47,"end":14.92},{"text":"Official","start":14.92,"end":15.37},{"text":"build","start":15.37,"end":15.82},{"text":"of","start":15.82,"end":16.27},{"text":"Nginx..","start":16.27,"end":16.72}],"start":14.02,"end":16.72},{"words":[{"text":"Bước","start":17.92,"end":18.32},{"text":"đầu","start":18.32,"end":18.72},{"text":"tiên","start":18.72,"end":19.11},{"text":"là","start":19.11,"end":19.51},{"text":"pull","start":19.51,"end":19.91},{"text":"image","start":19.91,"end":20.31}],"start":17.92,"end":20.31},{"words":[{"text":"và","start":20.31,"end":20.71},{"text":"chọn","start":20.71,"end":21.1},{"text":"tag","start":21.1,"end":21.5},{"text":"rõ","start":21.5,"end":21.9},{"text":"ràng.","start":21.9,"end":22.3},{"text":"Nếu","start":22.3,"end":22.7}],"start":20.31,"end":22.7},{"words":[{"text":"làm","start":22.7,"end":23.09},{"text":"production,","start":23.09,"end":23.49},{"text":"tránh","start":23.49,"end":23.89},{"text":"phụ","start":23.89,"end":24.29},{"text":"thuộc","start":24.29,"end":24.69},{"text":"vào","start":24.69,"end":25.08}],"start":22.7,"end":25.08},{"words":[{"text":"latest","start":25.08,"end":25.48},{"text":"khi","start":25.48,"end":25.88},{"text":"chưa","start":25.88,"end":26.28},{"text":"kiểm","start":26.28,"end":26.68},{"text":"soát","start":26.68,"end":27.07},{"text":"version.","start":27.07,"end":27.47}],"start":25.08,"end":27.47},{"words":[{"text":"Tiếp","start":28.68,"end":29.05},{"text":"theo","start":29.05,"end":29.42},{"text":"là","start":29.42,"end":29.79},{"text":"xác","start":29.79,"end":30.16},{"text":"định","start":30.16,"end":30.53},{"text":"port,","start":30.53,"end":30.9}],"start":28.68,"end":30.9},{"words":[{"text":"volume","start":30.9,"end":31.26},{"text":"và","start":31.26,"end":31.63},{"text":"biến","start":31.63,"end":32},{"text":"môi","start":32,"end":32.37},{"text":"trường.","start":32.37,"end":32.74},{"text":"Đây","start":32.74,"end":33.11}],"start":30.9,"end":33.11},{"words":[{"text":"là","start":33.11,"end":33.48},{"text":"ba","start":33.48,"end":33.85},{"text":"thứ","start":33.85,"end":34.22},{"text":"quyết","start":34.22,"end":34.59},{"text":"định","start":34.59,"end":34.96},{"text":"container","start":34.96,"end":35.33}],"start":33.11,"end":35.33},{"words":[{"text":"chạy","start":35.33,"end":35.7},{"text":"được","start":35.7,"end":36.06},{"text":"trong","start":36.06,"end":36.43},{"text":"môi","start":36.43,"end":36.8},{"text":"trường","start":36.8,"end":37.17},{"text":"thật","start":37.17,"end":37.54}],"start":35.33,"end":37.54},{"words":[{"text":"hay","start":37.54,"end":37.91},{"text":"không.","start":37.91,"end":38.28}],"start":37.54,"end":38.28},{"words":[{"text":"Lệnh","start":39.48,"end":39.87},{"text":"chạy","start":39.87,"end":40.26},{"text":"thử","start":40.26,"end":40.65},{"text":"nên","start":40.65,"end":41.04},{"text":"đơn","start":41.04,"end":41.43},{"text":"giản","start":41.43,"end":41.82}],"start":39.48,"end":41.82},{"words":[{"text":"trước,","start":41.82,"end":42.2},{"text":"ví","start":42.2,"end":42.59},{"text":"dụ","start":42.59,"end":42.98},{"text":"docker","start":42.98,"end":43.37},{"text":"run","start":43.37,"end":43.76},{"text":"nginx.","start":43.76,"end":44.15}],"start":41.82,"end":44.15},{"words":[{"text":"Sau","start":44.15,"end":44.54},{"text":"đó","start":44.54,"end":44.93},{"text":"mới","start":44.93,"end":45.32},{"text":"thêm","start":45.32,"end":45.71},{"text":"port,","start":45.71,"end":46.1},{"text":"volume","start":46.1,"end":46.49}],"start":44.15,"end":46.49},{"words":[{"text":"và","start":46.49,"end":46.88},{"text":"cấu","start":46.88,"end":47.26},{"text":"hình","start":47.26,"end":47.65},{"text":"bảo","start":47.65,"end":48.04},{"text":"mật.","start":48.04,"end":48.43}],"start":46.49,"end":48.43},{"words":[{"text":"Kết","start":49.63,"end":50.06},{"text":"luận:","start":50.06,"end":50.5},{"text":"với","start":50.5,"end":50.93},{"text":"Docker","start":50.93,"end":51.37},{"text":"image,","start":51.37,"end":51.8},{"text":"video","start":51.8,"end":52.23}],"start":49.63,"end":52.23},{"words":[{"text":"phải","start":52.23,"end":52.67},{"text":"giúp","start":52.67,"end":53.1},{"text":"người","start":53.1,"end":53.53},{"text":"xem","start":53.53,"end":53.97},{"text":"chạy","start":53.97,"end":54.4},{"text":"được","start":54.4,"end":54.84}],"start":52.23,"end":54.84},{"words":[{"text":"container,","start":54.84,"end":55.27},{"text":"hiểu","start":55.27,"end":55.7},{"text":"tag","start":55.7,"end":56.14},{"text":"nào","start":56.14,"end":56.57},{"text":"nên","start":56.57,"end":57},{"text":"dùng","start":57,"end":57.44}],"start":54.84,"end":57.44},{"words":[{"text":"và","start":57.44,"end":57.87},{"text":"biết","start":57.87,"end":58.31},{"text":"những","start":58.31,"end":58.74},{"text":"cấu","start":58.74,"end":59.17},{"text":"hình","start":59.17,"end":59.61},{"text":"tối","start":59.61,"end":60.04}],"start":57.44,"end":60.04},{"words":[{"text":"thiểu","start":60.04,"end":60.47},{"text":"trước","start":60.47,"end":60.91},{"text":"production.","start":60.91,"end":61.34}],"start":60.04,"end":61.34}];
     if (subtitleBlocks.length > 0) {
       const capContainer = document.getElementById("captions");
       const escapeHtml = (value) => String(value)
