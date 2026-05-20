@@ -38,6 +38,9 @@ try {
   if (!match) throw new Error("Không tìm thấy đường dẫn file JSON đã tạo trong output.");
   const jsonPath = match[1].trim();
 
+  // Extract base name from JSON for renaming the video: e.g. "nginx-20-05-2026-16-01"
+  const jsonBaseName = path.basename(jsonPath, '.json'); // e.g. nginx-20-05-2026-16-01
+
   console.log("\nStep 2: Chụp ảnh màn hình trang nguồn...");
   run("node", ["capture_github.js", targetUrl]);
 
@@ -52,6 +55,29 @@ try {
 
   console.log("\nStep 6: Kết xuất video MP4...");
   run(npmBin, ["run", "render"]);
+
+  // Rename the latest rendered MP4 to match the video name
+  console.log("\nStep 6b: Đổi tên video theo định dạng tên-video-date-time...");
+  const rendersDir = path.join(process.cwd(), "renders");
+  if (fs.existsSync(rendersDir)) {
+    const mp4Files = fs.readdirSync(rendersDir)
+      .filter(f => f.endsWith(".mp4"))
+      .map(f => ({ name: f, mtime: fs.statSync(path.join(rendersDir, f)).mtimeMs }))
+      .sort((a, b) => b.mtime - a.mtime);
+    
+    if (mp4Files.length > 0) {
+      const latestMp4 = mp4Files[0].name;
+      const newMp4Name = `${jsonBaseName}.mp4`;
+      const oldPath = path.join(rendersDir, latestMp4);
+      const newPath = path.join(rendersDir, newMp4Name);
+      if (latestMp4 !== newMp4Name) {
+        fs.renameSync(oldPath, newPath);
+        console.log(`✅ Video đã đổi tên: ${latestMp4} → ${newMp4Name}`);
+      } else {
+        console.log(`Video đã có tên đúng: ${newMp4Name}`);
+      }
+    }
+  }
 
   console.log("\nStep 7: Dọn dẹp file audio tạm...");
   const audioDir = path.join(process.cwd(), "assets", "audio");
@@ -69,7 +95,7 @@ try {
 
   console.log("\n==================================================");
   console.log("✅ PIPELINE ĐÃ HOÀN THÀNH");
-  console.log("Video mới đã được lưu trong thư mục renders/.");
+  console.log(`Video mới đã được lưu trong thư mục renders/ với tên: ${jsonBaseName}.mp4`);
   console.log("==================================================\n");
 } catch (error) {
   console.error("\n❌ Gặp lỗi trong quá trình chạy pipeline:", error.message);

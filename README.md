@@ -1,146 +1,178 @@
-# 🚀 Quy Trình Tự Động Hóa Tạo Video Tin Tức & Review (Workflow)
+# 🚀 Quy Trình Tự Động Hóa Tạo Video Tech Từ URL
 
-Tài liệu này hướng dẫn chi tiết từng bước tạo video Review GitHub Repository từ kịch bản thô hoặc tự động hóa hoàn toàn từ URL GitHub sang video `.mp4` hoàn chỉnh.
+Tài liệu này hướng dẫn chi tiết cách tạo video review tự động từ một URL bất kỳ (GitHub, Docker Hub, hoặc web) sang video `.mp4` hoàn chỉnh.
 
 ---
 
-## ⚡Cách chạy cực nhanh: Luồng Tự Động Hóa Hoàn Toàn (End-to-End Pipeline)
+## ⚡ Cách chạy nhanh nhất
 
-Nếu muốn tạo nhanh video review cho một repository GitHub bất kỳ, bạn chỉ cần chạy một câu lệnh duy nhất:
+Chỉ cần một lệnh duy nhất:
 
 ```bash
-node run_pipeline.js <github_repo_url>
+node run_pipeline.js <url>
 ```
 
 **Ví dụ:**
+
 ```bash
-node run_pipeline.js https://github.com/pnpm/pnpm
+# GitHub
+node run_pipeline.js https://github.com/rany2/edge-tts
+
+# Docker Hub
+node run_pipeline.js https://hub.docker.com/_/nginx
+
+# Web bất kỳ
+node run_pipeline.js https://docs.python.org/3/tutorial/
 ```
-## 🖥️ Cách xem giao diện UI Studio (Preview)
 
-Để xem trước (preview) dòng thời gian của video, nghe thử âm thanh, phụ đề karaoke và các chuyển động trực quan trên giao diện đồ họa Studio:
+## 🖥️ Xem trước trên Studio (Preview)
 
-![alt text](image-1.png)
-1. Khởi động máy chủ xem thử:
+Để xem trước video mà không cần render MP4:
+
+1. Chạy các bước sinh dữ liệu:
+   ```bash
+   node generate_repo_data.js <url>
+   node capture_github.js <url>
+   py gen_assets.py data/<tên-file>.json
+   node generate.mjs data/<tên-file>.json
+   ```
+
+2. Khởi động server preview:
    ```bash
    npm run dev
    ```
-2. Mở trình duyệt web và truy cập:
+
+3. Mở trình duyệt tại:
    ```
    http://localhost:3002
    ```
-   *(Hoặc truy cập trực tiếp dự án tại: [http://localhost:3002#project/VNP_HyperFrames](http://localhost:3002#project/VNP_HyperFrames))*
 
-### Sơ đồ hoạt động của Pipeline:
+---
+
+## Sơ đồ hoạt động của Pipeline
 
 ```mermaid
 graph TD
-    URL[GitHub Repo URL] -->|run_pipeline.js| R_DATA[1. generate_repo_data.js: Gọi GitHub API & tạo kịch bản JSON]
-    R_DATA -->|Tạo github-review.json| CAPTURE[2. capture_github.js: Puppeteer chụp giao diện Repo]
-    CAPTURE -->|Tạo github_repo.png| TTS[3. gen_assets.py: Sinh giọng đọc TTS & karaoke]
-    TTS -->|Tính duration & subtitles| GEN[4. generate.mjs: Biên dịch giao diện HTML]
-    GEN -->|Tạo index.html| VALIDATE[5. hyperframes validate: Kiểm tra lỗi kỹ thuật]
-    VALIDATE -->|Xác thực thành công| RENDER[6. npm run render: Kết xuất video MP4]
-    RENDER --> OUT[Video MP4 thành phẩm tại thư mục renders/]
+    URL[URL đầu vào] -->|run_pipeline.js| ANALYZE[1. generate_repo_data.js: Phân tích URL và tạo kịch bản JSON]
+    ANALYZE -->|Tạo tên-video-date-time.json| CAPTURE[2. capture_github.js: Chụp ảnh trang nguồn]
+    CAPTURE -->|Tạo github_repo.png| TTS[3. gen_assets.py: Sinh giọng đọc edge-tts và timing phụ đề]
+    TTS -->|Cập nhật duration + transcript| GEN[4. generate.mjs: Biên dịch HTML từ template]
+    GEN -->|Tạo index.html| VALIDATE[5. hyperframes validate: Kiểm tra lỗi]
+    VALIDATE -->|Xác thực OK| RENDER[6. npm run render: Kết xuất MP4]
+    RENDER -->|Đổi tên MP4| RENAME[6b. Đổi tên theo quy tắc tên-video-date-time]
+    RENAME --> CLEANUP[7. Dọn dẹp file audio tạm]
+    CLEANUP --> OUT[Video MP4 tại renders/tên-video-DD-MM-YYYY-HH-mm.mp4]
 ```
 
 ---
 
 > [!IMPORTANT]
-> Tất cả các bước thực hiện thủ công dưới đây đều được chạy trực tiếp từ thư mục gốc của dự án `VNP_HyperFrames`.
-
-### Bước 1: Thu thập thông tin repo và tạo kịch bản (`generate_repo_data.js`)
-*   **Mô tả**: Tách thông tin `owner` và `repo` từ đường dẫn GitHub, gọi API công khai của GitHub để lấy: tên dự án, mô tả, số sao, ngôn ngữ lập trình chính. Sau đó, kết hợp các thông tin này vào mẫu kịch bản tiếng Việt có cấu trúc 8 phân cảnh review chuẩn.
-*   **Lệnh thực thi**:
-    ```bash
-    node generate_repo_data.js https://github.com/pnpm/pnpm
-    ```
-*   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic tại: `data/github-review.json` (Đường dẫn tuyệt đối: [github-review.json](file:///d:/VNP_HyperFrames/data/github-review.json))
+> Tất cả các lệnh được chạy từ thư mục gốc của dự án `my-video/`.
 
 ---
 
-### Bước 2: Chụp ảnh GitHub tự động (`capture_github.js`)
-*   **Mô tả**: Sử dụng thư viện Puppeteer bật Chrome ẩn danh, tự động truy cập GitHub Repo, dọn dẹp các banner quảng cáo, căn chỉnh bố cục hợp lý và chụp ảnh màn hình dọc làm nguyên liệu cho Cảnh 1.
-*   **Lệnh thực thi**:
-    ```bash
-    node capture_github.js https://github.com/pnpm/pnpm
-    ```
-*   **Đầu vào (Input)**: URL trang GitHub.
-*   **Đầu ra (Output)**: Ảnh chụp màn hình dọc siêu dài: `assets/images/github_repo.png`
+### Bước 1: Phân tích URL và tạo kịch bản (`generate_repo_data.js`)
+
+- **Mô tả**: Nhận diện nền tảng (GitHub / Docker / Web), gọi API lấy metadata, phân loại nội dung và chọn format video phù hợp. Sinh file JSON kịch bản.
+- **Lệnh**:
+  ```bash
+  node generate_repo_data.js https://hub.docker.com/_/nginx
+  ```
+- **Đầu ra**: File JSON tại `data/<tên-video>-<DD>-<MM>-<YYYY>-<HH>-<mm>.json`
+
+**Hệ thống template:**
+
+| Nền tảng | Template | Phong cách |
+|---|---|---|
+| GitHub | `G1_github` | Gradient vàng/xanh, khung trình duyệt |
+| Docker | `G2_docker` | Xanh Docker, khung Terminal/Console |
+| Web | `G3_web` | Gradient xanh/vàng, khung trình duyệt |
 
 ---
 
-### Bước 3: Tạo giọng đọc và mốc thời gian phụ đề (`gen_assets.py`)
-*   **Mô tả**: Tự động chuyển văn bản thành giọng nói (TTS) tiếng Việt và tính toán mốc thời gian hiển thị karaoke cho từng từ.
-*   **Lệnh thực thi**:
-    ```bash
-    python gen_assets.py data/github-review.json
-    ```
-*   **Đầu vào (Input)**: Tệp JSON kịch bản.
-*   **Đầu ra (Output)**:
-    1.  Tự động sinh các tệp âm thanh giọng đọc dạng sóng: `assets/audio/github-review_scene_*.wav`
-    2.  Tự động cập nhật trực tiếp vào tệp JSON kịch bản các thông tin:
-        *   Mốc thời gian bắt đầu/kết thúc âm thanh cảnh (`audio_start`, `audio_duration`).
-        *   Mảng phụ đề karaoke chi tiết khớp từng mili-giây (`transcript`).
-        *   Tổng thời lượng toàn bộ video (`duration`).
+### Bước 2: Chụp ảnh trang nguồn (`capture_github.js`)
+
+- **Mô tả**: Dùng Puppeteer mở URL, ẩn các thành phần gây nhiễu (header, footer, banner), chụp ảnh màn hình dọc.
+- **Lệnh**:
+  ```bash
+  node capture_github.js https://hub.docker.com/_/nginx
+  ```
+- **Đầu ra**: `assets/images/github_repo.png`
 
 ---
 
-### Bước 4: Biên dịch sang giao diện video HTML (`generate.mjs`)
-*   **Mô tả**: Trình biên dịch sẽ đọc dữ liệu từ tệp JSON đã có đủ mốc thời gian để lắp ghép các thẻ HTML giao diện (Browser Mockup, text headline, nhân vật Shiba) và viết các dòng mã chuyển động GSAP tương ứng.
-*   **Lệnh thực thi**:
-    ```bash
-    node generate.mjs data/github-review.json
-    ```
-*   **Đầu vào (Input)**: Tệp JSON kịch bản đã xử lý ở Bước 2.
-*   **Đầu ra (Output)**: Tệp mã nguồn cấu trúc video tổng thể: `index.html` tại thư mục gốc của dự án.
+### Bước 3: Tạo giọng đọc và timing phụ đề (`gen_assets.py`)
+
+- **Mô tả**: Dùng **edge-tts** (giọng `vi-VN-NamMinhNeural` — nam miền Nam) để tạo audio tiếng Việt, tăng tốc 1.18x, tính transcript word-level.
+- **Lệnh**:
+  ```bash
+  py gen_assets.py data/nginx-20-05-2026-16-06.json
+  ```
+- **Đầu ra**:
+  - File audio: `assets/audio/<prefix>_scene_*.wav`
+  - Cập nhật JSON: `audio_start`, `audio_duration`, `audio_path`, `transcript`
 
 ---
 
-### Bước 5: Kiểm tra và xác thực chất lượng mã (`npx hyperframes validate`)
-*   **Mô tả**: Chạy trình giả lập kiểm tra tĩnh và kiểm tra chạy thực tế trên Chrome không đầu để phát hiện sớm các lỗi cú pháp HTML, lỗi JavaScript của GSAP, lỗi thiếu file ảnh/âm thanh hoặc lỗi tương phản màu chữ.
-*   **Lệnh thực thi**:
-    ```bash
-    npx hyperframes validate
-    ```
-*   **Đầu ra (Output)**: Báo cáo xác thực (ví dụ: *No console errors* - không có lỗi console).
+### Bước 4: Biên dịch HTML (`generate.mjs`)
+
+- **Mô tả**: Đọc JSON kịch bản, load template tương ứng, sinh file `index.html` chứa toàn bộ composition video.
+- **Lệnh**:
+  ```bash
+  node generate.mjs data/nginx-20-05-2026-16-06.json
+  ```
+- **Đầu ra**: `index.html`
 
 ---
 
-### Bước 6: Xuất video thành phẩm (`npm run render`)
-*   **Mô tả**: Kích hoạt engine HyperFrames đọc tệp `index.html`, kết hợp Puppeteer để chụp hình từng khung ảnh động và dùng FFmpeg đóng gói âm thanh + hình ảnh thành tệp phim hoàn chỉnh.
-*   **Lệnh thực thi**:
-    ```bash
-    npm run render
-    ```
-*   **Đầu ra (Output)**: Tệp video MP4 thành phẩm chất lượng cao nằm trong thư mục `renders/` với định dạng tên: `renders/VNP_HyperFrames_YYYY-MM-DD_HH-MM-SS.mp4`.
+### Bước 5: Kiểm tra composition (`npm run check`)
 
-# Cấu trúc dự án:
+- **Mô tả**: Chạy lint, validate và inspect trên composition HTML.
+- **Lệnh**:
+  ```bash
+  npm run check
+  ```
+
+---
+
+### Bước 6: Kết xuất video MP4 (`npm run render`)
+
+- **Mô tả**: HyperFrames đọc `index.html`, chụp từng frame bằng Puppeteer, encode bằng FFmpeg. Sau đó đổi tên MP4 theo quy tắc.
+- **Lệnh**:
+  ```bash
+  npm run render
+  ```
+- **Đầu ra**: `renders/<tên-video>-<DD>-<MM>-<YYYY>-<HH>-<mm>.mp4`
+
+---
+
+## Cấu trúc dự án
 
 ```text
-VNP_HyperFrames/
+my-video/
 ├── assets/
-│   ├── audio/
-│   │   └── github-review_scene_*.wav
-│   ├── images/
-│   │   └── github_repo.png
-│   └── styles/
-│       ├── components.css
-│       └── fonts.css
-├── data/
-│   ├── github-review.json
-│   ├── html-template/
-│   │   ├── index.html
-│   │   ├── scene_01_opening_and_intro.html
-│   │   └── ... (các scene khác)
-│   └── script/
-│       ├──generate_repo_data.js
-│       └──scene_01_opening_and_intro.js
-│       
-├── renders/        # Video đầu ra sẽ nằm ở đây
-├── nodes_modules/
-├── .gitignore
-├── package.json
-├── run_pipeline.js   # Script chạy toàn bộ luồng
-└── ... (các file khác)
+│   ├── audio/                    # File audio TTS (tạm, bị xóa sau render)
+│   ├── background-music/         # Nhạc nền
+│   ├── character/shiba/          # Nhân vật Shiba
+│   ├── images/                   # Ảnh chụp trang nguồn
+│   ├── logo/                     # Logo kênh
+│   └── sound-effect/             # Hiệu ứng âm thanh
+├── compositions/                 # Sub-composition (intro)
+├── data/                         # File JSON kịch bản
+├── docs/                         # Tài liệu dự án
+├── renders/                      # Video MP4 đầu ra
+├── scripts/                      # Script tiện ích
+├── templates/
+│   ├── G1_github/                # Template GitHub
+│   ├── G2_docker/                # Template Docker (Terminal)
+│   └── G3_web/                   # Template Web
+├── run_pipeline.js               # Entry point tự động
+├── generate_repo_data.js         # Phân tích URL → JSON
+├── capture_github.js             # Chụp ảnh trang nguồn
+├── gen_assets.py                 # TTS + timing phụ đề
+├── generate.mjs                  # JSON + template → index.html
+├── index.html                    # Composition video hiện tại
+├── meta.json                     # Metadata dự án
+├── package.json                  # Scripts và dependencies
+└── .env                          # API keys (TAVILY_API_KEY)
 ```
