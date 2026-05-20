@@ -18,16 +18,16 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
             </div>
             <div class="browser-address">${repoUrl}</div>
           </div>
-          <div class="browser-inner">
+          <div class="browser-inner" data-layout-allow-overflow>
             <img class="github-scroll-image" id="scroll-img-${sceneId}" src="./assets/images/github_repo.png" />
           </div>
           <div class="browser-glass-shine"></div>
         </div>
-        <div class="headline-container" style="top: 1070px; gap: 8px;">
-          <div class="headline-line1" id="hl1-${sceneId}" style="font-size: 75px; letter-spacing: 2px;">${headlineLine1}</div>
-          <div class="headline-line2" id="hl2-${sceneId}" style="font-size: 52px; font-weight: 800;">${headlineLine2}</div>
+        <div class="headline-container" style="top: 1085px; gap: 8px;">
+          <div class="headline-line1" id="hl1-${sceneId}" style="font-size: 64px; letter-spacing: 1px;">${headlineLine1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}" style="font-size: 44px; font-weight: 800;">${headlineLine2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}" style="top: 1270px; padding: 12px 30px; font-size: 26px; border-radius: 20px;">
+        <div class="action-btn" id="btn-${sceneId}" style="top: 1265px; padding: 12px 30px; font-size: 25px; border-radius: 20px;">
           <span class="action-icon" style="font-size: 30px; margin-right: 5px;">🔗</span> ${repoUrl}
         </div>
       `;
@@ -55,11 +55,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const bento2Title = scene.bento2_title || "Xem trước lập tức";
       const bento3Title = scene.bento3_title || "Xuất MP4 cực nét";
       html = `
-        <div class="headline-container" style="top: 250px;">
+        <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="bento-container" style="top: 550px;" id="bento-${sceneId}">
+        <div class="bento-container" style="top: 525px;" id="bento-${sceneId}">
           <div class="bento-card full" id="bc-${sceneId}-1">
             <div class="card-icon-svg">
               <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
@@ -104,11 +104,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const bento3Title = scene.bento3_title || "API độ trễ cực thấp";
       const bento4Title = scene.bento4_title || "Quản trị rủi ro AI";
       html = `
-        <div class="headline-container" style="top: 250px;">
+        <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="bento-container" style="top: 550px;" id="bento-${sceneId}">
+        <div class="bento-container" style="top: 525px;" id="bento-${sceneId}">
           <div class="bento-grid-2">
             <div class="bento-card half" id="bc-${sceneId}-1" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
               <div class="card-icon-svg" style="margin: 0 0 20px 0;">
@@ -156,10 +156,6 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const title2 = scene.headline_line2 || "RENDER SIÊU ỔN ĐỊNH";
       const btnText = scene.btn_text || "Khớp hình & Tiếng 100%";
       html = `
-        <div class="top-header">
-          <img class="top-avatar" src="./assets/character/shiba/${scene.assets ? scene.assets[0] : "character shiba explaining something.png"}" />
-          <div class="top-username">shiba news 24h</div>
-        </div>
         <div class="main-glow-icon" id="glow-${sceneId}">
           <div class="glow-svg-container">
             <svg viewBox="0 0 24 24"><path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5l-4-4V4h8v3.5l-4 4z"/></svg>
@@ -191,11 +187,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const bento2Title = scene.bento2_title || "ThreeJS 3D";
       const bento3Title = scene.bento3_title || "Lottie & Anime";
       html = `
-        <div class="headline-container" style="top: 250px;">
+        <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="bento-container" style="top: 550px;" id="bento-${sceneId}">
+        <div class="bento-container" style="top: 525px;" id="bento-${sceneId}">
           <div class="bento-card full" id="bc-${sceneId}-1">
             <div class="card-icon-svg">
               <svg viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/></svg>
@@ -237,11 +233,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const repoTrend = scene.repo_trend || "▲ 1,500";
       const repoTrendLabel = scene.repo_trend_label || "today";
       html = `
-        <div class="headline-container" style="top: 210px; gap: 5px;">
-          <div class="headline-line1" style="font-size: 60px;">${title1}</div>
-          <div class="headline-line2" style="font-size: 60px;">${title2}</div>
+        <div class="headline-container" style="top: 160px; gap: 5px;">
+          <div class="headline-line1" style="font-size: 50px;">${title1}</div>
+          <div class="headline-line2" style="font-size: 50px;">${title2}</div>
         </div>
-        <div class="bento-container" style="top: 390px; width: 960px;" id="bento-${sceneId}">
+        <div class="bento-container" style="top: 375px; width: 960px;" id="bento-${sceneId}">
           <div class="repo-badge" id="rb-${sceneId}">
             <div class="crown-container">
               <svg class="crown-svg" viewBox="0 0 24 24"><path d="M5 16L3 5l5 5 4-7 4 7 5-5-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
@@ -304,10 +300,6 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const title2 = scene.headline_line2 || "NPX HYPERFRAMES INIT";
       const btnText = scene.btn_text || "$ npx hyperframes init my-video";
       html = `
-        <div class="top-header">
-          <img class="top-avatar" src="./assets/character/shiba/${scene.assets ? scene.assets[0] : "character shiba explaining something.png"}" />
-          <div class="top-username">shiba news 24h</div>
-        </div>
         <div class="main-glow-icon" id="glow-${sceneId}">
           <div class="glow-svg-container">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
@@ -317,7 +309,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}" style="font-family: monospace; font-size: 32px; background: rgba(0,0,0,0.4); border: 2px solid #00ff88;">
+        <div class="action-btn" id="btn-${sceneId}" style="font-family: monospace; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #00ff88;">
           ${btnText}
         </div>
       `;
@@ -339,11 +331,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const bento3Title = scene.bento3_title || "Bình luận ngay";
       const bento4Title = scene.bento4_title || "Đăng ký kênh";
       html = `
-        <div class="headline-container" style="top: 250px;">
+        <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="bento-container" style="top: 480px;" id="bento-${sceneId}">
+        <div class="bento-container" style="top: 460px;" id="bento-${sceneId}">
           <div class="bento-grid-2">
             <div class="bento-card half" id="bc-${sceneId}-1" style="border: 2px solid rgba(243, 202, 86, 0.4); background: rgba(243, 202, 86, 0.02);">
               <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(243,202,86,0.06); border: 2px solid rgba(243,202,86,0.25);">

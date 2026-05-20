@@ -62,7 +62,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 /* Main Glow Icon & Vector Container */
 .main-glow-icon { 
   position: absolute; 
-  top: 300px; 
+  top: 280px; 
   left: 50%; 
   transform: translateX(-50%); 
   width: 200px; 
@@ -271,17 +271,26 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 /* Headline */
 .headline-container {
   position: absolute;
-  top: 550px;
+  top: 470px;
   width: 100%;
   text-align: center;
   z-index: 30;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+  padding: 0 64px;
+  box-sizing: border-box;
 }
-.headline-line1 { font-size: 90px; font-weight: 800; color: #ffffff; text-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+.headline-line1 {
+  font-size: 76px;
+  line-height: 0.98;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
 .headline-line2 { 
-  font-size: 90px; 
+  font-size: 72px; 
+  line-height: 0.98;
   font-weight: 900; 
   background: linear-gradient(90deg, #fdf01c, #00d2ff); 
   -webkit-background-clip: text; 
@@ -292,7 +301,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 /* Action Button */
 .action-btn {
   position: absolute;
-  top: 800px;
+  top: 775px;
   left: 50%;
   transform: translateX(-50%);
   padding: 25px 60px;
@@ -431,7 +440,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   width: 660px; 
   text-align: center; 
   z-index: 1000; 
-  min-height: 160px; 
+  min-height: 132px; 
+  max-height: 188px; 
   height: auto; 
   display: flex; 
   justify-content: center; 
@@ -444,6 +454,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(253, 240, 28, 0.05); 
   padding: 25px 30px; 
   box-sizing: border-box; 
+  overflow: hidden;
 }
 
 /* Browser Window Mockup for GitHub Repo */

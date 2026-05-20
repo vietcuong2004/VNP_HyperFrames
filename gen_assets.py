@@ -3,6 +3,9 @@ import sys
 from gtts import gTTS
 import os
 import subprocess
+import tempfile
+
+SPEECH_SPEED = 1.18
 
 def get_audio_duration(file_path):
     try:
@@ -14,6 +17,34 @@ def get_audio_duration(file_path):
         # fallback to word estimate
         words = len(open(file_path, 'r', errors='ignore').read().split())
         return words / 2.5
+
+def speed_up_audio(file_path, speed):
+    if speed <= 1:
+        return
+    temp_fd, temp_path = tempfile.mkstemp(suffix=os.path.splitext(file_path)[1])
+    os.close(temp_fd)
+    try:
+        subprocess.run(
+            [
+                "ffmpeg",
+                "-y",
+                "-i",
+                file_path,
+                "-filter:a",
+                f"atempo={speed}",
+                "-vn",
+                temp_path,
+            ],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        os.replace(temp_path, file_path)
+    except Exception as e:
+        print(f"Warning: could not speed up {file_path}: {e}")
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
 
 if len(sys.argv) < 2:
     print("Usage: python gen_assets.py <json_path>")
@@ -39,6 +70,7 @@ for i, scene in enumerate(data['scenes']):
     print(f"Generating TTS for scene {i+1}...")
     tts = gTTS(text=text, lang='vi', slow=False)
     tts.save(audio_path)
+    speed_up_audio(audio_path, SPEECH_SPEED)
     
     # Get exact duration using ffprobe
     scene_duration = get_audio_duration(audio_path)
