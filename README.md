@@ -1,21 +1,42 @@
 # 🚀 Quy Trình Tự Động Hóa Tạo Video Tin Tức & Review (Workflow)
 
-Tài liệu này hướng dẫn chi tiết từng bước tạo video Review GitHub Repository từ kịch bản thô hoặc tự động hóa hoàn toàn từ URL GitHub sang video `.mp4` hoàn chỉnh.
+Tài liệu này hướng dẫn chi tiết từng bước tạo video Review GitHub Repository từ kịch bản thô hoặc tự động hóa hoàn toàn từ URL (GitHub, Docker, Web) sang video `.mp4` hoàn chỉnh.
 
 ---
 
-## ⚡Cách chạy cực nhanh: Luồng Tự Động Hóa Hoàn Toàn (End-to-End Pipeline)
+## ⚡Cách chạy cực nhanh 1: Giao Diện Đồ Họa (Web UI Dashboard) - MỚI
 
-Nếu muốn tạo nhanh video review cho một repository GitHub bất kỳ, bạn chỉ cần chạy một câu lệnh duy nhất:
+Dự án giờ đây đã được trang bị một Web UI cực kỳ chuyên nghiệp giúp bạn tạo nhiều video cùng lúc với thao tác trực quan.
+
+1. Khởi động máy chủ UI:
+   ```bash
+   npm run start
+   ```
+2. Mở trình duyệt web và truy cập:
+   ```
+   http://localhost:3001
+   ```
+3. Tại giao diện, bạn có thể nhập nhiều URL cùng lúc (bấm `+ Add More URL`), theo dõi log hệ thống chạy realtime và **xem trực tiếp video** ngay trên trình duyệt khi quá trình hoàn tất.
+
+---
+
+## ⚡Cách chạy cực nhanh 2: Luồng Tự Động Hóa Qua Terminal (CLI)
+
+Nếu muốn tạo nhanh video review cho một URL bất kỳ từ terminal, bạn chỉ cần chạy một câu lệnh duy nhất:
 
 ```bash
-node run_pipeline.js <github_repo_url>
+node run_pipeline.js <url_bất_kỳ>
 ```
 
 **Ví dụ:**
 ```bash
 node run_pipeline.js https://github.com/pnpm/pnpm
+node run_pipeline.js https://hub.docker.com/_/nginx
+node run_pipeline.js https://docs.heygen.com
 ```
+
+---
+
 ## 🖥️ Cách xem giao diện UI Studio (Preview)
 
 Để xem trước (preview) dòng thời gian của video, nghe thử âm thanh, phụ đề karaoke và các chuyển động trực quan trên giao diện đồ họa Studio:
@@ -35,13 +56,14 @@ node run_pipeline.js https://github.com/pnpm/pnpm
 
 ```mermaid
 graph TD
-    URL[GitHub Repo URL] -->|run_pipeline.js| R_DATA[1. generate_repo_data.js: Gọi GitHub API & tạo kịch bản JSON]
-    R_DATA -->|Tạo github-review.json| CAPTURE[2. capture_github.js: Puppeteer chụp giao diện Repo]
+    URL[URL Đầu Vào] -->|run_pipeline.js| R_DATA[1. generate_repo_data.js: Gọi API/Tavily, chọn Template & tạo JSON]
+    R_DATA -->|Tạo JSON tên động| CAPTURE[2. capture_github.js: Puppeteer chụp ảnh trang nguồn]
     CAPTURE -->|Tạo github_repo.png| TTS[3. gen_assets.py: Sinh giọng đọc TTS & karaoke]
-    TTS -->|Tính duration & subtitles| GEN[4. generate.mjs: Biên dịch giao diện HTML]
+    TTS -->|Tính duration & subtitles| GEN[4. generate.mjs: Biên dịch HTML theo Template G1/G2/G3]
     GEN -->|Tạo index.html| VALIDATE[5. hyperframes validate: Kiểm tra lỗi kỹ thuật]
     VALIDATE -->|Xác thực thành công| RENDER[6. npm run render: Kết xuất video MP4]
-    RENDER --> OUT[Video MP4 thành phẩm tại thư mục renders/]
+    RENDER -->|Thành phẩm| CLEANUP[7. Dọn dẹp file Audio tạm]
+    CLEANUP --> OUT[Video MP4 thành phẩm tại thư mục renders/]
 ```
 
 ---
@@ -49,23 +71,27 @@ graph TD
 > [!IMPORTANT]
 > Tất cả các bước thực hiện thủ công dưới đây đều được chạy trực tiếp từ thư mục gốc của dự án `VNP_HyperFrames`.
 
-### Bước 1: Thu thập thông tin repo và tạo kịch bản (`generate_repo_data.js`)
-*   **Mô tả**: Tách thông tin `owner` và `repo` từ đường dẫn GitHub, gọi API công khai của GitHub để lấy: tên dự án, mô tả, số sao, ngôn ngữ lập trình chính. Sau đó, kết hợp các thông tin này vào mẫu kịch bản tiếng Việt có cấu trúc 8 phân cảnh review chuẩn.
+### Bước 1: Thu thập thông tin và tạo kịch bản (`generate_repo_data.js`)
+*   **Mô tả**: Dựa vào URL đầu vào, hệ thống tự động phân loại thành 3 nhóm (Group 1: GitHub, Group 2: Docker, Group 3: Web). Sau đó, gọi API hoặc dùng Tavily AI để lấy nội dung, sinh kịch bản và **chỉ định template tương ứng**.
 *   **Lệnh thực thi**:
     ```bash
     node generate_repo_data.js https://github.com/pnpm/pnpm
     ```
-*   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic tại: `data/github-review.json` (Đường dẫn tuyệt đối: [github-review.json](file:///d:/VNP_HyperFrames/data/github-review.json))
+*   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic (không ghi đè) tại: `data/<tên_tự_động>_dd_mm_yyyy.json`
+
+> [!TIP]
+> **Tavily AI cho Web URL**: Với các link Web thông thường, hệ thống sẽ dùng Tavily để tóm tắt và phân loại nội dung chính xác. Hãy nhớ cấu hình API Key trong terminal trước khi chạy:
+> `set TAVILY_API_KEY=your_api_key_here` (Windows) hoặc `export TAVILY_API_KEY=...` (Mac/Linux).
 
 ---
 
-### Bước 2: Chụp ảnh GitHub tự động (`capture_github.js`)
-*   **Mô tả**: Sử dụng thư viện Puppeteer bật Chrome ẩn danh, tự động truy cập GitHub Repo, dọn dẹp các banner quảng cáo, căn chỉnh bố cục hợp lý và chụp ảnh màn hình dọc làm nguyên liệu cho Cảnh 1.
+### Bước 2: Chụp ảnh trang tự động (`capture_github.js`)
+*   **Mô tả**: Sử dụng thư viện Puppeteer bật Chrome ẩn danh, tự động truy cập URL nguồn, dọn dẹp các banner quảng cáo, căn chỉnh bố cục hợp lý và chụp ảnh màn hình dọc làm nguyên liệu cho Cảnh 1. Chế độ Light/Dark mode được tinh chỉnh mượt mà để tôn lên giao diện UI của từng template.
 *   **Lệnh thực thi**:
     ```bash
     node capture_github.js https://github.com/pnpm/pnpm
     ```
-*   **Đầu vào (Input)**: URL trang GitHub.
+*   **Đầu vào (Input)**: URL trang nguồn.
 *   **Đầu ra (Output)**: Ảnh chụp màn hình dọc siêu dài: `assets/images/github_repo.png`
 
 ---
@@ -74,7 +100,7 @@ graph TD
 *   **Mô tả**: Tự động chuyển văn bản thành giọng nói (TTS) tiếng Việt và tính toán mốc thời gian hiển thị karaoke cho từng từ.
 *   **Lệnh thực thi**:
     ```bash
-    python gen_assets.py data/github-review.json
+    python gen_assets.py data/<tên_file_json>
     ```
 *   **Đầu vào (Input)**: Tệp JSON kịch bản.
 *   **Đầu ra (Output)**:
@@ -87,10 +113,13 @@ graph TD
 ---
 
 ### Bước 4: Biên dịch sang giao diện video HTML (`generate.mjs`)
-*   **Mô tả**: Trình biên dịch sẽ đọc dữ liệu từ tệp JSON đã có đủ mốc thời gian để lắp ghép các thẻ HTML giao diện (Browser Mockup, text headline, nhân vật Shiba) và viết các dòng mã chuyển động GSAP tương ứng.
+*   **Mô tả**: Trình biên dịch đọc dữ liệu từ tệp JSON đã có đủ mốc thời gian để lắp ghép các thẻ HTML giao diện và viết mã chuyển động GSAP tương ứng. Quá trình này sẽ **tự động phân luồng, nạp template UI** dựa trên loại nguồn:
+    - `G1_github`: Template chuyên dụng cho mã nguồn GitHub.
+    - `G2_docker`: Template cho hệ thống/container.
+    - `G3_web`: Template Neon Glassmorphism cho web/bài viết (Grid Layout, Timeline, Metric Cards).
 *   **Lệnh thực thi**:
     ```bash
-    node generate.mjs data/github-review.json
+    node generate.mjs data/<tên_file_json>
     ```
 *   **Đầu vào (Input)**: Tệp JSON kịch bản đã xử lý ở Bước 2.
 *   **Đầu ra (Output)**: Tệp mã nguồn cấu trúc video tổng thể: `index.html` tại thư mục gốc của dự án.
@@ -115,32 +144,35 @@ graph TD
     ```
 *   **Đầu ra (Output)**: Tệp video MP4 thành phẩm chất lượng cao nằm trong thư mục `renders/` với định dạng tên: `renders/VNP_HyperFrames_YYYY-MM-DD_HH-MM-SS.mp4`.
 
+---
+
+### Bước 7: Dọn dẹp hệ thống (Clean-up)
+*   **Mô tả**: Ngay khi video render thành công, Pipeline tự động rà quét và **xóa toàn bộ các tệp `.wav` rác** trong thư mục `assets/audio/` để giải phóng bộ nhớ ổ cứng, giữ không gian làm việc sạch sẽ.
+
 # Cấu trúc dự án:
 
 ```text
 VNP_HyperFrames/
 ├── assets/
-│   ├── audio/
-│   │   └── github-review_scene_*.wav
-│   ├── images/
-│   │   └── github_repo.png
+│   ├── audio/              # Chứa audio tạm thời (Tự động bị xóa sau render)
+│   ├── images/             # Ảnh chụp Screenshot tự động
 │   └── styles/
 │       ├── components.css
 │       └── fonts.css
-├── data/
-│   ├── github-review.json
-│   ├── html-template/
-│   │   ├── index.html
-│   │   ├── scene_01_opening_and_intro.html
-│   │   └── ... (các scene khác)
-│   └── script/
-│       ├──generate_repo_data.js
-│       └──scene_01_opening_and_intro.js
-│       
-├── renders/        # Video đầu ra sẽ nằm ở đây
-├── nodes_modules/
-├── .gitignore
+├── data/                   # Chứa các file kịch bản JSON (Tên sinh tự động theo ngày)
+├── docs/                   # Tài liệu kiến trúc và hướng dẫn
+├── public/                 # Các tài nguyên tĩnh (Giao diện cho Web UI - index.html)
+├── renders/                # Video MP4 thành phẩm
+├── templates/              # Hệ thống Multi-Template (Phân tách theo loại dữ liệu)
+│   ├── G1_github/          # UI/CSS cho GitHub Repo
+│   ├── G2_docker/          # UI/CSS cho Docker Hub
+│   └── G3_web/             # UI/CSS Neon Glassmorphism (Cho Website/Tech News)
+├── capture_github.js       # Script chụp ảnh màn hình Puppeteer
+├── gen_assets.py           # Sinh AI TTS & Karaoke Timing
+├── generate.mjs            # Biên dịch tệp JSON + Template ra index.html
+├── generate_repo_data.js   # Module phân loại URL, gọi API/AI sinh Data
+├── run_pipeline.js         # Trình điều phối chạy tuần tự 7 Bước
+├── ui_server.js            # Máy chủ Backend cấp giao diện Web (Express - Port 3001)
 ├── package.json
-├── run_pipeline.js   # Script chạy toàn bộ luồng
-└── ... (các file khác)
+└── README.md               # Tài liệu bạn đang đọc
 ```

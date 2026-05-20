@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "node ui_server.js",
     "dev": "npx --yes hyperframes@0.6.24 preview",
     "check": "npx --yes hyperframes@0.6.24 lint && npx --yes hyperframes@0.6.24 validate && npx --yes hyperframes@0.6.24 inspect",
     "render": "npx --yes hyperframes@0.6.24 render --workers=2",
@@ -15,6 +16,9 @@
     "render:finance": "node generate.mjs data/sample-finance.json && npx --yes hyperframes@0.6.24 render --workers=2"
   },
   "dependencies": {
-    "puppeteer": "^25.0.4"
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "puppeteer": "^25.0.4",
+    "socket.io": "^4.8.3"
   }
 }

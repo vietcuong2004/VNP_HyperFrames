@@ -1,16 +1,83 @@
 {
-  "template": "G2_docker",
-  "source_url": "https://hub.docker.com/_/nginx",
-  "platform": "docker",
-  "content_type": "docker_official_base_image",
-  "video_format": "container_quick_start",
-  "classification_reason": "Image có vẻ là official/base/service image phổ biến.",
+  "template": "G1_github",
+  "source_url": "https://github.com/heygen-com/hyperframes",
+  "platform": "github",
+  "content_type": "library_framework",
+  "video_format": "developer_integration_brief",
+  "classification_reason": "Repo có dấu hiệu là thư viện/framework để tích hợp vào code.",
   "metadata": {
-    "namespace": "library",
-    "image": "nginx",
-    "description": "Official build of Nginx.",
-    "star_count": 21279,
-    "pull_count": 13022046790
+    "owner": "heygen-com",
+    "repo": "hyperframes",
+    "description": "Write HTML. Render video. Built for agents.",
+    "stars": 19827,
+    "language": "TypeScript",
+    "topics": [
+      "ai",
+      "animation",
+      "ffmpeg",
+      "framework",
+      "gsap",
+      "html",
+      "mcp",
+      "puppeteer",
+      "rendering",
+      "typescript",
+      "video"
+    ],
+    "readme_headings": [
+      "Quick Start",
+      "Option 1: With an AI coding agent (recommended)",
+      "Option 2: Start a project manually",
+      "Why Hyperframes?",
+      "Hyperframes vs Remotion",
+      "Licensing: fully open source vs source-available",
+      "How It Works",
+      "Catalog",
+      "Documentation",
+      "Packages",
+      "Skills",
+      "Contributing"
+    ],
+    "root_files": [
+      ".claude-plugin",
+      ".claude",
+      ".codex-plugin",
+      ".cursor-plugin",
+      ".editorconfig",
+      ".env.example",
+      ".fallowrc.jsonc",
+      ".filesize-allowlist",
+      ".gitattributes",
+      ".github",
+      ".gitignore",
+      ".oxfmtrc.json",
+      ".oxlintrc.json",
+      ".prettierignore",
+      "ADOPTERS.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "CODE_OF_CONDUCT.md",
+      "CONTRIBUTING.md",
+      "CREDITS.md",
+      "DESIGN.md",
+      "DOCS_GUIDELINES.md",
+      "Dockerfile.test",
+      "LICENSE",
+      "README.md",
+      "SECURITY.md",
+      "assets",
+      "bun.lock",
+      "commitlint.config.js",
+      "docs",
+      "examples",
+      "knip.config.ts",
+      "lefthook.yml",
+      "package.json",
+      "packages",
+      "registry",
+      "scripts",
+      "skills"
+    ]
   },
   "scenes": [
     {
@@ -18,767 +85,1365 @@
         "character shiba explaining something.png"
       ],
       "sfx": "Ding 2.mp3",
-      "repo_url": "hub.docker.com/_/nginx",
-      "voice": "library/nginx là một Docker image nên bắt đầu bằng cách rất thực dụng: image này chạy service gì, pull thế nào, map port ra sao, và có cần volume hay env không. Official build of Nginx..",
-      "visual": "Chụp Docker Hub, tag và mô tả image.",
-      "headline_line1": "NGINX",
-      "headline_line2": "CONTAINER QUICK START",
+      "repo_url": "github.com/heygen-com/hyperframes",
+      "headline_line1": "HYPERFRAMES",
+      "voice": "hyperframes là thứ developer nên nhìn từ góc độ tích hợp vào dự án thật: nó làm gì, cài ra sao, API dùng thế nào, và có đáng đưa vào stack hay không. Write HTML. Render video. Built for agents..",
+      "visual": "Chụp trang repo và highlight README/API.",
+      "headline_line2": "DEV INTEGRATION BRIEF",
       "audio_start": 0.5,
-      "audio_duration": 16.22,
+      "audio_duration": 18.14,
       "audio_path": "assets/audio/video_20_05_2026_scene_1.wav",
       "transcript": [
         {
-          "text": "library/nginx",
+          "text": "hyperframes",
           "start": 0.5,
           "end": 0.95
         },
         {
           "text": "là",
           "start": 0.95,
-          "end": 1.4
-        },
-        {
-          "text": "một",
-          "start": 1.4,
-          "end": 1.85
-        },
-        {
-          "text": "Docker",
-          "start": 1.85,
-          "end": 2.3
-        },
-        {
-          "text": "image",
-          "start": 2.3,
-          "end": 2.75
-        },
-        {
-          "text": "nên",
-          "start": 2.75,
-          "end": 3.2
-        },
-        {
-          "text": "bắt",
-          "start": 3.2,
-          "end": 3.65
-        },
-        {
-          "text": "đầu",
-          "start": 3.65,
-          "end": 4.11
-        },
-        {
-          "text": "bằng",
-          "start": 4.11,
-          "end": 4.56
-        },
-        {
-          "text": "cách",
-          "start": 4.56,
-          "end": 5.01
-        },
-        {
-          "text": "rất",
-          "start": 5.01,
-          "end": 5.46
-        },
-        {
-          "text": "thực",
-          "start": 5.46,
-          "end": 5.91
-        },
-        {
-          "text": "dụng:",
-          "start": 5.91,
-          "end": 6.36
-        },
-        {
-          "text": "image",
-          "start": 6.36,
-          "end": 6.81
-        },
-        {
-          "text": "này",
-          "start": 6.81,
-          "end": 7.26
-        },
-        {
-          "text": "chạy",
-          "start": 7.26,
-          "end": 7.71
-        },
-        {
-          "text": "service",
-          "start": 7.71,
-          "end": 8.16
-        },
-        {
-          "text": "gì,",
-          "start": 8.16,
-          "end": 8.61
-        },
-        {
-          "text": "pull",
-          "start": 8.61,
-          "end": 9.06
-        },
-        {
-          "text": "thế",
-          "start": 9.06,
-          "end": 9.51
-        },
-        {
-          "text": "nào,",
-          "start": 9.51,
-          "end": 9.96
-        },
-        {
-          "text": "map",
-          "start": 9.96,
-          "end": 10.41
-        },
-        {
-          "text": "port",
-          "start": 10.41,
-          "end": 10.87
-        },
-        {
-          "text": "ra",
-          "start": 10.87,
-          "end": 11.32
-        },
-        {
-          "text": "sao,",
-          "start": 11.32,
-          "end": 11.77
-        },
-        {
-          "text": "và",
-          "start": 11.77,
-          "end": 12.22
-        },
-        {
-          "text": "có",
-          "start": 12.22,
-          "end": 12.67
-        },
-        {
-          "text": "cần",
-          "start": 12.67,
-          "end": 13.12
-        },
-        {
-          "text": "volume",
-          "start": 13.12,
-          "end": 13.57
-        },
-        {
-          "text": "hay",
-          "start": 13.57,
-          "end": 14.02
-        },
-        {
-          "text": "env",
-          "start": 14.02,
-          "end": 14.47
-        },
-        {
-          "text": "không.",
-          "start": 14.47,
-          "end": 14.92
-        },
-        {
-          "text": "Official",
-          "start": 14.92,
-          "end": 15.37
-        },
-        {
-          "text": "build",
-          "start": 15.37,
-          "end": 15.82
-        },
-        {
-          "text": "of",
-          "start": 15.82,
-          "end": 16.27
-        },
-        {
-          "text": "Nginx..",
-          "start": 16.27,
-          "end": 16.72
-        }
-      ]
-    },
-    {
-      "assets": [
-        "character shiba explaining something.png"
-      ],
-      "sfx": "Ding 2.mp3",
-      "voice": "Bước đầu tiên là pull image và chọn tag rõ ràng. Nếu làm production, tránh phụ thuộc vào latest khi chưa kiểm soát version.",
-      "visual": "Terminal docker pull và danh sách tag.",
-      "headline_line1": "CHỌN TAG",
-      "headline_line2": "RỒI PULL IMAGE",
-      "btn_text": "$ docker pull nginx",
-      "audio_start": 17.92,
-      "audio_duration": 9.55,
-      "audio_path": "assets/audio/video_20_05_2026_scene_2.wav",
-      "transcript": [
-        {
-          "text": "Bước",
-          "start": 17.92,
-          "end": 18.32
-        },
-        {
-          "text": "đầu",
-          "start": 18.32,
-          "end": 18.72
-        },
-        {
-          "text": "tiên",
-          "start": 18.72,
-          "end": 19.11
-        },
-        {
-          "text": "là",
-          "start": 19.11,
-          "end": 19.51
-        },
-        {
-          "text": "pull",
-          "start": 19.51,
-          "end": 19.91
-        },
-        {
-          "text": "image",
-          "start": 19.91,
-          "end": 20.31
-        },
-        {
-          "text": "và",
-          "start": 20.31,
-          "end": 20.71
-        },
-        {
-          "text": "chọn",
-          "start": 20.71,
-          "end": 21.1
-        },
-        {
-          "text": "tag",
-          "start": 21.1,
-          "end": 21.5
-        },
-        {
-          "text": "rõ",
-          "start": 21.5,
-          "end": 21.9
-        },
-        {
-          "text": "ràng.",
-          "start": 21.9,
-          "end": 22.3
-        },
-        {
-          "text": "Nếu",
-          "start": 22.3,
-          "end": 22.7
-        },
-        {
-          "text": "làm",
-          "start": 22.7,
-          "end": 23.09
-        },
-        {
-          "text": "production,",
-          "start": 23.09,
-          "end": 23.49
-        },
-        {
-          "text": "tránh",
-          "start": 23.49,
-          "end": 23.89
-        },
-        {
-          "text": "phụ",
-          "start": 23.89,
-          "end": 24.29
-        },
-        {
-          "text": "thuộc",
-          "start": 24.29,
-          "end": 24.69
-        },
-        {
-          "text": "vào",
-          "start": 24.69,
-          "end": 25.08
-        },
-        {
-          "text": "latest",
-          "start": 25.08,
-          "end": 25.48
-        },
-        {
-          "text": "khi",
-          "start": 25.48,
-          "end": 25.88
-        },
-        {
-          "text": "chưa",
-          "start": 25.88,
-          "end": 26.28
-        },
-        {
-          "text": "kiểm",
-          "start": 26.28,
-          "end": 26.68
-        },
-        {
-          "text": "soát",
-          "start": 26.68,
-          "end": 27.07
-        },
-        {
-          "text": "version.",
-          "start": 27.07,
-          "end": 27.47
-        }
-      ]
-    },
-    {
-      "assets": [
-        "character shiba explaining something.png"
-      ],
-      "sfx": "Ding 2.mp3",
-      "voice": "Tiếp theo là xác định port, volume và biến môi trường. Đây là ba thứ quyết định container chạy được trong môi trường thật hay không.",
-      "visual": "Sơ đồ port mapping, env, volume.",
-      "headline_line1": "PORT",
-      "headline_line2": "VOLUME VÀ ENV",
-      "bento1_title": "Port",
-      "bento1_desc": "Map đúng cổng service",
-      "bento2_title": "Volume",
-      "bento3_title": "Env",
-      "audio_start": 28.68,
-      "audio_duration": 9.6,
-      "audio_path": "assets/audio/video_20_05_2026_scene_3.wav",
-      "transcript": [
-        {
-          "text": "Tiếp",
-          "start": 28.68,
-          "end": 29.05
-        },
-        {
-          "text": "theo",
-          "start": 29.05,
-          "end": 29.42
-        },
-        {
-          "text": "là",
-          "start": 29.42,
-          "end": 29.79
-        },
-        {
-          "text": "xác",
-          "start": 29.79,
-          "end": 30.16
-        },
-        {
-          "text": "định",
-          "start": 30.16,
-          "end": 30.53
-        },
-        {
-          "text": "port,",
-          "start": 30.53,
-          "end": 30.9
-        },
-        {
-          "text": "volume",
-          "start": 30.9,
-          "end": 31.26
-        },
-        {
-          "text": "và",
-          "start": 31.26,
-          "end": 31.63
-        },
-        {
-          "text": "biến",
-          "start": 31.63,
-          "end": 32.0
-        },
-        {
-          "text": "môi",
-          "start": 32.0,
-          "end": 32.37
-        },
-        {
-          "text": "trường.",
-          "start": 32.37,
-          "end": 32.74
-        },
-        {
-          "text": "Đây",
-          "start": 32.74,
-          "end": 33.11
-        },
-        {
-          "text": "là",
-          "start": 33.11,
-          "end": 33.48
-        },
-        {
-          "text": "ba",
-          "start": 33.48,
-          "end": 33.85
+          "end": 1.41
         },
         {
           "text": "thứ",
-          "start": 33.85,
-          "end": 34.22
+          "start": 1.41,
+          "end": 1.86
         },
         {
-          "text": "quyết",
-          "start": 34.22,
-          "end": 34.59
-        },
-        {
-          "text": "định",
-          "start": 34.59,
-          "end": 34.96
-        },
-        {
-          "text": "container",
-          "start": 34.96,
-          "end": 35.33
-        },
-        {
-          "text": "chạy",
-          "start": 35.33,
-          "end": 35.7
-        },
-        {
-          "text": "được",
-          "start": 35.7,
-          "end": 36.06
-        },
-        {
-          "text": "trong",
-          "start": 36.06,
-          "end": 36.43
-        },
-        {
-          "text": "môi",
-          "start": 36.43,
-          "end": 36.8
-        },
-        {
-          "text": "trường",
-          "start": 36.8,
-          "end": 37.17
-        },
-        {
-          "text": "thật",
-          "start": 37.17,
-          "end": 37.54
-        },
-        {
-          "text": "hay",
-          "start": 37.54,
-          "end": 37.91
-        },
-        {
-          "text": "không.",
-          "start": 37.91,
-          "end": 38.28
-        }
-      ]
-    },
-    {
-      "assets": [
-        "character shiba explaining something.png"
-      ],
-      "sfx": "Ding 2.mp3",
-      "voice": "Lệnh chạy thử nên đơn giản trước, ví dụ docker run nginx. Sau đó mới thêm port, volume và cấu hình bảo mật.",
-      "visual": "Terminal docker run.",
-      "headline_line1": "RUN THỬ",
-      "headline_line2": "TRƯỚC KHI DEPLOY",
-      "btn_text": "$ docker run nginx",
-      "audio_start": 39.48,
-      "audio_duration": 8.95,
-      "audio_path": "assets/audio/video_20_05_2026_scene_4.wav",
-      "transcript": [
-        {
-          "text": "Lệnh",
-          "start": 39.48,
-          "end": 39.87
-        },
-        {
-          "text": "chạy",
-          "start": 39.87,
-          "end": 40.26
-        },
-        {
-          "text": "thử",
-          "start": 40.26,
-          "end": 40.65
+          "text": "developer",
+          "start": 1.86,
+          "end": 2.31
         },
         {
           "text": "nên",
-          "start": 40.65,
-          "end": 41.04
+          "start": 2.31,
+          "end": 2.77
         },
         {
-          "text": "đơn",
-          "start": 41.04,
-          "end": 41.43
+          "text": "nhìn",
+          "start": 2.77,
+          "end": 3.22
         },
         {
-          "text": "giản",
-          "start": 41.43,
-          "end": 41.82
+          "text": "từ",
+          "start": 3.22,
+          "end": 3.68
         },
         {
-          "text": "trước,",
-          "start": 41.82,
-          "end": 42.2
+          "text": "góc",
+          "start": 3.68,
+          "end": 4.13
         },
         {
-          "text": "ví",
-          "start": 42.2,
-          "end": 42.59
+          "text": "độ",
+          "start": 4.13,
+          "end": 4.58
         },
         {
-          "text": "dụ",
-          "start": 42.59,
-          "end": 42.98
+          "text": "tích",
+          "start": 4.58,
+          "end": 5.04
         },
         {
-          "text": "docker",
-          "start": 42.98,
-          "end": 43.37
+          "text": "hợp",
+          "start": 5.04,
+          "end": 5.49
         },
         {
-          "text": "run",
-          "start": 43.37,
-          "end": 43.76
+          "text": "vào",
+          "start": 5.49,
+          "end": 5.94
         },
         {
-          "text": "nginx.",
-          "start": 43.76,
-          "end": 44.15
+          "text": "dự",
+          "start": 5.94,
+          "end": 6.4
         },
         {
-          "text": "Sau",
-          "start": 44.15,
-          "end": 44.54
+          "text": "án",
+          "start": 6.4,
+          "end": 6.85
         },
         {
-          "text": "đó",
-          "start": 44.54,
-          "end": 44.93
+          "text": "thật:",
+          "start": 6.85,
+          "end": 7.3
         },
         {
-          "text": "mới",
-          "start": 44.93,
-          "end": 45.32
+          "text": "nó",
+          "start": 7.3,
+          "end": 7.76
         },
         {
-          "text": "thêm",
-          "start": 45.32,
-          "end": 45.71
+          "text": "làm",
+          "start": 7.76,
+          "end": 8.21
         },
         {
-          "text": "port,",
-          "start": 45.71,
-          "end": 46.1
+          "text": "gì,",
+          "start": 8.21,
+          "end": 8.66
         },
         {
-          "text": "volume",
-          "start": 46.1,
-          "end": 46.49
+          "text": "cài",
+          "start": 8.66,
+          "end": 9.12
         },
         {
-          "text": "và",
-          "start": 46.49,
-          "end": 46.88
+          "text": "ra",
+          "start": 9.12,
+          "end": 9.57
         },
         {
-          "text": "cấu",
-          "start": 46.88,
-          "end": 47.26
+          "text": "sao,",
+          "start": 9.57,
+          "end": 10.03
         },
         {
-          "text": "hình",
-          "start": 47.26,
-          "end": 47.65
-        },
-        {
-          "text": "bảo",
-          "start": 47.65,
-          "end": 48.04
-        },
-        {
-          "text": "mật.",
-          "start": 48.04,
-          "end": 48.43
-        }
-      ]
-    },
-    {
-      "assets": [
-        "character shiba explaining something.png"
-      ],
-      "sfx": "Ding 2.mp3",
-      "voice": "Kết luận: với Docker image, video phải giúp người xem chạy được container, hiểu tag nào nên dùng và biết những cấu hình tối thiểu trước production.",
-      "visual": "Outro checklist Docker.",
-      "headline_line1": "PIN TAG",
-      "headline_line2": "KIỂM TRA TRƯỚC PRODUCTION",
-      "bento1_title": "Pull",
-      "bento2_title": "Run",
-      "bento3_title": "Port",
-      "bento4_title": "Volume",
-      "audio_start": 49.63,
-      "audio_duration": 11.71,
-      "audio_path": "assets/audio/video_20_05_2026_scene_5.wav",
-      "transcript": [
-        {
-          "text": "Kết",
-          "start": 49.63,
-          "end": 50.06
-        },
-        {
-          "text": "luận:",
-          "start": 50.06,
-          "end": 50.5
-        },
-        {
-          "text": "với",
-          "start": 50.5,
-          "end": 50.93
-        },
-        {
-          "text": "Docker",
-          "start": 50.93,
-          "end": 51.37
-        },
-        {
-          "text": "image,",
-          "start": 51.37,
-          "end": 51.8
-        },
-        {
-          "text": "video",
-          "start": 51.8,
-          "end": 52.23
-        },
-        {
-          "text": "phải",
-          "start": 52.23,
-          "end": 52.67
-        },
-        {
-          "text": "giúp",
-          "start": 52.67,
-          "end": 53.1
-        },
-        {
-          "text": "người",
-          "start": 53.1,
-          "end": 53.53
-        },
-        {
-          "text": "xem",
-          "start": 53.53,
-          "end": 53.97
-        },
-        {
-          "text": "chạy",
-          "start": 53.97,
-          "end": 54.4
-        },
-        {
-          "text": "được",
-          "start": 54.4,
-          "end": 54.84
-        },
-        {
-          "text": "container,",
-          "start": 54.84,
-          "end": 55.27
-        },
-        {
-          "text": "hiểu",
-          "start": 55.27,
-          "end": 55.7
-        },
-        {
-          "text": "tag",
-          "start": 55.7,
-          "end": 56.14
-        },
-        {
-          "text": "nào",
-          "start": 56.14,
-          "end": 56.57
-        },
-        {
-          "text": "nên",
-          "start": 56.57,
-          "end": 57.0
+          "text": "API",
+          "start": 10.03,
+          "end": 10.48
         },
         {
           "text": "dùng",
-          "start": 57.0,
-          "end": 57.44
+          "start": 10.48,
+          "end": 10.93
+        },
+        {
+          "text": "thế",
+          "start": 10.93,
+          "end": 11.39
+        },
+        {
+          "text": "nào,",
+          "start": 11.39,
+          "end": 11.84
         },
         {
           "text": "và",
-          "start": 57.44,
-          "end": 57.87
+          "start": 11.84,
+          "end": 12.29
+        },
+        {
+          "text": "có",
+          "start": 12.29,
+          "end": 12.75
+        },
+        {
+          "text": "đáng",
+          "start": 12.75,
+          "end": 13.2
+        },
+        {
+          "text": "đưa",
+          "start": 13.2,
+          "end": 13.65
+        },
+        {
+          "text": "vào",
+          "start": 13.65,
+          "end": 14.11
+        },
+        {
+          "text": "stack",
+          "start": 14.11,
+          "end": 14.56
+        },
+        {
+          "text": "hay",
+          "start": 14.56,
+          "end": 15.02
+        },
+        {
+          "text": "không.",
+          "start": 15.02,
+          "end": 15.47
+        },
+        {
+          "text": "Write",
+          "start": 15.47,
+          "end": 15.92
+        },
+        {
+          "text": "HTML.",
+          "start": 15.92,
+          "end": 16.38
+        },
+        {
+          "text": "Render",
+          "start": 16.38,
+          "end": 16.83
+        },
+        {
+          "text": "video.",
+          "start": 16.83,
+          "end": 17.28
+        },
+        {
+          "text": "Built",
+          "start": 17.28,
+          "end": 17.74
+        },
+        {
+          "text": "for",
+          "start": 17.74,
+          "end": 18.19
+        },
+        {
+          "text": "agents..",
+          "start": 18.19,
+          "end": 18.64
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Trước tiên cần hiểu nó nằm ở lớp nào trong stack. Repo có các dấu hiệu như .claude-plugin, .claude, .codex-plugin, .cursor-plugin, .editorconfig, nên hãy xem phần cài đặt và API trước.",
+      "visual": "Bento card stack layer, package file và API usage.",
+      "headline_line1": "NẰM Ở LỚP NÀO",
+      "headline_line2": "TRONG TECH STACK?",
+      "bento1_title": "Package",
+      "bento1_desc": ".claude plugin, .claude, .codex plugin, .cursor plugin, .editorconfig",
+      "bento2_title": "API",
+      "bento3_title": "Docs",
+      "audio_start": 19.84,
+      "audio_duration": 16.15,
+      "audio_path": "assets/audio/video_20_05_2026_scene_2.wav",
+      "transcript": [
+        {
+          "text": "Trước",
+          "start": 19.84,
+          "end": 20.36
+        },
+        {
+          "text": "tiên",
+          "start": 20.36,
+          "end": 20.88
+        },
+        {
+          "text": "cần",
+          "start": 20.88,
+          "end": 21.4
+        },
+        {
+          "text": "hiểu",
+          "start": 21.4,
+          "end": 21.92
+        },
+        {
+          "text": "nó",
+          "start": 21.92,
+          "end": 22.45
+        },
+        {
+          "text": "nằm",
+          "start": 22.45,
+          "end": 22.97
+        },
+        {
+          "text": "ở",
+          "start": 22.97,
+          "end": 23.49
+        },
+        {
+          "text": "lớp",
+          "start": 23.49,
+          "end": 24.01
+        },
+        {
+          "text": "nào",
+          "start": 24.01,
+          "end": 24.53
+        },
+        {
+          "text": "trong",
+          "start": 24.53,
+          "end": 25.05
+        },
+        {
+          "text": "stack.",
+          "start": 25.05,
+          "end": 25.57
+        },
+        {
+          "text": "Repo",
+          "start": 25.57,
+          "end": 26.09
+        },
+        {
+          "text": "có",
+          "start": 26.09,
+          "end": 26.61
+        },
+        {
+          "text": "các",
+          "start": 26.61,
+          "end": 27.13
+        },
+        {
+          "text": "dấu",
+          "start": 27.13,
+          "end": 27.66
+        },
+        {
+          "text": "hiệu",
+          "start": 27.66,
+          "end": 28.18
+        },
+        {
+          "text": "như",
+          "start": 28.18,
+          "end": 28.7
+        },
+        {
+          "text": ".claude-plugin,",
+          "start": 28.7,
+          "end": 29.22
+        },
+        {
+          "text": ".claude,",
+          "start": 29.22,
+          "end": 29.74
+        },
+        {
+          "text": ".codex-plugin,",
+          "start": 29.74,
+          "end": 30.26
+        },
+        {
+          "text": ".cursor-plugin,",
+          "start": 30.26,
+          "end": 30.78
+        },
+        {
+          "text": ".editorconfig,",
+          "start": 30.78,
+          "end": 31.3
+        },
+        {
+          "text": "nên",
+          "start": 31.3,
+          "end": 31.82
+        },
+        {
+          "text": "hãy",
+          "start": 31.82,
+          "end": 32.34
+        },
+        {
+          "text": "xem",
+          "start": 32.34,
+          "end": 32.87
+        },
+        {
+          "text": "phần",
+          "start": 32.87,
+          "end": 33.39
+        },
+        {
+          "text": "cài",
+          "start": 33.39,
+          "end": 33.91
+        },
+        {
+          "text": "đặt",
+          "start": 33.91,
+          "end": 34.43
+        },
+        {
+          "text": "và",
+          "start": 34.43,
+          "end": 34.95
+        },
+        {
+          "text": "API",
+          "start": 34.95,
+          "end": 35.47
+        },
+        {
+          "text": "trước.",
+          "start": 35.47,
+          "end": 35.99
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Điểm cần xem ngay là lệnh cài đặt và ví dụ nhỏ nhất. Chỉ cần vài dòng đầu tiên, bạn đã biết thư viện này có dễ thử trong một project phụ hay không.",
+      "visual": "Terminal cài package và snippet code tối thiểu.",
+      "headline_line1": "CÀI ĐẶT",
+      "headline_line2": "RỒI TEST NHANH",
+      "bento1_title": "Install",
+      "bento2_title": "Import",
+      "bento3_title": "Minimal code",
+      "bento4_title": "Output",
+      "audio_start": 37.2,
+      "audio_duration": 11.42,
+      "audio_path": "assets/audio/video_20_05_2026_scene_3.wav",
+      "transcript": [
+        {
+          "text": "Điểm",
+          "start": 37.2,
+          "end": 37.54
+        },
+        {
+          "text": "cần",
+          "start": 37.54,
+          "end": 37.87
+        },
+        {
+          "text": "xem",
+          "start": 37.87,
+          "end": 38.21
+        },
+        {
+          "text": "ngay",
+          "start": 38.21,
+          "end": 38.54
+        },
+        {
+          "text": "là",
+          "start": 38.54,
+          "end": 38.88
+        },
+        {
+          "text": "lệnh",
+          "start": 38.88,
+          "end": 39.22
+        },
+        {
+          "text": "cài",
+          "start": 39.22,
+          "end": 39.55
+        },
+        {
+          "text": "đặt",
+          "start": 39.55,
+          "end": 39.89
+        },
+        {
+          "text": "và",
+          "start": 39.89,
+          "end": 40.22
+        },
+        {
+          "text": "ví",
+          "start": 40.22,
+          "end": 40.56
+        },
+        {
+          "text": "dụ",
+          "start": 40.56,
+          "end": 40.9
+        },
+        {
+          "text": "nhỏ",
+          "start": 40.9,
+          "end": 41.23
+        },
+        {
+          "text": "nhất.",
+          "start": 41.23,
+          "end": 41.57
+        },
+        {
+          "text": "Chỉ",
+          "start": 41.57,
+          "end": 41.9
+        },
+        {
+          "text": "cần",
+          "start": 41.9,
+          "end": 42.24
+        },
+        {
+          "text": "vài",
+          "start": 42.24,
+          "end": 42.58
+        },
+        {
+          "text": "dòng",
+          "start": 42.58,
+          "end": 42.91
+        },
+        {
+          "text": "đầu",
+          "start": 42.91,
+          "end": 43.25
+        },
+        {
+          "text": "tiên,",
+          "start": 43.25,
+          "end": 43.58
+        },
+        {
+          "text": "bạn",
+          "start": 43.58,
+          "end": 43.92
+        },
+        {
+          "text": "đã",
+          "start": 43.92,
+          "end": 44.26
         },
         {
           "text": "biết",
-          "start": 57.87,
-          "end": 58.31
+          "start": 44.26,
+          "end": 44.59
         },
         {
-          "text": "những",
-          "start": 58.31,
-          "end": 58.74
+          "text": "thư",
+          "start": 44.59,
+          "end": 44.93
         },
         {
-          "text": "cấu",
-          "start": 58.74,
-          "end": 59.17
+          "text": "viện",
+          "start": 44.93,
+          "end": 45.26
         },
         {
-          "text": "hình",
-          "start": 59.17,
-          "end": 59.61
+          "text": "này",
+          "start": 45.26,
+          "end": 45.6
         },
         {
-          "text": "tối",
-          "start": 59.61,
-          "end": 60.04
+          "text": "có",
+          "start": 45.6,
+          "end": 45.94
         },
         {
-          "text": "thiểu",
-          "start": 60.04,
-          "end": 60.47
+          "text": "dễ",
+          "start": 45.94,
+          "end": 46.27
+        },
+        {
+          "text": "thử",
+          "start": 46.27,
+          "end": 46.61
+        },
+        {
+          "text": "trong",
+          "start": 46.61,
+          "end": 46.94
+        },
+        {
+          "text": "một",
+          "start": 46.94,
+          "end": 47.28
+        },
+        {
+          "text": "project",
+          "start": 47.28,
+          "end": 47.62
+        },
+        {
+          "text": "phụ",
+          "start": 47.62,
+          "end": 47.95
+        },
+        {
+          "text": "hay",
+          "start": 47.95,
+          "end": 48.29
+        },
+        {
+          "text": "không.",
+          "start": 48.29,
+          "end": 48.62
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Sau đó mới nói tới điểm khác biệt: API tiện hơn, hiệu năng tốt hơn, hoặc tích hợp được với framework hiện đại. Đừng biến nó thành quảng cáo chung chung.",
+      "visual": "Sơ đồ integration từ app tới library/framework.",
+      "headline_line1": "GIÁ TRỊ CHÍNH",
+      "headline_line2": "NẰM Ở API",
+      "btn_text": "Đọc usage trước khi đưa vào production",
+      "audio_start": 49.82,
+      "audio_duration": 12.22,
+      "audio_path": "assets/audio/video_20_05_2026_scene_4.wav",
+      "transcript": [
+        {
+          "text": "Sau",
+          "start": 49.82,
+          "end": 50.21
+        },
+        {
+          "text": "đó",
+          "start": 50.21,
+          "end": 50.61
+        },
+        {
+          "text": "mới",
+          "start": 50.61,
+          "end": 51.0
+        },
+        {
+          "text": "nói",
+          "start": 51.0,
+          "end": 51.4
+        },
+        {
+          "text": "tới",
+          "start": 51.4,
+          "end": 51.79
+        },
+        {
+          "text": "điểm",
+          "start": 51.79,
+          "end": 52.18
+        },
+        {
+          "text": "khác",
+          "start": 52.18,
+          "end": 52.58
+        },
+        {
+          "text": "biệt:",
+          "start": 52.58,
+          "end": 52.97
+        },
+        {
+          "text": "API",
+          "start": 52.97,
+          "end": 53.37
+        },
+        {
+          "text": "tiện",
+          "start": 53.37,
+          "end": 53.76
+        },
+        {
+          "text": "hơn,",
+          "start": 53.76,
+          "end": 54.15
+        },
+        {
+          "text": "hiệu",
+          "start": 54.15,
+          "end": 54.55
+        },
+        {
+          "text": "năng",
+          "start": 54.55,
+          "end": 54.94
+        },
+        {
+          "text": "tốt",
+          "start": 54.94,
+          "end": 55.34
+        },
+        {
+          "text": "hơn,",
+          "start": 55.34,
+          "end": 55.73
+        },
+        {
+          "text": "hoặc",
+          "start": 55.73,
+          "end": 56.13
+        },
+        {
+          "text": "tích",
+          "start": 56.13,
+          "end": 56.52
+        },
+        {
+          "text": "hợp",
+          "start": 56.52,
+          "end": 56.91
+        },
+        {
+          "text": "được",
+          "start": 56.91,
+          "end": 57.31
+        },
+        {
+          "text": "với",
+          "start": 57.31,
+          "end": 57.7
+        },
+        {
+          "text": "framework",
+          "start": 57.7,
+          "end": 58.1
+        },
+        {
+          "text": "hiện",
+          "start": 58.1,
+          "end": 58.49
+        },
+        {
+          "text": "đại.",
+          "start": 58.49,
+          "end": 58.88
+        },
+        {
+          "text": "Đừng",
+          "start": 58.88,
+          "end": 59.28
+        },
+        {
+          "text": "biến",
+          "start": 59.28,
+          "end": 59.67
+        },
+        {
+          "text": "nó",
+          "start": 59.67,
+          "end": 60.07
+        },
+        {
+          "text": "thành",
+          "start": 60.07,
+          "end": 60.46
+        },
+        {
+          "text": "quảng",
+          "start": 60.46,
+          "end": 60.85
+        },
+        {
+          "text": "cáo",
+          "start": 60.85,
+          "end": 61.25
+        },
+        {
+          "text": "chung",
+          "start": 61.25,
+          "end": 61.64
+        },
+        {
+          "text": "chung.",
+          "start": 61.64,
+          "end": 62.04
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Checklist trước khi dùng gồm license, release gần nhất, số issue mở, ví dụ code và mức độ bảo trì. Đây là phần rất quan trọng với repo library.",
+      "visual": "Checklist license, release, issues, examples.",
+      "headline_line1": "CHECKLIST",
+      "headline_line2": "TRƯỚC KHI TÍCH HỢP",
+      "bento1_title": "License",
+      "bento1_desc": "Apache License 2.0",
+      "bento2_title": "Release",
+      "bento3_title": "Issues",
+      "audio_start": 63.24,
+      "audio_duration": 12.43,
+      "audio_path": "assets/audio/video_20_05_2026_scene_5.wav",
+      "transcript": [
+        {
+          "text": "Checklist",
+          "start": 63.24,
+          "end": 63.67
         },
         {
           "text": "trước",
-          "start": 60.47,
-          "end": 60.91
+          "start": 63.67,
+          "end": 64.1
         },
         {
-          "text": "production.",
-          "start": 60.91,
-          "end": 61.34
+          "text": "khi",
+          "start": 64.1,
+          "end": 64.53
+        },
+        {
+          "text": "dùng",
+          "start": 64.53,
+          "end": 64.95
+        },
+        {
+          "text": "gồm",
+          "start": 64.95,
+          "end": 65.38
+        },
+        {
+          "text": "license,",
+          "start": 65.38,
+          "end": 65.81
+        },
+        {
+          "text": "release",
+          "start": 65.81,
+          "end": 66.24
+        },
+        {
+          "text": "gần",
+          "start": 66.24,
+          "end": 66.67
+        },
+        {
+          "text": "nhất,",
+          "start": 66.67,
+          "end": 67.1
+        },
+        {
+          "text": "số",
+          "start": 67.1,
+          "end": 67.53
+        },
+        {
+          "text": "issue",
+          "start": 67.53,
+          "end": 67.96
+        },
+        {
+          "text": "mở,",
+          "start": 67.96,
+          "end": 68.38
+        },
+        {
+          "text": "ví",
+          "start": 68.38,
+          "end": 68.81
+        },
+        {
+          "text": "dụ",
+          "start": 68.81,
+          "end": 69.24
+        },
+        {
+          "text": "code",
+          "start": 69.24,
+          "end": 69.67
+        },
+        {
+          "text": "và",
+          "start": 69.67,
+          "end": 70.1
+        },
+        {
+          "text": "mức",
+          "start": 70.1,
+          "end": 70.53
+        },
+        {
+          "text": "độ",
+          "start": 70.53,
+          "end": 70.96
+        },
+        {
+          "text": "bảo",
+          "start": 70.96,
+          "end": 71.39
+        },
+        {
+          "text": "trì.",
+          "start": 71.39,
+          "end": 71.81
+        },
+        {
+          "text": "Đây",
+          "start": 71.81,
+          "end": 72.24
+        },
+        {
+          "text": "là",
+          "start": 72.24,
+          "end": 72.67
+        },
+        {
+          "text": "phần",
+          "start": 72.67,
+          "end": 73.1
+        },
+        {
+          "text": "rất",
+          "start": 73.1,
+          "end": 73.53
+        },
+        {
+          "text": "quan",
+          "start": 73.53,
+          "end": 73.96
+        },
+        {
+          "text": "trọng",
+          "start": 73.96,
+          "end": 74.39
+        },
+        {
+          "text": "với",
+          "start": 74.39,
+          "end": 74.81
+        },
+        {
+          "text": "repo",
+          "start": 74.81,
+          "end": 75.24
+        },
+        {
+          "text": "library.",
+          "start": 75.24,
+          "end": 75.67
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Về tín hiệu cộng đồng, hyperframes hiện có khoảng 19.827 sao, ngôn ngữ chính là TypeScript, và đây là điểm nên kiểm tra trước khi đưa vào dự án thật.",
+      "visual": "Thẻ thống kê repo với sao, ngôn ngữ, owner và trạng thái theo dõi.",
+      "headline_line1": "HYPERFRAMES STATS",
+      "headline_line2": "ĐỘ TIN CẬY BAN ĐẦU",
+      "repo_name": "heygen-com/hyperframes",
+      "repo_lang": "TypeScript",
+      "repo_stars": "★ 19.827",
+      "repo_trend": "▲ Repo",
+      "repo_trend_label": "GitHub",
+      "audio_start": 76.87,
+      "audio_duration": 14.26,
+      "audio_path": "assets/audio/video_20_05_2026_scene_6.wav",
+      "transcript": [
+        {
+          "text": "Về",
+          "start": 76.87,
+          "end": 77.35
+        },
+        {
+          "text": "tín",
+          "start": 77.35,
+          "end": 77.82
+        },
+        {
+          "text": "hiệu",
+          "start": 77.82,
+          "end": 78.3
+        },
+        {
+          "text": "cộng",
+          "start": 78.3,
+          "end": 78.77
+        },
+        {
+          "text": "đồng,",
+          "start": 78.77,
+          "end": 79.25
+        },
+        {
+          "text": "hyperframes",
+          "start": 79.25,
+          "end": 79.72
+        },
+        {
+          "text": "hiện",
+          "start": 79.72,
+          "end": 80.2
+        },
+        {
+          "text": "có",
+          "start": 80.2,
+          "end": 80.67
+        },
+        {
+          "text": "khoảng",
+          "start": 80.67,
+          "end": 81.15
+        },
+        {
+          "text": "19.827",
+          "start": 81.15,
+          "end": 81.62
+        },
+        {
+          "text": "sao,",
+          "start": 81.62,
+          "end": 82.1
+        },
+        {
+          "text": "ngôn",
+          "start": 82.1,
+          "end": 82.57
+        },
+        {
+          "text": "ngữ",
+          "start": 82.57,
+          "end": 83.05
+        },
+        {
+          "text": "chính",
+          "start": 83.05,
+          "end": 83.52
+        },
+        {
+          "text": "là",
+          "start": 83.52,
+          "end": 84.0
+        },
+        {
+          "text": "TypeScript,",
+          "start": 84.0,
+          "end": 84.47
+        },
+        {
+          "text": "và",
+          "start": 84.47,
+          "end": 84.95
+        },
+        {
+          "text": "đây",
+          "start": 84.95,
+          "end": 85.42
+        },
+        {
+          "text": "là",
+          "start": 85.42,
+          "end": 85.9
+        },
+        {
+          "text": "điểm",
+          "start": 85.9,
+          "end": 86.37
+        },
+        {
+          "text": "nên",
+          "start": 86.37,
+          "end": 86.85
+        },
+        {
+          "text": "kiểm",
+          "start": 86.85,
+          "end": 87.32
+        },
+        {
+          "text": "tra",
+          "start": 87.32,
+          "end": 87.8
+        },
+        {
+          "text": "trước",
+          "start": 87.8,
+          "end": 88.27
+        },
+        {
+          "text": "khi",
+          "start": 88.27,
+          "end": 88.75
+        },
+        {
+          "text": "đưa",
+          "start": 88.75,
+          "end": 89.23
+        },
+        {
+          "text": "vào",
+          "start": 89.23,
+          "end": 89.7
+        },
+        {
+          "text": "dự",
+          "start": 89.7,
+          "end": 90.18
+        },
+        {
+          "text": "án",
+          "start": 90.18,
+          "end": 90.65
+        },
+        {
+          "text": "thật.",
+          "start": 90.65,
+          "end": 91.13
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Cách thử an toàn là tạo một project phụ, copy ví dụ nhỏ nhất, rồi đo xem nó giải quyết đúng vấn đề của mình không.",
+      "visual": "Terminal chạy project phụ.",
+      "headline_line1": "THỬ AN TOÀN",
+      "headline_line2": "TRONG PROJECT PHỤ",
+      "btn_text": "$ git clone github.com/heygen-com/hyperframes",
+      "audio_start": 92.32,
+      "audio_duration": 9.53,
+      "audio_path": "assets/audio/video_20_05_2026_scene_7.wav",
+      "transcript": [
+        {
+          "text": "Cách",
+          "start": 92.32,
+          "end": 92.69
+        },
+        {
+          "text": "thử",
+          "start": 92.69,
+          "end": 93.05
+        },
+        {
+          "text": "an",
+          "start": 93.05,
+          "end": 93.42
+        },
+        {
+          "text": "toàn",
+          "start": 93.42,
+          "end": 93.79
+        },
+        {
+          "text": "là",
+          "start": 93.79,
+          "end": 94.15
+        },
+        {
+          "text": "tạo",
+          "start": 94.15,
+          "end": 94.52
+        },
+        {
+          "text": "một",
+          "start": 94.52,
+          "end": 94.89
+        },
+        {
+          "text": "project",
+          "start": 94.89,
+          "end": 95.25
+        },
+        {
+          "text": "phụ,",
+          "start": 95.25,
+          "end": 95.62
+        },
+        {
+          "text": "copy",
+          "start": 95.62,
+          "end": 95.98
+        },
+        {
+          "text": "ví",
+          "start": 95.98,
+          "end": 96.35
+        },
+        {
+          "text": "dụ",
+          "start": 96.35,
+          "end": 96.72
+        },
+        {
+          "text": "nhỏ",
+          "start": 96.72,
+          "end": 97.08
+        },
+        {
+          "text": "nhất,",
+          "start": 97.08,
+          "end": 97.45
+        },
+        {
+          "text": "rồi",
+          "start": 97.45,
+          "end": 97.82
+        },
+        {
+          "text": "đo",
+          "start": 97.82,
+          "end": 98.18
+        },
+        {
+          "text": "xem",
+          "start": 98.18,
+          "end": 98.55
+        },
+        {
+          "text": "nó",
+          "start": 98.55,
+          "end": 98.92
+        },
+        {
+          "text": "giải",
+          "start": 98.92,
+          "end": 99.28
+        },
+        {
+          "text": "quyết",
+          "start": 99.28,
+          "end": 99.65
+        },
+        {
+          "text": "đúng",
+          "start": 99.65,
+          "end": 100.02
+        },
+        {
+          "text": "vấn",
+          "start": 100.02,
+          "end": 100.38
+        },
+        {
+          "text": "đề",
+          "start": 100.38,
+          "end": 100.75
+        },
+        {
+          "text": "của",
+          "start": 100.75,
+          "end": 101.12
+        },
+        {
+          "text": "mình",
+          "start": 101.12,
+          "end": 101.48
+        },
+        {
+          "text": "không.",
+          "start": 101.48,
+          "end": 101.85
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Nếu repo này khớp use case, hãy star để theo dõi update và đọc kỹ docs trước khi đưa vào hệ thống thật.",
+      "visual": "CTA star, docs, follow releases.",
+      "headline_line1": "STAR VÀ ĐỌC DOCS",
+      "headline_line2": "TRƯỚC KHI DÙNG THẬT",
+      "bento1_title": "Star",
+      "bento2_title": "Docs",
+      "bento3_title": "Release",
+      "bento4_title": "Test",
+      "audio_start": 103.05,
+      "audio_duration": 8.14,
+      "audio_path": "assets/audio/video_20_05_2026_scene_8.wav",
+      "transcript": [
+        {
+          "text": "Nếu",
+          "start": 103.05,
+          "end": 103.4
+        },
+        {
+          "text": "repo",
+          "start": 103.4,
+          "end": 103.76
+        },
+        {
+          "text": "này",
+          "start": 103.76,
+          "end": 104.11
+        },
+        {
+          "text": "khớp",
+          "start": 104.11,
+          "end": 104.46
+        },
+        {
+          "text": "use",
+          "start": 104.46,
+          "end": 104.82
+        },
+        {
+          "text": "case,",
+          "start": 104.82,
+          "end": 105.17
+        },
+        {
+          "text": "hãy",
+          "start": 105.17,
+          "end": 105.53
+        },
+        {
+          "text": "star",
+          "start": 105.53,
+          "end": 105.88
+        },
+        {
+          "text": "để",
+          "start": 105.88,
+          "end": 106.23
+        },
+        {
+          "text": "theo",
+          "start": 106.23,
+          "end": 106.59
+        },
+        {
+          "text": "dõi",
+          "start": 106.59,
+          "end": 106.94
+        },
+        {
+          "text": "update",
+          "start": 106.94,
+          "end": 107.29
+        },
+        {
+          "text": "và",
+          "start": 107.29,
+          "end": 107.65
+        },
+        {
+          "text": "đọc",
+          "start": 107.65,
+          "end": 108.0
+        },
+        {
+          "text": "kỹ",
+          "start": 108.0,
+          "end": 108.36
+        },
+        {
+          "text": "docs",
+          "start": 108.36,
+          "end": 108.71
+        },
+        {
+          "text": "trước",
+          "start": 108.71,
+          "end": 109.06
+        },
+        {
+          "text": "khi",
+          "start": 109.06,
+          "end": 109.42
+        },
+        {
+          "text": "đưa",
+          "start": 109.42,
+          "end": 109.77
+        },
+        {
+          "text": "vào",
+          "start": 109.77,
+          "end": 110.12
+        },
+        {
+          "text": "hệ",
+          "start": 110.12,
+          "end": 110.48
+        },
+        {
+          "text": "thống",
+          "start": 110.48,
+          "end": 110.83
+        },
+        {
+          "text": "thật.",
+          "start": 110.83,
+          "end": 111.19
         }
       ]
     }
   ],
-  "duration": 64
+  "duration": 114
 }
