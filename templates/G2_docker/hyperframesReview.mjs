@@ -1,380 +1,463 @@
+// G2_docker — Docker Terminal Scene Layouts
 export function getHyperframesReviewScene(i, scene, sceneId, start) {
   let html = "";
   let gsap = "";
 
   switch (i) {
     case 0: {
-      // Cảnh 1: Giới thiệu HyperFrames
-      const repoUrl = scene.repo_url || "github.com/heygen-com/hyperframes";
-      const headlineLine1 = scene.headline_line1 || "HYPERFRAMES";
-      const headlineLine2 = scene.headline_line2 || "ĐỘT PHÁ RENDER VIDEO BẰNG HTML";
+      // Scene 1: Docker Hub page intro — terminal window with scrolling screenshot
+      const repoUrl = scene.repo_url || "hub.docker.com/_/nginx";
+      const hl1 = scene.headline_line1 || "NGINX";
+      const hl2 = scene.headline_line2 || "CONTAINER QUICK START";
       html = `
-        <div class="browser-frame" id="browser-${sceneId}">
-          <div class="browser-header">
-            <div class="browser-dots">
+        <div class="terminal-frame" id="term-${sceneId}">
+          <div class="terminal-header">
+            <div class="terminal-dots">
               <span class="dot red"></span>
               <span class="dot yellow"></span>
               <span class="dot green"></span>
             </div>
-            <div class="browser-address">${repoUrl}</div>
+            <div class="terminal-title">hub.docker.com — ${repoUrl}</div>
           </div>
-          <div class="browser-inner" data-layout-allow-overflow>
-            <img class="github-scroll-image" id="scroll-img-${sceneId}" src="./assets/images/github_repo.png" />
+          <div class="terminal-body">
+            <img class="docker-scroll-image" id="scroll-img-${sceneId}" src="./assets/images/github_repo.png" />
           </div>
-          <div class="browser-glass-shine"></div>
         </div>
-        <div class="headline-container" style="top: 1085px; gap: 8px;">
-          <div class="headline-line1" id="hl1-${sceneId}" style="font-size: 64px; letter-spacing: 1px;">${headlineLine1}</div>
-          <div class="headline-line2" id="hl2-${sceneId}" style="font-size: 44px; font-weight: 800;">${headlineLine2}</div>
+        <div class="headline-container" style="top: 1075px; gap: 8px;">
+          <div class="headline-line1" id="hl1-${sceneId}" style="font-size: 62px;">${hl1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}" style="font-size: 44px;">${hl2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}" style="top: 1265px; padding: 12px 30px; font-size: 25px; border-radius: 20px;">
-          <span class="action-icon" style="font-size: 30px; margin-right: 5px;">🔗</span> ${repoUrl}
+        <div class="action-btn" id="btn-${sceneId}" style="top: 1262px; font-size: 28px; padding: 14px 36px;">
+          <span class="action-icon">🐳</span> ${repoUrl}
         </div>
       `;
       gsap = `
-        tl.from("#browser-${sceneId}", { scale: 0.85, y: 30, duration: 0.4, ease: "back.out(1.2)" }, ${start});
-        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
-        tl.from("#btn-${sceneId}", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.4});
-        tl.fromTo("#scroll-img-${sceneId}", 
-          { y: 0 }, 
-          { y: -2100, duration: 8.5, ease: "power1.inOut" }, 
-          ${start + 1.5}
-        );
+        tl.from("#term-${sceneId}", { scale: 0.88, y: 30, duration: 0.4, ease: "back.out(1.2)" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.25, ease: "power3.out" }, ${start + 0.3});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.25, ease: "power3.out" }, ${start + 0.3});
+        tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.5});
+        tl.fromTo("#scroll-img-${sceneId}", { y: 0 }, { y: -2000, duration: 9, ease: "power1.inOut" }, ${start + 1.2});
       `;
       break;
     }
 
     case 1: {
-      // Cảnh 2: Nguyên lý hoạt động (Write HTML Render Video)
-      const title1 = scene.headline_line1 || "NGUYÊN LÝ";
-      const title2 = scene.headline_line2 || "VIẾT HTML RENDER MP4";
-      const bento1Title = scene.bento1_title || "Mã nguồn HTML sạch";
-      const bento1Desc =
-        scene.bento1_desc || `&lt;div class="clip" data-start="0" data-duration="5"&gt;`;
-      const bento2Title = scene.bento2_title || "Xem trước lập tức";
-      const bento3Title = scene.bento3_title || "Xuất MP4 cực nét";
+      // Scene 2: Stack layer / bento cards
+      const hl1 = scene.headline_line1 || "NẰM Ở LỚP NÀO";
+      const hl2 = scene.headline_line2 || "TRONG TECH STACK?";
+      const b1t = scene.bento1_title || "Image";
+      const b1d = scene.bento1_desc || "Base layer, runtime, deps";
+      const b2t = scene.bento2_title || "Container";
+      const b3t = scene.bento3_title || "Compose";
       html = `
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
-          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+          <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="bento-container" style="top: 525px;" id="bento-${sceneId}">
+        <div class="bento-container" style="top: 540px;" id="bento-${sceneId}">
           <div class="bento-card full" id="bc-${sceneId}-1">
             <div class="card-icon-svg">
-              <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+              <svg viewBox="0 0 24 24"><rect x="2" y="7" width="4" height="4" rx="1"/><rect x="7" y="7" width="4" height="4" rx="1"/><rect x="12" y="7" width="4" height="4" rx="1"/><rect x="7" y="2" width="4" height="4" rx="1"/><rect x="12" y="2" width="4" height="4" rx="1"/><rect x="2" y="12" width="4" height="4" rx="1"/><rect x="7" y="12" width="4" height="4" rx="1"/><path d="M22 13c0 2-2 4-5 6-3-2-5-4-5-6a5 5 0 0 1 10 0z"/></svg>
             </div>
             <div class="card-text-group">
-              <div class="card-title">${bento1Title}</div>
-              <div class="card-desc">${bento1Desc}</div>
+              <div class="card-title">${b1t}</div>
+              <div class="card-desc">${b1d}</div>
             </div>
           </div>
           <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-2">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">${bento2Title}</div>
+              <div class="card-title" style="font-size: 30px;">${b2t}</div>
             </div>
-            <div class="bento-card half" id="bc-${sceneId}-3">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
-                <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+            <div class="bento-card half card-accent-yellow" id="bc-${sceneId}-3">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="2" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="2" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="2" cy="18" r="1" fill="currentColor" stroke="none"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">${bento3Title}</div>
+              <div class="card-title" style="font-size: 30px;">${b3t}</div>
             </div>
           </div>
         </div>
       `;
       gsap = `
-        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-1", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-2", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-3", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#bc-${sceneId}-1", { y: 25, opacity: 0, duration: 0.25, ease: "power3.out" }, ${start + 0.1});
+        tl.from("#bc-${sceneId}-2", { x: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
+        tl.from("#bc-${sceneId}-3", { x: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
       `;
       break;
     }
 
     case 2: {
-      // Cảnh 3: BỐN TÍNH NĂNG LÕI
-      const title1 = scene.headline_line1 || "Bốn Tính Năng";
-      const title2 = scene.headline_line2 || "Lõi";
-      const bento1Title = scene.bento1_title || "Phân tích Real-time";
-      const bento2Title = scene.bento2_title || "Tranh biện chốt lệnh";
-      const bento3Title = scene.bento3_title || "API độ trễ cực thấp";
-      const bento4Title = scene.bento4_title || "Quản trị rủi ro AI";
+      // Scene 3: Pull & Run — terminal commands
+      const hl1 = scene.headline_line1 || "PULL IMAGE";
+      const hl2 = scene.headline_line2 || "RỒI CHẠY THỬ";
+      const btnText = scene.btn_text || "$ docker pull nginx";
       html = `
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
-          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+          <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="bento-container" style="top: 525px;" id="bento-${sceneId}">
-          <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-1" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
-              <div class="card-icon-svg" style="margin: 0 0 20px 0;">
-                <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.09 19.58 10.5 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">${bento1Title}</div>
+        <div class="terminal-frame" id="term-${sceneId}" style="top: 490px; height: 660px; width: 920px;">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
             </div>
-            <div class="bento-card half" id="bc-${sceneId}-2" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
-              <div class="card-icon-svg" style="margin: 0 0 20px 0;">
-                <svg viewBox="0 0 24 24"><path d="M5.2 18.2l-2.4-2.4c-.6-.6-.6-1.6 0-2.2l3.4-3.4c.6-.6 1.6-.6 2.2 0l2.4 2.4c.6.6.6 1.6 0 2.2l-3.4 3.4c-.6.6-1.6.6-2.2 0zM19.6 3.8c-.8-.8-2-.8-2.8 0l-7.1 7.1c-.8.8-.8 2 0 2.8l1.4 1.4c.8.8 2 .8 2.8 0l7.1-7.1c.8-.8.8-2 0-2.8l-1.4-1.4zM7.5 13.5l3 3M17 11.5l-4.5-4.5"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">${bento2Title}</div>
-            </div>
+            <div class="terminal-title">bash — docker</div>
           </div>
-          <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-3" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
-              <div class="card-icon-svg" style="margin: 0 0 20px 0;">
-                <svg viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-1.4-.8-1.05-1.57L11.5 3h1l-1 7h3.5c.88 0 1.4.8 1.05 1.57L11 21z"/></svg>
+          <div class="terminal-body">
+            <div class="terminal-content">
+              <div class="terminal-line" id="tl1-${sceneId}">
+                <span class="t-prompt">user@host:~$</span>
+                <span class="t-cmd">docker</span>
+                <span class="t-flag">pull</span>
+                <span class="t-image">${(scene.btn_text || 'docker pull nginx').replace(/^\$\s*docker\s+pull\s+/, '')}</span>
               </div>
-              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">${bento3Title}</div>
-            </div>
-            <div class="bento-card half" id="bc-${sceneId}-4" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
-              <div class="card-icon-svg" style="margin: 0 0 20px 0;">
-                <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 2.18c3.55 1 6 4.3 6 7.91 0 3.86-2.61 7.42-6 8.71V4.18z"/></svg>
+              <div class="terminal-line" id="tl2-${sceneId}" style="opacity:0;">
+                <span class="t-info">Using default tag: latest</span>
               </div>
-              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">${bento4Title}</div>
+              <div class="terminal-line" id="tl3-${sceneId}" style="opacity:0;">
+                <span class="t-output">latest: Pulling from library/nginx</span>
+              </div>
+              <div class="terminal-line" id="tl4-${sceneId}" style="opacity:0;">
+                <span class="t-output">Digest: sha256:a3...</span>
+              </div>
+              <div class="terminal-line" id="tl5-${sceneId}" style="opacity:0;">
+                <span class="t-success">✔ Status: Downloaded newer image</span>
+              </div>
+              <div class="terminal-line" id="tl6-${sceneId}" style="opacity:0; margin-top: 16px;">
+                <span class="t-prompt">user@host:~$</span>
+                <span class="t-cmd">docker</span>
+                <span class="t-flag">run</span>
+                <span class="t-flag">-d</span>
+                <span class="t-flag">-p</span>
+                <span class="t-cmd">80:80</span>
+                <span class="t-image">${(scene.btn_text || 'nginx').replace(/^\$\s*docker\s+pull\s+/, '')}</span>
+              </div>
+              <div class="terminal-line" id="tl7-${sceneId}" style="opacity:0;">
+                <span class="t-success">✔ Container started</span>
+                <span class="t-cursor" id="cursor-${sceneId}"></span>
+              </div>
             </div>
           </div>
         </div>
       `;
       gsap = `
-        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-1", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-2", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-3", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-4", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#term-${sceneId}", { y: 30, opacity: 0, duration: 0.3, ease: "back.out(1.2)" }, ${start + 0.1});
+        tl.to("#tl2-${sceneId}", { opacity: 1, duration: 0.15 }, ${start + 0.8});
+        tl.to("#tl3-${sceneId}", { opacity: 1, duration: 0.15 }, ${start + 1.2});
+        tl.to("#tl4-${sceneId}", { opacity: 1, duration: 0.15 }, ${start + 1.6});
+        tl.to("#tl5-${sceneId}", { opacity: 1, duration: 0.15 }, ${start + 2.1});
+        tl.to("#tl6-${sceneId}", { opacity: 1, duration: 0.15 }, ${start + 2.8});
+        tl.to("#tl7-${sceneId}", { opacity: 1, duration: 0.15 }, ${start + 3.4});
+        tl.to("#cursor-${sceneId}", { opacity: 0, repeat: -1, yoyo: true, duration: 0.5 }, ${start + 3.6});
       `;
       break;
     }
 
     case 3: {
-      // Cảnh 4: Deterministic Rendering (Siêu ổn định)
-      const title1 = scene.headline_line1 || "DETERMINISTIC";
-      const title2 = scene.headline_line2 || "RENDER SIÊU ỔN ĐỊNH";
-      const btnText = scene.btn_text || "Khớp hình & Tiếng 100%";
+      // Scene 4: Port / Volume / Env — glow icon + action button
+      const hl1 = scene.headline_line1 || "PORT";
+      const hl2 = scene.headline_line2 || "VOLUME VÀ ENV";
+      const btnText = scene.btn_text || "Đọc docs trước khi deploy production";
       html = `
         <div class="main-glow-icon" id="glow-${sceneId}">
           <div class="glow-svg-container">
-            <svg viewBox="0 0 24 24"><path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5l-4-4V4h8v3.5l-4 4z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M17 11h1a3 3 0 0 1 0 6h-1"/><path d="M11 12H3"/><path d="M16 6H3"/><path d="M16 18H3"/><rect x="1" y="3" width="15" height="18" rx="2"/></svg>
           </div>
         </div>
-        <div class="headline-container">
-          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
-          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+        <div class="headline-container" id="head-${sceneId}">
+          <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}">
-          <span class="action-icon">✓</span> ${btnText}
+        <div class="bento-container" style="top: 790px;" id="bento-${sceneId}">
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-${sceneId}-1">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 28px;">Port</div>
+              <div class="card-desc" style="font-size: 20px;">-p host:container</div>
+            </div>
+            <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M5 3a2 2 0 0 0-2 2"/><path d="M19 3a2 2 0 0 1 2 2"/><path d="M21 19a2 2 0 0 1-2 2"/><path d="M5 21a2 2 0 0 1-2-2"/><path d="M9 3h1"/><path d="M9 21h1"/><path d="M14 3h1"/><path d="M14 21h1"/><path d="M3 9v1"/><path d="M21 9v1"/><path d="M3 14v1"/><path d="M21 14v1"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 28px;">Volume</div>
+              <div class="card-desc" style="font-size: 20px;">-v path:/data</div>
+            </div>
+          </div>
+          <div class="bento-card full card-accent-yellow" id="bc-${sceneId}-3">
+            <div class="card-icon-svg">
+              <svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h6"/><circle cx="18" cy="16" r="3"/><path d="M18 13v3l1.5 1.5"/></svg>
+            </div>
+            <div class="card-text-group">
+              <div class="card-title">Env Variables</div>
+              <div class="card-desc">-e KEY=VALUE  |  --env-file .env</div>
+            </div>
+          </div>
+        </div>
+        <div class="action-btn" id="btn-${sceneId}" style="top: 1430px; font-size: 26px;">
+          <span class="action-icon">⚠</span> ${btnText}
         </div>
       `;
       gsap = `
-        tl.from("#glow-${sceneId}", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, ${start});
-        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#btn-${sceneId}", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, ${start});
+        tl.from("#glow-${sceneId}", { scale: 0.7, y: 30, opacity: 0, duration: 0.35, ease: "back.out(1.4)" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
+        tl.from("#bc-${sceneId}-1", { x: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.35});
+        tl.from("#bc-${sceneId}-2", { x: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.35});
+        tl.from("#bc-${sceneId}-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.45});
+        tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.55});
       `;
       break;
     }
 
     case 4: {
-      // Cảnh 5: Frame Adapter Pattern
-      const title1 = scene.headline_line1 || "ADAPTER PATTERN";
-      const title2 = scene.headline_line2 || "ĐA DẠNG ANIMATION";
-      const bento1Title = scene.bento1_title || "GSAP Timeline";
-      const bento1Desc = scene.bento1_desc || "Cơ chế đồng bộ timeline paused cực mạnh mẽ";
-      const bento2Title = scene.bento2_title || "ThreeJS 3D";
-      const bento3Title = scene.bento3_title || "Lottie & Anime";
+      // Scene 5: Checklist before production — 4 bento cards
+      const hl1 = scene.headline_line1 || "CHECKLIST";
+      const hl2 = scene.headline_line2 || "TRƯỚC KHI TÍCH HỢP";
+      const b1t = scene.bento1_title || "Pin tag";
+      const b2t = scene.bento2_title || "Backup";
+      const b3t = scene.bento3_title || "Healthcheck";
+      const b4t = scene.bento4_title || "Update";
       html = `
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
-          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+          <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="bento-container" style="top: 525px;" id="bento-${sceneId}">
-          <div class="bento-card full" id="bc-${sceneId}-1">
-            <div class="card-icon-svg">
-              <svg viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/></svg>
+        <div class="bento-container" style="top: 540px;" id="bento-${sceneId}">
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-${sceneId}-1">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px;">${b1t}</div>
+              <div class="card-desc" style="font-size: 22px;">nginx:1.25-alpine</div>
             </div>
-            <div class="card-text-group">
-              <div class="card-title">${bento1Title}</div>
-              <div class="card-desc">${bento1Desc}</div>
+            <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px;">${b2t}</div>
+              <div class="card-desc" style="font-size: 22px;">Volumes & data</div>
             </div>
           </div>
           <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-2">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">🪐</div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">${bento2Title}</div>
+            <div class="bento-card half card-accent-yellow" id="bc-${sceneId}-3">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px;">${b3t}</div>
+              <div class="card-desc" style="font-size: 22px;">HEALTHCHECK CMD</div>
             </div>
-            <div class="bento-card half" id="bc-${sceneId}-3">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">🎬</div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">${bento3Title}</div>
+            <div class="bento-card half card-accent-red" id="bc-${sceneId}-4">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px;">${b4t}</div>
+              <div class="card-desc" style="font-size: 22px;">docker pull latest</div>
             </div>
           </div>
         </div>
       `;
       gsap = `
-        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-1", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-2", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-3", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#bc-${sceneId}-1", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.1});
+        tl.from("#bc-${sceneId}-2", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.15});
+        tl.from("#bc-${sceneId}-3", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
+        tl.from("#bc-${sceneId}-4", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.25});
       `;
       break;
     }
 
     case 5: {
-      // Cảnh 6: Hyperframes vs Remotion
-      const title1 = scene.headline_line1 || "HYPERFRAMES VS REMOTION";
-      const title2 = scene.headline_line2 || "MÃ NGUỒN MỞ HOÀN TOÀN";
-      const repoName = scene.repo_name || "heygen-com / hyperframes";
-      const repoLang = scene.repo_lang || "TypeScript";
-      const repoStars = scene.repo_stars || "★ 12,890";
-      const repoTrend = scene.repo_trend || "▲ 1,500";
-      const repoTrendLabel = scene.repo_trend_label || "today";
+      // Scene 6: Docker stats (stars/pulls)
+      const hl1 = scene.headline_line1 || "DOCKER STATS";
+      const hl2 = scene.headline_line2 || "ĐỘ TIN CẬY BAN ĐẦU";
+      const repoName = scene.repo_name || scene.headline_line1 || "nginx";
+      const repoPulls = scene.repo_stars || "1B+ pulls";
+      const repoTrend = scene.repo_trend || "▲ Official";
+      const repoTrendLabel = scene.repo_trend_label || "Docker Hub";
       html = `
-        <div class="headline-container" style="top: 160px; gap: 5px;">
-          <div class="headline-line1" style="font-size: 50px;">${title1}</div>
-          <div class="headline-line2" style="font-size: 50px;">${title2}</div>
+        <div class="headline-container" style="top: 175px; gap: 5px;">
+          <div class="headline-line1" style="font-size: 66px;" id="hl1-${sceneId}">${hl1}</div>
+          <div class="headline-line2" style="font-size: 58px;" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="bento-container" style="top: 375px; width: 960px;" id="bento-${sceneId}">
-          <div class="repo-badge" id="rb-${sceneId}">
-            <div class="crown-container">
-              <svg class="crown-svg" viewBox="0 0 24 24"><path d="M5 16L3 5l5 5 4-7 4 7 5-5-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
-              <div class="rank-text">#1</div>
+        <div class="bento-container" style="top: 440px; width: 960px;" id="bento-${sceneId}">
+          <div class="docker-stats-card" id="dsc-${sceneId}">
+            <div class="docker-logo-container">
+              <svg viewBox="0 0 24 24"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.186m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.185v1.888c0 .102.084.185.186.185m-2.92 0h2.12a.186.186 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.185.186v1.887c0 .102.083.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg>
             </div>
-            <div class="repo-info">
-              <div class="repo-name">${repoName}</div>
-              <div class="repo-meta">
-                <span class="meta-dot"></span>
-                <span>${repoLang}</span>
-                <span>${repoStars}</span>
+            <div class="docker-info">
+              <div class="docker-image-name">${repoName}</div>
+              <div class="docker-meta">
+                <span>Official Image</span>
+                <span>•</span>
+                <span style="color: #0db7ed;">${repoPulls}</span>
               </div>
             </div>
-            <div class="repo-trend">
+            <div class="docker-pulls">
               <span>${repoTrend}</span>
-              <span class="trend-label">${repoTrendLabel}</span>
+              <span class="docker-pulls-label">${repoTrendLabel}</span>
             </div>
           </div>
-
-          <div class="financial-chart" id="fc-${sceneId}">
-            <div class="chart-trendline"></div>
-            
-            <div class="robot-badge" style="bottom: 180px; left: 160px;">
-              <svg viewBox="0 0 24 24"><path d="M19 8h-1V7c0-1.1-.9-2-2-2h-3V3c0-.55-.45-1-1-1s-1 .45-1 .45v2.55H8c-1.1 0-2 .9-2 2v1H5c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h1v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-2h1c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zM9 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+          <div class="terminal-frame" id="term-${sceneId}" style="position: relative; top: auto; left: auto; transform: none; width: 100%; height: 380px; box-sizing: border-box;">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              </div>
+              <div class="terminal-title">docker — stats</div>
             </div>
-
-            <div class="candlestick bullish">
-              <div class="candlestick-wick" style="height: 180px;"></div>
-              <div class="candlestick-body" style="height: 110px;"></div>
-            </div>
-            
-            <div class="candlestick bearish">
-              <div class="candlestick-wick" style="height: 140px;"></div>
-              <div class="candlestick-body" style="height: 60px;"></div>
-            </div>
-
-            <div class="robot-badge" style="bottom: 230px; right: 220px;">
-              <svg viewBox="0 0 24 24"><path d="M19 8h-1V7c0-1.1-.9-2-2-2h-3V3c0-.55-.45-1-1-1s-1 .45-1 .45v2.55H8c-1.1 0-2 .9-2 2v1H5c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h1v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-2h1c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zM9 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
-            </div>
-
-            <div class="candlestick bullish">
-              <div class="candlestick-wick" style="height: 240px;"></div>
-              <div class="candlestick-body" style="height: 160px; background: #00ff88; box-shadow: 0 0 35px rgba(0,255,136,0.6);"></div>
+            <div class="terminal-body">
+              <div class="terminal-content">
+                <div class="terminal-line">
+                  <span class="t-output" style="width:220px; font-weight:700; color:#0db7ed;">CONTAINER</span>
+                  <span class="t-output" style="width:140px; font-weight:700; color:#0db7ed;">CPU%</span>
+                  <span class="t-output" style="width:180px; font-weight:700; color:#0db7ed;">MEM USAGE</span>
+                  <span class="t-output" style="font-weight:700; color:#0db7ed;">NET I/O</span>
+                </div>
+                <div class="terminal-line" id="tr1-${sceneId}" style="opacity:0;">
+                  <span class="t-success" style="width:220px;">nginx_web</span>
+                  <span class="t-cmd" style="width:140px;">0.1%</span>
+                  <span class="t-cmd" style="width:180px;">4.2MB</span>
+                  <span class="t-info">1.5kB / 872B</span>
+                </div>
+                <div class="terminal-line" id="tr2-${sceneId}" style="opacity:0;">
+                  <span class="t-success" style="width:220px;">nginx_api</span>
+                  <span class="t-cmd" style="width:140px;">0.3%</span>
+                  <span class="t-cmd" style="width:180px;">6.1MB</span>
+                  <span class="t-info">2.1kB / 1.1kB</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       `;
       gsap = `
-        tl.from("#rb-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#fc-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from(".candlestick", { y: 20, stagger: 0.02, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from(".robot-badge", { y: 15, stagger: 0.02, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#dsc-${sceneId}", { y: 20, opacity: 0, duration: 0.25, ease: "power3.out" }, ${start + 0.15});
+        tl.from("#term-${sceneId}", { y: 20, opacity: 0, duration: 0.25, ease: "power3.out" }, ${start + 0.25});
+        tl.to("#tr1-${sceneId}", { opacity: 1, duration: 0.2 }, ${start + 0.6});
+        tl.to("#tr2-${sceneId}", { opacity: 1, duration: 0.2 }, ${start + 0.9});
       `;
       break;
     }
 
     case 6: {
-      // Cảnh 7: Quick Start
-      const title1 = scene.headline_line1 || "KÍCH HOẠT NHANH";
-      const title2 = scene.headline_line2 || "NPX HYPERFRAMES INIT";
-      const btnText = scene.btn_text || "$ npx hyperframes init my-video";
+      // Scene 7: Try safely
+      const hl1 = scene.headline_line1 || "THỬ AN TOÀN";
+      const hl2 = scene.headline_line2 || "TRONG PROJECT PHỤ";
+      const btnText = scene.btn_text || "$ docker run -d -p 80:80 nginx";
       html = `
         <div class="main-glow-icon" id="glow-${sceneId}">
           <div class="glow-svg-container">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
         </div>
-        <div class="headline-container">
-          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
-          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+        <div class="headline-container" id="head-${sceneId}">
+          <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}" style="font-family: monospace; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #00ff88;">
-          ${btnText}
+        <div class="action-btn" id="btn-${sceneId}" style="font-size: 28px; max-width: 920px;">
+          <span class="action-icon" style="color: #0db7ed;">🐳</span> ${btnText}
         </div>
       `;
       gsap = `
-        tl.from("#glow-${sceneId}", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, ${start});
-        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#btn-${sceneId}", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, ${start});
+        tl.from("#glow-${sceneId}", { scale: 0.7, y: 30, opacity: 0, duration: 0.35, ease: "back.out(1.4)" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
+        tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.35});
       `;
       break;
     }
 
     case 7: {
-      // Cảnh 8: Outro Github Star
-      const title1 = scene.headline_line1 || "ỦNG HỘ REPO";
-      const title2 = scene.headline_line2 || "THẢ 1 SAO GITHUB NHÉ!";
-      const bento1Title = scene.bento1_title || "Thả 1 Star";
-      const bento2Title = scene.bento2_title || "Yêu thích";
-      const bento3Title = scene.bento3_title || "Bình luận ngay";
-      const bento4Title = scene.bento4_title || "Đăng ký kênh";
+      // Scene 8: Outro — star/docs/test CTA
+      const hl1 = scene.headline_line1 || "STAR VÀ ĐỌC DOCS";
+      const hl2 = scene.headline_line2 || "TRƯỚC KHI DÙNG THẬT";
+      const b1t = scene.bento1_title || "Pull";
+      const b2t = scene.bento2_title || "Run";
+      const b3t = scene.bento3_title || "Docs";
+      const b4t = scene.bento4_title || "Test";
       html = `
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
-          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+          <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="bento-container" style="top: 460px;" id="bento-${sceneId}">
+        <div class="bento-container" style="top: 490px;" id="bento-${sceneId}">
           <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-1" style="border: 2px solid rgba(243, 202, 86, 0.4); background: rgba(243, 202, 86, 0.02);">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(243,202,86,0.06); border: 2px solid rgba(243,202,86,0.25);">
-                <svg viewBox="0 0 24 24" style="stroke: #f3ca56; filter: drop-shadow(0 0 8px rgba(243,202,86,0.8));"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <div class="bento-card half" id="bc-${sceneId}-1" style="border: 2px solid rgba(13,183,237,0.4) !important; background: rgba(13,183,237,0.04) !important;">
+              <div class="card-icon-svg" style="background: rgba(13,183,237,0.1) !important; border-color: rgba(13,183,237,0.4) !important;">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center; color: #f3ca56; font-weight: 800;">${bento1Title}</div>
+              <div class="card-title" style="font-size: 32px; color: #0db7ed; font-weight: 800;">${b1t}</div>
             </div>
-            <div class="bento-card half" id="bc-${sceneId}-2" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
-                <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">${bento2Title}</div>
+              <div class="card-title" style="font-size: 32px; color: #27c93f; font-weight: 800;">${b2t}</div>
             </div>
           </div>
           <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-3" style="border: 2px solid rgba(0, 210, 255, 0.4); background: rgba(0, 210, 255, 0.02);">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(0,210,255,0.06); border: 2px solid rgba(0,210,255,0.25);">
-                <svg viewBox="0 0 24 24" style="stroke: #00d2ff; filter: drop-shadow(0 0 8px rgba(0,210,255,0.8));"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <div class="bento-card half card-accent-yellow" id="bc-${sceneId}-3">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center; color: #00d2ff; font-weight: 800;">${bento3Title}</div>
+              <div class="card-title" style="font-size: 32px; color: #f3ca56; font-weight: 800;">${b3t}</div>
             </div>
-            <div class="bento-card half" id="bc-${sceneId}-4" style="border: 2px solid rgba(224, 86, 253, 0.4); background: rgba(224, 86, 253, 0.02);">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(224,86,253,0.06); border: 2px solid rgba(224,86,253,0.25);">
-                <svg viewBox="0 0 24 24" style="stroke: #e056fd; filter: drop-shadow(0 0 8px rgba(224,86,253,0.8));"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+            <div class="bento-card half card-accent-red" id="bc-${sceneId}-4">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center; color: #e056fd; font-weight: 800;">${bento4Title}</div>
+              <div class="card-title" style="font-size: 32px; color: #ff4757; font-weight: 800;">${b4t}</div>
             </div>
           </div>
         </div>
       `;
       gsap = `
-        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-1", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-2", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-3", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-4", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#bc-${sceneId}-1", { scale: 0.85, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.1});
+        tl.from("#bc-${sceneId}-2", { scale: 0.85, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.15});
+        tl.from("#bc-${sceneId}-3", { scale: 0.85, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.2});
+        tl.from("#bc-${sceneId}-4", { scale: 0.85, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.25});
       `;
       break;
+    }
+
+    default: {
+      // Fallback generic scene
+      const hl1 = scene.headline_line1 || "DOCKER";
+      const hl2 = scene.headline_line2 || "CONTAINER";
+      const btnText = scene.btn_text || "$ docker run --rm hello-world";
+      html = `
+        <div class="main-glow-icon" id="glow-${sceneId}">
+          <div class="glow-svg-container">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+        </div>
+        <div class="headline-container" id="head-${sceneId}">
+          <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
+        </div>
+        <div class="action-btn" id="btn-${sceneId}">
+          <span class="action-icon">🐳</span> ${btnText}
+        </div>
+      `;
+      gsap = `
+        tl.from("#glow-${sceneId}", { scale: 0.7, y: 30, opacity: 0, duration: 0.35, ease: "back.out(1.4)" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
+        tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.35});
+      `;
     }
   }
 

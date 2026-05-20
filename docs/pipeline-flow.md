@@ -14,20 +14,21 @@ Ví dụ:
 
 ```bash
 node run_pipeline.js https://github.com/heygen-com/hyperframes
-node run_pipeline.js https://github.com/keon/awesome-nlp
 node run_pipeline.js https://hub.docker.com/_/nginx
+node run_pipeline.js https://example.com/some-tech-article
 ```
 
 ## Tổng quan luồng
 
-Pipeline hiện tại gồm 6 bước chính:
+Pipeline hiện tại gồm 7 bước chính:
 
 1. Phân tích URL và sinh kịch bản JSON.
 2. Chụp ảnh trang nguồn.
-3. Tạo giọng đọc và timing phụ đề.
+3. Tạo giọng đọc (TTS) và timing phụ đề.
 4. Generate `index.html` từ template.
 5. Kiểm tra composition bằng HyperFrames.
-6. Render MP4.
+6. Render MP4 và đổi tên theo quy tắc.
+7. Dọn dẹp file audio tạm.
 
 ## Bước 1: Phân tích URL
 
@@ -40,73 +41,76 @@ node generate_repo_data.js <url>
 Nhiệm vụ:
 
 - Nhận URL đầu vào.
-- Xác định nền tảng: GitHub hoặc Docker.
-- Nếu không phải GitHub/Docker, chuyển sang luồng `web`.
+- Xác định nền tảng: GitHub, Docker hoặc web.
 - Gọi API nguồn nếu có thể.
 - Với URL web không rõ ràng, gọi Tavily nếu có `TAVILY_API_KEY`.
 - Lấy metadata cơ bản.
 - Phân loại nội dung.
-- Chọn `video_format`.
-- Sinh file JSON tại:
+- Chọn `video_format` và `template` tương ứng.
+- Sinh file JSON tại thư mục `data/`.
+
+### Quy tắc đặt tên file JSON
+
+File JSON được đặt tên theo định dạng:
 
 ```txt
-data/github-review.json
+data/<tên-video>-<DD>-<MM>-<YYYY>-<HH>-<mm>.json
 ```
-### Các loại template:
 
-**Group 1: Các format GitHub hiện có**
+Ví dụ:
 
-- `tool_review_quick_demo`
-- `developer_integration_brief`
-- `knowledge_map_resource_digest`
-- `dataset_explainer`
-- `repo_overview_with_use_cases`
+```txt
+data/edge-tts-20-05-2026-16-06.json
+data/nginx-20-05-2026-16-06.json
+data/pnpm-20-05-2026-16-06.json
+```
 
-**Group 2: Các format Docker hiện có**
+Tên video được lấy từ metadata: tên repo (GitHub), tên image (Docker) hoặc tiêu đề trang (web).
 
-- `container_quick_start`
-- `self_host_setup_guide`
-- `dev_workflow_image_brief`
-- `container_overview`
+### Các template hiện có
 
-**Group 3: Các format web không rõ ràng hiện có**
+| Template | Nền tảng | Thư mục |
+|---|---|---|
+| `G1_github` | GitHub | `templates/G1_github/` |
+| `G2_docker` | Docker Hub | `templates/G2_docker/` |
+| `G3_web` | Web bất kỳ | `templates/G3_web/` |
 
-- `web_docs_explainer`
-- `web_tool_overview`
-- `web_article_digest`
-- `web_product_brief`
-- `web_context_digest`
+### Các format video theo nền tảng
+
+**GitHub:**
+
+- `tool_review_quick_demo` — Repo dạng tool/app/CLI
+- `developer_integration_brief` — Repo dạng thư viện/framework
+- `knowledge_map_resource_digest` — Repo dạng awesome/curated list
+- `dataset_explainer` — Repo dạng dataset/benchmark
+- `repo_overview_with_use_cases` — Repo không xác định rõ
+
+**Docker:**
+
+- `container_quick_start` — Official/base image
+- `self_host_setup_guide` — Ứng dụng self-hosted
+- `dev_workflow_image_brief` — Dev/CI runtime
+- `container_overview` — Image không xác định rõ
+
+**Web:**
+
+- `web_docs_explainer` — Trang tài liệu
+- `web_tool_overview` — Trang tool/SDK
+- `web_article_digest` — Bài viết/phân tích
+- `web_product_brief` — Trang sản phẩm
+- `web_context_digest` — Web không xác định rõ
 
 ## Tavily cho URL không rõ ràng
 
 Tavily chỉ được dùng cho URL không thuộc GitHub/Docker. Điều này giúp giữ luồng GitHub/Docker ổn định và deterministic hơn.
 
-Thiết lập key:
+Thiết lập key trong file `.env`:
 
-```bash
-set TAVILY_API_KEY=your_api_key_here
+```txt
+TAVILY_API_KEY=your_api_key_here
 ```
 
-Hoặc trong PowerShell:
-
-```powershell
-$env:TAVILY_API_KEY="your_api_key_here"
-```
-
-Khi có key, pipeline sẽ gọi Tavily để lấy:
-
-- Tóm tắt nội dung chính.
-- Các nguồn/kết quả liên quan.
-- Ngữ cảnh giúp chọn format video.
-- Gợi ý điểm cần đưa vào scene.
-
-Khi không có key, pipeline fallback sang:
-
-- `<title>` của trang.
-- Meta description.
-- Ảnh chụp trực tiếp bằng Puppeteer.
-
-Không nên dùng Tavily để thay thế GitHub API hoặc Docker Hub API khi link đã rõ nền tảng.
+Khi có key, pipeline sẽ gọi Tavily để lấy tóm tắt nội dung, nguồn liên quan và ngữ cảnh. Khi không có key, pipeline fallback sang `<title>` và meta description của trang.
 
 ## Bước 2: Chụp ảnh trang nguồn
 
@@ -128,34 +132,32 @@ Nhiệm vụ:
 assets/images/github_repo.png
 ```
 
-Tên file này đang được template hiện tại sử dụng, kể cả khi URL là Docker Hub.
-
 ## Bước 3: Tạo TTS và timing phụ đề
 
 Script:
 
 ```bash
-py gen_assets.py data/github-review.json
+py gen_assets.py <đường_dẫn_file_json>
 ```
 
 Nhiệm vụ:
 
 - Đọc từng scene trong JSON.
-- Tạo audio voice-over tiếng Việt bằng gTTS.
-- Tăng tốc audio theo `SPEECH_SPEED`.
+- Tạo audio voice-over tiếng Việt bằng **edge-tts** (giọng `vi-VN-NamMinhNeural` — giọng nam miền Nam).
+- Sử dụng cờ `--file` thay vì `--text` để tránh lỗi mã hóa UTF-8 trên Windows.
+- Tăng tốc audio theo `SPEECH_SPEED` (hiện tại: 1.18x) bằng ffmpeg.
 - Dùng `ffprobe` để lấy duration thật.
-- Gắn các trường sau vào từng scene:
+- Tính toán transcript word-level với hệ số 85% thời lượng audio (để text chạy nhanh hơn, khớp với giọng đọc).
+- Gắn `audio_start`, `audio_duration`, `audio_path`, `transcript` vào từng scene.
 
-```json
-{
-  "audio_start": 0.5,
-  "audio_duration": 10.2,
-  "audio_path": "assets/audio/github-review_scene_1.wav",
-  "transcript": []
-}
-```
+### Cấu hình TTS
 
-Sau bước này, `data/github-review.json` sẽ được ghi lại với duration, audio path và transcript word-level giả lập.
+| Tham số | Giá trị |
+|---|---|
+| Engine | `edge-tts` (Microsoft Edge TTS) |
+| Giọng đọc | `vi-VN-NamMinhNeural` (nam, miền Nam) |
+| Tốc độ tăng | 1.18x |
+| Hệ số text pacing | 85% thời lượng audio |
 
 ## Quy tắc viết lời đọc và phụ đề
 
@@ -166,25 +168,20 @@ Nên viết:
 - "Nếu bạn vừa mở trang này, điều đầu tiên cần nắm là..."
 - "Điểm đáng chú ý nằm ở..."
 - "Trước khi áp dụng, hãy kiểm tra..."
-- "Cách đọc nhanh là..."
 
 Không nên viết:
 
 - "Tavily cho thấy..."
 - "Metadata trang cho thấy..."
 - "Scene này nên..."
-- "Video nên..."
-- "Format này phù hợp..."
 - "Mình đang phân tích link..."
-
-Nếu dữ liệu lấy từ Tavily hoặc HTML còn thô, không đưa nguyên văn vào lời đọc. Hãy dùng dữ liệu đó để hiểu ngữ cảnh, rồi viết lại thành câu tiếng Việt tự nhiên, ngắn, dễ nghe và có ích cho người xem.
 
 ## Bước 4: Generate HTML composition
 
 Script:
 
 ```bash
-node generate.mjs data/github-review.json
+node generate.mjs <đường_dẫn_file_json>
 ```
 
 Nhiệm vụ:
@@ -193,22 +190,16 @@ Nhiệm vụ:
 - Load template tương ứng trong `templates/`.
 - Sinh `index.html`.
 
-Với data hiện tại:
-
-```json
-{
-  "template": "news"
-}
-```
-
-Template được dùng:
+Mỗi template bao gồm:
 
 ```txt
-templates/news/template.mjs
-templates/news/style.css
+templates/<tên_template>/
+├── template.mjs          # Cấu trúc HTML chính
+├── style.css             # CSS thiết kế
+└── hyperframesReview.mjs # Layout cho từng scene
 ```
 
-## Bước 5: Check composition
+## Bước 5: Kiểm tra composition
 
 Command:
 
@@ -216,27 +207,9 @@ Command:
 npm run check
 ```
 
-Lệnh này chạy:
+Yêu cầu: không được có error. Warning có thể tồn tại tạm thời.
 
-```bash
-npx --yes hyperframes@0.6.24 lint
-npx --yes hyperframes@0.6.24 validate
-npx --yes hyperframes@0.6.24 inspect
-```
-
-Yêu cầu:
-
-- Không được có error.
-- Warning có thể tồn tại tạm thời, nhưng nên được xử lý dần nếu ảnh hưởng bảo trì hoặc render.
-
-Warning hiện tại thường gặp:
-
-- `duplicate_media_discovery_risk`
-- `composition_file_too_large`
-- `composition_self_attribute_selector`
-- `caption_transcript_parse_error`
-
-## Bước 6: Render MP4
+## Bước 6: Render MP4 và đổi tên
 
 Command:
 
@@ -244,17 +217,22 @@ Command:
 npm run render
 ```
 
-Output nằm trong:
+Sau khi render xong, pipeline tự động đổi tên file MP4 mới nhất trong `renders/` theo cùng quy tắc với file JSON:
 
 ```txt
-renders/
+renders/<tên-video>-<DD>-<MM>-<YYYY>-<HH>-<mm>.mp4
 ```
 
 Ví dụ:
 
 ```txt
-renders/my-video_2026-05-20_11-08-22.mp4
+renders/nginx-20-05-2026-16-06.mp4
+renders/edge-tts-20-05-2026-16-06.mp4
 ```
+
+## Bước 7: Dọn dẹp
+
+Pipeline tự động xóa các file `.wav` trong `assets/audio/` sau khi render thành công.
 
 ## Preview local
 
@@ -264,120 +242,34 @@ Command:
 npm run dev
 ```
 
-Trên Windows, có thể dùng script helper:
-
-```bash
-scripts/start-preview.cmd
-```
-
-Server preview thường chạy tại:
+Server preview chạy tại:
 
 ```txt
 http://localhost:3002
 ```
 
-Nếu port thay đổi, xem log:
-
-```txt
-preview.log
-preview.err.log
-```
-
 ## Luồng đầy đủ trong `run_pipeline.js`
 
-`run_pipeline.js` đang chạy tuần tự:
-
 ```txt
-generate_repo_data.js
-capture_github.js
-gen_assets.py
-generate.mjs
-npx hyperframes validate
-npm run render
-```
-
-Điểm cần lưu ý:
-
-- `run_pipeline.js` hiện render luôn MP4.
-- Nếu chỉ muốn preview, chạy thủ công đến bước `generate.mjs`, sau đó start `npm run dev`.
-- Nếu thay URL mới, ảnh `assets/images/github_repo.png` và audio `assets/audio/github-review_scene_*.wav` sẽ bị ghi đè.
-
-## Luồng chỉ preview, chưa render
-
-Dùng khi muốn kiểm tra nhanh:
-
-```bash
-node generate_repo_data.js <url>
-node capture_github.js <url>
-py gen_assets.py data/github-review.json
-node generate.mjs data/github-review.json
-npm run check
-npm run dev
-```
-
-## Luồng render đầy đủ
-
-Dùng khi muốn xuất MP4:
-
-```bash
-node run_pipeline.js <url>
-```
-
-Hoặc chạy thủ công:
-
-```bash
-node generate_repo_data.js <url>
-node capture_github.js <url>
-py gen_assets.py data/github-review.json
-node generate.mjs data/github-review.json
-npm run check
-npm run render
+generate_repo_data.js   → Sinh JSON kịch bản
+capture_github.js       → Chụp ảnh trang nguồn
+gen_assets.py           → TTS + timing phụ đề
+generate.mjs            → Biên dịch HTML
+hyperframes validate    → Kiểm tra composition
+npm run render          → Kết xuất MP4
+(đổi tên MP4)           → Theo quy tắc tên-video-date-time
+(dọn dẹp audio)         → Xóa file .wav tạm
 ```
 
 ## Vai trò của từng file chính
 
-```txt
-run_pipeline.js
-```
-
-Entry point tự động chạy toàn bộ luồng.
-
-```txt
-generate_repo_data.js
-```
-
-Router phân tích URL, phân loại nội dung và sinh scene JSON.
-
-```txt
-capture_github.js
-```
-
-Chụp ảnh trang nguồn bằng Puppeteer.
-
-```txt
-gen_assets.py
-```
-
-Tạo TTS, tính duration và transcript.
-
-```txt
-generate.mjs
-```
-
-Biên dịch JSON + template thành `index.html`.
-
-```txt
-templates/news/
-```
-
-Template HTML/CSS/scene layout đang dùng cho video.
-
-## Cải tiến nên làm tiếp
-
-1. Tách output theo slug URL để không ghi đè `github-review.json`, audio và ảnh.
-2. Đổi tên `capture_github.js` thành tên trung tính hơn, ví dụ `capture_source.js`.
-3. Thêm mode `--preview` cho `run_pipeline.js` để không render.
-4. Thêm mode `--render` hoặc giữ default render như hiện tại.
-5. Lưu metadata asset chụp ảnh vào JSON riêng.
-6. Sửa dần warning HyperFrames để composition sạch hơn.
-7. Tạo template riêng cho Docker thay vì dùng lại layout GitHub.
+| File | Vai trò |
+|---|---|
+| `run_pipeline.js` | Entry point tự động chạy toàn bộ luồng |
+| `generate_repo_data.js` | Phân tích URL, phân loại nội dung, sinh scene JSON |
+| `capture_github.js` | Chụp ảnh trang nguồn bằng Puppeteer |
+| `gen_assets.py` | Tạo TTS bằng edge-tts, tính duration và transcript |
+| `generate.mjs` | Biên dịch JSON + template thành `index.html` |
+| `templates/G1_github/` | Template cho video GitHub |
+| `templates/G2_docker/` | Template cho video Docker (phong cách Terminal) |
+| `templates/G3_web/` | Template cho video web |

@@ -1066,11 +1066,14 @@ async function main() {
   const day = String(dateObj.getDate()).padStart(2, '0');
   const month = String(dateObj.getMonth() + 1).padStart(2, '0');
   const year = dateObj.getFullYear();
-  
-  const rawTitle = data.metadata.title || data.metadata.repo_name || data.metadata.image || target.host || "video";
-  let safeName = rawTitle.replace(/[^a-zA-Z0-9\u00C0-\u1EF9]/g, '_').substring(0, 30);
-  safeName = safeName.replace(/_+/g, '_').replace(/^_|_$/g, '');
-  const jsonFilename = `${safeName}_${day}_${month}_${year}.json`;
+  const hours = String(dateObj.getHours()).padStart(2, '0');
+  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+
+  // Build video name from content metadata
+  const repoOrImage = data.metadata.repo || data.metadata.image || '';
+  const rawTitle = repoOrImage || data.metadata.title || data.metadata.host || 'video';
+  let safeName = rawTitle.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase().replace(/-+/g, '-').replace(/^-|-$/g, '').substring(0, 30);
+  const jsonFilename = `${safeName}-${day}-${month}-${year}-${hours}-${minutes}.json`;
 
   const outputPath = path.join(outputDir, jsonFilename);
   fs.writeFileSync(outputPath, JSON.stringify(data, null, 2), "utf-8");

@@ -172,11 +172,12 @@ export default function (data, css) {
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 </head>
 <body>
-  <div id="root" class="${rootClasses}" data-composition-id="news-multi" data-duration="${duration}" data-width="1080" data-height="1920" data-start="0">
+  <div id="root" class="${rootClasses}" data-composition-id="docker-multi" data-duration="${duration}" data-width="1080" data-height="1920" data-start="0">
     ${audioTags}
 
     <div id="main-clip" class="clip" data-start="0" data-duration="${duration}" data-track-index="3">
       <div class="bg"></div>
+      <div class="grid-dots"></div>
       ${particlesHTML}
       
       <div class="top-header">
@@ -230,8 +231,8 @@ export default function (data, css) {
           let html = activeBlock.words.map(w => {
             let isActive = (time >= w.start && time <= w.end);
             return '<span style="font-family: Space Grotesk, sans-serif; font-size: 34px; font-weight: 800; text-transform: uppercase; margin: 0 7px; display: inline-block; transition: all 0.08s; ' + 
-                   (isActive ? 'color: #fdf01c; text-shadow: 0 0 20px #fdf01c, 0 0 5px #fdf01c; transform: scale(1.1); font-weight: 900;' 
-                            : 'color: rgba(255,255,255,0.7); transform: scale(1.0);') + 
+                   (isActive ? 'color: #0db7ed; text-shadow: 0 0 20px #0db7ed, 0 0 5px #0db7ed; transform: scale(1.1); font-weight: 900;' 
+                            : 'color: rgba(232,244,253,0.7); transform: scale(1.0);') + 
                    '">' + escapeHtml(w.text.toUpperCase()) + '</span>';
           }).join(" ");
           capContainer.innerHTML = html;
@@ -241,7 +242,7 @@ export default function (data, css) {
       });
     }
 
-    window.__timelines["news-multi"] = tl;
+    window.__timelines["docker-multi"] = tl;
   </script>
 </body>
 </html>`;
