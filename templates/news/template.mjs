@@ -2,6 +2,12 @@ import { getHyperframesReviewScene } from "./hyperframesReview.mjs";
 
 export default function (data, css) {
   const duration = data.duration || 10;
+  const classSafe = (value) => String(value || "default").toLowerCase().replace(/[^a-z0-9_-]+/g, "-");
+  const rootClasses = [
+    `source-${classSafe(data.platform)}`,
+    `format-${classSafe(data.video_format)}`,
+    `theme-${classSafe(data.visual_theme || data.platform)}`,
+  ].join(" ");
 
   // Deterministic fake random based on index
   const seed = (x) => Math.sin(x * 999) * 10000;
@@ -14,7 +20,7 @@ export default function (data, css) {
   let scenesHTML = "";
   let jsTimelines = "";
   let allTranscripts = [];
-  let sentenceBlocks = [];
+  let captionBlocks = [];
 
   // Background Audio
   audioTags += `<audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="${duration}" data-volume="0.3" loop></audio>
@@ -87,18 +93,21 @@ export default function (data, css) {
         } else if (sfxLower.includes("pop")) {
           sfxFile = "transition 1.mp3";
         }
-        audioTags += `<audio id="sfx-${sceneId}" src="./assets/sound-effect/${sfxFile}" data-track-index="2" data-start="${start}" data-volume="0.8"></audio>
+        audioTags += `<audio id="sfx-${sceneId}" src="./assets/sound-effect/${sfxFile}" data-track-index="2" data-start="${start}" data-duration="1" data-volume="0.8"></audio>
 `;
       }
 
-      // Collect transcripts and build complete sentence blocks
+      // Collect transcripts and build compact caption chunks.
       if (scene.transcript && scene.transcript.length > 0) {
         allTranscripts.push(...scene.transcript);
-        sentenceBlocks.push({
-          words: scene.transcript,
-          start: scene.transcript[0].start,
-          end: scene.transcript[scene.transcript.length - 1].end,
-        });
+        for (let wordIndex = 0; wordIndex < scene.transcript.length; wordIndex += 6) {
+          const words = scene.transcript.slice(wordIndex, wordIndex + 6);
+          captionBlocks.push({
+            words,
+            start: words[0].start,
+            end: words[words.length - 1].end,
+          });
+        }
       }
 
       // Visual Scene HTML
@@ -113,7 +122,7 @@ export default function (data, css) {
       const sceneGsap = result.gsap;
 
       scenesHTML += `
-      <div id="${sceneId}" class="scene" style="position:absolute; inset:0; opacity:0; z-index: 10;">
+      <div id="${sceneId}" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
         ${sceneVisualHtml}
         ${charHtml}
       </div>`;
@@ -121,6 +130,7 @@ export default function (data, css) {
       // GSAP JS
       jsTimelines += `
       // Scene ${i + 1}
+      tl.set("#${sceneId}", { visibility: "visible" }, ${Math.max(0, start - 0.12)});
       tl.to("#${sceneId}", { opacity: 1, duration: 0.1 }, ${start - 0.1});
       ${sceneGsap}
       `;
@@ -137,6 +147,7 @@ export default function (data, css) {
       if (i < data.scenes.length - 1) {
         const nextStart = data.scenes[i + 1].audio_start;
         jsTimelines += `tl.to("#${sceneId}", { opacity: 0, duration: 0.3 }, ${nextStart - 0.3});\n`;
+        jsTimelines += `tl.set("#${sceneId}", { visibility: "hidden" }, ${nextStart});\n`;
       }
     });
   }
@@ -161,14 +172,10 @@ export default function (data, css) {
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 </head>
 <body>
-  <div id="root" data-composition-id="news-multi" data-duration="${duration}" data-width="1080" data-height="1920" data-start="0">
+  <div id="root" class="${rootClasses}" data-composition-id="news-multi" data-duration="${duration}" data-width="1080" data-height="1920" data-start="0">
     ${audioTags}
 
     <div id="main-clip" class="clip" data-start="0" data-duration="${duration}" data-track-index="3">
-      <div class="top-header">
-        <img class="top-avatar" src="./assets/logo/shiba.png" />
-        <div class="top-username">shiba news 24h</div>
-      </div>
       <div class="bg"></div>
       ${particlesHTML}
       
@@ -200,21 +207,27 @@ export default function (data, css) {
     ${jsTimelines}
 
     // Karaoke Subtitles Grouping by Scene (Complete Sentences)
-    const subtitleBlocks = ${JSON.stringify(sentenceBlocks)};
+    const subtitleBlocks = ${JSON.stringify(captionBlocks)};
     if (subtitleBlocks.length > 0) {
       const capContainer = document.getElementById("captions");
+      const escapeHtml = (value) => String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
 
       tl.eventCallback("onUpdate", () => {
         let time = tl.time();
         // Find the active block
-        let activeBlock = subtitleBlocks.find(b => time >= b.start - 0.2 && time <= b.end + 0.5);
+        let activeBlock = subtitleBlocks.find(b => time >= b.start - 0.08 && time <= b.end + 0.12);
         if (activeBlock) {
           let html = activeBlock.words.map(w => {
             let isActive = (time >= w.start && time <= w.end);
-            return '<span style="font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: 36px; font-weight: 800; text-transform: uppercase; margin: 0 8px; display: inline-block; transition: all 0.08s; ' + 
+            return '<span style="font-family: Space Grotesk, sans-serif; font-size: 34px; font-weight: 800; text-transform: uppercase; margin: 0 7px; display: inline-block; transition: all 0.08s; ' + 
                    (isActive ? 'color: #fdf01c; text-shadow: 0 0 20px #fdf01c, 0 0 5px #fdf01c; transform: scale(1.1); font-weight: 900;' 
                             : 'color: rgba(255,255,255,0.7); transform: scale(1.0);') + 
-                   '">' + w.text.toUpperCase() + '</span>';
+                   '">' + escapeHtml(w.text.toUpperCase()) + '</span>';
           }).join(" ");
           capContainer.innerHTML = html;
         } else {

@@ -3,6 +3,37 @@
 body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Plus Jakarta Sans", "Space Grotesk", "Inter", sans-serif; }
 .bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a1a0d 0%, #050505 80%); }
 
+.source-web .bg {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(0, 210, 255, 0.22) 0%, rgba(0, 210, 255, 0) 34%),
+    radial-gradient(circle at 82% 30%, rgba(253, 240, 28, 0.18) 0%, rgba(253, 240, 28, 0) 32%),
+    linear-gradient(180deg, #071017 0%, #050505 78%);
+}
+
+.source-web .headline-line2 {
+  background: linear-gradient(90deg, #00d2ff, #fdf01c, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.source-web .browser-frame {
+  border-color: rgba(0, 210, 255, 0.24);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 55px rgba(0, 210, 255, 0.18);
+}
+
+.source-web .browser-header {
+  background: #0b1720;
+}
+
+.source-web .action-btn {
+  border-color: rgba(0, 210, 255, 0.35);
+  background: rgba(0, 210, 255, 0.06);
+}
+
+.source-web .captions {
+  border-color: rgba(0, 210, 255, 0.28);
+}
+
 /* Animated Star Particles */
 .particles-container { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .particle-star { position: absolute; border-radius: 50%; opacity: 0.6; }
@@ -62,7 +93,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 /* Main Glow Icon & Vector Container */
 .main-glow-icon { 
   position: absolute; 
-  top: 300px; 
+  top: 280px; 
   left: 50%; 
   transform: translateX(-50%); 
   width: 200px; 
@@ -271,17 +302,26 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 /* Headline */
 .headline-container {
   position: absolute;
-  top: 550px;
+  top: 470px;
   width: 100%;
   text-align: center;
   z-index: 30;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+  padding: 0 64px;
+  box-sizing: border-box;
 }
-.headline-line1 { font-size: 90px; font-weight: 800; color: #ffffff; text-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+.headline-line1 {
+  font-size: 76px;
+  line-height: 0.98;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
 .headline-line2 { 
-  font-size: 90px; 
+  font-size: 72px; 
+  line-height: 0.98;
   font-weight: 900; 
   background: linear-gradient(90deg, #fdf01c, #00d2ff); 
   -webkit-background-clip: text; 
@@ -292,7 +332,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 /* Action Button */
 .action-btn {
   position: absolute;
-  top: 800px;
+  top: 775px;
   left: 50%;
   transform: translateX(-50%);
   padding: 25px 60px;
@@ -431,7 +471,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   width: 660px; 
   text-align: center; 
   z-index: 1000; 
-  min-height: 160px; 
+  min-height: 132px; 
+  max-height: 188px; 
   height: auto; 
   display: flex; 
   justify-content: center; 
@@ -444,6 +485,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(253, 240, 28, 0.05); 
   padding: 25px 30px; 
   box-sizing: border-box; 
+  overflow: hidden;
 }
 
 /* Browser Window Mockup for GitHub Repo */

@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 async function capture() {
-  console.log("Launching headless browser with Puppeteer...");
+  console.log("Đang mở trình duyệt headless bằng Puppeteer...");
   const browser = await puppeteer.launch({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -27,15 +27,15 @@ async function capture() {
   );
 
   const targetUrl = process.argv[2] || "https://github.com/heygen-com/hyperframes";
-  console.log(`Navigating to ${targetUrl}...`);
+  console.log(`Đang mở trang ${targetUrl}...`);
 
   await page.goto(targetUrl, {
     waitUntil: "networkidle2",
     timeout: 60000,
   });
 
-  console.log("Injecting clean layout overrides (hiding banners, footers and headers)...");
-  // Clean up standard GitHub mobile header/footers for a premium native look
+  console.log("Đang ẩn header/footer/banner để ảnh chụp sạch hơn...");
+  // Clean up standard GitHub/Docker Hub header/footers for a premium native look
   await page.addStyleTag({
     content: `
       header, 
@@ -64,18 +64,18 @@ async function capture() {
   }
 
   const outputPath = path.join(dir, "github_repo.png");
-  console.log(`Capturing crisp full-page screenshot to ${outputPath}...`);
+  console.log(`Đang chụp ảnh màn hình vào ${outputPath}...`);
 
   await page.screenshot({
     path: outputPath,
     fullPage: false, // Capturing the 640x3800 defined canvas which is already extremely long!
   });
 
-  console.log("Successfully captured and saved!");
+  console.log("Đã chụp và lưu ảnh thành công.");
   await browser.close();
 }
 
 capture().catch((err) => {
-  console.error("Capture failed:", err);
+  console.error("Chụp ảnh thất bại:", err);
   process.exit(1);
 });

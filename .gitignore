@@ -1,0 +1,12 @@
+node_modules/
+.thumbnails/
+.waveform-cache/
+renders/
+preview.log
+preview.err.log
+.env
+.env.*
+npm-debug.log*
+.DS_Store
+Thumbs.db
+

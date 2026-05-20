@@ -1,42 +1,54 @@
-import { execSync } from "child_process";
+import { spawnSync } from "child_process";
 
-const repoUrl = process.argv[2];
+const targetUrl = process.argv[2];
+const isWindows = process.platform === "win32";
+const npxBin = isWindows ? "npx.cmd" : "npx";
+const npmBin = isWindows ? "npm.cmd" : "npm";
+const pythonBin = isWindows ? "py" : "python3";
 
-if (!repoUrl) {
-  console.error("Lỗi: Vui lòng cung cấp link GitHub Repo URL!");
-  console.error("Ví dụ: node run_pipeline.js https://github.com/heygen-com/hyperframes");
+if (!targetUrl) {
+  console.error("Lỗi: Vui lòng cung cấp URL cần tạo video.");
+  console.error("Ví dụ GitHub: node run_pipeline.js https://github.com/heygen-com/hyperframes");
+  console.error("Ví dụ Docker: node run_pipeline.js https://hub.docker.com/_/nginx");
+  console.error("Ví dụ web: node run_pipeline.js https://example.com/some-tech-article");
   process.exit(1);
+}
+
+function run(command, args) {
+  const result = spawnSync(command, args, { stdio: "inherit", shell: isWindows });
+  if (result.error) throw result.error;
+  if (result.status !== 0) throw new Error(`Command ${command} failed with exit code ${result.status}`);
 }
 
 try {
   console.log("\n==================================================");
-  console.log("🎬 KHỞI CHẠY PIPELINE TẠO VIDEO TUẦN TỰ TỰ ĐỘNG");
-  console.log(`🔗 Target URL: ${repoUrl}`);
+  console.log("🎬 KHỞI CHẠY PIPELINE TẠO VIDEO TECH TỰ ĐỘNG");
+  console.log(`🔗 Target URL: ${targetUrl}`);
   console.log("==================================================\n");
 
-  console.log("Step 1: Thu thập thông tin repo và tạo kịch bản JSON...");
-  execSync(`node generate_repo_data.js "${repoUrl}"`, { stdio: "inherit" });
+  console.log("Step 1: Phân tích URL, nhận diện loại nội dung và tạo kịch bản JSON...");
+  run("node", ["generate_repo_data.js", targetUrl]);
 
-  console.log("\nStep 2: Chụp ảnh màn hình giao diện GitHub...");
-  execSync(`node capture_github.js "${repoUrl}"`, { stdio: "inherit" });
+  console.log("\nStep 2: Chụp ảnh màn hình trang nguồn...");
+  run("node", ["capture_github.js", targetUrl]);
 
-  console.log("\nStep 3: Tạo giọng đọc AI (TTS) & mốc thời gian phụ đề...");
-  execSync(`python gen_assets.py data/github-review.json`, { stdio: "inherit" });
+  console.log("\nStep 3: Tạo giọng đọc AI (TTS) và mốc thời gian phụ đề...");
+  run(pythonBin, ["gen_assets.py", "data/github-review.json"]);
 
-  console.log("\nStep 4: Biên dịch sang mã HTML...");
-  execSync(`node generate.mjs data/github-review.json`, { stdio: "inherit" });
+  console.log("\nStep 4: Biên dịch kịch bản sang HTML composition...");
+  run("node", ["generate.mjs", "data/github-review.json"]);
 
-  console.log("\nStep 5: Kiểm tra và xác thực chất lượng mã video...");
-  execSync(`npx hyperframes validate`, { stdio: "inherit" });
+  console.log("\nStep 5: Kiểm tra composition bằng HyperFrames...");
+  run(npxBin, ["hyperframes", "validate"]);
 
-  console.log("\nStep 6: Kết xuất (Render) video MP4 thành phẩm...");
-  execSync(`npm run render`, { stdio: "inherit" });
+  console.log("\nStep 6: Kết xuất video MP4...");
+  run(npmBin, ["run", "render"]);
 
   console.log("\n==================================================");
-  console.log("🎉 PIPELINE ĐÃ HOÀN THÀNH XUẤT SẮC!");
-  console.log("Video mới đã được lưu trong thư mục: D:\\hyperframes\\my-video\\renders\\");
+  console.log("✅ PIPELINE ĐÃ HOÀN THÀNH");
+  console.log("Video mới đã được lưu trong thư mục renders/.");
   console.log("==================================================\n");
 } catch (error) {
-  console.error("\n❌ Gặp lỗi trong quá trình thực thi pipeline:", error.message);
+  console.error("\n❌ Gặp lỗi trong quá trình chạy pipeline:", error.message);
   process.exit(1);
 }
