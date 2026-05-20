@@ -52,8 +52,9 @@ Nhiệm vụ:
 ```txt
 data/github-review.json
 ```
+### Các loại template:
 
-Các format GitHub hiện có:
+**Group 1: Các format GitHub hiện có**
 
 - `tool_review_quick_demo`
 - `developer_integration_brief`
@@ -61,14 +62,14 @@ Các format GitHub hiện có:
 - `dataset_explainer`
 - `repo_overview_with_use_cases`
 
-Các format Docker hiện có:
+**Group 2: Các format Docker hiện có**
 
 - `container_quick_start`
 - `self_host_setup_guide`
 - `dev_workflow_image_brief`
 - `container_overview`
 
-Các format web không rõ ràng hiện có:
+**Group 3: Các format web không rõ ràng hiện có**
 
 - `web_docs_explainer`
 - `web_tool_overview`

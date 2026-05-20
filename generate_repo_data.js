@@ -777,7 +777,7 @@ async function buildGithubData(target) {
   const scenes = buildGithubScenes(target, repoData, readme, rootFiles, classification);
 
   return {
-    template: "news",
+    template: "G1_github",
     source_url: target.url,
     platform: "github",
     content_type: classification.contentType,
@@ -816,7 +816,7 @@ async function buildDockerData(target) {
   const scenes = buildDockerScenes(target, info, classification);
 
   return {
-    template: "news",
+    template: "G2_docker",
     source_url: target.url,
     platform: "docker",
     content_type: classification.contentType,
@@ -1020,7 +1020,7 @@ async function buildWebData(target) {
   );
 
   return {
-    template: "news",
+    template: "G3_web",
     source_url: target.url,
     platform: "web",
     content_type: classification.contentType,
@@ -1062,7 +1062,17 @@ async function main() {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  const outputPath = path.join(outputDir, "github-review.json");
+  const dateObj = new Date();
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const year = dateObj.getFullYear();
+  
+  const rawTitle = data.metadata.title || data.metadata.repo_name || data.metadata.image || target.host || "video";
+  let safeName = rawTitle.replace(/[^a-zA-Z0-9\u00C0-\u1EF9]/g, '_').substring(0, 30);
+  safeName = safeName.replace(/_+/g, '_').replace(/^_|_$/g, '');
+  const jsonFilename = `${safeName}_${day}_${month}_${year}.json`;
+
+  const outputPath = path.join(outputDir, jsonFilename);
   fs.writeFileSync(outputPath, JSON.stringify(data, null, 2), "utf-8");
 
   console.log(`\nNền tảng: ${data.platform}`);
