@@ -156,6 +156,28 @@ Nhiệm vụ:
 
 Sau bước này, `data/github-review.json` sẽ được ghi lại với duration, audio path và transcript word-level giả lập.
 
+## Quy tắc viết lời đọc và phụ đề
+
+Lời đọc trong field `voice` phải được viết từ góc nhìn của một người xem lần đầu gặp nội dung, không viết từ góc nhìn của hệ thống đang tạo video.
+
+Nên viết:
+
+- "Nếu bạn vừa mở trang này, điều đầu tiên cần nắm là..."
+- "Điểm đáng chú ý nằm ở..."
+- "Trước khi áp dụng, hãy kiểm tra..."
+- "Cách đọc nhanh là..."
+
+Không nên viết:
+
+- "Tavily cho thấy..."
+- "Metadata trang cho thấy..."
+- "Scene này nên..."
+- "Video nên..."
+- "Format này phù hợp..."
+- "Mình đang phân tích link..."
+
+Nếu dữ liệu lấy từ Tavily hoặc HTML còn thô, không đưa nguyên văn vào lời đọc. Hãy dùng dữ liệu đó để hiểu ngữ cảnh, rồi viết lại thành câu tiếng Việt tự nhiên, ngắn, dễ nghe và có ích cho người xem.
+
 ## Bước 4: Generate HTML composition
 
 Script:

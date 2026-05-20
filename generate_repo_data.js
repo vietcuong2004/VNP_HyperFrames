@@ -5,6 +5,30 @@ import path from "path";
 const USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
+function loadDotEnv() {
+  const envPath = path.join(process.cwd(), ".env");
+  if (!fs.existsSync(envPath)) return;
+
+  const lines = fs.readFileSync(envPath, "utf-8").split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eqIndex = trimmed.indexOf("=");
+    if (eqIndex === -1) continue;
+
+    const key = trimmed.slice(0, eqIndex).trim();
+    let value = trimmed.slice(eqIndex + 1).trim();
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+    if (key && process.env[key] === undefined) {
+      process.env[key] = value;
+    }
+  }
+}
+
+loadDotEnv();
+
 function requestText(url, headers = {}) {
   return new Promise((resolve, reject) => {
     https
@@ -360,10 +384,10 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
     return [
       baseScene({
         ...commonIntro,
-        voice: `${repoName} không nên được review như một tool để cài rồi chạy ngay. Đây giống một bản đồ tài nguyên: ${short(description, 100)}.`,
+        voice: `Nếu bạn đang tìm tài nguyên để học hoặc tra cứu, ${repoName} giống một bản đồ tổng hợp hơn là một tool để cài rồi chạy ngay: ${short(description, 100)}.`,
         visual: "Chụp README, zoom vào các mục chính và biến chúng thành bản đồ tri thức.",
         headline_line2: "BẢN ĐỒ TÀI NGUYÊN ĐÁNG LƯU",
-        sfx: "yeah_tre_con.mp3",
+        //sfx: "yeah_tre_con.mp3",
       }),
       baseScene({
         voice: `Điểm quan trọng đầu tiên là phân nhóm. README đang có các mốc như ${firstHeadings}. Hãy xem nó như mục lục để biết nên học phần nào trước.`,
@@ -419,7 +443,7 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
         bento2_title: "Bookmark",
         bento3_title: "Lọc nguồn",
         bento4_title: "Chia sẻ",
-        sfx: "yeah_tre_con.mp3",
+        //sfx: "yeah_tre_con.mp3",
       }),
     ];
   }
@@ -428,10 +452,10 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
     return [
       baseScene({
         ...commonIntro,
-        voice: `Hôm nay mình phân tích ${repoName}: ${short(description, 110)}. Link này hợp với format developer brief, vì trọng tâm là tích hợp vào code.`,
+        voice: `${repoName} là thứ developer nên nhìn từ góc độ tích hợp vào dự án thật: nó làm gì, cài ra sao, API dùng thế nào, và có đáng đưa vào stack hay không. ${short(description, 90)}.`,
         visual: "Chụp trang repo và highlight README/API.",
         headline_line2: "DEV INTEGRATION BRIEF",
-        sfx: "yeah_tre_con.mp3",
+        //sfx: "yeah_tre_con.mp3",
       }),
       baseScene({
         voice: `Trước tiên cần hiểu nó nằm ở lớp nào trong stack. Repo có các dấu hiệu như ${fileSummary}, nên hãy xem phần cài đặt và API trước.`,
@@ -444,7 +468,7 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
         bento3_title: "Docs",
       }),
       baseScene({
-        voice: `Nếu README có lệnh cài đặt, scene này nên đưa thẳng snippet ngắn nhất lên màn hình. Người xem cần biết mất bao lâu để thử trong project phụ.`,
+        voice: `Điểm cần xem ngay là lệnh cài đặt và ví dụ nhỏ nhất. Chỉ cần vài dòng đầu tiên, bạn đã biết thư viện này có dễ thử trong một project phụ hay không.`,
         visual: "Terminal cài package và snippet code tối thiểu.",
         headline_line1: "CÀI ĐẶT",
         headline_line2: "RỒI TEST NHANH",
@@ -487,7 +511,7 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
         bento2_title: "Docs",
         bento3_title: "Release",
         bento4_title: "Test",
-        sfx: "yeah_tre_con.mp3",
+        //sfx: "yeah_tre_con.mp3",
       }),
     ];
   }
@@ -496,10 +520,10 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
     return [
       baseScene({
         ...commonIntro,
-        voice: `${repoName} nên được xem như một repo dữ liệu hoặc benchmark: ${short(description, 110)}. Video cần giải thích dữ liệu, không chỉ review mã nguồn.`,
+        voice: `${repoName} đáng xem như một nguồn dữ liệu hoặc benchmark. Điều quan trọng không chỉ là repo có gì, mà là dữ liệu này phục vụ bài toán nào: ${short(description, 100)}.`,
         visual: "Chụp README và highlight phần dataset/benchmark.",
         headline_line2: "DATASET EXPLAINER",
-        sfx: "yeah_tre_con.mp3",
+        //sfx: "yeah_tre_con.mp3",
       }),
       baseScene({
         voice: `Hãy bắt đầu từ bài toán mà dataset này phục vụ, sau đó mới nói tới cấu trúc file, nhãn, kích thước và cách tải về.`,
@@ -535,10 +559,10 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
   return [
     baseScene({
       ...commonIntro,
-      voice: `Hôm nay mình phân tích ${repoName}: ${short(description, 110)}. Link này hợp với format tool review vì người xem cần biết nó làm gì và thử nhanh ra sao.`,
+      voice: `${repoName} là một repo nên được nhìn qua câu hỏi rất thực tế: nó giải quyết vấn đề gì, thử nhanh có khó không, và ai thật sự nên dùng. ${short(description, 95)}.`,
       visual: "Chụp trang repo GitHub, mở đầu bằng tên repo và mô tả ngắn.",
       headline_line2: "TOOL REVIEW + QUICK DEMO",
-      sfx: "yeah_tre_con.mp3",
+      //sfx: "yeah_tre_con.mp3",
     }),
     baseScene({
       voice: `Vấn đề mà repo này đang nhắm tới là giúp developer tiết kiệm thời gian ở một tác vụ cụ thể. Hãy mở README và tìm phần quick start hoặc usage trước.`,
@@ -561,7 +585,7 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
       bento4_title: "Use case",
     }),
     baseScene({
-      voice: `Nếu repo có Dockerfile, package manifest hoặc hướng dẫn CLI, hãy biến chúng thành scene terminal thay vì chỉ đọc mô tả.`,
+      voice: `Nếu repo có Dockerfile, package manifest hoặc hướng dẫn CLI, phần đáng chú ý nhất là lệnh chạy thật. Người xem cần thấy cách bắt đầu, không chỉ nghe mô tả chung chung.`,
       visual: "Terminal command và README quick start.",
       headline_line1: "QUICK START",
       headline_line2: "PHẢI THẤY LỆNH CHẠY",
@@ -579,7 +603,7 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
     }),
     githubStatsScene(repoData, owner, repo, "SỨC HÚT TRÊN GITHUB"),
     baseScene({
-      voice: `Tóm lại, với repo dạng tool, format video tốt nhất là: nêu vấn đề, chạy thử thật nhanh, rồi nói rõ ai nên dùng và ai nên bỏ qua.`,
+      voice: `Tóm lại, với repo dạng tool, hãy nhớ ba điều: nó giải quyết vấn đề nào, bắt đầu nhanh ra sao, và trường hợp nào thì nên dùng hoặc nên bỏ qua.`,
       visual: "CTA clone, star và thử trong dự án phụ.",
       headline_line1: "THỬ TRONG",
       headline_line2: "DỰ ÁN PHỤ",
@@ -594,7 +618,7 @@ function buildGithubScenes(target, repoData, readme, rootFiles, classification) 
       bento2_title: "Docs",
       bento3_title: "Demo",
       bento4_title: "Follow",
-      sfx: "yeah_tre_con.mp3",
+      //sfx: "yeah_tre_con.mp3",
     }),
   ];
 }
@@ -609,11 +633,11 @@ function buildDockerScenes(target, info, classification) {
     return [
       baseScene({
         repo_url: `hub.docker.com/r/${imageRef}`,
-        voice: `${imageRef} phù hợp với format self-host setup guide. Đây là image để chạy một ứng dụng hoặc service cụ thể: ${short(description, 110)}.`,
+        voice: `${imageRef} là kiểu Docker image bạn nên xem như một bản hướng dẫn tự host. Trước khi chạy, cần hiểu nó là ứng dụng gì và cần cấu hình nào đi kèm: ${short(description, 100)}.`,
         visual: "Chụp Docker Hub và giới thiệu image.",
         headline_line1: target.image.toUpperCase(),
         headline_line2: "SELF-HOST SETUP GUIDE",
-        sfx: "yeah_tre_con.mp3",
+        //sfx: "yeah_tre_con.mp3",
       }),
       baseScene({
         voice: `Scene quan trọng nhất là cấu hình chạy: image này cần port, volume, biến môi trường và có thể cần database hoặc token đi kèm.`,
@@ -626,7 +650,7 @@ function buildDockerScenes(target, info, classification) {
         bento3_title: "Env",
       }),
       baseScene({
-        voice: `Lệnh khởi đầu nên được đưa lên màn hình thật rõ. Với image này, bước đầu tiên thường là ${pullCommand}.`,
+        voice: `Bước đầu tiên nên thật rõ ràng: pull image về máy rồi chạy thử ở cấu hình tối thiểu. Với image này, lệnh mở đầu là ${pullCommand}.`,
         visual: "Terminal docker pull/run.",
         headline_line1: "PULL IMAGE",
         headline_line2: "RỒI CHẠY THỬ",
@@ -649,14 +673,14 @@ function buildDockerScenes(target, info, classification) {
     return [
       baseScene({
         repo_url: `hub.docker.com/r/${imageRef}`,
-        voice: `${imageRef} nên được trình bày như một dev workflow image. Giá trị chính là tạo môi trường build, test hoặc CI đồng nhất.`,
+        voice: `${imageRef} hữu ích khi bạn cần một môi trường build, test hoặc CI giống nhau giữa máy local và pipeline. Giá trị chính nằm ở sự ổn định của workflow.`,
         visual: "Docker Hub image và pipeline CI.",
         headline_line1: target.image.toUpperCase(),
         headline_line2: "DEV WORKFLOW IMAGE",
-        sfx: "yeah_tre_con.mp3",
+        //sfx: "yeah_tre_con.mp3",
       }),
       baseScene({
-        voice: `Video nên tập trung vào cách mount source code, chạy task build hoặc test, và tái sử dụng trong CI/CD.`,
+        voice: `Phần cần xem kỹ là cách mount source code, chạy task build hoặc test, rồi tái sử dụng image này trong CI/CD.`,
         visual: "Sơ đồ local folder mount vào container.",
         headline_line1: "MOUNT CODE",
         headline_line2: "CHẠY BUILD/TEST",
@@ -673,7 +697,7 @@ function buildDockerScenes(target, info, classification) {
         btn_text: `$ ${pullCommand}`,
       }),
       baseScene({
-        voice: `Điểm cần nhắc là pin tag hoặc digest để pipeline không vỡ khi image latest thay đổi.`,
+        voice: `Điểm dễ bị bỏ qua là tag. Hãy pin version hoặc digest, vì chỉ một lần image latest thay đổi cũng có thể làm pipeline chạy khác đi.`,
         visual: "Tag pinning và digest.",
         headline_line1: "ĐỪNG DÙNG",
         headline_line2: "LATEST MỘT CÁCH MÙ QUÁNG",
@@ -685,11 +709,11 @@ function buildDockerScenes(target, info, classification) {
   return [
     baseScene({
       repo_url: target.namespace === "library" ? `hub.docker.com/_/${target.image}` : `hub.docker.com/r/${imageRef}`,
-      voice: `${imageRef} phù hợp với format container quick start. Image này dùng để chạy hoặc làm nền cho service: ${short(description, 110)}.`,
+      voice: `${imageRef} là một Docker image nên bắt đầu bằng cách rất thực dụng: image này chạy service gì, pull thế nào, map port ra sao, và có cần volume hay env không. ${short(description, 90)}.`,
       visual: "Chụp Docker Hub, tag và mô tả image.",
       headline_line1: target.image.toUpperCase(),
       headline_line2: "CONTAINER QUICK START",
-      sfx: "yeah_tre_con.mp3",
+      //sfx: "yeah_tre_con.mp3",
     }),
     baseScene({
       voice: `Bước đầu tiên là pull image và chọn tag rõ ràng. Nếu làm production, tránh phụ thuộc vào latest khi chưa kiểm soát version.`,
@@ -724,7 +748,7 @@ function buildDockerScenes(target, info, classification) {
       bento2_title: "Run",
       bento3_title: "Port",
       bento4_title: "Volume",
-      sfx: "yeah_tre_con.mp3",
+      //sfx: "yeah_tre_con.mp3",
     }),
   ];
 }
@@ -863,6 +887,28 @@ function buildWebScenes(target, webInfo, classification) {
   const sourceLabel = target.host.replace(/^www\./, "");
   const firstResult = webInfo.results[0]?.content || answer;
   const secondResult = webInfo.results[1]?.content || description;
+  const isDocs = classification.contentType === "web_docs";
+  const isTool = classification.contentType === "web_tool";
+  const isProduct = classification.contentType === "web_product_page";
+  const isArticle = classification.contentType === "web_article";
+  const angle = isDocs
+    ? "đây là tài liệu kỹ thuật, nên điều đáng xem nhất là phần nào giúp bạn dùng được ngay"
+    : isTool
+      ? "đây có vẻ là một công cụ cho developer, nên cần xem nó giải quyết vấn đề gì"
+      : isProduct
+        ? "đây giống một trang sản phẩm, nên cần tách phần giá trị thật khỏi câu chữ marketing"
+        : isArticle
+          ? "đây giống một bài viết kỹ thuật, nên nắm luận điểm chính trước khi đào sâu"
+          : "đây là một nguồn web mới, nên hiểu ý chính trước rồi mới tin hoặc áp dụng";
+  const practicalQuestion = isDocs
+    ? "nó hướng dẫn bạn làm gì, bước đầu tiên nằm ở đâu, và có điều kiện nào cần chú ý"
+    : isTool
+      ? "nó giúp tiết kiệm thời gian ở đâu, cách thử nhanh là gì, và giới hạn nằm ở chỗ nào"
+      : isProduct
+        ? "sản phẩm này dành cho ai, lợi ích chính là gì, và chi phí hoặc ràng buộc nằm ở đâu"
+        : isArticle
+          ? "bài viết đang lập luận điều gì, bằng chứng chính là gì, và phần nào cần đọc kỹ hơn"
+          : "trang này nói gì, mình dùng được gì, và phần nào cần kiểm chứng thêm";
 
   const formatLabel =
     classification.videoFormat === "web_docs_explainer"
@@ -878,15 +924,14 @@ function buildWebScenes(target, webInfo, classification) {
   return [
     baseScene({
       repo_url: target.url.replace(/^https?:\/\//, ""),
-      voice: `Link này không thuộc GitHub hay Docker, nên mình dùng luồng phân tích web. Trang ${sourceLabel} có nội dung chính là: ${short(title, 95)}.`,
+      voice: `Nếu bạn vừa lướt tới trang ${sourceLabel}, điều đầu tiên cần nắm là: ${short(title, 95)}. Đừng vội đọc từ đầu tới cuối; hãy xác định trang này có đáng dành thời gian không trước đã.`,
       visual: "Chụp trang nguồn, mở đầu bằng tiêu đề và domain để người xem hiểu đây là nguồn web.",
       headline_line1: short(title, 28).toUpperCase(),
       headline_line2: formatLabel,
-      sfx: "yeah_tre_con.mp3",
       assets: ["character shiba using a magnifying glass to look closely.png"],
     }),
     baseScene({
-      voice: `Tavily hoặc metadata trang cho thấy nội dung cốt lõi là: ${short(answer, 180)}. Đây là phần nên biến thành lời giải thích ngắn, không đọc nguyên văn trang web.`,
+      voice: `Cách đọc nhanh là nhìn vào mục đích của trang: ${angle}. Khi biết đúng góc nhìn, bạn sẽ không bị cuốn vào quá nhiều chi tiết phụ.`,
       visual: "Bento card tóm tắt nội dung chính, đối tượng xem và lý do đáng quan tâm.",
       headline_line1: "NỘI DUNG CHÍNH",
       headline_line2: "CẦN GIẢI THÍCH",
@@ -897,7 +942,7 @@ function buildWebScenes(target, webInfo, classification) {
       assets: ["character shiba explaining something.png"],
     }),
     baseScene({
-      voice: `Với loại link này, video nên trả lời ba câu hỏi: trang này nói về gì, người xem dùng được gì, và có điểm nào cần kiểm chứng trước khi tin hoặc áp dụng.`,
+      voice: `Ba câu hỏi nên giữ trong đầu là: ${practicalQuestion}. Nếu trả lời được ba câu này, bạn đã hiểu phần quan trọng nhất của trang.`,
       visual: "Ba thẻ câu hỏi: What, Why, Check.",
       headline_line1: "BA CÂU HỎI",
       headline_line2: "PHẢI TRẢ LỜI",
@@ -908,7 +953,7 @@ function buildWebScenes(target, webInfo, classification) {
       assets: ["character shiba thinking.png"],
     }),
     baseScene({
-      voice: `Các điểm phụ nên đưa vào scene giữa gồm: ${short(firstResult, 120)}. Nếu nguồn chưa đủ rõ, hãy nói là cần kiểm tra thêm thay vì khẳng định quá chắc.`,
+      voice: `Phần đáng chú ý nhất thường nằm ở ví dụ, quickstart, changelog hoặc checklist. Hãy tìm những đoạn có thể biến thành hành động cụ thể, thay vì chỉ đọc các câu giới thiệu.`,
       visual: "Checklist các điểm chính rút ra từ nội dung web.",
       headline_line1: "ĐIỂM ĐÁNG CHÚ Ý",
       headline_line2: "RÚT TỪ NGUỒN WEB",
@@ -919,7 +964,7 @@ function buildWebScenes(target, webInfo, classification) {
       assets: ["character shiba explaining something.png"],
     }),
     baseScene({
-      voice: `Nếu đây là docs hoặc sản phẩm, hãy đưa người xem tới hành động tiếp theo: đọc quickstart, thử demo, hoặc kiểm tra pricing, license và điều kiện sử dụng.`,
+      voice: `Bước tiếp theo phụ thuộc vào mục tiêu của bạn. Nếu đây là tài liệu, hãy đọc quickstart. Nếu là sản phẩm, hãy kiểm tra demo, pricing, license và điều kiện sử dụng.`,
       visual: "CTA theo loại nội dung: docs, demo, pricing, checklist.",
       headline_line1: "HÀNH ĐỘNG TIẾP",
       headline_line2: "TÙY THEO NGUỒN",
@@ -927,7 +972,7 @@ function buildWebScenes(target, webInfo, classification) {
       assets: ["character shiba developer.png"],
     }),
     baseScene({
-      voice: `Tóm lại, với link web không rõ ràng, format tốt nhất là tóm tắt ngữ cảnh, chỉ ra giá trị thực tế, rồi nhắc rõ phần nào cần kiểm chứng thêm từ nguồn chính.`,
+      voice: `Tóm lại, với một trang web mới, đừng vội tin toàn bộ chỉ sau vài dòng đầu. Hãy nắm ý chính, hiểu giá trị thực tế, rồi quay lại nguồn chính để kiểm chứng phần quan trọng.`,
       visual: "Outro với domain, các nguồn liên quan và CTA lưu link.",
       headline_line1: "LƯU LINK",
       headline_line2: "KIỂM CHỨNG TRƯỚC KHI DÙNG",
@@ -936,7 +981,6 @@ function buildWebScenes(target, webInfo, classification) {
       bento2_title: "Tóm tắt",
       bento3_title: "Kiểm chứng",
       bento4_title: "Áp dụng",
-      sfx: "yeah_tre_con.mp3",
       assets: ["character shiba smiling brightly.png"],
     }),
   ];
