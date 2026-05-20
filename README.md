@@ -4,10 +4,12 @@ Tài liệu này hướng dẫn chi tiết từng bước tạo video Review Git
 
 ---
 
-## ⚡Cách chạy cực nhanh 1: Giao Diện Đồ Họa (Web UI Dashboard) - MỚI
+## ⚡Cách chạy 1: Giao Diện Đồ Họa (Web UI Dashboard)
 
 Dự án giờ đây đã được trang bị một Web UI cực kỳ chuyên nghiệp giúp bạn tạo nhiều video cùng lúc với thao tác trực quan.
 
+![alt text](public/image.png)
+![alt text](public/image-2.png)
 1. Khởi động máy chủ UI:
    ```bash
    npm run start
@@ -20,7 +22,7 @@ Dự án giờ đây đã được trang bị một Web UI cực kỳ chuyên ng
 
 ---
 
-## ⚡Cách chạy cực nhanh 2: Luồng Tự Động Hóa Qua Terminal (CLI)
+## ⚡Cách chạy 2: Luồng Tự Động Hóa Qua Terminal (CLI)
 
 Nếu muốn tạo nhanh video review cho một URL bất kỳ từ terminal, bạn chỉ cần chạy một câu lệnh duy nhất:
 
@@ -32,25 +34,10 @@ node pipeline/run_pipeline.js <url_bất_kỳ>
 ```bash
 node pipeline/run_pipeline.js https://github.com/pnpm/pnpm
 node pipeline/run_pipeline.js https://hub.docker.com/_/nginx
-node pipeline/run_pipeline.js https://docs.heygen.com
+node pipeline/run_pipeline.js https://vitejs.dev
 ```
 
 ---
-
-## 🖥️ Cách xem giao diện UI Studio (Preview)
-
-Để xem trước (preview) dòng thời gian của video, nghe thử âm thanh, phụ đề karaoke và các chuyển động trực quan trên giao diện đồ họa Studio:
-
-![alt text](image-1.png)
-1. Khởi động máy chủ xem thử:
-   ```bash
-   npm run dev
-   ```
-2. Mở trình duyệt web và truy cập:
-   ```
-   http://localhost:3002
-   ```
-   *(Hoặc truy cập trực tiếp dự án tại: [http://localhost:3002#project/VNP_HyperFrames](http://localhost:3002#project/VNP_HyperFrames))*
 
 ### Sơ đồ hoạt động của Pipeline:
 
@@ -77,10 +64,44 @@ graph TD
     ```bash
     node pipeline/generate_repo_data.js https://github.com/pnpm/pnpm
     ```
-*   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic (không ghi đè) tại: `data/<tên_tự_động>_dd_mm_yyyy.json`
+*   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic (không ghi đè) với định dạng tên:
+    ```txt
+    data/<tên-video>-<DD>-<MM>-<YYYY>-<HH>-<mm>.json
+    ```
+    Ví dụ: `data/pnpm-20-05-2026-16-06.json`, `data/nginx-20-05-2026-16-06.json`
+
+#### Các template hiện có
+
+| Template | Nền tảng | Thư mục |
+|---|---|---|
+| `G1_github` | GitHub | `templates/G1_github/` |
+| `G2_docker` | Docker Hub | `templates/G2_docker/` |
+| `G3_web` | Web bất kỳ | `templates/G3_web/` |
+
+#### Các format video theo nền tảng
+
+**GitHub:**
+- `tool_review_quick_demo` — Repo dạng tool/app/CLI
+- `developer_integration_brief` — Repo dạng thư viện/framework
+- `knowledge_map_resource_digest` — Repo dạng awesome/curated list
+- `dataset_explainer` — Repo dạng dataset/benchmark
+- `repo_overview_with_use_cases` — Repo không xác định rõ
+
+**Docker:**
+- `container_quick_start` — Official/base image
+- `self_host_setup_guide` — Ứng dụng self-hosted
+- `dev_workflow_image_brief` — Dev/CI runtime
+- `container_overview` — Image không xác định rõ
+
+**Web:**
+- `web_docs_explainer` — Trang tài liệu
+- `web_tool_overview` — Trang tool/SDK
+- `web_article_digest` — Bài viết/phân tích
+- `web_product_brief` — Trang sản phẩm
+- `web_context_digest` — Web không xác định rõ
 
 > [!TIP]
-> **Tavily AI cho Web URL**: Với các link Web thông thường, hệ thống sẽ dùng Tavily để tóm tắt và phân loại nội dung chính xác. Hãy nhớ cấu hình API Key trong terminal trước khi chạy:
+> **Tavily AI cho Web URL**: Với các link Web thông thường, hệ thống sẽ dùng Tavily để tóm tắt và phân loại nội dung chính xác. Cấu hình trong file `.env` hoặc trong terminal:
 > `set TAVILY_API_KEY=your_api_key_here` (Windows) hoặc `export TAVILY_API_KEY=...` (Mac/Linux).
 
 ---

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HyperFrames Automated Video Generator</title>
+  <title>VNP HyperFrames</title>
   <style>
     :root {
       --bg: #0d1117;
@@ -395,7 +395,7 @@
     <!-- Left Sidebar -->
     <div class="sidebar">
       <div class="header">
-        <div class="title">VNPHyperFrames AI Video</div>
+        <div class="title">VNP HyperFrames AI Video</div>
         <div class="subtitle">Auto-generate premium tech videos from URLs</div>
       </div>
 
@@ -408,8 +408,7 @@
         </div>
 
         <button class="btn btn-add" onclick="addUrlInput()">+ Add More URL</button>
-        <button class="btn btn-generate" id="generateBtn" onclick="generateVideos()">G E N E R A T E &nbsp; V I D E O
-          S</button>
+        <button class="btn btn-generate" id="generateBtn" onclick="generateVideos()">Generate Video</button>
       </div>
 
       <div class="logs-section">
@@ -435,6 +434,7 @@
     const socket = io();
     let jobCounter = 1;
 
+
     function addUrlInput() {
       const list = document.getElementById('urlList');
       const item = document.createElement('div');
@@ -454,6 +454,8 @@
       logsEl.scrollTop = logsEl.scrollHeight;
     }
 
+    let activeJobs = 0;
+
     async function generateVideos() {
       const inputs = document.querySelectorAll('.url-input');
       const urls = Array.from(inputs).map(inp => inp.value.trim()).filter(val => val !== "");
@@ -465,7 +467,7 @@
 
       const btn = document.getElementById('generateBtn');
       btn.disabled = true;
-      btn.innerText = "S T A R T I N G ...";
+      btn.innerText = "Starting...";
 
       try {
         const res = await fetch('/api/generate', {
@@ -476,25 +478,20 @@
         const data = await res.json();
 
         if (data.success) {
+          activeJobs += data.jobs.length;
           data.jobs.forEach(job => {
             job.name = `Video ${jobCounter++}`;
             createJobCard(job);
           });
-          // Clear inputs
-          document.getElementById('urlList').innerHTML = `
-            <div class="url-item">
-              <input type="text" class="url-input" placeholder="e.g., https://github.com/heygen-com/hyperframes" />
-              <button class="btn btn-remove" onclick="this.parentElement.remove()">×</button>
-            </div>
-          `;
+          // Do NOT clear inputs - keep URLs visible
           appendLog(`\n[SYSTEM] Queued ${data.jobs.length} new jobs.\n`);
+          btn.innerText = `Running... (${activeJobs} active)`;
         }
       } catch (err) {
         alert("Lỗi khi kết nối đến server");
         appendLog(`\n[SYSTEM ERROR] Failed to connect to server.\n`);
-      } finally {
         btn.disabled = false;
-        btn.innerText = "G E N E R A T E   V I D E O S";
+        btn.innerText = "Generate Video";
       }
     }
 
@@ -509,8 +506,7 @@
         <div class="job-status status-queued" id="status-${job.id}">Queued</div>
         
         <div class="job-video" id="video-container-${job.id}">
-          <video id="video-${job.id}" controls playsinline></video>
-          <button class="video-overlay-btn" onclick="document.getElementById('video-${job.id}').play()">Play</button>
+          <video id="video-${job.id}" controls playsinline preload="metadata"></video>
         </div>
       `;
       grid.appendChild(card);
@@ -528,7 +524,6 @@
     socket.on("job_output", ({ id, text }) => {
       appendLog(text);
     });
-
     socket.on("job_done", ({ id, videoPath }) => {
       const statusEl = document.getElementById(`status-${id}`);
       if (statusEl) {
@@ -539,10 +534,24 @@
       if (videoPath) {
         const videoContainer = document.getElementById(`video-container-${id}`);
         const videoEl = document.getElementById(`video-${id}`);
+
+        console.log('[job_done] videoPath:', videoPath);
         videoContainer.style.display = 'block';
-        videoEl.src = videoPath;
+        videoEl.setAttribute('src', videoPath);
+        videoEl.load();
       }
-      appendLog(`\n[SUCCESS] Job completed successfully.\n`);
+      appendLog(`\n[SUCCESS] Job completed. Video: ${videoPath || 'path not found'}\n`);
+
+      // Re-enable button when all jobs done
+      activeJobs = Math.max(0, activeJobs - 1);
+      if (activeJobs === 0) {
+        const btn = document.getElementById('generateBtn');
+        btn.disabled = false;
+        btn.innerText = 'Generate Video';
+      } else {
+        const btn = document.getElementById('generateBtn');
+        btn.innerText = `Running... (${activeJobs} active)`;
+      }
     });
 
     socket.on("job_error", ({ id, error }) => {
@@ -552,6 +561,17 @@
         statusEl.innerText = 'Error';
       }
       appendLog(`\n[ERROR] ${error}\n`);
+
+      // Re-enable button even on error
+      activeJobs = Math.max(0, activeJobs - 1);
+      if (activeJobs === 0) {
+        const btn = document.getElementById('generateBtn');
+        btn.disabled = false;
+        btn.innerText = 'Generate Video';
+      } else {
+        const btn = document.getElementById('generateBtn');
+        btn.innerText = `Running... (${activeJobs} active)`;
+      }
     });
   </script>
 </body>

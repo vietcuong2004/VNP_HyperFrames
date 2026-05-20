@@ -13,9 +13,11 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+const ROOT_DIR = process.cwd();
+
 app.use(express.json());
-app.use(express.static("public"));
-app.use("/renders", express.static("renders"));
+app.use(express.static(path.join(ROOT_DIR, "public")));
+app.use("/renders", express.static(path.join(ROOT_DIR, "renders")));
 
 // Queue for sequential processing
 const jobQueue = [];
@@ -40,10 +42,16 @@ async function processQueue() {
     fullOutput += text;
     io.emit("job_output", { id, text });
 
-    // Parse video path
-    const match = text.match(/◇\s+(.*\.mp4)/);
-    if (match) {
-      videoPath = match[1].trim();
+    // Parse renamed video path from run_pipeline output
+    // Matches: ✅ Video đã đổi tên: old.mp4 → new.mp4
+    const renameMatch = text.match(/→\s+([\w\-\.]+\.mp4)/);
+    if (renameMatch) {
+      videoPath = path.join(ROOT_DIR, "renders", renameMatch[1].trim());
+    }
+    // Also match hyperframes output: ◇ path/to/file.mp4
+    const hfMatch = text.match(/◇\s+(.*\.mp4)/);
+    if (hfMatch) {
+      videoPath = hfMatch[1].trim();
     }
   });
 
@@ -54,17 +62,16 @@ async function processQueue() {
 
   child.on("close", (code) => {
     if (code === 0) {
-      // Find the most recently created mp4 in renders folder as a fallback
+      // Fallback: find most recently modified mp4
       if (!videoPath) {
-        const rendersDir = path.join(process.cwd(), "renders");
+        const rendersDir = path.join(ROOT_DIR, "renders");
         if (fs.existsSync(rendersDir)) {
           const files = fs.readdirSync(rendersDir).filter(f => f.endsWith(".mp4"));
           if (files.length > 0) {
-            // Sort by modified time
-            files.sort((a, b) => {
-              return fs.statSync(path.join(rendersDir, b)).mtime.getTime() - 
-                     fs.statSync(path.join(rendersDir, a)).mtime.getTime();
-            });
+            files.sort((a, b) =>
+              fs.statSync(path.join(rendersDir, b)).mtime.getTime() -
+              fs.statSync(path.join(rendersDir, a)).mtime.getTime()
+            );
             videoPath = path.join(rendersDir, files[0]);
           }
         }
@@ -72,8 +79,9 @@ async function processQueue() {
 
       let relativeVideoPath = null;
       if (videoPath) {
-        // convert to relative path for web
-        relativeVideoPath = "/renders/" + path.basename(videoPath);
+        const basename = path.basename(videoPath);
+        relativeVideoPath = "/renders/" + basename;
+        console.log(`[job_done] videoPath: ${videoPath} → serving: ${relativeVideoPath}`);
       }
       io.emit("job_done", { id, videoPath: relativeVideoPath });
     } else {
@@ -100,6 +108,18 @@ app.post("/api/generate", (req, res) => {
   processQueue();
 
   res.json({ success: true, jobs });
+});
+
+app.get("/api/recent-videos", (req, res) => {
+  const rendersDir = path.join(ROOT_DIR, "renders");
+  if (!fs.existsSync(rendersDir)) return res.json([]);
+  const files = fs.readdirSync(rendersDir)
+    .filter(f => f.endsWith(".mp4"))
+    .map(f => ({ name: f, mtime: fs.statSync(path.join(rendersDir, f)).mtimeMs }))
+    .sort((a, b) => b.mtime - a.mtime)
+    .slice(0, 2)
+    .map(f => ({ name: f.name, url: "/renders/" + f.name }));
+  res.json(files);
 });
 
 const PORT = 3001;
