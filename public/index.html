@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNP HyperFrames</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: rgba(22, 27, 34, 0.7);
+      --border: rgba(255, 255, 255, 0.1);
+      --neon-yellow: #fdf01c;
+      --neon-green: #00ff88;
+      --neon-blue: #00d2ff;
+      --neon-red: #ff4757;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      overflow: hidden;
+      background-image:
+        radial-gradient(circle at 15% 50%, rgba(253, 240, 28, 0.05), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(0, 210, 255, 0.05), transparent 25%);
+    }
+
+    .app-layout {
+      display: flex;
+      height: 100vh;
+      padding: 20px;
+      gap: 30px;
+    }
+
+    /* Left Sidebar */
+    .sidebar {
+      width: 450px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 100%;
+    }
+
+    .header {
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #fff, var(--neon-yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .input-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 25px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
+    }
+
+    .url-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .url-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      animation: slideIn 0.2s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .url-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .url-input:focus {
+      border-color: var(--neon-yellow);
+      box-shadow: 0 0 10px rgba(253, 240, 28, 0.2);
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .btn-remove {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 71, 87, 0.1);
+      color: var(--neon-red);
+      border: 1px solid rgba(255, 71, 87, 0.3);
+      font-size: 20px;
+    }
+
+    .btn-remove:hover {
+      background: rgba(255, 71, 87, 0.2);
+    }
+
+    .btn-add {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px dashed var(--border);
+      padding: 14px 20px;
+      width: 100%;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .btn-add:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--text-muted);
+    }
+
+    .btn-generate {
+      background: var(--neon-yellow);
+      color: #000;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(253, 240, 28, 0.3);
+    }
+
+    .btn-generate:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 25px rgba(253, 240, 28, 0.5);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .logs-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      /* Takes remaining height */
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+
+    .logs-section h3 {
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .global-logs {
+      flex: 1;
+      background: #000;
+      border-radius: 12px;
+      padding: 15px;
+      font-family: 'Consolas', monospace;
+      font-size: 12px;
+      color: #a5d6ff;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      border: 1px solid #30363d;
+    }
+
+    /* Right Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      overflow-y: auto;
+      backdrop-filter: blur(20px);
+    }
+
+    .content-header {
+      margin-bottom: 25px;
+    }
+
+    .content-header h3 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .job-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      aspect-ratio: 9/16;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      animation: scaleIn 0.3s ease-out;
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .job-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .job-url {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      word-break: break-all;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .job-status {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .status-queued {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .status-processing {
+      background: rgba(0, 210, 255, 0.15);
+      color: var(--neon-blue);
+      border: 1px solid var(--neon-blue);
+    }
+
+    .status-done {
+      background: rgba(0, 255, 136, 0.15);
+      color: var(--neon-green);
+      border: 1px solid var(--neon-green);
+    }
+
+    .status-error {
+      background: rgba(255, 71, 87, 0.15);
+      color: var(--neon-red);
+      border: 1px solid var(--neon-red);
+    }
+
+    .job-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: none;
+      z-index: 10;
+    }
+
+    .job-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay-btn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      z-index: 15;
+    }
+
+    .video-overlay-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-layout">
+
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <div class="header">
+        <div class="title">VNP HyperFrames AI Video</div>
+        <div class="subtitle">Auto-generate premium tech videos from URLs</div>
+      </div>
+
+      <div class="input-section">
+        <div class="url-list" id="urlList">
+          <div class="url-item">
+            <input type="text" class="url-input" placeholder="e.g., https://github.com/heygen-com/hyperframes" />
+            <button class="btn btn-remove" onclick="this.parentElement.remove()">×</button>
+          </div>
+        </div>
+
+        <button class="btn btn-add" onclick="addUrlInput()">+ Add More URL</button>
+        <button class="btn btn-generate" id="generateBtn" onclick="generateVideos()">Generate Video</button>
+      </div>
+
+      <div class="logs-section">
+        <h3>System Logs</h3>
+        <div class="global-logs" id="globalLogs">Ready...</div>
+      </div>
+    </div>
+
+    <!-- Right Main Content -->
+    <div class="main-content">
+      <div class="content-header">
+        <h3>Video Render Queue</h3>
+      </div>
+      <div class="jobs-grid" id="jobsGrid">
+        <!-- Job cards will be injected here -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    let jobCounter = 1;
+
+
+    function addUrlInput() {
+      const list = document.getElementById('urlList');
+      const item = document.createElement('div');
+      item.className = 'url-item';
+      item.innerHTML = `
+        <input type="text" class="url-input" placeholder="Enter URL..." />
+        <button class="btn btn-remove" onclick="this.parentElement.remove()">×</button>
+      `;
+      list.appendChild(item);
+    }
+
+    function appendLog(text) {
+      const logsEl = document.getElementById('globalLogs');
+      // If it's the first log, clear "Ready..."
+      if (logsEl.innerText === 'Ready...') logsEl.innerText = '';
+      logsEl.innerText += text;
+      logsEl.scrollTop = logsEl.scrollHeight;
+    }
+
+    let activeJobs = 0;
+
+    async function generateVideos() {
+      const inputs = document.querySelectorAll('.url-input');
+      const urls = Array.from(inputs).map(inp => inp.value.trim()).filter(val => val !== "");
+
+      if (urls.length === 0) {
+        alert("Vui lòng nhập ít nhất 1 URL.");
+        return;
+      }
+
+      const btn = document.getElementById('generateBtn');
+      btn.disabled = true;
+      btn.innerText = "Starting...";
+
+      try {
+        const res = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ urls })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          activeJobs += data.jobs.length;
+          data.jobs.forEach(job => {
+            job.name = `Video ${jobCounter++}`;
+            createJobCard(job);
+          });
+          // Do NOT clear inputs - keep URLs visible
+          appendLog(`\n[SYSTEM] Queued ${data.jobs.length} new jobs.\n`);
+          btn.innerText = `Running... (${activeJobs} active)`;
+        }
+      } catch (err) {
+        alert("Lỗi khi kết nối đến server");
+        appendLog(`\n[SYSTEM ERROR] Failed to connect to server.\n`);
+        btn.disabled = false;
+        btn.innerText = "Generate Video";
+      }
+    }
+
+    function createJobCard(job) {
+      const grid = document.getElementById('jobsGrid');
+      const card = document.createElement('div');
+      card.className = 'job-card';
+      card.id = `job-${job.id}`;
+      card.innerHTML = `
+        <h4 style="color: #fff; margin-bottom: 5px; font-size: 18px;">${job.name}</h4>
+        <div class="job-url">${job.url}</div>
+        <div class="job-status status-queued" id="status-${job.id}">Queued</div>
+        
+        <div class="job-video" id="video-container-${job.id}">
+          <video id="video-${job.id}" controls playsinline preload="metadata"></video>
+        </div>
+      `;
+      grid.appendChild(card);
+    }
+
+    socket.on("job_start", ({ id, url }) => {
+      const statusEl = document.getElementById(`status-${id}`);
+      if (statusEl) {
+        statusEl.className = 'job-status status-processing';
+        statusEl.innerText = 'Processing';
+      }
+      appendLog(`\n================================\n[STARTING] ${url}\n================================\n`);
+    });
+
+    socket.on("job_output", ({ id, text }) => {
+      appendLog(text);
+    });
+    socket.on("job_done", ({ id, videoPath }) => {
+      const statusEl = document.getElementById(`status-${id}`);
+      if (statusEl) {
+        statusEl.className = 'job-status status-done';
+        statusEl.innerText = 'Done';
+      }
+
+      if (videoPath) {
+        const videoContainer = document.getElementById(`video-container-${id}`);
+        const videoEl = document.getElementById(`video-${id}`);
+
+        console.log('[job_done] videoPath:', videoPath);
+        videoContainer.style.display = 'block';
+        videoEl.setAttribute('src', videoPath);
+        videoEl.load();
+      }
+      appendLog(`\n[SUCCESS] Job completed. Video: ${videoPath || 'path not found'}\n`);
+
+      // Re-enable button when all jobs done
+      activeJobs = Math.max(0, activeJobs - 1);
+      if (activeJobs === 0) {
+        const btn = document.getElementById('generateBtn');
+        btn.disabled = false;
+        btn.innerText = 'Generate Video';
+      } else {
+        const btn = document.getElementById('generateBtn');
+        btn.innerText = `Running... (${activeJobs} active)`;
+      }
+    });
+
+    socket.on("job_error", ({ id, error }) => {
+      const statusEl = document.getElementById(`status-${id}`);
+      if (statusEl) {
+        statusEl.className = 'job-status status-error';
+        statusEl.innerText = 'Error';
+      }
+      appendLog(`\n[ERROR] ${error}\n`);
+
+      // Re-enable button even on error
+      activeJobs = Math.max(0, activeJobs - 1);
+      if (activeJobs === 0) {
+        const btn = document.getElementById('generateBtn');
+        btn.disabled = false;
+        btn.innerText = 'Generate Video';
+      } else {
+        const btn = document.getElementById('generateBtn');
+        btn.innerText = `Running... (${activeJobs} active)`;
+      }
+    });
+  </script>
+</body>
+
+</html>

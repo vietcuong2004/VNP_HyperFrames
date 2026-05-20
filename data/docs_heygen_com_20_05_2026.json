@@ -26,7 +26,7 @@
       "headline_line2": "DOCS EXPLAINER",
       "audio_start": 0.5,
       "audio_duration": 18.1,
-      "audio_path": "assets/audio/github-review_scene_1.wav",
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_1.wav",
       "transcript": [
         {
           "text": "Nếu",
@@ -215,7 +215,7 @@
       "bento3_title": "Context",
       "audio_start": 19.8,
       "audio_duration": 14.86,
-      "audio_path": "assets/audio/github-review_scene_2.wav",
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_2.wav",
       "transcript": [
         {
           "text": "Cách",
@@ -459,7 +459,7 @@
       "bento4_title": "Next",
       "audio_start": 35.85,
       "audio_duration": 14.9,
-      "audio_path": "assets/audio/github-review_scene_3.wav",
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_3.wav",
       "transcript": [
         {
           "text": "Ba",
@@ -698,7 +698,7 @@
       "bento3_title": "Limit",
       "audio_start": 51.96,
       "audio_duration": 12.22,
-      "audio_path": "assets/audio/github-review_scene_4.wav",
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_4.wav",
       "transcript": [
         {
           "text": "Phần",
@@ -884,7 +884,7 @@
       "btn_text": "Đọc quickstart trước",
       "audio_start": 65.37,
       "audio_duration": 13.2,
-      "audio_path": "assets/audio/github-review_scene_5.wav",
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_5.wav",
       "transcript": [
         {
           "text": "Bước",
@@ -1069,7 +1069,7 @@
       "bento4_title": "Áp dụng",
       "audio_start": 79.77,
       "audio_duration": 13.75,
-      "audio_path": "assets/audio/github-review_scene_6.wav",
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_6.wav",
       "transcript": [
         {
           "text": "Tóm",

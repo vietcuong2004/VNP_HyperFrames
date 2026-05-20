@@ -51,7 +51,7 @@ Nhiệm vụ:
 
 ### Quy tắc đặt tên file JSON
 
-File JSON được đặt tên theo định dạng:
+Nội dung để gen video sẽ lưu vào file JSON được đặt tên theo định dạng:
 
 ```txt
 data/<tên-video>-<DD>-<MM>-<YYYY>-<HH>-<mm>.json
