@@ -4,11 +4,13 @@ const targetUrl = process.argv[2];
 const isWindows = process.platform === "win32";
 const npxBin = isWindows ? "npx.cmd" : "npx";
 const npmBin = isWindows ? "npm.cmd" : "npm";
+const pythonBin = isWindows ? "py" : "python3";
 
 if (!targetUrl) {
-  console.error("Lỗi: Vui lòng cung cấp link GitHub repo hoặc Docker image URL.");
+  console.error("Lỗi: Vui lòng cung cấp URL cần tạo video.");
   console.error("Ví dụ GitHub: node run_pipeline.js https://github.com/heygen-com/hyperframes");
   console.error("Ví dụ Docker: node run_pipeline.js https://hub.docker.com/_/nginx");
+  console.error("Ví dụ web: node run_pipeline.js https://example.com/some-tech-article");
   process.exit(1);
 }
 
@@ -29,7 +31,7 @@ try {
   run("node", ["capture_github.js", targetUrl]);
 
   console.log("\nStep 3: Tạo giọng đọc AI (TTS) và mốc thời gian phụ đề...");
-  run("python", ["gen_assets.py", "data/github-review.json"]);
+  run(pythonBin, ["gen_assets.py", "data/github-review.json"]);
 
   console.log("\nStep 4: Biên dịch kịch bản sang HTML composition...");
   run("node", ["generate.mjs", "data/github-review.json"]);

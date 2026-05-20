@@ -23,6 +23,44 @@ function requestText(url, headers = {}) {
   });
 }
 
+function requestJsonPost(url, payload, headers = {}) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify(payload);
+    const target = new URL(url);
+    const req = https.request(
+      {
+        method: "POST",
+        hostname: target.hostname,
+        path: `${target.pathname}${target.search}`,
+        headers: {
+          "User-Agent": USER_AGENT,
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(body),
+          ...headers,
+        },
+      },
+      (res) => {
+        let data = "";
+        res.on("data", (chunk) => (data += chunk));
+        res.on("end", () => {
+          if (res.statusCode >= 400) {
+            reject(new Error(`HTTP ${res.statusCode} khi gọi ${url}: ${data.slice(0, 180)}`));
+            return;
+          }
+          try {
+            resolve(JSON.parse(data));
+          } catch (err) {
+            reject(err);
+          }
+        });
+      },
+    );
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
+}
+
 async function fetchJson(url, headers = {}) {
   const text = await requestText(url, headers);
   return JSON.parse(text);
@@ -73,7 +111,12 @@ function parseTargetUrl(value) {
     }
   }
 
-  throw new Error("Hiện tại chỉ hỗ trợ link GitHub repo hoặc Docker Hub/Docker.io image.");
+  return {
+    platform: "web",
+    url: url.toString(),
+    host,
+    pathname: url.pathname,
+  };
 }
 
 function parseDockerPath(host, parts) {
@@ -117,6 +160,61 @@ function countMarkdownLinks(readme) {
 function hasAny(text, words) {
   const lower = text.toLowerCase();
   return words.some((word) => lower.includes(word));
+}
+
+function getTitleFromHtml(html) {
+  const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  return match ? stripMarkdown(match[1]).replace(/\s+/g, " ").trim() : "";
+}
+
+function getMetaDescriptionFromHtml(html) {
+  const match =
+    html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i) ||
+    html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']description["']/i) ||
+    html.match(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i);
+  return match ? stripMarkdown(match[1]).replace(/\s+/g, " ").trim() : "";
+}
+
+function classifyWebContent({ title, description, answer, results, host }) {
+  const text = `${title} ${description} ${answer} ${results.map((item) => `${item.title || ""} ${item.content || ""}`).join(" ")}`.toLowerCase();
+
+  if (hasAny(text, ["documentation", "docs", "api reference", "guide", "quickstart", "tutorial"])) {
+    return {
+      contentType: "web_docs",
+      videoFormat: "web_docs_explainer",
+      reason: "Trang có tín hiệu là tài liệu kỹ thuật hoặc hướng dẫn sử dụng.",
+    };
+  }
+
+  if (hasAny(text, ["github", "open source", "developer tool", "sdk", "api", "cli", "framework", "library"])) {
+    return {
+      contentType: "web_tool",
+      videoFormat: "web_tool_overview",
+      reason: "Trang có tín hiệu là tool, SDK, API hoặc sản phẩm cho developer.",
+    };
+  }
+
+  if (hasAny(text, ["blog", "article", "post", "explained", "deep dive", "case study", "announcement"])) {
+    return {
+      contentType: "web_article",
+      videoFormat: "web_article_digest",
+      reason: "Trang có tín hiệu là bài viết hoặc nội dung phân tích.",
+    };
+  }
+
+  if (hasAny(text, ["pricing", "customers", "product", "platform", "solution", "features"])) {
+    return {
+      contentType: "web_product_page",
+      videoFormat: "web_product_brief",
+      reason: "Trang có tín hiệu là landing page sản phẩm hoặc nền tảng.",
+    };
+  }
+
+  return {
+    contentType: "web_unknown",
+    videoFormat: "web_context_digest",
+    reason: `Không đủ tín hiệu từ ${host}, dùng format tóm tắt ngữ cảnh web.`,
+  };
 }
 
 function classifyGithubRepo(repoData, readme, rootFiles) {
@@ -711,6 +809,191 @@ async function buildDockerData(target) {
   };
 }
 
+async function analyzeUrlWithTavily(target) {
+  const apiKey = process.env.TAVILY_API_KEY;
+  if (!apiKey) {
+    console.warn("Không có TAVILY_API_KEY, fallback sang title/meta HTML của URL.");
+    return null;
+  }
+
+  const query = [
+    "Analyze this URL for a short Vietnamese technology explainer video.",
+    "Identify what the page is about, the target audience, key points, and how the video should be structured.",
+    target.url,
+  ].join(" ");
+
+  return await requestJsonPost("https://api.tavily.com/search", {
+    api_key: apiKey,
+    query,
+    search_depth: "advanced",
+    include_answer: true,
+    include_raw_content: false,
+    max_results: 5,
+  });
+}
+
+function summarizeTavilyResults(tavilyData) {
+  if (!tavilyData) return [];
+  return Array.isArray(tavilyData.results)
+    ? tavilyData.results
+        .map((item) => ({
+          title: item.title || "",
+          url: item.url || "",
+          content: item.content || "",
+          score: item.score || 0,
+        }))
+        .filter((item) => item.title || item.content)
+        .slice(0, 5)
+    : [];
+}
+
+function pickWebTitle(target, html, results) {
+  const htmlTitle = getTitleFromHtml(html);
+  if (htmlTitle) return htmlTitle;
+  const firstResultTitle = results.find((item) => item.title)?.title;
+  if (firstResultTitle) return firstResultTitle;
+  return target.host;
+}
+
+function buildWebScenes(target, webInfo, classification) {
+  const title = webInfo.title || target.host;
+  const description = webInfo.description || webInfo.answer || "một trang công nghệ cần được phân tích thêm";
+  const answer = webInfo.answer || description;
+  const resultTitles = webInfo.results.map((item) => item.title).filter(Boolean);
+  const sourceLabel = target.host.replace(/^www\./, "");
+  const firstResult = webInfo.results[0]?.content || answer;
+  const secondResult = webInfo.results[1]?.content || description;
+
+  const formatLabel =
+    classification.videoFormat === "web_docs_explainer"
+      ? "DOCS EXPLAINER"
+      : classification.videoFormat === "web_tool_overview"
+        ? "WEB TOOL OVERVIEW"
+        : classification.videoFormat === "web_product_brief"
+          ? "PRODUCT BRIEF"
+          : classification.videoFormat === "web_article_digest"
+            ? "ARTICLE DIGEST"
+            : "WEB CONTEXT DIGEST";
+
+  return [
+    baseScene({
+      repo_url: target.url.replace(/^https?:\/\//, ""),
+      voice: `Link này không thuộc GitHub hay Docker, nên mình dùng luồng phân tích web. Trang ${sourceLabel} có nội dung chính là: ${short(title, 95)}.`,
+      visual: "Chụp trang nguồn, mở đầu bằng tiêu đề và domain để người xem hiểu đây là nguồn web.",
+      headline_line1: short(title, 28).toUpperCase(),
+      headline_line2: formatLabel,
+      sfx: "yeah_tre_con.mp3",
+      assets: ["character shiba using a magnifying glass to look closely.png"],
+    }),
+    baseScene({
+      voice: `Tavily hoặc metadata trang cho thấy nội dung cốt lõi là: ${short(answer, 180)}. Đây là phần nên biến thành lời giải thích ngắn, không đọc nguyên văn trang web.`,
+      visual: "Bento card tóm tắt nội dung chính, đối tượng xem và lý do đáng quan tâm.",
+      headline_line1: "NỘI DUNG CHÍNH",
+      headline_line2: "CẦN GIẢI THÍCH",
+      bento1_title: "Tóm tắt",
+      bento1_desc: short(answer, 86),
+      bento2_title: "Audience",
+      bento3_title: "Context",
+      assets: ["character shiba explaining something.png"],
+    }),
+    baseScene({
+      voice: `Với loại link này, video nên trả lời ba câu hỏi: trang này nói về gì, người xem dùng được gì, và có điểm nào cần kiểm chứng trước khi tin hoặc áp dụng.`,
+      visual: "Ba thẻ câu hỏi: What, Why, Check.",
+      headline_line1: "BA CÂU HỎI",
+      headline_line2: "PHẢI TRẢ LỜI",
+      bento1_title: "What",
+      bento2_title: "Why",
+      bento3_title: "Check",
+      bento4_title: "Next",
+      assets: ["character shiba thinking.png"],
+    }),
+    baseScene({
+      voice: `Các điểm phụ nên đưa vào scene giữa gồm: ${short(firstResult, 120)}. Nếu nguồn chưa đủ rõ, hãy nói là cần kiểm tra thêm thay vì khẳng định quá chắc.`,
+      visual: "Checklist các điểm chính rút ra từ nội dung web.",
+      headline_line1: "ĐIỂM ĐÁNG CHÚ Ý",
+      headline_line2: "RÚT TỪ NGUỒN WEB",
+      bento1_title: "Key point",
+      bento1_desc: short(firstResult, 80),
+      bento2_title: "Evidence",
+      bento3_title: "Limit",
+      assets: ["character shiba explaining something.png"],
+    }),
+    baseScene({
+      voice: `Nếu đây là docs hoặc sản phẩm, hãy đưa người xem tới hành động tiếp theo: đọc quickstart, thử demo, hoặc kiểm tra pricing, license và điều kiện sử dụng.`,
+      visual: "CTA theo loại nội dung: docs, demo, pricing, checklist.",
+      headline_line1: "HÀNH ĐỘNG TIẾP",
+      headline_line2: "TÙY THEO NGUỒN",
+      btn_text: classification.contentType === "web_docs" ? "Đọc quickstart trước" : "Mở nguồn và kiểm chứng",
+      assets: ["character shiba developer.png"],
+    }),
+    baseScene({
+      voice: `Tóm lại, với link web không rõ ràng, format tốt nhất là tóm tắt ngữ cảnh, chỉ ra giá trị thực tế, rồi nhắc rõ phần nào cần kiểm chứng thêm từ nguồn chính.`,
+      visual: "Outro với domain, các nguồn liên quan và CTA lưu link.",
+      headline_line1: "LƯU LINK",
+      headline_line2: "KIỂM CHỨNG TRƯỚC KHI DÙNG",
+      bento1_title: "Nguồn chính",
+      bento1_desc: short(resultTitles.join(", ") || secondResult, 86),
+      bento2_title: "Tóm tắt",
+      bento3_title: "Kiểm chứng",
+      bento4_title: "Áp dụng",
+      sfx: "yeah_tre_con.mp3",
+      assets: ["character shiba smiling brightly.png"],
+    }),
+  ];
+}
+
+async function buildWebData(target) {
+  console.log(`Đang phân tích web URL: ${target.url}`);
+
+  const html = await fetchOptionalText(target.url, "");
+  let tavilyData = null;
+  try {
+    tavilyData = await analyzeUrlWithTavily(target);
+  } catch (err) {
+    console.warn(`Không phân tích được bằng Tavily: ${err.message}`);
+  }
+
+  const results = summarizeTavilyResults(tavilyData);
+  const title = pickWebTitle(target, html, results);
+  const description = getMetaDescriptionFromHtml(html) || results[0]?.content || "";
+  const answer = tavilyData?.answer || description || title;
+  const classification = classifyWebContent({
+    title,
+    description,
+    answer,
+    results,
+    host: target.host,
+  });
+  const scenes = buildWebScenes(
+    target,
+    {
+      title,
+      description,
+      answer,
+      results,
+    },
+    classification,
+  );
+
+  return {
+    template: "news",
+    source_url: target.url,
+    platform: "web",
+    content_type: classification.contentType,
+    video_format: classification.videoFormat,
+    classification_reason: classification.reason,
+    visual_theme: "web",
+    metadata: {
+      host: target.host,
+      title,
+      description,
+      tavily_used: Boolean(tavilyData),
+      tavily_results: results,
+    },
+    scenes,
+  };
+}
+
 async function main() {
   const urlArg = process.argv[2];
   if (!urlArg) {
@@ -721,7 +1004,14 @@ async function main() {
   }
 
   const target = parseTargetUrl(urlArg);
-  const data = target.platform === "github" ? await buildGithubData(target) : await buildDockerData(target);
+  let data;
+  if (target.platform === "github") {
+    data = await buildGithubData(target);
+  } else if (target.platform === "docker") {
+    data = await buildDockerData(target);
+  } else {
+    data = await buildWebData(target);
+  }
 
   const outputDir = path.join(process.cwd(), "data");
   if (!fs.existsSync(outputDir)) {

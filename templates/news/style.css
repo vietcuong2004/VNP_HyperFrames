@@ -3,6 +3,37 @@
 body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Plus Jakarta Sans", "Space Grotesk", "Inter", sans-serif; }
 .bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a1a0d 0%, #050505 80%); }
 
+.source-web .bg {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(0, 210, 255, 0.22) 0%, rgba(0, 210, 255, 0) 34%),
+    radial-gradient(circle at 82% 30%, rgba(253, 240, 28, 0.18) 0%, rgba(253, 240, 28, 0) 32%),
+    linear-gradient(180deg, #071017 0%, #050505 78%);
+}
+
+.source-web .headline-line2 {
+  background: linear-gradient(90deg, #00d2ff, #fdf01c, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.source-web .browser-frame {
+  border-color: rgba(0, 210, 255, 0.24);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 55px rgba(0, 210, 255, 0.18);
+}
+
+.source-web .browser-header {
+  background: #0b1720;
+}
+
+.source-web .action-btn {
+  border-color: rgba(0, 210, 255, 0.35);
+  background: rgba(0, 210, 255, 0.06);
+}
+
+.source-web .captions {
+  border-color: rgba(0, 210, 255, 0.28);
+}
+
 /* Animated Star Particles */
 .particles-container { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .particle-star { position: absolute; border-radius: 50%; opacity: 0.6; }

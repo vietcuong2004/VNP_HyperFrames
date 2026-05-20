@@ -41,7 +41,9 @@ Nhiệm vụ:
 
 - Nhận URL đầu vào.
 - Xác định nền tảng: GitHub hoặc Docker.
+- Nếu không phải GitHub/Docker, chuyển sang luồng `web`.
 - Gọi API nguồn nếu có thể.
+- Với URL web không rõ ràng, gọi Tavily nếu có `TAVILY_API_KEY`.
 - Lấy metadata cơ bản.
 - Phân loại nội dung.
 - Chọn `video_format`.
@@ -65,6 +67,45 @@ Các format Docker hiện có:
 - `self_host_setup_guide`
 - `dev_workflow_image_brief`
 - `container_overview`
+
+Các format web không rõ ràng hiện có:
+
+- `web_docs_explainer`
+- `web_tool_overview`
+- `web_article_digest`
+- `web_product_brief`
+- `web_context_digest`
+
+## Tavily cho URL không rõ ràng
+
+Tavily chỉ được dùng cho URL không thuộc GitHub/Docker. Điều này giúp giữ luồng GitHub/Docker ổn định và deterministic hơn.
+
+Thiết lập key:
+
+```bash
+set TAVILY_API_KEY=your_api_key_here
+```
+
+Hoặc trong PowerShell:
+
+```powershell
+$env:TAVILY_API_KEY="your_api_key_here"
+```
+
+Khi có key, pipeline sẽ gọi Tavily để lấy:
+
+- Tóm tắt nội dung chính.
+- Các nguồn/kết quả liên quan.
+- Ngữ cảnh giúp chọn format video.
+- Gợi ý điểm cần đưa vào scene.
+
+Khi không có key, pipeline fallback sang:
+
+- `<title>` của trang.
+- Meta description.
+- Ảnh chụp trực tiếp bằng Puppeteer.
+
+Không nên dùng Tavily để thay thế GitHub API hoặc Docker Hub API khi link đã rõ nền tảng.
 
 ## Bước 2: Chụp ảnh trang nguồn
 

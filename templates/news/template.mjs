@@ -2,6 +2,12 @@ import { getHyperframesReviewScene } from "./hyperframesReview.mjs";
 
 export default function (data, css) {
   const duration = data.duration || 10;
+  const classSafe = (value) => String(value || "default").toLowerCase().replace(/[^a-z0-9_-]+/g, "-");
+  const rootClasses = [
+    `source-${classSafe(data.platform)}`,
+    `format-${classSafe(data.video_format)}`,
+    `theme-${classSafe(data.visual_theme || data.platform)}`,
+  ].join(" ");
 
   // Deterministic fake random based on index
   const seed = (x) => Math.sin(x * 999) * 10000;
@@ -166,7 +172,7 @@ export default function (data, css) {
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 </head>
 <body>
-  <div id="root" data-composition-id="news-multi" data-duration="${duration}" data-width="1080" data-height="1920" data-start="0">
+  <div id="root" class="${rootClasses}" data-composition-id="news-multi" data-duration="${duration}" data-width="1080" data-height="1920" data-start="0">
     ${audioTags}
 
     <div id="main-clip" class="clip" data-start="0" data-duration="${duration}" data-track-index="3">
