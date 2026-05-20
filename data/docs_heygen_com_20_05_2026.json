@@ -1,0 +1,1263 @@
+{
+  "template": "G3_web",
+  "source_url": "https://docs.heygen.com/",
+  "platform": "web",
+  "content_type": "web_docs",
+  "video_format": "web_docs_explainer",
+  "classification_reason": "Trang có tín hiệu là tài liệu kỹ thuật hoặc hướng dẫn sử dụng.",
+  "visual_theme": "web",
+  "metadata": {
+    "host": "docs.heygen.com",
+    "title": "docs.heygen.com",
+    "description": "",
+    "tavily_used": false,
+    "tavily_results": []
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "repo_url": "docs.heygen.com/",
+      "voice": "Nếu bạn vừa lướt tới trang docs.heygen.com, điều đầu tiên cần nắm là: docs.heygen.com. Đừng vội đọc từ đầu tới cuối; hãy xác định trang này có đáng dành thời gian không trước đã.",
+      "visual": "Chụp trang nguồn, mở đầu bằng tiêu đề và domain để người xem hiểu đây là nguồn web.",
+      "headline_line1": "DOCS.HEYGEN.COM",
+      "headline_line2": "DOCS EXPLAINER",
+      "audio_start": 0.5,
+      "audio_duration": 18.1,
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_1.wav",
+      "transcript": [
+        {
+          "text": "Nếu",
+          "start": 0.5,
+          "end": 1.03
+        },
+        {
+          "text": "bạn",
+          "start": 1.03,
+          "end": 1.56
+        },
+        {
+          "text": "vừa",
+          "start": 1.56,
+          "end": 2.1
+        },
+        {
+          "text": "lướt",
+          "start": 2.1,
+          "end": 2.63
+        },
+        {
+          "text": "tới",
+          "start": 2.63,
+          "end": 3.16
+        },
+        {
+          "text": "trang",
+          "start": 3.16,
+          "end": 3.69
+        },
+        {
+          "text": "docs.heygen.com,",
+          "start": 3.69,
+          "end": 4.23
+        },
+        {
+          "text": "điều",
+          "start": 4.23,
+          "end": 4.76
+        },
+        {
+          "text": "đầu",
+          "start": 4.76,
+          "end": 5.29
+        },
+        {
+          "text": "tiên",
+          "start": 5.29,
+          "end": 5.82
+        },
+        {
+          "text": "cần",
+          "start": 5.82,
+          "end": 6.35
+        },
+        {
+          "text": "nắm",
+          "start": 6.35,
+          "end": 6.89
+        },
+        {
+          "text": "là:",
+          "start": 6.89,
+          "end": 7.42
+        },
+        {
+          "text": "docs.heygen.com.",
+          "start": 7.42,
+          "end": 7.95
+        },
+        {
+          "text": "Đừng",
+          "start": 7.95,
+          "end": 8.48
+        },
+        {
+          "text": "vội",
+          "start": 8.48,
+          "end": 9.02
+        },
+        {
+          "text": "đọc",
+          "start": 9.02,
+          "end": 9.55
+        },
+        {
+          "text": "từ",
+          "start": 9.55,
+          "end": 10.08
+        },
+        {
+          "text": "đầu",
+          "start": 10.08,
+          "end": 10.61
+        },
+        {
+          "text": "tới",
+          "start": 10.61,
+          "end": 11.14
+        },
+        {
+          "text": "cuối;",
+          "start": 11.14,
+          "end": 11.68
+        },
+        {
+          "text": "hãy",
+          "start": 11.68,
+          "end": 12.21
+        },
+        {
+          "text": "xác",
+          "start": 12.21,
+          "end": 12.74
+        },
+        {
+          "text": "định",
+          "start": 12.74,
+          "end": 13.27
+        },
+        {
+          "text": "trang",
+          "start": 13.27,
+          "end": 13.81
+        },
+        {
+          "text": "này",
+          "start": 13.81,
+          "end": 14.34
+        },
+        {
+          "text": "có",
+          "start": 14.34,
+          "end": 14.87
+        },
+        {
+          "text": "đáng",
+          "start": 14.87,
+          "end": 15.4
+        },
+        {
+          "text": "dành",
+          "start": 15.4,
+          "end": 15.93
+        },
+        {
+          "text": "thời",
+          "start": 15.93,
+          "end": 16.47
+        },
+        {
+          "text": "gian",
+          "start": 16.47,
+          "end": 17.0
+        },
+        {
+          "text": "không",
+          "start": 17.0,
+          "end": 17.53
+        },
+        {
+          "text": "trước",
+          "start": 17.53,
+          "end": 18.06
+        },
+        {
+          "text": "đã.",
+          "start": 18.06,
+          "end": 18.6
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Cách đọc nhanh là nhìn vào mục đích của trang: đây là tài liệu kỹ thuật, nên điều đáng xem nhất là phần nào giúp bạn dùng được ngay. Khi biết đúng góc nhìn, bạn sẽ không bị cuốn vào quá nhiều chi tiết phụ.",
+      "visual": "Bento card tóm tắt nội dung chính, đối tượng xem và lý do đáng quan tâm.",
+      "headline_line1": "NỘI DUNG CHÍNH",
+      "headline_line2": "CẦN GIẢI THÍCH",
+      "bento1_title": "Tóm tắt",
+      "bento1_desc": "docs.heygen.com",
+      "bento2_title": "Audience",
+      "bento3_title": "Context",
+      "audio_start": 19.8,
+      "audio_duration": 14.86,
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_2.wav",
+      "transcript": [
+        {
+          "text": "Cách",
+          "start": 19.8,
+          "end": 20.13
+        },
+        {
+          "text": "đọc",
+          "start": 20.13,
+          "end": 20.46
+        },
+        {
+          "text": "nhanh",
+          "start": 20.46,
+          "end": 20.79
+        },
+        {
+          "text": "là",
+          "start": 20.79,
+          "end": 21.12
+        },
+        {
+          "text": "nhìn",
+          "start": 21.12,
+          "end": 21.45
+        },
+        {
+          "text": "vào",
+          "start": 21.45,
+          "end": 21.78
+        },
+        {
+          "text": "mục",
+          "start": 21.78,
+          "end": 22.11
+        },
+        {
+          "text": "đích",
+          "start": 22.11,
+          "end": 22.44
+        },
+        {
+          "text": "của",
+          "start": 22.44,
+          "end": 22.77
+        },
+        {
+          "text": "trang:",
+          "start": 22.77,
+          "end": 23.1
+        },
+        {
+          "text": "đây",
+          "start": 23.1,
+          "end": 23.43
+        },
+        {
+          "text": "là",
+          "start": 23.43,
+          "end": 23.76
+        },
+        {
+          "text": "tài",
+          "start": 23.76,
+          "end": 24.09
+        },
+        {
+          "text": "liệu",
+          "start": 24.09,
+          "end": 24.42
+        },
+        {
+          "text": "kỹ",
+          "start": 24.42,
+          "end": 24.75
+        },
+        {
+          "text": "thuật,",
+          "start": 24.75,
+          "end": 25.08
+        },
+        {
+          "text": "nên",
+          "start": 25.08,
+          "end": 25.41
+        },
+        {
+          "text": "điều",
+          "start": 25.41,
+          "end": 25.74
+        },
+        {
+          "text": "đáng",
+          "start": 25.74,
+          "end": 26.07
+        },
+        {
+          "text": "xem",
+          "start": 26.07,
+          "end": 26.4
+        },
+        {
+          "text": "nhất",
+          "start": 26.4,
+          "end": 26.73
+        },
+        {
+          "text": "là",
+          "start": 26.73,
+          "end": 27.06
+        },
+        {
+          "text": "phần",
+          "start": 27.06,
+          "end": 27.39
+        },
+        {
+          "text": "nào",
+          "start": 27.39,
+          "end": 27.72
+        },
+        {
+          "text": "giúp",
+          "start": 27.72,
+          "end": 28.05
+        },
+        {
+          "text": "bạn",
+          "start": 28.05,
+          "end": 28.38
+        },
+        {
+          "text": "dùng",
+          "start": 28.38,
+          "end": 28.71
+        },
+        {
+          "text": "được",
+          "start": 28.71,
+          "end": 29.04
+        },
+        {
+          "text": "ngay.",
+          "start": 29.04,
+          "end": 29.37
+        },
+        {
+          "text": "Khi",
+          "start": 29.37,
+          "end": 29.7
+        },
+        {
+          "text": "biết",
+          "start": 29.7,
+          "end": 30.03
+        },
+        {
+          "text": "đúng",
+          "start": 30.03,
+          "end": 30.36
+        },
+        {
+          "text": "góc",
+          "start": 30.36,
+          "end": 30.69
+        },
+        {
+          "text": "nhìn,",
+          "start": 30.69,
+          "end": 31.02
+        },
+        {
+          "text": "bạn",
+          "start": 31.02,
+          "end": 31.35
+        },
+        {
+          "text": "sẽ",
+          "start": 31.35,
+          "end": 31.68
+        },
+        {
+          "text": "không",
+          "start": 31.68,
+          "end": 32.01
+        },
+        {
+          "text": "bị",
+          "start": 32.01,
+          "end": 32.35
+        },
+        {
+          "text": "cuốn",
+          "start": 32.35,
+          "end": 32.68
+        },
+        {
+          "text": "vào",
+          "start": 32.68,
+          "end": 33.01
+        },
+        {
+          "text": "quá",
+          "start": 33.01,
+          "end": 33.34
+        },
+        {
+          "text": "nhiều",
+          "start": 33.34,
+          "end": 33.67
+        },
+        {
+          "text": "chi",
+          "start": 33.67,
+          "end": 34.0
+        },
+        {
+          "text": "tiết",
+          "start": 34.0,
+          "end": 34.33
+        },
+        {
+          "text": "phụ.",
+          "start": 34.33,
+          "end": 34.66
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Ba câu hỏi nên giữ trong đầu là: nó hướng dẫn bạn làm gì, bước đầu tiên nằm ở đâu, và có điều kiện nào cần chú ý. Nếu trả lời được ba câu này, bạn đã hiểu phần quan trọng nhất của trang.",
+      "visual": "Ba thẻ câu hỏi: What, Why, Check.",
+      "headline_line1": "BA CÂU HỎI",
+      "headline_line2": "PHẢI TRẢ LỜI",
+      "bento1_title": "What",
+      "bento2_title": "Why",
+      "bento3_title": "Check",
+      "bento4_title": "Next",
+      "audio_start": 35.85,
+      "audio_duration": 14.9,
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_3.wav",
+      "transcript": [
+        {
+          "text": "Ba",
+          "start": 35.85,
+          "end": 36.19
+        },
+        {
+          "text": "câu",
+          "start": 36.19,
+          "end": 36.53
+        },
+        {
+          "text": "hỏi",
+          "start": 36.53,
+          "end": 36.87
+        },
+        {
+          "text": "nên",
+          "start": 36.87,
+          "end": 37.2
+        },
+        {
+          "text": "giữ",
+          "start": 37.2,
+          "end": 37.54
+        },
+        {
+          "text": "trong",
+          "start": 37.54,
+          "end": 37.88
+        },
+        {
+          "text": "đầu",
+          "start": 37.88,
+          "end": 38.22
+        },
+        {
+          "text": "là:",
+          "start": 38.22,
+          "end": 38.56
+        },
+        {
+          "text": "nó",
+          "start": 38.56,
+          "end": 38.9
+        },
+        {
+          "text": "hướng",
+          "start": 38.9,
+          "end": 39.24
+        },
+        {
+          "text": "dẫn",
+          "start": 39.24,
+          "end": 39.58
+        },
+        {
+          "text": "bạn",
+          "start": 39.58,
+          "end": 39.91
+        },
+        {
+          "text": "làm",
+          "start": 39.91,
+          "end": 40.25
+        },
+        {
+          "text": "gì,",
+          "start": 40.25,
+          "end": 40.59
+        },
+        {
+          "text": "bước",
+          "start": 40.59,
+          "end": 40.93
+        },
+        {
+          "text": "đầu",
+          "start": 40.93,
+          "end": 41.27
+        },
+        {
+          "text": "tiên",
+          "start": 41.27,
+          "end": 41.61
+        },
+        {
+          "text": "nằm",
+          "start": 41.61,
+          "end": 41.95
+        },
+        {
+          "text": "ở",
+          "start": 41.95,
+          "end": 42.29
+        },
+        {
+          "text": "đâu,",
+          "start": 42.29,
+          "end": 42.62
+        },
+        {
+          "text": "và",
+          "start": 42.62,
+          "end": 42.96
+        },
+        {
+          "text": "có",
+          "start": 42.96,
+          "end": 43.3
+        },
+        {
+          "text": "điều",
+          "start": 43.3,
+          "end": 43.64
+        },
+        {
+          "text": "kiện",
+          "start": 43.64,
+          "end": 43.98
+        },
+        {
+          "text": "nào",
+          "start": 43.98,
+          "end": 44.32
+        },
+        {
+          "text": "cần",
+          "start": 44.32,
+          "end": 44.66
+        },
+        {
+          "text": "chú",
+          "start": 44.66,
+          "end": 45.0
+        },
+        {
+          "text": "ý.",
+          "start": 45.0,
+          "end": 45.33
+        },
+        {
+          "text": "Nếu",
+          "start": 45.33,
+          "end": 45.67
+        },
+        {
+          "text": "trả",
+          "start": 45.67,
+          "end": 46.01
+        },
+        {
+          "text": "lời",
+          "start": 46.01,
+          "end": 46.35
+        },
+        {
+          "text": "được",
+          "start": 46.35,
+          "end": 46.69
+        },
+        {
+          "text": "ba",
+          "start": 46.69,
+          "end": 47.03
+        },
+        {
+          "text": "câu",
+          "start": 47.03,
+          "end": 47.37
+        },
+        {
+          "text": "này,",
+          "start": 47.37,
+          "end": 47.71
+        },
+        {
+          "text": "bạn",
+          "start": 47.71,
+          "end": 48.04
+        },
+        {
+          "text": "đã",
+          "start": 48.04,
+          "end": 48.38
+        },
+        {
+          "text": "hiểu",
+          "start": 48.38,
+          "end": 48.72
+        },
+        {
+          "text": "phần",
+          "start": 48.72,
+          "end": 49.06
+        },
+        {
+          "text": "quan",
+          "start": 49.06,
+          "end": 49.4
+        },
+        {
+          "text": "trọng",
+          "start": 49.4,
+          "end": 49.74
+        },
+        {
+          "text": "nhất",
+          "start": 49.74,
+          "end": 50.08
+        },
+        {
+          "text": "của",
+          "start": 50.08,
+          "end": 50.42
+        },
+        {
+          "text": "trang.",
+          "start": 50.42,
+          "end": 50.75
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Phần đáng chú ý nhất thường nằm ở ví dụ, quickstart, changelog hoặc checklist. Hãy tìm những đoạn có thể biến thành hành động cụ thể, thay vì chỉ đọc các câu giới thiệu.",
+      "visual": "Checklist các điểm chính rút ra từ nội dung web.",
+      "headline_line1": "ĐIỂM ĐÁNG CHÚ Ý",
+      "headline_line2": "RÚT TỪ NGUỒN WEB",
+      "bento1_title": "Key point",
+      "bento1_desc": "docs.heygen.com",
+      "bento2_title": "Evidence",
+      "bento3_title": "Limit",
+      "audio_start": 51.96,
+      "audio_duration": 12.22,
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_4.wav",
+      "transcript": [
+        {
+          "text": "Phần",
+          "start": 51.96,
+          "end": 52.32
+        },
+        {
+          "text": "đáng",
+          "start": 52.32,
+          "end": 52.68
+        },
+        {
+          "text": "chú",
+          "start": 52.68,
+          "end": 53.04
+        },
+        {
+          "text": "ý",
+          "start": 53.04,
+          "end": 53.4
+        },
+        {
+          "text": "nhất",
+          "start": 53.4,
+          "end": 53.76
+        },
+        {
+          "text": "thường",
+          "start": 53.76,
+          "end": 54.12
+        },
+        {
+          "text": "nằm",
+          "start": 54.12,
+          "end": 54.48
+        },
+        {
+          "text": "ở",
+          "start": 54.48,
+          "end": 54.83
+        },
+        {
+          "text": "ví",
+          "start": 54.83,
+          "end": 55.19
+        },
+        {
+          "text": "dụ,",
+          "start": 55.19,
+          "end": 55.55
+        },
+        {
+          "text": "quickstart,",
+          "start": 55.55,
+          "end": 55.91
+        },
+        {
+          "text": "changelog",
+          "start": 55.91,
+          "end": 56.27
+        },
+        {
+          "text": "hoặc",
+          "start": 56.27,
+          "end": 56.63
+        },
+        {
+          "text": "checklist.",
+          "start": 56.63,
+          "end": 56.99
+        },
+        {
+          "text": "Hãy",
+          "start": 56.99,
+          "end": 57.35
+        },
+        {
+          "text": "tìm",
+          "start": 57.35,
+          "end": 57.71
+        },
+        {
+          "text": "những",
+          "start": 57.71,
+          "end": 58.07
+        },
+        {
+          "text": "đoạn",
+          "start": 58.07,
+          "end": 58.43
+        },
+        {
+          "text": "có",
+          "start": 58.43,
+          "end": 58.79
+        },
+        {
+          "text": "thể",
+          "start": 58.79,
+          "end": 59.15
+        },
+        {
+          "text": "biến",
+          "start": 59.15,
+          "end": 59.51
+        },
+        {
+          "text": "thành",
+          "start": 59.51,
+          "end": 59.86
+        },
+        {
+          "text": "hành",
+          "start": 59.86,
+          "end": 60.22
+        },
+        {
+          "text": "động",
+          "start": 60.22,
+          "end": 60.58
+        },
+        {
+          "text": "cụ",
+          "start": 60.58,
+          "end": 60.94
+        },
+        {
+          "text": "thể,",
+          "start": 60.94,
+          "end": 61.3
+        },
+        {
+          "text": "thay",
+          "start": 61.3,
+          "end": 61.66
+        },
+        {
+          "text": "vì",
+          "start": 61.66,
+          "end": 62.02
+        },
+        {
+          "text": "chỉ",
+          "start": 62.02,
+          "end": 62.38
+        },
+        {
+          "text": "đọc",
+          "start": 62.38,
+          "end": 62.74
+        },
+        {
+          "text": "các",
+          "start": 62.74,
+          "end": 63.1
+        },
+        {
+          "text": "câu",
+          "start": 63.1,
+          "end": 63.46
+        },
+        {
+          "text": "giới",
+          "start": 63.46,
+          "end": 63.82
+        },
+        {
+          "text": "thiệu.",
+          "start": 63.82,
+          "end": 64.18
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba developer.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Bước tiếp theo phụ thuộc vào mục tiêu của bạn. Nếu đây là tài liệu, hãy đọc quickstart. Nếu là sản phẩm, hãy kiểm tra demo, pricing, license và điều kiện sử dụng.",
+      "visual": "CTA theo loại nội dung: docs, demo, pricing, checklist.",
+      "headline_line1": "HÀNH ĐỘNG TIẾP",
+      "headline_line2": "TÙY THEO NGUỒN",
+      "btn_text": "Đọc quickstart trước",
+      "audio_start": 65.37,
+      "audio_duration": 13.2,
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_5.wav",
+      "transcript": [
+        {
+          "text": "Bước",
+          "start": 65.37,
+          "end": 65.77
+        },
+        {
+          "text": "tiếp",
+          "start": 65.77,
+          "end": 66.17
+        },
+        {
+          "text": "theo",
+          "start": 66.17,
+          "end": 66.57
+        },
+        {
+          "text": "phụ",
+          "start": 66.57,
+          "end": 66.97
+        },
+        {
+          "text": "thuộc",
+          "start": 66.97,
+          "end": 67.37
+        },
+        {
+          "text": "vào",
+          "start": 67.37,
+          "end": 67.77
+        },
+        {
+          "text": "mục",
+          "start": 67.77,
+          "end": 68.17
+        },
+        {
+          "text": "tiêu",
+          "start": 68.17,
+          "end": 68.57
+        },
+        {
+          "text": "của",
+          "start": 68.57,
+          "end": 68.97
+        },
+        {
+          "text": "bạn.",
+          "start": 68.97,
+          "end": 69.37
+        },
+        {
+          "text": "Nếu",
+          "start": 69.37,
+          "end": 69.77
+        },
+        {
+          "text": "đây",
+          "start": 69.77,
+          "end": 70.17
+        },
+        {
+          "text": "là",
+          "start": 70.17,
+          "end": 70.57
+        },
+        {
+          "text": "tài",
+          "start": 70.57,
+          "end": 70.97
+        },
+        {
+          "text": "liệu,",
+          "start": 70.97,
+          "end": 71.37
+        },
+        {
+          "text": "hãy",
+          "start": 71.37,
+          "end": 71.77
+        },
+        {
+          "text": "đọc",
+          "start": 71.77,
+          "end": 72.17
+        },
+        {
+          "text": "quickstart.",
+          "start": 72.17,
+          "end": 72.57
+        },
+        {
+          "text": "Nếu",
+          "start": 72.57,
+          "end": 72.97
+        },
+        {
+          "text": "là",
+          "start": 72.97,
+          "end": 73.37
+        },
+        {
+          "text": "sản",
+          "start": 73.37,
+          "end": 73.77
+        },
+        {
+          "text": "phẩm,",
+          "start": 73.77,
+          "end": 74.17
+        },
+        {
+          "text": "hãy",
+          "start": 74.17,
+          "end": 74.57
+        },
+        {
+          "text": "kiểm",
+          "start": 74.57,
+          "end": 74.97
+        },
+        {
+          "text": "tra",
+          "start": 74.97,
+          "end": 75.37
+        },
+        {
+          "text": "demo,",
+          "start": 75.37,
+          "end": 75.77
+        },
+        {
+          "text": "pricing,",
+          "start": 75.77,
+          "end": 76.17
+        },
+        {
+          "text": "license",
+          "start": 76.17,
+          "end": 76.57
+        },
+        {
+          "text": "và",
+          "start": 76.57,
+          "end": 76.97
+        },
+        {
+          "text": "điều",
+          "start": 76.97,
+          "end": 77.37
+        },
+        {
+          "text": "kiện",
+          "start": 77.37,
+          "end": 77.77
+        },
+        {
+          "text": "sử",
+          "start": 77.77,
+          "end": 78.17
+        },
+        {
+          "text": "dụng.",
+          "start": 78.17,
+          "end": 78.57
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba smiling brightly.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Tóm lại, với một trang web mới, đừng vội tin toàn bộ chỉ sau vài dòng đầu. Hãy nắm ý chính, hiểu giá trị thực tế, rồi quay lại nguồn chính để kiểm chứng phần quan trọng.",
+      "visual": "Outro với domain, các nguồn liên quan và CTA lưu link.",
+      "headline_line1": "LƯU LINK",
+      "headline_line2": "KIỂM CHỨNG TRƯỚC KHI DÙNG",
+      "bento1_title": "Nguồn chính",
+      "bento1_desc": "docs.heygen.com",
+      "bento2_title": "Tóm tắt",
+      "bento3_title": "Kiểm chứng",
+      "bento4_title": "Áp dụng",
+      "audio_start": 79.77,
+      "audio_duration": 13.75,
+      "audio_path": "assets/audio/docs_heygen_com_20_05_2026_scene_6.wav",
+      "transcript": [
+        {
+          "text": "Tóm",
+          "start": 79.77,
+          "end": 80.14
+        },
+        {
+          "text": "lại,",
+          "start": 80.14,
+          "end": 80.51
+        },
+        {
+          "text": "với",
+          "start": 80.51,
+          "end": 80.89
+        },
+        {
+          "text": "một",
+          "start": 80.89,
+          "end": 81.26
+        },
+        {
+          "text": "trang",
+          "start": 81.26,
+          "end": 81.63
+        },
+        {
+          "text": "web",
+          "start": 81.63,
+          "end": 82.0
+        },
+        {
+          "text": "mới,",
+          "start": 82.0,
+          "end": 82.37
+        },
+        {
+          "text": "đừng",
+          "start": 82.37,
+          "end": 82.74
+        },
+        {
+          "text": "vội",
+          "start": 82.74,
+          "end": 83.12
+        },
+        {
+          "text": "tin",
+          "start": 83.12,
+          "end": 83.49
+        },
+        {
+          "text": "toàn",
+          "start": 83.49,
+          "end": 83.86
+        },
+        {
+          "text": "bộ",
+          "start": 83.86,
+          "end": 84.23
+        },
+        {
+          "text": "chỉ",
+          "start": 84.23,
+          "end": 84.6
+        },
+        {
+          "text": "sau",
+          "start": 84.6,
+          "end": 84.97
+        },
+        {
+          "text": "vài",
+          "start": 84.97,
+          "end": 85.35
+        },
+        {
+          "text": "dòng",
+          "start": 85.35,
+          "end": 85.72
+        },
+        {
+          "text": "đầu.",
+          "start": 85.72,
+          "end": 86.09
+        },
+        {
+          "text": "Hãy",
+          "start": 86.09,
+          "end": 86.46
+        },
+        {
+          "text": "nắm",
+          "start": 86.46,
+          "end": 86.83
+        },
+        {
+          "text": "ý",
+          "start": 86.83,
+          "end": 87.2
+        },
+        {
+          "text": "chính,",
+          "start": 87.2,
+          "end": 87.58
+        },
+        {
+          "text": "hiểu",
+          "start": 87.58,
+          "end": 87.95
+        },
+        {
+          "text": "giá",
+          "start": 87.95,
+          "end": 88.32
+        },
+        {
+          "text": "trị",
+          "start": 88.32,
+          "end": 88.69
+        },
+        {
+          "text": "thực",
+          "start": 88.69,
+          "end": 89.06
+        },
+        {
+          "text": "tế,",
+          "start": 89.06,
+          "end": 89.43
+        },
+        {
+          "text": "rồi",
+          "start": 89.43,
+          "end": 89.81
+        },
+        {
+          "text": "quay",
+          "start": 89.81,
+          "end": 90.18
+        },
+        {
+          "text": "lại",
+          "start": 90.18,
+          "end": 90.55
+        },
+        {
+          "text": "nguồn",
+          "start": 90.55,
+          "end": 90.92
+        },
+        {
+          "text": "chính",
+          "start": 90.92,
+          "end": 91.29
+        },
+        {
+          "text": "để",
+          "start": 91.29,
+          "end": 91.66
+        },
+        {
+          "text": "kiểm",
+          "start": 91.66,
+          "end": 92.04
+        },
+        {
+          "text": "chứng",
+          "start": 92.04,
+          "end": 92.41
+        },
+        {
+          "text": "phần",
+          "start": 92.41,
+          "end": 92.78
+        },
+        {
+          "text": "quan",
+          "start": 92.78,
+          "end": 93.15
+        },
+        {
+          "text": "trọng.",
+          "start": 93.15,
+          "end": 93.52
+        }
+      ]
+    }
+  ],
+  "duration": 96
+}

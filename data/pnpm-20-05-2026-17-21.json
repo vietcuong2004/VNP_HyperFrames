@@ -1,0 +1,1481 @@
+{
+  "template": "G1_github",
+  "source_url": "https://github.com/pnpm/pnpm",
+  "platform": "github",
+  "content_type": "library_framework",
+  "video_format": "developer_integration_brief",
+  "classification_reason": "Repo có dấu hiệu là thư viện/framework để tích hợp vào code.",
+  "metadata": {
+    "owner": "pnpm",
+    "repo": "pnpm",
+    "description": "Fast, disk space efficient package manager",
+    "stars": 35155,
+    "language": "TypeScript",
+    "topics": [
+      "dependency-manager",
+      "install",
+      "javascript",
+      "modules",
+      "node",
+      "nodejs",
+      "npm",
+      "package-manager"
+    ],
+    "readme_headings": [
+      "Platinum Sponsors",
+      "Gold Sponsors",
+      "Silver Sponsors",
+      "Background",
+      "Getting Started",
+      "Benchmark",
+      "License"
+    ],
+    "root_files": [
+      ".cargo",
+      ".changeset-released",
+      ".changeset",
+      ".devcontainer",
+      ".editorconfig",
+      ".git-wt",
+      ".gitattributes",
+      ".github",
+      ".gitignore",
+      ".husky",
+      ".meta-updater",
+      ".pnpmfile.cjs",
+      ".taplo.toml",
+      ".typos.toml",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "CODE_OF_CONDUCT.md",
+      "CONTRIBUTING.md",
+      "Cargo.lock",
+      "Cargo.toml",
+      "FUNDING.json",
+      "LICENSE",
+      "README.md",
+      "SECURITY.md",
+      "__fixtures__",
+      "__patches__",
+      "__typecheck__",
+      "__typings__",
+      "__utils__",
+      "agent",
+      "auth",
+      "benchmarks",
+      "bins",
+      "building",
+      "cache",
+      "catalogs",
+      "cli",
+      "commitlint.config.cjs",
+      "config",
+      "core",
+      "crypto",
+      "cspell.json",
+      "deny.toml",
+      "deps",
+      "docker",
+      "dylint.toml",
+      "engine",
+      "eslint.config.mjs",
+      "exec",
+      "fetching",
+      "fix-duplicates.mjs",
+      "fs",
+      "global",
+      "hooks",
+      "installing",
+      "justfile",
+      "lockfile",
+      "modules-mounter",
+      "network",
+      "object",
+      "package.json",
+      "pacquet",
+      "patching",
+      "pkg-manager",
+      "pkg-manifest",
+      "pnpm-lock.yaml",
+      "pnpm-workspace.yaml",
+      "pnpm",
+      "registry-access",
+      "releasing",
+      "renovate.json",
+      "resolving",
+      "rust-toolchain.toml",
+      "rustfmt.toml",
+      "shell",
+      "store",
+      "testing",
+      "text",
+      "tsconfig.lint.json",
+      "verdaccio.yaml",
+      "worker",
+      "workspace",
+      "yaml"
+    ]
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "repo_url": "github.com/pnpm/pnpm",
+      "headline_line1": "PNPM",
+      "voice": "pnpm là thứ developer nên nhìn từ góc độ tích hợp vào dự án thật: nó làm gì, cài ra sao, API dùng thế nào, và có đáng đưa vào stack hay không. Fast, disk space efficient package manager.",
+      "visual": "Chụp trang repo và highlight README/API.",
+      "headline_line2": "DEV INTEGRATION BRIEF",
+      "audio_start": 0.5,
+      "audio_duration": 13.97,
+      "audio_path": "assets/audio/pnpm-20-05-2026-17-21_scene_1.wav",
+      "transcript": [
+        {
+          "text": "pnpm",
+          "start": 0.5,
+          "end": 0.8
+        },
+        {
+          "text": "là",
+          "start": 0.8,
+          "end": 1.11
+        },
+        {
+          "text": "thứ",
+          "start": 1.11,
+          "end": 1.41
+        },
+        {
+          "text": "developer",
+          "start": 1.41,
+          "end": 1.72
+        },
+        {
+          "text": "nên",
+          "start": 1.72,
+          "end": 2.02
+        },
+        {
+          "text": "nhìn",
+          "start": 2.02,
+          "end": 2.33
+        },
+        {
+          "text": "từ",
+          "start": 2.33,
+          "end": 2.63
+        },
+        {
+          "text": "góc",
+          "start": 2.63,
+          "end": 2.94
+        },
+        {
+          "text": "độ",
+          "start": 2.94,
+          "end": 3.24
+        },
+        {
+          "text": "tích",
+          "start": 3.24,
+          "end": 3.54
+        },
+        {
+          "text": "hợp",
+          "start": 3.54,
+          "end": 3.85
+        },
+        {
+          "text": "vào",
+          "start": 3.85,
+          "end": 4.15
+        },
+        {
+          "text": "dự",
+          "start": 4.15,
+          "end": 4.46
+        },
+        {
+          "text": "án",
+          "start": 4.46,
+          "end": 4.76
+        },
+        {
+          "text": "thật:",
+          "start": 4.76,
+          "end": 5.07
+        },
+        {
+          "text": "nó",
+          "start": 5.07,
+          "end": 5.37
+        },
+        {
+          "text": "làm",
+          "start": 5.37,
+          "end": 5.68
+        },
+        {
+          "text": "gì,",
+          "start": 5.68,
+          "end": 5.98
+        },
+        {
+          "text": "cài",
+          "start": 5.98,
+          "end": 6.28
+        },
+        {
+          "text": "ra",
+          "start": 6.28,
+          "end": 6.59
+        },
+        {
+          "text": "sao,",
+          "start": 6.59,
+          "end": 6.89
+        },
+        {
+          "text": "API",
+          "start": 6.89,
+          "end": 7.2
+        },
+        {
+          "text": "dùng",
+          "start": 7.2,
+          "end": 7.5
+        },
+        {
+          "text": "thế",
+          "start": 7.5,
+          "end": 7.81
+        },
+        {
+          "text": "nào,",
+          "start": 7.81,
+          "end": 8.11
+        },
+        {
+          "text": "và",
+          "start": 8.11,
+          "end": 8.42
+        },
+        {
+          "text": "có",
+          "start": 8.42,
+          "end": 8.72
+        },
+        {
+          "text": "đáng",
+          "start": 8.72,
+          "end": 9.02
+        },
+        {
+          "text": "đưa",
+          "start": 9.02,
+          "end": 9.33
+        },
+        {
+          "text": "vào",
+          "start": 9.33,
+          "end": 9.63
+        },
+        {
+          "text": "stack",
+          "start": 9.63,
+          "end": 9.94
+        },
+        {
+          "text": "hay",
+          "start": 9.94,
+          "end": 10.24
+        },
+        {
+          "text": "không.",
+          "start": 10.24,
+          "end": 10.55
+        },
+        {
+          "text": "Fast,",
+          "start": 10.55,
+          "end": 10.85
+        },
+        {
+          "text": "disk",
+          "start": 10.85,
+          "end": 11.16
+        },
+        {
+          "text": "space",
+          "start": 11.16,
+          "end": 11.46
+        },
+        {
+          "text": "efficient",
+          "start": 11.46,
+          "end": 11.76
+        },
+        {
+          "text": "package",
+          "start": 11.76,
+          "end": 12.07
+        },
+        {
+          "text": "manager.",
+          "start": 12.07,
+          "end": 12.37
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Trước tiên cần hiểu nó nằm ở lớp nào trong stack. Repo có các dấu hiệu như .cargo, .changeset-released, .changeset, .devcontainer, .editorconfig, nên hãy xem phần cài đặt và API trước.",
+      "visual": "Bento card stack layer, package file và API usage.",
+      "headline_line1": "NẰM Ở LỚP NÀO",
+      "headline_line2": "TRONG TECH STACK?",
+      "bento1_title": "Package",
+      "bento1_desc": ".cargo, .changeset released, .changeset, .devcontainer, .editorconfig",
+      "bento2_title": "API",
+      "bento3_title": "Docs",
+      "audio_start": 15.67,
+      "audio_duration": 12.65,
+      "audio_path": "assets/audio/pnpm-20-05-2026-17-21_scene_2.wav",
+      "transcript": [
+        {
+          "text": "Trước",
+          "start": 15.67,
+          "end": 16.02
+        },
+        {
+          "text": "tiên",
+          "start": 16.02,
+          "end": 16.36
+        },
+        {
+          "text": "cần",
+          "start": 16.36,
+          "end": 16.71
+        },
+        {
+          "text": "hiểu",
+          "start": 16.71,
+          "end": 17.06
+        },
+        {
+          "text": "nó",
+          "start": 17.06,
+          "end": 17.4
+        },
+        {
+          "text": "nằm",
+          "start": 17.4,
+          "end": 17.75
+        },
+        {
+          "text": "ở",
+          "start": 17.75,
+          "end": 18.1
+        },
+        {
+          "text": "lớp",
+          "start": 18.1,
+          "end": 18.44
+        },
+        {
+          "text": "nào",
+          "start": 18.44,
+          "end": 18.79
+        },
+        {
+          "text": "trong",
+          "start": 18.79,
+          "end": 19.14
+        },
+        {
+          "text": "stack.",
+          "start": 19.14,
+          "end": 19.48
+        },
+        {
+          "text": "Repo",
+          "start": 19.48,
+          "end": 19.83
+        },
+        {
+          "text": "có",
+          "start": 19.83,
+          "end": 20.18
+        },
+        {
+          "text": "các",
+          "start": 20.18,
+          "end": 20.53
+        },
+        {
+          "text": "dấu",
+          "start": 20.53,
+          "end": 20.87
+        },
+        {
+          "text": "hiệu",
+          "start": 20.87,
+          "end": 21.22
+        },
+        {
+          "text": "như",
+          "start": 21.22,
+          "end": 21.57
+        },
+        {
+          "text": ".cargo,",
+          "start": 21.57,
+          "end": 21.91
+        },
+        {
+          "text": ".changeset-released,",
+          "start": 21.91,
+          "end": 22.26
+        },
+        {
+          "text": ".changeset,",
+          "start": 22.26,
+          "end": 22.61
+        },
+        {
+          "text": ".devcontainer,",
+          "start": 22.61,
+          "end": 22.95
+        },
+        {
+          "text": ".editorconfig,",
+          "start": 22.95,
+          "end": 23.3
+        },
+        {
+          "text": "nên",
+          "start": 23.3,
+          "end": 23.65
+        },
+        {
+          "text": "hãy",
+          "start": 23.65,
+          "end": 23.99
+        },
+        {
+          "text": "xem",
+          "start": 23.99,
+          "end": 24.34
+        },
+        {
+          "text": "phần",
+          "start": 24.34,
+          "end": 24.69
+        },
+        {
+          "text": "cài",
+          "start": 24.69,
+          "end": 25.03
+        },
+        {
+          "text": "đặt",
+          "start": 25.03,
+          "end": 25.38
+        },
+        {
+          "text": "và",
+          "start": 25.38,
+          "end": 25.73
+        },
+        {
+          "text": "API",
+          "start": 25.73,
+          "end": 26.07
+        },
+        {
+          "text": "trước.",
+          "start": 26.07,
+          "end": 26.42
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Điểm cần xem ngay là lệnh cài đặt và ví dụ nhỏ nhất. Chỉ cần vài dòng đầu tiên, bạn đã biết thư viện này có dễ thử trong một project phụ hay không.",
+      "visual": "Terminal cài package và snippet code tối thiểu.",
+      "headline_line1": "CÀI ĐẶT",
+      "headline_line2": "RỒI TEST NHANH",
+      "bento1_title": "Install",
+      "bento2_title": "Import",
+      "bento3_title": "Minimal code",
+      "bento4_title": "Output",
+      "audio_start": 29.52,
+      "audio_duration": 9.41,
+      "audio_path": "assets/audio/pnpm-20-05-2026-17-21_scene_3.wav",
+      "transcript": [
+        {
+          "text": "Điểm",
+          "start": 29.52,
+          "end": 29.76
+        },
+        {
+          "text": "cần",
+          "start": 29.76,
+          "end": 29.99
+        },
+        {
+          "text": "xem",
+          "start": 29.99,
+          "end": 30.23
+        },
+        {
+          "text": "ngay",
+          "start": 30.23,
+          "end": 30.46
+        },
+        {
+          "text": "là",
+          "start": 30.46,
+          "end": 30.7
+        },
+        {
+          "text": "lệnh",
+          "start": 30.7,
+          "end": 30.93
+        },
+        {
+          "text": "cài",
+          "start": 30.93,
+          "end": 31.17
+        },
+        {
+          "text": "đặt",
+          "start": 31.17,
+          "end": 31.4
+        },
+        {
+          "text": "và",
+          "start": 31.4,
+          "end": 31.64
+        },
+        {
+          "text": "ví",
+          "start": 31.64,
+          "end": 31.87
+        },
+        {
+          "text": "dụ",
+          "start": 31.87,
+          "end": 32.11
+        },
+        {
+          "text": "nhỏ",
+          "start": 32.11,
+          "end": 32.34
+        },
+        {
+          "text": "nhất.",
+          "start": 32.34,
+          "end": 32.58
+        },
+        {
+          "text": "Chỉ",
+          "start": 32.58,
+          "end": 32.81
+        },
+        {
+          "text": "cần",
+          "start": 32.81,
+          "end": 33.05
+        },
+        {
+          "text": "vài",
+          "start": 33.05,
+          "end": 33.28
+        },
+        {
+          "text": "dòng",
+          "start": 33.28,
+          "end": 33.52
+        },
+        {
+          "text": "đầu",
+          "start": 33.52,
+          "end": 33.75
+        },
+        {
+          "text": "tiên,",
+          "start": 33.75,
+          "end": 33.99
+        },
+        {
+          "text": "bạn",
+          "start": 33.99,
+          "end": 34.22
+        },
+        {
+          "text": "đã",
+          "start": 34.22,
+          "end": 34.46
+        },
+        {
+          "text": "biết",
+          "start": 34.46,
+          "end": 34.69
+        },
+        {
+          "text": "thư",
+          "start": 34.69,
+          "end": 34.93
+        },
+        {
+          "text": "viện",
+          "start": 34.93,
+          "end": 35.16
+        },
+        {
+          "text": "này",
+          "start": 35.16,
+          "end": 35.4
+        },
+        {
+          "text": "có",
+          "start": 35.4,
+          "end": 35.64
+        },
+        {
+          "text": "dễ",
+          "start": 35.64,
+          "end": 35.87
+        },
+        {
+          "text": "thử",
+          "start": 35.87,
+          "end": 36.11
+        },
+        {
+          "text": "trong",
+          "start": 36.11,
+          "end": 36.34
+        },
+        {
+          "text": "một",
+          "start": 36.34,
+          "end": 36.58
+        },
+        {
+          "text": "project",
+          "start": 36.58,
+          "end": 36.81
+        },
+        {
+          "text": "phụ",
+          "start": 36.81,
+          "end": 37.05
+        },
+        {
+          "text": "hay",
+          "start": 37.05,
+          "end": 37.28
+        },
+        {
+          "text": "không.",
+          "start": 37.28,
+          "end": 37.52
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Sau đó mới nói tới điểm khác biệt: API tiện hơn, hiệu năng tốt hơn, hoặc tích hợp được với framework hiện đại. Đừng biến nó thành quảng cáo chung chung.",
+      "visual": "Sơ đồ integration từ app tới library/framework.",
+      "headline_line1": "GIÁ TRỊ CHÍNH",
+      "headline_line2": "NẰM Ở API",
+      "btn_text": "Đọc usage trước khi đưa vào production",
+      "audio_start": 40.12,
+      "audio_duration": 10.34,
+      "audio_path": "assets/audio/pnpm-20-05-2026-17-21_scene_4.wav",
+      "transcript": [
+        {
+          "text": "Sau",
+          "start": 40.12,
+          "end": 40.4
+        },
+        {
+          "text": "đó",
+          "start": 40.4,
+          "end": 40.69
+        },
+        {
+          "text": "mới",
+          "start": 40.69,
+          "end": 40.97
+        },
+        {
+          "text": "nói",
+          "start": 40.97,
+          "end": 41.25
+        },
+        {
+          "text": "tới",
+          "start": 41.25,
+          "end": 41.54
+        },
+        {
+          "text": "điểm",
+          "start": 41.54,
+          "end": 41.82
+        },
+        {
+          "text": "khác",
+          "start": 41.82,
+          "end": 42.11
+        },
+        {
+          "text": "biệt:",
+          "start": 42.11,
+          "end": 42.39
+        },
+        {
+          "text": "API",
+          "start": 42.39,
+          "end": 42.67
+        },
+        {
+          "text": "tiện",
+          "start": 42.67,
+          "end": 42.96
+        },
+        {
+          "text": "hơn,",
+          "start": 42.96,
+          "end": 43.24
+        },
+        {
+          "text": "hiệu",
+          "start": 43.24,
+          "end": 43.52
+        },
+        {
+          "text": "năng",
+          "start": 43.52,
+          "end": 43.81
+        },
+        {
+          "text": "tốt",
+          "start": 43.81,
+          "end": 44.09
+        },
+        {
+          "text": "hơn,",
+          "start": 44.09,
+          "end": 44.37
+        },
+        {
+          "text": "hoặc",
+          "start": 44.37,
+          "end": 44.66
+        },
+        {
+          "text": "tích",
+          "start": 44.66,
+          "end": 44.94
+        },
+        {
+          "text": "hợp",
+          "start": 44.94,
+          "end": 45.23
+        },
+        {
+          "text": "được",
+          "start": 45.23,
+          "end": 45.51
+        },
+        {
+          "text": "với",
+          "start": 45.51,
+          "end": 45.79
+        },
+        {
+          "text": "framework",
+          "start": 45.79,
+          "end": 46.08
+        },
+        {
+          "text": "hiện",
+          "start": 46.08,
+          "end": 46.36
+        },
+        {
+          "text": "đại.",
+          "start": 46.36,
+          "end": 46.64
+        },
+        {
+          "text": "Đừng",
+          "start": 46.64,
+          "end": 46.93
+        },
+        {
+          "text": "biến",
+          "start": 46.93,
+          "end": 47.21
+        },
+        {
+          "text": "nó",
+          "start": 47.21,
+          "end": 47.49
+        },
+        {
+          "text": "thành",
+          "start": 47.49,
+          "end": 47.78
+        },
+        {
+          "text": "quảng",
+          "start": 47.78,
+          "end": 48.06
+        },
+        {
+          "text": "cáo",
+          "start": 48.06,
+          "end": 48.35
+        },
+        {
+          "text": "chung",
+          "start": 48.35,
+          "end": 48.63
+        },
+        {
+          "text": "chung.",
+          "start": 48.63,
+          "end": 48.91
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Checklist trước khi dùng gồm license, release gần nhất, số issue mở, ví dụ code và mức độ bảo trì. Đây là phần rất quan trọng với repo library.",
+      "visual": "Checklist license, release, issues, examples.",
+      "headline_line1": "CHECKLIST",
+      "headline_line2": "TRƯỚC KHI TÍCH HỢP",
+      "bento1_title": "License",
+      "bento1_desc": "MIT License",
+      "bento2_title": "Release",
+      "bento3_title": "Issues",
+      "audio_start": 51.67,
+      "audio_duration": 10.54,
+      "audio_path": "assets/audio/pnpm-20-05-2026-17-21_scene_5.wav",
+      "transcript": [
+        {
+          "text": "Checklist",
+          "start": 51.67,
+          "end": 51.98
+        },
+        {
+          "text": "trước",
+          "start": 51.98,
+          "end": 52.29
+        },
+        {
+          "text": "khi",
+          "start": 52.29,
+          "end": 52.6
+        },
+        {
+          "text": "dùng",
+          "start": 52.6,
+          "end": 52.91
+        },
+        {
+          "text": "gồm",
+          "start": 52.91,
+          "end": 53.21
+        },
+        {
+          "text": "license,",
+          "start": 53.21,
+          "end": 53.52
+        },
+        {
+          "text": "release",
+          "start": 53.52,
+          "end": 53.83
+        },
+        {
+          "text": "gần",
+          "start": 53.83,
+          "end": 54.14
+        },
+        {
+          "text": "nhất,",
+          "start": 54.14,
+          "end": 54.45
+        },
+        {
+          "text": "số",
+          "start": 54.45,
+          "end": 54.76
+        },
+        {
+          "text": "issue",
+          "start": 54.76,
+          "end": 55.07
+        },
+        {
+          "text": "mở,",
+          "start": 55.07,
+          "end": 55.38
+        },
+        {
+          "text": "ví",
+          "start": 55.38,
+          "end": 55.68
+        },
+        {
+          "text": "dụ",
+          "start": 55.68,
+          "end": 55.99
+        },
+        {
+          "text": "code",
+          "start": 55.99,
+          "end": 56.3
+        },
+        {
+          "text": "và",
+          "start": 56.3,
+          "end": 56.61
+        },
+        {
+          "text": "mức",
+          "start": 56.61,
+          "end": 56.92
+        },
+        {
+          "text": "độ",
+          "start": 56.92,
+          "end": 57.23
+        },
+        {
+          "text": "bảo",
+          "start": 57.23,
+          "end": 57.54
+        },
+        {
+          "text": "trì.",
+          "start": 57.54,
+          "end": 57.85
+        },
+        {
+          "text": "Đây",
+          "start": 57.85,
+          "end": 58.16
+        },
+        {
+          "text": "là",
+          "start": 58.16,
+          "end": 58.46
+        },
+        {
+          "text": "phần",
+          "start": 58.46,
+          "end": 58.77
+        },
+        {
+          "text": "rất",
+          "start": 58.77,
+          "end": 59.08
+        },
+        {
+          "text": "quan",
+          "start": 59.08,
+          "end": 59.39
+        },
+        {
+          "text": "trọng",
+          "start": 59.39,
+          "end": 59.7
+        },
+        {
+          "text": "với",
+          "start": 59.7,
+          "end": 60.01
+        },
+        {
+          "text": "repo",
+          "start": 60.01,
+          "end": 60.32
+        },
+        {
+          "text": "library.",
+          "start": 60.32,
+          "end": 60.63
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Về tín hiệu cộng đồng, pnpm hiện có khoảng 35.155 sao, ngôn ngữ chính là TypeScript, và đây là điểm nên kiểm tra trước khi đưa vào dự án thật.",
+      "visual": "Thẻ thống kê repo với sao, ngôn ngữ, owner và trạng thái theo dõi.",
+      "headline_line1": "PNPM STATS",
+      "headline_line2": "ĐỘ TIN CẬY BAN ĐẦU",
+      "repo_name": "pnpm/pnpm",
+      "repo_lang": "TypeScript",
+      "repo_stars": "★ 35.155",
+      "repo_trend": "▲ Repo",
+      "repo_trend_label": "GitHub",
+      "audio_start": 63.4,
+      "audio_duration": 10.08,
+      "audio_path": "assets/audio/pnpm-20-05-2026-17-21_scene_6.wav",
+      "transcript": [
+        {
+          "text": "Về",
+          "start": 63.4,
+          "end": 63.69
+        },
+        {
+          "text": "tín",
+          "start": 63.69,
+          "end": 63.97
+        },
+        {
+          "text": "hiệu",
+          "start": 63.97,
+          "end": 64.26
+        },
+        {
+          "text": "cộng",
+          "start": 64.26,
+          "end": 64.54
+        },
+        {
+          "text": "đồng,",
+          "start": 64.54,
+          "end": 64.83
+        },
+        {
+          "text": "pnpm",
+          "start": 64.83,
+          "end": 65.11
+        },
+        {
+          "text": "hiện",
+          "start": 65.11,
+          "end": 65.4
+        },
+        {
+          "text": "có",
+          "start": 65.4,
+          "end": 65.68
+        },
+        {
+          "text": "khoảng",
+          "start": 65.68,
+          "end": 65.97
+        },
+        {
+          "text": "35.155",
+          "start": 65.97,
+          "end": 66.26
+        },
+        {
+          "text": "sao,",
+          "start": 66.26,
+          "end": 66.54
+        },
+        {
+          "text": "ngôn",
+          "start": 66.54,
+          "end": 66.83
+        },
+        {
+          "text": "ngữ",
+          "start": 66.83,
+          "end": 67.11
+        },
+        {
+          "text": "chính",
+          "start": 67.11,
+          "end": 67.4
+        },
+        {
+          "text": "là",
+          "start": 67.4,
+          "end": 67.68
+        },
+        {
+          "text": "TypeScript,",
+          "start": 67.68,
+          "end": 67.97
+        },
+        {
+          "text": "và",
+          "start": 67.97,
+          "end": 68.26
+        },
+        {
+          "text": "đây",
+          "start": 68.26,
+          "end": 68.54
+        },
+        {
+          "text": "là",
+          "start": 68.54,
+          "end": 68.83
+        },
+        {
+          "text": "điểm",
+          "start": 68.83,
+          "end": 69.11
+        },
+        {
+          "text": "nên",
+          "start": 69.11,
+          "end": 69.4
+        },
+        {
+          "text": "kiểm",
+          "start": 69.4,
+          "end": 69.68
+        },
+        {
+          "text": "tra",
+          "start": 69.68,
+          "end": 69.97
+        },
+        {
+          "text": "trước",
+          "start": 69.97,
+          "end": 70.25
+        },
+        {
+          "text": "khi",
+          "start": 70.25,
+          "end": 70.54
+        },
+        {
+          "text": "đưa",
+          "start": 70.54,
+          "end": 70.83
+        },
+        {
+          "text": "vào",
+          "start": 70.83,
+          "end": 71.11
+        },
+        {
+          "text": "dự",
+          "start": 71.11,
+          "end": 71.4
+        },
+        {
+          "text": "án",
+          "start": 71.4,
+          "end": 71.68
+        },
+        {
+          "text": "thật.",
+          "start": 71.68,
+          "end": 71.97
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Cách thử an toàn là tạo một project phụ, copy ví dụ nhỏ nhất, rồi đo xem nó giải quyết đúng vấn đề của mình không.",
+      "visual": "Terminal chạy project phụ.",
+      "headline_line1": "THỬ AN TOÀN",
+      "headline_line2": "TRONG PROJECT PHỤ",
+      "btn_text": "$ git clone github.com/pnpm/pnpm",
+      "audio_start": 74.68,
+      "audio_duration": 7.37,
+      "audio_path": "assets/audio/pnpm-20-05-2026-17-21_scene_7.wav",
+      "transcript": [
+        {
+          "text": "Cách",
+          "start": 74.68,
+          "end": 74.92
+        },
+        {
+          "text": "thử",
+          "start": 74.92,
+          "end": 75.16
+        },
+        {
+          "text": "an",
+          "start": 75.16,
+          "end": 75.4
+        },
+        {
+          "text": "toàn",
+          "start": 75.4,
+          "end": 75.64
+        },
+        {
+          "text": "là",
+          "start": 75.64,
+          "end": 75.88
+        },
+        {
+          "text": "tạo",
+          "start": 75.88,
+          "end": 76.13
+        },
+        {
+          "text": "một",
+          "start": 76.13,
+          "end": 76.37
+        },
+        {
+          "text": "project",
+          "start": 76.37,
+          "end": 76.61
+        },
+        {
+          "text": "phụ,",
+          "start": 76.61,
+          "end": 76.85
+        },
+        {
+          "text": "copy",
+          "start": 76.85,
+          "end": 77.09
+        },
+        {
+          "text": "ví",
+          "start": 77.09,
+          "end": 77.33
+        },
+        {
+          "text": "dụ",
+          "start": 77.33,
+          "end": 77.57
+        },
+        {
+          "text": "nhỏ",
+          "start": 77.57,
+          "end": 77.81
+        },
+        {
+          "text": "nhất,",
+          "start": 77.81,
+          "end": 78.05
+        },
+        {
+          "text": "rồi",
+          "start": 78.05,
+          "end": 78.29
+        },
+        {
+          "text": "đo",
+          "start": 78.29,
+          "end": 78.53
+        },
+        {
+          "text": "xem",
+          "start": 78.53,
+          "end": 78.77
+        },
+        {
+          "text": "nó",
+          "start": 78.77,
+          "end": 79.02
+        },
+        {
+          "text": "giải",
+          "start": 79.02,
+          "end": 79.26
+        },
+        {
+          "text": "quyết",
+          "start": 79.26,
+          "end": 79.5
+        },
+        {
+          "text": "đúng",
+          "start": 79.5,
+          "end": 79.74
+        },
+        {
+          "text": "vấn",
+          "start": 79.74,
+          "end": 79.98
+        },
+        {
+          "text": "đề",
+          "start": 79.98,
+          "end": 80.22
+        },
+        {
+          "text": "của",
+          "start": 80.22,
+          "end": 80.46
+        },
+        {
+          "text": "mình",
+          "start": 80.46,
+          "end": 80.7
+        },
+        {
+          "text": "không.",
+          "start": 80.7,
+          "end": 80.94
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Nếu repo này khớp use case, hãy star để theo dõi update và đọc kỹ docs trước khi đưa vào hệ thống thật.",
+      "visual": "CTA star, docs, follow releases.",
+      "headline_line1": "STAR VÀ ĐỌC DOCS",
+      "headline_line2": "TRƯỚC KHI DÙNG THẬT",
+      "bento1_title": "Star",
+      "bento2_title": "Docs",
+      "bento3_title": "Release",
+      "bento4_title": "Test",
+      "audio_start": 83.25,
+      "audio_duration": 6.72,
+      "audio_path": "assets/audio/pnpm-20-05-2026-17-21_scene_8.wav",
+      "transcript": [
+        {
+          "text": "Nếu",
+          "start": 83.25,
+          "end": 83.5
+        },
+        {
+          "text": "repo",
+          "start": 83.5,
+          "end": 83.75
+        },
+        {
+          "text": "này",
+          "start": 83.75,
+          "end": 84.0
+        },
+        {
+          "text": "khớp",
+          "start": 84.0,
+          "end": 84.24
+        },
+        {
+          "text": "use",
+          "start": 84.24,
+          "end": 84.49
+        },
+        {
+          "text": "case,",
+          "start": 84.49,
+          "end": 84.74
+        },
+        {
+          "text": "hãy",
+          "start": 84.74,
+          "end": 84.99
+        },
+        {
+          "text": "star",
+          "start": 84.99,
+          "end": 85.24
+        },
+        {
+          "text": "để",
+          "start": 85.24,
+          "end": 85.49
+        },
+        {
+          "text": "theo",
+          "start": 85.49,
+          "end": 85.73
+        },
+        {
+          "text": "dõi",
+          "start": 85.73,
+          "end": 85.98
+        },
+        {
+          "text": "update",
+          "start": 85.98,
+          "end": 86.23
+        },
+        {
+          "text": "và",
+          "start": 86.23,
+          "end": 86.48
+        },
+        {
+          "text": "đọc",
+          "start": 86.48,
+          "end": 86.73
+        },
+        {
+          "text": "kỹ",
+          "start": 86.73,
+          "end": 86.98
+        },
+        {
+          "text": "docs",
+          "start": 86.98,
+          "end": 87.22
+        },
+        {
+          "text": "trước",
+          "start": 87.22,
+          "end": 87.47
+        },
+        {
+          "text": "khi",
+          "start": 87.47,
+          "end": 87.72
+        },
+        {
+          "text": "đưa",
+          "start": 87.72,
+          "end": 87.97
+        },
+        {
+          "text": "vào",
+          "start": 87.97,
+          "end": 88.22
+        },
+        {
+          "text": "hệ",
+          "start": 88.22,
+          "end": 88.47
+        },
+        {
+          "text": "thống",
+          "start": 88.47,
+          "end": 88.71
+        },
+        {
+          "text": "thật.",
+          "start": 88.71,
+          "end": 88.96
+        }
+      ]
+    }
+  ],
+  "duration": 93
+}

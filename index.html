@@ -17,6 +17,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 .source-web .headline-line2 {
   background: linear-gradient(90deg, #00d2ff, #fdf01c, #ffffff);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -328,7 +329,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   line-height: 0.98;
   font-weight: 900; 
   background: linear-gradient(90deg, #fdf01c, #00d2ff); 
-  -webkit-background-clip: text; 
+  -webkit-background-clip: text;
+  background-clip: text; 
   -webkit-text-fill-color: transparent; 
   filter: drop-shadow(0 5px 15px rgba(253,240,28,0.35));
 }
@@ -579,20 +581,30 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 </head>
 <body>
-  <div id="root" class="source-docker format-container_quick_start theme-docker" data-composition-id="news-multi" data-duration="64" data-width="1080" data-height="1920" data-start="0">
-    <audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="64" data-volume="0.3" loop></audio>
-<audio id="tts-scene1" src="./assets/audio/github-review_scene_1.wav" data-track-index="1" data-start="0.5" data-duration="16.22" data-volume="1.0"></audio>
+  <div id="root" class="source-github format-developer_integration_brief theme-github" data-composition-id="news-multi" data-duration="97" data-width="1080" data-height="1920" data-start="0">
+    <audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="97" data-volume="0.3" loop></audio>
+<audio id="tts-scene1" src="./assets/audio/9router-20-05-2026-20-04_scene_1.wav" data-track-index="1" data-start="0.5" data-duration="18.58" data-volume="1.0"></audio>
 <audio id="sfx-scene1" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="0.5" data-duration="1" data-volume="0.8"></audio>
-<audio id="tts-scene2" src="./assets/audio/github-review_scene_2.wav" data-track-index="1" data-start="17.92" data-duration="9.55" data-volume="1.0"></audio>
-<audio id="tts-scene3" src="./assets/audio/github-review_scene_3.wav" data-track-index="1" data-start="28.68" data-duration="9.6" data-volume="1.0"></audio>
-<audio id="sfx-scene3" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="28.68" data-duration="1" data-volume="0.8"></audio>
-<audio id="tts-scene4" src="./assets/audio/github-review_scene_4.wav" data-track-index="1" data-start="39.48" data-duration="8.95" data-volume="1.0"></audio>
-<audio id="tts-scene5" src="./assets/audio/github-review_scene_5.wav" data-track-index="1" data-start="49.63" data-duration="11.71" data-volume="1.0"></audio>
+<audio id="tts-scene2" src="./assets/audio/9router-20-05-2026-20-04_scene_2.wav" data-track-index="1" data-start="20.28" data-duration="12.6" data-volume="1.0"></audio>
+<audio id="tts-scene3" src="./assets/audio/9router-20-05-2026-20-04_scene_3.wav" data-track-index="1" data-start="34.08" data-duration="9.41" data-volume="1.0"></audio>
+<audio id="sfx-scene3" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="34.08" data-duration="1" data-volume="0.8"></audio>
+<audio id="tts-scene4" src="./assets/audio/9router-20-05-2026-20-04_scene_4.wav" data-track-index="1" data-start="44.68" data-duration="10.34" data-volume="1.0"></audio>
+<audio id="tts-scene5" src="./assets/audio/9router-20-05-2026-20-04_scene_5.wav" data-track-index="1" data-start="56.23" data-duration="10.54" data-volume="1.0"></audio>
+<audio id="tts-scene6" src="./assets/audio/9router-20-05-2026-20-04_scene_6.wav" data-track-index="1" data-start="67.96" data-duration="10.15" data-volume="1.0"></audio>
+<audio id="sfx-scene6" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="67.96" data-duration="1" data-volume="0.8"></audio>
+<audio id="tts-scene7" src="./assets/audio/9router-20-05-2026-20-04_scene_7.wav" data-track-index="1" data-start="79.32" data-duration="7.37" data-volume="1.0"></audio>
+<audio id="tts-scene8" src="./assets/audio/9router-20-05-2026-20-04_scene_8.wav" data-track-index="1" data-start="87.88" data-duration="6.72" data-volume="1.0"></audio>
+<audio id="sfx-scene8" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="87.88" data-duration="1" data-volume="0.8"></audio>
 
 
-    <div id="main-clip" class="clip" data-start="0" data-duration="64" data-track-index="3">
+    <div id="main-clip" class="clip" data-start="0" data-duration="97" data-track-index="3">
       <div class="bg"></div>
       <div class="particles-container"><div class="particle-star particle-green p-anim" style="width:2px; height:2px; top:1535.5259029250192px; left:588.9586788280576px;"></div><div class="particle-star particle-green p-anim" style="width:3.569890517434942px; height:3.569890517434942px; top:632.6718196883576px; left:564.6973520454776px;"></div><div class="particle-star particle-green p-anim" style="width:5.880993330547426px; height:5.880993330547426px; top:1766.284509041543px; left:797.7507367319777px;"></div><div class="particle-star particle-green p-anim" style="width:5.674001668463916px; height:5.674001668463916px; top:1145.1231563722104px; left:360.1147201735148px;"></div><div class="particle-star particle-white p-anim" style="width:3.6885709907046476px; height:3.6885709907046476px; top:224.27374659860106px; left:407.89639844377234px;"></div><div class="particle-star particle-purple p-anim" style="width:4.662801010879775px; height:4.662801010879775px; top:455.35559069928695px; left:21.23276730206271px;"></div><div class="particle-star particle-green p-anim" style="width:5.332718809853759px; height:5.332718809853759px; top:1536.730279927201px; left:364.20659095929295px;"></div><div class="particle-star particle-purple p-anim" style="width:2.431763400373711px; height:2.431763400373711px; top:1413.7129213923345px; left:524.7595076730795px;"></div><div class="particle-star particle-purple p-anim" style="width:4.690272104100586px; height:4.690272104100586px; top:1528.785507073212px; left:634.6024329709326px;"></div><div class="particle-star particle-green p-anim" style="width:4.83496910073336px; height:4.83496910073336px; top:1571.8122668458136px; left:829.1233232848754px;"></div><div class="particle-star particle-purple p-anim" style="width:3.5884565074029524px; height:3.5884565074029524px; top:1230.2568547147985px; left:207.29236457424122px;"></div><div class="particle-star particle-purple p-anim" style="width:5.668708344712286px; height:5.668708344712286px; top:189.40121615183898px; left:991.5646523256873px;"></div><div class="particle-star particle-green p-anim" style="width:3.7885677438189305px; height:3.7885677438189305px; top:1632.5659832752308px; left:207.78043110905855px;"></div><div class="particle-star particle-green p-anim" style="width:2.655247746628447px; height:2.655247746628447px; top:1741.3322435210603px; left:85.06296351828496px;"></div><div class="particle-star particle-green p-anim" style="width:2.969836048725483px; height:2.969836048725483px; top:195.76452651078853px; left:775.7141000385309px;"></div><div class="particle-star particle-white p-anim" style="width:5.426804031838401px; height:5.426804031838401px; top:174.63485295288024px; left:355.1076229717728px;"></div><div class="particle-star particle-white p-anim" style="width:2.7135204296719166px; height:2.7135204296719166px; top:1355.647688683166px; left:21.580439099489013px;"></div><div class="particle-star particle-purple p-anim" style="width:3.509769967673492px; height:3.509769967673492px; top:1665.665646303924px; left:976.3216972953524px;"></div><div class="particle-star particle-purple p-anim" style="width:4.487277313852246px; height:4.487277313852246px; top:780.9357763713535px; left:263.2599087196286px;"></div><div class="particle-star particle-purple p-anim" style="width:2.3092366739983845px; height:2.3092366739983845px; top:127.31628965545667px; left:128.94814866565866px;"></div><div class="particle-star particle-green p-anim" style="width:5.629847360720305px; height:5.629847360720305px; top:1130.5035517027904px; left:742.447420430326px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0938556615874404px; height:3.0938556615874404px; top:1716.259190737776px; left:195.2082629036886px;"></div><div class="particle-star particle-purple p-anim" style="width:3.3361033271394263px; height:3.3361033271394263px; top:1560.6371598624548px; left:740.9506847751618px;"></div><div class="particle-star particle-green p-anim" style="width:2.981082994971075px; height:2.981082994971075px; top:340.21059454044007px; left:475.54250945300737px;"></div><div class="particle-star particle-white p-anim" style="width:2.6425008613077807px; height:2.6425008613077807px; top:1232.298306504208px; left:616.8762158707614px;"></div><div class="particle-star particle-green p-anim" style="width:2.9228469061708893px; height:2.9228469061708893px; top:415.1907554643117px; left:304.7443614471922px;"></div><div class="particle-star particle-purple p-anim" style="width:4.412972973270371px; height:4.412972973270371px; top:1068.37534038566px; left:760.7136744288073px;"></div><div class="particle-star particle-white p-anim" style="width:3.6916789999486355px; height:3.6916789999486355px; top:1122.7608525493224px; left:87.99790379453043px;"></div><div class="particle-star particle-white p-anim" style="width:5.325307687064196px; height:5.325307687064196px; top:260.9009332248206px; left:551.3295157581888px;"></div><div class="particle-star particle-white p-anim" style="width:5.867347892552061px; height:5.867347892552061px; top:1667.2163794618655px; left:256.8303267231022px;"></div><div class="particle-star particle-purple p-anim" style="width:5.8580470264969335px; height:5.8580470264969335px; top:1528.216142326005px; left:431.8811632851066px;"></div><div class="particle-star particle-purple p-anim" style="width:5.824032719079696px; height:5.824032719079696px; top:1282.716862806683px; left:224.99064055640702px;"></div><div class="particle-star particle-white p-anim" style="width:2.2779440263730066px; height:2.2779440263730066px; top:622.0607916782683px; left:865.66315070575px;"></div><div class="particle-star particle-purple p-anim" style="width:3.718072432315239px; height:3.718072432315239px; top:990.331940667761px; left:464.2661541623238px;"></div><div class="particle-star particle-white p-anim" style="width:2.628012898090674px; height:2.628012898090674px; top:334.5703136134716px; left:251.8968664185104px;"></div><div class="particle-star particle-green p-anim" style="width:3.4763252035190817px; height:3.4763252035190817px; top:104.98406753008567px; left:420.2484337896567px;"></div><div class="particle-star particle-purple p-anim" style="width:2.71620581739262px; height:2.71620581739262px; top:1755.1594550569007px; left:121.47569184503482px;"></div><div class="particle-star particle-green p-anim" style="width:4.7851705267239595px; height:4.7851705267239595px; top:1492.2684012358786px; left:588.0606005231914px;"></div><div class="particle-star particle-green p-anim" style="width:2.104748047007888px; height:2.104748047007888px; top:777.2735692683909px; left:972.6774501627324px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0801848282280844px; height:3.0801848282280844px; top:1075.1307716375777px; left:428.0579328452359px;"></div><div class="particle-star particle-white p-anim" style="width:4.1001612631371245px; height:4.1001612631371245px; top:354.9885848517988px; left:186.85617354039096px;"></div><div class="particle-star particle-green p-anim" style="width:5.53651949671621px; height:5.53651949671621px; top:90.38502802313815px; left:441.5138155709792px;"></div><div class="particle-star particle-green p-anim" style="width:3.744003027342842px; height:3.744003027342842px; top:1759.4411675504944px; left:344.1252548768898px;"></div><div class="particle-star particle-white p-anim" style="width:3.060008282023773px; height:3.060008282023773px; top:1595.0515123047808px; left:86.30311745526342px;"></div><div class="particle-star particle-white p-anim" style="width:3.8043483396759257px; height:3.8043483396759257px; top:1085.071066021601px; left:899.0440741810016px;"></div><div class="particle-star particle-white p-anim" style="width:2.2790289679760463px; height:2.2790289679760463px; top:1722.4989058748179px; left:892.5950869757799px;"></div><div class="particle-star particle-green p-anim" style="width:2.768037130474113px; height:2.768037130474113px; top:1505.6581586905395px; left:256.3201799959279px;"></div><div class="particle-star particle-green p-anim" style="width:5.5371421122254105px; height:5.5371421122254105px; top:188.3722487646537px; left:218.56782913586358px;"></div><div class="particle-star particle-white p-anim" style="width:2.83370940318855px; height:2.83370940318855px; top:1030.1372938413806px; left:966.5390627094894px;"></div><div class="particle-star particle-green p-anim" style="width:2.8865274695999688px; height:2.8865274695999688px; top:296.29052856698763px; left:606.1563656924045px;"></div><div class="particle-star particle-white p-anim" style="width:5.9056475347679225px; height:5.9056475347679225px; top:1258.1746374035447px; left:361.9334793071539px;"></div><div class="particle-star particle-purple p-anim" style="width:4.082236481510336px; height:4.082236481510336px; top:193.2978819973414px; left:416.846187156043px;"></div><div class="particle-star particle-green p-anim" style="width:5.588442979067622px; height:5.588442979067622px; top:385.4899108153404px; left:952.2041783677923px;"></div><div class="particle-star particle-purple p-anim" style="width:2.577276928444917px; height:2.577276928444917px; top:1625.0531419507752px; left:67.52407750307611px;"></div><div class="particle-star particle-purple p-anim" style="width:3.1825023104902357px; height:3.1825023104902357px; top:208.90961308673468px; left:20.403730133039062px;"></div><div class="particle-star particle-white p-anim" style="width:3.518543511752796px; height:3.518543511752796px; top:1190.7431957914014px; left:986.3978321271134px;"></div><div class="particle-star particle-purple p-anim" style="width:3.6804051938161138px; height:3.6804051938161138px; top:881.1370745273052px; left:1058.8949897472048px;"></div><div class="particle-star particle-green p-anim" style="width:3.743605762036168px; height:3.743605762036168px; top:847.7063941152664px; left:408.9962966384337px;"></div><div class="particle-star particle-purple p-anim" style="width:3.7641244805054157px; height:3.7641244805054157px; top:915.2259827631497px; left:245.39551275243866px;"></div><div class="particle-star particle-white p-anim" style="width:3.7783622700808337px; height:3.7783622700808337px; top:915.7530612154005px; left:734.2609291146073px;"></div></div>
+      
+      <div class="top-header">
+        <img class="top-avatar" src="./assets/logo/shiba.png" />
+        <div class="top-username">SHIBA NEWS 24H</div>
+      </div>
       
       
       <div id="scene1" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
@@ -604,7 +616,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <span class="dot yellow"></span>
               <span class="dot green"></span>
             </div>
-            <div class="browser-address">hub.docker.com/_/nginx</div>
+            <div class="browser-address">github.com/decolua/9router</div>
           </div>
           <div class="browser-inner" data-layout-allow-overflow>
             <img class="github-scroll-image" id="scroll-img-scene1" src="./assets/images/github_repo.png" />
@@ -612,11 +624,11 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
           <div class="browser-glass-shine"></div>
         </div>
         <div class="headline-container" style="top: 1085px; gap: 8px;">
-          <div class="headline-line1" id="hl1-scene1" style="font-size: 64px; letter-spacing: 1px;">NGINX</div>
-          <div class="headline-line2" id="hl2-scene1" style="font-size: 44px; font-weight: 800;">CONTAINER QUICK START</div>
+          <div class="headline-line1" id="hl1-scene1" style="font-size: 64px; letter-spacing: 1px;">9ROUTER</div>
+          <div class="headline-line2" id="hl2-scene1" style="font-size: 44px; font-weight: 800;">DEV INTEGRATION BRIEF</div>
         </div>
         <div class="action-btn" id="btn-scene1" style="top: 1265px; padding: 12px 30px; font-size: 25px; border-radius: 20px;">
-          <span class="action-icon" style="font-size: 30px; margin-right: 5px;">🔗</span> hub.docker.com/_/nginx
+          <span class="action-icon" style="font-size: 30px; margin-right: 5px;">🔗</span> github.com/decolua/9router
         </div>
       
         <img class="character" id="char-scene1" src="./assets/character/shiba/character shiba explaining something.png" />
@@ -624,8 +636,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
       <div id="scene2" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
         
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-scene2">CHỌN TAG</div>
-          <div class="headline-line2" id="hl2-scene2">RỒI PULL IMAGE</div>
+          <div class="headline-line1" id="hl1-scene2">NẰM Ở LỚP NÀO</div>
+          <div class="headline-line2" id="hl2-scene2">TRONG TECH STACK?</div>
         </div>
         <div class="bento-container" style="top: 525px;" id="bento-scene2">
           <div class="bento-card full" id="bc-scene2-1">
@@ -633,8 +645,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
             </div>
             <div class="card-text-group">
-              <div class="card-title">Mã nguồn HTML sạch</div>
-              <div class="card-desc">&lt;div class="clip" data-start="0" data-duration="5"&gt;</div>
+              <div class="card-title">Package</div>
+              <div class="card-desc">.dockerignore, .env.example, .github, .gitignore, .npmignore</div>
             </div>
           </div>
           <div class="bento-grid-2">
@@ -642,13 +654,13 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">Xem trước lập tức</div>
+              <div class="card-title" style="font-size: 32px; text-align: center;">API</div>
             </div>
             <div class="bento-card half" id="bc-scene2-3">
               <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
                 <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">Xuất MP4 cực nét</div>
+              <div class="card-title" style="font-size: 32px; text-align: center;">Docs</div>
             </div>
           </div>
         </div>
@@ -658,8 +670,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
       <div id="scene3" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
         
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-scene3">PORT</div>
-          <div class="headline-line2" id="hl2-scene3">VOLUME VÀ ENV</div>
+          <div class="headline-line1" id="hl1-scene3">CÀI ĐẶT</div>
+          <div class="headline-line2" id="hl2-scene3">RỒI TEST NHANH</div>
         </div>
         <div class="bento-container" style="top: 525px;" id="bento-scene3">
           <div class="bento-grid-2">
@@ -667,13 +679,13 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <div class="card-icon-svg" style="margin: 0 0 20px 0;">
                 <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.09 19.58 10.5 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">Port</div>
+              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">Install</div>
             </div>
             <div class="bento-card half" id="bc-scene3-2" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
               <div class="card-icon-svg" style="margin: 0 0 20px 0;">
                 <svg viewBox="0 0 24 24"><path d="M5.2 18.2l-2.4-2.4c-.6-.6-.6-1.6 0-2.2l3.4-3.4c.6-.6 1.6-.6 2.2 0l2.4 2.4c.6.6.6 1.6 0 2.2l-3.4 3.4c-.6.6-1.6.6-2.2 0zM19.6 3.8c-.8-.8-2-.8-2.8 0l-7.1 7.1c-.8.8-.8 2 0 2.8l1.4 1.4c.8.8 2 .8 2.8 0l7.1-7.1c.8-.8.8-2 0-2.8l-1.4-1.4zM7.5 13.5l3 3M17 11.5l-4.5-4.5"/></svg>
               </div>
-              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">Volume</div>
+              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">Import</div>
             </div>
           </div>
           <div class="bento-grid-2">
@@ -681,13 +693,13 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <div class="card-icon-svg" style="margin: 0 0 20px 0;">
                 <svg viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-1.4-.8-1.05-1.57L11.5 3h1l-1 7h3.5c.88 0 1.4.8 1.05 1.57L11 21z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">Env</div>
+              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">Minimal code</div>
             </div>
             <div class="bento-card half" id="bc-scene3-4" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
               <div class="card-icon-svg" style="margin: 0 0 20px 0;">
                 <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 2.18c3.55 1 6 4.3 6 7.91 0 3.86-2.61 7.42-6 8.71V4.18z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">Quản trị rủi ro AI</div>
+              <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">Output</div>
             </div>
           </div>
         </div>
@@ -702,11 +714,11 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
           </div>
         </div>
         <div class="headline-container">
-          <div class="headline-line1" id="hl1-scene4">RUN THỬ</div>
-          <div class="headline-line2" id="hl2-scene4">TRƯỚC KHI DEPLOY</div>
+          <div class="headline-line1" id="hl1-scene4">GIÁ TRỊ CHÍNH</div>
+          <div class="headline-line2" id="hl2-scene4">NẰM Ở API</div>
         </div>
         <div class="action-btn" id="btn-scene4">
-          <span class="action-icon">✓</span> $ docker run nginx
+          <span class="action-icon">✓</span> Đọc usage trước khi đưa vào production
         </div>
       
         <img class="character" id="char-scene4" src="./assets/character/shiba/character shiba explaining something.png" />
@@ -714,8 +726,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
       <div id="scene5" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
         
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-scene5">PIN TAG</div>
-          <div class="headline-line2" id="hl2-scene5">KIỂM TRA TRƯỚC PRODUCTION</div>
+          <div class="headline-line1" id="hl1-scene5">CHECKLIST</div>
+          <div class="headline-line2" id="hl2-scene5">TRƯỚC KHI TÍCH HỢP</div>
         </div>
         <div class="bento-container" style="top: 525px;" id="bento-scene5">
           <div class="bento-card full" id="bc-scene5-1">
@@ -723,23 +735,135 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <svg viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/></svg>
             </div>
             <div class="card-text-group">
-              <div class="card-title">Pull</div>
-              <div class="card-desc">Cơ chế đồng bộ timeline paused cực mạnh mẽ</div>
+              <div class="card-title">License</div>
+              <div class="card-desc">MIT License</div>
             </div>
           </div>
           <div class="bento-grid-2">
             <div class="bento-card half" id="bc-scene5-2">
               <div class="card-icon-svg" style="margin: 0 auto 15px auto;">🪐</div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">Run</div>
+              <div class="card-title" style="font-size: 32px; text-align: center;">Release</div>
             </div>
             <div class="bento-card half" id="bc-scene5-3">
               <div class="card-icon-svg" style="margin: 0 auto 15px auto;">🎬</div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">Port</div>
+              <div class="card-title" style="font-size: 32px; text-align: center;">Issues</div>
             </div>
           </div>
         </div>
       
         <img class="character" id="char-scene5" src="./assets/character/shiba/character shiba explaining something.png" />
+      </div>
+      <div id="scene6" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        
+        <div class="headline-container" style="top: 160px; gap: 5px;">
+          <div class="headline-line1" style="font-size: 50px;">9ROUTER STATS</div>
+          <div class="headline-line2" style="font-size: 50px;">ĐỘ TIN CẬY BAN ĐẦU</div>
+        </div>
+        <div class="bento-container" style="top: 375px; width: 960px;" id="bento-scene6">
+          <div class="repo-badge" id="rb-scene6">
+            <div class="crown-container">
+              <svg class="crown-svg" viewBox="0 0 24 24"><path d="M5 16L3 5l5 5 4-7 4 7 5-5-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+              <div class="rank-text">#1</div>
+            </div>
+            <div class="repo-info">
+              <div class="repo-name">decolua/9router</div>
+              <div class="repo-meta">
+                <span class="meta-dot"></span>
+                <span>JavaScript</span>
+                <span>★ 12.754</span>
+              </div>
+            </div>
+            <div class="repo-trend">
+              <span>▲ Repo</span>
+              <span class="trend-label">GitHub</span>
+            </div>
+          </div>
+
+          <div class="financial-chart" id="fc-scene6">
+            <div class="chart-trendline"></div>
+            
+            <div class="robot-badge" style="bottom: 180px; left: 160px;">
+              <svg viewBox="0 0 24 24"><path d="M19 8h-1V7c0-1.1-.9-2-2-2h-3V3c0-.55-.45-1-1-1s-1 .45-1 .45v2.55H8c-1.1 0-2 .9-2 2v1H5c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h1v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-2h1c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zM9 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+            </div>
+
+            <div class="candlestick bullish">
+              <div class="candlestick-wick" style="height: 180px;"></div>
+              <div class="candlestick-body" style="height: 110px;"></div>
+            </div>
+            
+            <div class="candlestick bearish">
+              <div class="candlestick-wick" style="height: 140px;"></div>
+              <div class="candlestick-body" style="height: 60px;"></div>
+            </div>
+
+            <div class="robot-badge" style="bottom: 230px; right: 220px;">
+              <svg viewBox="0 0 24 24"><path d="M19 8h-1V7c0-1.1-.9-2-2-2h-3V3c0-.55-.45-1-1-1s-1 .45-1 .45v2.55H8c-1.1 0-2 .9-2 2v1H5c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h1v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-2h1c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zM9 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+            </div>
+
+            <div class="candlestick bullish">
+              <div class="candlestick-wick" style="height: 240px;"></div>
+              <div class="candlestick-body" style="height: 160px; background: #00ff88; box-shadow: 0 0 35px rgba(0,255,136,0.6);"></div>
+            </div>
+          </div>
+        </div>
+      
+        <img class="character" id="char-scene6" src="./assets/character/shiba/character shiba explaining something.png" />
+      </div>
+      <div id="scene7" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        
+        <div class="main-glow-icon" id="glow-scene7">
+          <div class="glow-svg-container">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+          </div>
+        </div>
+        <div class="headline-container">
+          <div class="headline-line1" id="hl1-scene7">THỬ AN TOÀN</div>
+          <div class="headline-line2" id="hl2-scene7">TRONG PROJECT PHỤ</div>
+        </div>
+        <div class="action-btn" id="btn-scene7" style="font-family: monospace; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #00ff88;">
+          $ git clone github.com/decolua/9router
+        </div>
+      
+        <img class="character" id="char-scene7" src="./assets/character/shiba/character shiba explaining something.png" />
+      </div>
+      <div id="scene8" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene8">STAR VÀ ĐỌC DOCS</div>
+          <div class="headline-line2" id="hl2-scene8">TRƯỚC KHI DÙNG THẬT</div>
+        </div>
+        <div class="bento-container" style="top: 460px;" id="bento-scene8">
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-scene8-1" style="border: 2px solid rgba(243, 202, 86, 0.4); background: rgba(243, 202, 86, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(243,202,86,0.06); border: 2px solid rgba(243,202,86,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #f3ca56; filter: drop-shadow(0 0 8px rgba(243,202,86,0.8));"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #f3ca56; font-weight: 800;">Star</div>
+            </div>
+            <div class="bento-card half" id="bc-scene8-2" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">Docs</div>
+            </div>
+          </div>
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-scene8-3" style="border: 2px solid rgba(0, 210, 255, 0.4); background: rgba(0, 210, 255, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(0,210,255,0.06); border: 2px solid rgba(0,210,255,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #00d2ff; filter: drop-shadow(0 0 8px rgba(0,210,255,0.8));"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #00d2ff; font-weight: 800;">Release</div>
+            </div>
+            <div class="bento-card half" id="bc-scene8-4" style="border: 2px solid rgba(224, 86, 253, 0.4); background: rgba(224, 86, 253, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(224,86,253,0.06); border: 2px solid rgba(224,86,253,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #e056fd; filter: drop-shadow(0 0 8px rgba(224,86,253,0.8));"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #e056fd; font-weight: 800;">Test</div>
+            </div>
+          </div>
+        </div>
+      
+        <img class="character" id="char-scene8" src="./assets/character/shiba/character shiba explaining something.png" />
       </div>
       
       <!-- Subtitles Area -->
@@ -753,7 +877,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
     // Animate Particles Floating
     gsap.utils.toArray('.p-anim').forEach((p, i) => {
       const pDur = 3 + (i % 4);
-      const pRepeat = Math.max(1, Math.floor(64 / pDur) - 1);
+      const pRepeat = Math.max(1, Math.floor(97 / pDur) - 1);
       tl.to(p, { 
         y: "-=100", 
         x: (i%2===0 ? "+=30" : "-=30"),
@@ -782,75 +906,122 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
       
       
         tl.from("#char-scene1", { y: 20, duration: 0.2, ease: "power2.out" }, 0.5);
-        tl.to("#char-scene1", { y: -30, duration: 2, repeat: 7, yoyo: true, ease: "sine.inOut" }, 0.7);
-        tl.to("#scene1", { opacity: 0, duration: 0.3 }, 17.62);
-tl.set("#scene1", { visibility: "hidden" }, 17.92);
+        tl.to("#char-scene1", { y: -30, duration: 2, repeat: 8, yoyo: true, ease: "sine.inOut" }, 0.7);
+        tl.to("#scene1", { opacity: 0, duration: 0.3 }, 19.98);
+tl.set("#scene1", { visibility: "hidden" }, 20.28);
 
       // Scene 2
-      tl.set("#scene2", { visibility: "visible" }, 17.8);
-      tl.to("#scene2", { opacity: 1, duration: 0.1 }, 17.82);
+      tl.set("#scene2", { visibility: "visible" }, 20.16);
+      tl.to("#scene2", { opacity: 1, duration: 0.1 }, 20.18);
       
-        tl.from("#hl1-scene2", { y: -20, duration: 0.2, ease: "power3.out" }, 17.92);
-        tl.from("#hl2-scene2", { y: 20, duration: 0.2, ease: "power3.out" }, 17.92);
-        tl.from("#bc-scene2-1", { y: 20, duration: 0.2, ease: "power3.out" }, 17.92);
-        tl.from("#bc-scene2-2", { y: 20, duration: 0.2, ease: "power3.out" }, 17.92);
-        tl.from("#bc-scene2-3", { y: 20, duration: 0.2, ease: "power3.out" }, 17.92);
+        tl.from("#hl1-scene2", { y: -20, duration: 0.2, ease: "power3.out" }, 20.28);
+        tl.from("#hl2-scene2", { y: 20, duration: 0.2, ease: "power3.out" }, 20.28);
+        tl.from("#bc-scene2-1", { y: 20, duration: 0.2, ease: "power3.out" }, 20.28);
+        tl.from("#bc-scene2-2", { y: 20, duration: 0.2, ease: "power3.out" }, 20.28);
+        tl.from("#bc-scene2-3", { y: 20, duration: 0.2, ease: "power3.out" }, 20.28);
       
       
-        tl.from("#char-scene2", { y: 20, duration: 0.2, ease: "power2.out" }, 17.92);
-        tl.to("#char-scene2", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 18.12);
-        tl.to("#scene2", { opacity: 0, duration: 0.3 }, 28.38);
-tl.set("#scene2", { visibility: "hidden" }, 28.68);
+        tl.from("#char-scene2", { y: 20, duration: 0.2, ease: "power2.out" }, 20.28);
+        tl.to("#char-scene2", { y: -30, duration: 2, repeat: 5, yoyo: true, ease: "sine.inOut" }, 20.48);
+        tl.to("#scene2", { opacity: 0, duration: 0.3 }, 33.78);
+tl.set("#scene2", { visibility: "hidden" }, 34.08);
 
       // Scene 3
-      tl.set("#scene3", { visibility: "visible" }, 28.56);
-      tl.to("#scene3", { opacity: 1, duration: 0.1 }, 28.58);
+      tl.set("#scene3", { visibility: "visible" }, 33.96);
+      tl.to("#scene3", { opacity: 1, duration: 0.1 }, 33.98);
       
-        tl.from("#hl1-scene3", { y: -20, duration: 0.2, ease: "power3.out" }, 28.68);
-        tl.from("#hl2-scene3", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
-        tl.from("#bc-scene3-1", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
-        tl.from("#bc-scene3-2", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
-        tl.from("#bc-scene3-3", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
-        tl.from("#bc-scene3-4", { y: 20, duration: 0.2, ease: "power3.out" }, 28.68);
+        tl.from("#hl1-scene3", { y: -20, duration: 0.2, ease: "power3.out" }, 34.08);
+        tl.from("#hl2-scene3", { y: 20, duration: 0.2, ease: "power3.out" }, 34.08);
+        tl.from("#bc-scene3-1", { y: 20, duration: 0.2, ease: "power3.out" }, 34.08);
+        tl.from("#bc-scene3-2", { y: 20, duration: 0.2, ease: "power3.out" }, 34.08);
+        tl.from("#bc-scene3-3", { y: 20, duration: 0.2, ease: "power3.out" }, 34.08);
+        tl.from("#bc-scene3-4", { y: 20, duration: 0.2, ease: "power3.out" }, 34.08);
       
       
-        tl.from("#char-scene3", { y: 20, duration: 0.2, ease: "power2.out" }, 28.68);
-        tl.to("#char-scene3", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 28.88);
-        tl.to("#scene3", { opacity: 0, duration: 0.3 }, 39.18);
-tl.set("#scene3", { visibility: "hidden" }, 39.48);
+        tl.from("#char-scene3", { y: 20, duration: 0.2, ease: "power2.out" }, 34.08);
+        tl.to("#char-scene3", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 34.28);
+        tl.to("#scene3", { opacity: 0, duration: 0.3 }, 44.38);
+tl.set("#scene3", { visibility: "hidden" }, 44.68);
 
       // Scene 4
-      tl.set("#scene4", { visibility: "visible" }, 39.36);
-      tl.to("#scene4", { opacity: 1, duration: 0.1 }, 39.379999999999995);
+      tl.set("#scene4", { visibility: "visible" }, 44.56);
+      tl.to("#scene4", { opacity: 1, duration: 0.1 }, 44.58);
       
-        tl.from("#glow-scene4", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, 39.48);
-        tl.from("#hl1-scene4", { y: -20, duration: 0.2, ease: "power3.out" }, 39.48);
-        tl.from("#hl2-scene4", { y: 20, duration: 0.2, ease: "power3.out" }, 39.48);
-        tl.from("#btn-scene4", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, 39.48);
+        tl.from("#glow-scene4", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, 44.68);
+        tl.from("#hl1-scene4", { y: -20, duration: 0.2, ease: "power3.out" }, 44.68);
+        tl.from("#hl2-scene4", { y: 20, duration: 0.2, ease: "power3.out" }, 44.68);
+        tl.from("#btn-scene4", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, 44.68);
       
       
-        tl.from("#char-scene4", { y: 20, duration: 0.2, ease: "power2.out" }, 39.48);
-        tl.to("#char-scene4", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 39.68);
-        tl.to("#scene4", { opacity: 0, duration: 0.3 }, 49.330000000000005);
-tl.set("#scene4", { visibility: "hidden" }, 49.63);
+        tl.from("#char-scene4", { y: 20, duration: 0.2, ease: "power2.out" }, 44.68);
+        tl.to("#char-scene4", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 44.88);
+        tl.to("#scene4", { opacity: 0, duration: 0.3 }, 55.93);
+tl.set("#scene4", { visibility: "hidden" }, 56.23);
 
       // Scene 5
-      tl.set("#scene5", { visibility: "visible" }, 49.510000000000005);
-      tl.to("#scene5", { opacity: 1, duration: 0.1 }, 49.53);
+      tl.set("#scene5", { visibility: "visible" }, 56.11);
+      tl.to("#scene5", { opacity: 1, duration: 0.1 }, 56.129999999999995);
       
-        tl.from("#hl1-scene5", { y: -20, duration: 0.2, ease: "power3.out" }, 49.63);
-        tl.from("#hl2-scene5", { y: 20, duration: 0.2, ease: "power3.out" }, 49.63);
-        tl.from("#bc-scene5-1", { y: 20, duration: 0.2, ease: "power3.out" }, 49.63);
-        tl.from("#bc-scene5-2", { y: 20, duration: 0.2, ease: "power3.out" }, 49.63);
-        tl.from("#bc-scene5-3", { y: 20, duration: 0.2, ease: "power3.out" }, 49.63);
+        tl.from("#hl1-scene5", { y: -20, duration: 0.2, ease: "power3.out" }, 56.23);
+        tl.from("#hl2-scene5", { y: 20, duration: 0.2, ease: "power3.out" }, 56.23);
+        tl.from("#bc-scene5-1", { y: 20, duration: 0.2, ease: "power3.out" }, 56.23);
+        tl.from("#bc-scene5-2", { y: 20, duration: 0.2, ease: "power3.out" }, 56.23);
+        tl.from("#bc-scene5-3", { y: 20, duration: 0.2, ease: "power3.out" }, 56.23);
       
       
-        tl.from("#char-scene5", { y: 20, duration: 0.2, ease: "power2.out" }, 49.63);
-        tl.to("#char-scene5", { y: -30, duration: 2, repeat: 6, yoyo: true, ease: "sine.inOut" }, 49.830000000000005);
+        tl.from("#char-scene5", { y: 20, duration: 0.2, ease: "power2.out" }, 56.23);
+        tl.to("#char-scene5", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 56.43);
+        tl.to("#scene5", { opacity: 0, duration: 0.3 }, 67.66);
+tl.set("#scene5", { visibility: "hidden" }, 67.96);
+
+      // Scene 6
+      tl.set("#scene6", { visibility: "visible" }, 67.83999999999999);
+      tl.to("#scene6", { opacity: 1, duration: 0.1 }, 67.86);
+      
+        tl.from("#rb-scene6", { y: -20, duration: 0.2, ease: "power3.out" }, 67.96);
+        tl.from("#fc-scene6", { y: 20, duration: 0.2, ease: "power3.out" }, 67.96);
+        tl.from(".candlestick", { y: 20, stagger: 0.02, duration: 0.2, ease: "power3.out" }, 67.96);
+        tl.from(".robot-badge", { y: 15, stagger: 0.02, duration: 0.2, ease: "power3.out" }, 67.96);
+      
+      
+        tl.from("#char-scene6", { y: 20, duration: 0.2, ease: "power2.out" }, 67.96);
+        tl.to("#char-scene6", { y: -30, duration: 2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 68.16);
+        tl.to("#scene6", { opacity: 0, duration: 0.3 }, 79.02);
+tl.set("#scene6", { visibility: "hidden" }, 79.32);
+
+      // Scene 7
+      tl.set("#scene7", { visibility: "visible" }, 79.19999999999999);
+      tl.to("#scene7", { opacity: 1, duration: 0.1 }, 79.22);
+      
+        tl.from("#glow-scene7", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, 79.32);
+        tl.from("#hl1-scene7", { y: -20, duration: 0.2, ease: "power3.out" }, 79.32);
+        tl.from("#hl2-scene7", { y: 20, duration: 0.2, ease: "power3.out" }, 79.32);
+        tl.from("#btn-scene7", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, 79.32);
+      
+      
+        tl.from("#char-scene7", { y: 20, duration: 0.2, ease: "power2.out" }, 79.32);
+        tl.to("#char-scene7", { y: -30, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 79.52);
+        tl.to("#scene7", { opacity: 0, duration: 0.3 }, 87.58);
+tl.set("#scene7", { visibility: "hidden" }, 87.88);
+
+      // Scene 8
+      tl.set("#scene8", { visibility: "visible" }, 87.75999999999999);
+      tl.to("#scene8", { opacity: 1, duration: 0.1 }, 87.78);
+      
+        tl.from("#hl1-scene8", { y: -20, duration: 0.2, ease: "power3.out" }, 87.88);
+        tl.from("#hl2-scene8", { y: 20, duration: 0.2, ease: "power3.out" }, 87.88);
+        tl.from("#bc-scene8-1", { y: 20, duration: 0.2, ease: "power3.out" }, 87.88);
+        tl.from("#bc-scene8-2", { y: 20, duration: 0.2, ease: "power3.out" }, 87.88);
+        tl.from("#bc-scene8-3", { y: 20, duration: 0.2, ease: "power3.out" }, 87.88);
+        tl.from("#bc-scene8-4", { y: 20, duration: 0.2, ease: "power3.out" }, 87.88);
+      
+      
+        tl.from("#char-scene8", { y: 20, duration: 0.2, ease: "power2.out" }, 87.88);
+        tl.to("#char-scene8", { y: -30, duration: 2, repeat: 3, yoyo: true, ease: "sine.inOut" }, 88.08);
         
 
     // Karaoke Subtitles Grouping by Scene (Complete Sentences)
-    const subtitleBlocks = [{"words":[{"text":"library/nginx","start":0.5,"end":0.95},{"text":"là","start":0.95,"end":1.4},{"text":"một","start":1.4,"end":1.85},{"text":"Docker","start":1.85,"end":2.3},{"text":"image","start":2.3,"end":2.75},{"text":"nên","start":2.75,"end":3.2}],"start":0.5,"end":3.2},{"words":[{"text":"bắt","start":3.2,"end":3.65},{"text":"đầu","start":3.65,"end":4.11},{"text":"bằng","start":4.11,"end":4.56},{"text":"cách","start":4.56,"end":5.01},{"text":"rất","start":5.01,"end":5.46},{"text":"thực","start":5.46,"end":5.91}],"start":3.2,"end":5.91},{"words":[{"text":"dụng:","start":5.91,"end":6.36},{"text":"image","start":6.36,"end":6.81},{"text":"này","start":6.81,"end":7.26},{"text":"chạy","start":7.26,"end":7.71},{"text":"service","start":7.71,"end":8.16},{"text":"gì,","start":8.16,"end":8.61}],"start":5.91,"end":8.61},{"words":[{"text":"pull","start":8.61,"end":9.06},{"text":"thế","start":9.06,"end":9.51},{"text":"nào,","start":9.51,"end":9.96},{"text":"map","start":9.96,"end":10.41},{"text":"port","start":10.41,"end":10.87},{"text":"ra","start":10.87,"end":11.32}],"start":8.61,"end":11.32},{"words":[{"text":"sao,","start":11.32,"end":11.77},{"text":"và","start":11.77,"end":12.22},{"text":"có","start":12.22,"end":12.67},{"text":"cần","start":12.67,"end":13.12},{"text":"volume","start":13.12,"end":13.57},{"text":"hay","start":13.57,"end":14.02}],"start":11.32,"end":14.02},{"words":[{"text":"env","start":14.02,"end":14.47},{"text":"không.","start":14.47,"end":14.92},{"text":"Official","start":14.92,"end":15.37},{"text":"build","start":15.37,"end":15.82},{"text":"of","start":15.82,"end":16.27},{"text":"Nginx..","start":16.27,"end":16.72}],"start":14.02,"end":16.72},{"words":[{"text":"Bước","start":17.92,"end":18.32},{"text":"đầu","start":18.32,"end":18.72},{"text":"tiên","start":18.72,"end":19.11},{"text":"là","start":19.11,"end":19.51},{"text":"pull","start":19.51,"end":19.91},{"text":"image","start":19.91,"end":20.31}],"start":17.92,"end":20.31},{"words":[{"text":"và","start":20.31,"end":20.71},{"text":"chọn","start":20.71,"end":21.1},{"text":"tag","start":21.1,"end":21.5},{"text":"rõ","start":21.5,"end":21.9},{"text":"ràng.","start":21.9,"end":22.3},{"text":"Nếu","start":22.3,"end":22.7}],"start":20.31,"end":22.7},{"words":[{"text":"làm","start":22.7,"end":23.09},{"text":"production,","start":23.09,"end":23.49},{"text":"tránh","start":23.49,"end":23.89},{"text":"phụ","start":23.89,"end":24.29},{"text":"thuộc","start":24.29,"end":24.69},{"text":"vào","start":24.69,"end":25.08}],"start":22.7,"end":25.08},{"words":[{"text":"latest","start":25.08,"end":25.48},{"text":"khi","start":25.48,"end":25.88},{"text":"chưa","start":25.88,"end":26.28},{"text":"kiểm","start":26.28,"end":26.68},{"text":"soát","start":26.68,"end":27.07},{"text":"version.","start":27.07,"end":27.47}],"start":25.08,"end":27.47},{"words":[{"text":"Tiếp","start":28.68,"end":29.05},{"text":"theo","start":29.05,"end":29.42},{"text":"là","start":29.42,"end":29.79},{"text":"xác","start":29.79,"end":30.16},{"text":"định","start":30.16,"end":30.53},{"text":"port,","start":30.53,"end":30.9}],"start":28.68,"end":30.9},{"words":[{"text":"volume","start":30.9,"end":31.26},{"text":"và","start":31.26,"end":31.63},{"text":"biến","start":31.63,"end":32},{"text":"môi","start":32,"end":32.37},{"text":"trường.","start":32.37,"end":32.74},{"text":"Đây","start":32.74,"end":33.11}],"start":30.9,"end":33.11},{"words":[{"text":"là","start":33.11,"end":33.48},{"text":"ba","start":33.48,"end":33.85},{"text":"thứ","start":33.85,"end":34.22},{"text":"quyết","start":34.22,"end":34.59},{"text":"định","start":34.59,"end":34.96},{"text":"container","start":34.96,"end":35.33}],"start":33.11,"end":35.33},{"words":[{"text":"chạy","start":35.33,"end":35.7},{"text":"được","start":35.7,"end":36.06},{"text":"trong","start":36.06,"end":36.43},{"text":"môi","start":36.43,"end":36.8},{"text":"trường","start":36.8,"end":37.17},{"text":"thật","start":37.17,"end":37.54}],"start":35.33,"end":37.54},{"words":[{"text":"hay","start":37.54,"end":37.91},{"text":"không.","start":37.91,"end":38.28}],"start":37.54,"end":38.28},{"words":[{"text":"Lệnh","start":39.48,"end":39.87},{"text":"chạy","start":39.87,"end":40.26},{"text":"thử","start":40.26,"end":40.65},{"text":"nên","start":40.65,"end":41.04},{"text":"đơn","start":41.04,"end":41.43},{"text":"giản","start":41.43,"end":41.82}],"start":39.48,"end":41.82},{"words":[{"text":"trước,","start":41.82,"end":42.2},{"text":"ví","start":42.2,"end":42.59},{"text":"dụ","start":42.59,"end":42.98},{"text":"docker","start":42.98,"end":43.37},{"text":"run","start":43.37,"end":43.76},{"text":"nginx.","start":43.76,"end":44.15}],"start":41.82,"end":44.15},{"words":[{"text":"Sau","start":44.15,"end":44.54},{"text":"đó","start":44.54,"end":44.93},{"text":"mới","start":44.93,"end":45.32},{"text":"thêm","start":45.32,"end":45.71},{"text":"port,","start":45.71,"end":46.1},{"text":"volume","start":46.1,"end":46.49}],"start":44.15,"end":46.49},{"words":[{"text":"và","start":46.49,"end":46.88},{"text":"cấu","start":46.88,"end":47.26},{"text":"hình","start":47.26,"end":47.65},{"text":"bảo","start":47.65,"end":48.04},{"text":"mật.","start":48.04,"end":48.43}],"start":46.49,"end":48.43},{"words":[{"text":"Kết","start":49.63,"end":50.06},{"text":"luận:","start":50.06,"end":50.5},{"text":"với","start":50.5,"end":50.93},{"text":"Docker","start":50.93,"end":51.37},{"text":"image,","start":51.37,"end":51.8},{"text":"video","start":51.8,"end":52.23}],"start":49.63,"end":52.23},{"words":[{"text":"phải","start":52.23,"end":52.67},{"text":"giúp","start":52.67,"end":53.1},{"text":"người","start":53.1,"end":53.53},{"text":"xem","start":53.53,"end":53.97},{"text":"chạy","start":53.97,"end":54.4},{"text":"được","start":54.4,"end":54.84}],"start":52.23,"end":54.84},{"words":[{"text":"container,","start":54.84,"end":55.27},{"text":"hiểu","start":55.27,"end":55.7},{"text":"tag","start":55.7,"end":56.14},{"text":"nào","start":56.14,"end":56.57},{"text":"nên","start":56.57,"end":57},{"text":"dùng","start":57,"end":57.44}],"start":54.84,"end":57.44},{"words":[{"text":"và","start":57.44,"end":57.87},{"text":"biết","start":57.87,"end":58.31},{"text":"những","start":58.31,"end":58.74},{"text":"cấu","start":58.74,"end":59.17},{"text":"hình","start":59.17,"end":59.61},{"text":"tối","start":59.61,"end":60.04}],"start":57.44,"end":60.04},{"words":[{"text":"thiểu","start":60.04,"end":60.47},{"text":"trước","start":60.47,"end":60.91},{"text":"production.","start":60.91,"end":61.34}],"start":60.04,"end":61.34}];
+    const subtitleBlocks = [{"words":[{"text":"9router","start":0.5,"end":0.85},{"text":"là","start":0.85,"end":1.2},{"text":"thứ","start":1.2,"end":1.55},{"text":"developer","start":1.55,"end":1.9},{"text":"nên","start":1.9,"end":2.25},{"text":"nhìn","start":2.25,"end":2.61}],"start":0.5,"end":2.61},{"words":[{"text":"từ","start":2.61,"end":2.96},{"text":"góc","start":2.96,"end":3.31},{"text":"độ","start":3.31,"end":3.66},{"text":"tích","start":3.66,"end":4.01},{"text":"hợp","start":4.01,"end":4.36},{"text":"vào","start":4.36,"end":4.71}],"start":2.61,"end":4.71},{"words":[{"text":"dự","start":4.71,"end":5.06},{"text":"án","start":5.06,"end":5.41},{"text":"thật:","start":5.41,"end":5.76},{"text":"nó","start":5.76,"end":6.11},{"text":"làm","start":6.11,"end":6.46},{"text":"gì,","start":6.46,"end":6.82}],"start":4.71,"end":6.82},{"words":[{"text":"cài","start":6.82,"end":7.17},{"text":"ra","start":7.17,"end":7.52},{"text":"sao,","start":7.52,"end":7.87},{"text":"API","start":7.87,"end":8.22},{"text":"dùng","start":8.22,"end":8.57},{"text":"thế","start":8.57,"end":8.92}],"start":6.82,"end":8.92},{"words":[{"text":"nào,","start":8.92,"end":9.27},{"text":"và","start":9.27,"end":9.62},{"text":"có","start":9.62,"end":9.97},{"text":"đáng","start":9.97,"end":10.32},{"text":"đưa","start":10.32,"end":10.68},{"text":"vào","start":10.68,"end":11.03}],"start":8.92,"end":11.03},{"words":[{"text":"stack","start":11.03,"end":11.38},{"text":"hay","start":11.38,"end":11.73},{"text":"không.","start":11.73,"end":12.08},{"text":"Unlimited","start":12.08,"end":12.43},{"text":"FREE","start":12.43,"end":12.78},{"text":"AI","start":12.78,"end":13.13}],"start":11.03,"end":13.13},{"words":[{"text":"coding.","start":13.13,"end":13.48},{"text":"Connect","start":13.48,"end":13.83},{"text":"Claude","start":13.83,"end":14.18},{"text":"Code,","start":14.18,"end":14.54},{"text":"Codex,","start":14.54,"end":14.89},{"text":"Cursor,","start":14.89,"end":15.24}],"start":13.13,"end":15.24},{"words":[{"text":"Cline,","start":15.24,"end":15.59},{"text":"Copilot,","start":15.59,"end":15.94},{"text":"Antigravity….","start":15.94,"end":16.29}],"start":15.24,"end":16.29},{"words":[{"text":"Trước","start":20.28,"end":20.63},{"text":"tiên","start":20.63,"end":20.97},{"text":"cần","start":20.97,"end":21.32},{"text":"hiểu","start":21.32,"end":21.66},{"text":"nó","start":21.66,"end":22.01},{"text":"nằm","start":22.01,"end":22.35}],"start":20.28,"end":22.35},{"words":[{"text":"ở","start":22.35,"end":22.7},{"text":"lớp","start":22.7,"end":23.04},{"text":"nào","start":23.04,"end":23.39},{"text":"trong","start":23.39,"end":23.73},{"text":"stack.","start":23.73,"end":24.08},{"text":"Repo","start":24.08,"end":24.43}],"start":22.35,"end":24.43},{"words":[{"text":"có","start":24.43,"end":24.77},{"text":"các","start":24.77,"end":25.12},{"text":"dấu","start":25.12,"end":25.46},{"text":"hiệu","start":25.46,"end":25.81},{"text":"như","start":25.81,"end":26.15},{"text":".dockerignore,","start":26.15,"end":26.5}],"start":24.43,"end":26.5},{"words":[{"text":".env.example,","start":26.5,"end":26.84},{"text":".github,","start":26.84,"end":27.19},{"text":".gitignore,","start":27.19,"end":27.54},{"text":".npmignore,","start":27.54,"end":27.88},{"text":"nên","start":27.88,"end":28.23},{"text":"hãy","start":28.23,"end":28.57}],"start":26.5,"end":28.57},{"words":[{"text":"xem","start":28.57,"end":28.92},{"text":"phần","start":28.92,"end":29.26},{"text":"cài","start":29.26,"end":29.61},{"text":"đặt","start":29.61,"end":29.95},{"text":"và","start":29.95,"end":30.3},{"text":"API","start":30.3,"end":30.64}],"start":28.57,"end":30.64},{"words":[{"text":"trước.","start":30.64,"end":30.99}],"start":30.64,"end":30.99},{"words":[{"text":"Điểm","start":34.08,"end":34.32},{"text":"cần","start":34.32,"end":34.55},{"text":"xem","start":34.55,"end":34.79},{"text":"ngay","start":34.79,"end":35.02},{"text":"là","start":35.02,"end":35.26},{"text":"lệnh","start":35.26,"end":35.49}],"start":34.08,"end":35.49},{"words":[{"text":"cài","start":35.49,"end":35.73},{"text":"đặt","start":35.73,"end":35.96},{"text":"và","start":35.96,"end":36.2},{"text":"ví","start":36.2,"end":36.43},{"text":"dụ","start":36.43,"end":36.67},{"text":"nhỏ","start":36.67,"end":36.9}],"start":35.49,"end":36.9},{"words":[{"text":"nhất.","start":36.9,"end":37.14},{"text":"Chỉ","start":37.14,"end":37.37},{"text":"cần","start":37.37,"end":37.61},{"text":"vài","start":37.61,"end":37.84},{"text":"dòng","start":37.84,"end":38.08},{"text":"đầu","start":38.08,"end":38.31}],"start":36.9,"end":38.31},{"words":[{"text":"tiên,","start":38.31,"end":38.55},{"text":"bạn","start":38.55,"end":38.78},{"text":"đã","start":38.78,"end":39.02},{"text":"biết","start":39.02,"end":39.25},{"text":"thư","start":39.25,"end":39.49},{"text":"viện","start":39.49,"end":39.72}],"start":38.31,"end":39.72},{"words":[{"text":"này","start":39.72,"end":39.96},{"text":"có","start":39.96,"end":40.2},{"text":"dễ","start":40.2,"end":40.43},{"text":"thử","start":40.43,"end":40.67},{"text":"trong","start":40.67,"end":40.9},{"text":"một","start":40.9,"end":41.14}],"start":39.72,"end":41.14},{"words":[{"text":"project","start":41.14,"end":41.37},{"text":"phụ","start":41.37,"end":41.61},{"text":"hay","start":41.61,"end":41.84},{"text":"không.","start":41.84,"end":42.08}],"start":41.14,"end":42.08},{"words":[{"text":"Sau","start":44.68,"end":44.96},{"text":"đó","start":44.96,"end":45.25},{"text":"mới","start":45.25,"end":45.53},{"text":"nói","start":45.53,"end":45.81},{"text":"tới","start":45.81,"end":46.1},{"text":"điểm","start":46.1,"end":46.38}],"start":44.68,"end":46.38},{"words":[{"text":"khác","start":46.38,"end":46.67},{"text":"biệt:","start":46.67,"end":46.95},{"text":"API","start":46.95,"end":47.23},{"text":"tiện","start":47.23,"end":47.52},{"text":"hơn,","start":47.52,"end":47.8},{"text":"hiệu","start":47.8,"end":48.08}],"start":46.38,"end":48.08},{"words":[{"text":"năng","start":48.08,"end":48.37},{"text":"tốt","start":48.37,"end":48.65},{"text":"hơn,","start":48.65,"end":48.93},{"text":"hoặc","start":48.93,"end":49.22},{"text":"tích","start":49.22,"end":49.5},{"text":"hợp","start":49.5,"end":49.79}],"start":48.08,"end":49.79},{"words":[{"text":"được","start":49.79,"end":50.07},{"text":"với","start":50.07,"end":50.35},{"text":"framework","start":50.35,"end":50.64},{"text":"hiện","start":50.64,"end":50.92},{"text":"đại.","start":50.92,"end":51.2},{"text":"Đừng","start":51.2,"end":51.49}],"start":49.79,"end":51.49},{"words":[{"text":"biến","start":51.49,"end":51.77},{"text":"nó","start":51.77,"end":52.05},{"text":"thành","start":52.05,"end":52.34},{"text":"quảng","start":52.34,"end":52.62},{"text":"cáo","start":52.62,"end":52.91},{"text":"chung","start":52.91,"end":53.19}],"start":51.49,"end":53.19},{"words":[{"text":"chung.","start":53.19,"end":53.47}],"start":53.19,"end":53.47},{"words":[{"text":"Checklist","start":56.23,"end":56.54},{"text":"trước","start":56.54,"end":56.85},{"text":"khi","start":56.85,"end":57.16},{"text":"dùng","start":57.16,"end":57.47},{"text":"gồm","start":57.47,"end":57.77},{"text":"license,","start":57.77,"end":58.08}],"start":56.23,"end":58.08},{"words":[{"text":"release","start":58.08,"end":58.39},{"text":"gần","start":58.39,"end":58.7},{"text":"nhất,","start":58.7,"end":59.01},{"text":"số","start":59.01,"end":59.32},{"text":"issue","start":59.32,"end":59.63},{"text":"mở,","start":59.63,"end":59.94}],"start":58.08,"end":59.94},{"words":[{"text":"ví","start":59.94,"end":60.24},{"text":"dụ","start":60.24,"end":60.55},{"text":"code","start":60.55,"end":60.86},{"text":"và","start":60.86,"end":61.17},{"text":"mức","start":61.17,"end":61.48},{"text":"độ","start":61.48,"end":61.79}],"start":59.94,"end":61.79},{"words":[{"text":"bảo","start":61.79,"end":62.1},{"text":"trì.","start":62.1,"end":62.41},{"text":"Đây","start":62.41,"end":62.72},{"text":"là","start":62.72,"end":63.02},{"text":"phần","start":63.02,"end":63.33},{"text":"rất","start":63.33,"end":63.64}],"start":61.79,"end":63.64},{"words":[{"text":"quan","start":63.64,"end":63.95},{"text":"trọng","start":63.95,"end":64.26},{"text":"với","start":64.26,"end":64.57},{"text":"repo","start":64.57,"end":64.88},{"text":"library.","start":64.88,"end":65.19}],"start":63.64,"end":65.19},{"words":[{"text":"Về","start":67.96,"end":68.25},{"text":"tín","start":68.25,"end":68.54},{"text":"hiệu","start":68.54,"end":68.82},{"text":"cộng","start":68.82,"end":69.11},{"text":"đồng,","start":69.11,"end":69.4},{"text":"9router","start":69.4,"end":69.69}],"start":67.96,"end":69.69},{"words":[{"text":"hiện","start":69.69,"end":69.97},{"text":"có","start":69.97,"end":70.26},{"text":"khoảng","start":70.26,"end":70.55},{"text":"12.754","start":70.55,"end":70.84},{"text":"sao,","start":70.84,"end":71.12},{"text":"ngôn","start":71.12,"end":71.41}],"start":69.69,"end":71.41},{"words":[{"text":"ngữ","start":71.41,"end":71.7},{"text":"chính","start":71.7,"end":71.99},{"text":"là","start":71.99,"end":72.27},{"text":"JavaScript,","start":72.27,"end":72.56},{"text":"và","start":72.56,"end":72.85},{"text":"đây","start":72.85,"end":73.14}],"start":71.41,"end":73.14},{"words":[{"text":"là","start":73.14,"end":73.43},{"text":"điểm","start":73.43,"end":73.71},{"text":"nên","start":73.71,"end":74},{"text":"kiểm","start":74,"end":74.29},{"text":"tra","start":74.29,"end":74.58},{"text":"trước","start":74.58,"end":74.86}],"start":73.14,"end":74.86},{"words":[{"text":"khi","start":74.86,"end":75.15},{"text":"đưa","start":75.15,"end":75.44},{"text":"vào","start":75.44,"end":75.73},{"text":"dự","start":75.73,"end":76.01},{"text":"án","start":76.01,"end":76.3},{"text":"thật.","start":76.3,"end":76.59}],"start":74.86,"end":76.59},{"words":[{"text":"Cách","start":79.32,"end":79.56},{"text":"thử","start":79.56,"end":79.8},{"text":"an","start":79.8,"end":80.04},{"text":"toàn","start":80.04,"end":80.28},{"text":"là","start":80.28,"end":80.52},{"text":"tạo","start":80.52,"end":80.77}],"start":79.32,"end":80.77},{"words":[{"text":"một","start":80.77,"end":81.01},{"text":"project","start":81.01,"end":81.25},{"text":"phụ,","start":81.25,"end":81.49},{"text":"copy","start":81.49,"end":81.73},{"text":"ví","start":81.73,"end":81.97},{"text":"dụ","start":81.97,"end":82.21}],"start":80.77,"end":82.21},{"words":[{"text":"nhỏ","start":82.21,"end":82.45},{"text":"nhất,","start":82.45,"end":82.69},{"text":"rồi","start":82.69,"end":82.93},{"text":"đo","start":82.93,"end":83.17},{"text":"xem","start":83.17,"end":83.41},{"text":"nó","start":83.41,"end":83.66}],"start":82.21,"end":83.66},{"words":[{"text":"giải","start":83.66,"end":83.9},{"text":"quyết","start":83.9,"end":84.14},{"text":"đúng","start":84.14,"end":84.38},{"text":"vấn","start":84.38,"end":84.62},{"text":"đề","start":84.62,"end":84.86},{"text":"của","start":84.86,"end":85.1}],"start":83.66,"end":85.1},{"words":[{"text":"mình","start":85.1,"end":85.34},{"text":"không.","start":85.34,"end":85.58}],"start":85.1,"end":85.58},{"words":[{"text":"Nếu","start":87.88,"end":88.13},{"text":"repo","start":88.13,"end":88.38},{"text":"này","start":88.38,"end":88.63},{"text":"khớp","start":88.63,"end":88.87},{"text":"use","start":88.87,"end":89.12},{"text":"case,","start":89.12,"end":89.37}],"start":87.88,"end":89.37},{"words":[{"text":"hãy","start":89.37,"end":89.62},{"text":"star","start":89.62,"end":89.87},{"text":"để","start":89.87,"end":90.12},{"text":"theo","start":90.12,"end":90.36},{"text":"dõi","start":90.36,"end":90.61},{"text":"update","start":90.61,"end":90.86}],"start":89.37,"end":90.86},{"words":[{"text":"và","start":90.86,"end":91.11},{"text":"đọc","start":91.11,"end":91.36},{"text":"kỹ","start":91.36,"end":91.61},{"text":"docs","start":91.61,"end":91.85},{"text":"trước","start":91.85,"end":92.1},{"text":"khi","start":92.1,"end":92.35}],"start":90.86,"end":92.35},{"words":[{"text":"đưa","start":92.35,"end":92.6},{"text":"vào","start":92.6,"end":92.85},{"text":"hệ","start":92.85,"end":93.1},{"text":"thống","start":93.1,"end":93.34},{"text":"thật.","start":93.34,"end":93.59}],"start":92.35,"end":93.59}];
     if (subtitleBlocks.length > 0) {
       const capContainer = document.getElementById("captions");
       const escapeHtml = (value) => String(value)
