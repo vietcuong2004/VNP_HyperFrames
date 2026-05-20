@@ -13,6 +13,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 .source-web .headline-line2 {
   background: linear-gradient(90deg, #00d2ff, #fdf01c, #ffffff);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -324,7 +325,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   line-height: 0.98;
   font-weight: 900; 
   background: linear-gradient(90deg, #fdf01c, #00d2ff); 
-  -webkit-background-clip: text; 
+  -webkit-background-clip: text;
+  background-clip: text; 
   -webkit-text-fill-color: transparent; 
   filter: drop-shadow(0 5px 15px rgba(253,240,28,0.35));
 }
@@ -571,3 +573,185 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   height: auto;
   z-index: 25;
 }
+/* Layout 1: 5 Grid */
+.grid-layout-title {
+  text-align: center;
+  font-size: 56px;
+  font-weight: 800;
+  margin-top: 250px;
+  margin-bottom: 60px;
+}
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  width: 900px;
+  margin: 0 auto;
+}
+.feature-item {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+}
+.feature-item.full-width {
+  width: 100%;
+}
+.feature-icon-wrapper {
+  width: 90px;
+  height: 90px;
+  border-radius: 24px;
+  background: rgba(30, 30, 30, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.feature-icon-wrapper svg {
+  width: 45px;
+  height: 45px;
+}
+.feature-icon-wrapper.neon-green { background: rgba(0, 255, 136, 0.08); border: 2px solid rgba(0, 255, 136, 0.2); }
+.feature-icon-wrapper.neon-green svg { stroke: #00ff88; fill: none; }
+.feature-icon-wrapper.neon-yellow { background: rgba(253, 240, 28, 0.08); border: 2px solid rgba(253, 240, 28, 0.2); }
+.feature-icon-wrapper.neon-yellow svg { stroke: #fdf01c; fill: none; }
+.feature-icon-wrapper.neon-purple { background: rgba(155, 89, 182, 0.08); border: 2px solid rgba(155, 89, 182, 0.2); }
+.feature-icon-wrapper.neon-purple svg { stroke: #9b59b6; fill: none; }
+.feature-icon-wrapper.neon-blue { background: rgba(0, 210, 255, 0.08); border: 2px solid rgba(0, 210, 255, 0.2); }
+.feature-icon-wrapper.neon-blue svg { stroke: #00d2ff; fill: none; }
+.feature-item-title { font-size: 32px; font-weight: 800; }
+.feature-item-subtitle { font-size: 22px; color: #aaa; font-weight: 500; }
+
+.bottom-text {
+  text-align: center;
+  font-size: 50px;
+  font-weight: 800;
+  margin-top: 80px;
+}
+
+/* Layout 2: Vertical Timeline */
+.timeline-container {
+  width: 800px;
+  margin: 400px auto 0;
+  display: flex;
+  flex-direction: column;
+}
+.timeline-item {
+  display: flex;
+  gap: 40px;
+  position: relative;
+  margin-bottom: 50px;
+}
+.timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.timeline-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(40, 40, 40, 0.8);
+  border: 2px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+.timeline-icon svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
+.timeline-icon.active {
+  background: rgba(255, 71, 87, 0.1);
+  border: 2px solid #ff4757;
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+}
+.timeline-icon.active svg { stroke: #ff4757; }
+.timeline-line {
+  position: absolute;
+  top: 60px;
+  bottom: -50px;
+  left: 30px;
+  width: 2px;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 50%, transparent 50%);
+  background-size: 2px 10px;
+  background-repeat: repeat-y;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+.timeline-item:last-child .timeline-line { display: none; }
+.timeline-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 5px;
+}
+.timeline-title { font-size: 38px; font-weight: 800; }
+.timeline-subtitle { font-size: 24px; color: rgba(255,255,255,0.6); }
+
+/* Layout 3: Metric Cards */
+.metric-layout-title {
+  text-align: center;
+  font-size: 56px;
+  font-weight: 800;
+  margin-top: 250px;
+  margin-bottom: 60px;
+}
+.metric-cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 900px;
+  margin: 0 auto;
+}
+.metric-card {
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.metric-card.large {
+  width: 60%;
+  align-items: center;
+  text-align: center;
+}
+.metric-card.small {
+  width: 40%;
+  align-items: flex-start;
+}
+.metric-card-icon {
+  margin-bottom: 10px;
+}
+.metric-card-icon svg { width: 45px; height: 45px; }
+.metric-card.large .metric-card-icon svg { stroke: #fff; fill: none; stroke-width: 2; }
+.metric-card.small .metric-card-icon svg { fill: #fdf01c; stroke: none; }
+.metric-value-large {
+  font-size: 50px;
+  font-weight: 900;
+  color: #ff4757;
+  text-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+}
+.metric-label-large {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+}
+.metric-label-small {
+  font-size: 20px;
+  font-weight: 800;
+  color: #888;
+  letter-spacing: 1px;
+}
+.metric-label-small .highlight { color: #fdf01c; }
+.metric-value-small {
+  font-size: 65px;
+  font-weight: 900;
+  color: #fff;
+}
+

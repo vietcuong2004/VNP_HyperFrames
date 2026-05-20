@@ -11,8 +11,8 @@ async function capture() {
 
   const page = await browser.newPage();
 
-  // Emulate dark mode
-  await page.emulateMediaFeatures([{ name: "prefers-color-scheme", value: "dark" }]);
+  // Emulate light mode
+  await page.emulateMediaFeatures([{ name: "prefers-color-scheme", value: "light" }]);
 
   // Emulate beautiful mobile viewport (vertical aspect ratio matching mobile screen)
   await page.setViewport({
@@ -47,9 +47,6 @@ async function capture() {
       .unsupported-browser,
       #bottom-sticky-banner {
         display: none !important;
-      }
-      body {
-        background-color: #0d1117 !important;
       }
     `,
   });

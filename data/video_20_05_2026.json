@@ -1,0 +1,784 @@
+{
+  "template": "G2_docker",
+  "source_url": "https://hub.docker.com/_/nginx",
+  "platform": "docker",
+  "content_type": "docker_official_base_image",
+  "video_format": "container_quick_start",
+  "classification_reason": "Image có vẻ là official/base/service image phổ biến.",
+  "metadata": {
+    "namespace": "library",
+    "image": "nginx",
+    "description": "Official build of Nginx.",
+    "star_count": 21279,
+    "pull_count": 13022046790
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "repo_url": "hub.docker.com/_/nginx",
+      "voice": "library/nginx là một Docker image nên bắt đầu bằng cách rất thực dụng: image này chạy service gì, pull thế nào, map port ra sao, và có cần volume hay env không. Official build of Nginx..",
+      "visual": "Chụp Docker Hub, tag và mô tả image.",
+      "headline_line1": "NGINX",
+      "headline_line2": "CONTAINER QUICK START",
+      "audio_start": 0.5,
+      "audio_duration": 16.22,
+      "audio_path": "assets/audio/video_20_05_2026_scene_1.wav",
+      "transcript": [
+        {
+          "text": "library/nginx",
+          "start": 0.5,
+          "end": 0.95
+        },
+        {
+          "text": "là",
+          "start": 0.95,
+          "end": 1.4
+        },
+        {
+          "text": "một",
+          "start": 1.4,
+          "end": 1.85
+        },
+        {
+          "text": "Docker",
+          "start": 1.85,
+          "end": 2.3
+        },
+        {
+          "text": "image",
+          "start": 2.3,
+          "end": 2.75
+        },
+        {
+          "text": "nên",
+          "start": 2.75,
+          "end": 3.2
+        },
+        {
+          "text": "bắt",
+          "start": 3.2,
+          "end": 3.65
+        },
+        {
+          "text": "đầu",
+          "start": 3.65,
+          "end": 4.11
+        },
+        {
+          "text": "bằng",
+          "start": 4.11,
+          "end": 4.56
+        },
+        {
+          "text": "cách",
+          "start": 4.56,
+          "end": 5.01
+        },
+        {
+          "text": "rất",
+          "start": 5.01,
+          "end": 5.46
+        },
+        {
+          "text": "thực",
+          "start": 5.46,
+          "end": 5.91
+        },
+        {
+          "text": "dụng:",
+          "start": 5.91,
+          "end": 6.36
+        },
+        {
+          "text": "image",
+          "start": 6.36,
+          "end": 6.81
+        },
+        {
+          "text": "này",
+          "start": 6.81,
+          "end": 7.26
+        },
+        {
+          "text": "chạy",
+          "start": 7.26,
+          "end": 7.71
+        },
+        {
+          "text": "service",
+          "start": 7.71,
+          "end": 8.16
+        },
+        {
+          "text": "gì,",
+          "start": 8.16,
+          "end": 8.61
+        },
+        {
+          "text": "pull",
+          "start": 8.61,
+          "end": 9.06
+        },
+        {
+          "text": "thế",
+          "start": 9.06,
+          "end": 9.51
+        },
+        {
+          "text": "nào,",
+          "start": 9.51,
+          "end": 9.96
+        },
+        {
+          "text": "map",
+          "start": 9.96,
+          "end": 10.41
+        },
+        {
+          "text": "port",
+          "start": 10.41,
+          "end": 10.87
+        },
+        {
+          "text": "ra",
+          "start": 10.87,
+          "end": 11.32
+        },
+        {
+          "text": "sao,",
+          "start": 11.32,
+          "end": 11.77
+        },
+        {
+          "text": "và",
+          "start": 11.77,
+          "end": 12.22
+        },
+        {
+          "text": "có",
+          "start": 12.22,
+          "end": 12.67
+        },
+        {
+          "text": "cần",
+          "start": 12.67,
+          "end": 13.12
+        },
+        {
+          "text": "volume",
+          "start": 13.12,
+          "end": 13.57
+        },
+        {
+          "text": "hay",
+          "start": 13.57,
+          "end": 14.02
+        },
+        {
+          "text": "env",
+          "start": 14.02,
+          "end": 14.47
+        },
+        {
+          "text": "không.",
+          "start": 14.47,
+          "end": 14.92
+        },
+        {
+          "text": "Official",
+          "start": 14.92,
+          "end": 15.37
+        },
+        {
+          "text": "build",
+          "start": 15.37,
+          "end": 15.82
+        },
+        {
+          "text": "of",
+          "start": 15.82,
+          "end": 16.27
+        },
+        {
+          "text": "Nginx..",
+          "start": 16.27,
+          "end": 16.72
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Bước đầu tiên là pull image và chọn tag rõ ràng. Nếu làm production, tránh phụ thuộc vào latest khi chưa kiểm soát version.",
+      "visual": "Terminal docker pull và danh sách tag.",
+      "headline_line1": "CHỌN TAG",
+      "headline_line2": "RỒI PULL IMAGE",
+      "btn_text": "$ docker pull nginx",
+      "audio_start": 17.92,
+      "audio_duration": 9.55,
+      "audio_path": "assets/audio/video_20_05_2026_scene_2.wav",
+      "transcript": [
+        {
+          "text": "Bước",
+          "start": 17.92,
+          "end": 18.32
+        },
+        {
+          "text": "đầu",
+          "start": 18.32,
+          "end": 18.72
+        },
+        {
+          "text": "tiên",
+          "start": 18.72,
+          "end": 19.11
+        },
+        {
+          "text": "là",
+          "start": 19.11,
+          "end": 19.51
+        },
+        {
+          "text": "pull",
+          "start": 19.51,
+          "end": 19.91
+        },
+        {
+          "text": "image",
+          "start": 19.91,
+          "end": 20.31
+        },
+        {
+          "text": "và",
+          "start": 20.31,
+          "end": 20.71
+        },
+        {
+          "text": "chọn",
+          "start": 20.71,
+          "end": 21.1
+        },
+        {
+          "text": "tag",
+          "start": 21.1,
+          "end": 21.5
+        },
+        {
+          "text": "rõ",
+          "start": 21.5,
+          "end": 21.9
+        },
+        {
+          "text": "ràng.",
+          "start": 21.9,
+          "end": 22.3
+        },
+        {
+          "text": "Nếu",
+          "start": 22.3,
+          "end": 22.7
+        },
+        {
+          "text": "làm",
+          "start": 22.7,
+          "end": 23.09
+        },
+        {
+          "text": "production,",
+          "start": 23.09,
+          "end": 23.49
+        },
+        {
+          "text": "tránh",
+          "start": 23.49,
+          "end": 23.89
+        },
+        {
+          "text": "phụ",
+          "start": 23.89,
+          "end": 24.29
+        },
+        {
+          "text": "thuộc",
+          "start": 24.29,
+          "end": 24.69
+        },
+        {
+          "text": "vào",
+          "start": 24.69,
+          "end": 25.08
+        },
+        {
+          "text": "latest",
+          "start": 25.08,
+          "end": 25.48
+        },
+        {
+          "text": "khi",
+          "start": 25.48,
+          "end": 25.88
+        },
+        {
+          "text": "chưa",
+          "start": 25.88,
+          "end": 26.28
+        },
+        {
+          "text": "kiểm",
+          "start": 26.28,
+          "end": 26.68
+        },
+        {
+          "text": "soát",
+          "start": 26.68,
+          "end": 27.07
+        },
+        {
+          "text": "version.",
+          "start": 27.07,
+          "end": 27.47
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Tiếp theo là xác định port, volume và biến môi trường. Đây là ba thứ quyết định container chạy được trong môi trường thật hay không.",
+      "visual": "Sơ đồ port mapping, env, volume.",
+      "headline_line1": "PORT",
+      "headline_line2": "VOLUME VÀ ENV",
+      "bento1_title": "Port",
+      "bento1_desc": "Map đúng cổng service",
+      "bento2_title": "Volume",
+      "bento3_title": "Env",
+      "audio_start": 28.68,
+      "audio_duration": 9.6,
+      "audio_path": "assets/audio/video_20_05_2026_scene_3.wav",
+      "transcript": [
+        {
+          "text": "Tiếp",
+          "start": 28.68,
+          "end": 29.05
+        },
+        {
+          "text": "theo",
+          "start": 29.05,
+          "end": 29.42
+        },
+        {
+          "text": "là",
+          "start": 29.42,
+          "end": 29.79
+        },
+        {
+          "text": "xác",
+          "start": 29.79,
+          "end": 30.16
+        },
+        {
+          "text": "định",
+          "start": 30.16,
+          "end": 30.53
+        },
+        {
+          "text": "port,",
+          "start": 30.53,
+          "end": 30.9
+        },
+        {
+          "text": "volume",
+          "start": 30.9,
+          "end": 31.26
+        },
+        {
+          "text": "và",
+          "start": 31.26,
+          "end": 31.63
+        },
+        {
+          "text": "biến",
+          "start": 31.63,
+          "end": 32.0
+        },
+        {
+          "text": "môi",
+          "start": 32.0,
+          "end": 32.37
+        },
+        {
+          "text": "trường.",
+          "start": 32.37,
+          "end": 32.74
+        },
+        {
+          "text": "Đây",
+          "start": 32.74,
+          "end": 33.11
+        },
+        {
+          "text": "là",
+          "start": 33.11,
+          "end": 33.48
+        },
+        {
+          "text": "ba",
+          "start": 33.48,
+          "end": 33.85
+        },
+        {
+          "text": "thứ",
+          "start": 33.85,
+          "end": 34.22
+        },
+        {
+          "text": "quyết",
+          "start": 34.22,
+          "end": 34.59
+        },
+        {
+          "text": "định",
+          "start": 34.59,
+          "end": 34.96
+        },
+        {
+          "text": "container",
+          "start": 34.96,
+          "end": 35.33
+        },
+        {
+          "text": "chạy",
+          "start": 35.33,
+          "end": 35.7
+        },
+        {
+          "text": "được",
+          "start": 35.7,
+          "end": 36.06
+        },
+        {
+          "text": "trong",
+          "start": 36.06,
+          "end": 36.43
+        },
+        {
+          "text": "môi",
+          "start": 36.43,
+          "end": 36.8
+        },
+        {
+          "text": "trường",
+          "start": 36.8,
+          "end": 37.17
+        },
+        {
+          "text": "thật",
+          "start": 37.17,
+          "end": 37.54
+        },
+        {
+          "text": "hay",
+          "start": 37.54,
+          "end": 37.91
+        },
+        {
+          "text": "không.",
+          "start": 37.91,
+          "end": 38.28
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Lệnh chạy thử nên đơn giản trước, ví dụ docker run nginx. Sau đó mới thêm port, volume và cấu hình bảo mật.",
+      "visual": "Terminal docker run.",
+      "headline_line1": "RUN THỬ",
+      "headline_line2": "TRƯỚC KHI DEPLOY",
+      "btn_text": "$ docker run nginx",
+      "audio_start": 39.48,
+      "audio_duration": 8.95,
+      "audio_path": "assets/audio/video_20_05_2026_scene_4.wav",
+      "transcript": [
+        {
+          "text": "Lệnh",
+          "start": 39.48,
+          "end": 39.87
+        },
+        {
+          "text": "chạy",
+          "start": 39.87,
+          "end": 40.26
+        },
+        {
+          "text": "thử",
+          "start": 40.26,
+          "end": 40.65
+        },
+        {
+          "text": "nên",
+          "start": 40.65,
+          "end": 41.04
+        },
+        {
+          "text": "đơn",
+          "start": 41.04,
+          "end": 41.43
+        },
+        {
+          "text": "giản",
+          "start": 41.43,
+          "end": 41.82
+        },
+        {
+          "text": "trước,",
+          "start": 41.82,
+          "end": 42.2
+        },
+        {
+          "text": "ví",
+          "start": 42.2,
+          "end": 42.59
+        },
+        {
+          "text": "dụ",
+          "start": 42.59,
+          "end": 42.98
+        },
+        {
+          "text": "docker",
+          "start": 42.98,
+          "end": 43.37
+        },
+        {
+          "text": "run",
+          "start": 43.37,
+          "end": 43.76
+        },
+        {
+          "text": "nginx.",
+          "start": 43.76,
+          "end": 44.15
+        },
+        {
+          "text": "Sau",
+          "start": 44.15,
+          "end": 44.54
+        },
+        {
+          "text": "đó",
+          "start": 44.54,
+          "end": 44.93
+        },
+        {
+          "text": "mới",
+          "start": 44.93,
+          "end": 45.32
+        },
+        {
+          "text": "thêm",
+          "start": 45.32,
+          "end": 45.71
+        },
+        {
+          "text": "port,",
+          "start": 45.71,
+          "end": 46.1
+        },
+        {
+          "text": "volume",
+          "start": 46.1,
+          "end": 46.49
+        },
+        {
+          "text": "và",
+          "start": 46.49,
+          "end": 46.88
+        },
+        {
+          "text": "cấu",
+          "start": 46.88,
+          "end": 47.26
+        },
+        {
+          "text": "hình",
+          "start": 47.26,
+          "end": 47.65
+        },
+        {
+          "text": "bảo",
+          "start": 47.65,
+          "end": 48.04
+        },
+        {
+          "text": "mật.",
+          "start": 48.04,
+          "end": 48.43
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Kết luận: với Docker image, video phải giúp người xem chạy được container, hiểu tag nào nên dùng và biết những cấu hình tối thiểu trước production.",
+      "visual": "Outro checklist Docker.",
+      "headline_line1": "PIN TAG",
+      "headline_line2": "KIỂM TRA TRƯỚC PRODUCTION",
+      "bento1_title": "Pull",
+      "bento2_title": "Run",
+      "bento3_title": "Port",
+      "bento4_title": "Volume",
+      "audio_start": 49.63,
+      "audio_duration": 11.71,
+      "audio_path": "assets/audio/video_20_05_2026_scene_5.wav",
+      "transcript": [
+        {
+          "text": "Kết",
+          "start": 49.63,
+          "end": 50.06
+        },
+        {
+          "text": "luận:",
+          "start": 50.06,
+          "end": 50.5
+        },
+        {
+          "text": "với",
+          "start": 50.5,
+          "end": 50.93
+        },
+        {
+          "text": "Docker",
+          "start": 50.93,
+          "end": 51.37
+        },
+        {
+          "text": "image,",
+          "start": 51.37,
+          "end": 51.8
+        },
+        {
+          "text": "video",
+          "start": 51.8,
+          "end": 52.23
+        },
+        {
+          "text": "phải",
+          "start": 52.23,
+          "end": 52.67
+        },
+        {
+          "text": "giúp",
+          "start": 52.67,
+          "end": 53.1
+        },
+        {
+          "text": "người",
+          "start": 53.1,
+          "end": 53.53
+        },
+        {
+          "text": "xem",
+          "start": 53.53,
+          "end": 53.97
+        },
+        {
+          "text": "chạy",
+          "start": 53.97,
+          "end": 54.4
+        },
+        {
+          "text": "được",
+          "start": 54.4,
+          "end": 54.84
+        },
+        {
+          "text": "container,",
+          "start": 54.84,
+          "end": 55.27
+        },
+        {
+          "text": "hiểu",
+          "start": 55.27,
+          "end": 55.7
+        },
+        {
+          "text": "tag",
+          "start": 55.7,
+          "end": 56.14
+        },
+        {
+          "text": "nào",
+          "start": 56.14,
+          "end": 56.57
+        },
+        {
+          "text": "nên",
+          "start": 56.57,
+          "end": 57.0
+        },
+        {
+          "text": "dùng",
+          "start": 57.0,
+          "end": 57.44
+        },
+        {
+          "text": "và",
+          "start": 57.44,
+          "end": 57.87
+        },
+        {
+          "text": "biết",
+          "start": 57.87,
+          "end": 58.31
+        },
+        {
+          "text": "những",
+          "start": 58.31,
+          "end": 58.74
+        },
+        {
+          "text": "cấu",
+          "start": 58.74,
+          "end": 59.17
+        },
+        {
+          "text": "hình",
+          "start": 59.17,
+          "end": 59.61
+        },
+        {
+          "text": "tối",
+          "start": 59.61,
+          "end": 60.04
+        },
+        {
+          "text": "thiểu",
+          "start": 60.04,
+          "end": 60.47
+        },
+        {
+          "text": "trước",
+          "start": 60.47,
+          "end": 60.91
+        },
+        {
+          "text": "production.",
+          "start": 60.91,
+          "end": 61.34
+        }
+      ]
+    }
+  ],
+  "duration": 64
+}
