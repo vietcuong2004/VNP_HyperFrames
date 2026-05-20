@@ -1,6 +1,11 @@
 import { spawnSync } from "child_process";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+
+// Resolve __dirname for ES module context
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const targetUrl = process.argv[2];
 const isWindows = process.platform === "win32";
@@ -29,7 +34,7 @@ try {
   console.log("==================================================\n");
 
   console.log("Step 1: Phân tích URL, nhận diện loại nội dung và tạo kịch bản JSON...");
-  const result1 = spawnSync("node", ["generate_repo_data.js", targetUrl], { encoding: "utf-8", shell: isWindows });
+  const result1 = spawnSync("node", [path.join(__dirname, "generate_repo_data.js"), targetUrl], { encoding: "utf-8", shell: isWindows });
   if (result1.error) throw result1.error;
   if (result1.status !== 0) throw new Error(`Command failed: ${result1.stderr || result1.stdout}`);
   console.log(result1.stdout);
@@ -42,13 +47,13 @@ try {
   const jsonBaseName = path.basename(jsonPath, '.json'); // e.g. nginx-20-05-2026-16-01
 
   console.log("\nStep 2: Chụp ảnh màn hình trang nguồn...");
-  run("node", ["capture_github.js", targetUrl]);
+  run("node", [path.join(__dirname, "capture_github.js"), targetUrl]);
 
   console.log("\nStep 3: Tạo giọng đọc AI (TTS) và mốc thời gian phụ đề...");
-  run(pythonBin, ["gen_assets.py", jsonPath]);
+  run(pythonBin, [path.join(__dirname, "gen_assets.py"), jsonPath]);
 
   console.log("\nStep 4: Biên dịch kịch bản sang HTML composition...");
-  run("node", ["generate.mjs", jsonPath]);
+  run("node", [path.join(__dirname, "generate.mjs"), jsonPath]);
 
   console.log("\nStep 5: Kiểm tra composition bằng HyperFrames...");
   run(npxBin, ["hyperframes", "validate"]);

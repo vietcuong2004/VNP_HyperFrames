@@ -4,6 +4,10 @@ import { Server } from "socket.io";
 import { spawn } from "child_process";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
@@ -26,7 +30,7 @@ async function processQueue() {
   
   io.emit("job_start", { id, url });
 
-  const child = spawn("node", ["run_pipeline.js", url]);
+  const child = spawn("node", [path.join(__dirname, "run_pipeline.js"), url]);
 
   let videoPath = null;
   let fullOutput = "";
