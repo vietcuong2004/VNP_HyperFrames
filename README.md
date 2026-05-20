@@ -25,14 +25,14 @@ Dự án giờ đây đã được trang bị một Web UI cực kỳ chuyên ng
 Nếu muốn tạo nhanh video review cho một URL bất kỳ từ terminal, bạn chỉ cần chạy một câu lệnh duy nhất:
 
 ```bash
-node run_pipeline.js <url_bất_kỳ>
+node pipeline/run_pipeline.js <url_bất_kỳ>
 ```
 
 **Ví dụ:**
 ```bash
-node run_pipeline.js https://github.com/pnpm/pnpm
-node run_pipeline.js https://hub.docker.com/_/nginx
-node run_pipeline.js https://docs.heygen.com
+node pipeline/run_pipeline.js https://github.com/pnpm/pnpm
+node pipeline/run_pipeline.js https://hub.docker.com/_/nginx
+node pipeline/run_pipeline.js https://docs.heygen.com
 ```
 
 ---
@@ -75,7 +75,7 @@ graph TD
 *   **Mô tả**: Dựa vào URL đầu vào, hệ thống tự động phân loại thành 3 nhóm (Group 1: GitHub, Group 2: Docker, Group 3: Web). Sau đó, gọi API hoặc dùng Tavily AI để lấy nội dung, sinh kịch bản và **chỉ định template tương ứng**.
 *   **Lệnh thực thi**:
     ```bash
-    node generate_repo_data.js https://github.com/pnpm/pnpm
+    node pipeline/generate_repo_data.js https://github.com/pnpm/pnpm
     ```
 *   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic (không ghi đè) tại: `data/<tên_tự_động>_dd_mm_yyyy.json`
 
@@ -89,7 +89,7 @@ graph TD
 *   **Mô tả**: Sử dụng thư viện Puppeteer bật Chrome ẩn danh, tự động truy cập URL nguồn, dọn dẹp các banner quảng cáo, căn chỉnh bố cục hợp lý và chụp ảnh màn hình dọc làm nguyên liệu cho Cảnh 1. Chế độ Light/Dark mode được tinh chỉnh mượt mà để tôn lên giao diện UI của từng template.
 *   **Lệnh thực thi**:
     ```bash
-    node capture_github.js https://github.com/pnpm/pnpm
+    node pipeline/capture_github.js https://github.com/pnpm/pnpm
     ```
 *   **Đầu vào (Input)**: URL trang nguồn.
 *   **Đầu ra (Output)**: Ảnh chụp màn hình dọc siêu dài: `assets/images/github_repo.png`
@@ -100,7 +100,7 @@ graph TD
 *   **Mô tả**: Tự động chuyển văn bản thành giọng nói (TTS) tiếng Việt và tính toán mốc thời gian hiển thị karaoke cho từng từ.
 *   **Lệnh thực thi**:
     ```bash
-    python gen_assets.py data/<tên_file_json>
+    python pipeline/gen_assets.py data/<tên_file_json>
     ```
 *   **Đầu vào (Input)**: Tệp JSON kịch bản.
 *   **Đầu ra (Output)**:
@@ -119,7 +119,7 @@ graph TD
     - `G3_web`: Template Neon Glassmorphism cho web/bài viết (Grid Layout, Timeline, Metric Cards).
 *   **Lệnh thực thi**:
     ```bash
-    node generate.mjs data/<tên_file_json>
+    node pipeline/generate.mjs data/<tên_file_json>
     ```
 *   **Đầu vào (Input)**: Tệp JSON kịch bản đã xử lý ở Bước 2.
 *   **Đầu ra (Output)**: Tệp mã nguồn cấu trúc video tổng thể: `index.html` tại thư mục gốc của dự án.
@@ -161,18 +161,19 @@ VNP_HyperFrames/
 │       └── fonts.css
 ├── data/                   # Chứa các file kịch bản JSON (Tên sinh tự động theo ngày)
 ├── docs/                   # Tài liệu kiến trúc và hướng dẫn
-├── public/                 # Các tài nguyên tĩnh (Giao diện cho Web UI - index.html)
+├── pipeline/               # Toàn bộ scripts điều phối pipeline
+│   ├── capture_github.js   # Script chụp ảnh màn hình Puppeteer
+│   ├── gen_assets.py       # Sinh AI TTS & Karaoke Timing
+│   ├── generate.mjs        # Biên dịch tệp JSON + Template ra index.html
+│   ├── generate_repo_data.js  # Module phân loại URL, gọi API/AI sinh Data
+│   ├── run_pipeline.js     # Trình điều phối chạy tuần tự 7 Bước
+│   └── ui_server.js        # Máy chủ Backend cấp giao diện Web (Express - Port 3001)
+├── public/                 # Giao diện Web UI (HTML/CSS/JS frontend)
 ├── renders/                # Video MP4 thành phẩm
 ├── templates/              # Hệ thống Multi-Template (Phân tách theo loại dữ liệu)
 │   ├── G1_github/          # UI/CSS cho GitHub Repo
 │   ├── G2_docker/          # UI/CSS cho Docker Hub
 │   └── G3_web/             # UI/CSS Neon Glassmorphism (Cho Website/Tech News)
-├── capture_github.js       # Script chụp ảnh màn hình Puppeteer
-├── gen_assets.py           # Sinh AI TTS & Karaoke Timing
-├── generate.mjs            # Biên dịch tệp JSON + Template ra index.html
-├── generate_repo_data.js   # Module phân loại URL, gọi API/AI sinh Data
-├── run_pipeline.js         # Trình điều phối chạy tuần tự 7 Bước
-├── ui_server.js            # Máy chủ Backend cấp giao diện Web (Express - Port 3001)
 ├── package.json
 └── README.md               # Tài liệu bạn đang đọc
 ```
