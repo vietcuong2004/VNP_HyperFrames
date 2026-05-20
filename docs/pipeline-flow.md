@@ -140,7 +140,7 @@ py gen_assets.py data/github-review.json
 Nhiệm vụ:
 
 - Đọc từng scene trong JSON.
-- Tạo audio voice-over tiếng Việt bằng gTTS.
+- Tạo audio voice-over tiếng Việt bằng edge-tts.
 - Tăng tốc audio theo `SPEECH_SPEED`.
 - Dùng `ffprobe` để lấy duration thật.
 - Gắn các trường sau vào từng scene:

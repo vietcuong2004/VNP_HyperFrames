@@ -1,9 +1,38 @@
 import json
 import sys
-from gtts import gTTS
 import os
 import subprocess
 import tempfile
+import time
+
+def generate_edge_tts(text, output_path):
+    with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', delete=False, suffix='.txt') as f:
+        f.write(text)
+        temp_text_path = f.name
+        
+    cmd = [
+        sys.executable, "-m", "edge_tts",
+        "--file", temp_text_path,
+        "--voice", "vi-VN-NamMinhNeural",
+        "--write-media", output_path
+    ]
+    
+    try:
+        for attempt in range(3):
+            try:
+                subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                return
+            except subprocess.CalledProcessError as e:
+                err_msg = e.stderr.decode('utf-8', errors='replace') if e.stderr else "Unknown error"
+                print(f"Warning: TTS failed on attempt {attempt+1}, retrying... ({err_msg})")
+                time.sleep(2)
+        raise Exception(f"TTS failed after 3 attempts. Last error: {err_msg}")
+    finally:
+        if os.path.exists(temp_text_path):
+            os.remove(temp_text_path)
+
+
+
 
 SPEECH_SPEED = 1.18
 
@@ -68,9 +97,9 @@ for i, scene in enumerate(data['scenes']):
     audio_path = f"assets/audio/{file_prefix}_scene_{i+1}.wav"
     
     print(f"Generating TTS for scene {i+1}...")
-    tts = gTTS(text=text, lang='vi', slow=False)
-    tts.save(audio_path)
+    generate_edge_tts(text, audio_path)
     speed_up_audio(audio_path, SPEECH_SPEED)
+    time.sleep(1) # prevent rate-limiting
     
     # Get exact duration using ffprobe
     scene_duration = get_audio_duration(audio_path)
@@ -84,7 +113,10 @@ for i, scene in enumerate(data['scenes']):
     words = text.split()
     scene_transcript = []
     word_start = scene['audio_start']
-    time_per_word = scene_duration / len(words)
+    # Text appears slower because trailing silence makes scene_duration longer than actual speech
+    # So we use a shorter effective duration for text spreading (e.g. 85% of total audio duration)
+    effective_text_duration = scene_duration * 0.85
+    time_per_word = effective_text_duration / len(words)
     for w in words:
         scene_transcript.append({
             "text": w,
