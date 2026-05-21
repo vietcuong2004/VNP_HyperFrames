@@ -1,11 +1,21 @@
-import { app, BrowserWindow, shell } from "electron";
+import { createRequire } from "module";
 import path from "path";
-import fs from "fs";
+import { createBrowserRuntimeState } from "./browser_runtime.mjs";
 import { buildBundledBinaryEnv, resolveBundledBinaryPaths } from "./runtime_binaries.mjs";
+import { buildRuntimeEnv, loadAppBundledEnv, loadWorkspaceEnv } from "./settings.mjs";
 import { startServer } from "./ui_server.js";
+
+const require = createRequire(import.meta.url);
+const electron = require("electron");
+const { app, BrowserWindow, shell } = electron;
 
 let mainWindow = null;
 let serverInstance = null;
+
+function hasArg(name) {
+  const normalized = name.startsWith("--") ? name : `--${name}`;
+  return process.argv.includes(normalized);
+}
 
 function getAppRoot() {
   return app.getAppPath();
@@ -19,15 +29,23 @@ async function createMainWindow() {
   const appRoot = getAppRoot();
   const workspaceRoot = getWorkspaceRoot();
   const bundledBinaries = await resolveBundledBinaryPaths({ appRoot });
-
-  const baseEnv = { ...process.env };
-  const localPuppeteerCache = path.join(appRoot, ".puppeteer-cache");
-  if (app.isPackaged || fs.existsSync(localPuppeteerCache)) {
-    baseEnv.PUPPETEER_CACHE_DIR = localPuppeteerCache;
-  }
+  const appEnv = await loadAppBundledEnv(appRoot);
+  const workspaceEnv = await loadWorkspaceEnv(workspaceRoot);
+  const browserRuntime = createBrowserRuntimeState({
+    workspaceRoot,
+    isPackaged: app.isPackaged,
+    installIfMissing: true,
+  });
 
   const runtimeEnv = buildBundledBinaryEnv({
-    baseEnv,
+    baseEnv: buildRuntimeEnv({
+      baseEnv: {
+        ...process.env,
+        ...browserRuntime.env,
+      },
+      appEnv,
+      workspaceEnv,
+    }),
     ...bundledBinaries,
   });
 
@@ -38,6 +56,7 @@ async function createMainWindow() {
     isPackaged: app.isPackaged,
     nodePath: bundledBinaries.nodePath ?? process.execPath,
     electronPath: process.execPath,
+    browserRuntime,
     port: 0,
     host: "127.0.0.1",
   });
@@ -64,6 +83,52 @@ async function createMainWindow() {
   await mainWindow.loadURL(serverInstance.url);
 }
 
+async function runSmokeTest() {
+  const appRoot = getAppRoot();
+  const workspaceRoot = path.join(app.getPath("temp"), "vnp-hyperframes-smoke-workspace");
+  const bundledBinaries = await resolveBundledBinaryPaths({ appRoot });
+  const appEnv = await loadAppBundledEnv(appRoot);
+  const workspaceEnv = await loadWorkspaceEnv(workspaceRoot);
+  const browserRuntime = createBrowserRuntimeState({
+    workspaceRoot,
+    isPackaged: app.isPackaged,
+    installIfMissing: false,
+  });
+  const runtimeEnv = buildBundledBinaryEnv({
+    baseEnv: buildRuntimeEnv({
+      baseEnv: {
+        ...process.env,
+        ...browserRuntime.env,
+      },
+      appEnv,
+      workspaceEnv,
+    }),
+    ...bundledBinaries,
+  });
+
+  const instance = await startServer({
+    rootDir: appRoot,
+    workspaceDir: workspaceRoot,
+    runtimeEnv,
+    isPackaged: app.isPackaged,
+    nodePath: bundledBinaries.nodePath ?? process.execPath,
+    electronPath: process.execPath,
+    browserRuntime,
+    port: 0,
+    host: "127.0.0.1",
+  });
+
+  try {
+    const response = await fetch(instance.url);
+    if (!response.ok) {
+      throw new Error(`Smoke test HTTP ${response.status}`);
+    }
+    console.log(`Desktop smoke test OK: ${instance.url}`);
+  } finally {
+    await instance.close();
+  }
+}
+
 async function shutdownServer() {
   if (!serverInstance) return;
   const instance = serverInstance;
@@ -82,7 +147,14 @@ if (!hasLock) {
     mainWindow.focus();
   });
 
-  app.whenReady().then(createMainWindow).catch((error) => {
+  app.whenReady().then(async () => {
+    if (hasArg("--desktop-smoke-test")) {
+      await runSmokeTest();
+      app.quit();
+      return;
+    }
+    await createMainWindow();
+  }).catch((error) => {
     console.error("Failed to start desktop app:", error);
     app.quit();
   });

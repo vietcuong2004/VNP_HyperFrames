@@ -1,6 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
+function stripNetworkCssImports(css) {
+  return css.replace(/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com\/[^'"]+['"]\);\s*/g, '');
+}
+
 async function generate() {
   const dataPath = process.argv[2];
   if (!dataPath) {
@@ -32,7 +36,7 @@ async function generate() {
 
   let styleContent = '';
   if (fs.existsSync(stylePath)) {
-    styleContent = fs.readFileSync(stylePath, 'utf-8');
+    styleContent = stripNetworkCssImports(fs.readFileSync(stylePath, 'utf-8'));
   }
 
   const html = templateModule.default(data, styleContent);

@@ -17,6 +17,7 @@ export function createWorkspacePaths({ appRoot = process.cwd(), workspaceRoot = 
     audioDir: path.join(resolvedWorkspaceRoot, "assets", "audio"),
     imageDir: path.join(resolvedWorkspaceRoot, "assets", "images"),
     workspaceAssetsDir: path.join(resolvedWorkspaceRoot, "assets"),
+    vendorDir: path.join(resolvedWorkspaceRoot, "vendor"),
     rendersDir: path.join(resolvedWorkspaceRoot, "renders"),
     logsDir: path.join(resolvedWorkspaceRoot, "logs"),
     compositionPath: path.join(resolvedWorkspaceRoot, "index.html"),
@@ -30,6 +31,7 @@ export async function ensureWorkspace(paths) {
     fsp.mkdir(paths.dataDir, { recursive: true }),
     fsp.mkdir(paths.audioDir, { recursive: true }),
     fsp.mkdir(paths.imageDir, { recursive: true }),
+    fsp.mkdir(paths.vendorDir, { recursive: true }),
     fsp.mkdir(paths.rendersDir, { recursive: true }),
     fsp.mkdir(paths.logsDir, { recursive: true }),
   ]);
@@ -69,6 +71,11 @@ export async function prepareWorkspaceRuntime(paths) {
     copyDirectoryIfExists(path.join(paths.sourceAssetsDir, "logo"), path.join(paths.workspaceAssetsDir, "logo")),
     copyDirectoryIfExists(paths.compositionsDir, path.join(paths.workspaceRoot, "compositions")),
   ]);
+
+  const gsapSource = path.join(paths.appRoot, "node_modules", "gsap", "dist", "gsap.min.js");
+  if (fs.existsSync(gsapSource)) {
+    await copyFileIfChanged(gsapSource, path.join(paths.vendorDir, "gsap.min.js"));
+  }
 
   const configCopies = [
     ["hyperframes.json", paths.hyperframesConfigPath],

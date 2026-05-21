@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { runCommand } from "../desktop_app/command_runner.mjs";
+import { createNodePackageBinCommand } from "../desktop_app/runtime_binaries.mjs";
 import { createWorkspacePaths, prepareWorkspaceRuntime } from "../desktop_app/workspace.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -9,11 +10,7 @@ const __dirname = path.dirname(__filename);
 const appRoot = path.resolve(process.env.APP_ROOT || path.join(__dirname, ".."));
 const workspaceRoot = path.resolve(process.env.WORKSPACE_DIR || appRoot);
 const paths = createWorkspacePaths({ appRoot, workspaceRoot });
-const isWindows = process.platform === "win32";
 const nodeBin = process.execPath;
-const hyperframesBin = isWindows
-  ? path.join(appRoot, "node_modules", ".bin", "hyperframes.cmd")
-  : path.join(appRoot, "node_modules", ".bin", "hyperframes");
 
 function run(command, args, options = {}) {
   return runCommand(command, args, {
@@ -119,10 +116,24 @@ async function main() {
   });
 
   console.log("\nStep 5: Kiem tra composition bang HyperFrames...");
-  run(hyperframesBin, ["validate"], { cwd: workspaceRoot });
+  const hyperframesValidate = createNodePackageBinCommand({
+    appRoot,
+    packageName: "hyperframes",
+    binRelativePath: path.join("dist", "cli.js"),
+    args: ["validate"],
+    nodePath: nodeBin,
+  });
+  run(hyperframesValidate.command, hyperframesValidate.args, { cwd: workspaceRoot });
 
   console.log("\nStep 6: Ket xuat video MP4...");
-  run(hyperframesBin, ["render", "--workers=2"], { cwd: workspaceRoot });
+  const hyperframesRender = createNodePackageBinCommand({
+    appRoot,
+    packageName: "hyperframes",
+    binRelativePath: path.join("dist", "cli.js"),
+    args: ["render", "--workers=2"],
+    nodePath: nodeBin,
+  });
+  run(hyperframesRender.command, hyperframesRender.args, { cwd: workspaceRoot });
 
   console.log("\nStep 6b: Doi ten video theo dinh dang ten-video-date-time...");
   const latestMp4 = findLatestMp4(paths.rendersDir);

@@ -273,3 +273,31 @@ npm run render          → Kết xuất MP4
 | `templates/G1_github/` | Template cho video GitHub |
 | `templates/G2_docker/` | Template cho video Docker (phong cách Terminal) |
 | `templates/G3_web/` | Template cho video web |
+
+## Ghi chú cho bản desktop packaged
+
+Khi pipeline chạy bên trong app desktop đã cài đặt, app root và workspace không còn là thư mục repo gốc:
+
+```txt
+App root: %LOCALAPPDATA%\Programs\my-video\resources\app
+Workspace: %APPDATA%\my-video\workspace
+```
+
+`desktop_app/workspace.mjs` chuẩn bị workspace trước khi chạy job: copy template/assets/data cần thiết, tạo `vendor/`, tạo thư mục output/log và copy GSAP local vào `workspace\vendor\gsap.min.js`.
+
+`desktop_app/ui_server.js` gọi pipeline với env runtime đã được hợp nhất từ:
+
+- env của tiến trình app
+- env bundle trong app, ví dụ `desktop_app/app.env`
+- env riêng của workspace nếu có
+- đường dẫn Node, FFmpeg/FFprobe và Puppeteer browser runtime
+
+Trong app desktop, bước validate/render HyperFrames dùng CLI local:
+
+```txt
+node_modules/hyperframes/dist/cli.js
+```
+
+Không dùng wrapper `node_modules\.bin\hyperframes.cmd` trong bản packaged.
+
+Composition sinh ra dùng GSAP local `./vendor/gsap.min.js`. Các `@import` Google Fonts trong CSS template được loại bỏ khi generate HTML để tránh phụ thuộc CDN trong lúc HyperFrames validate/render.

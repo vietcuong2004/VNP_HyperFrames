@@ -18,6 +18,7 @@ test("createWorkspacePaths keeps resources separate from runtime output", () => 
   assert.equal(paths.dataDir, path.join(workspaceRoot, "data"));
   assert.equal(paths.audioDir, path.join(workspaceRoot, "assets", "audio"));
   assert.equal(paths.imageDir, path.join(workspaceRoot, "assets", "images"));
+  assert.equal(paths.vendorDir, path.join(workspaceRoot, "vendor"));
   assert.equal(paths.rendersDir, path.join(workspaceRoot, "renders"));
   assert.equal(paths.logsDir, path.join(workspaceRoot, "logs"));
   assert.equal(paths.compositionPath, path.join(workspaceRoot, "index.html"));
@@ -37,6 +38,7 @@ test("ensureWorkspace creates runtime output directories", async () => {
       paths.dataDir,
       paths.audioDir,
       paths.imageDir,
+      paths.vendorDir,
       paths.rendersDir,
       paths.logsDir,
     ];

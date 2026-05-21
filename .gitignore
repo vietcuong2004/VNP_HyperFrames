@@ -8,6 +8,7 @@ preview.log
 preview.err.log
 .env
 .env.*
+desktop_app/app.env
 npm-debug.log*
 .DS_Store
 Thumbs.db

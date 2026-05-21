@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import path from "node:path";
 import { test } from "node:test";
 
-import { buildBundledBinaryEnv, createNodeScriptCommand } from "../desktop_app/runtime_binaries.mjs";
+import { buildBundledBinaryEnv, createNodePackageBinCommand, createNodeScriptCommand } from "../desktop_app/runtime_binaries.mjs";
 
 test("createNodeScriptCommand uses system node in development", () => {
   const result = createNodeScriptCommand({
@@ -45,4 +45,17 @@ test("buildBundledBinaryEnv prepends binary directories to PATH", () => {
   assert.equal(env.FFMPEG_PATH, "C:\\app\\bin\\ffmpeg.exe");
   assert.equal(env.FFPROBE_PATH, "C:\\app\\tools\\ffprobe.exe");
   assert.equal(env.PATH, ["C:\\app\\node\\bin", "C:\\app\\bin", "C:\\app\\tools", "C:\\Windows"].join(";"));
+});
+
+test("createNodePackageBinCommand runs package bin JS directly without .cmd shims", () => {
+  const result = createNodePackageBinCommand({
+    appRoot: "C:\\App\\resources\\app",
+    packageName: "hyperframes",
+    binRelativePath: "dist\\cli.js",
+    args: ["validate"],
+    nodePath: "C:\\App\\resources\\app\\node_modules\\node\\bin\\node.exe",
+  });
+
+  assert.equal(result.command, "C:\\App\\resources\\app\\node_modules\\node\\bin\\node.exe");
+  assert.deepEqual(result.args, ["C:\\App\\resources\\app\\node_modules\\hyperframes\\dist\\cli.js", "validate"]);
 });

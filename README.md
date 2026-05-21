@@ -245,3 +245,52 @@ VNP_HyperFrames/
 ├── package.json
 └── README.md               # Tài liệu bạn đang đọc
 ```
+
+## Desktop app hiện tại
+
+Bản desktop được đóng gói bằng Electron và electron-builder. Toàn bộ phần runtime riêng cho desktop nằm trong `desktop_app/`.
+
+Lệnh dùng trong quá trình phát triển:
+
+```bash
+npm run desktop
+```
+
+Lệnh tạo installer Windows:
+
+```bash
+npm run dist
+```
+
+Sau khi build, installer nằm trong `dist/`, ví dụ:
+
+```txt
+dist/VNP HyperFrames Setup 0.1.0.exe
+```
+
+Khi cài đặt và chạy app:
+
+- App root: `%LOCALAPPDATA%\Programs\my-video\resources\app`
+- Workspace người dùng: `%APPDATA%\my-video\workspace`
+- Video xuất ra: `%APPDATA%\my-video\workspace\renders`
+- Log job: `%APPDATA%\my-video\workspace\logs`
+
+Bản desktop đã bundle Node.js, FFmpeg/FFprobe, HyperFrames CLI, GSAP local và các file pipeline cần thiết. Composition sinh ra dùng `./vendor/gsap.min.js`; `pipeline/generate.mjs` sẽ loại bỏ `@import` Google Fonts để tránh lỗi validate/render khi máy người dùng không truy cập được CDN.
+
+HyperFrames trong app desktop được gọi trực tiếp qua:
+
+```txt
+node_modules/hyperframes/dist/cli.js
+```
+
+Không gọi `node_modules/.bin/hyperframes.cmd` trong bản packaged, vì đường dẫn `.cmd` có thể hỏng trong thư mục `resources/app` của Electron.
+
+Puppeteer/Chrome for Testing được quản lý trong workspace tại:
+
+```txt
+%APPDATA%\my-video\workspace\.puppeteer-cache
+```
+
+Lần chạy đầu có thể cần mạng để tải Chrome runtime nếu máy người dùng chưa có browser phù hợp. Sau khi cache xong, các lần sau sẽ dùng lại browser trong workspace.
+
+Nếu muốn người dùng chạy mà không tự nhập API key, cấu hình provider của bên làm app có thể được bundle trong `desktop_app/app.env` khi đóng gói. Không nên đưa key chính/không giới hạn vào đây; nên dùng key riêng cho app, có giới hạn quota, domain/routing riêng và có thể thu hồi.

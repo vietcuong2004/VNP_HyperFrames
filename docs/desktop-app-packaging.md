@@ -427,3 +427,59 @@ Electron + Chromium + Puppeteer + assets âm thanh/ảnh có thể làm installe
 Không cần viết lại project từ đầu. Hướng thực tế nhất là giữ pipeline đang có, dùng Electron làm lớp desktop wrapper/runtime, sau đó thiết kế lại UI theo hướng app desktop. Giao diện web hiện tại chỉ là prototype để nhìn workflow, không phải định hướng sản phẩm.
 
 Điểm cần làm sớm nhất là refactor `pipeline/ui_server.js` và thêm `desktop/main.js`. Điểm khó nhất không nằm ở UI desktop, mà nằm ở việc đóng gói các phụ thuộc ngoài Node như Python, `edge_tts`, FFmpeg/FFprobe và HyperFrames CLI.
+
+## Trạng thái hiện tại của desktop app
+
+Tại ngày 2026-05-21, bản desktop đã có thể build thành installer Windows bằng Electron:
+
+```bash
+npm run dist
+```
+
+Installer được tạo trong `dist/`, ví dụ:
+
+```txt
+dist/VNP HyperFrames Setup 0.1.0.exe
+```
+
+Khi cài đặt, app chạy từ:
+
+```txt
+%LOCALAPPDATA%\Programs\my-video\resources\app
+```
+
+Workspace runtime của người dùng nằm tại:
+
+```txt
+%APPDATA%\my-video\workspace
+```
+
+Trong workspace này có `assets/`, `data/`, `renders/`, `logs/`, `vendor/` và `.puppeteer-cache/`. Video thành phẩm nằm trong `workspace\renders`.
+
+Những điểm đã được đóng gói/tự động hóa:
+
+- Node.js runtime riêng cho app.
+- FFmpeg và FFprobe sidecar.
+- HyperFrames package local.
+- GSAP local tại `workspace\vendor\gsap.min.js`.
+- Puppeteer browser runtime/cache tại `workspace\.puppeteer-cache`.
+- Server nội bộ trong `desktop_app/ui_server.js`.
+- Cấu hình env runtime đọc từ app bundled env và workspace env.
+
+HyperFrames trong bản packaged phải được gọi bằng file CLI thật:
+
+```txt
+node_modules/hyperframes/dist/cli.js
+```
+
+Không dùng `node_modules\.bin\hyperframes.cmd` trong app đã cài, vì wrapper `.cmd` có thể trỏ sai đường dẫn trong `resources\app`.
+
+Nếu cần bundle key AI để người dùng không phải nhập, đặt env riêng của app trong:
+
+```txt
+desktop_app/app.env
+```
+
+Key này sẽ đi kèm installer nếu `desktop_app/**` được khai báo trong `package.json` `build.files`. Nên dùng key riêng cho app, có quota/routing giới hạn và có khả năng thu hồi; không nên bundle key chính.
+
+Phần bên trên là kế hoạch/thiết kế ban đầu và chỉ còn giá trị tham chiếu lịch sử. Khi có xung đột, ưu tiên mục "Trạng thái hiện tại của desktop app" này.

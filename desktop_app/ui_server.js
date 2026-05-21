@@ -38,7 +38,7 @@ function openFolder(folderPath) {
   child.unref();
 }
 
-function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false, nodePath, electronPath }) {
+function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false, nodePath, electronPath, browserRuntime }) {
   const paths = createWorkspacePaths({ appRoot, workspaceRoot });
   const app = express();
   const server = http.createServer(app);
@@ -61,6 +61,28 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
     const logPath = path.join(paths.logsDir, `${id}.log`);
 
     io.emit("job_start", { id, url });
+
+    try {
+      if (browserRuntime) {
+        io.emit("job_output", { id, text: "[desktop] Checking browser runtime for screenshots...\n" });
+        const browserResult = await browserRuntime.ensureReady();
+        if (browserResult.executablePath) {
+          runtimeEnv.PUPPETEER_EXECUTABLE_PATH = browserResult.executablePath;
+          runtimeEnv.PUPPETEER_CACHE_DIR = browserRuntime.cacheDir;
+          const installNote = browserResult.installed ? "installed" : browserResult.source;
+          io.emit("job_output", { id, text: `[desktop] Browser ready (${installNote}).\n` });
+        } else if (isPackaged) {
+          throw new Error("Không tìm thấy browser để Puppeteer chụp màn hình.");
+        }
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      await fsp.appendFile(logPath, `[desktop] Browser setup failed: ${message}\n`, "utf-8").catch(() => {});
+      io.emit("job_error", { id, error: `Browser setup failed: ${message}`, logPath });
+      isProcessing = false;
+      processQueue();
+      return;
+    }
 
     const nodeCommand = createNodeScriptCommand({
       scriptPath: path.join(__dirname, "../pipeline/run_pipeline.js"),
@@ -197,6 +219,7 @@ export async function startServer(options = {}) {
     isPackaged: options.isPackaged,
     nodePath: options.nodePath,
     electronPath: options.electronPath,
+    browserRuntime: options.browserRuntime,
   });
   await ensureWorkspace(paths);
 

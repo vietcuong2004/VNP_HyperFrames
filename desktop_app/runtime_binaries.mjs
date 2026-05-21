@@ -20,6 +20,18 @@ export function createNodeScriptCommand(options) {
   };
 }
 
+export function createNodePackageBinCommand(options) {
+  const appRoot = options.appRoot ?? process.cwd();
+  return {
+    command: options.nodePath ?? process.execPath,
+    args: [
+      path.join(appRoot, "node_modules", options.packageName, options.binRelativePath),
+      ...(options.args ?? []),
+    ],
+    env: {},
+  };
+}
+
 export function buildBundledBinaryEnv(options = {}) {
   const baseEnv = { ...(options.baseEnv ?? process.env) };
   const delimiter = options.delimiter ?? path.delimiter;
