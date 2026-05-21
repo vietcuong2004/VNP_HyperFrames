@@ -483,3 +483,60 @@ desktop_app/app.env
 Key này sẽ đi kèm installer nếu `desktop_app/**` được khai báo trong `package.json` `build.files`. Nên dùng key riêng cho app, có quota/routing giới hạn và có khả năng thu hồi; không nên bundle key chính.
 
 Phần bên trên là kế hoạch/thiết kế ban đầu và chỉ còn giá trị tham chiếu lịch sử. Khi có xung đột, ưu tiên mục "Trạng thái hiện tại của desktop app" này.
+
+## Quy trình đóng gói bản gửi người dùng
+
+Chỉ build installer trên máy của người làm app, nơi có đầy đủ dependency và file cấu hình runtime cần bundle.
+
+1. Cài dependency:
+
+```bash
+npm install
+```
+
+2. Chuẩn bị key runtime nếu muốn người dùng không phải nhập key:
+
+```txt
+desktop_app/app.env
+```
+
+`desktop_app/app.env` là file local, không commit lên Git. File này có thể chứa `OPENROUTER_API_KEY`, `OPENAI_API_KEY`, `TAVILY_API_KEY` hoặc các biến runtime khác. Nên dùng key riêng cho app, có quota/routing giới hạn và có thể thu hồi.
+
+3. Build installer:
+
+```bash
+npm run dist
+```
+
+4. Gửi cho người dùng file:
+
+```txt
+dist\VNP HyperFrames Setup 0.1.0.exe
+```
+
+Không cần nén `.rar` nếu chỉ mục tiêu là gửi app để cài và chạy. Không gửi kèm `.env`, `desktop_app/app.env`, source repo, `node_modules` hay `dist\win-unpacked`. Các phần cần thiết đã được đóng vào installer.
+
+Installer hiện đóng gói:
+
+- `desktop_app/**`: Electron main, UI server, workspace/runtime helpers và env bundled nếu có `desktop_app/app.env`.
+- `pipeline/**`: toàn bộ luồng phân tích URL, sinh JSON, TTS, generate HTML, validate và render.
+- `public/**`: giao diện desktop/web prototype đang được Electron load.
+- `templates/**`: template G1 GitHub, G2 Docker, G3 Web.
+- `assets/**`, `compositions/**`, `hyperframes.json`, `meta.json`.
+- Dependency runtime trong `node_modules` theo `package.json`, gồm `node`, `hyperframes`, `ffmpeg-static`, `ffprobe-static`, `puppeteer`, `gsap`, `openai`, `node-edge-tts`.
+
+Các đường dẫn quan trọng sau khi cài:
+
+```txt
+App root: %LOCALAPPDATA%\Programs\my-video\resources\app
+Workspace: %APPDATA%\my-video\workspace
+Output video: %APPDATA%\my-video\workspace\renders
+Log job: %APPDATA%\my-video\workspace\logs
+Browser cache: %APPDATA%\my-video\workspace\.puppeteer-cache
+```
+
+Các lỗi dễ nhầm:
+
+- `Runtime: Missing runtime`: thường là app đang chạy bản cũ hoặc kiểm runtime theo đường dẫn cũ. Bản mới kiểm HyperFrames tại `node_modules\hyperframes\dist\cli.js`.
+- `HyperFrames CLI: Cài hyperframes local trong project`: không nên xuất hiện với installer mới nếu `node_modules\hyperframes\dist\cli.js` đã được đóng gói.
+- AI trả thiếu số cảnh: bản mới có schema GitHub đủ 8 cảnh và có bước chuẩn hóa để tránh chết pipeline khi AI trả thiếu cảnh.

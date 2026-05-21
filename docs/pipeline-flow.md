@@ -301,3 +301,36 @@ node_modules/hyperframes/dist/cli.js
 Không dùng wrapper `node_modules\.bin\hyperframes.cmd` trong bản packaged.
 
 Composition sinh ra dùng GSAP local `./vendor/gsap.min.js`. Các `@import` Google Fonts trong CSS template được loại bỏ khi generate HTML để tránh phụ thuộc CDN trong lúc HyperFrames validate/render.
+
+## Đóng gói và phân phối desktop app
+
+Luồng pipeline không yêu cầu người dùng cuối có source repo. Người làm app build installer bằng:
+
+```bash
+npm run dist
+```
+
+File phân phối cho máy khác:
+
+```txt
+dist\VNP HyperFrames Setup 0.1.0.exe
+```
+
+Không cần gửi thêm `.rar`, không cần gửi `node_modules`, không cần gửi `dist\win-unpacked`. Installer đã chứa app root và các dependency runtime cần thiết.
+
+Khi cài trên máy người dùng:
+
+```txt
+App root: %LOCALAPPDATA%\Programs\my-video\resources\app
+Workspace: %APPDATA%\my-video\workspace
+```
+
+Pipeline desktop dùng:
+
+- Node local từ `resources\app\node_modules\node\bin\node.exe`.
+- HyperFrames local từ `resources\app\node_modules\hyperframes\dist\cli.js`.
+- FFmpeg/FFprobe từ package bundled.
+- GSAP local từ `workspace\vendor\gsap.min.js`.
+- Key AI từ env bundle trong app hoặc env workspace nếu có.
+
+Máy người dùng vẫn cần mạng cho AI, Edge TTS và lần đầu tải Chrome for Testing nếu workspace chưa có cache browser. Sau khi Chrome đã cache trong `%APPDATA%\my-video\workspace\.puppeteer-cache`, các lần sau app dùng lại cache đó.

@@ -29,7 +29,7 @@ const STORYTELLING_GUIDELINES = {
 };
 
 // Cấu trúc 8 cảnh (scenes) cố định cho Group 1 (GitHub)
-const GITHUB_LAYOUT_SCHEMA = [
+export const GITHUB_LAYOUT_SCHEMA = [
   {
     scene: 1,
     layout: "intro",
@@ -95,8 +95,50 @@ const GITHUB_LAYOUT_SCHEMA = [
     repo_stars: "★ 12,345",
     repo_trend: "▲ Repo",
     repo_trend_label: "GitHub"
+  },
+  {
+    scene: 7,
+    layout: "clone",
+    voice: "Huong dan clone repo, doc README va chay thu trong mot project phu truoc khi tich hop that...",
+    visual: "Hien thi lenh git clone va checklist chay thu toi gian.",
+    headline_line1: "CLONE REPO",
+    headline_line2: "CHAY THU AN TOAN",
+    btn_text: "$ git clone github.com/owner/repo"
+  },
+  {
+    scene: 8,
+    layout: "outro",
+    voice: "Ket lai bang loi khuyen kiem tra license, issue, release va star repo neu thay huu ich...",
+    visual: "Outro nhac star, binh luan va luu repo de xem lai.",
+    headline_line1: "TONG KET",
+    headline_line2: "LUU LAI NEU HUU ICH",
+    bento1_title: "Star",
+    bento2_title: "Fork",
+    bento3_title: "Issue",
+    bento4_title: "Theo doi"
   }
 ];
+
+export function normalizeGithubScenes(scenes) {
+  if (!Array.isArray(scenes)) {
+    return [];
+  }
+
+  const normalized = scenes.slice(0, GITHUB_LAYOUT_SCHEMA.length).map((scene, idx) => ({
+    ...GITHUB_LAYOUT_SCHEMA[idx],
+    ...scene,
+    scene: idx + 1,
+  }));
+
+  for (let idx = normalized.length; idx < GITHUB_LAYOUT_SCHEMA.length; idx += 1) {
+    normalized.push({
+      ...GITHUB_LAYOUT_SCHEMA[idx],
+      scene: idx + 1,
+    });
+  }
+
+  return normalized;
+}
 
 export async function generateScenes(rawData, format) {
   const { target, repoData, readme } = rawData;
@@ -179,6 +221,8 @@ export async function generateScenes(rawData, format) {
       }
     }
     
+    scenes = normalizeGithubScenes(scenes);
+
     if (Array.isArray(scenes) && scenes.length === 8) {
       // Gắn thêm các assets và sfx mặc định cho từng scene
       return scenes.map((scene, idx) => {

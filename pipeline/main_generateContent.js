@@ -598,7 +598,11 @@ async function main() {
   console.log(`Đã tạo kịch bản UTF-8 tại: ${outputPath}`);
 }
 
-main().catch((err) => {
-  console.error("Lỗi:", err.message);
-  process.exit(1);
-});
+const isCliEntrypoint = process.argv[1] && path.resolve(process.argv[1]) === __filename;
+
+if (isCliEntrypoint) {
+  main().catch((err) => {
+    console.error("Lỗi:", err.message);
+    process.exit(1);
+  });
+}

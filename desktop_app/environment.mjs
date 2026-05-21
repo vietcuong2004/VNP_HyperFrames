@@ -37,7 +37,11 @@ export async function inspectEnvironment(options = {}) {
   const env = options.env ?? process.env;
   const appRoot = options.appRoot ?? process.cwd();
   const hyperframesLocal = path.join(appRoot, "node_modules", ".bin", isWindows ? "hyperframes.cmd" : "hyperframes");
-  const hasHyperframes = fs.existsSync(hyperframesLocal) || (await checkCommand(isWindows ? "hyperframes.cmd" : "hyperframes"));
+  const hyperframesCli = path.join(appRoot, "node_modules", "hyperframes", "dist", "cli.js");
+  const hasHyperframes =
+    fileExists(hyperframesCli) ||
+    fileExists(hyperframesLocal) ||
+    (await checkCommand(isWindows ? "hyperframes.cmd" : "hyperframes"));
   const hasSystemNode = await checkCommand("node");
   const hasSystemFfmpeg = await checkCommand("ffmpeg");
   const hasSystemFfprobe = await checkCommand("ffprobe");
@@ -74,7 +78,8 @@ export async function inspectEnvironment(options = {}) {
       label: "HyperFrames CLI",
       required: true,
       ok: hasHyperframes,
-      fix: "Cài hyperframes local trong project.",
+      source: fileExists(hyperframesCli) ? "package" : fileExists(hyperframesLocal) ? "local" : hasHyperframes ? "system" : "missing",
+      fix: "Dùng installer desktop mới nhất hoặc cài hyperframes local trong project.",
     },
     {
       id: "workspace",

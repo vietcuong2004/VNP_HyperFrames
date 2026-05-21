@@ -61,3 +61,21 @@ test("inspectEnvironment accepts bundled Node and FFmpeg in packaged mode", asyn
 
   fs.rmSync(tempDir, { recursive: true, force: true });
 });
+
+test("inspectEnvironment accepts HyperFrames package CLI in packaged mode", async () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "runtime-hyperframes-"));
+  const cliPath = path.join(tempDir, "node_modules", "hyperframes", "dist", "cli.js");
+  fs.mkdirSync(path.dirname(cliPath), { recursive: true });
+  fs.writeFileSync(cliPath, "");
+
+  const result = await inspectEnvironment({
+    appRoot: tempDir,
+    isPackaged: true,
+    env: {},
+    commandExists: async () => false,
+    canWriteWorkspace: async () => true,
+  });
+
+  assert.equal(result.checks.find((check) => check.id === "hyperframes").ok, true);
+  fs.rmSync(tempDir, { recursive: true, force: true });
+});

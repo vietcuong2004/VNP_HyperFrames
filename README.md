@@ -294,3 +294,60 @@ Puppeteer/Chrome for Testing được quản lý trong workspace tại:
 Lần chạy đầu có thể cần mạng để tải Chrome runtime nếu máy người dùng chưa có browser phù hợp. Sau khi cache xong, các lần sau sẽ dùng lại browser trong workspace.
 
 Nếu muốn người dùng chạy mà không tự nhập API key, cấu hình provider của bên làm app có thể được bundle trong `desktop_app/app.env` khi đóng gói. Không nên đưa key chính/không giới hạn vào đây; nên dùng key riêng cho app, có giới hạn quota, domain/routing riêng và có thể thu hồi.
+
+### Cách đóng gói để gửi cho máy khác
+
+Trên máy build, chuẩn bị dependency một lần:
+
+```bash
+npm install
+```
+
+Nếu muốn bundle key AI của bên làm app, tạo file local:
+
+```txt
+desktop_app/app.env
+```
+
+File này không được commit lên Git. Khi build installer trên máy của người làm app, electron-builder vẫn đóng file này vào `resources\app\desktop_app\app.env` để app có key runtime. Nội dung nên chỉ gồm key riêng cho app, ví dụ các biến `OPENROUTER_API_KEY`, `OPENAI_API_KEY`, `TAVILY_API_KEY` nếu cần.
+
+Sau đó build installer:
+
+```bash
+npm run dist
+```
+
+File cần gửi cho người dùng là:
+
+```txt
+dist\VNP HyperFrames Setup 0.1.0.exe
+```
+
+Không cần nén `.rar`, không cần gửi kèm repo, `node_modules`, `dist\win-unpacked` hay file `.env` riêng. Người dùng chỉ cần chạy file setup này để cài app.
+
+Bản installer hiện đóng gói các phần sau:
+
+- App Electron và UI trong `desktop_app/`, `public/`.
+- Pipeline sinh video trong `pipeline/`.
+- Templates GitHub/Docker/Web trong `templates/`.
+- Assets mặc định trong `assets/`.
+- Node.js runtime local trong package `node`.
+- HyperFrames local tại `node_modules\hyperframes\dist\cli.js`.
+- FFmpeg/FFprobe qua `ffmpeg-static` và `ffprobe-static`.
+- GSAP local, được copy sang workspace `vendor\gsap.min.js` khi app chạy.
+
+Những thứ không cần người dùng tự cài:
+
+- Node.js.
+- HyperFrames CLI.
+- FFmpeg/FFprobe.
+- Python hoặc Python package cho TTS.
+
+Những thứ app vẫn cần lúc chạy:
+
+- Mạng để gọi AI sinh kịch bản.
+- Mạng để tạo TTS bằng dịch vụ Edge TTS.
+- Mạng trong lần chạy đầu nếu Puppeteer cần tải Chrome for Testing vào `%APPDATA%\my-video\workspace\.puppeteer-cache`.
+- Quyền ghi vào `%APPDATA%\my-video\workspace`.
+
+Khi gửi bản mới cho máy khác, luôn gửi lại file `dist\VNP HyperFrames Setup 0.1.0.exe` vừa build xong. Nếu máy bên kia đã cài bản cũ, nên cài đè bằng installer mới hoặc gỡ bản cũ rồi cài lại để tránh chạy nhầm runtime cũ.
