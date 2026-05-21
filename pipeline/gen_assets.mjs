@@ -114,7 +114,20 @@ export async function speedUpAudio(filePath, speed = SPEECH_SPEED) {
     ["-y", "-i", filePath, "-filter:a", `atempo=${speed}`, "-vn", tempPath],
     "ffmpeg atempo",
   );
-  await fsp.rename(tempPath, filePath);
+
+  // Use copyFile + unlink instead of rename to avoid EPERM on Windows
+  // (ffmpeg output may still be locked briefly by OS/antivirus)
+  const maxAttempts = 5;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      await fsp.copyFile(tempPath, filePath);
+      await fsp.unlink(tempPath);
+      return;
+    } catch (err) {
+      if (attempt === maxAttempts) throw err;
+      await sleep(300 * attempt); // 300ms, 600ms, 900ms...
+    }
+  }
 }
 
 export async function getAudioDuration(filePath) {
