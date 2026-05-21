@@ -1,5 +1,6 @@
 import { app, BrowserWindow, shell } from "electron";
 import path from "path";
+import { buildBundledBinaryEnv, resolveBundledBinaryPaths } from "../pipeline/runtime_binaries.mjs";
 import { startServer } from "../pipeline/ui_server.js";
 
 let mainWindow = null;
@@ -16,9 +17,22 @@ function getWorkspaceRoot() {
 async function createMainWindow() {
   const appRoot = getAppRoot();
   const workspaceRoot = getWorkspaceRoot();
+  const bundledBinaries = await resolveBundledBinaryPaths({ appRoot });
+  const runtimeEnv = buildBundledBinaryEnv({
+    baseEnv: {
+      ...process.env,
+      PUPPETEER_CACHE_DIR: path.join(appRoot, ".puppeteer-cache"),
+    },
+    ...bundledBinaries,
+  });
+
   serverInstance = await startServer({
     rootDir: appRoot,
     workspaceDir: workspaceRoot,
+    runtimeEnv,
+    isPackaged: app.isPackaged,
+    nodePath: bundledBinaries.nodePath ?? process.execPath,
+    electronPath: process.execPath,
     port: 0,
     host: "127.0.0.1",
   });

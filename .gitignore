@@ -1,6 +1,7 @@
 node_modules/
 .thumbnails/
 .waveform-cache/
+.puppeteer-cache/
 renders/
 dist/
 preview.log

@@ -82,8 +82,14 @@ export async function generateEdgeTts(text, outputPath, options = {}) {
   await tts.ttsPromise(text, outputPath);
 }
 
+function getRuntimeBinary(name) {
+  if (name === "ffmpeg") return process.env.FFMPEG_PATH || "ffmpeg";
+  if (name === "ffprobe") return process.env.FFPROBE_PATH || "ffprobe";
+  return name;
+}
+
 export function runFfmpeg(args, label) {
-  const result = spawnSync("ffmpeg", args, {
+  const result = spawnSync(getRuntimeBinary("ffmpeg"), args, {
     encoding: "utf-8",
     stdio: ["ignore", "pipe", "pipe"],
   });
@@ -94,7 +100,7 @@ export function runFfmpeg(args, label) {
 }
 
 export function runFfprobe(args) {
-  const result = spawnSync("ffprobe", args, {
+  const result = spawnSync(getRuntimeBinary("ffprobe"), args, {
     encoding: "utf-8",
     stdio: ["ignore", "pipe", "pipe"],
   });
@@ -130,7 +136,7 @@ export async function getAudioDuration(filePath) {
       filePath,
     ]);
   } catch {
-    const result = spawnSync("ffmpeg", ["-i", filePath], {
+    const result = spawnSync(getRuntimeBinary("ffmpeg"), ["-i", filePath], {
       encoding: "utf-8",
       stdio: ["ignore", "pipe", "pipe"],
     });

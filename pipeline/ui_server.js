@@ -7,11 +7,11 @@ import fs from "fs";
 import fsp from "fs/promises";
 import { fileURLToPath } from "url";
 import { inspectEnvironment } from "./environment.mjs";
+import { createNodeScriptCommand } from "./runtime_binaries.mjs";
 import { createWorkspacePaths, ensureWorkspace } from "./workspace.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const isWindows = process.platform === "win32";
 
 function findLatestMp4(rendersDir) {
   if (!fs.existsSync(rendersDir)) return null;
@@ -38,7 +38,7 @@ function openFolder(folderPath) {
   child.unref();
 }
 
-function createApp({ appRoot, workspaceRoot }) {
+function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false, nodePath, electronPath }) {
   const paths = createWorkspacePaths({ appRoot, workspaceRoot });
   const app = express();
   const server = http.createServer(app);
@@ -62,11 +62,21 @@ function createApp({ appRoot, workspaceRoot }) {
 
     io.emit("job_start", { id, url });
 
-    const child = spawn("node", [path.join(__dirname, "run_pipeline.js"), url], {
+    const nodeCommand = createNodeScriptCommand({
+      scriptPath: path.join(__dirname, "run_pipeline.js"),
+      args: [url],
+      isPackaged,
+      nodePath,
+      electronPath,
+    });
+
+    const child = spawn(nodeCommand.command, nodeCommand.args, {
       cwd: appRoot,
-      shell: isWindows,
+      shell: false,
       env: {
         ...process.env,
+        ...runtimeEnv,
+        ...nodeCommand.env,
         APP_ROOT: appRoot,
         WORKSPACE_DIR: workspaceRoot,
       },
@@ -157,7 +167,12 @@ function createApp({ appRoot, workspaceRoot }) {
   });
 
   app.get("/api/environment", async (_req, res) => {
-    const result = await inspectEnvironment({ appRoot, workspaceRoot });
+    const result = await inspectEnvironment({
+      appRoot,
+      workspaceRoot,
+      env: runtimeEnv,
+      isPackaged,
+    });
     return res.json({ ...result, workspaceRoot });
   });
 
@@ -175,7 +190,14 @@ export async function startServer(options = {}) {
   const workspaceRoot = options.workspaceDir ? path.resolve(options.workspaceDir) : appRoot;
   const port = Number(options.port ?? process.env.PORT ?? 3001);
   const host = options.host ?? process.env.HOST ?? "127.0.0.1";
-  const { app, server, io, paths } = createApp({ appRoot, workspaceRoot });
+  const { app, server, io, paths } = createApp({
+    appRoot,
+    workspaceRoot,
+    runtimeEnv: options.runtimeEnv,
+    isPackaged: options.isPackaged,
+    nodePath: options.nodePath,
+    electronPath: options.electronPath,
+  });
   await ensureWorkspace(paths);
 
   await new Promise((resolve, reject) => {
