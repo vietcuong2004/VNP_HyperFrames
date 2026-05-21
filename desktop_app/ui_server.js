@@ -8,7 +8,7 @@ import fsp from "fs/promises";
 import { fileURLToPath } from "url";
 import { inspectEnvironment } from "./environment.mjs";
 import { createNodeScriptCommand } from "./runtime_binaries.mjs";
-import { createWorkspacePaths, ensureWorkspace } from "../pipeline/workspace.mjs";
+import { createWorkspacePaths, ensureWorkspace } from "./workspace.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

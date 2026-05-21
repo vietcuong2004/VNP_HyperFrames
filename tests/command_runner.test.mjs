@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { createSpawnCommand } from "../pipeline/command_runner.mjs";
+import { createSpawnCommand } from "../desktop_app/command_runner.mjs";
 
 test("createSpawnCommand runs Windows cmd shims through cmd.exe", () => {
   const result = createSpawnCommand("C:/project/node_modules/.bin/hyperframes.cmd", ["validate"], {

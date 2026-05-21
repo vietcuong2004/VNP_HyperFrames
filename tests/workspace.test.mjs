@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { createWorkspacePaths, ensureWorkspace } from "../pipeline/workspace.mjs";
+import { createWorkspacePaths, ensureWorkspace } from "../desktop_app/workspace.mjs";
 
 test("createWorkspacePaths keeps resources separate from runtime output", () => {
   const appRoot = path.resolve("app-root");

@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { runCommand } from "./command_runner.mjs";
-import { createWorkspacePaths, prepareWorkspaceRuntime } from "./workspace.mjs";
+import { runCommand } from "../desktop_app/command_runner.mjs";
+import { createWorkspacePaths, prepareWorkspaceRuntime } from "../desktop_app/workspace.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
