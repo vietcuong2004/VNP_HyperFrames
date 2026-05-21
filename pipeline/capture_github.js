@@ -55,12 +55,12 @@ async function capture() {
   await page.evaluate(() => new Promise((resolve) => setTimeout(resolve, 3000)));
 
   // Ensure output directory exists
-  const dir = path.join(process.cwd(), "assets", "images");
+  const outputPath = process.env.SCREENSHOT_PATH || path.join(process.cwd(), "assets", "images", "github_repo.png");
+  const dir = path.dirname(outputPath);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
-  const outputPath = path.join(dir, "github_repo.png");
   console.log(`Đang chụp ảnh màn hình vào ${outputPath}...`);
 
   await page.screenshot({

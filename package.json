@@ -1,24 +1,59 @@
 {
   "name": "my-video",
+  "version": "0.1.0",
+  "description": "Desktop video generation app powered by HyperFrames.",
+  "author": "VNP",
   "private": true,
   "type": "module",
+  "main": "desktop/main.js",
   "scripts": {
     "start": "node pipeline/ui_server.js",
-    "dev": "npx --yes hyperframes@0.6.24 preview",
-    "check": "npx --yes hyperframes@0.6.24 lint && npx --yes hyperframes@0.6.24 validate && npx --yes hyperframes@0.6.24 inspect",
-    "render": "npx --yes hyperframes@0.6.24 render --workers=2",
-    "publish": "npx --yes hyperframes@0.6.24 publish",
+    "desktop": "electron .",
+    "dist": "electron-builder --win",
+    "test": "node --test tests/*.test.mjs",
+    "dev": "hyperframes preview",
+    "check": "hyperframes lint && hyperframes validate && hyperframes inspect",
+    "render": "hyperframes render --workers=2",
+    "publish": "hyperframes publish",
     "generate:news": "node generate.mjs data/sample-news.json",
     "generate:motivation": "node generate.mjs data/sample-motivation.json",
     "generate:finance": "node generate.mjs data/sample-finance.json",
-    "render:news": "node generate.mjs data/sample-news.json && npx --yes hyperframes@0.6.24 render --workers=2",
-    "render:motivation": "node generate.mjs data/sample-motivation.json && npx --yes hyperframes@0.6.24 render --workers=2",
-    "render:finance": "node generate.mjs data/sample-finance.json && npx --yes hyperframes@0.6.24 render --workers=2"
+    "render:news": "node generate.mjs data/sample-news.json && hyperframes render --workers=2",
+    "render:motivation": "node generate.mjs data/sample-motivation.json && hyperframes render --workers=2",
+    "render:finance": "node generate.mjs data/sample-finance.json && hyperframes render --workers=2"
   },
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1",
+    "hyperframes": "^0.6.24",
+    "node-edge-tts": "^1.2.10",
     "puppeteer": "^25.0.4",
     "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "vn.vnp.hyperframes",
+    "productName": "VNP HyperFrames",
+    "asar": false,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**",
+      "pipeline/**",
+      "public/**",
+      "templates/**",
+      "assets/**",
+      "compositions/**",
+      "hyperframes.json",
+      "meta.json",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    }
   }
 }

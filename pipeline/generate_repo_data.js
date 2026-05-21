@@ -6,7 +6,7 @@ const USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
 function loadDotEnv() {
-  const envPath = path.join(process.cwd(), ".env");
+  const envPath = path.join(process.env.APP_ROOT || process.cwd(), ".env");
   if (!fs.existsSync(envPath)) return;
 
   const lines = fs.readFileSync(envPath, "utf-8").split(/\r?\n/);
@@ -1057,7 +1057,7 @@ async function main() {
     data = await buildWebData(target);
   }
 
-  const outputDir = path.join(process.cwd(), "data");
+  const outputDir = process.env.DATA_DIR || path.join(process.cwd(), "data");
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }

@@ -2,6 +2,7 @@ node_modules/
 .thumbnails/
 .waveform-cache/
 renders/
+dist/
 preview.log
 preview.err.log
 .env
@@ -9,4 +10,3 @@ preview.err.log
 npm-debug.log*
 .DS_Store
 Thumbs.db
-

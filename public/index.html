@@ -206,6 +206,48 @@
       transform: none;
     }
 
+    .utility-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .environment-panel {
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .environment-panel strong {
+      color: var(--text);
+    }
+
+    .environment-ok {
+      color: var(--neon-green);
+    }
+
+    .environment-error {
+      color: var(--neon-red);
+    }
+
     .logs-section {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -409,6 +451,11 @@
 
         <button class="btn btn-add" onclick="addUrlInput()">+ Add More URL</button>
         <button class="btn btn-generate" id="generateBtn" onclick="generateVideos()">Generate Video</button>
+        <div class="utility-row">
+          <button class="btn btn-secondary" onclick="refreshEnvironment()">Check Runtime</button>
+          <button class="btn btn-secondary" onclick="openRenders()">Open Renders</button>
+        </div>
+        <div class="environment-panel" id="environmentPanel">Checking runtime...</div>
       </div>
 
       <div class="logs-section">
@@ -455,6 +502,36 @@
     }
 
     let activeJobs = 0;
+
+    function renderEnvironment(data) {
+      const panel = document.getElementById('environmentPanel');
+      const missing = data.checks.filter(check => check.required && !check.ok);
+      const status = data.ok
+        ? '<span class="environment-ok">Ready</span>'
+        : '<span class="environment-error">Missing runtime</span>';
+      const details = missing.length
+        ? missing.map(check => `${check.label}: ${check.fix}`).join('<br>')
+        : `Workspace: ${data.workspaceRoot}`;
+      panel.innerHTML = `<strong>Runtime:</strong> ${status}<br>${details}`;
+    }
+
+    async function refreshEnvironment() {
+      try {
+        const res = await fetch('/api/environment');
+        renderEnvironment(await res.json());
+      } catch (err) {
+        document.getElementById('environmentPanel').innerHTML =
+          '<strong>Runtime:</strong> <span class="environment-error">Cannot inspect environment</span>';
+      }
+    }
+
+    async function openRenders() {
+      try {
+        await fetch('/api/open-renders', { method: 'POST' });
+      } catch (err) {
+        appendLog('\n[SYSTEM ERROR] Could not open renders folder.\n');
+      }
+    }
 
     async function generateVideos() {
       const inputs = document.querySelectorAll('.url-input');
@@ -573,6 +650,8 @@
         btn.innerText = `Running... (${activeJobs} active)`;
       }
     });
+
+    refreshEnvironment();
   </script>
 </body>
 
