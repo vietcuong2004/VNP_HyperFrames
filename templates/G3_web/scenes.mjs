@@ -174,118 +174,87 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       break;
     }
 
-    case 4: {
-      // Cảnh 5: Frame Adapter Pattern
-      const title1 = scene.headline_line1 || "ADAPTER PATTERN";
-      const title2 = scene.headline_line2 || "ĐA DẠNG ANIMATION";
-      const bento1Title = scene.bento1_title || "GSAP Timeline";
-      const bento1Desc = scene.bento1_desc || "Cơ chế đồng bộ timeline paused cực mạnh mẽ";
-      const bento2Title = scene.bento2_title || "ThreeJS 3D";
-      const bento3Title = scene.bento3_title || "Lottie & Anime";
+        case 4: {
+      // Cảnh 5: Action Call to Action
+      const title1 = scene.headline_line1 || "HÀNH ĐỘNG TIẾP";
+      const title2 = scene.headline_line2 || "TÙY THEO NGUỒN";
+      const btnText = scene.btn_text || "Mở nguồn và kiểm chứng";
+      html = `
+        <div class="main-glow-icon" id="glow-${sceneId}">
+          <div class="glow-svg-container" style="background: rgba(255, 71, 87, 0.1); border: 2px solid #ff4757; box-shadow: 0 0 25px rgba(255, 71, 87, 0.4);">
+            <svg viewBox="0 0 24 24" style="stroke: #ff4757; fill: none; stroke-width: 2; filter: drop-shadow(0 0 8px #ff4757);"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          </div>
+        </div>
+        <div class="headline-container" style="top: 850px;">
+          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+        </div>
+        <div class="action-btn" id="btn-${sceneId}" style="top: 1250px; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #ff4757; box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);">
+          ${btnText}
+        </div>
+      `;
+      gsap = `
+        tl.from("#glow-${sceneId}", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, ${start});
+        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start + 0.1});
+        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start + 0.1});
+        tl.from("#btn-${sceneId}", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.2});
+      `;
+      break;
+    }
+
+    case 5: {
+      // Cảnh 6: Outro Web page summary
+      const title1 = scene.headline_line1 || "LƯU LINK";
+      const title2 = scene.headline_line2 || "KIỂM CHỨNG TRƯỚC KHI DÙNG";
+      const bento1Title = scene.bento1_title || "Nguồn chính";
+      const bento1Desc = scene.bento1_desc || "Tóm tắt liên quan";
+      const bento2Title = scene.bento2_title || "Tóm tắt";
+      const bento3Title = scene.bento3_title || "Kiểm chứng";
+      const bento4Title = scene.bento4_title || "Áp dụng";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="bento-container" style="top: 525px;" id="bento-${sceneId}">
-          <div class="bento-card full" id="bc-${sceneId}-1">
-            <div class="card-icon-svg">
-              <svg viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/></svg>
+        <div class="bento-container" style="top: 460px;" id="bento-${sceneId}">
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-${sceneId}-1" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">${bento1Title}</div>
+              <div class="card-desc" style="font-size: 20px; text-align: center; color: rgba(255,255,255,0.7); margin-top: 10px; max-width: 100%; word-break: break-word;">${bento1Desc}</div>
             </div>
-            <div class="card-text-group">
-              <div class="card-title">${bento1Title}</div>
-              <div class="card-desc">${bento1Desc}</div>
+            <div class="bento-card half" id="bc-${sceneId}-2" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">${bento2Title}</div>
             </div>
           </div>
           <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-2">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">🪐</div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">${bento2Title}</div>
+            <div class="bento-card half" id="bc-${sceneId}-3" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">${bento3Title}</div>
             </div>
-            <div class="bento-card half" id="bc-${sceneId}-3">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">🎬</div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">${bento3Title}</div>
+            <div class="bento-card half" id="bc-${sceneId}-4" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">${bento4Title}</div>
             </div>
           </div>
         </div>
       `;
       gsap = `
         tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#bc-${sceneId}-1", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#bc-${sceneId}-2", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#bc-${sceneId}-3", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-      `;
-      break;
-    }
-
-    case 5: {
-      // Cảnh 6: Hyperframes vs Remotion
-      const title1 = scene.headline_line1 || "HYPERFRAMES VS REMOTION";
-      const title2 = scene.headline_line2 || "MÃ NGUỒN MỞ HOÀN TOÀN";
-      const repoName = scene.repo_name || "heygen-com / hyperframes";
-      const repoLang = scene.repo_lang || "TypeScript";
-      const repoStars = scene.repo_stars || "★ 12,890";
-      const repoTrend = scene.repo_trend || "▲ 1,500";
-      const repoTrendLabel = scene.repo_trend_label || "today";
-      html = `
-        <div class="headline-container" style="top: 160px; gap: 5px;">
-          <div class="headline-line1" style="font-size: 50px;">${title1}</div>
-          <div class="headline-line2" style="font-size: 50px;">${title2}</div>
-        </div>
-        <div class="bento-container" style="top: 375px; width: 960px;" id="bento-${sceneId}">
-          <div class="repo-badge" id="rb-${sceneId}">
-            <div class="crown-container">
-              <svg class="crown-svg" viewBox="0 0 24 24"><path d="M5 16L3 5l5 5 4-7 4 7 5-5-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
-              <div class="rank-text">#1</div>
-            </div>
-            <div class="repo-info">
-              <div class="repo-name">${repoName}</div>
-              <div class="repo-meta">
-                <span class="meta-dot"></span>
-                <span>${repoLang}</span>
-                <span>${repoStars}</span>
-              </div>
-            </div>
-            <div class="repo-trend">
-              <span>${repoTrend}</span>
-              <span class="trend-label">${repoTrendLabel}</span>
-            </div>
-          </div>
-
-          <div class="financial-chart" id="fc-${sceneId}">
-            <div class="chart-trendline"></div>
-            
-            <div class="robot-badge" style="bottom: 180px; left: 160px;">
-              <svg viewBox="0 0 24 24"><path d="M19 8h-1V7c0-1.1-.9-2-2-2h-3V3c0-.55-.45-1-1-1s-1 .45-1 .45v2.55H8c-1.1 0-2 .9-2 2v1H5c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h1v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-2h1c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zM9 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
-            </div>
-
-            <div class="candlestick bullish">
-              <div class="candlestick-wick" style="height: 180px;"></div>
-              <div class="candlestick-body" style="height: 110px;"></div>
-            </div>
-            
-            <div class="candlestick bearish">
-              <div class="candlestick-wick" style="height: 140px;"></div>
-              <div class="candlestick-body" style="height: 60px;"></div>
-            </div>
-
-            <div class="robot-badge" style="bottom: 230px; right: 220px;">
-              <svg viewBox="0 0 24 24"><path d="M19 8h-1V7c0-1.1-.9-2-2-2h-3V3c0-.55-.45-1-1-1s-1 .45-1 .45v2.55H8c-1.1 0-2 .9-2 2v1H5c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h1v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-2h1c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zM9 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
-            </div>
-
-            <div class="candlestick bullish">
-              <div class="candlestick-wick" style="height: 240px;"></div>
-              <div class="candlestick-body" style="height: 160px; background: #00ff88; box-shadow: 0 0 35px rgba(0,255,136,0.6);"></div>
-            </div>
-          </div>
-        </div>
-      `;
-      gsap = `
-        tl.from("#rb-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#fc-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from(".candlestick", { y: 20, stagger: 0.02, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from(".robot-badge", { y: 15, stagger: 0.02, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#bc-${sceneId}-4", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
       `;
       break;
     }

@@ -1,0 +1,145 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH TU DONG
+Target URL: https://hub.docker.com/_/mysql
+App root: D:\VNP_HyperFrames
+Workspace: D:\VNP_HyperFrames
+==================================================
+
+Step 1: Phan tich URL va tao kich ban JSON...
+Đang phân tích Docker image: library/mysql
+> Đang gọi OpenAI/OpenRouter để sinh kịch bản Docker cho format: container_quick_start...
+
+Nền tảng: docker
+Loại nội dung: docker_official_base_image
+Format video: container_quick_start
+Lý do chọn format: Image có vẻ là official/base/service image phổ biến.
+Đã tạo kịch bản UTF-8 tại: D:\VNP_HyperFrames\data\mysql-21-05-2026-16-46.json
+
+
+Step 2: Chup anh man hinh trang nguon...
+Đang mở trình duyệt headless bằng Puppeteer...
+Đang mở trang https://hub.docker.com/_/mysql...
+Đang ẩn header/footer/banner để ảnh chụp sạch hơn...
+Đang chụp ảnh màn hình vào D:\VNP_HyperFrames\assets\images\github_repo.png...
+Đã chụp và lưu ảnh thành công.
+
+Step 3: Tao giong doc bang Node va moc thoi gian phu de...
+Generating TTS for scene 1...
+  Exact duration: 8.341208s
+Generating TTS for scene 2...
+  Exact duration: 7.426333s
+Generating TTS for scene 3...
+  Exact duration: 6.632417s
+Generating TTS for scene 4...
+  Exact duration: 7.225958s
+Generating TTS for scene 5...
+  Exact duration: 7.853542s
+Done! Total duration: 45s
+
+Step 4: Bien dich kich ban sang HTML composition...
+Successfully generated D:\VNP_HyperFrames\index.html using template: G2_docker
+
+Step 5: Kiem tra composition bang HyperFrames...
+◆  Validating VNP_HyperFrames in headless Chrome
+[StaticGuard] Invalid HyperFrame contract: GSAP tween uses `repeat: -1` (infinite). Infinite repeats break the deterministic capture engine which seeks to exact frame times. Use a finite repeat count calculated from the composition duration: `repeat: Math.floor(duration / cycleDuration) - 1`.
+
+
+  ⚠ WCAG AA contrast warnings (2):
+    · div.terminal-title "hub.docker.com — hub.docker.com/r/library/mysql" — 4.1:1 (need 4.5:1, t=4.5s)
+    · div.terminal-title "bash — docker" — 4.1:1 (need 4.5:1, t=22.5s)
+
+◇  0 error(s), 0 warning(s), 2 contrast warning(s)
+
+Step 6: Ket xuat video MP4...
+
+◆  Rendering VNP_HyperFrames → D:\VNP_HyperFrames\renders\VNP_HyperFrames_2026-05-21_16-47-26.mp4
+   30fps · standard · 2 workers
+   GPU: browser GPU (auto-detect)
+
+[?25l│
+◇  Browser: cache
+[?25h
+  ✗ [index.html] gsap_infinite_repeat: GSAP tween uses `repeat: -1` (infinite). Infinite repeats break the deterministic capture engine which seeks to exact frame times. Use a finite repeat count calculated from the composition duration: `repeat: Math.floor(duration / cycleDuration) - 1`.
+    Fix: Replace `repeat: -1` with a finite count, e.g. `repeat: Math.floor(totalDuration / singleCycleDuration) - 1`. Use Math.floor (not Math.ceil) to ensure the animation fits within the total duration.
+  ⚠ [index.html] duplicate_media_discovery_risk: Detected 5 matching img entries with the same source/start/duration.
+    Fix: Avoid duplicated media nodes that can be discovered twice during compilation.
+  ⚠ [index.html] composition_file_too_large: This HTML composition file has 374 lines. Smaller sub-compositions are easier to read, iterate on, and diff.
+    Fix: Split coherent scenes or layers into separate .html files under compositions/, then mount them from the parent with data-composition-src so each file stays small enough to inspect, revise, and validate independently.
+  ⚠ [compositions/captions.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #captions for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/captions.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #captions for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/captions.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #captions for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/captions.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #captions for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/captions.html] caption_transcript_parse_error: Inline TRANSCRIPT array is not valid JSON. The studio caption editor may fail to parse it. Common cause: unquoted property keys with apostrophes in text.
+    Fix: Use JSON-quoted keys: { "text": "don't", "start": 0, "end": 1 } instead of { text: "don't", start: 0, end: 1 }.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  Continuing render despite lint issues. Use --strict to block.
+
+[2K  █░░░░░░░░░░░░░░░░░░░░░░░░  5%  Compiling composition[Compiler] Fetched 15 font face(s) for "Space Grotesk" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\space-grotesk)
+[Compiler] Fetched 60 font face(s) for "JetBrains Mono" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\jetbrains-mono)
+[Compiler] Injected deterministic @font-face rules for 2 requested font families
+[Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[INFO] Compiled composition metadata {"entryFile":"index.html","staticDuration":45,"width":1080,"height":1920,"videoCount":0,"audioCount":8,"renderModeHints":{"recommendScreenshot":false,"reasons":[]}}
+[2K  ██░░░░░░░░░░░░░░░░░░░░░░░  10%  Extracting video frames[INFO] [Render] No HDR sources detected — rendering SDR
+[2K  █████░░░░░░░░░░░░░░░░░░░░  20%  Processing audio tracks[2K  ██████░░░░░░░░░░░░░░░░░░░  25%  Starting frame capture[INFO] streaming-encode gate {"enabled":false,"configFlag":true,"outputFormat":"mp4","workerCount":2,"durationSeconds":45,"maxDurationSeconds":240}
+[hyperframes] browserGpuMode auto → hardware (WebGL probe succeeded)
+[2K  ██████░░░░░░░░░░░░░░░░░░░  26%  Capturing frame 30/1350 (2 workers)[2K  ██████░░░░░░░░░░░░░░░░░░░  27%  Capturing frame 60/1350 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  28%  Capturing frame 90/1350 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  29%  Capturing frame 120/1350 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  30%  Capturing frame 150/1350 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  31%  Capturing frame 180/1350 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  32%  Capturing frame 210/1350 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  33%  Capturing frame 240/1350 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  34%  Capturing frame 270/1350 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  35%  Capturing frame 300/1350 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  36%  Capturing frame 330/1350 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  37%  Capturing frame 360/1350 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  38%  Capturing frame 390/1350 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  39%  Capturing frame 420/1350 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  40%  Capturing frame 450/1350 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  41%  Capturing frame 480/1350 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  42%  Capturing frame 510/1350 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  43%  Capturing frame 540/1350 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  44%  Capturing frame 570/1350 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  45%  Capturing frame 600/1350 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  46%  Capturing frame 630/1350 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  47%  Capturing frame 660/1350 (2 workers)[2K  ████████████░░░░░░░░░░░░░  48%  Capturing frame 690/1350 (2 workers)[2K  ████████████░░░░░░░░░░░░░  49%  Capturing frame 720/1350 (2 workers)[2K  ████████████░░░░░░░░░░░░░  50%  Capturing frame 750/1350 (2 workers)[2K  ████████████░░░░░░░░░░░░░  51%  Capturing frame 780/1350 (2 workers)[2K  █████████████░░░░░░░░░░░░  52%  Capturing frame 810/1350 (2 workers)[2K  █████████████░░░░░░░░░░░░  53%  Capturing frame 840/1350 (2 workers)[2K  █████████████░░░░░░░░░░░░  54%  Capturing frame 870/1350 (2 workers)[2K  █████████████░░░░░░░░░░░░  55%  Capturing frame 900/1350 (2 workers)[2K  ██████████████░░░░░░░░░░░  56%  Capturing frame 930/1350 (2 workers)[2K  ██████████████░░░░░░░░░░░  57%  Capturing frame 960/1350 (2 workers)[2K  ██████████████░░░░░░░░░░░  58%  Capturing frame 990/1350 (2 workers)[2K  ██████████████░░░░░░░░░░░  59%  Capturing frame 1020/1350 (2 workers)[2K  ███████████████░░░░░░░░░░  60%  Capturing frame 1050/1350 (2 workers)[2K  ███████████████░░░░░░░░░░  61%  Capturing frame 1080/1350 (2 workers)[2K  ███████████████░░░░░░░░░░  62%  Capturing frame 1110/1350 (2 workers)[2K  ███████████████░░░░░░░░░░  63%  Capturing frame 1140/1350 (2 workers)[2K  ████████████████░░░░░░░░░  64%  Capturing frame 1170/1350 (2 workers)[2K  ████████████████░░░░░░░░░  65%  Capturing frame 1200/1350 (2 workers)[2K  ████████████████░░░░░░░░░  66%  Capturing frame 1230/1350 (2 workers)[2K  ████████████████░░░░░░░░░  67%  Capturing frame 1260/1350 (2 workers)[2K  █████████████████░░░░░░░░  68%  Capturing frame 1290/1350 (2 workers)[2K  █████████████████░░░░░░░░  69%  Capturing frame 1320/1350 (2 workers)[2K  █████████████████░░░░░░░░  70%  Capturing frame 1350/1350 (2 workers)[2K  ██████████████████░░░░░░░  75%  Encoding video[2K  ██████████████████████░░░  90%  Assembling final video[2K  █████████████████████████  100%  Render complete
+◇  D:\VNP_HyperFrames\renders\VNP_HyperFrames_2026-05-21_16-47-26.mp4
+   15.1 MB · 2m 3.9s · completed
+
+Step 6b: Doi ten video theo dinh dang ten-video-date-time...
+Video da doi ten: VNP_HyperFrames_2026-05-21_16-47-26.mp4 -> mysql-21-05-2026-16-46.mp4
+
+Step 7: Don dep file audio tam...
+Da xoa 0 file .wav trong thu muc assets/audio.
+
+==================================================
+PIPELINE DA HOAN THANH
+Video moi da duoc luu trong thu muc renders/ voi ten: mysql-21-05-2026-16-46.mp4
+==================================================
+
+(node:5024) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)

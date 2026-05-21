@@ -1,0 +1,1035 @@
+{
+  "template": "G3_web",
+  "source_url": "https://react.dev/learn",
+  "platform": "web",
+  "content_type": "web_tool",
+  "video_format": "web_tool_overview",
+  "classification_reason": "Trang có tín hiệu là tool, SDK, API hoặc sản phẩm cho developer.",
+  "visual_theme": "web",
+  "metadata": {
+    "host": "react.dev",
+    "title": "Quick Start – React",
+    "description": "The library for web and native user interfaces",
+    "tavily_used": false,
+    "tavily_results": []
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 1,
+      "layout": "intro_web",
+      "voice": "Chào mừng các bạn đến với trang web Quick Start – React. Đây là nơi giúp bạn bắt đầu với thư viện React dành cho các giao diện web và ứng dụng di động.",
+      "visual": "Chụp giao diện trang web, highlight tiêu đề chính.",
+      "headline_line1": "QUICK START – REACT",
+      "headline_line2": "HƯỚNG DẪN ĐẦU TIÊN",
+      "repo_url": "react.dev/learn",
+      "audio_start": 0.5,
+      "audio_duration": 7.33,
+      "audio_path": "assets/audio/quick-start-react-21-05-2026-16-49_scene_1.mp3",
+      "transcript": [
+        {
+          "text": "Chào",
+          "start": 0.5,
+          "end": 0.68
+        },
+        {
+          "text": "mừng",
+          "start": 0.68,
+          "end": 0.87
+        },
+        {
+          "text": "các",
+          "start": 0.87,
+          "end": 1.05
+        },
+        {
+          "text": "bạn",
+          "start": 1.05,
+          "end": 1.23
+        },
+        {
+          "text": "đến",
+          "start": 1.23,
+          "end": 1.42
+        },
+        {
+          "text": "với",
+          "start": 1.42,
+          "end": 1.6
+        },
+        {
+          "text": "trang",
+          "start": 1.6,
+          "end": 1.78
+        },
+        {
+          "text": "web",
+          "start": 1.78,
+          "end": 1.97
+        },
+        {
+          "text": "Quick",
+          "start": 1.97,
+          "end": 2.15
+        },
+        {
+          "text": "Start",
+          "start": 2.15,
+          "end": 2.33
+        },
+        {
+          "text": "–",
+          "start": 2.33,
+          "end": 2.51
+        },
+        {
+          "text": "React.",
+          "start": 2.51,
+          "end": 2.7
+        },
+        {
+          "text": "Đây",
+          "start": 2.7,
+          "end": 2.88
+        },
+        {
+          "text": "là",
+          "start": 2.88,
+          "end": 3.06
+        },
+        {
+          "text": "nơi",
+          "start": 3.06,
+          "end": 3.25
+        },
+        {
+          "text": "giúp",
+          "start": 3.25,
+          "end": 3.43
+        },
+        {
+          "text": "bạn",
+          "start": 3.43,
+          "end": 3.61
+        },
+        {
+          "text": "bắt",
+          "start": 3.61,
+          "end": 3.8
+        },
+        {
+          "text": "đầu",
+          "start": 3.8,
+          "end": 3.98
+        },
+        {
+          "text": "với",
+          "start": 3.98,
+          "end": 4.16
+        },
+        {
+          "text": "thư",
+          "start": 4.16,
+          "end": 4.35
+        },
+        {
+          "text": "viện",
+          "start": 4.35,
+          "end": 4.53
+        },
+        {
+          "text": "React",
+          "start": 4.53,
+          "end": 4.71
+        },
+        {
+          "text": "dành",
+          "start": 4.71,
+          "end": 4.9
+        },
+        {
+          "text": "cho",
+          "start": 4.9,
+          "end": 5.08
+        },
+        {
+          "text": "các",
+          "start": 5.08,
+          "end": 5.26
+        },
+        {
+          "text": "giao",
+          "start": 5.26,
+          "end": 5.44
+        },
+        {
+          "text": "diện",
+          "start": 5.44,
+          "end": 5.63
+        },
+        {
+          "text": "web",
+          "start": 5.63,
+          "end": 5.81
+        },
+        {
+          "text": "và",
+          "start": 5.81,
+          "end": 5.99
+        },
+        {
+          "text": "ứng",
+          "start": 5.99,
+          "end": 6.18
+        },
+        {
+          "text": "dụng",
+          "start": 6.18,
+          "end": 6.36
+        },
+        {
+          "text": "di",
+          "start": 6.36,
+          "end": 6.54
+        },
+        {
+          "text": "động.",
+          "start": 6.54,
+          "end": 6.73
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 2,
+      "layout": "web_summary",
+      "voice": "React là thư viện dành cho việc xây dựng giao diện người dùng cho web và ứng dụng di động, mang lại khả năng lập trình linh hoạt và tái sử dụng linh kiện.",
+      "visual": "Bento card tóm tắt nội dung chính và đối tượng phù hợp.",
+      "headline_line1": "NỘI DUNG CHÍNH",
+      "headline_line2": "VỀ REACT",
+      "bento1_title": "Tóm tắt",
+      "bento1_desc": "Thư viện xây dựng giao diện người dùng.",
+      "bento2_title": "Người dùng",
+      "bento3_title": "Mục đích",
+      "audio_start": 9.03,
+      "audio_duration": 7.02,
+      "audio_path": "assets/audio/quick-start-react-21-05-2026-16-49_scene_2.mp3",
+      "transcript": [
+        {
+          "text": "React",
+          "start": 9.03,
+          "end": 9.21
+        },
+        {
+          "text": "là",
+          "start": 9.21,
+          "end": 9.38
+        },
+        {
+          "text": "thư",
+          "start": 9.38,
+          "end": 9.56
+        },
+        {
+          "text": "viện",
+          "start": 9.56,
+          "end": 9.73
+        },
+        {
+          "text": "dành",
+          "start": 9.73,
+          "end": 9.91
+        },
+        {
+          "text": "cho",
+          "start": 9.91,
+          "end": 10.08
+        },
+        {
+          "text": "việc",
+          "start": 10.08,
+          "end": 10.26
+        },
+        {
+          "text": "xây",
+          "start": 10.26,
+          "end": 10.43
+        },
+        {
+          "text": "dựng",
+          "start": 10.43,
+          "end": 10.61
+        },
+        {
+          "text": "giao",
+          "start": 10.61,
+          "end": 10.78
+        },
+        {
+          "text": "diện",
+          "start": 10.78,
+          "end": 10.96
+        },
+        {
+          "text": "người",
+          "start": 10.96,
+          "end": 11.14
+        },
+        {
+          "text": "dùng",
+          "start": 11.14,
+          "end": 11.31
+        },
+        {
+          "text": "cho",
+          "start": 11.31,
+          "end": 11.49
+        },
+        {
+          "text": "web",
+          "start": 11.49,
+          "end": 11.66
+        },
+        {
+          "text": "và",
+          "start": 11.66,
+          "end": 11.84
+        },
+        {
+          "text": "ứng",
+          "start": 11.84,
+          "end": 12.01
+        },
+        {
+          "text": "dụng",
+          "start": 12.01,
+          "end": 12.19
+        },
+        {
+          "text": "di",
+          "start": 12.19,
+          "end": 12.36
+        },
+        {
+          "text": "động,",
+          "start": 12.36,
+          "end": 12.54
+        },
+        {
+          "text": "mang",
+          "start": 12.54,
+          "end": 12.72
+        },
+        {
+          "text": "lại",
+          "start": 12.72,
+          "end": 12.89
+        },
+        {
+          "text": "khả",
+          "start": 12.89,
+          "end": 13.07
+        },
+        {
+          "text": "năng",
+          "start": 13.07,
+          "end": 13.24
+        },
+        {
+          "text": "lập",
+          "start": 13.24,
+          "end": 13.42
+        },
+        {
+          "text": "trình",
+          "start": 13.42,
+          "end": 13.59
+        },
+        {
+          "text": "linh",
+          "start": 13.59,
+          "end": 13.77
+        },
+        {
+          "text": "hoạt",
+          "start": 13.77,
+          "end": 13.94
+        },
+        {
+          "text": "và",
+          "start": 13.94,
+          "end": 14.12
+        },
+        {
+          "text": "tái",
+          "start": 14.12,
+          "end": 14.29
+        },
+        {
+          "text": "sử",
+          "start": 14.29,
+          "end": 14.47
+        },
+        {
+          "text": "dụng",
+          "start": 14.47,
+          "end": 14.65
+        },
+        {
+          "text": "linh",
+          "start": 14.65,
+          "end": 14.82
+        },
+        {
+          "text": "kiện.",
+          "start": 14.82,
+          "end": 15
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 3,
+      "layout": "web_questions",
+      "voice": "Khi khám phá React, bạn cần tự hỏi: Thư viện này làm gì? Tại sao nó cần thiết? Làm thế nào để tích hợp và sử dụng?",
+      "visual": "Ba thẻ câu hỏi: What, Why, Check.",
+      "headline_line1": "BA CÂU HỎI",
+      "headline_line2": "PHẢI TRẢ LỜI",
+      "bento1_title": "What",
+      "bento2_title": "Why",
+      "bento3_title": "Check",
+      "bento4_title": "Next",
+      "audio_start": 17.24,
+      "audio_duration": 7.98,
+      "audio_path": "assets/audio/quick-start-react-21-05-2026-16-49_scene_3.mp3",
+      "transcript": [
+        {
+          "text": "Khi",
+          "start": 17.24,
+          "end": 17.49
+        },
+        {
+          "text": "khám",
+          "start": 17.49,
+          "end": 17.74
+        },
+        {
+          "text": "phá",
+          "start": 17.74,
+          "end": 17.99
+        },
+        {
+          "text": "React,",
+          "start": 17.99,
+          "end": 18.24
+        },
+        {
+          "text": "bạn",
+          "start": 18.24,
+          "end": 18.5
+        },
+        {
+          "text": "cần",
+          "start": 18.5,
+          "end": 18.75
+        },
+        {
+          "text": "tự",
+          "start": 18.75,
+          "end": 19
+        },
+        {
+          "text": "hỏi:",
+          "start": 19,
+          "end": 19.25
+        },
+        {
+          "text": "Thư",
+          "start": 19.25,
+          "end": 19.5
+        },
+        {
+          "text": "viện",
+          "start": 19.5,
+          "end": 19.75
+        },
+        {
+          "text": "này",
+          "start": 19.75,
+          "end": 20
+        },
+        {
+          "text": "làm",
+          "start": 20,
+          "end": 20.25
+        },
+        {
+          "text": "gì?",
+          "start": 20.25,
+          "end": 20.51
+        },
+        {
+          "text": "Tại",
+          "start": 20.51,
+          "end": 20.76
+        },
+        {
+          "text": "sao",
+          "start": 20.76,
+          "end": 21.01
+        },
+        {
+          "text": "nó",
+          "start": 21.01,
+          "end": 21.26
+        },
+        {
+          "text": "cần",
+          "start": 21.26,
+          "end": 21.51
+        },
+        {
+          "text": "thiết?",
+          "start": 21.51,
+          "end": 21.76
+        },
+        {
+          "text": "Làm",
+          "start": 21.76,
+          "end": 22.01
+        },
+        {
+          "text": "thế",
+          "start": 22.01,
+          "end": 22.26
+        },
+        {
+          "text": "nào",
+          "start": 22.26,
+          "end": 22.51
+        },
+        {
+          "text": "để",
+          "start": 22.51,
+          "end": 22.77
+        },
+        {
+          "text": "tích",
+          "start": 22.77,
+          "end": 23.02
+        },
+        {
+          "text": "hợp",
+          "start": 23.02,
+          "end": 23.27
+        },
+        {
+          "text": "và",
+          "start": 23.27,
+          "end": 23.52
+        },
+        {
+          "text": "sử",
+          "start": 23.52,
+          "end": 23.77
+        },
+        {
+          "text": "dụng?",
+          "start": 23.77,
+          "end": 24.02
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 4,
+      "layout": "web_notable",
+      "voice": "Một số điểm đáng chú ý của React bao gồm quickstart dễ dàng, changelog cập nhật thường xuyên và các bản demo phong phú giúp bạn nhanh chóng làm quen.",
+      "visual": "Checklist các điểm quan trọng rút ra từ trang web.",
+      "headline_line1": "ĐIỂM ĐÁNG CHÚ Ý",
+      "headline_line2": "VỀ REACT",
+      "bento1_title": "Key point",
+      "bento1_desc": "Hướng dẫn chi tiết sử dụng.",
+      "bento2_title": "Bản sửa đổi",
+      "bento3_title": "Kim chỉ nam",
+      "audio_start": 26.42,
+      "audio_duration": 7.33,
+      "audio_path": "assets/audio/quick-start-react-21-05-2026-16-49_scene_4.mp3",
+      "transcript": [
+        {
+          "text": "Một",
+          "start": 26.42,
+          "end": 26.63
+        },
+        {
+          "text": "số",
+          "start": 26.63,
+          "end": 26.84
+        },
+        {
+          "text": "điểm",
+          "start": 26.84,
+          "end": 27.04
+        },
+        {
+          "text": "đáng",
+          "start": 27.04,
+          "end": 27.25
+        },
+        {
+          "text": "chú",
+          "start": 27.25,
+          "end": 27.46
+        },
+        {
+          "text": "ý",
+          "start": 27.46,
+          "end": 27.67
+        },
+        {
+          "text": "của",
+          "start": 27.67,
+          "end": 27.87
+        },
+        {
+          "text": "React",
+          "start": 27.87,
+          "end": 28.08
+        },
+        {
+          "text": "bao",
+          "start": 28.08,
+          "end": 28.29
+        },
+        {
+          "text": "gồm",
+          "start": 28.29,
+          "end": 28.5
+        },
+        {
+          "text": "quickstart",
+          "start": 28.5,
+          "end": 28.7
+        },
+        {
+          "text": "dễ",
+          "start": 28.7,
+          "end": 28.91
+        },
+        {
+          "text": "dàng,",
+          "start": 28.91,
+          "end": 29.12
+        },
+        {
+          "text": "changelog",
+          "start": 29.12,
+          "end": 29.33
+        },
+        {
+          "text": "cập",
+          "start": 29.33,
+          "end": 29.53
+        },
+        {
+          "text": "nhật",
+          "start": 29.53,
+          "end": 29.74
+        },
+        {
+          "text": "thường",
+          "start": 29.74,
+          "end": 29.95
+        },
+        {
+          "text": "xuyên",
+          "start": 29.95,
+          "end": 30.16
+        },
+        {
+          "text": "và",
+          "start": 30.16,
+          "end": 30.36
+        },
+        {
+          "text": "các",
+          "start": 30.36,
+          "end": 30.57
+        },
+        {
+          "text": "bản",
+          "start": 30.57,
+          "end": 30.78
+        },
+        {
+          "text": "demo",
+          "start": 30.78,
+          "end": 30.99
+        },
+        {
+          "text": "phong",
+          "start": 30.99,
+          "end": 31.19
+        },
+        {
+          "text": "phú",
+          "start": 31.19,
+          "end": 31.4
+        },
+        {
+          "text": "giúp",
+          "start": 31.4,
+          "end": 31.61
+        },
+        {
+          "text": "bạn",
+          "start": 31.61,
+          "end": 31.82
+        },
+        {
+          "text": "nhanh",
+          "start": 31.82,
+          "end": 32.02
+        },
+        {
+          "text": "chóng",
+          "start": 32.02,
+          "end": 32.23
+        },
+        {
+          "text": "làm",
+          "start": 32.23,
+          "end": 32.44
+        },
+        {
+          "text": "quen.",
+          "start": 32.44,
+          "end": 32.65
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba developer.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 5,
+      "layout": "action",
+      "voice": "Hãy khuyến nghị đến với React, tìm hiểu thêm và áp dụng bằng cách đọc tài liệu chi tiết hơn trên trang web chính thức của họ.",
+      "visual": "Nút CTA kêu gọi hành động cụ thể.",
+      "headline_line1": "HÀNH ĐỘNG TIẾP",
+      "headline_line2": "KHÁM PHÁ REACT",
+      "btn_text": "Mở nguồn và tìm hiểu",
+      "audio_start": 34.95,
+      "audio_duration": 5.82,
+      "audio_path": "assets/audio/quick-start-react-21-05-2026-16-49_scene_5.mp3",
+      "transcript": [
+        {
+          "text": "Hãy",
+          "start": 34.95,
+          "end": 35.13
+        },
+        {
+          "text": "khuyến",
+          "start": 35.13,
+          "end": 35.32
+        },
+        {
+          "text": "nghị",
+          "start": 35.32,
+          "end": 35.5
+        },
+        {
+          "text": "đến",
+          "start": 35.5,
+          "end": 35.68
+        },
+        {
+          "text": "với",
+          "start": 35.68,
+          "end": 35.87
+        },
+        {
+          "text": "React,",
+          "start": 35.87,
+          "end": 36.05
+        },
+        {
+          "text": "tìm",
+          "start": 36.05,
+          "end": 36.23
+        },
+        {
+          "text": "hiểu",
+          "start": 36.23,
+          "end": 36.42
+        },
+        {
+          "text": "thêm",
+          "start": 36.42,
+          "end": 36.6
+        },
+        {
+          "text": "và",
+          "start": 36.6,
+          "end": 36.78
+        },
+        {
+          "text": "áp",
+          "start": 36.78,
+          "end": 36.97
+        },
+        {
+          "text": "dụng",
+          "start": 36.97,
+          "end": 37.15
+        },
+        {
+          "text": "bằng",
+          "start": 37.15,
+          "end": 37.33
+        },
+        {
+          "text": "cách",
+          "start": 37.33,
+          "end": 37.52
+        },
+        {
+          "text": "đọc",
+          "start": 37.52,
+          "end": 37.7
+        },
+        {
+          "text": "tài",
+          "start": 37.7,
+          "end": 37.88
+        },
+        {
+          "text": "liệu",
+          "start": 37.88,
+          "end": 38.07
+        },
+        {
+          "text": "chi",
+          "start": 38.07,
+          "end": 38.25
+        },
+        {
+          "text": "tiết",
+          "start": 38.25,
+          "end": 38.43
+        },
+        {
+          "text": "hơn",
+          "start": 38.43,
+          "end": 38.62
+        },
+        {
+          "text": "trên",
+          "start": 38.62,
+          "end": 38.8
+        },
+        {
+          "text": "trang",
+          "start": 38.8,
+          "end": 38.98
+        },
+        {
+          "text": "web",
+          "start": 38.98,
+          "end": 39.17
+        },
+        {
+          "text": "chính",
+          "start": 39.17,
+          "end": 39.35
+        },
+        {
+          "text": "thức",
+          "start": 39.35,
+          "end": 39.53
+        },
+        {
+          "text": "của",
+          "start": 39.53,
+          "end": 39.72
+        },
+        {
+          "text": "họ.",
+          "start": 39.72,
+          "end": 39.9
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba smiling brightly.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 6,
+      "layout": "outro_web",
+      "voice": "Cảm ơn bạn đã theo dõi video. Hãy nhớ lưu link này và chia sẻ video để mọi người cùng khám phá thế giới của React nhé!",
+      "visual": "Màn hình outro hiển thị link và các nguồn tham khảo liên quan.",
+      "headline_line1": "LƯU LINK",
+      "headline_line2": "CHIA SẺ VIDEO",
+      "bento1_title": "Nguồn chính",
+      "bento1_desc": "Tài liệu chính thức của React.",
+      "bento2_title": "Tóm tắt",
+      "bento3_title": "Chia sẻ",
+      "bento4_title": "Khám Phá",
+      "audio_start": 41.97,
+      "audio_duration": 6.63,
+      "audio_path": "assets/audio/quick-start-react-21-05-2026-16-49_scene_6.mp3",
+      "transcript": [
+        {
+          "text": "Cảm",
+          "start": 41.97,
+          "end": 42.18
+        },
+        {
+          "text": "ơn",
+          "start": 42.18,
+          "end": 42.39
+        },
+        {
+          "text": "bạn",
+          "start": 42.39,
+          "end": 42.6
+        },
+        {
+          "text": "đã",
+          "start": 42.6,
+          "end": 42.81
+        },
+        {
+          "text": "theo",
+          "start": 42.81,
+          "end": 43.01
+        },
+        {
+          "text": "dõi",
+          "start": 43.01,
+          "end": 43.22
+        },
+        {
+          "text": "video.",
+          "start": 43.22,
+          "end": 43.43
+        },
+        {
+          "text": "Hãy",
+          "start": 43.43,
+          "end": 43.64
+        },
+        {
+          "text": "nhớ",
+          "start": 43.64,
+          "end": 43.85
+        },
+        {
+          "text": "lưu",
+          "start": 43.85,
+          "end": 44.06
+        },
+        {
+          "text": "link",
+          "start": 44.06,
+          "end": 44.27
+        },
+        {
+          "text": "này",
+          "start": 44.27,
+          "end": 44.48
+        },
+        {
+          "text": "và",
+          "start": 44.48,
+          "end": 44.68
+        },
+        {
+          "text": "chia",
+          "start": 44.68,
+          "end": 44.89
+        },
+        {
+          "text": "sẻ",
+          "start": 44.89,
+          "end": 45.1
+        },
+        {
+          "text": "video",
+          "start": 45.1,
+          "end": 45.31
+        },
+        {
+          "text": "để",
+          "start": 45.31,
+          "end": 45.52
+        },
+        {
+          "text": "mọi",
+          "start": 45.52,
+          "end": 45.73
+        },
+        {
+          "text": "người",
+          "start": 45.73,
+          "end": 45.94
+        },
+        {
+          "text": "cùng",
+          "start": 45.94,
+          "end": 46.15
+        },
+        {
+          "text": "khám",
+          "start": 46.15,
+          "end": 46.35
+        },
+        {
+          "text": "phá",
+          "start": 46.35,
+          "end": 46.56
+        },
+        {
+          "text": "thế",
+          "start": 46.56,
+          "end": 46.77
+        },
+        {
+          "text": "giới",
+          "start": 46.77,
+          "end": 46.98
+        },
+        {
+          "text": "của",
+          "start": 46.98,
+          "end": 47.19
+        },
+        {
+          "text": "React",
+          "start": 47.19,
+          "end": 47.4
+        },
+        {
+          "text": "nhé!",
+          "start": 47.4,
+          "end": 47.61
+        }
+      ]
+    }
+  ],
+  "duration": 51
+}
