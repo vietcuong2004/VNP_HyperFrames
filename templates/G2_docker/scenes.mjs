@@ -1,13 +1,78 @@
 // G2_docker — Docker Terminal Scene Layouts
+const OFFICIAL_IMAGE_NAMES = new Set(["nginx", "postgres", "redis", "node", "python", "ubuntu", "mysql", "mongo", "alpine"]);
+
+function cleanCommand(value) {
+  return String(value || "").trim().replace(/^\$\s*/, "");
+}
+
+function imageFromPullCommand(value) {
+  const command = cleanCommand(value);
+  const match = command.match(/^docker\s+pull\s+(\S+)/i);
+  return match ? match[1] : "";
+}
+
+function imageFromRunCommand(value) {
+  const command = cleanCommand(value);
+  const parts = command.split(/\s+/).filter(Boolean);
+  if (parts[0] !== "docker" || parts[1] !== "run") return "";
+
+  for (let i = 2; i < parts.length; i += 1) {
+    const token = parts[i];
+    if (!token.startsWith("-")) return token;
+    if (["-p", "--publish", "-e", "--env", "-v", "--volume", "--name", "--env-file"].includes(token)) {
+      i += 1;
+    }
+  }
+  return "";
+}
+
+function imageFromRepoUrl(value) {
+  const text = String(value || "").trim();
+  const match = text.match(/hub\.docker\.com\/r\/([^/\s]+)\/([^/\s?#]+)/i);
+  if (match) return `${match[1]}/${match[2]}`;
+  const officialMatch = text.match(/hub\.docker\.com\/_\/([^/\s?#]+)/i);
+  return officialMatch ? `library/${officialMatch[1]}` : "";
+}
+
+function getSceneImage(scene, fallback = "hello-world") {
+  return (
+    imageFromPullCommand(scene.btn_text) ||
+    imageFromRunCommand(scene.btn_text) ||
+    imageFromRepoUrl(scene.repo_url) ||
+    scene.repo_name ||
+    fallback
+  );
+}
+
+function stripTag(imageRef) {
+  return String(imageRef || "").replace(/@sha256:[a-f0-9]+$/i, "").replace(/:[^/:]+$/, "");
+}
+
+function imageTag(imageRef) {
+  const text = String(imageRef || "");
+  const tagMatch = text.match(/:([^/:]+)$/);
+  return tagMatch ? tagMatch[1] : "latest";
+}
+
+function pullSource(imageRef) {
+  const base = stripTag(imageRef);
+  if (base.includes("/")) return base;
+  if (OFFICIAL_IMAGE_NAMES.has(base.toLowerCase())) return `library/${base}`;
+  return base;
+}
+
 export function getHyperframesReviewScene(i, scene, sceneId, start) {
   let html = "";
   let gsap = "";
 
-  switch (i) {
+  const layout = scene.layout || i;
+
+  switch (layout) {
+    case "intro_docker":
     case 0: {
       // Scene 1: Docker Hub page intro — terminal window with scrolling screenshot
-      const repoUrl = scene.repo_url || "hub.docker.com/_/nginx";
-      const hl1 = scene.headline_line1 || "NGINX";
+      const repoUrl = scene.repo_url || "hub.docker.com/_/hello-world";
+      const hl1 = scene.headline_line1 || "DOCKER IMAGE";
       const hl2 = scene.headline_line2 || "CONTAINER QUICK START";
       html = `
         <div class="terminal-frame" id="term-${sceneId}">
@@ -90,11 +155,32 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       break;
     }
 
+    case "docker_tag":
     case 2: {
       // Scene 3: Pull & Run — terminal commands
       const hl1 = scene.headline_line1 || "PULL IMAGE";
       const hl2 = scene.headline_line2 || "RỒI CHẠY THỬ";
-      const btnText = scene.btn_text || "$ docker pull nginx";
+      const imageRef = getSceneImage(scene, "hello-world");
+      const btnText = scene.btn_text || `$ docker pull ${imageRef}`;
+      const pullImage = imageFromPullCommand(btnText) || imageRef;
+      const runImage = stripTag(pullImage);
+      const tag = imageTag(pullImage);
+      const source = pullSource(pullImage);
+      const followupCommand =
+        layout === "docker_tag"
+          ? `
+                <span class="t-cmd">docker</span>
+                <span class="t-flag">image</span>
+                <span class="t-flag">inspect</span>
+                <span class="t-image">${pullImage}</span>`
+          : `
+                <span class="t-cmd">docker</span>
+                <span class="t-flag">run</span>
+                <span class="t-flag">-d</span>
+                <span class="t-flag">-p</span>
+                <span class="t-cmd">80:80</span>
+                <span class="t-image">${runImage}</span>`;
+      const followupStatus = layout === "docker_tag" ? "✔ Tag metadata ready" : "✔ Container started";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
@@ -113,13 +199,13 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <span class="t-prompt">user@host:~$</span>
                 <span class="t-cmd">docker</span>
                 <span class="t-flag">pull</span>
-                <span class="t-image">${(scene.btn_text || 'docker pull nginx').replace(/^\$\s*docker\s+pull\s+/, '')}</span>
+                <span class="t-image">${pullImage}</span>
               </div>
               <div class="terminal-line" id="tl2-${sceneId}" style="opacity:0;">
-                <span class="t-info">Using default tag: latest</span>
+                <span class="t-info">Using tag: ${tag}</span>
               </div>
               <div class="terminal-line" id="tl3-${sceneId}" style="opacity:0;">
-                <span class="t-output">latest: Pulling from library/nginx</span>
+                <span class="t-output">${tag}: Pulling from ${source}</span>
               </div>
               <div class="terminal-line" id="tl4-${sceneId}" style="opacity:0;">
                 <span class="t-output">Digest: sha256:a3...</span>
@@ -129,15 +215,10 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
               </div>
               <div class="terminal-line" id="tl6-${sceneId}" style="opacity:0; margin-top: 16px;">
                 <span class="t-prompt">user@host:~$</span>
-                <span class="t-cmd">docker</span>
-                <span class="t-flag">run</span>
-                <span class="t-flag">-d</span>
-                <span class="t-flag">-p</span>
-                <span class="t-cmd">80:80</span>
-                <span class="t-image">${(scene.btn_text || 'nginx').replace(/^\$\s*docker\s+pull\s+/, '')}</span>
+                ${followupCommand}
               </div>
               <div class="terminal-line" id="tl7-${sceneId}" style="opacity:0;">
-                <span class="t-success">✔ Container started</span>
+                <span class="t-success">${followupStatus}</span>
                 <span class="t-cursor" id="cursor-${sceneId}"></span>
               </div>
             </div>
@@ -159,6 +240,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       break;
     }
 
+    case "docker_config":
     case 3: {
       // Scene 4: Port / Volume / Env — glow icon + action button
       const hl1 = scene.headline_line1 || "PORT";
@@ -217,6 +299,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       break;
     }
 
+    case "outro_docker":
     case 4: {
       // Scene 5: Checklist before production — 4 bento cards
       const hl1 = scene.headline_line1 || "CHECKLIST";
@@ -225,6 +308,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const b2t = scene.bento2_title || "Backup";
       const b3t = scene.bento3_title || "Healthcheck";
       const b4t = scene.bento4_title || "Update";
+      const imageRef = getSceneImage(scene, "hello-world");
+      const pinnedImage = imageRef.includes(":") || imageRef.includes("@") ? imageRef : `${stripTag(imageRef)}:stable`;
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
@@ -237,7 +322,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px;">${b1t}</div>
-              <div class="card-desc" style="font-size: 22px;">nginx:1.25-alpine</div>
+              <div class="card-desc" style="font-size: 22px;">${pinnedImage}</div>
             </div>
             <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
               <div class="card-icon-svg">
@@ -260,7 +345,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px;">${b4t}</div>
-              <div class="card-desc" style="font-size: 22px;">docker pull latest</div>
+              <div class="card-desc" style="font-size: 22px;">docker pull ${stripTag(imageRef)}</div>
             </div>
           </div>
         </div>
@@ -280,10 +365,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 6: Docker stats (stars/pulls)
       const hl1 = scene.headline_line1 || "DOCKER STATS";
       const hl2 = scene.headline_line2 || "ĐỘ TIN CẬY BAN ĐẦU";
-      const repoName = scene.repo_name || scene.headline_line1 || "nginx";
+      const repoName = scene.repo_name || stripTag(getSceneImage(scene, scene.headline_line1 || "hello-world"));
       const repoPulls = scene.repo_stars || "1B+ pulls";
       const repoTrend = scene.repo_trend || "▲ Official";
       const repoTrendLabel = scene.repo_trend_label || "Docker Hub";
+      const containerBase = stripTag(repoName).split("/").pop().replace(/[^a-z0-9_-]+/gi, "_") || "container";
       html = `
         <div class="headline-container" style="top: 175px; gap: 5px;">
           <div class="headline-line1" style="font-size: 66px;" id="hl1-${sceneId}">${hl1}</div>
@@ -323,13 +409,13 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                   <span class="t-output" style="font-weight:700; color:#0db7ed;">NET I/O</span>
                 </div>
                 <div class="terminal-line" id="tr1-${sceneId}" style="opacity:0;">
-                  <span class="t-success" style="width:220px;">nginx_web</span>
+                  <span class="t-success" style="width:220px;">${containerBase}_main</span>
                   <span class="t-cmd" style="width:140px;">0.1%</span>
                   <span class="t-cmd" style="width:180px;">4.2MB</span>
                   <span class="t-info">1.5kB / 872B</span>
                 </div>
                 <div class="terminal-line" id="tr2-${sceneId}" style="opacity:0;">
-                  <span class="t-success" style="width:220px;">nginx_api</span>
+                  <span class="t-success" style="width:220px;">${containerBase}_sidecar</span>
                   <span class="t-cmd" style="width:140px;">0.3%</span>
                   <span class="t-cmd" style="width:180px;">6.1MB</span>
                   <span class="t-info">2.1kB / 1.1kB</span>
@@ -350,11 +436,13 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       break;
     }
 
+    case "terminal_docker":
     case 6: {
       // Scene 7: Try safely
       const hl1 = scene.headline_line1 || "THỬ AN TOÀN";
       const hl2 = scene.headline_line2 || "TRONG PROJECT PHỤ";
-      const btnText = scene.btn_text || "$ docker run -d -p 80:80 nginx";
+      const imageRef = stripTag(getSceneImage(scene, "hello-world"));
+      const btnText = scene.btn_text || `$ docker run --rm ${imageRef}`;
       html = `
         <div class="main-glow-icon" id="glow-${sceneId}">
           <div class="glow-svg-container">
