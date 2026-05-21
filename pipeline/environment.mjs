@@ -27,34 +27,47 @@ export async function canWriteWorkspace(workspaceRoot) {
   }
 }
 
+function fileExists(filePath) {
+  return Boolean(filePath && fs.existsSync(filePath));
+}
+
 export async function inspectEnvironment(options = {}) {
   const checkCommand = options.commandExists ?? commandExists;
   const checkWorkspace = options.canWriteWorkspace ?? (() => canWriteWorkspace(options.workspaceRoot ?? process.cwd()));
+  const env = options.env ?? process.env;
   const appRoot = options.appRoot ?? process.cwd();
   const hyperframesLocal = path.join(appRoot, "node_modules", ".bin", isWindows ? "hyperframes.cmd" : "hyperframes");
   const hasHyperframes = fs.existsSync(hyperframesLocal) || (await checkCommand(isWindows ? "hyperframes.cmd" : "hyperframes"));
+  const hasSystemNode = await checkCommand("node");
+  const hasSystemFfmpeg = await checkCommand("ffmpeg");
+  const hasSystemFfprobe = await checkCommand("ffprobe");
+  const hasBundledFfmpeg = fileExists(env.FFMPEG_PATH);
+  const hasBundledFfprobe = fileExists(env.FFPROBE_PATH);
 
   const checks = [
     {
       id: "node",
       label: "Node.js",
       required: true,
-      ok: await checkCommand("node"),
+      ok: Boolean(options.isPackaged) || hasSystemNode,
+      source: options.isPackaged ? "bundled" : hasSystemNode ? "system" : "missing",
       fix: "Cài Node.js hoặc chạy app từ bản desktop đã bundle runtime.",
     },
     {
       id: "ffmpeg",
       label: "FFmpeg",
       required: true,
-      ok: await checkCommand("ffmpeg"),
-      fix: "Cài FFmpeg và thêm vào PATH, hoặc bundle FFmpeg ở giai đoạn phát hành.",
+      ok: hasBundledFfmpeg || hasSystemFfmpeg,
+      source: hasBundledFfmpeg ? "bundled" : hasSystemFfmpeg ? "system" : "missing",
+      fix: "Cài FFmpeg và thêm vào PATH, hoặc dùng bản desktop đã bundle FFmpeg.",
     },
     {
       id: "ffprobe",
       label: "FFprobe",
       required: false,
-      ok: await checkCommand("ffprobe"),
-      fix: "Nên cài FFprobe cùng FFmpeg để đọc duration chính xác hơn; app có fallback qua FFmpeg.",
+      ok: hasBundledFfprobe || hasSystemFfprobe,
+      source: hasBundledFfprobe ? "bundled" : hasSystemFfprobe ? "system" : "missing",
+      fix: "Nên có FFprobe cùng FFmpeg để đọc duration chính xác hơn; app có fallback qua FFmpeg.",
     },
     {
       id: "hyperframes",
