@@ -1,4 +1,4 @@
-import { getHyperframesReviewScene } from "./hyperframesReview.mjs";
+import { getHyperframesReviewScene } from "./scenes.mjs";
 
 export default function (data, css) {
   const duration = data.duration || 10;

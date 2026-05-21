@@ -8,7 +8,7 @@ import fsp from "fs/promises";
 import { fileURLToPath } from "url";
 import { inspectEnvironment } from "./environment.mjs";
 import { createNodeScriptCommand } from "./runtime_binaries.mjs";
-import { createWorkspacePaths, ensureWorkspace } from "./workspace.mjs";
+import { createWorkspacePaths, ensureWorkspace } from "../pipeline/workspace.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,7 +63,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
     io.emit("job_start", { id, url });
 
     const nodeCommand = createNodeScriptCommand({
-      scriptPath: path.join(__dirname, "run_pipeline.js"),
+      scriptPath: path.join(__dirname, "../pipeline/run_pipeline.js"),
       args: [url],
       isPackaged,
       nodePath,
@@ -84,7 +84,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
 
     let videoPath = null;
     const appendLog = (text) => {
-      fsp.appendFile(logPath, text, "utf-8").catch(() => {});
+      fsp.appendFile(logPath, text, "utf-8").catch(() => { });
     };
 
     child.stdout.on("data", (data) => {

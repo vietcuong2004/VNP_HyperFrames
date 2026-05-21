@@ -51,6 +51,7 @@ async function copyFileIfChanged(source, target) {
 
 async function copyDirectoryIfExists(sourceDir, targetDir) {
   if (!fs.existsSync(sourceDir)) return;
+  if (path.resolve(sourceDir) === path.resolve(targetDir)) return;
   await fsp.cp(sourceDir, targetDir, {
     recursive: true,
     force: true,

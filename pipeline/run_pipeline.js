@@ -76,7 +76,7 @@ async function main() {
   console.log("==================================================\n");
 
   console.log("Step 1: Phan tich URL va tao kich ban JSON...");
-  const result1 = run(nodeBin, [path.join(__dirname, "generate_repo_data.js"), targetUrl], {
+  const result1 = run(nodeBin, [path.join(__dirname, "main_generateContent.js"), targetUrl], {
     cwd: appRoot,
     encoding: "utf-8",
     stdio: ["ignore", "pipe", "pipe"],

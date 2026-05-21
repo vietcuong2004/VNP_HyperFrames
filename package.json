@@ -5,9 +5,9 @@
   "author": "VNP",
   "private": true,
   "type": "module",
-  "main": "desktop/main.js",
+  "main": "desktop_app/main.js",
   "scripts": {
-    "start": "node pipeline/ui_server.js",
+    "start": "node desktop_app/ui_server.js",
     "desktop": "electron .",
     "dist": "electron-builder --win",
     "test": "node --test tests/*.test.mjs",
@@ -30,6 +30,7 @@
     "hyperframes": "^0.6.24",
     "node": "24.14.1",
     "node-edge-tts": "^1.2.10",
+    "openai": "^6.38.0",
     "puppeteer": "^25.0.4",
     "socket.io": "^4.8.3"
   },
@@ -45,7 +46,7 @@
       "output": "dist"
     },
     "files": [
-      "desktop/**",
+      "desktop_app/**",
       "pipeline/**",
       "public/**",
       "templates/**",

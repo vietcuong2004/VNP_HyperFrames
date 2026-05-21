@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import path from "node:path";
 import { test } from "node:test";
 
-import { buildBundledBinaryEnv, createNodeScriptCommand } from "../pipeline/runtime_binaries.mjs";
+import { buildBundledBinaryEnv, createNodeScriptCommand } from "../desktop_app/runtime_binaries.mjs";
 
 test("createNodeScriptCommand uses system node in development", () => {
   const result = createNodeScriptCommand({

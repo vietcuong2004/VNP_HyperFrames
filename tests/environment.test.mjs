@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { inspectEnvironment } from "../pipeline/environment.mjs";
+import { inspectEnvironment } from "../desktop_app/environment.mjs";
 
 test("inspectEnvironment reports required desktop runtime commands", async () => {
   const calls = [];

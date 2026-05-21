@@ -39,13 +39,25 @@ node pipeline/run_pipeline.js https://vitejs.dev
 
 ---
 
+## ⚡Cách chạy 3: Chạy ứng dụng Desktop (Electron App)
+
+Dự án hỗ trợ khởi chạy trực tiếp dưới dạng ứng dụng desktop chuyên nghiệp qua Electron:
+
+1. Khởi động ứng dụng desktop:
+   ```bash
+   npm run desktop
+   ```
+2. Cửa sổ ứng dụng desktop sẽ tự động khởi động và tải giao diện điều khiển cấu hình & render video.
+
+---
+
 ### Sơ đồ hoạt động của Pipeline:
 
 ```mermaid
 graph TD
-    URL[URL Đầu Vào] -->|run_pipeline.js| R_DATA[1. generate_repo_data.js: Gọi API/Tavily, chọn Template & tạo JSON]
+    URL[URL Đầu Vào] -->|run_pipeline.js| R_DATA[1. main_generateContent.js: Gọi API/Tavily, chọn Template & tạo JSON]
     R_DATA -->|Tạo JSON tên động| CAPTURE[2. capture_github.js: Puppeteer chụp ảnh trang nguồn]
-    CAPTURE -->|Tạo github_repo.png| TTS[3. gen_assets.py: Sinh giọng đọc TTS & karaoke]
+    CAPTURE -->|Tạo github_repo.png| TTS[3. gen_assets.mjs: Sinh giọng đọc TTS & karaoke]
     TTS -->|Tính duration & subtitles| GEN[4. generate.mjs: Biên dịch HTML theo Template G1/G2/G3]
     GEN -->|Tạo index.html| VALIDATE[5. hyperframes validate: Kiểm tra lỗi kỹ thuật]
     VALIDATE -->|Xác thực thành công| RENDER[6. npm run render: Kết xuất video MP4]
@@ -58,11 +70,11 @@ graph TD
 > [!IMPORTANT]
 > Tất cả các bước thực hiện thủ công dưới đây đều được chạy trực tiếp từ thư mục gốc của dự án `VNP_HyperFrames`.
 
-### Bước 1: Thu thập thông tin và tạo kịch bản (`generate_repo_data.js`)
-*   **Mô tả**: Dựa vào URL đầu vào, hệ thống tự động phân loại thành 3 nhóm (Group 1: GitHub, Group 2: Docker, Group 3: Web). Sau đó, gọi API hoặc dùng Tavily AI để lấy nội dung, sinh kịch bản và **chỉ định template tương ứng**.
+### Bước 1: Thu thập thông tin và tạo kịch bản (`main_generateContent.js`)
+*   **Mô tả**: Dựa vào URL đầu vào, hệ thống tự động phân loại thành 3 nhóm (Group 1: GitHub, Group 2: Docker, Group 3: Web). Sau đó, gọi API hoặc dùng Tavily AI để lấy nội dung, sinh kịch bản bằng AI (OpenAI/OpenRouter) theo từng format và chỉ định template tương ứng.
 *   **Lệnh thực thi**:
     ```bash
-    node pipeline/generate_repo_data.js https://github.com/pnpm/pnpm
+    node pipeline/main_generateContent.js https://github.com/pnpm/pnpm
     ```
 *   **Đầu ra (Output)**: Tệp JSON kịch bản dynamic (không ghi đè) với định dạng tên:
     ```txt
@@ -80,25 +92,51 @@ graph TD
 
 #### Các format video theo nền tảng
 
-**GitHub:**
+**Group 1: GitHub:**
 - `tool_review_quick_demo` — Repo dạng tool/app/CLI
 - `developer_integration_brief` — Repo dạng thư viện/framework
 - `knowledge_map_resource_digest` — Repo dạng awesome/curated list
 - `dataset_explainer` — Repo dạng dataset/benchmark
 - `repo_overview_with_use_cases` — Repo không xác định rõ
 
-**Docker:**
+**Group 2: Docker:**
 - `container_quick_start` — Official/base image
 - `self_host_setup_guide` — Ứng dụng self-hosted
 - `dev_workflow_image_brief` — Dev/CI runtime
 - `container_overview` — Image không xác định rõ
 
-**Web:**
+**Group 3: Web:**
 - `web_docs_explainer` — Trang tài liệu
 - `web_tool_overview` — Trang tool/SDK
 - `web_article_digest` — Bài viết/phân tích
 - `web_product_brief` — Trang sản phẩm
 - `web_context_digest` — Web không xác định rõ
+
+## Cấu trúc Mẫu video (Templates)
+
+### 1. Phân chia theo Nhóm mẫu (Group)
+Thư mục `templates/` được phân chia thành các thư mục con tương ứng với từng nhóm mẫu:
+* **`G1_github/`**: Chuyên phục vụ mẫu giới thiệu repository GitHub.
+* **`G2_docker/`**: Chuyên phục vụ mẫu cài đặt Docker container.
+* **`G3_web/`**: Chuyên phục vụ mẫu review các trang web/tool tổng hợp.
+
+### 2. Cấu trúc của mỗi Thư mục Mẫu
+Trong mỗi thư mục mẫu (ví dụ `templates/G1_github/`), mã nguồn được tổ chức thành 3 thành phần chính:
+
+* **`style.css` (CSS Stylesheet)**:
+  Định nghĩa toàn bộ hệ thống màu sắc (Color Tokens), typography (Font chữ), kích thước, hiệu ứng hover, bóng đổ (glow), căn chỉnh bố cục Flexbox/Grid và các hiệu ứng chuyển động CSS (micro-animations như hạt bụi bay, hiệu ứng kính phản chiếu `.browser-glass-shine`, v.v.).
+* **`scenes.mjs` (Các Cảnh phim cụ thể)**:
+  * Chứa mã nguồn cấu trúc HTML và các đoạn script hiệu ứng GSAP cho từng cảnh (từ Cảnh 1 đến Cảnh 8).
+  * File sử dụng câu lệnh `switch (i)` để render ra giao diện tương ứng theo thứ tự cảnh:
+    * *Cảnh 1 (case 0)*: Khung trình duyệt web mô phỏng (`.browser-frame`) chứa hình ảnh cuộn của Github repository.
+    * *Cảnh 2 (case 1)*: Bố cục Bento Grid (`.bento-container` gồm `.bento-card full` và `.bento-grid-2`).
+    * *Cảnh 7 (case 6)*: Cửa sổ giao diện dòng lệnh (`.terminal-frame`).
+* **`template.mjs` (Trình biên dịch & Lắp ghép)**:
+  Đóng vai trò là file "khung xương" nhận dữ liệu kịch bản JSON từ AI và thực hiện:
+  * Lần lượt gọi hàm dựng cảnh `getHyperframesReviewScene` từ file `scenes.mjs` để lấy về HTML và GSAP code cho từng cảnh.
+  * Tự động liên kết các file âm thanh giọng đọc (TTS) và hiệu ứng âm thanh (SFX).
+  * Nhúng thư viện GSAP và thiết lập thuật toán chạy phụ đề Karaoke động đồng bộ với âm thanh.
+  * Trả về toàn bộ trang HTML hoàn chỉnh cho composition.
 
 > [!TIP]
 > **Tavily AI cho Web URL**: Với các link Web thông thường, hệ thống sẽ dùng Tavily để tóm tắt và phân loại nội dung chính xác. Cấu hình trong file `.env` hoặc trong terminal:
@@ -117,11 +155,11 @@ graph TD
 
 ---
 
-### Bước 3: Tạo giọng đọc và mốc thời gian phụ đề (`gen_assets.py`)
-*   **Mô tả**: Tự động chuyển văn bản thành giọng nói (TTS) tiếng Việt và tính toán mốc thời gian hiển thị karaoke cho từng từ.
+### Bước 3: Tạo giọng đọc và mốc thời gian phụ đề (`gen_assets.mjs`)
+*   **Mô tả**: Tự động chuyển văn bản thành giọng nói (TTS) tiếng Việt bằng Node.js và tính toán mốc thời gian hiển thị karaoke cho từng từ.
 *   **Lệnh thực thi**:
     ```bash
-    python pipeline/gen_assets.py data/<tên_file_json>
+    node pipeline/gen_assets.mjs data/<tên_file_json>
     ```
 *   **Đầu vào (Input)**: Tệp JSON kịch bản.
 *   **Đầu ra (Output)**:
@@ -144,6 +182,13 @@ graph TD
     ```
 *   **Đầu vào (Input)**: Tệp JSON kịch bản đã xử lý ở Bước 2.
 *   **Đầu ra (Output)**: Tệp mã nguồn cấu trúc video tổng thể: `index.html` tại thư mục gốc của dự án.
+
+* Quy trình generate của video:
+1. Script `pipeline/generate.mjs` sẽ được gọi.
+2. Nó kiểm tra xem link đầu vào thuộc nhóm nào để chọn thư mục template phù hợp (ví dụ: `G1_github`).
+3. Nó đọc file `style.css` và import hàm xuất mặc định của `template.mjs`.
+4. Nó truyền dữ liệu JSON kịch bản (vừa được AI sinh ra) vào hàm template để tạo ra mã HTML hoàn chỉnh và ghi đè vào file `index.html` ở thư mục gốc của dự án.
+5. Từ `index.html` này, công cụ HyperFrames sẽ khởi chạy Chrome Headless để kết xuất và xuất ra video MP4 cuối cùng.
 
 ---
 
@@ -182,13 +227,15 @@ VNP_HyperFrames/
 │       └── fonts.css
 ├── data/                   # Chứa các file kịch bản JSON (Tên sinh tự động theo ngày)
 ├── docs/                   # Tài liệu kiến trúc và hướng dẫn
+├── desktop_app/            # Mã nguồn ứng dụng Desktop & UI Server
+│   ├── main.js             # Entrypoint cho Electron
+│   └── ui_server.js        # Máy chủ Backend cấp giao diện Web (Express - Port 3001)
 ├── pipeline/               # Toàn bộ scripts điều phối pipeline
 │   ├── capture_github.js   # Script chụp ảnh màn hình Puppeteer
-│   ├── gen_assets.py       # Sinh AI TTS & Karaoke Timing
+│   ├── gen_assets.mjs      # Sinh AI TTS & Karaoke Timing
 │   ├── generate.mjs        # Biên dịch tệp JSON + Template ra index.html
-│   ├── generate_repo_data.js  # Module phân loại URL, gọi API/AI sinh Data
-│   ├── run_pipeline.js     # Trình điều phối chạy tuần tự 7 Bước
-│   └── ui_server.js        # Máy chủ Backend cấp giao diện Web (Express - Port 3001)
+│   ├── main_generateContent.js  # Module phân loại URL, gọi API/AI sinh Data
+│   └── run_pipeline.js     # Trình điều phối chạy tuần tự 7 Bước
 ├── public/                 # Giao diện Web UI (HTML/CSS/JS frontend)
 ├── renders/                # Video MP4 thành phẩm
 ├── templates/              # Hệ thống Multi-Template (Phân tách theo loại dữ liệu)

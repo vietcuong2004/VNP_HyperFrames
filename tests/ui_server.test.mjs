@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { startServer } from "../pipeline/ui_server.js";
+import { startServer } from "../desktop_app/ui_server.js";
 
 test("startServer starts on an available port and serves the desktop prototype", async () => {
   const instance = await startServer({

@@ -82,6 +82,64 @@ export async function generateEdgeTts(text, outputPath, options = {}) {
   await tts.ttsPromise(text, outputPath);
 }
 
+export function splitTextIntoChunks(text, maxLength = 180) {
+  const words = text.split(/\s+/).filter(Boolean);
+  const chunks = [];
+  let currentChunk = "";
+  for (const word of words) {
+    if ((currentChunk + " " + word).trim().length > maxLength) {
+      if (currentChunk) chunks.push(currentChunk.trim());
+      currentChunk = word;
+    } else {
+      currentChunk = (currentChunk + " " + word).trim();
+    }
+  }
+  if (currentChunk) chunks.push(currentChunk.trim());
+  return chunks;
+}
+
+export async function generateGoogleTts(text, outputPath) {
+  await fsp.mkdir(path.dirname(outputPath), { recursive: true });
+  const chunks = splitTextIntoChunks(text, 180);
+  const fileBuffers = [];
+
+  for (let i = 0; i < chunks.length; i++) {
+    const chunk = chunks[i];
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=tw-ob&q=${encodeURIComponent(chunk)}`;
+    
+    let lastError = null;
+    let success = false;
+    
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const res = await fetch(url, {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+          },
+          signal: AbortSignal.timeout(10000)
+        });
+        if (!res.ok) {
+          throw new Error(`Google Translate status ${res.status}`);
+        }
+        const buffer = await res.arrayBuffer();
+        fileBuffers.push(Buffer.from(buffer));
+        success = true;
+        break;
+      } catch (err) {
+        lastError = err;
+        await sleep(1000);
+      }
+    }
+    
+    if (!success) {
+      throw new Error(`Google Translate TTS failed for chunk "${chunk}": ${lastError?.message || lastError}`);
+    }
+  }
+
+  const combinedBuffer = Buffer.concat(fileBuffers);
+  await fsp.writeFile(outputPath, combinedBuffer);
+}
+
 function getRuntimeBinary(name) {
   if (name === "ffmpeg") return process.env.FFMPEG_PATH || "ffmpeg";
   if (name === "ffprobe") return process.env.FFPROBE_PATH || "ffprobe";
@@ -187,11 +245,25 @@ export async function addGeneratedAssets(data, options) {
     const audioPath = path.join(audioDir, audioFilename);
 
     console.log(`Generating TTS for scene ${sceneNumber}...`);
-    await runWithRetries(() => generateAudio(text, audioPath), {
-      attempts: options.ttsAttempts ?? 3,
-      delayMs: options.ttsRetryDelayMs ?? 2000,
-      label: `TTS scene ${sceneNumber}`,
-    });
+    await runWithRetries(
+      async (attempt) => {
+        try {
+          await generateAudio(text, audioPath, { timeout: 15000 });
+        } catch (err) {
+          if (attempt >= 3) {
+            console.warn(`[TTS Fallback] Edge TTS failed, trying Google Translate TTS as fallback...`);
+            await generateGoogleTts(text, audioPath);
+          } else {
+            throw err;
+          }
+        }
+      },
+      {
+        attempts: options.ttsAttempts ?? 6,
+        delayMs: options.ttsRetryDelayMs ?? 2000,
+        label: `TTS scene ${sceneNumber}`,
+      }
+    );
     await speedAudio(audioPath, SPEECH_SPEED);
 
     const sceneDuration = await readDuration(audioPath);
