@@ -7,7 +7,7 @@ import {
   createChatCompletionWithFallback,
 } from "../pipeline/ai_provider.mjs";
 
-test("buildAiProviders adds TROLLLLM as OpenRouter-compatible fallback after OPENROUTER", () => {
+test("buildAiProviders adds TROLLLLM fallback with its own endpoint after OPENROUTER", () => {
   const providers = buildAiProviders({
     OPENROUTER_API_KEY: "sk-or-primary",
     TROLLLLM_API_KEY: "sk-or-backup",
@@ -30,8 +30,31 @@ test("buildAiProviders adds TROLLLLM as OpenRouter-compatible fallback after OPE
       {
         name: "trollllm",
         apiKey: "sk-or-backup",
-        baseURL: "https://openrouter.ai/api/v1",
-        model: "openai/gpt-4o-mini",
+        baseURL: "https://chat.trollllm.xyz/v1",
+        model: "claude-sonnet-4-6",
+      },
+    ],
+  );
+});
+
+test("buildAiProviders lets TROLLLLM endpoint and model be overridden", () => {
+  const providers = buildAiProviders({
+    TROLLLLM_API_KEY: "sk-troll",
+    TROLLLLM_BASE_URL: "https://example.test/v1",
+    TROLLLLM_MODEL: "custom-model",
+  });
+
+  assert.deepEqual(
+    providers.map((provider) => ({
+      name: provider.name,
+      baseURL: provider.baseURL,
+      model: provider.model,
+    })),
+    [
+      {
+        name: "trollllm",
+        baseURL: "https://example.test/v1",
+        model: "custom-model",
       },
     ],
   );

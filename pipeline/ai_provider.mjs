@@ -1,8 +1,10 @@
 import OpenAI from "openai";
 
 const OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1";
+const TROLLLLM_BASE_URL = "https://chat.trollllm.xyz/v1";
 const OPENAI_MODEL = "gpt-4o-mini";
 const OPENROUTER_MODEL = "openai/gpt-4o-mini";
+const TROLLLLM_MODEL = "claude-sonnet-4-6";
 
 function clean(value) {
   return String(value || "").trim();
@@ -36,8 +38,8 @@ export function buildAiProviders(env = process.env) {
     providers.push({
       name: "trollllm",
       apiKey: trollllmKey,
-      baseURL: env.TROLLLLM_BASE_URL || env.OPENROUTER_BASE_URL || OPENROUTER_BASE_URL,
-      model: env.TROLLLLM_MODEL || env.OPENROUTER_MODEL || OPENROUTER_MODEL,
+      baseURL: env.TROLLLLM_BASE_URL || TROLLLLM_BASE_URL,
+      model: env.TROLLLLM_MODEL || TROLLLLM_MODEL,
     });
   }
 
