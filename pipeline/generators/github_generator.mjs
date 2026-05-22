@@ -1,6 +1,6 @@
-import OpenAI from "openai";
 import { short, baseScene, githubStatsScene, getReadmeHeadings } from "../main_generateContent.js";
 import { buildProjectAssetsPrompt } from "../agent_dynamic_flow.mjs";
+import { buildAiProviders, createChatCompletionWithFallback } from "../ai_provider.mjs";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của GitHub
 const STORYTELLING_GUIDELINES = {
@@ -264,23 +264,15 @@ export function normalizeGithubScenes(scenes, context = {}) {
 
 export async function generateScenes(rawData, format) {
   const { target, repoData, readme, projectAssets = [] } = rawData;
-  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
+  const providers = buildAiProviders();
 
-  if (!apiKey) {
-    throw new Error("Không tìm thấy OPENAI_API_KEY hoặc OPENROUTER_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
+  if (!providers.length) {
+    throw new Error("Không tìm thấy OPENAI_API_KEY, OPENROUTER_API_KEY hoặc TROLLLLM_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
   }
 
   try {
     console.log(`> Đang gọi OpenAI/OpenRouter để sinh kịch bản GitHub cho format: ${format}...`);
     
-    // Cấu hình linh hoạt trỏ tới OpenRouter nếu có cấu hình hoặc dùng mặc định OpenAI
-    const isOpenRouter = apiKey.startsWith("sk-or-") || process.env.OPENROUTER_API_KEY;
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: isOpenRouter ? "https://openrouter.ai/api/v1" : undefined
-    });
-
-    const modelName = isOpenRouter ? "openai/gpt-4o-mini" : "gpt-4o-mini";
     const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.repo_overview_with_use_cases;
 
     const prompt = `
@@ -320,14 +312,20 @@ export async function generateScenes(rawData, format) {
       8. Đối với Scene 7, điền "btn_text" là lệnh git clone chính xác: "$ git clone github.com/${target.owner}/${target.repo}".toLowerCase()
     `;
 
-    const response = await client.chat.completions.create({
-      model: modelName,
-      messages: [
-        { role: "system", content: "You are a professional video content editor who outputs JSON strict data." },
-        { role: "user", content: prompt }
-      ],
-      response_format: { type: "json_object" }
+    const { result: response, provider } = await createChatCompletionWithFallback({
+      providers,
+      request: {
+        messages: [
+          { role: "system", content: "You are a professional video content editor who outputs JSON strict data." },
+          { role: "user", content: prompt }
+        ],
+        response_format: { type: "json_object" }
+      },
+      onFallback: ({ from, to, error }) => {
+        console.warn(`AI provider ${from.name} lỗi (${error.message}); chuyển sang ${to.name}.`);
+      },
     });
+    console.log(`> Đã sinh kịch bản GitHub bằng provider: ${provider.name}`);
 
     const parsed = JSON.parse(response.choices[0].message.content);
     

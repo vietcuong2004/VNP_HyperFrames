@@ -65,6 +65,7 @@ export async function saveWorkspaceEnv(workspaceRoot, values = {}) {
   const entries = [
     ["OPENAI_API_KEY", values.openaiApiKey],
     ["OPENROUTER_API_KEY", values.openrouterApiKey],
+    ["TROLLLLM_API_KEY", values.trollllmApiKey],
     ["TAVILY_API_KEY", values.tavilyApiKey],
   ];
 
@@ -85,5 +86,5 @@ export function buildRuntimeEnv(options = {}) {
 }
 
 export function hasAiApiKey(env = process.env) {
-  return Boolean(env.OPENAI_API_KEY || env.OPENROUTER_API_KEY);
+  return Boolean(env.OPENAI_API_KEY || env.OPENROUTER_API_KEY || env.TROLLLLM_API_KEY);
 }

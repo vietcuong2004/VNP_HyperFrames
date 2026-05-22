@@ -1,6 +1,6 @@
-import OpenAI from "openai";
 import { short, baseScene } from "../main_generateContent.js";
 import { buildProjectAssetsPrompt } from "../agent_dynamic_flow.mjs";
+import { buildAiProviders, createChatCompletionWithFallback } from "../ai_provider.mjs";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của Web (Tavily/General URLs)
 const STORYTELLING_GUIDELINES = {
@@ -205,24 +205,16 @@ export function normalizeWebScenes(scenes, context = {}) {
 
 export async function generateScenes(rawData, format) {
   const { target, webInfo, projectAssets = [] } = rawData;
-  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
-
   const title = webInfo.title || target.host;
   const sourceLabel = target.host.replace(/^www\./, "");
+  const providers = buildAiProviders();
 
-  if (!apiKey) {
-    throw new Error("Không tìm thấy OPENAI_API_KEY hoặc OPENROUTER_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
+  if (!providers.length) {
+    throw new Error("Không tìm thấy OPENAI_API_KEY, OPENROUTER_API_KEY hoặc TROLLLLM_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
   }
 
   try {
     console.log(`> Đang gọi OpenAI/OpenRouter để sinh kịch bản Web cho format: ${format}...`);
-    const isOpenRouter = apiKey.startsWith("sk-or-") || process.env.OPENROUTER_API_KEY;
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: isOpenRouter ? "https://openrouter.ai/api/v1" : undefined
-    });
-
-    const modelName = isOpenRouter ? "openai/gpt-4o-mini" : "gpt-4o-mini";
     const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.web_context_digest;
 
     const prompt = `
@@ -258,14 +250,20 @@ export async function generateScenes(rawData, format) {
       7. Nếu không đủ dữ liệu chắc chắn, hãy viết theo hướng kiểm tra/tư vấn; không bịa API, giá, port, lệnh hoặc cấu hình.
     `;
 
-    const response = await client.chat.completions.create({
-      model: modelName,
-      messages: [
-        { role: "system", content: "You are a tech analyst script writer who outputs JSON strict format." },
-        { role: "user", content: prompt }
-      ],
-      response_format: { type: "json_object" }
+    const { result: response, provider } = await createChatCompletionWithFallback({
+      providers,
+      request: {
+        messages: [
+          { role: "system", content: "You are a tech analyst script writer who outputs JSON strict format." },
+          { role: "user", content: prompt }
+        ],
+        response_format: { type: "json_object" }
+      },
+      onFallback: ({ from, to, error }) => {
+        console.warn(`AI provider ${from.name} lỗi (${error.message}); chuyển sang ${to.name}.`);
+      },
     });
+    console.log(`> Đã sinh kịch bản Web bằng provider: ${provider.name}`);
 
     const parsed = JSON.parse(response.choices[0].message.content);
     

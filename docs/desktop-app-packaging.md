@@ -500,7 +500,9 @@ npm install
 desktop_app/app.env
 ```
 
-`desktop_app/app.env` là file local, không commit lên Git. File này có thể chứa `OPENROUTER_API_KEY`, `OPENAI_API_KEY`, `TAVILY_API_KEY` hoặc các biến runtime khác. Nên dùng key riêng cho app, có quota/routing giới hạn và có thể thu hồi.
+`desktop_app/app.env` là file local, không commit lên Git. File này có thể chứa `OPENROUTER_API_KEY`, `TROLLLLM_API_KEY`, `OPENAI_API_KEY`, `TAVILY_API_KEY` hoặc các biến runtime khác. Nên dùng key riêng cho app, có quota/routing giới hạn và có thể thu hồi.
+
+Thứ tự fallback AI khi sinh kịch bản là: `OPENAI_API_KEY` nếu có, sau đó `OPENROUTER_API_KEY`, sau đó `TROLLLLM_API_KEY`. `TROLLLLM_API_KEY` mặc định dùng endpoint/model tương thích OpenRouter; có thể override bằng `TROLLLLM_BASE_URL` và `TROLLLLM_MODEL` nếu cần.
 
 3. Build installer:
 
