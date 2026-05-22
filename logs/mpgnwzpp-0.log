@@ -1,0 +1,123 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://github.com/rany2/edge-tts
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+[Pipeline] Phat hien URL. Dang lay thong tin tu trang web...
+[Pipeline] Context trich xuat tu URL: "GitHub - rany2/edge-tts: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key · GitHub" | "Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or..."
+
+[Pipeline] Tien hanh chup anh man hinh trang nguon...
+Đang mở trình duyệt headless bằng Puppeteer...
+Đang mở trang https://github.com/rany2/edge-tts...
+Đang ẩn header/footer/banner để ảnh chụp sạch hơn...
+Đang chụp ảnh màn hình vào C:\CONG_VIEC\VNP_HyperFrames\assets\images\github_repo.png...
+Đã chụp và lưu ảnh thành công.
+[Pipeline] Chup anh man hinh thanh cong. Da them vao project assets: github_repo.png
+Step 1: Sinh kich ban JSON qua ScriptAgent...
+[Pipeline] [Caching] Tim thay kich ban JSON tu truoc tai: C:\CONG_VIEC\VNP_HyperFrames\data\agent-script-https-github-com-rany2-edge-tt-mpgnqdyq.json
+[Pipeline] Da luu file kich ban JSON tai: C:\CONG_VIEC\VNP_HyperFrames\data\agent-script-https-github-com-rany2-edge-tt-mpgnx71y.json
+
+Step 2: Sinh giong doc (LarVoice) va phu de (Whisper/LarVoice Subtitle)...
+
+--- Xy ly Canh 1/4 ---
+[Pipeline] Sinh giong doc Canh 1...
+[Agent Log] TTS Edge: "Bạn muốn tích hợp text-to-speech vào Python nhưng không muốn…" (voice=vi-VN-HoaiMyNeural, lang=vi)
+[Agent Log] ✓ TTS Edge xong: 9.3s audio (74 KB) | 11.2s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 1...
+[Agent Log] Whisper: scene_1.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 1...
+[Agent Log] AI SRT fix cảnh 1 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" (Lần thử 1/1, isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 1: OK (1 blocks)
+
+--- Xy ly Canh 2/4 ---
+[Pipeline] Sinh giong doc Canh 2...
+[Agent Log] TTS Edge: "edge-tts là thư viện Python mã nguồn mở cho phép bạn sử dụng…" (voice=vi-VN-HoaiMyNeural, lang=vi)
+[Agent Log] ✓ TTS Edge xong: 9.4s audio (77 KB) | 10.9s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 2...
+[Agent Log] Whisper: scene_2.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 2...
+[Agent Log] AI SRT fix cảnh 2 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" (Lần thử 1/1, isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 2: OK (1 blocks)
+
+--- Xy ly Canh 3/4 ---
+[Pipeline] Sinh giong doc Canh 3...
+[Agent Log] TTS Edge: "Chỉ cần vài dòng code đơn giản, bạn có thể chuyển đổi text t…" (voice=vi-VN-HoaiMyNeural, lang=vi)
+[Agent Log] TTS Edge: Lỗi: edge-tts failed with code 1: Traceback (most recent call last):
+  File [35m"<frozen runpy>"[0m, line [35m198[0m, in [35m_run_module_as_main[0m
+  File [35m"<frozen runpy>"[0m, line [35m88[0m, in [35m_run_code[0m
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\__main__.py"[0m, line [35m6[0m, in [35m<module>[0m
+    [31mmain[0m[1;31m()[0m
+    [31m~~~~[0m[1;31m^^[0m
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\util.py"[0m, line [35m141[0m, in [35mmain[0m
+    [31masyncio.run[0m[1;31m(amain())[0m
+    [31m~~~~~~~~~~~[0m[1;31m^^^^^^^^^[0m
+  File [35m"C:\Python313\Lib\asyncio\runners.py"[0m, line [35m195[0m, in [35mrun[0m
+    return [31mrunner.run[0m[1;31m(main)[0m
+           [31m~~~~~~~~~~[0m[1;31m^^^^^^[0m
+  File [35m"C:\Python313\Lib\asyncio\runners.py"[0m, line [35m118[0m, in [35mrun[0m
+    return [31mself._loop.run_until_complete[0m[1;31m(task)[0m
+           [31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^[0m
+  File [35m"C:\Python313\Lib\asyncio\base_events.py"[0m, line [35m719[0m, in [35mrun_until_complete[0m
+    return [31mfuture.result[0m[1;31m()[0m
+           [31m~~~~~~~~~~~~~[0m[1;31m^^[0m
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\util.py"[0m, line [35m136[0m, in [35mamain[0m
+    await _run_tts(args)
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\util.py"[0m, line [35m73[0m, in [35m_run_tts[0m
+    async for chunk in communicate.stream():
+    ...<3 lines>...
+            submaker.feed(chunk)
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\communicate.py"[0m, line [35m588[0m, in [35mstream[0m
+    async for message in self.__stream():
+        yield message
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\communicate.py"[0m, line [35m562[0m, in [35m__stream[0m
+    raise NoAudioReceived(
+        "No audio was received. Please verify that your parameters are correct."
+    )
+[1;35medge_tts.exceptions.NoAudioReceived[0m: [35mNo audio was received. Please verify that your parameters are correct.[0m
+
+
+Gap loi trong qua trinh chay Agent pipeline: Error: Edge TTS failed: edge-tts failed with code 1: Traceback (most recent call last):
+  File [35m"<frozen runpy>"[0m, line [35m198[0m, in [35m_run_module_as_main[0m
+  File [35m"<frozen runpy>"[0m, line [35m88[0m, in [35m_run_code[0m
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\__main__.py"[0m, line [35m6[0m, in [35m<module>[0m
+    [31mmain[0m[1;31m()[0m
+    [31m~~~~[0m[1;31m^^[0m
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\util.py"[0m, line [35m141[0m, in [35mmain[0m
+    [31masyncio.run[0m[1;31m(amain())[0m
+    [31m~~~~~~~~~~~[0m[1;31m^^^^^^^^^[0m
+  File [35m"C:\Python313\Lib\asyncio\runners.py"[0m, line [35m195[0m, in [35mrun[0m
+    return [31mrunner.run[0m[1;31m(main)[0m
+           [31m~~~~~~~~~~[0m[1;31m^^^^^^[0m
+  File [35m"C:\Python313\Lib\asyncio\runners.py"[0m, line [35m118[0m, in [35mrun[0m
+    return [31mself._loop.run_until_complete[0m[1;31m(task)[0m
+           [31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^[0m
+  File [35m"C:\Python313\Lib\asyncio\base_events.py"[0m, line [35m719[0m, in [35mrun_until_complete[0m
+    return [31mfuture.result[0m[1;31m()[0m
+           [31m~~~~~~~~~~~~~[0m[1;31m^^[0m
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\util.py"[0m, line [35m136[0m, in [35mamain[0m
+    await _run_tts(args)
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\util.py"[0m, line [35m73[0m, in [35m_run_tts[0m
+    async for chunk in communicate.stream():
+    ...<3 lines>...
+            submaker.feed(chunk)
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\communicate.py"[0m, line [35m588[0m, in [35mstream[0m
+    async for message in self.__stream():
+        yield message
+  File [35m"C:\Users\ADMIN\AppData\Roaming\Python\Python313\site-packages\edge_tts\communicate.py"[0m, line [35m562[0m, in [35m__stream[0m
+    raise NoAudioReceived(
+        "No audio was received. Please verify that your parameters are correct."
+    )
+[1;35medge_tts.exceptions.NoAudioReceived[0m: [35mNo audio was received. Please verify that your parameters are correct.[0m
+
+    at generateTTS_EdgeTTS [90m(file:///C:/CONG_VIEC/VNP_HyperFrames/[39magents/ttsAgent.js:139:11[90m)[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)[39m
+    at async main [90m(file:///C:/CONG_VIEC/VNP_HyperFrames/[39mpipeline/run_agent_pipeline.js:209:23[90m)[39m

@@ -1,0 +1,68 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://github.com/rany2/edge-tts
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+[Pipeline] Phat hien URL. Dang lay thong tin tu trang web...
+[Pipeline] Context trich xuat tu URL: "GitHub - rany2/edge-tts: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key · GitHub" | "Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or..."
+
+[Pipeline] Tien hanh chup anh man hinh trang nguon...
+Đang mở trình duyệt headless bằng Puppeteer...
+Đang mở trang https://github.com/rany2/edge-tts...
+Đang ẩn header/footer/banner để ảnh chụp sạch hơn...
+Đang chụp ảnh màn hình vào C:\CONG_VIEC\VNP_HyperFrames\assets\images\github_repo.png...
+Đã chụp và lưu ảnh thành công.
+[Pipeline] Chup anh man hinh thanh cong. Da them vao project assets: github_repo.png
+Step 1: Sinh kich ban JSON qua ScriptAgent...
+[Agent Log] Tạo kịch bản cho chủ đề: "Gioi thieu du an/website tai dia chi https://github.com/rany2/edge-tts. Tiêu đề: GitHub - rany2/edge-tts: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key · GitHub. Mô tả: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key - rany2/edge-tts." | 4 cảnh x 8s
+[Agent Log] [AIRouter] Đang gọi model "google/gemini-2.5-flash" (Lần thử 1/6, isJson=true)...
+[Agent Log] [AIRouter] Thất bại với model "google/gemini-2.5-flash". Lỗi: 402 - 402 Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits
+[Agent Log] [AIRouter] Chuyển sang model dự phòng tiếp theo...
+[Agent Log] [AIRouter] Đang gọi model "deepseek/deepseek-v4-flash:free" (Lần thử 2/6, isJson=true)...
+[Agent Log] [AIRouter] Phát hiện hết hạn mức free-models-per-day của OpenRouter. Bỏ qua các model free trong tương lai.
+[Agent Log] [AIRouter] Bỏ qua model free "meta-llama/llama-3.3-70b-instruct:free" vì đã hết hạn mức free-models-per-day.
+[Agent Log] [AIRouter] Bỏ qua model free "google/gemma-4-31b-it:free" vì đã hết hạn mức free-models-per-day.
+[Agent Log] [AIRouter] Bỏ qua model free "meta-llama/llama-3.2-3b-instruct:free" vì đã hết hạn mức free-models-per-day.
+[Agent Log] [AIRouter] Bỏ qua model free "openrouter/free" vì đã hết hạn mức free-models-per-day.
+[Agent Log] [AIRouter] Thất bại với model "deepseek/deepseek-v4-flash:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+
+Gap loi trong qua trinh chay Agent pipeline: RateLimitError: 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+    at APIError.generate [90m(file:///C:/CONG_VIEC/VNP_HyperFrames/[39mnode_modules/[4mopenai[24m/core/error.mjs:59:20[90m)[39m
+    at OpenAI.makeStatusError [90m(file:///C:/CONG_VIEC/VNP_HyperFrames/[39mnode_modules/[4mopenai[24m/client.mjs:255:32[90m)[39m
+    at OpenAI.makeRequest [90m(file:///C:/CONG_VIEC/VNP_HyperFrames/[39mnode_modules/[4mopenai[24m/client.mjs:446:30[90m)[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)[39m
+    at async callAI [90m(file:///C:/CONG_VIEC/VNP_HyperFrames/[39mservices/aiRouter.js:109:28[90m)[39m
+    at async generateScript [90m(file:///C:/CONG_VIEC/VNP_HyperFrames/[39magents/scriptAgent.js:234:24[90m)[39m
+    at async main [90m(file:///C:/CONG_VIEC/VNP_HyperFrames/[39mpipeline/run_agent_pipeline.js:183:18[90m)[39m {
+  status: [33m429[39m,
+  headers: Headers {
+    date: [32m'Fri, 22 May 2026 08:17:02 GMT'[39m,
+    [32m'content-type'[39m: [32m'application/json'[39m,
+    [32m'transfer-encoding'[39m: [32m'chunked'[39m,
+    connection: [32m'keep-alive'[39m,
+    [32m'cf-ray'[39m: [32m'9ffa61cdfdb81483-HKG'[39m,
+    [32m'cf-cache-status'[39m: [32m'DYNAMIC'[39m,
+    [32m'access-control-allow-origin'[39m: [32m'*'[39m,
+    server: [32m'cloudflare'[39m,
+    [32m'access-control-expose-headers'[39m: [32m'X-Generation-Id,cf-ray'[39m,
+    [32m'permissions-policy'[39m: [32m'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com"), payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'[39m,
+    [32m'referrer-policy'[39m: [32m'no-referrer, strict-origin-when-cross-origin, no-referrer, strict-origin-when-cross-origin'[39m,
+    [32m'x-cloud-trace-context'[39m: [32m'c121f7428c88edb7e699dbc1bcccfcd7'[39m,
+    [32m'x-content-type-options'[39m: [32m'nosniff, nosniff'[39m,
+    [32m'x-ratelimit-limit'[39m: [32m'50'[39m,
+    [32m'x-ratelimit-remaining'[39m: [32m'0'[39m,
+    [32m'x-ratelimit-reset'[39m: [32m'1779494400000'[39m
+  },
+  requestID: [1mnull[22m,
+  error: {
+    message: [32m'Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day'[39m,
+    code: [33m429[39m,
+    metadata: { headers: [36m[Object][39m, provider_name: [1mnull[22m }
+  },
+  code: [33m429[39m,
+  param: [90mundefined[39m,
+  type: [90mundefined[39m
+}

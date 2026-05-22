@@ -66,6 +66,8 @@ export async function saveWorkspaceEnv(workspaceRoot, values = {}) {
     ["OPENAI_API_KEY", values.openaiApiKey],
     ["OPENROUTER_API_KEY", values.openrouterApiKey],
     ["TAVILY_API_KEY", values.tavilyApiKey],
+    ["LARVOICE_API_KEY", values.larvoiceApiKey],
+    ["LARVOICE_VOICE_ID", values.larvoiceVoiceId],
   ];
 
   for (const [key, value] of entries) {

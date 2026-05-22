@@ -1,0 +1,57 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://github.com/rany2/edge-tts
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+[Pipeline] Phat hien URL. Dang lay thong tin tu trang web...
+[Pipeline] Context trich xuat tu URL: "GitHub - rany2/edge-tts: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key · GitHub" | "Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or..."
+
+[Pipeline] Tien hanh chup anh man hinh trang nguon...
+Đang mở trình duyệt headless bằng Puppeteer...
+Đang mở trang https://github.com/rany2/edge-tts...
+Đang ẩn header/footer/banner để ảnh chụp sạch hơn...
+Đang chụp ảnh màn hình vào C:\CONG_VIEC\VNP_HyperFrames\assets\images\github_repo.png...
+Đã chụp và lưu ảnh thành công.
+[Pipeline] Chup anh man hinh thanh cong. Da them vao project assets: github_repo.png
+Step 1: Sinh kich ban JSON qua ScriptAgent...
+[Agent Log] Tạo kịch bản cho chủ đề: "Gioi thieu du an/website tai dia chi https://github.com/rany2/edge-tts. Tiêu đề: GitHub - rany2/edge-tts: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key · GitHub. Mô tả: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key - rany2/edge-tts." | 4 cảnh x 8s
+[Agent Log] [AIRouter] Gọi model "google/gemini-2.5-flash" via OpenRouter (isJson=true)...
+[Agent Log] [AIRouter] OpenRouter báo lỗi 402 (thiếu credit). Thử lại với max_tokens = 1200...
+[Agent Log] [AIRouter] Lỗi gọi AI: 402 Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits
+
+Gap loi trong qua trinh chay Agent pipeline: APIError: 402 Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits
+    at APIError.generate (file:///C:/CONG_VIEC/VNP_HyperFrames/node_modules/openai/core/error.mjs:64:16)
+    at OpenAI.makeStatusError (file:///C:/CONG_VIEC/VNP_HyperFrames/node_modules/openai/client.mjs:255:32)
+    at OpenAI.makeRequest (file:///C:/CONG_VIEC/VNP_HyperFrames/node_modules/openai/client.mjs:446:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callAI (file:///C:/CONG_VIEC/VNP_HyperFrames/services/aiRouter.js:80:24)
+    at async generateScript (file:///C:/CONG_VIEC/VNP_HyperFrames/agents/scriptAgent.js:234:24)
+    at async main (file:///C:/CONG_VIEC/VNP_HyperFrames/pipeline/run_agent_pipeline.js:158:22) {
+  status: 402,
+  headers: Headers {
+    date: 'Fri, 22 May 2026 07:39:26 GMT',
+    'content-type': 'application/json',
+    'transfer-encoding': 'chunked',
+    connection: 'keep-alive',
+    'cf-ray': '9ffa2abfdb46dd9e-HKG',
+    'cf-cache-status': 'DYNAMIC',
+    'access-control-allow-origin': '*',
+    server: 'cloudflare',
+    'access-control-expose-headers': 'X-Generation-Id,cf-ray',
+    'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com"), payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")',
+    'referrer-policy': 'no-referrer, strict-origin-when-cross-origin, no-referrer, strict-origin-when-cross-origin',
+    'x-cloud-trace-context': 'c2c13340a55a3d0efba7af4885304f4b',
+    'x-content-type-options': 'nosniff, nosniff'
+  },
+  requestID: null,
+  error: {
+    message: 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits',
+    code: 402
+  },
+  code: 402,
+  param: undefined,
+  type: undefined
+}

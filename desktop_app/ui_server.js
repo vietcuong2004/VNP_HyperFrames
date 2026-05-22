@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 import { inspectEnvironment } from "./environment.mjs";
 import { createNodeScriptCommand } from "./runtime_binaries.mjs";
 import { createWorkspacePaths, ensureWorkspace } from "./workspace.mjs";
+import { loadWorkspaceEnv, saveWorkspaceEnv } from "./settings.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -85,7 +86,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
     }
 
     const nodeCommand = createNodeScriptCommand({
-      scriptPath: path.join(__dirname, "../pipeline/run_pipeline.js"),
+      scriptPath: path.join(__dirname, "../pipeline/run_agent_pipeline.js"),
       args: [url],
       isPackaged,
       nodePath,
@@ -202,6 +203,43 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
     await ensureWorkspace(paths);
     openFolder(paths.rendersDir);
     return res.json({ success: true, path: paths.rendersDir });
+  });
+
+  app.get("/api/settings", async (req, res) => {
+    try {
+      const workspaceEnv = await loadWorkspaceEnv(workspaceRoot);
+      return res.json({
+        openaiApiKey: workspaceEnv.OPENAI_API_KEY || "",
+        openrouterApiKey: workspaceEnv.OPENROUTER_API_KEY || "",
+        tavilyApiKey: workspaceEnv.TAVILY_API_KEY || "",
+        larvoiceApiKey: workspaceEnv.LARVOICE_API_KEY || "",
+        larvoiceVoiceId: workspaceEnv.LARVOICE_VOICE_ID || "1",
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/settings", async (req, res) => {
+    try {
+      const { openaiApiKey, openrouterApiKey, tavilyApiKey, larvoiceApiKey, larvoiceVoiceId } = req.body;
+      await saveWorkspaceEnv(workspaceRoot, {
+        openaiApiKey,
+        openrouterApiKey,
+        tavilyApiKey,
+        larvoiceApiKey,
+        larvoiceVoiceId,
+      });
+      // Also update runtimeEnv dynamically so the current running process has the updated keys
+      runtimeEnv.OPENAI_API_KEY = openaiApiKey;
+      runtimeEnv.OPENROUTER_API_KEY = openrouterApiKey;
+      runtimeEnv.TAVILY_API_KEY = tavilyApiKey;
+      runtimeEnv.LARVOICE_API_KEY = larvoiceApiKey;
+      runtimeEnv.LARVOICE_VOICE_ID = larvoiceVoiceId;
+      return res.json({ success: true });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   });
 
   return { app, server, io, paths };

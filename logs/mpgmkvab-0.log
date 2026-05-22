@@ -1,0 +1,102 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://github.com/heygen-com/hyperframes
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+[Pipeline] Phat hien URL. Dang lay thong tin tu trang web...
+[Pipeline] Context trich xuat tu URL: "GitHub - heygen-com/hyperframes: Write HTML. Render video. Built for agents. · GitHub" | "Write HTML. Render video. Built for agents. Contribute to heygen-com/hyperframes development by crea..."
+
+[Pipeline] Tien hanh chup anh man hinh trang nguon...
+Đang mở trình duyệt headless bằng Puppeteer...
+Đang mở trang https://github.com/heygen-com/hyperframes...
+Đang ẩn header/footer/banner để ảnh chụp sạch hơn...
+Đang chụp ảnh màn hình vào C:\CONG_VIEC\VNP_HyperFrames\assets\images\github_repo.png...
+Đã chụp và lưu ảnh thành công.
+[Pipeline] Chup anh man hinh thanh cong. Da them vao project assets: github_repo.png
+Step 1: Sinh kich ban JSON qua ScriptAgent...
+[Agent Log] Tạo kịch bản cho chủ đề: "Gioi thieu du an/website tai dia chi https://github.com/heygen-com/hyperframes. Tiêu đề: GitHub - heygen-com/hyperframes: Write HTML. Render video. Built for agents. · GitHub. Mô tả: Write HTML. Render video. Built for agents. Contribute to heygen-com/hyperframes development by creating an account on GitHub.." | 4 cảnh x 8s
+[Agent Log] [AIRouter] Đang gọi model "google/gemini-2.5-flash" (Lần thử 1/6, isJson=true)...
+[Agent Log] [AIRouter] Thất bại với model "google/gemini-2.5-flash". Lỗi: 402 - 402 Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits
+[Agent Log] [AIRouter] Tự động chuyển đổi sang model dự phòng tiếp theo...
+[Agent Log] [AIRouter] Đang gọi model "deepseek/deepseek-v4-flash:free" (Lần thử 2/6, isJson=true)...
+[Agent Log] [AIRouter] Thất bại với model "deepseek/deepseek-v4-flash:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+[Agent Log] [AIRouter] Bị rate limit. Chờ 4s và thử lại model "deepseek/deepseek-v4-flash:free" (Lần thử lại 1/3)...
+[Agent Log] [AIRouter] Thất bại với model "deepseek/deepseek-v4-flash:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+[Agent Log] [AIRouter] Bị rate limit. Chờ 8s và thử lại model "deepseek/deepseek-v4-flash:free" (Lần thử lại 2/3)...
+[Agent Log] [AIRouter] Thất bại với model "deepseek/deepseek-v4-flash:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+[Agent Log] [AIRouter] Bị rate limit. Chờ 12s và thử lại model "deepseek/deepseek-v4-flash:free" (Lần thử lại 3/3)...
+[Agent Log] [AIRouter] Thất bại với model "deepseek/deepseek-v4-flash:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+[Agent Log] [AIRouter] Tự động chuyển đổi sang model dự phòng tiếp theo...
+[Agent Log] [AIRouter] Đang gọi model "meta-llama/llama-3.3-70b-instruct:free" (Lần thử 3/6, isJson=true)...
+[Agent Log] [AIRouter] Thất bại với model "meta-llama/llama-3.3-70b-instruct:free". Lỗi: 429 - 429 Provider returned error
+[Agent Log] [AIRouter] Bị rate limit. Chờ 4s và thử lại model "meta-llama/llama-3.3-70b-instruct:free" (Lần thử lại 1/3)...
+[Agent Log] [AIRouter] Thất bại với model "meta-llama/llama-3.3-70b-instruct:free". Lỗi: 429 - 429 Provider returned error
+[Agent Log] [AIRouter] Bị rate limit. Chờ 8s và thử lại model "meta-llama/llama-3.3-70b-instruct:free" (Lần thử lại 2/3)...
+[Agent Log] [AIRouter] Thất bại với model "meta-llama/llama-3.3-70b-instruct:free". Lỗi: 429 - 429 Provider returned error
+[Agent Log] [AIRouter] Bị rate limit. Chờ 12s và thử lại model "meta-llama/llama-3.3-70b-instruct:free" (Lần thử lại 3/3)...
+[Agent Log] [AIRouter] Thất bại với model "meta-llama/llama-3.3-70b-instruct:free". Lỗi: 429 - 429 Provider returned error
+[Agent Log] [AIRouter] Tự động chuyển đổi sang model dự phòng tiếp theo...
+[Agent Log] [AIRouter] Đang gọi model "google/gemma-4-31b-it:free" (Lần thử 4/6, isJson=true)...
+[Agent Log] [AIRouter] Thất bại với model "google/gemma-4-31b-it:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+[Agent Log] [AIRouter] Bị rate limit. Chờ 4s và thử lại model "google/gemma-4-31b-it:free" (Lần thử lại 1/3)...
+[Agent Log] [AIRouter] Thất bại với model "google/gemma-4-31b-it:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+[Agent Log] [AIRouter] Bị rate limit. Chờ 8s và thử lại model "google/gemma-4-31b-it:free" (Lần thử lại 2/3)...
+[Agent Log] [AIRouter] Thất bại với model "google/gemma-4-31b-it:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+[Agent Log] [AIRouter] Bị rate limit. Chờ 12s và thử lại model "google/gemma-4-31b-it:free" (Lần thử lại 3/3)...
+[Agent Log] [AIRouter] Thất bại với model "google/gemma-4-31b-it:free". Lỗi: 429 - 429 Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model requests per day
+[Agent Log] [AIRouter] Tự động chuyển đổi sang model dự phòng tiếp theo...
+[Agent Log] [AIRouter] Đang gọi model "meta-llama/llama-3.2-3b-instruct:free" (Lần thử 5/6, isJson=true)...
+[Agent Log] [AIRouter] Thất bại với model "meta-llama/llama-3.2-3b-instruct:free". Lỗi: 429 - 429 Provider returned error
+[Agent Log] [AIRouter] Bị rate limit. Chờ 4s và thử lại model "meta-llama/llama-3.2-3b-instruct:free" (Lần thử lại 1/3)...
+[Agent Log] [AIRouter] Thất bại với model "meta-llama/llama-3.2-3b-instruct:free". Lỗi: 429 - 429 Provider returned error
+[Agent Log] [AIRouter] Bị rate limit. Chờ 8s và thử lại model "meta-llama/llama-3.2-3b-instruct:free" (Lần thử lại 2/3)...
+[Agent Log] [AIRouter] Thất bại với model "meta-llama/llama-3.2-3b-instruct:free". Lỗi: 429 - 429 Provider returned error
+[Agent Log] [AIRouter] Bị rate limit. Chờ 12s và thử lại model "meta-llama/llama-3.2-3b-instruct:free" (Lần thử lại 3/3)...
+[Agent Log] [AIRouter] Thất bại với model "meta-llama/llama-3.2-3b-instruct:free". Lỗi: 429 - 429 Provider returned error
+[Agent Log] [AIRouter] Tự động chuyển đổi sang model dự phòng tiếp theo...
+[Agent Log] [AIRouter] Đang gọi model "openrouter/free" (Lần thử 6/6, isJson=true)...
+[Agent Log] [AIRouter] Thất bại với model "openrouter/free". Lỗi: 404 - 404 Provider returned error
+
+Gap loi trong qua trinh chay Agent pipeline: NotFoundError: 404 Provider returned error
+    at APIError.generate (file:///C:/CONG_VIEC/VNP_HyperFrames/node_modules/openai/core/error.mjs:50:20)
+    at OpenAI.makeStatusError (file:///C:/CONG_VIEC/VNP_HyperFrames/node_modules/openai/client.mjs:255:32)
+    at OpenAI.makeRequest (file:///C:/CONG_VIEC/VNP_HyperFrames/node_modules/openai/client.mjs:446:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callAI (file:///C:/CONG_VIEC/VNP_HyperFrames/services/aiRouter.js:98:28)
+    at async generateScript (file:///C:/CONG_VIEC/VNP_HyperFrames/agents/scriptAgent.js:234:24)
+    at async main (file:///C:/CONG_VIEC/VNP_HyperFrames/pipeline/run_agent_pipeline.js:158:22) {
+  status: 404,
+  headers: Headers {
+    date: 'Fri, 22 May 2026 08:02:56 GMT',
+    'content-type': 'application/json',
+    'transfer-encoding': 'chunked',
+    connection: 'keep-alive',
+    'cf-ray': '9ffa4d203fcc4f91-HKG',
+    'cf-cache-status': 'DYNAMIC',
+    'access-control-allow-origin': '*',
+    server: 'cloudflare',
+    vary: 'Accept-Encoding',
+    'access-control-expose-headers': 'X-Generation-Id,cf-ray',
+    'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com"), payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")',
+    'referrer-policy': 'no-referrer, strict-origin-when-cross-origin, no-referrer, strict-origin-when-cross-origin',
+    'x-cloud-trace-context': '677205174391f4faaf9e69f542f63476',
+    'x-content-type-options': 'nosniff, nosniff',
+    'content-encoding': 'gzip'
+  },
+  requestID: null,
+  error: {
+    message: 'Provider returned error',
+    code: 404,
+    metadata: {
+      raw: '{"error":{"message":"Model not found","type":"invalid_request_error"}}',
+      provider_name: 'OpenInference',
+      is_byok: false
+    }
+  },
+  code: 404,
+  param: undefined,
+  type: undefined
+}
