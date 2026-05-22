@@ -1,6 +1,6 @@
 import { short, baseScene } from "../main_generateContent.js";
 import { buildProjectAssetsPrompt } from "../agent_dynamic_flow.mjs";
-import { buildAiProviders, createChatCompletionWithFallback } from "../ai_provider.mjs";
+import { buildAiProviders, createChatCompletionWithFallback, parseAiJsonContent } from "../ai_provider.mjs";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của Docker Hub
 const STORYTELLING_GUIDELINES = {
@@ -258,7 +258,7 @@ export async function generateScenes(rawData, format) {
     });
     console.log(`> Đã sinh kịch bản Docker bằng provider: ${provider.name}`);
 
-    const parsed = JSON.parse(response.choices[0].message.content);
+    const parsed = parseAiJsonContent(response.choices[0].message.content);
     
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;

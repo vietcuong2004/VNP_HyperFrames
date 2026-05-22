@@ -5,6 +5,7 @@ import {
   buildAiProviders,
   isFallbackableAiError,
   createChatCompletionWithFallback,
+  parseAiJsonContent,
 } from "../pipeline/ai_provider.mjs";
 
 test("buildAiProviders adds TROLLLLM fallback with its own endpoint after OPENROUTER", () => {
@@ -103,4 +104,18 @@ test("createChatCompletionWithFallback retries TROLLLLM when OpenRouter quota fa
   assert.equal(calls[1].provider.apiKey, "sk-or-backup");
   assert.equal(response.provider.name, "trollllm");
   assert.equal(response.result.choices[0].message.content, "{\"ok\":true}");
+});
+
+test("parseAiJsonContent accepts markdown fenced JSON", () => {
+  assert.deepEqual(
+    parseAiJsonContent('```json\n{"scenes":[{"scene":1}]}\n```'),
+    { scenes: [{ scene: 1 }] },
+  );
+});
+
+test("parseAiJsonContent extracts JSON object from explanatory text", () => {
+  assert.deepEqual(
+    parseAiJsonContent('Dưới đây là JSON:\n{"ok":true}\nHết.'),
+    { ok: true },
+  );
 });

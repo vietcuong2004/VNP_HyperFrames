@@ -69,6 +69,30 @@ export function isFallbackableAiError(error) {
   ].some((needle) => message.includes(needle));
 }
 
+export function parseAiJsonContent(content) {
+  const raw = String(content || "").trim();
+  if (!raw) throw new Error("AI trả về nội dung rỗng.");
+
+  const fencedMatch = raw.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
+  const withoutFence = fencedMatch ? fencedMatch[1].trim() : raw;
+
+  try {
+    return JSON.parse(withoutFence);
+  } catch (firstError) {
+    const start = withoutFence.indexOf("{");
+    const end = withoutFence.lastIndexOf("}");
+    if (start !== -1 && end > start) {
+      const candidate = withoutFence.slice(start, end + 1);
+      try {
+        return JSON.parse(candidate);
+      } catch {
+        // Keep the original parse error; it points at the exact malformed content.
+      }
+    }
+    throw firstError;
+  }
+}
+
 export async function createChatCompletionWithFallback({
   providers = buildAiProviders(),
   request,
