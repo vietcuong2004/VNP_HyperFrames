@@ -1,3 +1,30 @@
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+export function getSceneCards(scene, limit = 4) {
+  const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
+    ? scene.steps
+    : Array.isArray(scene.cards) && scene.cards.length > 0
+      ? scene.cards
+      : [1, 2, 3, 4]
+          .map((idx) => ({
+            title: scene[`bento${idx}_title`],
+            body: scene[`bento${idx}_desc`],
+          }))
+          .filter((card) => card.title || card.body);
+
+  return rawCards.slice(0, limit).map((card, idx) => ({
+    title: escapeHtml(card.title || `Điểm ${idx + 1}`),
+    body: escapeHtml(card.body || card.desc || card.description || ""),
+  }));
+}
+
 export function getHyperframesReviewScene(i, scene, sceneId, start) {
   let html = "";
   let gsap = "";
@@ -48,10 +75,17 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 1: {
       const title1 = scene.headline_line1 || "NỘI DUNG CHÍNH";
       const title2 = scene.headline_line2 || "CẦN GIẢI THÍCH";
-      const bento1Title = scene.bento1_title || "Tóm tắt";
-      const bento1Desc = scene.bento1_desc || "Thông tin cơ bản";
-      const bento2Title = scene.bento2_title || "Audience";
-      const bento3Title = scene.bento3_title || "Context";
+      const cards = getSceneCards(scene, 5);
+      const bento1Title = cards[0]?.title || scene.bento1_title || "Tóm tắt";
+      const bento1Desc = cards[0]?.body || scene.bento1_desc || "Thông tin cơ bản";
+      const bento2Title = cards[1]?.title || scene.bento2_title || "Đối tượng";
+      const bento2Desc = cards[1]?.body || scene.bento2_desc || "Phân tích chuyên sâu";
+      const bento3Title = cards[2]?.title || scene.bento3_title || "Ngữ cảnh";
+      const bento3Desc = cards[2]?.body || scene.bento3_desc || "Dữ liệu liên quan";
+      const bento4Title = cards[3]?.title || scene.bento4_title || "Lưu ý";
+      const bento4Desc = cards[3]?.body || scene.bento4_desc || "Kiểm tra trước khi dùng";
+      const bento5Title = cards[4]?.title || scene.bento5_title || "Tiếp theo";
+      const bento5Desc = cards[4]?.body || scene.bento5_desc || "Mở nguồn và kiểm chứng";
       html = `
         <div class="grid-layout-title">${title1}<br/><span style="color: #fdf01c">${title2}</span></div>
         <div class="feature-grid">
@@ -63,22 +97,22 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
           <div class="feature-item" id="fi-${sceneId}-2">
             <div class="feature-icon-wrapper neon-yellow"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
             <div class="feature-item-title">${bento2Title}</div>
-            <div class="feature-item-subtitle">Phân tích chuyên sâu</div>
+            <div class="feature-item-subtitle">${bento2Desc}</div>
           </div>
           <div class="feature-item" id="fi-${sceneId}-3">
             <div class="feature-icon-wrapper neon-purple"><svg viewBox="0 0 24 24"><path d="M12 14v8H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm9 4h1v5h-8v-5h7z"/></svg></div>
             <div class="feature-item-title">${bento3Title}</div>
-            <div class="feature-item-subtitle">Dữ liệu liên quan</div>
+            <div class="feature-item-subtitle">${bento3Desc}</div>
           </div>
           <div class="feature-item" id="fi-${sceneId}-4">
             <div class="feature-icon-wrapper neon-blue"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
-            <div class="feature-item-title">Tính năng</div>
-            <div class="feature-item-subtitle">Điều phối tự động</div>
+            <div class="feature-item-title">${bento4Title}</div>
+            <div class="feature-item-subtitle">${bento4Desc}</div>
           </div>
           <div class="feature-item full-width" id="fi-${sceneId}-5">
             <div class="feature-icon-wrapper neon-green"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></div>
-            <div class="feature-item-title">Tích hợp AI</div>
-            <div class="feature-item-subtitle">Kết nối mở rộng</div>
+            <div class="feature-item-title">${bento5Title}</div>
+            <div class="feature-item-subtitle">${bento5Desc}</div>
           </div>
         </div>
       `;
@@ -96,6 +130,13 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 2: {
       const title1 = scene.headline_line1 || "BA CÂU HỎI";
       const title2 = scene.headline_line2 || "PHẢI TRẢ LỜI";
+      const cards = getSceneCards(scene, 3);
+      const item1Title = cards[0]?.title || scene.bento1_title || "What";
+      const item1Body = cards[0]?.body || scene.bento1_desc || "Định nghĩa vấn đề cơ bản";
+      const item2Title = cards[1]?.title || scene.bento2_title || "Why";
+      const item2Body = cards[1]?.body || scene.bento2_desc || "Lý do cốt lõi đáng quan tâm";
+      const item3Title = cards[2]?.title || scene.bento3_title || "Check";
+      const item3Body = cards[2]?.body || scene.bento3_desc || "Kiểm chứng trước khi áp dụng";
       html = `
         <div class="headline-container" style="top: 150px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
@@ -108,8 +149,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
               <div class="timeline-line"></div>
             </div>
             <div class="timeline-right">
-              <div class="timeline-title">${scene.bento1_title || "What"}</div>
-              <div class="timeline-subtitle">Định nghĩa vấn đề cơ bản</div>
+              <div class="timeline-title">${item1Title}</div>
+              <div class="timeline-subtitle">${item1Body}</div>
             </div>
           </div>
           <div class="timeline-item" id="ti-${sceneId}-2">
@@ -118,8 +159,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
               <div class="timeline-line"></div>
             </div>
             <div class="timeline-right">
-              <div class="timeline-title">${scene.bento2_title || "Why"}</div>
-              <div class="timeline-subtitle">Lý do cốt lõi đáng quan tâm</div>
+              <div class="timeline-title">${item2Title}</div>
+              <div class="timeline-subtitle">${item2Body}</div>
             </div>
           </div>
           <div class="timeline-item" id="ti-${sceneId}-3">
@@ -128,8 +169,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
               <div class="timeline-line"></div>
             </div>
             <div class="timeline-right">
-              <div class="timeline-title">${scene.bento3_title || "Check"}</div>
-              <div class="timeline-subtitle">Kiểm chứng tự động nền</div>
+              <div class="timeline-title">${item3Title}</div>
+              <div class="timeline-subtitle">${item3Body}</div>
             </div>
           </div>
         </div>

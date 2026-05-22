@@ -1,3 +1,57 @@
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+export function getSceneCards(scene, limit = 4) {
+  const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
+    ? scene.steps
+    : Array.isArray(scene.cards) && scene.cards.length > 0
+      ? scene.cards
+      : [1, 2, 3, 4]
+          .map((idx) => ({
+            title: scene[`bento${idx}_title`],
+            body: scene[`bento${idx}_desc`],
+          }))
+          .filter((card) => card.title || card.body);
+
+  return rawCards.slice(0, limit).map((card, idx) => ({
+    title: escapeHtml(card.title || `Step ${idx + 1}`),
+    body: escapeHtml(card.body || card.desc || card.description || ""),
+  }));
+}
+
+function renderStepCards(scene, sceneId, limit = 4, options = {}) {
+  const cards = getSceneCards(scene, limit);
+  const command = options.command ? escapeHtml(options.command) : "";
+  const commandCard = command
+    ? `
+          <div class="step-command" id="cmd-${sceneId}">${command}</div>`
+    : "";
+  return `
+        <div class="step-container" id="steps-${sceneId}" style="top: ${options.top || 525}px;">
+          ${cards.map((card, idx) => `
+          <div class="step-card" id="st-${sceneId}-${idx + 1}">
+            <div class="step-number">${idx + 1}</div>
+            <div>
+              <div class="step-title">${card.title}</div>
+              <div class="step-desc">${card.body}</div>
+              ${idx === 0 ? commandCard : ""}
+            </div>
+          </div>`).join("")}
+        </div>`;
+}
+
+function stepCardAnimation(sceneId, start, count = 4) {
+  return Array.from({ length: count }, (_, idx) =>
+    `tl.from("#st-${sceneId}-${idx + 1}", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.1 + idx * 0.08});`
+  ).join("\n        ");
+}
+
 export function getHyperframesReviewScene(i, scene, sceneId, start) {
   let html = "";
   let gsap = "";
@@ -99,10 +153,30 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Cảnh 3: BỐN TÍNH NĂNG LÕI
       const title1 = scene.headline_line1 || "Bốn Tính Năng";
       const title2 = scene.headline_line2 || "Lõi";
-      const bento1Title = scene.bento1_title || "Phân tích Real-time";
-      const bento2Title = scene.bento2_title || "Tranh biện chốt lệnh";
-      const bento3Title = scene.bento3_title || "API độ trễ cực thấp";
-      const bento4Title = scene.bento4_title || "Quản trị rủi ro AI";
+      const cards = getSceneCards(scene, 4);
+      if (scene.content_mode === "steps" || Array.isArray(scene.steps)) {
+        html = `
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+        </div>
+        ${renderStepCards(scene, sceneId, 4)}
+      `;
+        gsap = `
+        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
+        ${stepCardAnimation(sceneId, start, cards.length)}
+      `;
+        break;
+      }
+      const bento1Title = cards[0]?.title || scene.bento1_title || "Phân tích Real-time";
+      const bento1Desc = cards[0]?.body || scene.bento1_desc || "";
+      const bento2Title = cards[1]?.title || scene.bento2_title || "Tranh biện chốt lệnh";
+      const bento2Desc = cards[1]?.body || scene.bento2_desc || "";
+      const bento3Title = cards[2]?.title || scene.bento3_title || "API độ trễ cực thấp";
+      const bento3Desc = cards[2]?.body || scene.bento3_desc || "";
+      const bento4Title = cards[3]?.title || scene.bento4_title || "Quản trị rủi ro AI";
+      const bento4Desc = cards[3]?.body || scene.bento4_desc || "";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
@@ -115,12 +189,14 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.09 19.58 10.5 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">${bento1Title}</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">${bento1Desc}</div>
             </div>
             <div class="bento-card half" id="bc-${sceneId}-2" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
               <div class="card-icon-svg" style="margin: 0 0 20px 0;">
                 <svg viewBox="0 0 24 24"><path d="M5.2 18.2l-2.4-2.4c-.6-.6-.6-1.6 0-2.2l3.4-3.4c.6-.6 1.6-.6 2.2 0l2.4 2.4c.6.6.6 1.6 0 2.2l-3.4 3.4c-.6.6-1.6.6-2.2 0zM19.6 3.8c-.8-.8-2-.8-2.8 0l-7.1 7.1c-.8.8-.8 2 0 2.8l1.4 1.4c.8.8 2 .8 2.8 0l7.1-7.1c.8-.8.8-2 0-2.8l-1.4-1.4zM7.5 13.5l3 3M17 11.5l-4.5-4.5"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">${bento2Title}</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">${bento2Desc}</div>
             </div>
           </div>
           <div class="bento-grid-2">
@@ -129,12 +205,14 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <svg viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-1.4-.8-1.05-1.57L11.5 3h1l-1 7h3.5c.88 0 1.4.8 1.05 1.57L11 21z"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">${bento3Title}</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">${bento3Desc}</div>
             </div>
             <div class="bento-card half" id="bc-${sceneId}-4" style="flex-direction: column; align-items: center; justify-content: center; padding: 30px;">
               <div class="card-icon-svg" style="margin: 0 0 20px 0;">
                 <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 2.18c3.55 1 6 4.3 6 7.91 0 3.86-2.61 7.42-6 8.71V4.18z"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px; font-weight: 700; text-align: center;">${bento4Title}</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">${bento4Desc}</div>
             </div>
           </div>
         </div>
@@ -299,6 +377,23 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const title1 = scene.headline_line1 || "KÍCH HOẠT NHANH";
       const title2 = scene.headline_line2 || "NPX HYPERFRAMES INIT";
       const btnText = scene.btn_text || "$ npx hyperframes init my-video";
+      const cards = getSceneCards(scene, 3);
+      if (scene.content_mode === "steps" || Array.isArray(scene.steps)) {
+        html = `
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
+          <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
+        </div>
+        ${renderStepCards(scene, sceneId, 3, { top: 560, command: btnText })}
+      `;
+        gsap = `
+        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
+        ${stepCardAnimation(sceneId, start, cards.length)}
+        tl.from("#cmd-${sceneId}", { y: 10, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.45});
+      `;
+        break;
+      }
       html = `
         <div class="main-glow-icon" id="glow-${sceneId}">
           <div class="glow-svg-container">
@@ -326,10 +421,15 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Cảnh 8: Outro Github Star
       const title1 = scene.headline_line1 || "ỦNG HỘ REPO";
       const title2 = scene.headline_line2 || "THẢ 1 SAO GITHUB NHÉ!";
-      const bento1Title = scene.bento1_title || "Thả 1 Star";
-      const bento2Title = scene.bento2_title || "Yêu thích";
-      const bento3Title = scene.bento3_title || "Bình luận ngay";
-      const bento4Title = scene.bento4_title || "Đăng ký kênh";
+      const cards = getSceneCards(scene, 4);
+      const bento1Title = cards[0]?.title || scene.bento1_title || "Thả 1 Star";
+      const bento1Desc = cards[0]?.body || scene.bento1_desc || "";
+      const bento2Title = cards[1]?.title || scene.bento2_title || "Yêu thích";
+      const bento2Desc = cards[1]?.body || scene.bento2_desc || "";
+      const bento3Title = cards[2]?.title || scene.bento3_title || "Bình luận ngay";
+      const bento3Desc = cards[2]?.body || scene.bento3_desc || "";
+      const bento4Title = cards[3]?.title || scene.bento4_title || "Đăng ký kênh";
+      const bento4Desc = cards[3]?.body || scene.bento4_desc || "";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
@@ -342,12 +442,14 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <svg viewBox="0 0 24 24" style="stroke: #f3ca56; filter: drop-shadow(0 0 8px rgba(243,202,86,0.8));"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
               </div>
               <div class="card-title" style="font-size: 32px; text-align: center; color: #f3ca56; font-weight: 800;">${bento1Title}</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">${bento1Desc}</div>
             </div>
             <div class="bento-card half" id="bc-${sceneId}-2" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
               <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
                 <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               </div>
               <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">${bento2Title}</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">${bento2Desc}</div>
             </div>
           </div>
           <div class="bento-grid-2">
@@ -356,12 +458,14 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <svg viewBox="0 0 24 24" style="stroke: #00d2ff; filter: drop-shadow(0 0 8px rgba(0,210,255,0.8));"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               </div>
               <div class="card-title" style="font-size: 32px; text-align: center; color: #00d2ff; font-weight: 800;">${bento3Title}</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">${bento3Desc}</div>
             </div>
             <div class="bento-card half" id="bc-${sceneId}-4" style="border: 2px solid rgba(224, 86, 253, 0.4); background: rgba(224, 86, 253, 0.02);">
               <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(224,86,253,0.06); border: 2px solid rgba(224,86,253,0.25);">
                 <svg viewBox="0 0 24 24" style="stroke: #e056fd; filter: drop-shadow(0 0 8px rgba(224,86,253,0.8));"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
               </div>
               <div class="card-title" style="font-size: 32px; text-align: center; color: #e056fd; font-weight: 800;">${bento4Title}</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">${bento4Desc}</div>
             </div>
           </div>
         </div>

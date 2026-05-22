@@ -61,6 +61,33 @@ function pullSource(imageRef) {
   return base;
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+export function getSceneCards(scene, limit = 4) {
+  const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
+    ? scene.steps
+    : Array.isArray(scene.cards) && scene.cards.length > 0
+      ? scene.cards
+      : [1, 2, 3, 4]
+          .map((idx) => ({
+            title: scene[`bento${idx}_title`],
+            body: scene[`bento${idx}_desc`],
+          }))
+          .filter((card) => card.title || card.body);
+
+  return rawCards.slice(0, limit).map((card, idx) => ({
+    title: escapeHtml(card.title || `Bước ${idx + 1}`),
+    body: escapeHtml(card.body || card.desc || card.description || ""),
+  }));
+}
+
 export function getHyperframesReviewScene(i, scene, sceneId, start) {
   let html = "";
   let gsap = "";
@@ -246,6 +273,13 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const hl1 = scene.headline_line1 || "PORT";
       const hl2 = scene.headline_line2 || "VOLUME VÀ ENV";
       const btnText = scene.btn_text || "Đọc docs trước khi deploy production";
+      const cards = getSceneCards(scene, 3);
+      const card1Title = cards[0]?.title || "Port";
+      const card1Body = cards[0]?.body || "-p host:container";
+      const card2Title = cards[1]?.title || "Volume";
+      const card2Body = cards[1]?.body || "-v path:/data";
+      const card3Title = cards[2]?.title || "Env Variables";
+      const card3Body = cards[2]?.body || "-e KEY=VALUE  |  --env-file .env";
       html = `
         <div class="main-glow-icon" id="glow-${sceneId}">
           <div class="glow-svg-container">
@@ -262,15 +296,15 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
               <div class="card-icon-svg">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
               </div>
-              <div class="card-title" style="font-size: 28px;">Port</div>
-              <div class="card-desc" style="font-size: 20px;">-p host:container</div>
+              <div class="card-title" style="font-size: 28px;">${card1Title}</div>
+              <div class="card-desc" style="font-size: 20px;">${card1Body}</div>
             </div>
             <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
               <div class="card-icon-svg">
                 <svg viewBox="0 0 24 24"><path d="M5 3a2 2 0 0 0-2 2"/><path d="M19 3a2 2 0 0 1 2 2"/><path d="M21 19a2 2 0 0 1-2 2"/><path d="M5 21a2 2 0 0 1-2-2"/><path d="M9 3h1"/><path d="M9 21h1"/><path d="M14 3h1"/><path d="M14 21h1"/><path d="M3 9v1"/><path d="M21 9v1"/><path d="M3 14v1"/><path d="M21 14v1"/></svg>
               </div>
-              <div class="card-title" style="font-size: 28px;">Volume</div>
-              <div class="card-desc" style="font-size: 20px;">-v path:/data</div>
+              <div class="card-title" style="font-size: 28px;">${card2Title}</div>
+              <div class="card-desc" style="font-size: 20px;">${card2Body}</div>
             </div>
           </div>
           <div class="bento-card full card-accent-yellow" id="bc-${sceneId}-3">
@@ -278,8 +312,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
               <svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h6"/><circle cx="18" cy="16" r="3"/><path d="M18 13v3l1.5 1.5"/></svg>
             </div>
             <div class="card-text-group">
-              <div class="card-title">Env Variables</div>
-              <div class="card-desc">-e KEY=VALUE  |  --env-file .env</div>
+              <div class="card-title">${card3Title}</div>
+              <div class="card-desc">${card3Body}</div>
             </div>
           </div>
         </div>
@@ -308,8 +342,14 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const b2t = scene.bento2_title || "Backup";
       const b3t = scene.bento3_title || "Healthcheck";
       const b4t = scene.bento4_title || "Update";
+      const cards = getSceneCards(scene, 4);
+      const b1d = cards[0]?.body;
+      const b2d = cards[1]?.body;
+      const b3d = cards[2]?.body;
+      const b4d = cards[3]?.body;
       const imageRef = getSceneImage(scene, "hello-world");
       const pinnedImage = imageRef.includes(":") || imageRef.includes("@") ? imageRef : `${stripTag(imageRef)}:stable`;
+      const btnText = scene.btn_text || "$ docker compose config";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
@@ -322,14 +362,14 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px;">${b1t}</div>
-              <div class="card-desc" style="font-size: 22px;">${pinnedImage}</div>
+              <div class="card-desc" style="font-size: 22px;">${b1d || pinnedImage}</div>
             </div>
             <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
               <div class="card-icon-svg">
                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px;">${b2t}</div>
-              <div class="card-desc" style="font-size: 22px;">Volumes & data</div>
+              <div class="card-desc" style="font-size: 22px;">${b2d || "Volumes & data"}</div>
             </div>
           </div>
           <div class="bento-grid-2">
@@ -338,16 +378,19 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
                 <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px;">${b3t}</div>
-              <div class="card-desc" style="font-size: 22px;">HEALTHCHECK CMD</div>
+              <div class="card-desc" style="font-size: 22px;">${b3d || "HEALTHCHECK CMD"}</div>
             </div>
             <div class="bento-card half card-accent-red" id="bc-${sceneId}-4">
               <div class="card-icon-svg">
                 <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
               </div>
               <div class="card-title" style="font-size: 30px;">${b4t}</div>
-              <div class="card-desc" style="font-size: 22px;">docker pull ${stripTag(imageRef)}</div>
+              <div class="card-desc" style="font-size: 22px;">${b4d || `docker pull ${stripTag(imageRef)}`}</div>
             </div>
           </div>
+        </div>
+        <div class="action-btn" id="btn-${sceneId}" style="top: 1418px; font-size: 26px; max-width: 900px;">
+          <span class="action-icon">✓</span> ${btnText}
         </div>
       `;
       gsap = `
@@ -357,6 +400,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.from("#bc-${sceneId}-2", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.15});
         tl.from("#bc-${sceneId}-3", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
         tl.from("#bc-${sceneId}-4", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.25});
+        tl.from("#btn-${sceneId}", { y: 18, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.35});
       `;
       break;
     }

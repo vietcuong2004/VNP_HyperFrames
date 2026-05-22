@@ -25,7 +25,7 @@ const STORYTELLING_GUIDELINES = {
 };
 
 // Cấu trúc 6 cảnh (scenes) cố định cho Group 3 (Web)
-const WEB_LAYOUT_SCHEMA = [
+export const WEB_LAYOUT_SCHEMA = [
   {
     scene: 1,
     layout: "intro_web",
@@ -41,8 +41,14 @@ const WEB_LAYOUT_SCHEMA = [
     layout: "web_summary",
     voice: "Tóm tắt ý chính cốt lõi hoặc mục đích của trang web...",
     visual: "Bento card tóm tắt nội dung chính và đối tượng phù hợp.",
+    content_mode: "steps",
     headline_line1: "NỘI DUNG CHÍNH",
     headline_line2: "CẦN GIẢI THÍCH",
+    steps: [
+      { title: "<bước 1>", body: "<hành động đầu tiên nên làm>" },
+      { title: "<bước 2>", body: "<cách kiểm tra nhanh>" },
+      { title: "<bước 3>", body: "<lưu ý trước khi áp dụng>" }
+    ],
     bento1_title: "Tóm tắt",
     bento1_desc: "Mô tả nội dung tóm tắt ngắn gọn",
     bento2_title: "Audience",
@@ -54,8 +60,14 @@ const WEB_LAYOUT_SCHEMA = [
     layout: "web_questions",
     voice: "Nêu ra 3 câu hỏi thực tế phải trả lời khi đọc trang này...",
     visual: "Ba thẻ câu hỏi: What, Why, Check.",
+    content_mode: "steps",
     headline_line1: "BA CÂU HỎI",
     headline_line2: "PHẢI TRẢ LỜI",
+    steps: [
+      { title: "<câu hỏi 1>", body: "<điều cần xác định>" },
+      { title: "<câu hỏi 2>", body: "<lý do cần quan tâm>" },
+      { title: "<câu hỏi 3>", body: "<cách kiểm chứng>" }
+    ],
     bento1_title: "What",
     bento2_title: "Why",
     bento3_title: "Check",
@@ -80,8 +92,8 @@ const WEB_LAYOUT_SCHEMA = [
     layout: "action",
     voice: "Hành động tiếp theo khuyến nghị cho người xem (đọc tiếp, clone, check pricing)...",
     visual: "Nút CTA kêu gọi hành động cụ thể.",
-    headline_line1: "HÀNH ĐỘNG TIẾP",
-    headline_line2: "TÙY THEO NGUỒN",
+    headline_line1: "<nguồn hoặc hành động cụ thể>",
+    headline_line2: "<việc nên làm tiếp theo>",
     btn_text: "Mở nguồn và kiểm chứng",
     assets: ["character shiba developer.png"]
   },
@@ -100,6 +112,95 @@ const WEB_LAYOUT_SCHEMA = [
     assets: ["character shiba smiling brightly.png"]
   }
 ];
+
+function softLimit(value, max) {
+  const text = String(value || "").trim().replace(/\s+/g, " ");
+  if (text.length <= max) return text;
+  const sliced = text.slice(0, max + 1);
+  const lastSpace = sliced.lastIndexOf(" ");
+  return `${sliced.slice(0, lastSpace > 10 ? lastSpace : max).trim()}...`;
+}
+
+function normalizeCards(scene) {
+  const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
+    ? scene.steps
+    : Array.isArray(scene.cards) && scene.cards.length > 0
+      ? scene.cards
+      : [1, 2, 3, 4]
+          .map((idx) => ({
+            title: scene[`bento${idx}_title`],
+            body: scene[`bento${idx}_desc`],
+          }))
+          .filter((card) => card.title || card.body);
+
+  return rawCards.slice(0, 4).map((card, idx) => ({
+    title: softLimit(card.title || `Điểm ${idx + 1}`, 16),
+    body: softLimit(card.body || card.desc || card.description || "Kiểm tra trong nguồn chính.", 75),
+  }));
+}
+
+function isGenericActionHeadline(value) {
+  const text = String(value || "").toUpperCase();
+  return text.includes("HÀNH ĐỘNG") || text.includes("TÙY THEO") || text.includes("TUỲ THEO");
+}
+
+function actionHeadline(context) {
+  const title = String(context.title || "").toUpperCase();
+  const source = String(context.sourceLabel || "NGUỒN").replace(/^www\./, "").toUpperCase();
+  if (title.includes("DOC")) return "ĐỌC DOCS";
+  if (title.includes("API")) return "KIỂM API";
+  return softLimit(source, 20);
+}
+
+export function normalizeWebScenes(scenes, context = {}) {
+  if (!Array.isArray(scenes)) {
+    return [];
+  }
+
+  const normalized = scenes.slice(0, WEB_LAYOUT_SCHEMA.length).map((scene, idx) => {
+    const schema = WEB_LAYOUT_SCHEMA[idx];
+    const merged = {
+      ...schema,
+      ...scene,
+      scene: idx + 1,
+      layout: schema.layout,
+      repo_url: scene.repo_url || context.sourceUrl || schema.repo_url,
+    };
+
+    const cards = normalizeCards(merged);
+    if (merged.content_mode === "steps" && cards.length > 0) {
+      merged.steps = cards;
+    } else if (cards.length > 0) {
+      merged.cards = cards;
+    }
+
+    cards.forEach((card, cardIdx) => {
+      const n = cardIdx + 1;
+      merged[`bento${n}_title`] = card.title;
+      merged[`bento${n}_desc`] = card.body;
+    });
+
+    if (idx === 4 && (isGenericActionHeadline(merged.headline_line1) || isGenericActionHeadline(merged.headline_line2))) {
+      merged.headline_line1 = actionHeadline(context);
+      merged.headline_line2 = "KIỂM TRA TRƯỚC";
+    }
+
+    merged.headline_line1 = softLimit(merged.headline_line1 || context.title || context.sourceLabel || "WEB", 20);
+    merged.headline_line2 = softLimit(merged.headline_line2 || schema.headline_line2 || "KIỂM TRA NGUỒN", 32);
+    return merged;
+  });
+
+  for (let idx = normalized.length; idx < WEB_LAYOUT_SCHEMA.length; idx += 1) {
+    normalized.push({
+      ...WEB_LAYOUT_SCHEMA[idx],
+      scene: idx + 1,
+      headline_line1: softLimit(WEB_LAYOUT_SCHEMA[idx].headline_line1 || context.sourceLabel || "WEB", 20),
+      headline_line2: softLimit(WEB_LAYOUT_SCHEMA[idx].headline_line2 || "KIỂM TRA NGUỒN", 32),
+    });
+  }
+
+  return normalized;
+}
 
 export async function generateScenes(rawData, format) {
   const { target, webInfo } = rawData;
@@ -148,7 +249,11 @@ export async function generateScenes(rawData, format) {
          - "bento1_desc": tối đa 70 ký tự.
          - "bento1_title" đến "bento4_title": tối đa 12 ký tự.
          - "btn_text": Nút CTA cực ngắn (<= 30 ký tự).
+         - "steps": tối đa 3-4 object, mỗi object có "title" <= 16 ký tự và "body" <= 75 ký tự.
       4. Đối với Scene 1, điền chính xác "repo_url" là: "${target.url.replace(/^https?:\/\//, "")}".toLowerCase()
+      5. Không copy placeholder trong schema. Mọi headline, bento title, bento desc và step phải viết lại theo context thật của trang.
+      6. Với scene hướng dẫn đọc docs, quickstart, cấu hình hoặc hành động tiếp theo, ưu tiên "content_mode": "steps" và sinh 3 bước cụ thể.
+      7. Nếu không đủ dữ liệu chắc chắn, hãy viết theo hướng kiểm tra/tư vấn; không bịa API, giá, port, lệnh hoặc cấu hình.
     `;
 
     const response = await client.chat.completions.create({
@@ -178,6 +283,12 @@ export async function generateScenes(rawData, format) {
       }
     }
     
+    scenes = normalizeWebScenes(scenes, {
+      title,
+      sourceLabel,
+      sourceUrl: target.url.replace(/^https?:\/\//, "").toLowerCase(),
+    });
+
     if (Array.isArray(scenes) && scenes.length === 6) {
       return scenes.map((scene, idx) => {
         return baseScene({
