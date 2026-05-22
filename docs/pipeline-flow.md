@@ -334,3 +334,25 @@ Pipeline desktop dùng:
 - Key AI từ env bundle trong app hoặc env workspace nếu có.
 
 Máy người dùng vẫn cần mạng cho AI, Edge TTS và lần đầu tải Chrome for Testing nếu workspace chưa có cache browser. Sau khi Chrome đã cache trong `%APPDATA%\my-video\workspace\.puppeteer-cache`, các lần sau app dùng lại cache đó.
+
+## Agent dynamic HTML
+
+Luồng mới chạy theo thứ tự:
+
+1. `run_pipeline.js` chụp URL bằng Puppeteer trước khi sinh kịch bản.
+2. Ảnh chụp được lưu tại `assets/images/github_repo.png`.
+3. Pipeline đọc kích thước PNG thật và ghi manifest `agent_output/project_assets.json`.
+4. `main_generateContent.js` đọc manifest qua `PROJECT_ASSETS_PATH`, truyền `projectAssets` vào Script Agent, rồi gắn `render_mode: "agent_html"`.
+5. `generate.mjs` không load template tĩnh nếu thấy `render_mode: "agent_html"`. Thay vào đó, nó sinh các scene HTML vào `agent_output/scenes/` và tạo root `index.html` tham chiếu các sub-composition.
+
+Mọi file runtime do luồng agent dynamic sinh ra phải nằm trong:
+
+```txt
+agent_output/
+├── project_assets.json
+└── scenes/
+    ├── scene-1.html
+    └── ...
+```
+
+Không trộn file HTML sinh theo luồng mới vào `templates/`. `templates/` chỉ còn là fallback cho luồng static cũ.

@@ -4,6 +4,7 @@ node_modules/
 .puppeteer-cache/
 renders/
 dist/
+agent_output/
 preview.log
 preview.err.log
 .env

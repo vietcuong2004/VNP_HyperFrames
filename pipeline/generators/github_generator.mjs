@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { short, baseScene, githubStatsScene, getReadmeHeadings } from "../main_generateContent.js";
+import { buildProjectAssetsPrompt } from "../agent_dynamic_flow.mjs";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của GitHub
 const STORYTELLING_GUIDELINES = {
@@ -262,7 +263,7 @@ export function normalizeGithubScenes(scenes, context = {}) {
 }
 
 export async function generateScenes(rawData, format) {
-  const { target, repoData, readme } = rawData;
+  const { target, repoData, readme, projectAssets = [] } = rawData;
   const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
 
   if (!apiKey) {
@@ -290,6 +291,7 @@ export async function generateScenes(rawData, format) {
       - Số sao (Stars): ${repoData.stargazers_count || 0}
       - License: ${repoData.license?.name || "Chưa rõ"}
       - README snippets: ${short(readme, 1200)}
+      ${buildProjectAssetsPrompt(projectAssets)}
 
       HƯỚNG DẪN KỂ CHUYỆN (STORYTELLING GUIDELINE) BẮT BUỘC CHO FORMAT "${format}":
       ${guideline}
@@ -357,7 +359,9 @@ export async function generateScenes(rawData, format) {
         return baseScene({
           ...scene,
           scene: idx + 1,
-          assets: ["character shiba explaining something.png"],
+          assets: Array.isArray(scene.assets) && scene.assets.length > 0
+            ? scene.assets
+            : ["character shiba explaining something.png"],
           sfx: "Ding 2.mp3"
         });
       });

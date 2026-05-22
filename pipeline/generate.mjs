@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { createAgentComposition } from './agent_dynamic_flow.mjs';
 
 function stripNetworkCssImports(css) {
   return css.replace(/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com\/[^'"]+['"]\);\s*/g, '');
@@ -23,6 +24,15 @@ async function generate() {
 
   const appRoot = process.env.APP_ROOT || process.cwd();
   const outputPath = process.env.COMPOSITION_PATH || path.join(process.cwd(), 'index.html');
+  if (data.render_mode === "agent_html") {
+    const agentOutputDir =
+      process.env.AGENT_OUTPUT_DIR ||
+      path.join(path.dirname(outputPath), "agent_output");
+    await createAgentComposition({ data, agentOutputDir, compositionPath: outputPath });
+    console.log('Successfully generated ' + outputPath + ' using agent dynamic HTML.');
+    return;
+  }
+
   const templatePath = 'file://' + path.join(appRoot, 'templates', templateName, 'template.mjs').replace(/\\/g, '/');
   const stylePath = path.join(appRoot, 'templates', templateName, 'style.css');
   

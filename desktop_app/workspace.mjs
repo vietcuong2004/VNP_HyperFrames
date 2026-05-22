@@ -18,6 +18,7 @@ export function createWorkspacePaths({ appRoot = process.cwd(), workspaceRoot = 
     imageDir: path.join(resolvedWorkspaceRoot, "assets", "images"),
     workspaceAssetsDir: path.join(resolvedWorkspaceRoot, "assets"),
     vendorDir: path.join(resolvedWorkspaceRoot, "vendor"),
+    agentOutputDir: path.join(resolvedWorkspaceRoot, "agent_output"),
     rendersDir: path.join(resolvedWorkspaceRoot, "renders"),
     logsDir: path.join(resolvedWorkspaceRoot, "logs"),
     compositionPath: path.join(resolvedWorkspaceRoot, "index.html"),
@@ -32,6 +33,7 @@ export async function ensureWorkspace(paths) {
     fsp.mkdir(paths.audioDir, { recursive: true }),
     fsp.mkdir(paths.imageDir, { recursive: true }),
     fsp.mkdir(paths.vendorDir, { recursive: true }),
+    fsp.mkdir(paths.agentOutputDir, { recursive: true }),
     fsp.mkdir(paths.rendersDir, { recursive: true }),
     fsp.mkdir(paths.logsDir, { recursive: true }),
   ]);
@@ -75,6 +77,17 @@ export async function prepareWorkspaceRuntime(paths) {
   const gsapSource = path.join(paths.appRoot, "node_modules", "gsap", "dist", "gsap.min.js");
   if (fs.existsSync(gsapSource)) {
     await copyFileIfChanged(gsapSource, path.join(paths.vendorDir, "gsap.min.js"));
+  }
+
+  const fontFiles = [
+    ["@fontsource", "be-vietnam-pro", "files", "be-vietnam-pro-latin-ext-700-normal.woff2"],
+    ["@fontsource", "be-vietnam-pro", "files", "be-vietnam-pro-latin-ext-900-normal.woff2"],
+  ];
+  for (const parts of fontFiles) {
+    const source = path.join(paths.appRoot, "node_modules", ...parts);
+    if (fs.existsSync(source)) {
+      await copyFileIfChanged(source, path.join(paths.vendorDir, "fonts", parts.at(-1)));
+    }
   }
 
   const configCopies = [

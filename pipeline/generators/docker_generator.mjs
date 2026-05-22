@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { short, baseScene } from "../main_generateContent.js";
+import { buildProjectAssetsPrompt } from "../agent_dynamic_flow.mjs";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của Docker Hub
 const STORYTELLING_GUIDELINES = {
@@ -196,7 +197,7 @@ export function normalizeDockerScenes(scenes, context = {}) {
 }
 
 export async function generateScenes(rawData, format) {
-  const { target, info } = rawData;
+  const { target, info, projectAssets = [] } = rawData;
   const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
 
   const imageRef = `${target.namespace}/${target.image}`;
@@ -222,6 +223,7 @@ export async function generateScenes(rawData, format) {
       - Mô tả: ${info.description || "Không có mô tả"}
       - Sao (Stars): ${info.star_count || 0}
       - Lượt Pulls: ${info.pull_count || 0}
+      ${buildProjectAssetsPrompt(projectAssets)}
 
       HƯỚNG DẪN KỂ CHUYỆN BẮT BUỘC CHO FORMAT "${format}":
       ${guideline}
@@ -286,7 +288,9 @@ export async function generateScenes(rawData, format) {
         return baseScene({
           ...scene,
           scene: idx + 1,
-          assets: ["character shiba explaining something.png"],
+          assets: Array.isArray(scene.assets) && scene.assets.length > 0
+            ? scene.assets
+            : ["character shiba explaining something.png"],
           sfx: "Ding 2.mp3"
         });
       });

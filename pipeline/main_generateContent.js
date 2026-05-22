@@ -2,6 +2,10 @@ import https from "https";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import {
+  attachProjectAssetsToData,
+  loadProjectAssetsFromEnv,
+} from "./agent_dynamic_flow.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -372,7 +376,7 @@ export function githubStatsScene(repoData, owner, repo, headlineLine2) {
 }
 
 // Builders đóng vai trò nạp dữ liệu thô và gọi Group Generator tương ứng
-async function buildGithubData(target) {
+async function buildGithubData(target, projectAssets = []) {
   const { owner, repo } = target;
   console.log(`Đang phân tích GitHub repo: ${owner}/${repo}`);
 
@@ -397,7 +401,7 @@ async function buildGithubData(target) {
 
   // Dynamic import G1_github generator
   const { generateScenes } = await import("./generators/github_generator.mjs");
-  const scenes = await generateScenes({ target, repoData, readme, rootFiles }, classification.videoFormat);
+  const scenes = await generateScenes({ target, repoData, readme, rootFiles, projectAssets }, classification.videoFormat);
 
   return {
     template: "G1_github",
@@ -420,7 +424,7 @@ async function buildGithubData(target) {
   };
 }
 
-async function buildDockerData(target) {
+async function buildDockerData(target, projectAssets = []) {
   console.log(`Đang phân tích Docker image: ${target.namespace}/${target.image}`);
 
   const pathPart =
@@ -439,7 +443,7 @@ async function buildDockerData(target) {
 
   // Dynamic import G2_docker generator
   const { generateScenes } = await import("./generators/docker_generator.mjs");
-  const scenes = await generateScenes({ target, info }, classification.videoFormat);
+  const scenes = await generateScenes({ target, info, projectAssets }, classification.videoFormat);
 
   return {
     template: "G2_docker",
@@ -505,7 +509,7 @@ function pickWebTitle(target, html, results) {
   return target.host;
 }
 
-async function buildWebData(target) {
+async function buildWebData(target, projectAssets = []) {
   console.log(`Đang phân tích web URL: ${target.url}`);
 
   const html = await fetchOptionalText(target.url, "");
@@ -530,7 +534,7 @@ async function buildWebData(target) {
 
   // Dynamic import G3_web generator
   const { generateScenes } = await import("./generators/web_generator.mjs");
-  const scenes = await generateScenes({ target, webInfo: { title, description, answer, results } }, classification.videoFormat);
+  const scenes = await generateScenes({ target, webInfo: { title, description, answer, results }, projectAssets }, classification.videoFormat);
 
   return {
     template: "G3_web",
@@ -561,13 +565,18 @@ async function main() {
   }
 
   const target = parseTargetUrl(urlArg);
+  const projectAssets = await loadProjectAssetsFromEnv();
   let data;
   if (target.platform === "github") {
-    data = await buildGithubData(target);
+    data = await buildGithubData(target, projectAssets);
   } else if (target.platform === "docker") {
-    data = await buildDockerData(target);
+    data = await buildDockerData(target, projectAssets);
   } else {
-    data = await buildWebData(target);
+    data = await buildWebData(target, projectAssets);
+  }
+
+  if (projectAssets.length > 0) {
+    data = attachProjectAssetsToData(data, projectAssets);
   }
 
   const outputDir = process.env.DATA_DIR || path.join(process.cwd(), "data");

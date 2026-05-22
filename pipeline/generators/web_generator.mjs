@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { short, baseScene } from "../main_generateContent.js";
+import { buildProjectAssetsPrompt } from "../agent_dynamic_flow.mjs";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của Web (Tavily/General URLs)
 const STORYTELLING_GUIDELINES = {
@@ -203,7 +204,7 @@ export function normalizeWebScenes(scenes, context = {}) {
 }
 
 export async function generateScenes(rawData, format) {
-  const { target, webInfo } = rawData;
+  const { target, webInfo, projectAssets = [] } = rawData;
   const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
 
   const title = webInfo.title || target.host;
@@ -231,6 +232,7 @@ export async function generateScenes(rawData, format) {
       - Câu trả lời tóm tắt của hệ thống: ${webInfo.answer || "Không có"}
       - Mô tả: ${webInfo.description || "Không có"}
       - Kết quả tìm kiếm mở rộng (nếu có): ${JSON.stringify(webInfo.results)}
+      ${buildProjectAssetsPrompt(projectAssets)}
 
       HƯỚNG DẪN KỂ CHUYỆN BẮT BUỘC CHO FORMAT "${format}":
       ${guideline}

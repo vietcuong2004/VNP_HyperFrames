@@ -4,6 +4,10 @@ import { fileURLToPath } from "url";
 import { runCommand } from "../desktop_app/command_runner.mjs";
 import { createNodePackageBinCommand } from "../desktop_app/runtime_binaries.mjs";
 import { createWorkspacePaths, prepareWorkspaceRuntime } from "../desktop_app/workspace.mjs";
+import {
+  buildScreenshotProjectAsset,
+  writeProjectAssetsManifest,
+} from "./agent_dynamic_flow.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -72,7 +76,24 @@ async function main() {
   console.log(`Workspace: ${workspaceRoot}`);
   console.log("==================================================\n");
 
-  console.log("Step 1: Phan tich URL va tao kich ban JSON...");
+  console.log("Step 1: Chup anh man hinh trang nguon...");
+  const screenshotPath = path.join(paths.imageDir, "github_repo.png");
+  run(nodeBin, [path.join(__dirname, "capture_github.js"), targetUrl], {
+    cwd: appRoot,
+    env: {
+      APP_ROOT: appRoot,
+      SCREENSHOT_PATH: screenshotPath,
+    },
+  });
+
+  const projectAssets = [await buildScreenshotProjectAsset(screenshotPath)];
+  const projectAssetsPath = await writeProjectAssetsManifest({
+    agentOutputDir: paths.agentOutputDir,
+    projectAssets,
+  });
+  console.log(`Da khai bao project asset: ${path.basename(screenshotPath)} (${projectAssets[0].aspectRatio})`);
+
+  console.log("\nStep 2: Phan tich URL va tao kich ban JSON...");
   const result1 = run(nodeBin, [path.join(__dirname, "main_generateContent.js"), targetUrl], {
     cwd: appRoot,
     encoding: "utf-8",
@@ -80,6 +101,7 @@ async function main() {
     env: {
       APP_ROOT: appRoot,
       DATA_DIR: paths.dataDir,
+      PROJECT_ASSETS_PATH: projectAssetsPath,
     },
   });
   if (result1.stdout) console.log(result1.stdout);
@@ -87,15 +109,6 @@ async function main() {
 
   const jsonPath = findJsonPath(result1.stdout || "");
   const jsonBaseName = path.basename(jsonPath, ".json");
-
-  console.log("\nStep 2: Chup anh man hinh trang nguon...");
-  run(nodeBin, [path.join(__dirname, "capture_github.js"), targetUrl], {
-    cwd: appRoot,
-    env: {
-      APP_ROOT: appRoot,
-      SCREENSHOT_PATH: path.join(paths.imageDir, "github_repo.png"),
-    },
-  });
 
   console.log("\nStep 3: Tao giong doc bang Node va moc thoi gian phu de...");
   run(nodeBin, [path.join(__dirname, "gen_assets.mjs"), jsonPath], {
@@ -112,6 +125,7 @@ async function main() {
     env: {
       APP_ROOT: appRoot,
       COMPOSITION_PATH: paths.compositionPath,
+      AGENT_OUTPUT_DIR: paths.agentOutputDir,
     },
   });
 

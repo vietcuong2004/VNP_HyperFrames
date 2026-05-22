@@ -50,6 +50,7 @@
     },
     "files": [
       "desktop_app/**",
+      "agents/**",
       "pipeline/**",
       "public/**",
       "templates/**",
