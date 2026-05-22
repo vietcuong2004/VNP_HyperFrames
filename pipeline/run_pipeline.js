@@ -46,6 +46,44 @@ export function findJsonPath(output) {
   return matches[matches.length - 1].trim();
 }
 
+function findLatestJsonPath(dataDir, sinceMs = 0) {
+  if (!dataDir || !fs.existsSync(dataDir)) return null;
+
+  const minMtime = Math.max(0, Number(sinceMs || 0) - 2000);
+  const jsonFiles = fs
+    .readdirSync(dataDir)
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => {
+      const filePath = path.join(dataDir, file);
+      return { filePath, mtime: fs.statSync(filePath).mtimeMs };
+    })
+    .filter((file) => file.mtime >= minMtime)
+    .sort((a, b) => b.mtime - a.mtime);
+
+  return jsonFiles[0]?.filePath || null;
+}
+
+export function findJsonPathFromCommandResult(result, options = {}) {
+  const combinedOutput = [result?.stdout, result?.stderr].filter(Boolean).join("\n");
+
+  try {
+    return findJsonPath(combinedOutput);
+  } catch (error) {
+    const latestJsonPath = findLatestJsonPath(options.dataDir, options.sinceMs);
+    if (latestJsonPath) return latestJsonPath;
+
+    const outputTail = combinedOutput
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .slice(-12)
+      .join("\n");
+
+    if (!outputTail) throw error;
+    throw new Error(`${error.message}\nOutput gan nhat:\n${outputTail}`);
+  }
+}
+
 function findLatestMp4(rendersDir) {
   if (!fs.existsSync(rendersDir)) return null;
   const mp4Files = fs
@@ -94,6 +132,7 @@ async function main() {
   console.log(`Da khai bao project asset: ${path.basename(screenshotPath)} (${projectAssets[0].aspectRatio})`);
 
   console.log("\nStep 2: Phan tich URL va tao kich ban JSON...");
+  const scriptStartedAt = Date.now();
   const result1 = run(nodeBin, [path.join(__dirname, "main_generateContent.js"), targetUrl], {
     cwd: appRoot,
     encoding: "utf-8",
@@ -107,7 +146,10 @@ async function main() {
   if (result1.stdout) console.log(result1.stdout);
   if (result1.stderr) console.error(result1.stderr);
 
-  const jsonPath = findJsonPath(result1.stdout || "");
+  const jsonPath = findJsonPathFromCommandResult(result1, {
+    dataDir: paths.dataDir,
+    sinceMs: scriptStartedAt,
+  });
   const jsonBaseName = path.basename(jsonPath, ".json");
 
   console.log("\nStep 3: Tao giong doc bang Node va moc thoi gian phu de...");

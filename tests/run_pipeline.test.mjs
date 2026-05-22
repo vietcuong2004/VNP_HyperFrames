@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { test } from "node:test";
 
-import { findJsonPath } from "../pipeline/run_pipeline.js";
+import { findJsonPath, findJsonPathFromCommandResult } from "../pipeline/run_pipeline.js";
 import { getHyperframesReviewScene } from "../templates/G2_docker/scenes.mjs";
 
 test("findJsonPath extracts only the generated JSON path from Vietnamese output", () => {
@@ -20,6 +23,49 @@ test("findJsonPath extracts POSIX JSON paths from plain output", () => {
   assert.equal(
     findJsonPath("created /tmp/workspace/data/demo.json"),
     "/tmp/workspace/data/demo.json",
+  );
+});
+
+test("findJsonPathFromCommandResult reads generated JSON path from stderr too", () => {
+  const jsonPath = "C:\\Users\\ADMIN\\AppData\\Roaming\\my-video\\workspace\\data\\antigravity-manager-22-05-2026-11-04.json";
+
+  assert.equal(
+    findJsonPathFromCommandResult({
+      stdout: "Đang phân tích GitHub repo: lbjlaq/Antigravity-Manager\n",
+      stderr: `Đã tạo kịch bản UTF-8 tại: ${jsonPath}\n`,
+    }),
+    jsonPath,
+  );
+});
+
+test("findJsonPathFromCommandResult includes output tail when no JSON path exists", () => {
+  assert.throws(
+    () =>
+      findJsonPathFromCommandResult({
+        stdout: "Đang phân tích GitHub repo: lbjlaq/Antigravity-Manager\n",
+        stderr: "Lỗi: AI trả về dữ liệu không hợp lệ\n",
+      }),
+    /AI trả về dữ liệu không hợp lệ/,
+  );
+});
+
+test("findJsonPathFromCommandResult falls back to newest JSON in data dir", () => {
+  const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), "run-pipeline-json-"));
+  const olderPath = path.join(dataDir, "older.json");
+  const newestPath = path.join(dataDir, "newest.json");
+  fs.writeFileSync(olderPath, "{}");
+  fs.writeFileSync(newestPath, "{}");
+
+  const now = Date.now();
+  fs.utimesSync(olderPath, new Date(now - 10_000), new Date(now - 10_000));
+  fs.utimesSync(newestPath, new Date(now + 1_000), new Date(now + 1_000));
+
+  assert.equal(
+    findJsonPathFromCommandResult(
+      { stdout: "Đang phân tích GitHub repo: lbjlaq/Antigravity-Manager\n" },
+      { dataDir, sinceMs: now - 1_000 },
+    ),
+    newestPath,
   );
 });
 
