@@ -1,4 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap');
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("./node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-ext-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("./node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-ext-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("./node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-ext-800-normal.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("./node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-ext-900-normal.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
 
 /* =============================================
    G2_DOCKER — Terminal / Console Aesthetic
@@ -13,7 +54,7 @@ body {
   overflow: hidden;
   background: #060d14;
   color: #e8f4fd;
-  font-family: "Space Grotesk", "JetBrains Mono", monospace;
+  font-family: "Be Vietnam Pro", Arial, sans-serif;
 }
 
 /* === BACKGROUND === */
@@ -101,7 +142,7 @@ body {
   color: #0db7ed;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", Consolas, monospace;
   text-shadow: 0 0 20px rgba(13, 183, 237, 0.6);
 }
 
@@ -153,7 +194,7 @@ body {
 
 .terminal-title {
   margin: 0 auto;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", Consolas, monospace;
   font-size: 20px;
   font-weight: 500;
   color: rgba(13, 183, 237, 0.7);
@@ -168,7 +209,7 @@ body {
   right: 0;
   overflow: hidden;
   background: #0d1117;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", Consolas, monospace;
 }
 
 /* Scrolling screenshot inside terminal */
@@ -194,7 +235,7 @@ body {
 }
 
 .terminal-line {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", Consolas, monospace;
   font-size: 24px;
   line-height: 1.5;
   display: flex;
@@ -274,21 +315,22 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 64px;
+  padding: 14px 64px 18px;
   box-sizing: border-box;
+  overflow: visible;
 }
 .headline-line1 {
   font-size: 74px;
-  line-height: 0.98;
+  line-height: 1.14;
   font-weight: 900;
   color: #ffffff;
-  letter-spacing: -1px;
+  letter-spacing: 0;
   text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Be Vietnam Pro", Arial, sans-serif;
 }
 .headline-line2 {
   font-size: 68px;
-  line-height: 0.98;
+  line-height: 1.14;
   font-weight: 900;
   background: linear-gradient(90deg, #0db7ed, #2496ed, #0db7ed);
   background-size: 200%;
@@ -296,7 +338,8 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 4px 16px rgba(13, 183, 237, 0.4));
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Be Vietnam Pro", Arial, sans-serif;
+  letter-spacing: 0;
 }
 
 /* === ACTION BUTTON (Docker command style) === */
@@ -317,7 +360,7 @@ body {
   color: #0db7ed;
   z-index: 30;
   box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(13, 183, 237, 0.1);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", Consolas, monospace;
   white-space: nowrap;
   max-width: 960px;
   overflow: hidden;
@@ -425,13 +468,13 @@ body {
   font-size: 36px;
   font-weight: 800;
   color: #e8f4fd;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Be Vietnam Pro", Arial, sans-serif;
 }
 .card-desc {
   font-size: 24px;
   font-weight: 400;
   color: rgba(232, 244, 253, 0.5);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", Consolas, monospace;
   line-height: 1.4;
 }
 

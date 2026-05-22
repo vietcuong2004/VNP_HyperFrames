@@ -1,6 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap');
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("./node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-ext-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("./node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-ext-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("./node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-ext-800-normal.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("./node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-ext-900-normal.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
 
-body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Plus Jakarta Sans", "Space Grotesk", "Inter", sans-serif; }
+body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Be Vietnam Pro", Arial, sans-serif; }
 .bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a0505 0%, #050505 80%); }
 
 .source-web .bg {
@@ -88,7 +122,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Be Vietnam Pro", Arial, sans-serif;
 }
 
 /* Main Glow Icon & Vector Container */
@@ -310,25 +344,30 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 64px;
+  padding: 14px 64px 18px;
   box-sizing: border-box;
+  overflow: visible;
 }
 .headline-line1 {
   font-size: 76px;
-  line-height: 0.98;
+  line-height: 1.14;
   font-weight: 800;
+  font-family: "Be Vietnam Pro", Arial, sans-serif;
   color: #ffffff;
   text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  letter-spacing: 0;
 }
 .headline-line2 { 
   font-size: 72px; 
-  line-height: 0.98;
+  line-height: 1.14;
   font-weight: 900; 
+  font-family: "Be Vietnam Pro", Arial, sans-serif;
   background: linear-gradient(90deg, #ff4757, #ff6b81); 
   -webkit-background-clip: text;
   background-clip: text; 
   -webkit-text-fill-color: transparent; 
   filter: drop-shadow(0 5px 15px rgba(255, 71, 87, 0.35));
+  letter-spacing: 0;
 }
 
 /* Action Button */
@@ -537,7 +576,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 .browser-address {
   background: #0d1117;
   color: rgba(255, 255, 255, 0.6);
-  font-family: monospace;
+  font-family: "JetBrains Mono", Consolas, monospace;
   font-size: 24px;
   padding: 8px 30px;
   border-radius: 14px;

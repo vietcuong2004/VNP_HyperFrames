@@ -315,7 +315,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}" style="font-family: monospace; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #00ff88;">
+        <div class="action-btn" id="btn-${sceneId}" style="font-family: 'JetBrains Mono', Consolas, monospace; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #00ff88;">
           ${btnText}
         </div>
       `;

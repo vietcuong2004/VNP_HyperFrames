@@ -230,7 +230,7 @@ export default function (data, css) {
         if (activeBlock) {
           let html = activeBlock.words.map(w => {
             let isActive = (time >= w.start && time <= w.end);
-            return '<span style="font-family: Space Grotesk, sans-serif; font-size: 34px; font-weight: 800; text-transform: uppercase; margin: 0 7px; display: inline-block; transition: all 0.08s; ' + 
+            return '<span style="font-family: Be Vietnam Pro, Arial, sans-serif; font-size: 34px; font-weight: 800; text-transform: uppercase; margin: 0 7px; display: inline-block; transition: all 0.08s; ' + 
                    (isActive ? 'color: #0db7ed; text-shadow: 0 0 20px #0db7ed, 0 0 5px #0db7ed; transform: scale(1.1); font-weight: 900;' 
                             : 'color: rgba(232,244,253,0.7); transform: scale(1.0);') + 
                    '">' + escapeHtml(w.text.toUpperCase()) + '</span>';
