@@ -48,6 +48,64 @@ MANDATORY — DO NOT VIOLATE:
 Reason: Video needs visual consistency across scenes. Changing colors = unprofessional, disjointed video.
 `;
 
+function stripVisualDirectives(value) {
+  return String(value || '')
+    .split(/B[aá]t bu[oộ]c/i)[0]
+    .replace(/\[[^\]]+\]/g, ' ')
+    .replace(/['"`]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractQuotedVisualText(value) {
+  return [...String(value || '').matchAll(/['"]([^'"]{3,48})['"]/g)]
+    .map((match) => match[1].trim())
+    .filter(Boolean);
+}
+
+function visualWords(value) {
+  const stop = new Set([
+    'main', 'focus', 'motion', 'style', 'scene', 'visual', 'text', 'center',
+    'diagram', 'drops', 'packets', 'compress', 'into', 'cache', 'with', 'from',
+    'the', 'and', 'for', 'image', 'logo', 'card', 'cards', 'background',
+  ]);
+  const picked = [];
+  const words = String(value || '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9+#./-]+/g, ' ')
+    .split(/\s+/)
+    .filter((word) => word.length > 1);
+
+  for (const word of words) {
+    const key = word.toLowerCase();
+    if (stop.has(key)) continue;
+    if (picked.some((item) => item.toLowerCase() === key)) continue;
+    picked.push(word);
+    if (picked.length >= 6) break;
+  }
+  return picked;
+}
+
+export function deriveSceneDisplayCopy(scene = {}) {
+  const quoted = extractQuotedVisualText(scene.visual);
+  const visual = stripVisualDirectives(scene.visual);
+  const picked = visualWords(quoted.join(' ') || visual);
+  const primary = quoted[0] || picked.slice(0, 3).join(' ') || `Scene ${scene.stt || 1}`;
+  const labels = [
+    ...quoted.slice(1, 4),
+    ...picked.filter((word) => !primary.toLowerCase().includes(word.toLowerCase())).slice(0, 4),
+  ].slice(0, 4);
+  const summary = visual.split(/\s+/).slice(0, 12).join(' ');
+
+  return [
+    `PRIMARY_TEXT: ${primary}`,
+    `SECONDARY_LABELS: ${labels.join(' | ') || primary}`,
+    `VISUAL_SUMMARY: ${summary || primary}`,
+    'RULE: Main #content text must use these candidates only. Do not copy any 5+ consecutive words from Voice/SRT.',
+  ].join('\n');
+}
+
 export async function generateSceneHTML({ scene, keys, onLog, brandAssets = [], projectAssets = [], outputAspectRatio = '9:16', styleGuide = null, consistentScenes = false, litePrompt = false, outputLanguage = 'vi', audioDurationMs = null }) {
   const isEN = outputLanguage === 'en';
 
@@ -142,6 +200,7 @@ export async function generateSceneHTML({ scene, keys, onLog, brandAssets = [], 
     .replace('{{ASPECT_RATIO_RULES}}', aspectRatioRules)
     .replace('{{VOICE}}', scene.voice.replace(/"/g, "'"))
     .replace('{{VISUAL}}', scene.visual.replace(/"/g, "'"))
+    .replace('{{VISUAL_COPY}}', deriveSceneDisplayCopy(scene).replace(/"/g, "'"))
     .replace(/\{\{DURATION\}\}/g, duration)
     .replace('{{SUBS}}', voiceTimeline)
     .replace('{{CINEMATIC_DIRECTION}}', directionBlock)

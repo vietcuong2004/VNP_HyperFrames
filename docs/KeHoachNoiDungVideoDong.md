@@ -1,120 +1,95 @@
-# Kế hoạch nội dung video động
+# Ke hoach noi dung va visual dong
 
-## Mục tiêu
+Tai lieu nay mo ta contract noi dung can co de scene AI khong sinh text giua video vo nghia.
 
-Các generator GitHub, Docker và Web đã bắt đầu sinh nội dung hiển thị theo context đầu vào thay vì bám hoàn toàn vào text mẫu. Mục tiêu là giữ layout ổn định, nhưng để các phần sau được viết theo đúng repo, Docker image hoặc trang web thật:
+## Nguyen tac
 
-- `headline_line1`, `headline_line2`
-- `bento*_title`, `bento*_desc`
-- `steps`, `cards`
-- `btn_text`
+Moi scene co 3 lop thong tin rieng:
 
-Video không nên còn các cụm chung chung như `Bước 1`, `Bước 2`, `Cấu hình`, `Production`, `Checklist` nếu nguồn đầu vào có đủ dữ liệu cụ thể hơn.
+1. `voice`: loi doc tu nhien.
+2. `visual_brief`: noi dung duoc phep hien tren man hinh.
+3. `html`: scene composition do AI sinh tu `visual_brief`.
 
-## Trạng thái hiện tại
+Khong dung `voice` lam nguon text chinh. Neu can subtitle, subtitle/burn-in nam rieng o lower-third.
 
-Đã triển khai bước đầu cho:
-
-- `G3_web`: generator và template có thể nhận nội dung động, dùng `steps/cards` cho các scene hướng dẫn.
-- `G2_docker`: headline được normalize theo image, config/outro dùng nội dung step/card động, outro có hành động cuối rõ hơn.
-- `G1_github`: generator nhận `steps/cards`, thay headline placeholder bằng headline theo repo, scene install/clone dùng step cards, headline dùng font local an toàn cho tiếng Việt.
-
-Chưa hoàn tất:
-
-- Chưa thay toàn bộ template visual cố định thành hệ template động.
-- Chưa áp dụng step/card mode nhất quán cho mọi scene có tính hướng dẫn.
-- Chưa tách contract scene thành module dùng chung cho cả ba group.
-
-## Nguyên tắc thiết kế
-
-### Layout cố định, nội dung động
-
-AI không được tự thay số scene hoặc layout chính. Mỗi group vẫn giữ cấu trúc:
-
-| Group | Số scene | Vai trò |
-|---|---:|---|
-| GitHub | 8 | Review repo, install/clone, tính năng, stats, kết luận |
-| Docker | 5 | Docker image, tag, config, run command, checklist |
-| Web | 6 | Tóm tắt web, câu hỏi chính, điểm đáng chú ý, hành động tiếp theo |
-
-AI chỉ sinh nội dung cho field hiển thị. Hệ thống vẫn kiểm soát `scene`, `layout`, asset, sfx, timing và media path.
-
-### Không copy placeholder
-
-Schema mẫu không nên chứa text thành phẩm quá cụ thể. Ví dụ thay vì:
+## Visual Brief de xuat
 
 ```json
 {
-  "headline_line1": "CẤU HÌNH",
-  "headline_line2": "PORT, VOLUME VÀ ENV"
+  "scene_goal": "explain_value",
+  "layout_intent": "metric_cards",
+  "main_subject": "RTK CLI proxy",
+  "primary_text": "TOKEN CUT 60-90%",
+  "secondary_labels": ["Rust binary", "Local proxy", "Cache"],
+  "facts": [
+    "CLI proxy that reduces LLM token consumption by 60-90%",
+    "single Rust binary",
+    "zero dependencies"
+  ],
+  "visual_objects": ["terminal", "token meter", "cache node"],
+  "asset_requirements": ["logo"],
+  "avoid_text": ["HTML", "Scene 1", "Focus", "Infinite possibilities"]
 }
 ```
 
-Nên dùng:
+## Layout Intent
 
-```json
-{
-  "headline_line1": "<từ khóa ngắn bám vào nguồn thật>",
-  "headline_line2": "<lợi ích hoặc cảnh báo cụ thể của scene>"
-}
+Danh sach ban dau:
+
+| Intent | Khi dung | Visual nen co |
+|---|---|---|
+| `browser_scroll` | Can hien trang nguon, GitHub, Docker Hub, docs | Screenshot lon, browser chrome, callout ngan |
+| `terminal_steps` | Install, clone, run, config | Command block, step cards, progress |
+| `architecture_map` | Giai thich proxy, library, data flow | Nodes, arrows, label ngan |
+| `metric_cards` | Co number/benefit ro | Number lon, 2-3 card phu |
+| `feature_cards` | Liet ke tinh nang | Cards ngan, icon/shape lien quan |
+| `checklist` | Outro, warning, next action | Checklist, CTA, repo/domain |
+
+AI khong tu phat minh intent ngoai danh sach neu chua co renderer/fallback.
+
+## Rule chong text vo nghia
+
+Text hien giua video bi xem la fail neu:
+
+- Chi la tu chung chung: `HTML`, `Scene`, `Focus`, `Module`, `Overview`, `Dynamic`, `Visual`.
+- Khong chua keyword nao tu URL/source.
+- Copy 5+ tu lien tiep tu `voice`.
+- Khong giup nguoi xem hieu scene dang noi ve cai gi.
+
+Text tot nen co:
+
+- Ten repo/image/product/domain.
+- Mot metric hoac loi ich cu the.
+- Command/keyword that neu source co.
+- 1-4 tu moi label, nhung du nghia.
+
+## Normalize de xuat
+
+Neu `primary_text` yeu:
+
+1. Lay `[TEXT] '...'` trong `scene.visual` neu co.
+2. Lay repo/image/domain name tu source metadata.
+3. Lay number/metric trong description/README.
+4. Ket hop thanh label ngan, vi du:
+   - `RTK PROXY`
+   - `TOKEN CUT 60-90%`
+   - `RUST CLI`
+   - `LOCAL CACHE`
+
+Neu van khong co du lieu, dung fallback co boi canh:
+
+```txt
+<repo-name> OVERVIEW
+<domain> SUMMARY
+<image-name> QUICKSTART
 ```
 
-Sau khi AI trả về, generator cần normalize để thay các headline quá chung chung bằng fallback theo metadata thật.
+Khong fallback ve `Scene 1`.
 
-### Bento cho phân tích, step cards cho hướng dẫn
+## Test can co
 
-Scene phân tích tính năng, rủi ro, use case hoặc checklist tổng quan có thể dùng bento.
-
-Scene cài đặt, clone, cấu hình, deploy, quickstart hoặc lộ trình nên dùng:
-
-```json
-{
-  "content_mode": "steps",
-  "steps": [
-    { "title": "Clone", "body": "Clone repo về project phụ." },
-    { "title": "Cài deps", "body": "Dùng package manager được nêu trong README." },
-    { "title": "Chạy thử", "body": "Chạy ví dụ nhỏ nhất trước khi tích hợp thật." }
-  ]
-}
-```
-
-Template nên đọc dữ liệu theo thứ tự ưu tiên:
-
-1. `scene.steps`
-2. `scene.cards`
-3. `bento*_title` và `bento*_desc`
-
-## Ràng buộc nội dung
-
-| Field | Giới hạn đề xuất |
-|---|---:|
-| `headline_line1` | 16-20 ký tự |
-| `headline_line2` | 24-32 ký tự |
-| `bento*_title` | 10-14 ký tự |
-| `bento*_desc` | 45-70 ký tự |
-| `step.title` | 10-16 ký tự |
-| `step.body` | 45-75 ký tự |
-| `btn_text` | 30-42 ký tự tùy layout |
-
-Nếu AI sinh quá dài, generator nên cắt mềm theo từ, ưu tiên giữ danh từ chính như repo name, image name, command, tag hoặc domain.
-
-## Quy tắc chống bịa nội dung
-
-Generator prompt cần nhấn mạnh:
-
-- Không bịa port, env, API key, price, benchmark hoặc command nếu nguồn không nêu.
-- Nếu README/Docker page thiếu lệnh cụ thể, dùng bước an toàn như `Đọc README`, `Kiểm tra release`, `Chạy demo nhỏ`.
-- Với Docker image không rõ port/env, nói theo hướng kiểm tra docs thay vì gán mặc định `80:80` hoặc `latest`.
-- Với GitHub repo, lệnh clone có thể tạo từ URL thật, nhưng lệnh install/run chỉ dùng nếu README có tín hiệu rõ.
-
-## Checklist khi sửa tiếp
-
-- Mỗi generator có normalize riêng cho headline, cards và steps.
-- Template có helper `getSceneCards(scene, limit)`.
-- Scene hướng dẫn không render bằng bento nếu `content_mode === "steps"`.
-- Headline dùng font local có hỗ trợ tiếng Việt, line-height đủ rộng để không mất dấu.
-- Test cần kiểm tra cả dữ liệu normalize và HTML render.
-
-## Phạm vi chưa làm
-
-Tài liệu này không thay thế kế hoạch thay template tổng thể. Nó chỉ mô tả contract nội dung động hiện tại và các quy tắc cần giữ khi mở rộng.
+- `rtk-ai/rtk`: primary text phai co `RTK`, `TOKEN`, `60-90`, `Rust` hoac `proxy`.
+- GitHub repo co README: scene install phai dung `terminal_steps` neu co command.
+- Docker Hub: scene run/config phai dung command/checklist neu co lenh.
+- Web docs: scene browser phai dung screenshot nguon.
+- Validator phai bat voice leak ngoai caption.

@@ -56,6 +56,10 @@ export function validateSceneHTML(html, opts = {}) {
     warnings.push('DEPRECATED: Google Fonts <link> tag found. Fonts are auto-embedded — just use font-family in CSS.');
   }
 
+  if (/\bdrawSVG\b/i.test(html)) {
+    warnings.push('BANNED: drawSVG detected. DrawSVGPlugin is paid/unsupported; use strokeDasharray/strokeDashoffset instead.');
+  }
+
   // Should NOT have disconnected setTimeout for timing
   const setTimeoutCount = (html.match(/setTimeout/g) || []).length;
   if (setTimeoutCount > 2) {
@@ -108,6 +112,56 @@ export function validateSceneHTML(html, opts = {}) {
     errors,
     warnings
   };
+}
+
+function stripCaptionLikeBlocks(html) {
+  return String(html || '').replace(
+    /<([a-z][\w:-]*)\b(?=[^>]*(?:class|id)\s*=\s*["'][^"']*(?:caption|captions|subtitle|subtitles)[^"']*["'])[^>]*>[\s\S]*?<\/\1>/gi,
+    ' '
+  );
+}
+
+function visibleTextFromHtml(html) {
+  return stripCaptionLikeBlocks(html)
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z0-9#]+;/gi, ' ');
+}
+
+function normalizeLeakText(value) {
+  return String(value || '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9+#./-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Detect whether the generated scene copied a long narration phrase into
+ * the main visual DOM. Caption/subtitle containers are ignored because
+ * subtitles are expected to contain narration.
+ *
+ * @param {string} voice
+ * @param {string} html
+ * @returns {boolean}
+ */
+export function containsVoiceLeak(voice, html) {
+  const voiceWords = normalizeLeakText(voice).split(' ').filter(Boolean);
+  if (voiceWords.length < 7) return false;
+
+  const visible = ` ${normalizeLeakText(visibleTextFromHtml(html))} `;
+  if (!visible.trim()) return false;
+
+  const windowSize = 7;
+  for (let i = 0; i <= voiceWords.length - windowSize; i++) {
+    const phrase = voiceWords.slice(i, i + windowSize).join(' ');
+    if (visible.includes(` ${phrase} `)) return true;
+  }
+  return false;
 }
 
 /**
@@ -185,6 +239,20 @@ export function autoFixSceneHTML(html, opts = {}) {
     // Replace repeat:-1 with Math.ceil(DUR/2)-1 as a safe default (2s cycle)
     html = html.replace(/repeat\s*:\s*-1/g, `repeat: Math.ceil(${durSec}/2)-1`);
     fixes.push('Fixed: replaced repeat:-1 with finite repeat');
+  }
+
+  const beforeAssetPathFix = html;
+  html = html
+    .replace(/(["'(])\.\/assets\//g, '$1../assets/')
+    .replace(/url\(\s*\.\/assets\//g, 'url(../assets/');
+  if (html !== beforeAssetPathFix) {
+    fixes.push('Fixed: scene asset paths ./assets/ -> ../assets/');
+  }
+
+  const beforeDrawSvgFix = html;
+  html = html.replace(/\bdrawSVG\s*:\s*(?:"[^"]*"|'[^']*'|[^,}\n]+)/gi, 'opacity:0');
+  if (html !== beforeDrawSvgFix) {
+    fixes.push('Fixed: removed unsupported drawSVG usage');
   }
 
   // Fix 4: Vietnamese diacritics — dấu bị cắt bởi overflow:hidden trên #content

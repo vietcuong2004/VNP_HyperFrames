@@ -1,6 +1,121 @@
 import fs from 'fs';
 import path from 'path';
 
+const FORBIDDEN_FALLBACK_COPY = [
+  'OPEN SOURCE ENGINE',
+  'Write HTML. Render Video. Built for Agents.',
+  'Automated Screenshots',
+  'Infinite Possibilities',
+  'GET STARTED',
+  'Start Generating Today',
+];
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function stripVisualTags(value) {
+  return String(value || '')
+    .replace(/\[[^\]]+\]/g, ' ')
+    .replace(/['"`]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function toWords(value) {
+  return String(value || '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9+#./-]+/g, ' ')
+    .split(/\s+/)
+    .map((word) => word.trim())
+    .filter(Boolean);
+}
+
+function titleCase(words) {
+  return words
+    .map((word) => {
+      if (/^[A-Z0-9+#./-]{2,}$/.test(word)) return word;
+      return word.slice(0, 1).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(' ');
+}
+
+function shortText(value, maxLength) {
+  const text = stripVisualTags(value);
+  if (text.length <= maxLength) return text;
+  const words = text.split(/\s+/);
+  let out = '';
+  for (const word of words) {
+    const next = `${out} ${word}`.trim();
+    if (next.length > maxLength) break;
+    out = next;
+  }
+  return out || text.slice(0, maxLength).trim();
+}
+
+function extractQuotedText(value) {
+  const text = String(value || '');
+  const match = text.match(/['"]([^'"]{3,40})['"]/);
+  return match?.[1]?.trim() || '';
+}
+
+function cleanVisualDescription(value) {
+  return stripVisualTags(String(value || '').split(/B[aá]t bu[oộ]c/i)[0]);
+}
+
+function conciseBody(value, fallback) {
+  const text = shortText(value, 44);
+  return text || fallback;
+}
+
+export function containsForbiddenFallbackCopy(html) {
+  const lower = String(html || '').toLowerCase();
+  return FORBIDDEN_FALLBACK_COPY.some((phrase) => lower.includes(phrase.toLowerCase()));
+}
+
+export function deriveFallbackSceneContent(scene = {}) {
+  const quoted = extractQuotedText(scene.visual);
+  const visualDescription = cleanVisualDescription(scene.visual);
+  const visualWords = toWords(quoted || visualDescription);
+  const allWords = visualWords.filter((word) => word.length > 1);
+  const stop = new Set([
+    'main', 'focus', 'motion', 'flow', 'text', 'style', 'scene', 'center', 'entry', 'idle', 'exit',
+    'visual', 'voice', 'mot', 'canh', 'dung', 'giup', 'ban', 'nhanh', 'trong', 'voi', 'cua', 'cho',
+  ]);
+  const picked = [];
+  for (const word of allWords) {
+    const key = word.toLowerCase();
+    if (stop.has(key)) continue;
+    if (picked.some((item) => item.toLowerCase() === key)) continue;
+    picked.push(word);
+    if (picked.length >= 3) break;
+  }
+
+  const titleWords = (quoted ? toWords(quoted) : picked).slice(0, 3);
+  const title = (titleWords.length ? titleWords.join(' ') : `Scene ${scene.stt || 1}`).toUpperCase();
+  const subtitle = shortText(visualDescription || quoted || title, 92);
+  const subject = titleCase(picked.slice(0, 2).length ? picked.slice(0, 2) : titleWords);
+  const label = `SCENE ${String(scene.stt || 1).padStart(2, '0')}`;
+  const cards = [
+    { title: picked[0] || 'Focus', body: conciseBody(quoted || visualDescription, 'Visual summary') },
+    { title: picked[1] || 'Motion', body: conciseBody(visualDescription, 'Motion from scene brief') },
+    { title: picked[2] || 'Signal', body: conciseBody(quoted || subject, 'Key signal') },
+  ];
+
+  return {
+    title: title.slice(0, 34),
+    label,
+    subtitle,
+    subject,
+    cards,
+  };
+}
+
 /**
  * localFallbackGenerator.js
  * Generates highly aesthetic, premium HTML/CSS/GSAP scene compositions locally
@@ -9,9 +124,14 @@ import path from 'path';
 
 export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAspectRatio = '9:16', audioDurationMs }) {
   const duration = (audioDurationMs ? audioDurationMs : (scene.duration ? scene.duration * 1000 : 8000)) / 1000;
+  const dynamic = deriveFallbackSceneContent(scene);
 
-  // Get screenshot url if available
-  const screenshot = projectAssets.find(a => a.name === 'github_repo.png' || a.type === 'image');
+  // Get the captured source screenshot only. Do not fall back to arbitrary
+  // project images here, because this layout scrolls the source page.
+  const screenshot = projectAssets.find((a) =>
+    a.name === 'github_repo.png' ||
+    String(a.fileUrl || '').replace(/\\/g, '/').endsWith('/assets/images/github_repo.png')
+  );
   const screenshotUrl = screenshot ? screenshot.fileUrl : '../assets/images/github_repo.png';
 
   // Words parsing from transcript for karaoke highlight
@@ -50,10 +170,10 @@ export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAsp
     contentHtml = `
       <div class="intro-container">
         <div class="glow-bg"></div>
-        <div class="brand-badge">OPEN SOURCE ENGINE</div>
-        <h1 class="main-title">HYPERFRAMES</h1>
+        <div class="brand-badge">${escapeHtml(dynamic.label)}</div>
+        <h1 class="main-title">${escapeHtml(dynamic.title)}</h1>
         <div class="subtitle-badge">HTML → VIDEO</div>
-        <p class="tagline">Write HTML. Render Video. Built for Agents.</p>
+        <p class="tagline">${escapeHtml(dynamic.subtitle)}</p>
         <div class="tech-lines">
           <div class="line"></div>
           <div class="line"></div>
@@ -156,8 +276,8 @@ export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAsp
         <div class="glow-bg"></div>
         <div class="tech-header">
           <div class="title-wrap">
-            <span class="sec-label">MODULE 01</span>
-            <h2 class="section-title">Automated Screenshots</h2>
+            <span class="sec-label">${escapeHtml(dynamic.label)}</span>
+            <h2 class="section-title">${escapeHtml(dynamic.title)}</h2>
           </div>
         </div>
         
@@ -168,7 +288,7 @@ export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAsp
               <span class="dot yellow"></span>
               <span class="dot green"></span>
             </div>
-            <div class="url-bar">https://github.com/heygen-com/hyperframes</div>
+            <div class="url-bar">${escapeHtml(scene.source_url || scene.repo_url || 'source capture')}</div>
           </div>
           <div class="browser-body">
             <img id="screenshot-img" src="${screenshotUrl}" alt="GitHub Screenshot" />
@@ -325,8 +445,8 @@ export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAsp
         <div class="glow-bg"></div>
         <div class="tech-header">
           <div class="title-wrap">
-            <span class="sec-label">ENGINE FOCUS</span>
-            <h2 class="section-title">Infinite Possibilities</h2>
+            <span class="sec-label">${escapeHtml(dynamic.label)}</span>
+            <h2 class="section-title">${escapeHtml(dynamic.title)}</h2>
           </div>
         </div>
         
@@ -334,23 +454,23 @@ export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAsp
           <div class="card card-1">
             <div class="card-glow"></div>
             <div class="card-icon">⚡</div>
-            <h3>Dynamic GSAP</h3>
-            <p>Fluid motion paths, custom triggers, timeline controls.</p>
+            <h3>${escapeHtml(dynamic.cards[0].title)}</h3>
+            <p>${escapeHtml(dynamic.cards[0].body)}</p>
           </div>
           
           <div class="card card-2 active-card">
             <div class="card-glow"></div>
             <div class="card-icon">🎨</div>
-            <h3>Rich Styling</h3>
-            <p>Glassmorphism, gradients, modern tech aesthetics.</p>
-            <div class="render-badge">RENDERING</div>
+            <h3>${escapeHtml(dynamic.cards[1].title)}</h3>
+            <p>${escapeHtml(dynamic.cards[1].body)}</p>
+            <div class="render-badge">${escapeHtml(dynamic.subject)}</div>
           </div>
           
           <div class="card card-3">
             <div class="card-glow"></div>
             <div class="card-icon">🎥</div>
-            <h3>High Quality</h3>
-            <p>FHD 60FPS mp4 video output optimized for tech ads.</p>
+            <h3>${escapeHtml(dynamic.cards[2].title)}</h3>
+            <p>${escapeHtml(dynamic.cards[2].body)}</p>
           </div>
         </div>
       </div>
@@ -481,10 +601,10 @@ export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAsp
     contentHtml = `
       <div class="outro-container">
         <div class="glow-bg"></div>
-        <div class="brand-badge">GET STARTED</div>
+        <div class="brand-badge">${escapeHtml(dynamic.label)}</div>
         
-        <h1 class="cta-title">Start Generating Today</h1>
-        <p class="cta-desc">Clone the repository, configure your template, and render high quality videos instantly.</p>
+        <h1 class="cta-title">${escapeHtml(dynamic.title)}</h1>
+        <p class="cta-desc">${escapeHtml(dynamic.subtitle)}</p>
         
         <div class="gh-container">
           <div class="gh-button">
@@ -493,7 +613,7 @@ export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAsp
                 <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.35 3.12.88.01.47.01 1.05.01 1.2 0 .21-.15.47-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
               </svg>
             </span>
-            <span class="gh-text">github.com/heygen-com/hyperframes</span>
+            <span class="gh-text">${escapeHtml(scene.repo_url || scene.source_url || dynamic.subject)}</span>
           </div>
         </div>
       </div>

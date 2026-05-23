@@ -17,9 +17,15 @@ export const SCENE_PROMPT_LITE = `HTML cinematic composition {{W}}×{{H}}px ({{R
 • KHÔNG full sentence — chỉ keyword/số/label (phụ đề burn-in bởi ffmpeg)
 • Code 300-650 dòng. Max 750. Kết thúc: <\/script></body></html>
 • Max 4 CDN. DOM 30-160 elements.
+• KHONG dung drawSVG/DrawSVGPlugin. SVG path drawing phai dung strokeDasharray/strokeDashoffset.
 
 ━━━ CONTENT ━━━
 Thời lượng: {{DURATION}}ms | Voice: "{{VOICE}}" | Visual: "{{VISUAL}}"
+
+TEXT DISCIPLINE:
+Voice/SRT is narration timing only. Main #content must NOT contain any 5+ consecutive words copied from Voice/SRT.
+Use this visual copy block for titles, labels, cards, counters and badges:
+{{VISUAL_COPY}}
 
 {{CINEMATIC_DIRECTION}}
 {{ANIMATION_SPEC}}

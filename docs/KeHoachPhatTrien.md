@@ -1,111 +1,121 @@
-# Kế hoạch phát triển: Tích hợp OpenAI & Tái cấu trúc Bộ sinh kịch bản
+# Ke hoach phat trien hien tai
 
-Tài liệu này mô tả chi tiết phương án nâng cấp và tái cấu trúc hệ thống tạo video tự động của **VNP HyperFrames**, chuyển đổi từ cơ chế sinh kịch bản cứng (Template-based) sang cơ chế sinh thông minh bằng AI (OpenAI) kết hợp tối ưu hóa kiến trúc mã nguồn.
+Tai lieu nay thay the cac ban ke hoach cu dua tren template co dinh G1/G2/G3. Huong moi cua du an la pipeline agentic: AI sinh kich ban, voice, subtitle, scene HTML, thumbnail va mot phan art direction; code chi giu vai tro guardrail, validation, asset routing va fallback an toan.
 
----
+## Trang thai hien tai
 
-## 1. Hiện trạng & Thách thức hiện tại
+Pipeline chinh nam o `pipeline/run_agent_pipeline.js`.
 
-Hiện tại, file `pipeline/main_generateContent.js` đang gánh vác cả 3 vai trò:
-1. **Phân tích dữ liệu nguồn:** Tải thông tin từ API GitHub, Docker Hub hoặc quét nội dung Web.
-2. **Phân loại định dạng video:** Xác định xem URL thuộc nhóm nào trong 15 format con.
-3. **Sinh kịch bản chi tiết:** Chứa toàn bộ logic render cứng cho tất cả các format, dẫn đến code phình to (> 1000 dòng) và lời thoại video bị rập khuôn.
+Luot chay hien tai da co cac phan sau:
 
----
+- Lay URL/topic, trich metadata co ban va chup screenshot nguon vao `assets/images/github_repo.png`.
+- Sinh script JSON bang `agents/scriptAgent.js`.
+- Sinh TTS bang LarVoice neu co key, hoac Edge TTS Node fallback.
+- Tao SRT/transcript, gan timing vao tung scene.
+- Goi `agents/scene/generate.js` de AI sinh HTML cho tung scene.
+- Auto-fix mot so loi render pho bien trong `agents/scene/htmlValidator.js`.
+- Neu AI fail hoac scene vi pham rule quan trong, fallback sang `pipeline/localFallbackGenerator.js`.
+- Lap `index.html`, validate bang HyperFrames, render MP4.
 
-## 2. Kiến trúc mới đề xuất (Strategy Pattern)
+Da sua gan day:
 
-Để tăng tính đa dạng trong nội dung kể chuyện (Storytelling) mà vẫn đảm bảo tính ổn định của layout video, chúng ta sẽ áp dụng nguyên lý:
-> **Mỗi Group (GitHub, Docker, Web) có một cấu trúc Layout (Visual Scenes) cố định, nhưng nội dung kể chuyện (Storytelling) thay đổi linh hoạt theo từng thể loại con thông qua OpenAI.**
+- Khong fallback anh tuy tien khi scene can chup/scroll trang nguon. Scene dang can screenshot chi nhan screenshot nguon va logo.
+- Khong de AI/fallback copy nguyen cau voice vao hero/card/title. Voice chi dung cho narration/subtitle.
+- Tu dong sua path asset trong scene HTML: `./assets/...` -> `../assets/...`.
+- Tu dong loai `drawSVG`, vi DrawSVGPlugin khong co trong runtime.
+- TTS Edge fallback khong phu thuoc Python `edge_tts`.
 
-### Sơ đồ cấu trúc thư mục mới:
-```txt
-pipeline/
-├── generators/
-│   ├── github_generator.mjs  # Quản lý 8 cảnh của G1_github
-│   ├── docker_generator.mjs  # Quản lý 4-5 cảnh của G2_docker
-│   ├── web_generator.mjs     # Quản lý 6 cảnh của G3_web
-│   └── default_generator.mjs # Trình sinh kịch bản dự phòng (không cần API key)
-├── main_generateContent.js     # Đóng vai trò Router phân phối
-└── ...
-```
+## Van de chua giai quyet
 
----
+Phan noi dung chinh giua video van co the trong vo nghia hoac giong template, vi AI scene generator hien chi nhan `voice`, `visual`, SRT timeline va prompt dai. Khi model khong hieu du ngu canh, no sinh cac label ngan nhu `HTML`, `SCENE 01`, `Focus`, hoac card chung chung.
 
-## 3. Chi tiết triển khai
+Day khong nen sua bang cach them them hardcode vao template. Huong dung la tao mot lop contract rieng cho visual scene truoc khi sinh HTML.
 
-### Bước 1: Khởi tạo & Cài đặt Thư viện
-1. Cài đặt SDK OpenAI chính thức:
-   ```bash
-   npm install openai
-   ```
-2. Thêm cấu hình khóa API vào file `.env`:
-   ```env
-   OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxx
-   ```
+## Huong kien truc tiep theo
 
-### Bước 2: Tái cấu trúc Router chính (`main_generateContent.js`)
-File này sẽ được rút gọn lại chỉ làm nhiệm vụ: **Quét dữ liệu thô (Scraping) -> Phân loại (Classification) -> Gọi Generator**.
+### 1. Tach Scene Brief khoi Voice
 
-```javascript
-// Mã giả minh họa luồng Router chính
-import { classifyGithubRepo } from './classifier.mjs';
+Moi scene can co hai nhom du lieu rieng:
 
-async function main() {
-  const target = parseTargetUrl(process.argv[2]);
-  const rawData = await fetchRawData(target);
-  
-  // Xác định Group và Format
-  const { group, format } = classify(target, rawData); 
-  
-  // Dynamic import generator tương ứng theo Group
-  const { generateScenes } = await import(`./generators/${group}_generator.mjs`);
-  
-  // Tiến hành sinh kịch bản (AI hoặc Fallback)
-  const scenes = await generateScenes(rawData, format);
-  
-  await saveJsonScript(rawData, scenes);
+```json
+{
+  "voice": "Loi doc tu nhien cho nguoi xem.",
+  "visual_brief": {
+    "purpose": "explain_value",
+    "main_subject": "RTK CLI proxy",
+    "primary_text": "TOKEN CUT 60-90%",
+    "secondary_labels": ["Rust binary", "Local proxy", "Cache"],
+    "facts": ["reduces LLM token consumption by 60-90%"],
+    "avoid_text": ["HTML", "Scene 1", "Infinite possibilities"]
+  }
 }
 ```
 
-### Bước 3: Xây dựng các Group Generator (`github_generator.mjs`, v.v.)
-Mỗi file generator sẽ đóng vai trò quản lý **Layout Schema** cố định của group đó và gửi kèm **Storytelling Prompt** tương ứng với format con cho OpenAI.
+`voice` khong duoc dung lam nguon text chinh. `visual_brief` moi la nguon cho title, cards, badge, number, command block va diagram label.
 
-> **Lưu ý quan trọng để tránh vỡ giao diện video:**
-> Chúng ta bắt buộc phải giới hạn số lượng ký tự đầu ra của AI trong prompt (ví dụ: Title <= 20 ký tự, Bento Desc <= 60 ký tự).
+### 2. Them Visual Planner Agent
 
-#### Sơ đồ hoạt động của Generator:
-1. Nhận dữ liệu thô & Format con.
-2. Kiểm tra có `OPENAI_API_KEY` hay không.
-3. Nếu có: Lấy Storytelling Prompt tương ứng, gọi OpenAI sinh JSON theo Schema cố định, và trả về Scenes.
-4. Nếu không: Chạy kịch bản điền biến cứng cũ làm Fallback, và trả về Scenes.
+Them agent moi truoc `generateSceneHTML`:
 
-#### Thiết lập Hướng dẫn kể chuyện (Storytelling Guidelines) mẫu cho GitHub:
-```javascript
-const STORYTELLING_GUIDELINES = {
-  tool_review_quick_demo: 
-    "Giọng điệu hào hứng, tập trung vào cách cài đặt nhanh bằng CLI và trải nghiệm thực tế.",
-  developer_integration_brief: 
-    "Giọng điệu kỹ thuật chuyên nghiệp, tập trung vào cấu trúc code, cách import và các API.",
-  knowledge_map_resource_digest: 
-    "Giọng điệu chia sẻ, hướng dẫn cách sử dụng repo này như một thư viện tài liệu tra cứu."
-};
+```txt
+script scene -> visual planner -> validated visual brief -> HTML scene generator
 ```
 
----
+Visual Planner nhan topic, metadata, scene voice, screenshot context va tra ve JSON ngan gon:
 
-## 4. Kế hoạch kiểm thử & Phòng ngừa rủi ro
+- `scene_goal`: hook, explain, compare, demo, warning, outro.
+- `layout_intent`: browser_scroll, terminal_steps, architecture_map, metric_cards, checklist.
+- `primary_text`: text lon nhat tren man hinh.
+- `supporting_text`: toi da 3-5 label ngan.
+- `visual_objects`: cac doi tuong nen ve bang HTML/CSS/SVG.
+- `asset_requirements`: screenshot, logo, character, none.
 
-| Rủi ro | Giải pháp phòng ngừa |
-|---|---|
-| **AI sinh chữ quá dài gây vỡ khung hình** | Chỉ định rõ giới hạn ký tự `max_characters` cho từng key trong Prompt và kích hoạt chế độ `response_format: json_object`. |
-| **Hết hạn API Key hoặc mất mạng** | Luôn viết cơ chế dự phòng (Fallback) bằng code điền biến cứng cũ trong trường hợp gọi API của OpenAI thất bại. |
-| **Tốn chi phí token** | Sử dụng model `gpt-4o-mini` cho các tác vụ sinh kịch bản thông thường để tối ưu chi phí và tăng tốc độ phản hồi. |
+### 3. Validate Visual Brief truoc khi generate HTML
 
----
+Can co guard de chan brief yeu:
 
-## 5. Lộ trình thực hiện đề xuất
+- `primary_text` khong duoc la `HTML`, `Scene 1`, `Focus`, `Module`, `Overview` neu khong co ngu canh ro.
+- Khong copy 5+ tu lien tiep tu `voice`.
+- Phai co it nhat mot danh tu rieng hoac keyword lay tu URL/source: repo name, image name, domain, product, command, metric.
+- Neu scene la browser/scroll, asset screenshot la bat buoc.
 
-- [ ] **Pha 1 (Tái cấu trúc nền tảng):** Chia tách `main_generateContent.js` thành các file generator theo nhóm cấu trúc. Chạy thử nghiệm bằng kịch bản cứng cũ để đảm bảo không lỗi.
-- [ ] **Pha 2 (Tích hợp OpenAI):** Cài đặt SDK, viết prompt động và cấu trúc hóa JSON đầu ra của OpenAI.
-- [ ] **Pha 3 (Kiểm thử & Tinh chỉnh):** Test thử nghiệm tối thiểu 3 URL đại diện cho 3 nhóm trên UI Desktop và tinh chỉnh lại độ dài chữ hiển thị.
+Neu brief fail, regenerate brief hoac fallback bang rule deterministic.
+
+### 4. HTML Generator chi render theo Visual Brief
+
+Prompt HTML nen giam phu thuoc vao `voice`. No chi duoc dung:
+
+- `visual_brief`
+- `srt/beat timeline` de can animation timing
+- `projectAssets`
+- style guide va HyperFrames rules
+
+`voice` chi nen dua vao prompt nhu canh bao: "do not copy this narration into main content".
+
+### 5. Fallback cung phai la dynamic visual fallback
+
+Fallback hien tai da bot hardcode, nhung van chi la generic cards/browser/outro. Can doi fallback thanh cac renderer theo `layout_intent`:
+
+- `browser_scroll`: screenshot lon + 2-3 callout label.
+- `terminal_steps`: command/step cards.
+- `architecture_map`: node/link diagram.
+- `metric_cards`: cards voi number/keyword ro.
+- `checklist`: next actions/warnings.
+
+Fallback khong can dep nhu AI, nhung phai de nguoi xem hieu noi dung.
+
+## Thu tu uu tien
+
+1. Tao `agents/scene/visualPlanner.js` va test cho cac URL da gap loi: `rtk-ai/rtk`, GitHub repo, Docker Hub, web docs.
+2. Them schema/validator cho `visual_brief`.
+3. Sua `generateSceneHTML` de prompt dung `visual_brief`, khong de model tu boc text tu `voice`.
+4. Tach fallback theo `layout_intent`.
+5. Chi sau khi visual brief on dinh moi refresh thiet ke animation/style.
+
+## Tieu chi hoan thanh gan nhat
+
+- Video cua `https://github.com/rtk-ai/rtk` phai co text giua man hinh de hieu voi nguoi xem lan dau, vi du `TOKEN CUT 60-90%`, `Rust CLI proxy`, `Local cache`.
+- Khong scene nao hien text chung chung nhu `HTML`, `Scene 1`, `Module`, `Focus` neu khong co boi canh.
+- Khong hero/card/title nao copy nguyen cau voice.
+- Scene browser/scroll dung screenshot nguon that, khong dung anh asset co san.
+- `npx hyperframes validate` khong co console error.

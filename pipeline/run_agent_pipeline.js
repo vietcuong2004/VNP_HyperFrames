@@ -13,9 +13,9 @@ import { transcribeToSRT } from '../agents/whisperAgent.js';
 import { fixSRTWithAI } from '../agents/srtFixAgent.js';
 import { generateSceneHTML, generateThumbnailHTML } from '../agents/scene/generate.js';
 import { editSceneHTML } from '../agents/scene/edit.js';
-import { autoFixSceneHTML, formatValidationReport, validateSceneHTML } from '../agents/scene/htmlValidator.js';
+import { autoFixSceneHTML, containsVoiceLeak, formatValidationReport, validateSceneHTML } from '../agents/scene/htmlValidator.js';
 import { decideMusicPlan } from '../agents/musicAgent.js';
-import { generateLocalFallbackHTML, generateLocalFallbackThumbnailHTML } from './localFallbackGenerator.js';
+import { containsForbiddenFallbackCopy, generateLocalFallbackHTML, generateLocalFallbackThumbnailHTML } from './localFallbackGenerator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -70,6 +70,47 @@ function findLatestMp4(rendersDir) {
 
 function toWebPath(...parts) {
   return parts.join('/').replace(/\\/g, '/');
+}
+
+function isSourceScreenshotAsset(asset) {
+  const name = String(asset?.name || '').toLowerCase();
+  const fileUrl = String(asset?.fileUrl || '').replace(/\\/g, '/').toLowerCase();
+  return name === 'github_repo.png' || fileUrl.endsWith('/assets/images/github_repo.png');
+}
+
+function isLogoAsset(asset) {
+  const name = String(asset?.name || '').toLowerCase();
+  const fileUrl = String(asset?.fileUrl || '').replace(/\\/g, '/').toLowerCase();
+  return name === 'shiba.png' || fileUrl.endsWith('/assets/logo/shiba.png');
+}
+
+export function isSourceScreenshotScene(scene) {
+  const visual = String(scene?.visual || '').toLowerCase();
+  const voice = String(scene?.voice || '').toLowerCase();
+  const text = `${visual}\n${voice}`;
+  return /screenshot|screen|browser|webpage|website|trang web|màn hình|man hinh|chụp|chup|scroll|cuộn|cuon|github|docker hub/.test(text);
+}
+
+export function selectProjectAssetsForScene(scene, projectAssets = []) {
+  const screenshot = projectAssets.find(isSourceScreenshotAsset);
+  if (!screenshot || !isSourceScreenshotScene(scene)) return projectAssets;
+
+  const logo = projectAssets.find(isLogoAsset);
+  return [screenshot, logo].filter(Boolean);
+}
+
+export function evaluateSceneHtmlRequirements(scene, sceneProjectAssets = [], html = '') {
+  const hasLogo = /assets\/logo\/shiba\.png/i.test(html);
+  const needsScreenshot = isSourceScreenshotScene(scene) && sceneProjectAssets.some(isSourceScreenshotAsset);
+  const hasScreenshot = /assets\/images\/github_repo\.png/i.test(html);
+  const hasForbiddenFallbackCopy = containsForbiddenFallbackCopy(html);
+  const hasVoiceLeak = containsVoiceLeak(scene?.voice, html);
+  const missing = [];
+  if (!hasLogo) missing.push('logo');
+  if (needsScreenshot && !hasScreenshot) missing.push('source screenshot');
+  if (hasForbiddenFallbackCopy) missing.push('stale fallback copy');
+  if (hasVoiceLeak) missing.push('voice leak');
+  return { ok: missing.length === 0, missing };
 }
 
 function buildTemplateCss() {
@@ -232,7 +273,7 @@ async function main() {
     larvoiceKey: process.env.LARVOICE_API_KEY,
     larvoiceKeys: process.env.LARVOICE_API_KEY ? process.env.LARVOICE_API_KEY.split(',') : [],
     larvoiceVoiceId: process.env.LARVOICE_VOICE_ID || '1',
-    useLarVoice: false,
+    useLarVoice: Boolean(process.env.LARVOICE_API_KEY && process.env.USE_LARVOICE !== 'false'),
     outputLanguage: 'vi',
     sessionId: `session_${Date.now().toString(36)}`
   };
@@ -347,14 +388,15 @@ async function main() {
   const templateCompositionsDir = path.join(templateDir, 'compositions');
   fs.mkdirSync(templateCompositionsDir, { recursive: true });
 
-  console.log('\nStep 2: Sinh giong doc (LarVoice) va phu de (Whisper/LarVoice Subtitle)...');
+  const ttsProviderLabel = keys.useLarVoice ? 'LarVoice' : 'Edge TTS';
+  console.log(`\nStep 2: Sinh giong doc (${ttsProviderLabel}) va phu de (Whisper/LarVoice Subtitle)...`);
   const scenes = scriptData.scenes;
   let accumulatedTimeMs = 0;
   const visualBoost = [
     'Bắt buộc có ít nhất 1 hình minh họa vector (SVG/CSS) phù hợp nội dung.',
     'Bắt buộc có bố cục bento cards (2-4 card) cho mỗi cảnh.',
     'Dùng nhân vật từ ./assets/character/shiba khi phù hợp.',
-    'Giữ logo góc trên trái (./assets/logo/shiba.png) và khu vực phụ đề như hiện tại.'
+    'Giữ logo góc trên trái (../assets/logo/shiba.png) và khu vực phụ đề như hiện tại. Khong dung drawSVG; neu can ve SVG path thi dung strokeDasharray/strokeDashoffset.'
   ].join(' ');
 
   for (const scene of scenes) {
@@ -464,6 +506,7 @@ async function main() {
 
   for (const scene of scenes) {
     console.log(`[Pipeline] Generating HTML for Scene ${scene.stt}...`);
+    const sceneProjectAssets = selectProjectAssetsForScene(scene, projectAssets);
     scene.visual = `${scene.visual || ''}\n${visualBoost}`.trim();
     let sceneHtml;
     try {
@@ -471,7 +514,7 @@ async function main() {
         scene,
         keys,
         onLog,
-        projectAssets,
+        projectAssets: sceneProjectAssets,
         outputAspectRatio: '9:16',
         consistentScenes: true,
         litePrompt: false,
@@ -482,26 +525,13 @@ async function main() {
       console.warn(`[Pipeline] [Warning] Sinh HTML Scene ${scene.stt} qua AI that bai: ${err.message}. Su dung template local fallback.`);
       sceneHtml = generateLocalFallbackHTML({
         scene,
-        projectAssets,
+        projectAssets: sceneProjectAssets,
         outputAspectRatio: '9:16',
         audioDurationMs: Math.round(scene.duration * 1000)
       });
     }
 
     const durationMs = Math.round(scene.duration * 1000);
-    const strictChecks = (html) => {
-      const hasLogo = /assets\/logo\/shiba\.png/i.test(html);
-      const hasCaptions = /id=["']captions["']|class=["'][^"']*captions[^"']*["']/i.test(html);
-      const hasClip = /class=["'][^"']*clip[^"']*["']/i.test(html)
-        && /data-start=/.test(html)
-        && /data-duration=/.test(html)
-        && /data-track-index=/.test(html);
-      const missing = [];
-      if (!hasLogo) missing.push('logo');
-      if (!hasCaptions) missing.push('captions');
-      if (!hasClip) missing.push('clip');
-      return { ok: missing.length === 0, missing };
-    };
 
     let fixed = autoFixSceneHTML(sceneHtml, { duration: durationMs });
     if (fixed.fixes.length) {
@@ -510,12 +540,15 @@ async function main() {
     }
 
     let validation = validateSceneHTML(sceneHtml, { duration: durationMs, lang: 'vi' });
-    const strict = strictChecks(sceneHtml);
+    const strict = evaluateSceneHtmlRequirements(scene, sceneProjectAssets, sceneHtml);
     onLog?.(`  └ Validation: ${formatValidationReport(validation).split('\n')[0]}`);
 
     if (!validation.valid || !strict.ok) {
       const editPrompt = [
-        'Bắt buộc thêm logo góc trên trái bằng <img src="./assets/logo/shiba.png"> và style cố định.',
+        'Neu hero/card/title dang copy nguyen cau voice/SRT: thay bang keyword ngan, so lieu, label 1-4 tu tu visual brief. Chi subtitle lower-third moi duoc chua cau voice.',
+        'Neu canh yeu cau chup man hinh, scroll, browser, website hoac link nguon: bat buoc dung <img src="../assets/images/github_repo.png"> cho khung trang web. Khong thay bang anh nhan vat, logo hay asset minh hoa.',
+        'Bat buoc them logo goc tren trai bang <img src="../assets/logo/shiba.png"> va style co dinh. Scene HTML nam trong /compositions nen KHONG dung ./assets/logo/shiba.png.',
+        'Khong dung drawSVG/DrawSVGPlugin. Neu can ve SVG path thi dung strokeDasharray/strokeDashoffset voi GSAP core.',
         'Bắt buộc có vùng subtitle với id="captions" hoặc class="captions" ở lower-third.',
         'Bắt buộc phần hiển thị chính là một element class="clip" có data-start/data-duration/data-track-index.',
         'Giữ bố cục 1080x1920, không đổi tỉ lệ, không để tràn khung.',
@@ -531,13 +564,13 @@ async function main() {
         sceneHtml = fixed.html;
       }
       validation = validateSceneHTML(sceneHtml, { duration: durationMs, lang: 'vi' });
-      const strictAfter = strictChecks(sceneHtml);
+      const strictAfter = evaluateSceneHtmlRequirements(scene, sceneProjectAssets, sceneHtml);
 
       if (!validation.valid || !strictAfter.ok) {
         console.warn(`[Pipeline] [Warning] Scene ${scene.stt} fail validation after edit. Using local fallback.`);
         sceneHtml = generateLocalFallbackHTML({
           scene,
-          projectAssets,
+          projectAssets: sceneProjectAssets,
           outputAspectRatio: '9:16',
           audioDurationMs: durationMs
         });

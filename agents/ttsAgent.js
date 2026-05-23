@@ -1,10 +1,16 @@
 // Node.js v22+ có global fetch built-in — không cần node-fetch
 import fs from 'fs';
+import fsp from 'fs/promises';
+import path from 'path';
 import { spawn } from 'child_process';
 import { FFMPEG_BIN, FFPROBE_BIN } from '../utils/binPaths.js';
 
 const LARVOICE_API      = 'https://larvoice.com/api/v2';
 const DEFAULT_LARVOICE_ID = 1;
+const EDGE_VOICES = {
+  vi: ['vi-VN-NamMinhNeural', 'vi-VN-HoaiMyNeural'],
+  en: ['en-US-AriaNeural', 'en-US-GuyNeural'],
+};
 
 const fmtMs = ms => ms < 60000
   ? `${(ms / 1000).toFixed(1)}s`
@@ -28,7 +34,7 @@ function probeAudioDuration(file) {
  */
 export async function generateTTS(text, outputPath, onLog, keys = {}) {
   // Kiểm tra xem có dùng LarVoice không (mặc định là Edge TTS)
-  const useLarVoice = keys?.useLarVoice === true;
+  const useLarVoice = shouldUseLarVoice(keys);
   
   if (useLarVoice) {
     // Sequential TTS per session — tránh LarVoice server mix up response khi
@@ -37,7 +43,7 @@ export async function generateTTS(text, outputPath, onLog, keys = {}) {
     return withTTSLock(sessionId, () => generateTTS_LarVoice(text, outputPath, onLog, keys));
   } else {
     // Dùng Edge TTS (miễn phí, không cần API key)
-    return generateTTS_EdgeTTS(text, outputPath, onLog, keys);
+    return generateTTS_EdgeTTS_Node(text, outputPath, onLog, keys);
   }
 }
 
@@ -69,6 +75,106 @@ export function clearTTSLock(sessionId) {
  * @param {(msg:string)=>void} [onLog]
  * @param {{ outputLanguage?: string, edgeTTSVoice?: string }} [keys]
  */
+export function shouldUseLarVoice(keys = {}) {
+  if (keys?.useLarVoice === false) return false;
+  if (keys?.useLarVoice === true) return true;
+  return normalizeKeyList(keys).length > 0;
+}
+
+async function generateTTS_EdgeTTS_Node(text, outputPath, onLog, keys = {}) {
+  const language = keys.outputLanguage === 'en' ? 'en' : 'vi';
+  const voices = keys.edgeTTSVoice ? [keys.edgeTTSVoice] : EDGE_VOICES[language];
+  const preview = text.slice(0, 60) + (text.length > 60 ? '...' : '');
+  const t0 = Date.now();
+
+  try {
+    let lastError = null;
+    for (const voice of voices) {
+      try {
+        onLog?.(`TTS Edge: "${preview}" (voice=${voice}, lang=${language})`);
+        await generateEdgeTtsNode(text, outputPath, { voice, language });
+        lastError = null;
+        break;
+      } catch (err) {
+        lastError = err;
+        onLog?.(`TTS Edge: voice ${voice} loi: ${err.message}`);
+      }
+    }
+
+    if (lastError) {
+      onLog?.('TTS Edge: chuyen sang Google Translate TTS fallback...');
+      await generateGoogleTts(text, outputPath, language);
+    }
+
+    const duration = await probeAudioDuration(outputPath);
+    const kb = (fs.statSync(outputPath).size / 1024).toFixed(0);
+    onLog?.(`TTS Edge xong: ${duration.toFixed(1)}s audio (${kb} KB) | ${fmtMs(Date.now() - t0)}`);
+    return { duration, uuid: 'edge-tts', subtitleUrl: null };
+  } catch (err) {
+    onLog?.(`TTS Edge: Loi: ${err.message}`);
+    throw new Error(`Edge TTS failed: ${err.message}`);
+  }
+}
+
+async function generateEdgeTtsNode(text, outputPath, { voice, language }) {
+  const { EdgeTTS } = await import('node-edge-tts');
+  await fsp.mkdir(path.dirname(outputPath), { recursive: true });
+  const tts = new EdgeTTS({
+    voice,
+    lang: language === 'en' ? 'en-US' : 'vi-VN',
+    outputFormat: 'audio-24khz-48kbitrate-mono-mp3',
+    timeout: 60000,
+  });
+  await tts.ttsPromise(text, outputPath);
+}
+
+function splitTextIntoChunks(text, maxLength = 180) {
+  const words = text.split(/\s+/).filter(Boolean);
+  const chunks = [];
+  let current = '';
+  for (const word of words) {
+    const next = `${current} ${word}`.trim();
+    if (next.length > maxLength && current) {
+      chunks.push(current);
+      current = word;
+    } else {
+      current = next;
+    }
+  }
+  if (current) chunks.push(current);
+  return chunks;
+}
+
+async function generateGoogleTts(text, outputPath, language) {
+  await fsp.mkdir(path.dirname(outputPath), { recursive: true });
+  const chunks = splitTextIntoChunks(text);
+  const buffers = [];
+  const tl = language === 'en' ? 'en' : 'vi';
+
+  for (const chunk of chunks) {
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${tl}&client=tw-ob&q=${encodeURIComponent(chunk)}`;
+    let lastError = null;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const res = await fetch(url, {
+          headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!res.ok) throw new Error(`Google Translate TTS HTTP ${res.status}`);
+        buffers.push(Buffer.from(await res.arrayBuffer()));
+        lastError = null;
+        break;
+      } catch (err) {
+        lastError = err;
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+    }
+    if (lastError) throw lastError;
+  }
+
+  await fsp.writeFile(outputPath, Buffer.concat(buffers));
+}
+
 async function generateTTS_EdgeTTS(text, outputPath, onLog, keys = {}) {
   const language = keys.outputLanguage === 'en' ? 'en' : 'vi';
   // Giọng mặc định cho tiếng Việt và tiếng Anh

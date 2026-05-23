@@ -33,6 +33,12 @@ MỤC TIÊU: Apple keynote / high-end tech ad / cinematic motion graphics.
 
 Thời lượng: {{DURATION}}ms | Voice: "{{VOICE}}" | Visual: "{{VISUAL}}"
 
+TEXT DISCIPLINE:
+Voice/SRT is narration timing only, not main on-screen copy.
+Main #content must NOT contain any 5+ consecutive words copied from Voice/SRT.
+Use this visual copy block for titles, labels, cards, counters and badges:
+{{VISUAL_COPY}}
+
 ════════════════════════════════════════
 ĐẠO DIỄN + ANIMATION SPEC
 ════════════════════════════════════════
@@ -182,7 +188,7 @@ TIẾNG VIỆT — BẮT BUỘC:
 PHẦN 5 — KỸ THUẬT HÌNH ẢNH NÂNG CAO (dùng 2-3/scene)
 ════════════════════════════════════════
 
-A) SVG PATH DRAWING: gsap.set(path,{strokeDasharray:len,strokeDashoffset:len}); tl.to(path,{strokeDashoffset:0,...},t);
+A) SVG PATH DRAWING: gsap.set(path,{strokeDasharray:len,strokeDashoffset:len}); tl.to(path,{strokeDashoffset:0,...},t). KHONG dung drawSVG/DrawSVGPlugin.
 B) CANVAS 2D với GSAP proxy: tl.to(proxy,{time:DUR,onUpdate:function(){drawFrame(proxy.time);}},0);
 C) CSS 3D TRANSFORMS: perspective:900px + transform-style:preserve-3d + tl.to(el,{rotationY:360,...},t);
 D) PER-WORD TYPOGRAPHY: Mỗi từ <span class="word">, stagger với slide decay 80→12px
@@ -242,6 +248,7 @@ PHẦN 10 — VOICE TIMELINE & TEXT-SYNC
 {{SUBS}}
 
 ⛔ KHÔNG render nguyên câu voice/SRT ra DOM
+⛔ KHONG copy phrase dai tu Voice/SRT vao hero/card/title. Subtitle lower-third la noi duy nhat duoc chua cau voice.
 ✅ Keyword (1-2 từ), số liệu, label ngắn (2-4 từ) từ beat TEXT/KEYWORD
 • Visual vào tại beat.from (±200ms). ENTER 350-500ms | HOLD ≥1500ms | EXIT 250-350ms tại beat.to
 • Mỗi beat: 1 visual anchor (keyword | số | icon)
