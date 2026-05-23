@@ -1,18 +1,18 @@
-# Ke hoach noi dung va visual dong
+# Kế hoạch nội dung và visual động
 
-Tai lieu nay mo ta contract noi dung can co de scene AI khong sinh text giua video vo nghia.
+Tài liệu này mô tả contract nội dung cần có để scene AI không sinh text giữa video vô nghĩa.
 
-## Nguyen tac
+## Nguyên tắc
 
-Moi scene co 3 lop thong tin rieng:
+Mỗi scene có 3 lớp thông tin riêng:
 
-1. `voice`: loi doc tu nhien.
-2. `visual_brief`: noi dung duoc phep hien tren man hinh.
-3. `html`: scene composition do AI sinh tu `visual_brief`.
+1. `voice`: lời đọc tự nhiên.
+2. `visual_brief`: nội dung được phép hiện trên màn hình.
+3. `html`: scene composition do AI sinh từ `visual_brief`.
 
-Khong dung `voice` lam nguon text chinh. Neu can subtitle, subtitle/burn-in nam rieng o lower-third.
+Không dùng `voice` làm nguồn text chính. Nếu cần subtitle, subtitle/burn-in nằm riêng ở lower-third.
 
-## Visual Brief de xuat
+## Visual Brief đề xuất
 
 ```json
 {
@@ -34,49 +34,49 @@ Khong dung `voice` lam nguon text chinh. Neu can subtitle, subtitle/burn-in nam 
 
 ## Layout Intent
 
-Danh sach ban dau:
+Danh sách ban đầu:
 
-| Intent | Khi dung | Visual nen co |
+| Intent | Khi dùng | Visual nên có |
 |---|---|---|
-| `browser_scroll` | Can hien trang nguon, GitHub, Docker Hub, docs | Screenshot lon, browser chrome, callout ngan |
+| `browser_scroll` | Cần hiện trang nguồn, GitHub, Docker Hub, docs | Screenshot lớn, browser chrome, callout ngắn |
 | `terminal_steps` | Install, clone, run, config | Command block, step cards, progress |
-| `architecture_map` | Giai thich proxy, library, data flow | Nodes, arrows, label ngan |
-| `metric_cards` | Co number/benefit ro | Number lon, 2-3 card phu |
-| `feature_cards` | Liet ke tinh nang | Cards ngan, icon/shape lien quan |
+| `architecture_map` | Giải thích proxy, library, data flow | Nodes, arrows, label ngắn |
+| `metric_cards` | Có number/benefit rõ | Number lớn, 2-3 card phụ |
+| `feature_cards` | Liệt kê tính năng | Cards ngắn, icon/shape liên quan |
 | `checklist` | Outro, warning, next action | Checklist, CTA, repo/domain |
 
-AI khong tu phat minh intent ngoai danh sach neu chua co renderer/fallback.
+AI không tự phát minh intent ngoài danh sách nếu chưa có renderer/fallback.
 
-## Rule chong text vo nghia
+## Rule chống text vô nghĩa
 
-Text hien giua video bi xem la fail neu:
+Text hiện giữa video bị xem là fail nếu:
 
-- Chi la tu chung chung: `HTML`, `Scene`, `Focus`, `Module`, `Overview`, `Dynamic`, `Visual`.
-- Khong chua keyword nao tu URL/source.
-- Copy 5+ tu lien tiep tu `voice`.
-- Khong giup nguoi xem hieu scene dang noi ve cai gi.
+- Chỉ là từ chung chung: `HTML`, `Scene`, `Focus`, `Module`, `Overview`, `Dynamic`, `Visual`.
+- Không chứa keyword nào từ URL/source.
+- Copy 5+ từ liên tiếp từ `voice`.
+- Không giúp người xem hiểu scene đang nói về cái gì.
 
-Text tot nen co:
+Text tốt nên có:
 
-- Ten repo/image/product/domain.
-- Mot metric hoac loi ich cu the.
-- Command/keyword that neu source co.
-- 1-4 tu moi label, nhung du nghia.
+- Tên repo/image/product/domain.
+- Một metric hoặc lợi ích cụ thể.
+- Command/keyword thật nếu source có.
+- 1-4 từ mỗi label, nhưng đủ nghĩa.
 
-## Normalize de xuat
+## Normalize đề xuất
 
-Neu `primary_text` yeu:
+Nếu `primary_text` yếu:
 
-1. Lay `[TEXT] '...'` trong `scene.visual` neu co.
-2. Lay repo/image/domain name tu source metadata.
-3. Lay number/metric trong description/README.
-4. Ket hop thanh label ngan, vi du:
+1. Lấy `[TEXT] '...'` trong `scene.visual` nếu có.
+2. Lấy repo/image/domain name từ source metadata.
+3. Lấy number/metric trong description/README.
+4. Kết hợp thành label ngắn, ví dụ:
    - `RTK PROXY`
    - `TOKEN CUT 60-90%`
    - `RUST CLI`
    - `LOCAL CACHE`
 
-Neu van khong co du lieu, dung fallback co boi canh:
+Nếu vẫn không có dữ liệu, dùng fallback có bối cảnh:
 
 ```txt
 <repo-name> OVERVIEW
@@ -84,12 +84,12 @@ Neu van khong co du lieu, dung fallback co boi canh:
 <image-name> QUICKSTART
 ```
 
-Khong fallback ve `Scene 1`.
+Không fallback về `Scene 1`.
 
-## Test can co
+## Test cần có
 
-- `rtk-ai/rtk`: primary text phai co `RTK`, `TOKEN`, `60-90`, `Rust` hoac `proxy`.
-- GitHub repo co README: scene install phai dung `terminal_steps` neu co command.
-- Docker Hub: scene run/config phai dung command/checklist neu co lenh.
-- Web docs: scene browser phai dung screenshot nguon.
-- Validator phai bat voice leak ngoai caption.
+- `rtk-ai/rtk`: primary text phải có `RTK`, `TOKEN`, `60-90`, `Rust` hoặc `proxy`.
+- GitHub repo có README: scene install phải dùng `terminal_steps` nếu có command.
+- Docker Hub: scene run/config phải dùng command/checklist nếu có lệnh.
+- Web docs: scene browser phải dùng screenshot nguồn.
+- Validator phải bắt voice leak ngoài caption.

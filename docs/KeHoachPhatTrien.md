@@ -1,45 +1,45 @@
-# Ke hoach phat trien hien tai
+# Kế hoạch phát triển hiện tại
 
-Tai lieu nay thay the cac ban ke hoach cu dua tren template co dinh G1/G2/G3. Huong moi cua du an la pipeline agentic: AI sinh kich ban, voice, subtitle, scene HTML, thumbnail va mot phan art direction; code chi giu vai tro guardrail, validation, asset routing va fallback an toan.
+Tài liệu này thay thế các bản kế hoạch cũ dựa trên template cố định G1/G2/G3. Hướng mới của dự án là pipeline agentic: AI sinh kịch bản, voice, phụ đề, scene HTML, thumbnail và một phần art direction; code chỉ giữ vai trò guardrail, validation, asset routing và fallback an toàn.
 
-## Trang thai hien tai
+## Trạng thái hiện tại
 
-Pipeline chinh nam o `pipeline/run_agent_pipeline.js`.
+Pipeline chính nằm ở `pipeline/run_agent_pipeline.js`.
 
-Luot chay hien tai da co cac phan sau:
+Luồng hiện tại đã có các phần sau:
 
-- Lay URL/topic, trich metadata co ban va chup screenshot nguon vao `assets/images/github_repo.png`.
-- Sinh script JSON bang `agents/scriptAgent.js`.
-- Sinh TTS bang LarVoice neu co key, hoac Edge TTS Node fallback.
-- Tao SRT/transcript, gan timing vao tung scene.
-- Goi `agents/scene/generate.js` de AI sinh HTML cho tung scene.
-- Auto-fix mot so loi render pho bien trong `agents/scene/htmlValidator.js`.
-- Neu AI fail hoac scene vi pham rule quan trong, fallback sang `pipeline/localFallbackGenerator.js`.
-- Lap `index.html`, validate bang HyperFrames, render MP4.
+- Lấy URL/topic, trích metadata cơ bản và chụp screenshot nguồn vào `assets/images/github_repo.png`.
+- Sinh script JSON bằng `agents/scriptAgent.js`.
+- Sinh TTS bằng LarVoice nếu có key, hoặc Edge TTS Node fallback.
+- Tạo SRT/transcript, gắn timing vào từng scene.
+- Gọi `agents/scene/generate.js` để AI sinh HTML cho từng scene.
+- Auto-fix một số lỗi render phổ biến trong `agents/scene/htmlValidator.js`.
+- Nếu AI fail hoặc scene vi phạm rule quan trọng, fallback sang `pipeline/localFallbackGenerator.js`.
+- Lắp `index.html`, validate bằng HyperFrames, render MP4.
 
-Da sua gan day:
+Đã sửa gần đây:
 
-- Khong fallback anh tuy tien khi scene can chup/scroll trang nguon. Scene dang can screenshot chi nhan screenshot nguon va logo.
-- Khong de AI/fallback copy nguyen cau voice vao hero/card/title. Voice chi dung cho narration/subtitle.
-- Tu dong sua path asset trong scene HTML: `./assets/...` -> `../assets/...`.
-- Tu dong loai `drawSVG`, vi DrawSVGPlugin khong co trong runtime.
-- TTS Edge fallback khong phu thuoc Python `edge_tts`.
+- Không fallback ảnh tùy tiện khi scene cần chụp/scroll trang nguồn. Scene cần screenshot chỉ nhận screenshot nguồn và logo.
+- Không để AI/fallback copy nguyên câu voice vào hero/card/title. Voice chỉ dùng cho narration/subtitle.
+- Tự động sửa path asset trong scene HTML: `./assets/...` -> `../assets/...`.
+- Tự động loại `drawSVG`, vì DrawSVGPlugin không có trong runtime.
+- TTS Edge fallback không phụ thuộc Python `edge_tts`.
 
-## Van de chua giai quyet
+## Vấn đề chưa giải quyết
 
-Phan noi dung chinh giua video van co the trong vo nghia hoac giong template, vi AI scene generator hien chi nhan `voice`, `visual`, SRT timeline va prompt dai. Khi model khong hieu du ngu canh, no sinh cac label ngan nhu `HTML`, `SCENE 01`, `Focus`, hoac card chung chung.
+Phần nội dung chính giữa video vẫn có thể trông vô nghĩa hoặc giống template, vì AI scene generator hiện chỉ nhận `voice`, `visual`, SRT timeline và prompt dài. Khi model không hiểu đủ ngữ cảnh, nó sinh các label ngắn như `HTML`, `SCENE 01`, `Focus`, hoặc card chung chung.
 
-Day khong nen sua bang cach them them hardcode vao template. Huong dung la tao mot lop contract rieng cho visual scene truoc khi sinh HTML.
+Không nên sửa việc này bằng cách thêm hardcode vào template. Hướng đúng là tạo một lớp contract riêng cho visual scene trước khi sinh HTML.
 
-## Huong kien truc tiep theo
+## Hướng kiến trúc tiếp theo
 
-### 1. Tach Scene Brief khoi Voice
+### 1. Tách Scene Brief khỏi Voice
 
-Moi scene can co hai nhom du lieu rieng:
+Mỗi scene cần có hai nhóm dữ liệu riêng:
 
 ```json
 {
-  "voice": "Loi doc tu nhien cho nguoi xem.",
+  "voice": "Lời đọc tự nhiên cho người xem.",
   "visual_brief": {
     "purpose": "explain_value",
     "main_subject": "RTK CLI proxy",
@@ -51,71 +51,71 @@ Moi scene can co hai nhom du lieu rieng:
 }
 ```
 
-`voice` khong duoc dung lam nguon text chinh. `visual_brief` moi la nguon cho title, cards, badge, number, command block va diagram label.
+`voice` không được dùng làm nguồn text chính. `visual_brief` mới là nguồn cho title, cards, badge, number, command block và diagram label.
 
-### 2. Them Visual Planner Agent
+### 2. Thêm Visual Planner Agent
 
-Them agent moi truoc `generateSceneHTML`:
+Thêm agent mới trước `generateSceneHTML`:
 
 ```txt
 script scene -> visual planner -> validated visual brief -> HTML scene generator
 ```
 
-Visual Planner nhan topic, metadata, scene voice, screenshot context va tra ve JSON ngan gon:
+Visual Planner nhận topic, metadata, scene voice, screenshot context và trả về JSON ngắn gọn:
 
 - `scene_goal`: hook, explain, compare, demo, warning, outro.
 - `layout_intent`: browser_scroll, terminal_steps, architecture_map, metric_cards, checklist.
-- `primary_text`: text lon nhat tren man hinh.
-- `supporting_text`: toi da 3-5 label ngan.
-- `visual_objects`: cac doi tuong nen ve bang HTML/CSS/SVG.
+- `primary_text`: text lớn nhất trên màn hình.
+- `supporting_text`: tối đa 3-5 label ngắn.
+- `visual_objects`: các đối tượng nên vẽ bằng HTML/CSS/SVG.
 - `asset_requirements`: screenshot, logo, character, none.
 
-### 3. Validate Visual Brief truoc khi generate HTML
+### 3. Validate Visual Brief trước khi generate HTML
 
-Can co guard de chan brief yeu:
+Cần có guard để chặn brief yếu:
 
-- `primary_text` khong duoc la `HTML`, `Scene 1`, `Focus`, `Module`, `Overview` neu khong co ngu canh ro.
-- Khong copy 5+ tu lien tiep tu `voice`.
-- Phai co it nhat mot danh tu rieng hoac keyword lay tu URL/source: repo name, image name, domain, product, command, metric.
-- Neu scene la browser/scroll, asset screenshot la bat buoc.
+- `primary_text` không được là `HTML`, `Scene 1`, `Focus`, `Module`, `Overview` nếu không có ngữ cảnh rõ.
+- Không copy 5+ từ liên tiếp từ `voice`.
+- Phải có ít nhất một danh từ riêng hoặc keyword lấy từ URL/source: repo name, image name, domain, product, command, metric.
+- Nếu scene là browser/scroll, asset screenshot là bắt buộc.
 
-Neu brief fail, regenerate brief hoac fallback bang rule deterministic.
+Nếu brief fail, regenerate brief hoặc fallback bằng rule deterministic.
 
-### 4. HTML Generator chi render theo Visual Brief
+### 4. HTML Generator chỉ render theo Visual Brief
 
-Prompt HTML nen giam phu thuoc vao `voice`. No chi duoc dung:
+Prompt HTML nên giảm phụ thuộc vào `voice`. Nó chỉ được dùng:
 
 - `visual_brief`
-- `srt/beat timeline` de can animation timing
+- `srt/beat timeline` để căn animation timing
 - `projectAssets`
-- style guide va HyperFrames rules
+- style guide và HyperFrames rules
 
-`voice` chi nen dua vao prompt nhu canh bao: "do not copy this narration into main content".
+`voice` chỉ nên đưa vào prompt như cảnh báo: "do not copy this narration into main content".
 
-### 5. Fallback cung phai la dynamic visual fallback
+### 5. Fallback cũng phải là dynamic visual fallback
 
-Fallback hien tai da bot hardcode, nhung van chi la generic cards/browser/outro. Can doi fallback thanh cac renderer theo `layout_intent`:
+Fallback hiện tại đã bớt hardcode, nhưng vẫn chỉ là generic cards/browser/outro. Cần đổi fallback thành các renderer theo `layout_intent`:
 
-- `browser_scroll`: screenshot lon + 2-3 callout label.
+- `browser_scroll`: screenshot lớn + 2-3 callout label.
 - `terminal_steps`: command/step cards.
 - `architecture_map`: node/link diagram.
-- `metric_cards`: cards voi number/keyword ro.
+- `metric_cards`: cards với number/keyword rõ.
 - `checklist`: next actions/warnings.
 
-Fallback khong can dep nhu AI, nhung phai de nguoi xem hieu noi dung.
+Fallback không cần đẹp như AI, nhưng phải để người xem hiểu nội dung.
 
-## Thu tu uu tien
+## Thứ tự ưu tiên
 
-1. Tao `agents/scene/visualPlanner.js` va test cho cac URL da gap loi: `rtk-ai/rtk`, GitHub repo, Docker Hub, web docs.
-2. Them schema/validator cho `visual_brief`.
-3. Sua `generateSceneHTML` de prompt dung `visual_brief`, khong de model tu boc text tu `voice`.
-4. Tach fallback theo `layout_intent`.
-5. Chi sau khi visual brief on dinh moi refresh thiet ke animation/style.
+1. Tạo `agents/scene/visualPlanner.js` và test cho các URL đã gặp lỗi: `rtk-ai/rtk`, GitHub repo, Docker Hub, web docs.
+2. Thêm schema/validator cho `visual_brief`.
+3. Sửa `generateSceneHTML` để prompt dùng `visual_brief`, không để model tự bốc text từ `voice`.
+4. Tách fallback theo `layout_intent`.
+5. Chỉ sau khi visual brief ổn định mới refresh thiết kế animation/style.
 
-## Tieu chi hoan thanh gan nhat
+## Tiêu chí hoàn thành gần nhất
 
-- Video cua `https://github.com/rtk-ai/rtk` phai co text giua man hinh de hieu voi nguoi xem lan dau, vi du `TOKEN CUT 60-90%`, `Rust CLI proxy`, `Local cache`.
-- Khong scene nao hien text chung chung nhu `HTML`, `Scene 1`, `Module`, `Focus` neu khong co boi canh.
-- Khong hero/card/title nao copy nguyen cau voice.
-- Scene browser/scroll dung screenshot nguon that, khong dung anh asset co san.
-- `npx hyperframes validate` khong co console error.
+- Video của `https://github.com/rtk-ai/rtk` phải có text giữa màn hình dễ hiểu với người xem lần đầu, ví dụ `TOKEN CUT 60-90%`, `Rust CLI proxy`, `Local cache`.
+- Không scene nào hiện text chung chung như `HTML`, `Scene 1`, `Module`, `Focus` nếu không có bối cảnh.
+- Không hero/card/title nào copy nguyên câu voice.
+- Scene browser/scroll dùng screenshot nguồn thật, không dùng ảnh asset có sẵn.
+- `npx hyperframes validate` không có console error.

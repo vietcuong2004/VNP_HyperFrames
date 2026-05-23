@@ -1,66 +1,66 @@
-# Pipeline flow hien tai
+# Luồng pipeline hiện tại
 
-Entry point chinh:
+Entry point chính:
 
 ```bash
 npm run start
 ```
 
-UI desktop/server goi pipeline:
+UI desktop/server gọi pipeline:
 
 ```bash
 node pipeline/run_agent_pipeline.js <url-or-topic>
 ```
 
-## Tong quan
+## Tổng quan
 
 ```txt
 URL/topic
   -> fetch metadata + screenshot
   -> ScriptAgent sinh JSON scenes
   -> TTS + SRT/transcript
-  -> Scene HTML Agent sinh tung composition
+  -> Scene HTML Agent sinh từng composition
   -> htmlValidator auto-fix + strict checks
-  -> local fallback neu AI fail
-  -> lap index.html
+  -> local fallback nếu AI fail
+  -> lắp index.html
   -> hyperframes validate
   -> hyperframes render
-  -> doi ten MP4
+  -> đổi tên MP4
 ```
 
-## 1. Input va source context
+## 1. Input và source context
 
-`pipeline/run_agent_pipeline.js` nhan URL hoac topic.
+`pipeline/run_agent_pipeline.js` nhận URL hoặc topic.
 
-Neu la URL:
+Nếu là URL:
 
-- Lay `<title>` va meta description.
-- Chup screenshot bang `pipeline/capture_github.js`.
-- Luu screenshot vao `assets/images/github_repo.png`.
-- Them screenshot vao `projectAssets`.
+- Lấy `<title>` và meta description.
+- Chụp screenshot bằng `pipeline/capture_github.js`.
+- Lưu screenshot vào `assets/images/github_repo.png`.
+- Thêm screenshot vào `projectAssets`.
 
-Quy tac quan trong: scene can browser/screenshot/scroll chi duoc nhan screenshot nguon va logo, khong duoc dung anh bat ky trong `assets/images`.
+Quy tắc quan trọng: scene cần browser/screenshot/scroll chỉ được nhận screenshot nguồn và logo, không được dùng ảnh bất kỳ trong `assets/images`.
 
 ## 2. Script generation
 
-`agents/scriptAgent.js` sinh script JSON gom cac scene:
+`agents/scriptAgent.js` sinh script JSON gồm các scene:
 
 - `stt`
 - `voice`
 - `visual`
 - thumbnail metadata
 
-Hien tai `visual` van la text brief tu do, chua phai contract chat. Day la diem can nang cap tiep thanh `visual_brief`.
+Hiện tại `visual` vẫn là text brief tự do, chưa phải contract chặt. Đây là điểm cần nâng cấp tiếp thành `visual_brief`.
 
-## 3. TTS va subtitle
+## 3. TTS và subtitle
 
-`agents/ttsAgent.js` chon provider:
+`agents/ttsAgent.js` chọn provider:
 
-- LarVoice neu co `LARVOICE_API_KEY` va `USE_LARVOICE` khong phai `false`.
-- Edge TTS Node fallback neu khong dung LarVoice.
-- Google Translate TTS fallback neu Edge TTS loi.
+- LarVoice nếu có `LARVOICE_API_KEY` và `USE_LARVOICE` không phải `false`.
+- Edge TTS Node fallback nếu không dùng LarVoice.
+- Google Translate TTS fallback nếu Edge TTS lỗi.
 
-Pipeline tao SRT/transcript, gan vao tung scene:
+Pipeline tạo SRT/transcript, gắn vào từng scene:
 
 - `audio_start`
 - `audio_duration`
@@ -71,51 +71,51 @@ Pipeline tao SRT/transcript, gan vao tung scene:
 
 ## 4. Scene HTML generation
 
-`agents/scene/generate.js` tao prompt HyperFrames va goi AI sinh HTML tung scene.
+`agents/scene/generate.js` tạo prompt HyperFrames và gọi AI sinh HTML từng scene.
 
-Prompt hien co da co guard:
+Prompt hiện có đã có guard:
 
-- Khong copy nguyen cau voice/SRT vao main content.
-- Main content nen dung visual copy block.
-- Khong dung `drawSVG`.
-- Asset trong scene HTML phai dung path tuong doi hop le.
+- Không copy nguyên câu voice/SRT vào main content.
+- Main content nên dùng visual copy block.
+- Không dùng `drawSVG`.
+- Asset trong scene HTML phải dùng path tương đối hợp lệ.
 
-Can nang cap tiep: chen `visual_brief` co schema vao prompt, thay vi dua `visual` tu do.
+Cần nâng cấp tiếp: chèn `visual_brief` có schema vào prompt, thay vì đưa `visual` tự do.
 
-## 5. Validation va auto-fix
+## 5. Validation và auto-fix
 
-`agents/scene/htmlValidator.js` xu ly:
+`agents/scene/htmlValidator.js` xử lý:
 
-- Thieu `window.__timelines`.
-- Thieu `paused: true`.
+- Thiếu `window.__timelines`.
+- Thiếu `paused: true`.
 - `repeat:-1`.
 - Path sai trong scene: `./assets/...` -> `../assets/...`.
 - `drawSVG` unsupported.
 - Voice leak trong main visual DOM.
 
-`pipeline/run_agent_pipeline.js` co strict checks:
+`pipeline/run_agent_pipeline.js` có strict checks:
 
-- Logo phai co.
-- Scene can screenshot phai dung `../assets/images/github_repo.png`.
-- Khong con copy fallback cu.
-- Khong leak voice vao hero/card/title.
+- Logo phải có.
+- Scene cần screenshot phải dùng `../assets/images/github_repo.png`.
+- Không còn copy fallback cũ.
+- Không leak voice vào hero/card/title.
 
-Neu AI HTML fail, pipeline thu goi `editSceneHTML`. Neu van fail, dung `generateLocalFallbackHTML`.
+Nếu AI HTML fail, pipeline thử gọi `editSceneHTML`. Nếu vẫn fail, dùng `generateLocalFallbackHTML`.
 
 ## 6. Local fallback
 
-`pipeline/localFallbackGenerator.js` chi la fallback an toan, khong phai huong san pham cuoi.
+`pipeline/localFallbackGenerator.js` chỉ là fallback an toàn, không phải hướng sản phẩm cuối.
 
-Fallback hien tai:
+Fallback hiện tại:
 
-- Lay text ngan tu `[TEXT]` trong visual neu co.
-- Khong dung cac title cu nhu `Infinite Possibilities`, `Automated Screenshots`.
-- Khong lay nguyen voice lam card/title.
-- Scene screenshot chi dung `github_repo.png`.
+- Lấy text ngắn từ `[TEXT]` trong visual nếu có.
+- Không dùng các title cũ như `Infinite Possibilities`, `Automated Screenshots`.
+- Không lấy nguyên voice làm card/title.
+- Scene screenshot chỉ dùng `github_repo.png`.
 
-Can nang cap tiep: fallback render theo `layout_intent` tu `visual_brief`.
+Cần nâng cấp tiếp: fallback render theo `layout_intent` từ `visual_brief`.
 
-## 7. Lap composition tong
+## 7. Lắp composition tổng
 
 Pipeline ghi:
 
@@ -125,27 +125,27 @@ Pipeline ghi:
 - template snapshot trong `templates/<safe-topic>/<timestamp>/`
 - script data trong `data/`
 
-Luu y: cac file nay la output cua moi lan gen, khong nen xem la source chinh khi phat trien.
+Lưu ý: các file này là output của mỗi lần gen, không nên xem là source chính khi phát triển.
 
-## 8. Validate va render
+## 8. Validate và render
 
-Pipeline chay HyperFrames local:
+Pipeline chạy HyperFrames local:
 
 ```bash
 npx hyperframes validate
 npx hyperframes render --workers=2
 ```
 
-Trong code packaged, pipeline goi file CLI trong `node_modules/hyperframes/dist/cli.js`.
+Trong code packaged, pipeline gọi file CLI trong `node_modules/hyperframes/dist/cli.js`.
 
-`npm run check` hien quet ca nhieu composition cu trong repo, nen co the fail vi lint legacy. Khi debug pipeline runtime, uu tien xem output cua `hyperframes validate` trong Step 6.
+`npm run check` hiện quét cả nhiều composition cũ trong repo, nên có thể fail vì lint legacy. Khi debug pipeline runtime, ưu tiên xem output của `hyperframes validate` trong Step 6.
 
-## Huong tiep theo
+## Hướng tiếp theo
 
-Viec can lam tiep khong phai them template, ma la them Visual Planner:
+Việc cần làm tiếp không phải thêm template, mà là thêm Visual Planner:
 
 ```txt
 script scene -> visual planner -> visual_brief validator -> scene HTML agent
 ```
 
-Muc tieu la de phan noi dung giua video co nghia voi nguoi xem lan dau, khong con label rong nghia nhu `HTML`, `Scene 1`, `Focus`.
+Mục tiêu là để phần nội dung giữa video có nghĩa với người xem lần đầu, không còn label rỗng nghĩa như `HTML`, `Scene 1`, `Focus`.

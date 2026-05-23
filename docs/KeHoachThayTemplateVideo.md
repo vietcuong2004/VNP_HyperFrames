@@ -1,41 +1,41 @@
-# Legacy: thay template video co dinh
+# Legacy: thay template video cố định
 
-Tai lieu nay duoc giu lai nhu ghi chu lich su. Huong "thay template G1/G2/G3 bang nhieu variant template" khong con la huong chinh.
+Tài liệu này được giữ lại như ghi chú lịch sử. Hướng "thay template G1/G2/G3 bằng nhiều variant template" không còn là hướng chính.
 
-Huong hien tai:
+Hướng hiện tại:
 
-- Khong tiep tuc mo rong template co dinh theo group.
-- AI sinh scene HTML truc tiep qua `agents/scene/generate.js`.
-- Code chi giu cac guardrail: asset routing, visual brief validation, HyperFrames validation, auto-fix va fallback.
-- Neu can fallback, fallback phai bam theo `visual_brief`/`layout_intent`, khong bam theo template mau co san.
+- Không tiếp tục mở rộng template cố định theo group.
+- AI sinh scene HTML trực tiếp qua `agents/scene/generate.js`.
+- Code chỉ giữ các guardrail: asset routing, visual brief validation, HyperFrames validation, auto-fix và fallback.
+- Nếu cần fallback, fallback phải bám theo `visual_brief`/`layout_intent`, không bám theo template mẫu có sẵn.
 
-Tai lieu can doc truoc khi phat trien tiep:
+Tài liệu cần đọc trước khi phát triển tiếp:
 
 - `docs/KeHoachPhatTrien.md`
 - `docs/KeHoachNoiDungVideoDong.md`
 - `docs/pipeline-flow.md`
 
-## Bai hoc van con dung
+## Bài học vẫn còn đúng
 
-Mot so nguyen tac trong ke hoach cu van dung:
+Một số nguyên tắc trong kế hoạch cũ vẫn dùng được:
 
-- Khong de video nao lap lai text mau nhu `Infinite Possibilities`, `Automated Screenshots`, `Start Generating Today`.
-- Scene huong dan nen hien steps/commands, khong ep vao bento card chung chung.
-- Text hien thi phai ngan, ro, bam vao nguon that.
-- Khong de AI tra ve component tuy y roi render truc tiep neu chua validate.
+- Không để video nào lặp lại text mẫu như `Infinite Possibilities`, `Automated Screenshots`, `Start Generating Today`.
+- Scene hướng dẫn nên hiện steps/commands, không ép vào bento card chung chung.
+- Text hiển thị phải ngắn, rõ, bám vào nguồn thật.
+- Không để AI trả về component tùy ý rồi render trực tiếp nếu chưa validate.
 
-## Diem khac voi huong moi
+## Điểm khác với hướng mới
 
-Truoc day:
+Trước đây:
 
 ```txt
 URL -> classify G1/G2/G3 -> template variant -> fill content
 ```
 
-Bay gio:
+Bây giờ:
 
 ```txt
-URL/topic -> script agent -> visual planner -> scene HTML agent -> validator/autofix -> fallback neu can
+URL/topic -> script agent -> visual planner -> scene HTML agent -> validator/autofix -> fallback nếu cần
 ```
 
-Cong viec tiep theo khong phai tao them template, ma la tao `visual_brief` du ro de scene HTML agent khong sinh cac label vo nghia nhu `HTML`, `Scene 1`, `Focus`.
+Công việc tiếp theo không phải tạo thêm template, mà là tạo `visual_brief` đủ rõ để scene HTML agent không sinh các label vô nghĩa như `HTML`, `Scene 1`, `Focus`.
