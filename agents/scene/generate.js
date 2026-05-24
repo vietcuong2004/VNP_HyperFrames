@@ -18,6 +18,7 @@ import { DEFAULT_STYLE_GUIDE }    from './style-guide.js';
 import { DEFAULT_STYLE_GUIDE_EN } from './style-guide_en.js';
 import { buildVisualStyleBlock }  from './visualStyleSelector.js';
 import { validateSceneHTML, formatValidationReport, autoFixSceneHTML } from './htmlValidator.js';
+import { buildVisualCopyBlock, createVisualBrief } from './visualPlanner.js';
 
 // ── Palette Lock: instruction inject khi "Scene nhất quán" được bật ──
 const PALETTE_LOCK_VI = `
@@ -88,22 +89,7 @@ function visualWords(value) {
 }
 
 export function deriveSceneDisplayCopy(scene = {}) {
-  const quoted = extractQuotedVisualText(scene.visual);
-  const visual = stripVisualDirectives(scene.visual);
-  const picked = visualWords(quoted.join(' ') || visual);
-  const primary = quoted[0] || picked.slice(0, 3).join(' ') || `Scene ${scene.stt || 1}`;
-  const labels = [
-    ...quoted.slice(1, 4),
-    ...picked.filter((word) => !primary.toLowerCase().includes(word.toLowerCase())).slice(0, 4),
-  ].slice(0, 4);
-  const summary = visual.split(/\s+/).slice(0, 12).join(' ');
-
-  return [
-    `PRIMARY_TEXT: ${primary}`,
-    `SECONDARY_LABELS: ${labels.join(' | ') || primary}`,
-    `VISUAL_SUMMARY: ${summary || primary}`,
-    'RULE: Main #content text must use these candidates only. Do not copy any 5+ consecutive words from Voice/SRT.',
-  ].join('\n');
+  return buildVisualCopyBlock(createVisualBrief(scene));
 }
 
 export async function generateSceneHTML({ scene, keys, onLog, brandAssets = [], projectAssets = [], outputAspectRatio = '9:16', styleGuide = null, consistentScenes = false, litePrompt = false, outputLanguage = 'vi', audioDurationMs = null }) {
@@ -145,6 +131,7 @@ export async function generateSceneHTML({ scene, keys, onLog, brandAssets = [], 
 
   // Build VOICE TIMELINE — clear table: beat + timing + text + keyword
   const voiceTimeline = _buildVoice(subsArr);
+  scene.visual_brief = createVisualBrief(scene);
 
   // Format brand assets: NAME | TYPE | URL [| duration]
   const brandAssetsText = brandAssets.length
@@ -200,7 +187,7 @@ export async function generateSceneHTML({ scene, keys, onLog, brandAssets = [], 
     .replace('{{ASPECT_RATIO_RULES}}', aspectRatioRules)
     .replace('{{VOICE}}', scene.voice.replace(/"/g, "'"))
     .replace('{{VISUAL}}', scene.visual.replace(/"/g, "'"))
-    .replace('{{VISUAL_COPY}}', deriveSceneDisplayCopy(scene).replace(/"/g, "'"))
+    .replace('{{VISUAL_COPY}}', buildVisualCopyBlock(scene.visual_brief).replace(/"/g, "'"))
     .replace(/\{\{DURATION\}\}/g, duration)
     .replace('{{SUBS}}', voiceTimeline)
     .replace('{{CINEMATIC_DIRECTION}}', directionBlock)

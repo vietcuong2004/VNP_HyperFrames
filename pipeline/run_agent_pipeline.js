@@ -14,6 +14,7 @@ import { fixSRTWithAI } from '../agents/srtFixAgent.js';
 import { generateSceneHTML, generateThumbnailHTML } from '../agents/scene/generate.js';
 import { editSceneHTML } from '../agents/scene/edit.js';
 import { autoFixSceneHTML, containsVoiceLeak, formatValidationReport, validateSceneHTML } from '../agents/scene/htmlValidator.js';
+import { createVisualBrief, validateVisualBrief } from '../agents/scene/visualPlanner.js';
 import { decideMusicPlan } from '../agents/musicAgent.js';
 import { containsForbiddenFallbackCopy, generateLocalFallbackHTML, generateLocalFallbackThumbnailHTML } from './localFallbackGenerator.js';
 
@@ -506,6 +507,14 @@ async function main() {
 
   for (const scene of scenes) {
     console.log(`[Pipeline] Generating HTML for Scene ${scene.stt}...`);
+    if (urlOrTopic.startsWith('http://') || urlOrTopic.startsWith('https://')) {
+      scene.source_url = scene.source_url || urlOrTopic;
+    }
+    scene.visual_brief = createVisualBrief(scene);
+    const briefCheck = validateVisualBrief(scene.visual_brief, scene);
+    if (!briefCheck.ok) {
+      onLog?.(`  ⚠ Visual brief weak: ${briefCheck.errors.join(', ')}`);
+    }
     const sceneProjectAssets = selectProjectAssetsForScene(scene, projectAssets);
     scene.visual = `${scene.visual || ''}\n${visualBoost}`.trim();
     let sceneHtml;

@@ -12,7 +12,21 @@ Mỗi scene có 3 lớp thông tin riêng:
 
 Không dùng `voice` làm nguồn text chính. Nếu cần subtitle, subtitle/burn-in nằm riêng ở lower-third.
 
-## Visual Brief đề xuất
+## Trạng thái triển khai
+
+Đã có bản đầu tiên của Visual Planner tại `agents/scene/visualPlanner.js`.
+
+Bản này hiện làm các việc sau:
+
+- Tạo `main_subject`, `primary_text`, `secondary_labels`, `facts`, `layout_intent` từ `scene.visual`, `scene.voice` và `source_url`.
+- Chặn các nhãn rỗng nghĩa như `HTML`, `Scene 1`, `Focus`, `Module`, `Overview`.
+- Ưu tiên repo/domain/metric/command thật khi có URL nguồn.
+- Lọc mô tả art direction như `gradient xanh`, `[ENVIRONMENT]`, `[MOTION]`, `3 lớp depth` để không biến chúng thành copy chính.
+- Cấp visual copy block cho `generateSceneHTML` và local fallback.
+
+Đây là guardrail deterministic, chưa phải AI planner hoàn chỉnh.
+
+## Visual Brief mục tiêu
 
 ```json
 {
@@ -54,6 +68,7 @@ Text hiện giữa video bị xem là fail nếu:
 - Chỉ là từ chung chung: `HTML`, `Scene`, `Focus`, `Module`, `Overview`, `Dynamic`, `Visual`.
 - Không chứa keyword nào từ URL/source.
 - Copy 5+ từ liên tiếp từ `voice`.
+- Lấy mô tả thiết kế làm nội dung, ví dụ `gradient xanh`, `ánh sáng`, `camera`, `motion`, `environment`.
 - Không giúp người xem hiểu scene đang nói về cái gì.
 
 Text tốt nên có:
@@ -67,7 +82,7 @@ Text tốt nên có:
 
 Nếu `primary_text` yếu:
 
-1. Lấy `[TEXT] '...'` trong `scene.visual` nếu có.
+1. Lấy `[TEXT] '...'` trong `scene.visual` nếu có và không phải art direction.
 2. Lấy repo/image/domain name từ source metadata.
 3. Lấy number/metric trong description/README.
 4. Kết hợp thành label ngắn, ví dụ:
@@ -84,9 +99,16 @@ Nếu vẫn không có dữ liệu, dùng fallback có bối cảnh:
 <image-name> QUICKSTART
 ```
 
-Không fallback về `Scene 1`.
+Không fallback về `Scene 1` hoặc `HTML -> VIDEO`.
 
 ## Test cần có
+
+Đã có test cho Visual Planner và fallback động:
+
+- `tests/visual_planner.test.mjs`
+- `tests/dynamic_fallback_content.test.mjs`
+
+Các case cần tiếp tục mở rộng:
 
 - `rtk-ai/rtk`: primary text phải có `RTK`, `TOKEN`, `60-90`, `Rust` hoặc `proxy`.
 - GitHub repo có README: scene install phải dùng `terminal_steps` nếu có command.

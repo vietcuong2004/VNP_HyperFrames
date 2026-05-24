@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { createVisualBrief } from '../agents/scene/visualPlanner.js';
 
 const FORBIDDEN_FALLBACK_COPY = [
   'OPEN SOURCE ENGINE',
@@ -73,15 +74,22 @@ function conciseBody(value, fallback) {
   return text || fallback;
 }
 
+function displayTagline(dynamic) {
+  const cardText = dynamic.cards?.map((card) => card.title).filter(Boolean).join(' / ');
+  return cardText || dynamic.subject || dynamic.title;
+}
+
 export function containsForbiddenFallbackCopy(html) {
   const lower = String(html || '').toLowerCase();
   return FORBIDDEN_FALLBACK_COPY.some((phrase) => lower.includes(phrase.toLowerCase()));
 }
 
 export function deriveFallbackSceneContent(scene = {}) {
+  const brief = createVisualBrief(scene);
+  const briefLabels = Array.isArray(brief.secondary_labels) ? brief.secondary_labels : [];
   const quoted = extractQuotedText(scene.visual);
   const visualDescription = cleanVisualDescription(scene.visual);
-  const visualWords = toWords(quoted || visualDescription);
+  const visualWords = toWords(quoted || brief.primary_text || visualDescription);
   const allWords = visualWords.filter((word) => word.length > 1);
   const stop = new Set([
     'main', 'focus', 'motion', 'flow', 'text', 'style', 'scene', 'center', 'entry', 'idle', 'exit',
@@ -96,15 +104,15 @@ export function deriveFallbackSceneContent(scene = {}) {
     if (picked.length >= 3) break;
   }
 
-  const titleWords = (quoted ? toWords(quoted) : picked).slice(0, 3);
+  const titleWords = toWords(brief.primary_text || quoted || picked.join(' ')).slice(0, 4);
   const title = (titleWords.length ? titleWords.join(' ') : `Scene ${scene.stt || 1}`).toUpperCase();
-  const subtitle = shortText(visualDescription || quoted || title, 92);
-  const subject = titleCase(picked.slice(0, 2).length ? picked.slice(0, 2) : titleWords);
+  const subtitle = shortText(brief.facts?.[0] || visualDescription || quoted || title, 92);
+  const subject = titleCase(toWords(brief.main_subject || picked.slice(0, 2).join(' ') || titleWords.join(' ')).slice(0, 3));
   const label = `SCENE ${String(scene.stt || 1).padStart(2, '0')}`;
   const cards = [
-    { title: picked[0] || 'Focus', body: conciseBody(quoted || visualDescription, 'Visual summary') },
-    { title: picked[1] || 'Motion', body: conciseBody(visualDescription, 'Motion from scene brief') },
-    { title: picked[2] || 'Signal', body: conciseBody(quoted || subject, 'Key signal') },
+    { title: briefLabels[0] || picked[0] || subject || 'Signal', body: conciseBody(brief.facts?.[0] || quoted || visualDescription, 'Visual summary') },
+    { title: briefLabels[1] || picked[1] || 'Motion', body: conciseBody(brief.facts?.[1] || visualDescription, 'Motion from scene brief') },
+    { title: briefLabels[2] || picked[2] || 'Signal', body: conciseBody(brief.facts?.[2] || quoted || subject, 'Key signal') },
   ];
 
   return {
@@ -172,8 +180,8 @@ export function generateLocalFallbackHTML({ scene, projectAssets = [], outputAsp
         <div class="glow-bg"></div>
         <div class="brand-badge">${escapeHtml(dynamic.label)}</div>
         <h1 class="main-title">${escapeHtml(dynamic.title)}</h1>
-        <div class="subtitle-badge">HTML → VIDEO</div>
-        <p class="tagline">${escapeHtml(dynamic.subtitle)}</p>
+        <div class="subtitle-badge">${escapeHtml(dynamic.subject || dynamic.label)}</div>
+        <p class="tagline">${escapeHtml(displayTagline(dynamic))}</p>
         <div class="tech-lines">
           <div class="line"></div>
           <div class="line"></div>

@@ -19,6 +19,7 @@ URL/topic
   -> fetch metadata + screenshot
   -> ScriptAgent sinh JSON scenes
   -> TTS + SRT/transcript
+  -> Visual Planner tạo visual_brief
   -> Scene HTML Agent sinh từng composition
   -> htmlValidator auto-fix + strict checks
   -> local fallback nếu AI fail
@@ -50,7 +51,7 @@ Quy tắc quan trọng: scene cần browser/screenshot/scroll chỉ được nh�
 - `visual`
 - thumbnail metadata
 
-Hiện tại `visual` vẫn là text brief tự do, chưa phải contract chặt. Đây là điểm cần nâng cấp tiếp thành `visual_brief`.
+`visual` vẫn là text brief tự do. Pipeline sẽ chuẩn hóa nó thành `visual_brief` ở bước sau.
 
 ## 3. TTS và subtitle
 
@@ -69,20 +70,34 @@ Pipeline tạo SRT/transcript, gắn vào từng scene:
 - `srt`
 - `transcript`
 
-## 4. Scene HTML generation
+## 4. Visual Planner
+
+`agents/scene/visualPlanner.js` tạo `visual_brief` trước khi sinh HTML.
+
+Vai trò hiện tại:
+
+- Tách nội dung được phép hiện trên màn hình khỏi `voice`.
+- Chọn `layout_intent` ban đầu: `browser_scroll`, `terminal_steps`, `architecture_map`, `metric_cards`, `feature_cards`, `checklist`.
+- Tạo `primary_text`, `secondary_labels`, `facts`, `main_subject`.
+- Loại text yếu như `HTML`, `Scene 1`, `Focus`.
+- Loại mô tả art direction như `gradient xanh`, `[ENVIRONMENT]`, `[MOTION]`.
+
+Trong `pipeline/run_agent_pipeline.js`, mỗi scene được gắn `scene.visual_brief` trước khi chọn asset và gọi scene generator.
+
+## 5. Scene HTML generation
 
 `agents/scene/generate.js` tạo prompt HyperFrames và gọi AI sinh HTML từng scene.
 
-Prompt hiện có đã có guard:
+Prompt hiện có guard:
 
+- Main content phải dựa trên visual copy block từ `visual_brief`.
 - Không copy nguyên câu voice/SRT vào main content.
-- Main content nên dùng visual copy block.
 - Không dùng `drawSVG`.
 - Asset trong scene HTML phải dùng path tương đối hợp lệ.
 
-Cần nâng cấp tiếp: chèn `visual_brief` có schema vào prompt, thay vì đưa `visual` tự do.
+Cần nâng cấp tiếp: chuyển `visual_brief` thành schema nghiêm ngặt hơn và giảm thêm phần prompt tự do.
 
-## 5. Validation và auto-fix
+## 6. Validation và auto-fix
 
 `agents/scene/htmlValidator.js` xử lý:
 
@@ -102,20 +117,21 @@ Cần nâng cấp tiếp: chèn `visual_brief` có schema vào prompt, thay vì 
 
 Nếu AI HTML fail, pipeline thử gọi `editSceneHTML`. Nếu vẫn fail, dùng `generateLocalFallbackHTML`.
 
-## 6. Local fallback
+## 7. Local fallback
 
-`pipeline/localFallbackGenerator.js` chỉ là fallback an toàn, không phải hướng sản phẩm cuối.
+`pipeline/localFallbackGenerator.js` là fallback an toàn, không phải hướng sản phẩm cuối.
 
 Fallback hiện tại:
 
-- Lấy text ngắn từ `[TEXT]` trong visual nếu có.
-- Không dùng các title cũ như `Infinite Possibilities`, `Automated Screenshots`.
+- Dùng `visual_brief` nếu có.
+- Không dùng các title cũ như `Infinite Possibilities`, `Automated Screenshots`, `HTML -> VIDEO`.
 - Không lấy nguyên voice làm card/title.
+- Không biến mô tả thiết kế thành nội dung chính.
 - Scene screenshot chỉ dùng `github_repo.png`.
 
-Cần nâng cấp tiếp: fallback render theo `layout_intent` từ `visual_brief`.
+Cần nâng cấp tiếp: fallback render theo `layout_intent` thay vì một bộ layout generic.
 
-## 7. Lắp composition tổng
+## 8. Lắp composition tổng
 
 Pipeline ghi:
 
@@ -127,7 +143,7 @@ Pipeline ghi:
 
 Lưu ý: các file này là output của mỗi lần gen, không nên xem là source chính khi phát triển.
 
-## 8. Validate và render
+## 9. Validate và render
 
 Pipeline chạy HyperFrames local:
 
@@ -142,10 +158,10 @@ Trong code packaged, pipeline gọi file CLI trong `node_modules/hyperframes/dis
 
 ## Hướng tiếp theo
 
-Việc cần làm tiếp không phải thêm template, mà là thêm Visual Planner:
+Việc cần làm tiếp không phải thêm template, mà là làm `visual_brief` mạnh hơn:
 
 ```txt
-script scene -> visual planner -> visual_brief validator -> scene HTML agent
+script scene -> deterministic visual planner -> AI visual planner -> visual_brief validator -> scene HTML agent
 ```
 
-Mục tiêu là để phần nội dung giữa video có nghĩa với người xem lần đầu, không còn label rỗng nghĩa như `HTML`, `Scene 1`, `Focus`.
+Mục tiêu là để phần nội dung giữa video có nghĩa với người xem lần đầu, không còn label rỗng nghĩa như `HTML`, `Scene 1`, `Focus`, và không để mô tả giao diện như `gradient xanh` lọt thành nội dung.

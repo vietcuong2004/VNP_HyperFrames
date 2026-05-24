@@ -51,6 +51,25 @@ test("local fallback does not render old hardcoded HyperFrames titles", () => {
   assert.match(html, /POSTGRESQL IMAGE|POSTGRESQL/i);
 });
 
+test("intro fallback does not render product boilerplate or visual direction as copy", () => {
+  const html = generateLocalFallbackHTML({
+    scene: {
+      stt: 1,
+      source_url: "https://github.com/rtk-ai/rtk",
+      voice: "RTK la CLI proxy viet bang Rust giup giam token bill khi dung AI assistant.",
+      visual:
+        "[ENVIRONMENT] Gradient xanh đen tối, 3 lớp depth. [MAIN FOCUS] Terminal proxy diagram. [TEXT] 'RTK PROXY'. [MOTION] token packets move through cache.",
+    },
+    projectAssets: [],
+    audioDurationMs: 8000,
+  });
+
+  const centralHtml = html.split("<!-- Subtitles Bar -->")[0];
+  assert.doesNotMatch(centralHtml, /HTML\s*(?:→|-|&rarr;|â†’)\s*VIDEO/i);
+  assert.doesNotMatch(centralHtml, /Gradient xanh|3 lớp depth|MAIN FOCUS|ENVIRONMENT|MOTION/i);
+  assert.match(centralHtml, /RTK PROXY|RTK/i);
+});
+
 test("containsForbiddenFallbackCopy catches stale fallback phrases", () => {
   assert.equal(containsForbiddenFallbackCopy("<h1>Infinite Possibilities</h1>"), true);
   assert.equal(containsForbiddenFallbackCopy("<h1>POSTGRESQL IMAGE</h1>"), false);
