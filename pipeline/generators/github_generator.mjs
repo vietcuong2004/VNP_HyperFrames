@@ -339,8 +339,8 @@ export async function generateScenes(rawData, format) {
         "character shiba explaining something.png",         // Scene 3: install
         "character shiba wearing stylish glasses.png",      // Scene 4: feature
         "character shiba using a magnifying glass to look closely.png", // Scene 5: checklist
-        "character shiba expressing unbelievable emotions.png", // Scene 6: stats
-        "character shiba meditating in zen state.png",     // Scene 7: clone
+        "character shiba showing surprise.png",             // Scene 6: stats
+        "character shiba wearing a cassock like it has become enlightened.png", // Scene 7: clone
         "character shiba smiling brightly.png"             // Scene 8: outro
       ];
       return scenes.map((scene, idx) => {

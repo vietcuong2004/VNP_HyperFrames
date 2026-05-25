@@ -343,6 +343,29 @@ function classifyDockerImage(info, target) {
 }
 
 // Xuất các helpers dùng chung cho các Generators
+export function selectTemplateVariant(platform, videoFormat) {
+  const variants = {
+    github: {
+      knowledge_map_resource_digest: "template2",
+      dataset_explainer: "template2",
+      developer_integration_brief: "template3",
+      tool_review_quick_demo: "template3",
+    },
+    docker: {
+      self_host_setup_guide: "template2",
+      dev_workflow_image_brief: "template3",
+    },
+    web: {
+      web_docs_explainer: "template2",
+      web_article_digest: "template2",
+      web_tool_overview: "template3",
+      web_product_brief: "template3",
+    },
+  };
+
+  return variants[platform]?.[videoFormat] || "template1";
+}
+
 export function short(value, max = 120) {
   const clean = stripMarkdown(value || "");
   if (clean.length <= max) return clean;
@@ -401,6 +424,7 @@ export async function buildGithubData(target) {
 
   return {
     template: "G1_github",
+    subtemplate: selectTemplateVariant("github", classification.videoFormat),
     source_url: target.url,
     platform: "github",
     content_type: classification.contentType,
@@ -443,6 +467,7 @@ export async function buildDockerData(target) {
 
   return {
     template: "G2_docker",
+    subtemplate: selectTemplateVariant("docker", classification.videoFormat),
     source_url: target.url,
     platform: "docker",
     content_type: classification.contentType,
@@ -534,6 +559,7 @@ export async function buildWebData(target) {
 
   return {
     template: "G3_web",
+    subtemplate: selectTemplateVariant("web", classification.videoFormat),
     source_url: target.url,
     platform: "web",
     content_type: classification.contentType,

@@ -6,6 +6,7 @@ import path from "path";
 import fs from "fs";
 import fsp from "fs/promises";
 import { fileURLToPath } from "url";
+import { randomUUID } from "crypto";
 import { inspectEnvironment } from "./environment.mjs";
 import { createNodeScriptCommand } from "./runtime_binaries.mjs";
 import { createWorkspacePaths, ensureWorkspace } from "./workspace.mjs";
@@ -27,6 +28,10 @@ function findLatestMp4(rendersDir) {
     .sort((a, b) => b.mtime - a.mtime);
 
   return files.length > 0 ? path.join(rendersDir, files[0].name) : null;
+}
+
+export function createJobId(index, now = Date.now()) {
+  return `${now.toString(36)}-${process.pid}-${index}-${randomUUID().slice(0, 8)}`;
 }
 
 function openFolder(folderPath) {
@@ -138,6 +143,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
         ...nodeCommand.env,
         APP_ROOT: appRoot,
         WORKSPACE_DIR: jobWorkspaceRoot,
+        JOB_ID: id,
       },
     });
 
@@ -215,7 +221,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
     }
 
     const jobs = urls.map((url, index) => ({
-      id: `${Date.now().toString(36)}-${index}`,
+      id: createJobId(index),
       url,
     }));
 

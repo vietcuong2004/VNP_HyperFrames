@@ -38,6 +38,44 @@ test("normalizeWebScenes preserves dynamic step cards for Web guide scenes", () 
   assert.equal(scenes[1].repo_url, "example.dev/docs");
 });
 
+test("G3_web notable scene uses dynamic evidence cards instead of benchmark boilerplate", () => {
+  const scene = {
+    headline_line1: "KEY TAKEAWAY",
+    headline_line2: "FROM SOURCE",
+    steps: [
+      { title: "Proof", body: "The page links to a working quickstart." },
+      { title: "Limit", body: "Pricing and quota need separate verification." },
+      { title: "Action", body: "Open docs before copying any config." },
+    ],
+  };
+
+  const result = getHyperframesReviewScene(3, scene, "scene4", 0);
+
+  assert.match(result.html, /web-evidence-panel/);
+  assert.match(result.html, /The page links to a working quickstart/);
+  assert.match(result.html, /Pricing and quota need separate verification/);
+  assert.doesNotMatch(result.html, /frontier|4x|all coding bench/i);
+});
+
+test("G3_web outro includes dynamic card bodies for every checklist item", () => {
+  const scene = {
+    headline_line1: "SAVE SOURCE",
+    headline_line2: "VERIFY FIRST",
+    steps: [
+      { title: "Source", body: "Keep the original link in notes." },
+      { title: "Summary", body: "Use the summary only as a starting point." },
+      { title: "Check", body: "Verify dates, pricing, and API limits." },
+      { title: "Apply", body: "Test on a small example before rollout." },
+    ],
+  };
+
+  const result = getHyperframesReviewScene(5, scene, "scene6", 0);
+
+  assert.match(result.html, /Keep the original link in notes/);
+  assert.match(result.html, /Verify dates, pricing, and API limits/);
+  assert.match(result.html, /Test on a small example before rollout/);
+});
+
 test("G3_web scene renderer uses dynamic steps instead of fixed bento copy", () => {
   const scene = {
     content_mode: "steps",

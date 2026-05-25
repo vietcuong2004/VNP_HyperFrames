@@ -5,12 +5,13 @@ import { fileURLToPath } from 'url';
 import { runCommand } from '../desktop_app/command_runner.mjs';
 import { createNodePackageBinCommand } from '../desktop_app/runtime_binaries.mjs';
 import { createWorkspacePaths, prepareWorkspaceRuntime } from '../desktop_app/workspace.mjs';
+import { resolveTemplatePaths } from './templateResolver.mjs';
 
 // Import Agents & Builders
 import { generateTTS } from '../agents/ttsAgent.js';
 import { transcribeToSRT } from '../agents/whisperAgent.js';
 import { fixSRTWithAI } from '../agents/srtFixAgent.js';
-import { parseTargetUrl, buildGithubData, buildDockerData, buildWebData } from './main_generateContent.js';
+import { parseTargetUrl, buildGithubData, buildDockerData, buildWebData, selectTemplateVariant } from './main_generateContent.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -54,6 +55,24 @@ function findLatestMp4(rendersDir) {
 
 function toWebPath(...parts) {
   return parts.join('/').replace(/\\/g, '/');
+}
+
+export function buildFinalVideoName({ safeTopicName, date = new Date(), runId } = {}) {
+  const pad = (n) => String(n).padStart(2, '0');
+  const dateStr = [
+    pad(date.getDate()),
+    pad(date.getMonth() + 1),
+    date.getFullYear(),
+    pad(date.getHours()),
+    pad(date.getMinutes()),
+    pad(date.getSeconds()),
+  ].join('-');
+  const safeRunId = String(runId || process.pid || 'run')
+    .replace(/[^a-zA-Z0-9_-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 48) || 'run';
+  return `agent-video-${safeTopicName || 'video'}_${dateStr}-${safeRunId}.mp4`;
 }
 
 async function main() {
@@ -112,6 +131,7 @@ async function main() {
 
   let safeTopicName = urlOrTopic.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase().replace(/-+/g, '-').substring(0, 30);
   const timestamp = Date.now().toString(36);
+  const runId = process.env.JOB_ID || `${timestamp}-${process.pid}`;
   const jsonPath = path.join(paths.dataDir, `agent-script-${safeTopicName}-${timestamp}.json`);
 
   // Step 1: Sinh kich ban JSON qua cac content generator hoac cache
@@ -155,6 +175,7 @@ async function main() {
         const scenes = await generateScenes({ target: mockTarget, repoData: mockRepoData, readme }, 'repo_overview_with_use_cases');
         scriptData = {
           template: 'G1_github',
+          subtemplate: selectTemplateVariant('github', 'repo_overview_with_use_cases'),
           source_url: mockTarget.url,
           platform: 'github',
           content_type: 'repo_overview',
@@ -179,6 +200,7 @@ async function main() {
         const scenes = await generateScenes({ target: mockTarget, info: mockInfo }, 'container_overview');
         scriptData = {
           template: 'G2_docker',
+          subtemplate: selectTemplateVariant('docker', 'container_overview'),
           source_url: mockTarget.url,
           platform: 'docker',
           content_type: 'docker_image',
@@ -202,6 +224,7 @@ async function main() {
         const scenes = await generateScenes({ target: mockTarget, webInfo: mockWebInfo }, 'web_context_digest');
         scriptData = {
           template: 'G3_web',
+          subtemplate: selectTemplateVariant('web', 'web_context_digest'),
           source_url: mockTarget.url,
           platform: 'web',
           content_type: 'web_unknown',
@@ -215,24 +238,21 @@ async function main() {
     console.log(`[Pipeline] Da luu file kich ban JSON tai: ${jsonPath}`);
   }
 
-  // Chụp ảnh màn hình nếu là URL và là github
+  // Chụp ảnh màn hình cho tất cả các loại URL (GitHub, Docker, Web)
   if (urlOrTopic.startsWith('http://') || urlOrTopic.startsWith('https://')) {
-    const target = parseTargetUrl(urlOrTopic);
-    if (target.platform === 'github') {
-      try {
-        console.log('\n[Pipeline] Tien hanh chup anh man hinh trang nguon...');
-        const screenshotPath = path.join(paths.imageDir, 'github_repo.png');
-        run(nodeBin, [path.join(__dirname, 'capture_github.js'), urlOrTopic], {
-          cwd: appRoot,
-          env: {
-            APP_ROOT: appRoot,
-            SCREENSHOT_PATH: screenshotPath,
-          },
-        });
-        console.log(`[Pipeline] Chup anh man hinh thanh cong.`);
-      } catch (err) {
-        console.warn(`[Pipeline] Chup anh man hinh loi: ${err.message}. Bo qua.`);
-      }
+    try {
+      console.log('\n[Pipeline] Tien hanh chup anh man hinh trang nguon...');
+      const screenshotPath = path.join(paths.imageDir, 'github_repo.png');
+      run(nodeBin, [path.join(__dirname, 'capture_github.js'), urlOrTopic], {
+        cwd: appRoot,
+        env: {
+          APP_ROOT: appRoot,
+          SCREENSHOT_PATH: screenshotPath,
+        },
+      });
+      console.log(`[Pipeline] Chup anh man hinh thanh cong.`);
+    } catch (err) {
+      console.warn(`[Pipeline] Chup anh man hinh loi: ${err.message}. Bo qua.`);
     }
   }
 
@@ -334,20 +354,24 @@ async function main() {
 
   console.log('\nStep 3: Bien dich index.html composition chinh tu template...');
   const templateName = scriptData.template || 'G3_web';
-  const templatePath = 'file://' + path.join(appRoot, 'templates', templateName, 'template.mjs').replace(/\\/g, '/');
-  const stylePath = path.join(appRoot, 'templates', templateName, 'style.css');
+  const templatePaths = resolveTemplatePaths({
+    appRoot,
+    templateName,
+    subtemplateName: scriptData.subtemplate,
+    templateVariant: scriptData.template_variant,
+  });
 
   let templateModule;
   try {
-    templateModule = await import(templatePath);
+    templateModule = await import(templatePaths.templateImportPath);
   } catch (e) {
-    console.error(`Error loading template module for ${templateName}:`, e);
+    console.error(`Error loading template module for ${templateName}/${templatePaths.variantName}:`, e);
     process.exit(1);
   }
 
   let styleContent = '';
-  if (fs.existsSync(stylePath)) {
-    styleContent = fs.readFileSync(stylePath, 'utf-8');
+  if (fs.existsSync(templatePaths.stylePath)) {
+    styleContent = fs.readFileSync(templatePaths.stylePath, 'utf-8');
     styleContent = styleContent.replace(/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com\/[^'"]+['"]\);\s*/g, '');
   }
 
@@ -380,10 +404,7 @@ async function main() {
   console.log('\nStep 6: Doi ten video theo dung dinh dang...');
   const latestMp4 = findLatestMp4(paths.rendersDir);
   if (latestMp4) {
-    const now = new Date();
-    const pad = (n) => String(n).padStart(2, '0');
-    const dateStr = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}-${pad(now.getHours())}-${pad(now.getMinutes())}`;
-    const newMp4Name = `agent-video-${safeTopicName}_${dateStr}.mp4`;
+    const newMp4Name = buildFinalVideoName({ safeTopicName, runId });
     const oldPath = path.join(paths.rendersDir, latestMp4);
     const newPath = path.join(paths.rendersDir, newMp4Name);
     if (latestMp4 !== newMp4Name) {
