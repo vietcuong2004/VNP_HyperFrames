@@ -50,17 +50,25 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
   app.use("/renders", express.static(paths.rendersDir));
 
   const jobQueue = [];
-  let isProcessing = false;
+  let activeJobsCount = 0;
+  const MAX_CONCURRENT_JOBS = 3;
 
   async function processQueue() {
-    if (isProcessing || jobQueue.length === 0) return;
-    isProcessing = true;
+    if (activeJobsCount >= MAX_CONCURRENT_JOBS || jobQueue.length === 0) return;
+    activeJobsCount++;
 
     const job = jobQueue.shift();
-    const { url, id } = job;
-    await ensureWorkspace(paths);
-    const logPath = path.join(paths.logsDir, `${id}.log`);
+    
+    // Gọi tiếp để khởi động các job khác song song nếu còn slot trống
+    processQueue();
 
+    const { url, id } = job;
+    
+    // Tạo thư mục workspace cô lập cho tiến trình chạy song song này
+    const jobWorkspaceRoot = path.join(workspaceRoot, `tmp_workspace_${id}`);
+    await fsp.mkdir(jobWorkspaceRoot, { recursive: true });
+
+    const logPath = path.join(paths.logsDir, `${id}.log`);
     io.emit("job_start", { id, url });
 
     try {
@@ -76,11 +84,39 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
           throw new Error("Không tìm thấy browser để Puppeteer chụp màn hình.");
         }
       }
+
+      // Link static assets into the temporary workspace assets directory to save space and time
+      await fsp.mkdir(path.join(jobWorkspaceRoot, "assets"), { recursive: true });
+      const symlinkType = process.platform === "win32" ? "junction" : "dir";
+      const assetSubdirs = ["character", "background-music", "sound-effect", "logo"];
+      
+      for (const dir of assetSubdirs) {
+        const srcDir = path.join(workspaceRoot, "assets", dir);
+        if (fs.existsSync(srcDir)) {
+          await fsp.symlink(srcDir, path.join(jobWorkspaceRoot, "assets", dir), symlinkType);
+        }
+      }
+      
+      // Link compositions and vendor directories
+      await fsp.symlink(path.join(workspaceRoot, "compositions"), path.join(jobWorkspaceRoot, "compositions"), symlinkType);
+      await fsp.symlink(path.join(workspaceRoot, "vendor"), path.join(jobWorkspaceRoot, "vendor"), symlinkType);
+
+      // Copy config files
+      for (const file of ["hyperframes.json", "meta.json"]) {
+        const srcFile = path.join(workspaceRoot, file);
+        if (fs.existsSync(srcFile)) {
+          await fsp.copyFile(srcFile, path.join(jobWorkspaceRoot, file));
+        }
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      await fsp.appendFile(logPath, `[desktop] Browser setup failed: ${message}\n`, "utf-8").catch(() => {});
-      io.emit("job_error", { id, error: `Browser setup failed: ${message}`, logPath });
-      isProcessing = false;
+      await fsp.appendFile(logPath, `[desktop] Temporary workspace setup failed: ${message}\n`, "utf-8").catch(() => {});
+      io.emit("job_error", { id, error: `Workspace setup failed: ${message}`, logPath });
+      
+      // Clean up workspace if setup fails
+      await fsp.rm(jobWorkspaceRoot, { recursive: true, force: true }).catch(() => {});
+      
+      activeJobsCount--;
       processQueue();
       return;
     }
@@ -101,7 +137,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
         ...runtimeEnv,
         ...nodeCommand.env,
         APP_ROOT: appRoot,
-        WORKSPACE_DIR: workspaceRoot,
+        WORKSPACE_DIR: jobWorkspaceRoot,
       },
     });
 
@@ -120,7 +156,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
         text.match(/→\s+([\w\-.]+\.mp4)/) ||
         text.match(/â†’\s+([\w\-.]+\.mp4)/);
       if (renameMatch) {
-        videoPath = path.join(paths.rendersDir, renameMatch[1].trim());
+        videoPath = path.join(jobWorkspaceRoot, "renders", renameMatch[1].trim());
       }
 
       const hfMatch = text.match(/◇\s+(.*\.mp4)/) || text.match(/â—‡\s+(.*\.mp4)/);
@@ -135,22 +171,39 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
       io.emit("job_output", { id, text });
     });
 
-    child.on("close", (code) => {
+    child.on("close", async (code) => {
       if (code === 0) {
         if (!videoPath) {
-          videoPath = findLatestMp4(paths.rendersDir);
+          videoPath = findLatestMp4(path.join(jobWorkspaceRoot, "renders"));
         }
 
-        const relativeVideoPath = videoPath ? `/renders/${path.basename(videoPath)}` : null;
-        if (videoPath) {
-          console.log(`[job_done] videoPath: ${videoPath} -> serving: ${relativeVideoPath}`);
+        let finalVideoPath = null;
+        if (videoPath && fs.existsSync(videoPath)) {
+          finalVideoPath = path.join(paths.rendersDir, path.basename(videoPath));
+          try {
+            await fsp.rename(videoPath, finalVideoPath);
+          } catch (err) {
+            // Fallback to copy + unlink if rename fails (e.g. cross-volume move)
+            await fsp.copyFile(videoPath, finalVideoPath);
+            await fsp.unlink(videoPath).catch(() => {});
+          }
+        }
+
+        const relativeVideoPath = finalVideoPath ? `/renders/${path.basename(finalVideoPath)}` : null;
+        if (finalVideoPath) {
+          console.log(`[job_done] videoPath: ${finalVideoPath} -> serving: ${relativeVideoPath}`);
         }
         io.emit("job_done", { id, videoPath: relativeVideoPath, logPath });
       } else {
         io.emit("job_error", { id, error: `Process exited with code ${code}`, logPath });
       }
 
-      isProcessing = false;
+      // Clean up the temporary workspace directory
+      await fsp.rm(jobWorkspaceRoot, { recursive: true, force: true }).catch((err) => {
+        console.warn(`[desktop] Failed to clean up temp workspace ${jobWorkspaceRoot}:`, err.message);
+      });
+
+      activeJobsCount--;
       processQueue();
     });
   }

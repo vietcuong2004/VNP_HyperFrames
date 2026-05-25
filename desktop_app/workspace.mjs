@@ -27,17 +27,43 @@ export function createWorkspacePaths({ appRoot = process.cwd(), workspaceRoot = 
 }
 
 export async function ensureWorkspace(paths) {
-  await Promise.all([
-    fsp.mkdir(paths.dataDir, { recursive: true }),
-    fsp.mkdir(paths.audioDir, { recursive: true }),
-    fsp.mkdir(paths.imageDir, { recursive: true }),
-    fsp.mkdir(paths.vendorDir, { recursive: true }),
-    fsp.mkdir(paths.rendersDir, { recursive: true }),
-    fsp.mkdir(paths.logsDir, { recursive: true }),
-  ]);
+  const dirs = [
+    paths.dataDir,
+    paths.audioDir,
+    paths.imageDir,
+    paths.vendorDir,
+    paths.rendersDir,
+    paths.logsDir,
+  ];
+
+  await Promise.all(
+    dirs.map(async (dir) => {
+      if (!dir) return;
+      try {
+        const stat = await fsp.stat(dir).catch(() => fsp.lstat(dir));
+        if (stat.isDirectory() || stat.isSymbolicLink()) {
+          return;
+        }
+      } catch (err) {}
+      await fsp.mkdir(dir, { recursive: true });
+    })
+  );
 }
 
 async function copyFileIfChanged(source, target) {
+  let realSource, realTarget;
+  try {
+    realSource = fs.realpathSync(source);
+  } catch (e) {
+    realSource = path.resolve(source);
+  }
+  try {
+    realTarget = fs.realpathSync(target);
+  } catch (e) {
+    realTarget = path.resolve(target);
+  }
+  if (realSource === realTarget) return;
+
   const [sourceStat, targetStat] = await Promise.all([
     fsp.stat(source),
     fsp.stat(target).catch(() => null),
@@ -53,7 +79,20 @@ async function copyFileIfChanged(source, target) {
 
 async function copyDirectoryIfExists(sourceDir, targetDir) {
   if (!fs.existsSync(sourceDir)) return;
-  if (path.resolve(sourceDir) === path.resolve(targetDir)) return;
+  
+  let realSource, realTarget;
+  try {
+    realSource = fs.realpathSync(sourceDir);
+  } catch (e) {
+    realSource = path.resolve(sourceDir);
+  }
+  try {
+    realTarget = fs.realpathSync(targetDir);
+  } catch (e) {
+    realTarget = path.resolve(targetDir);
+  }
+  if (realSource === realTarget) return;
+
   await fsp.cp(sourceDir, targetDir, {
     recursive: true,
     force: true,

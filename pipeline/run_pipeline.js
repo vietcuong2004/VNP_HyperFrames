@@ -252,10 +252,11 @@ async function main() {
     const ttsResult = await generateTTS(scene.voice, audioPath, onLog, keys);
     const duration = ttsResult.duration; // thoi luong (s) cua file am thanh
 
-    scene.audio_start = accumulatedTimeMs / 1000;
-    scene.audio_duration = duration;
+    const roundedDuration = Math.round(duration * 1000) / 1000;
+    scene.audio_start = Math.round(accumulatedTimeMs) / 1000;
+    scene.audio_duration = Math.max(0.1, roundedDuration - 0.005);
     scene.audio_path = `assets/audio/scene_${scene.stt}.mp3`;
-    scene.duration = duration;
+    scene.duration = roundedDuration;
 
     // 2b. Karaoke Timestamps
     let rawSrt = '';
