@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { callAI } from "../../services/aiRouter.js";
 import { short, baseScene } from "../main_generateContent.js";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của Web (Tavily/General URLs)
@@ -204,27 +204,11 @@ export function normalizeWebScenes(scenes, context = {}) {
 
 export async function generateScenes(rawData, format) {
   const { target, webInfo } = rawData;
-  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
-
   const title = webInfo.title || target.host;
   const sourceLabel = target.host.replace(/^www\./, "");
+  const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.web_context_digest;
 
-  if (!apiKey) {
-    throw new Error("Không tìm thấy OPENAI_API_KEY hoặc OPENROUTER_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
-  }
-
-  try {
-    console.log(`> Đang gọi OpenAI/OpenRouter để sinh kịch bản Web cho format: ${format}...`);
-    const isOpenRouter = apiKey.startsWith("sk-or-") || process.env.OPENROUTER_API_KEY;
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: isOpenRouter ? "https://openrouter.ai/api/v1" : undefined
-    });
-
-    const modelName = isOpenRouter ? "openai/gpt-4o-mini" : "gpt-4o-mini";
-    const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.web_context_digest;
-
-    const prompt = `
+  const prompt = `
       Bạn là chuyên gia phân tích và tóm tắt thông tin công nghệ. Hãy viết kịch bản voice-over tiếng Việt và tiêu đề màn hình cho video review trang web sau:
       - Tiêu đề Trang: ${title}
       - Domain: ${sourceLabel}
@@ -256,16 +240,13 @@ export async function generateScenes(rawData, format) {
       7. Nếu không đủ dữ liệu chắc chắn, hãy viết theo hướng kiểm tra/tư vấn; không bịa API, giá, port, lệnh hoặc cấu hình.
     `;
 
-    const response = await client.chat.completions.create({
-      model: modelName,
-      messages: [
-        { role: "system", content: "You are a tech analyst script writer who outputs JSON strict format." },
-        { role: "user", content: prompt }
-      ],
-      response_format: { type: "json_object" }
+  try {
+    console.log(`> Đang gọi custom API để sinh kịch bản Web cho format: ${format}...`);
+    const { result: parsed } = await callAI({
+      prompt,
+      isJson: true,
+      onLog: (msg) => console.log(msg)
     });
-
-    const parsed = JSON.parse(response.choices[0].message.content);
     
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;
@@ -290,12 +271,19 @@ export async function generateScenes(rawData, format) {
     });
 
     if (Array.isArray(scenes) && scenes.length === 6) {
+      const shibaAssets = [
+        "character shiba using a magnifying glass to look closely.png", // Scene 1: intro
+        "character shiba explaining something.png",         // Scene 2: summary
+        "character shiba thinking.png",                   // Scene 3: questions
+        "character shiba wearing stylish glasses.png",      // Scene 4: notable points
+        "character shiba cheerfully talking.png",          // Scene 5: action
+        "character shiba smiling brightly.png"             // Scene 6: outro
+      ];
       return scenes.map((scene, idx) => {
         return baseScene({
           ...scene,
           scene: idx + 1,
-          // Giữ lại các assets/sfx mặc định hoặc lấy từ AI nếu hợp lệ
-          assets: scene.assets || ["character shiba explaining something.png"],
+          assets: [shibaAssets[idx] || "character shiba explaining something.png"],
           sfx: "Ding 2.mp3"
         });
       });

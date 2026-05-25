@@ -112,7 +112,7 @@ async function fetchOptionalText(url, fallback, headers = {}) {
   }
 }
 
-function parseTargetUrl(value) {
+export function parseTargetUrl(value) {
   let url;
   try {
     url = new URL(value);
@@ -372,7 +372,7 @@ export function githubStatsScene(repoData, owner, repo, headlineLine2) {
 }
 
 // Builders đóng vai trò nạp dữ liệu thô và gọi Group Generator tương ứng
-async function buildGithubData(target) {
+export async function buildGithubData(target) {
   const { owner, repo } = target;
   console.log(`Đang phân tích GitHub repo: ${owner}/${repo}`);
 
@@ -420,7 +420,7 @@ async function buildGithubData(target) {
   };
 }
 
-async function buildDockerData(target) {
+export async function buildDockerData(target) {
   console.log(`Đang phân tích Docker image: ${target.namespace}/${target.image}`);
 
   const pathPart =
@@ -505,7 +505,7 @@ function pickWebTitle(target, html, results) {
   return target.host;
 }
 
-async function buildWebData(target) {
+export async function buildWebData(target) {
   console.log(`Đang phân tích web URL: ${target.url}`);
 
   const html = await fetchOptionalText(target.url, "");

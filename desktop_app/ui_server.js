@@ -86,7 +86,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
     }
 
     const nodeCommand = createNodeScriptCommand({
-      scriptPath: path.join(__dirname, "../pipeline/run_agent_pipeline.js"),
+      scriptPath: path.join(__dirname, "../pipeline/run_pipeline.js"),
       args: [url],
       isPackaged,
       nodePath,

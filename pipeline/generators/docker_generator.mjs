@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { callAI } from "../../services/aiRouter.js";
 import { short, baseScene } from "../main_generateContent.js";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của Docker Hub
@@ -197,26 +197,10 @@ export function normalizeDockerScenes(scenes, context = {}) {
 
 export async function generateScenes(rawData, format) {
   const { target, info } = rawData;
-  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
-
   const imageRef = `${target.namespace}/${target.image}`;
+  const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.container_overview;
 
-  if (!apiKey) {
-    throw new Error("Không tìm thấy OPENAI_API_KEY hoặc OPENROUTER_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
-  }
-
-  try {
-    console.log(`> Đang gọi OpenAI/OpenRouter để sinh kịch bản Docker cho format: ${format}...`);
-    const isOpenRouter = apiKey.startsWith("sk-or-") || process.env.OPENROUTER_API_KEY;
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: isOpenRouter ? "https://openrouter.ai/api/v1" : undefined
-    });
-
-    const modelName = isOpenRouter ? "openai/gpt-4o-mini" : "gpt-4o-mini";
-    const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.container_overview;
-
-    const prompt = `
+  const prompt = `
       Bạn là chuyên gia DevOps và làm video hướng dẫn. Hãy viết kịch bản voice-over tiếng Việt và tiêu đề màn hình cho video giới thiệu Docker Image sau:
       - Tên Image: ${imageRef}
       - Mô tả: ${info.description || "Không có mô tả"}
@@ -243,22 +227,19 @@ export async function generateScenes(rawData, format) {
          - "steps": Tối đa 3-4 object, mỗi object có "title" <= 16 ký tự và "body" <= 75 ký tự.
       4. Đối với Scene 1, điền chính xác "repo_url" là: "hub.docker.com/r/${imageRef}".toLowerCase()
       5. Đối với các scene có lệnh CLI, điền lệnh mẫu Docker thật hợp lý dựa vào tên image.
-      6. Không copy placeholder trong schema. Mọi headline, bento title, bento desc và step phải viết theo image thật.
+      6. Không copy placeholder trong schema. Mọi headline, bento title, bento desc và step phải viết lại theo image thật.
          Ví dụ với Ubuntu không viết "DOCKER QUICK START", "CHỌN TAG", "CẤU HÌNH"; hãy viết kiểu "UBUNTU", "PIN TAG", "CONFIG UBUNTU".
       7. Với scene chọn tag, cấu hình, docker run hoặc production checklist, ưu tiên "content_mode": "steps" và sinh các bước cụ thể.
       8. Nếu không đủ dữ liệu chắc chắn, hãy viết theo hướng kiểm tra docs; không bịa port, env, password, volume path hoặc command.
     `;
 
-    const response = await client.chat.completions.create({
-      model: modelName,
-      messages: [
-        { role: "system", content: "You are a DevOps video script writer who outputs strict JSON structures." },
-        { role: "user", content: prompt }
-      ],
-      response_format: { type: "json_object" }
+  try {
+    console.log(`> Đang gọi custom API để sinh kịch bản Docker cho format: ${format}...`);
+    const { result: parsed } = await callAI({
+      prompt,
+      isJson: true,
+      onLog: (msg) => console.log(msg)
     });
-
-    const parsed = JSON.parse(response.choices[0].message.content);
     
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;
@@ -282,11 +263,18 @@ export async function generateScenes(rawData, format) {
     });
 
     if (Array.isArray(scenes) && scenes.length === 5) {
+      const shibaAssets = [
+        "character shiba cheerfully talking.png",          // Scene 1: intro
+        "character shiba thinking.png",                   // Scene 2: select tag
+        "character shiba using a magnifying glass to look closely.png", // Scene 3: config
+        "character shiba explaining something.png",         // Scene 4: run terminal
+        "character shiba smiling brightly.png"             // Scene 5: outro/checklist
+      ];
       return scenes.map((scene, idx) => {
         return baseScene({
           ...scene,
           scene: idx + 1,
-          assets: ["character shiba explaining something.png"],
+          assets: [shibaAssets[idx] || "character shiba explaining something.png"],
           sfx: "Ding 2.mp3"
         });
       });

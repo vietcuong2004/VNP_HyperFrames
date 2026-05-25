@@ -1,4 +1,4 @@
-body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Segoe UI", Arial, sans-serif; }
+body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Space Grotesk", Arial, sans-serif; }
 .bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a1a0d 0%, #050505 80%); }
 
 .source-web .bg {
@@ -86,7 +86,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Space Grotesk", Arial, sans-serif;
 }
 
 /* Main Glow Icon & Vector Container */
@@ -316,7 +316,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   font-size: 76px;
   line-height: 1.14;
   font-weight: 800;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Space Grotesk", Arial, sans-serif;
   color: #ffffff;
   text-shadow: 0 5px 20px rgba(0,0,0,0.5);
   letter-spacing: 0;
@@ -325,7 +325,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   font-size: 72px; 
   line-height: 1.14;
   font-weight: 900; 
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Space Grotesk", Arial, sans-serif;
   background: linear-gradient(90deg, #fdf01c, #00d2ff); 
   -webkit-background-clip: text;
   background-clip: text; 

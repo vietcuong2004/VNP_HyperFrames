@@ -32,9 +32,9 @@ node pipeline/run_pipeline.js <url_bất_kỳ>
 
 **Ví dụ:**
 ```bash
-node pipeline/run_pipeline.js https://github.com/pnpm/pnpm
-node pipeline/run_pipeline.js https://hub.docker.com/_/nginx
-node pipeline/run_pipeline.js https://vitejs.dev
+node pipeline/run_pipeline.js https://github.com/honojs/hono
+node pipeline/run_pipeline.js https://hub.docker.com/r/ollama/ollama
+node pipeline/run_pipeline.js https://supabase.com
 ```
 
 ---

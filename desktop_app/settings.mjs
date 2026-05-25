@@ -61,22 +61,32 @@ export async function loadAppBundledEnv(appRoot) {
 }
 
 export async function saveWorkspaceEnv(workspaceRoot, values = {}) {
-  const lines = [];
-  const entries = [
-    ["OPENAI_API_KEY", values.openaiApiKey],
-    ["OPENROUTER_API_KEY", values.openrouterApiKey],
-    ["TAVILY_API_KEY", values.tavilyApiKey],
-    ["LARVOICE_API_KEY", values.larvoiceApiKey],
-    ["LARVOICE_VOICE_ID", values.larvoiceVoiceId],
-  ];
+  const existing = await loadWorkspaceEnv(workspaceRoot);
+  
+  const map = {
+    OPENAI_API_KEY: values.openaiApiKey !== undefined ? values.openaiApiKey : existing.OPENAI_API_KEY,
+    OPENROUTER_API_KEY: values.openrouterApiKey !== undefined ? values.openrouterApiKey : existing.OPENROUTER_API_KEY,
+    TAVILY_API_KEY: values.tavilyApiKey !== undefined ? values.tavilyApiKey : existing.TAVILY_API_KEY,
+    LARVOICE_API_KEY: values.larvoiceApiKey !== undefined ? values.larvoiceApiKey : existing.LARVOICE_API_KEY,
+    LARVOICE_VOICE_ID: values.larvoiceVoiceId !== undefined ? values.larvoiceVoiceId : existing.LARVOICE_VOICE_ID,
+  };
 
-  for (const [key, value] of entries) {
-    if (value) lines.push(`${key}=${quoteEnvValue(value)}`);
+  const updatedEnv = {
+    ...existing,
+    ...map,
+  };
+
+  const lines = [];
+  for (const [key, value] of Object.entries(updatedEnv)) {
+    if (value !== undefined && value !== null && value !== "") {
+      lines.push(`${key}=${quoteEnvValue(value)}`);
+    }
   }
 
   await fsp.mkdir(workspaceRoot, { recursive: true });
   await fsp.writeFile(path.join(workspaceRoot, ".env"), `${lines.join("\n")}\n`, "utf-8");
 }
+
 
 export function buildRuntimeEnv(options = {}) {
   return {

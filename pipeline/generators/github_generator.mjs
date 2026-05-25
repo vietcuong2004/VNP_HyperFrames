@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { callAI } from "../../services/aiRouter.js";
 import { short, baseScene, githubStatsScene, getReadmeHeadings } from "../main_generateContent.js";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của GitHub
@@ -263,26 +263,9 @@ export function normalizeGithubScenes(scenes, context = {}) {
 
 export async function generateScenes(rawData, format) {
   const { target, repoData, readme } = rawData;
-  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
+  const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.repo_overview_with_use_cases;
 
-  if (!apiKey) {
-    throw new Error("Không tìm thấy OPENAI_API_KEY hoặc OPENROUTER_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
-  }
-
-  try {
-    console.log(`> Đang gọi OpenAI/OpenRouter để sinh kịch bản GitHub cho format: ${format}...`);
-    
-    // Cấu hình linh hoạt trỏ tới OpenRouter nếu có cấu hình hoặc dùng mặc định OpenAI
-    const isOpenRouter = apiKey.startsWith("sk-or-") || process.env.OPENROUTER_API_KEY;
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: isOpenRouter ? "https://openrouter.ai/api/v1" : undefined
-    });
-
-    const modelName = isOpenRouter ? "openai/gpt-4o-mini" : "gpt-4o-mini";
-    const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.repo_overview_with_use_cases;
-
-    const prompt = `
+  const prompt = `
       Bạn là chuyên gia biên tập video công nghệ có kinh nghiệm. Hãy viết kịch bản voice-over tiếng Việt và các tiêu đề màn hình cho video giới thiệu repo GitHub sau:
       - Tên Repo: ${repoData.name || target.repo}
       - Mô tả: ${repoData.description || "Không có mô tả"}
@@ -308,7 +291,7 @@ export async function generateScenes(rawData, format) {
          - "bento1_desc": tối đa 70 ký tự.
          - "bento1_title" đến "bento4_title": tối đa 12 ký tự.
          - "btn_text": Lệnh CLI hoặc chuỗi cực ngắn (<= 30 ký tự).
-      4. Khong copy nguyen placeholder headline nhu "CAI DAT / LO TRINH", "BAT DAU NHANH", "TONG KET"; hay viet theo ten repo va ngu canh that.
+      4. Khong copy nguyen placeholder headline nhu "CAI DAT / LO TRINH", "BAT DAU NHANH", "TONG KET"; hay viet theo ten repo va ngu canh thật.
       5. Voi canh cai dat, clone, demo, checklist hoac outro, dien "content_mode": "steps" va mang "steps" gom 3-4 object { "title", "body" }. Cac bento_title/bento_desc nen khop voi cac step nay.
       6. Khong bia lenh install, API key, port, config, price hoac benchmark neu README khong neu. Neu README thieu lenh, dung buoc an toan nhu "Doc README", "Kiem tra release", "Chay demo nho".
       7. Thong tin Scene 6 (stats) phai chinh xac:
@@ -318,16 +301,13 @@ export async function generateScenes(rawData, format) {
       8. Đối với Scene 7, điền "btn_text" là lệnh git clone chính xác: "$ git clone github.com/${target.owner}/${target.repo}".toLowerCase()
     `;
 
-    const response = await client.chat.completions.create({
-      model: modelName,
-      messages: [
-        { role: "system", content: "You are a professional video content editor who outputs JSON strict data." },
-        { role: "user", content: prompt }
-      ],
-      response_format: { type: "json_object" }
+  try {
+    console.log(`> Đang gọi custom API để sinh kịch bản GitHub cho format: ${format}...`);
+    const { result: parsed } = await callAI({
+      prompt,
+      isJson: true,
+      onLog: (msg) => console.log(msg)
     });
-
-    const parsed = JSON.parse(response.choices[0].message.content);
     
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;
@@ -353,11 +333,21 @@ export async function generateScenes(rawData, format) {
 
     if (Array.isArray(scenes) && scenes.length === 8) {
       // Gắn thêm các assets và sfx mặc định cho từng scene
+      const shibaAssets = [
+        "character shiba cheerfully talking.png",          // Scene 1: intro
+        "character shiba thinking.png",                   // Scene 2: problem
+        "character shiba explaining something.png",         // Scene 3: install
+        "character shiba wearing stylish glasses.png",      // Scene 4: feature
+        "character shiba using a magnifying glass to look closely.png", // Scene 5: checklist
+        "character shiba expressing unbelievable emotions.png", // Scene 6: stats
+        "character shiba meditating in zen state.png",     // Scene 7: clone
+        "character shiba smiling brightly.png"             // Scene 8: outro
+      ];
       return scenes.map((scene, idx) => {
         return baseScene({
           ...scene,
           scene: idx + 1,
-          assets: ["character shiba explaining something.png"],
+          assets: [shibaAssets[idx] || "character shiba explaining something.png"],
           sfx: "Ding 2.mp3"
         });
       });

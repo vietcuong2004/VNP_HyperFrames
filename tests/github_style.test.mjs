@@ -6,9 +6,9 @@ const css = readFileSync(new URL("../templates/G1_github/style.css", import.meta
 
 test("G1_github uses local Vietnamese-safe font stack for headlines", () => {
   assert.doesNotMatch(css, /fonts\.googleapis\.com/);
-  assert.match(css, /font-family:\s*"Segoe UI"/);
-  assert.match(css, /\.headline-line1[\s\S]*font-family:\s*"Segoe UI"/);
-  assert.match(css, /\.headline-line2[\s\S]*font-family:\s*"Segoe UI"/);
+  assert.match(css, /font-family:\s*"Space Grotesk"/);
+  assert.match(css, /\.headline-line1[\s\S]*font-family:\s*"Space Grotesk"/);
+  assert.match(css, /\.headline-line2[\s\S]*font-family:\s*"Space Grotesk"/);
 });
 
 test("G1_github headline line-height leaves room for Vietnamese diacritics", () => {
