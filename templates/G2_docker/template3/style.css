@@ -1,9 +1,10 @@
+:root { --font-sans: "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif; --font-mono: "Cascadia Mono", Consolas, "Liberation Mono", monospace; }
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap');
 
 /* =============================================
-   G2_DOCKER — Terminal / Console Aesthetic
+   G2_DOCKER - Terminal / Console Aesthetic
    Color palette: Docker Blue #0db7ed / #2496ed
-   Background: Deep Navy #060d14 → #0a1628
+   Background: Deep Navy #060d14 â†’ #0a1628
    ============================================= */
 
 body {
@@ -13,7 +14,7 @@ body {
   overflow: hidden;
   background: #060d14;
   color: #e8f4fd;
-  font-family: "Space Grotesk", "JetBrains Mono", monospace;
+  font-family: var(--font-sans);
 }
 
 /* === BACKGROUND === */
@@ -101,7 +102,7 @@ body {
   color: #0db7ed;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   text-shadow: 0 0 20px rgba(13, 183, 237, 0.6);
 }
 
@@ -153,7 +154,7 @@ body {
 
 .terminal-title {
   margin: 0 auto;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 20px;
   font-weight: 500;
   color: rgba(13, 183, 237, 0.7);
@@ -168,7 +169,7 @@ body {
   right: 0;
   overflow: hidden;
   background: #0d1117;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
 }
 
 /* Scrolling screenshot inside terminal */
@@ -194,7 +195,7 @@ body {
 }
 
 .terminal-line {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 24px;
   line-height: 1.5;
   display: flex;
@@ -284,7 +285,7 @@ body {
   color: #ffffff;
   letter-spacing: -1px;
   text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-sans);
 }
 .headline-line2 {
   font-size: 68px;
@@ -296,7 +297,7 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 4px 16px rgba(13, 183, 237, 0.4));
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* === ACTION BUTTON (Docker command style) === */
@@ -317,7 +318,7 @@ body {
   color: #0db7ed;
   z-index: 30;
   box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(13, 183, 237, 0.1);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   white-space: nowrap;
   max-width: 960px;
   overflow: hidden;
@@ -425,13 +426,13 @@ body {
   font-size: 36px;
   font-weight: 800;
   color: #e8f4fd;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-sans);
 }
 .card-desc {
   font-size: 24px;
   font-weight: 400;
   color: rgba(232, 244, 253, 0.5);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   line-height: 1.4;
 }
 
@@ -470,7 +471,7 @@ body {
   font-size: 40px;
   font-weight: 800;
   color: #e8f4fd;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
 }
 .docker-meta {
   display: flex;
@@ -478,7 +479,7 @@ body {
   gap: 20px;
   font-size: 26px;
   color: rgba(232, 244, 253, 0.5);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
 }
 .docker-pulls {
   margin-left: auto;
@@ -493,7 +494,7 @@ body {
 .docker-pulls-label {
   font-size: 22px;
   color: rgba(13, 183, 237, 0.6);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
 }
 
 /* === CHARACTER === */
@@ -509,9 +510,9 @@ body {
 }
 
 /* === CAPTIONS / SUBTITLES === */
-.captions { 
-  position: absolute; 
-  bottom: 120px; 
+.captions {
+  position: absolute;
+  bottom: 120px;
   left: 60px;
   width: 660px;
   text-align: center;

@@ -63,9 +63,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
         tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
         tl.from("#btn-${sceneId}", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.4});
-        tl.fromTo("#scroll-img-${sceneId}", 
-          { y: 0 }, 
-          { y: -2100, duration: 8.5, ease: "power1.inOut" }, 
+        tl.fromTo("#scroll-img-${sceneId}",
+          { y: 0 },
+          { y: -2100, duration: 8.5, ease: "power1.inOut" },
           ${start + 1.5}
         );
       `;
@@ -214,36 +214,46 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         ).join("\n        ")}
       `;
       break;
-    }
-
-        case 4: {
-      // Cảnh 5: Action Call to Action
-      const title1 = scene.headline_line1 || "HÀNH ĐỘNG TIẾP";
-      const title2 = scene.headline_line2 || "TÙY THEO NGUỒN";
-      const btnText = scene.btn_text || "Mở nguồn và kiểm chứng";
+    }    case 4: {
+      // Scene 5: Concrete next action
+      const title1 = scene.headline_line1 || "HANH DONG TIEP";
+      const title2 = scene.headline_line2 || "KIEM TRA NGUON";
+      const btnText = escapeHtml(scene.btn_text || "Mo nguon va kiem chung");
+      const cards = getSceneCards(scene, 3);
+      const actionCards = cards.length > 0 ? cards : [
+        { title: "Open", body: "Mo link goc de doi chieu noi dung." },
+        { title: "Check", body: "Kiem tra ngay thang, gia va gioi han." },
+        { title: "Test", body: "Thu mot vi du nho truoc khi ap dung." },
+      ];
       html = `
-        <div class="main-glow-icon" id="glow-${sceneId}">
-          <div class="glow-svg-container" style="background: rgba(255, 71, 87, 0.1); border: 2px solid #ff4757; box-shadow: 0 0 25px rgba(255, 71, 87, 0.4);">
-            <svg viewBox="0 0 24 24" style="stroke: #ff4757; fill: none; stroke-width: 2; filter: drop-shadow(0 0 8px #ff4757);"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-          </div>
-        </div>
-        <div class="headline-container" style="top: 850px;">
+        <div class="headline-container" style="top: 165px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}" style="top: 1250px; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #ff4757; box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);">
+        <div class="web-action-panel" style="position:absolute; top:455px; left:50%; transform:translateX(-50%); width:920px; z-index:30;">
+          ${actionCards.slice(0, 3).map((card, idx) => `
+          <div class="step-card" id="act-${sceneId}-${idx + 1}" style="margin-bottom:24px;">
+            <div class="step-number">${idx + 1}</div>
+            <div>
+              <div class="step-title">${card.title}</div>
+              <div class="step-desc">${card.body}</div>
+            </div>
+          </div>`).join("")}
+        </div>
+        <div class="action-btn" id="btn-${sceneId}" style="top: 1235px; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #ff4757; box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);">
           ${btnText}
         </div>
       `;
       gsap = `
-        tl.from("#glow-${sceneId}", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, ${start});
-        tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start + 0.1});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start + 0.1});
-        tl.from("#btn-${sceneId}", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.2});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        ${actionCards.slice(0, 3).map((_, idx) =>
+          `tl.from("#act-${sceneId}-${idx + 1}", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.1 + idx * 0.1});`
+        ).join("\n        ")}
+        tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.45});
       `;
       break;
     }
-
     case 5: {
       // Cảnh 6: Outro Web page summary
       const title1 = scene.headline_line1 || "LƯU LINK";
@@ -297,7 +307,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       `;
       gsap = `
         tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#bc-${sceneId}-1", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#bc-${sceneId}-2", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#bc-${sceneId}-3", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});

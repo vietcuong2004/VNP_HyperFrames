@@ -107,6 +107,26 @@ test("G1_github checklist renderer does not leak adapter animation defaults", ()
   assert.doesNotMatch(result.html, /ADAPTER PATTERN|GSAP Timeline|ThreeJS|Lottie/i);
 });
 
+test("G1_github stats renderer looks like repo signals instead of a finance chart", () => {
+  const scene = {
+    layout: "stats",
+    headline_line1: "AWESOME NLP",
+    headline_line2: "TIN HIEU REPO",
+    repo_name: "keon/awesome-nlp",
+    repo_lang: "Python",
+    repo_stars: "★ 17,000",
+    repo_trend: "Curated list",
+    repo_trend_label: "GitHub",
+  };
+
+  const result = getHyperframesReviewScene(5, scene, "scene6", 0);
+
+  assert.match(result.html, /repo-signal-panel/);
+  assert.match(result.html, /keon\/awesome-nlp/);
+  assert.match(result.html, /Python/);
+  assert.doesNotMatch(result.html, /financial-chart|candlestick|robot-badge/i);
+});
+
 test("G1_github clone renderer shows git steps as sequential cards", () => {
   const scene = {
     layout: "clone",
@@ -127,6 +147,21 @@ test("G1_github clone renderer shows git steps as sequential cards", () => {
   assert.match(result.html, /git clone github.com\/obra\/superpowers/);
   assert.match(result.html, /Read README/);
   assert.match(result.html, /Chay lenh nho nhat/);
+  assert.doesNotMatch(result.html, /main-glow-icon/);
+});
+
+test("G1_github clone renderer has useful fallback cards when AI omits steps", () => {
+  const scene = {
+    layout: "clone",
+    headline_line1: "CLONE AWESOME NLP",
+    headline_line2: "READ BEFORE USE",
+    btn_text: "$ git clone github.com/keon/awesome-nlp",
+  };
+
+  const result = getHyperframesReviewScene(6, scene, "scene7", 0);
+
+  assert.match(result.html, /step-card/);
+  assert.match(result.html, /Read README|Run test|Check license/);
   assert.doesNotMatch(result.html, /main-glow-icon/);
 });
 

@@ -121,6 +121,15 @@ function softLimit(value, max) {
   return `${sliced.slice(0, lastSpace > 10 ? lastSpace : max).trim()}...`;
 }
 
+
+function isSchemaPlaceholder(value) {
+  return /^<[^>]+>$/.test(String(value || "").trim());
+}
+
+function cleanSchemaValue(value, fallback = "") {
+  return isSchemaPlaceholder(value) ? fallback : value;
+}
+
 function normalizeCards(scene) {
   const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
     ? scene.steps
@@ -134,14 +143,34 @@ function normalizeCards(scene) {
           .filter((card) => card.title || card.body);
 
   return rawCards.slice(0, 4).map((card, idx) => ({
-    title: softLimit(card.title || `Điểm ${idx + 1}`, 16),
-    body: softLimit(card.body || card.desc || card.description || "Kiểm tra trong nguồn chính.", 75),
+    title: softLimit(cleanSchemaValue(card.title, "") || `Điểm ${idx + 1}`, 16),
+    body: softLimit(cleanSchemaValue(card.body || card.desc || card.description, "") || "Kiểm tra trong nguồn chính.", 75),
   }));
 }
 
 function isGenericActionHeadline(value) {
+  const text = String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase();
+  return text.includes("HANH DONG") || text.includes("TUY THEO") || text.includes("HÀNH ĐỘNG") || text.includes("TÙY THEO") || text.includes("TUỲ THEO");
+}
+
+function isGenericWebHeadline(value) {
   const text = String(value || "").toUpperCase();
-  return text.includes("HÀNH ĐỘNG") || text.includes("TÙY THEO") || text.includes("TUỲ THEO");
+  return [
+    "TIÊU ĐỀ TRANG",
+    "TIÊU ĐỀ TRANG",
+    "WEB CONTEXT DIGEST",
+    "NỘI DUNG CHÍNH",
+    "NỘI DUNG CHÍNH",
+    "CẦN GIẢI THÍCH",
+    "CẦN GIẢI THÍCH",
+    "BA CÂU HỎI",
+    "BA CÂU HỎI",
+    "PHẢI TRẢ LỜI",
+    "PHẢI TRẢ LỜI",
+  ].some((generic) => text.includes(generic));
 }
 
 function actionHeadline(context) {
@@ -180,13 +209,34 @@ export function normalizeWebScenes(scenes, context = {}) {
       merged[`bento${n}_desc`] = card.body;
     });
 
-    if (idx === 4 && (isGenericActionHeadline(merged.headline_line1) || isGenericActionHeadline(merged.headline_line2))) {
+    if (idx !== 4 && (isGenericWebHeadline(merged.headline_line1) || isGenericWebHeadline(merged.headline_line2))) {
+      const source = actionHeadline(context);
+      const pairs = [
+        [source, "WEB CAN KIEM TRA"],
+        ["TOM TAT", `${source} NOI GI`],
+        ["CAU HOI", "DOC TRUOC KHI DUNG"],
+        ["DIEM CHINH", "RUT TU NGUON WEB"],
+        [source, "KIEM TRA TRUOC"],
+        ["LUU LINK", "KIEM CHUNG LAI"],
+      ];
+      [merged.headline_line1, merged.headline_line2] = pairs[idx] || [source, "KIEM TRA NGUON"];
+    }
+
+    if (
+      idx === 4 &&
+      (
+        isGenericActionHeadline(merged.headline_line1) ||
+        isGenericActionHeadline(merged.headline_line2) ||
+        isSchemaPlaceholder(merged.headline_line1) ||
+        isSchemaPlaceholder(merged.headline_line2)
+      )
+    ) {
       merged.headline_line1 = actionHeadline(context);
       merged.headline_line2 = "KIỂM TRA TRƯỚC";
     }
 
-    merged.headline_line1 = softLimit(merged.headline_line1 || context.title || context.sourceLabel || "WEB", 20);
-    merged.headline_line2 = softLimit(merged.headline_line2 || schema.headline_line2 || "KIỂM TRA NGUỒN", 32);
+    merged.headline_line1 = softLimit(cleanSchemaValue(merged.headline_line1, "") || context.title || context.sourceLabel || "WEB", 20);
+    merged.headline_line2 = softLimit(cleanSchemaValue(merged.headline_line2, "") || "KIỂM TRA NGUỒN", 32);
     return merged;
   });
 
@@ -247,7 +297,7 @@ export async function generateScenes(rawData, format) {
       isJson: true,
       onLog: (msg) => console.log(msg)
     });
-    
+
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;
     if (!Array.isArray(scenes)) {
@@ -263,7 +313,7 @@ export async function generateScenes(rawData, format) {
         }
       }
     }
-    
+
     scenes = normalizeWebScenes(scenes, {
       title,
       sourceLabel,

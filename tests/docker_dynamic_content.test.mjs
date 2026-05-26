@@ -101,6 +101,27 @@ test("G2_docker outro renderer includes a concrete final action", () => {
   assert.match(result.gsap, /btn-scene5/);
 });
 
+test("G2_docker run scene renders a terminal flow with the actual command", () => {
+  const scene = {
+    layout: "terminal_docker",
+    headline_line1: "RUN POSTGRES",
+    headline_line2: "THU TREN MAY PHU",
+    btn_text: "$ docker run --rm -p 5432:5432 postgres:16",
+    steps: [
+      { title: "Dry run", body: "Chay voi --rm truoc khi dua vao compose." },
+      { title: "Logs", body: "Doc log khoi dong de bat loi config." },
+      { title: "Stop", body: "Dung container sau khi test xong." },
+    ],
+  };
+
+  const result = getHyperframesReviewScene(3, scene, "scene4", 0);
+
+  assert.match(result.html, /terminal-frame/);
+  assert.match(result.html, /docker run --rm -p 5432:5432 postgres:16/);
+  assert.match(result.html, /Doc log khoi dong/);
+  assert.doesNotMatch(result.html, /main-glow-icon/);
+});
+
 test("normalizeDockerScenes replaces generic schema headlines with image-aware copy", () => {
   const scenes = normalizeDockerScenes(
     [
@@ -141,4 +162,29 @@ test("normalizeDockerScenes replaces generic schema headlines with image-aware c
       ["TRƯỚC PROD", "BACKUP VÀ UPDATE"],
     ],
   );
+});
+
+test("normalizeDockerScenes replaces angle-bracket schema placeholders", () => {
+  const scenes = normalizeDockerScenes(
+    [
+      { headline_line1: "<ten image ngan gon>", headline_line2: "<loi ich chay container>" },
+      { headline_line1: "<tag nen dung>", headline_line2: "<ly do can pin tag>" },
+      {
+        headline_line1: "<config quan trong>",
+        headline_line2: "<diem can kiem tra>",
+        steps: [{ title: "<buoc 1>", body: "<noi dung mau>" }],
+      },
+      { headline_line1: "<lenh chay thu>", headline_line2: "<pham vi thu nghiem>" },
+      { headline_line1: "<truoc production>", headline_line2: "<backup va cap nhat>" },
+    ],
+    {
+      imageRef: "library/postgres",
+      repoUrl: "hub.docker.com/_/postgres",
+    },
+  );
+
+  const serialized = JSON.stringify(scenes);
+  assert.doesNotMatch(serialized, /<[^>]+>/);
+  assert.equal(scenes[0].headline_line1, "POSTGRES");
+  assert.equal(scenes[2].steps[0].title, "Bước 1");
 });

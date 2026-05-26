@@ -483,34 +483,74 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
     case "terminal_docker":
     case 6: {
-      // Scene 7: Try safely
-      const hl1 = scene.headline_line1 || "THỬ AN TOÀN";
-      const hl2 = scene.headline_line2 || "TRONG PROJECT PHỤ";
+      // Scene 4: Run safely in a terminal
+      const hl1 = scene.headline_line1 || "RUN IMAGE";
+      const hl2 = scene.headline_line2 || "THU TREN MAY PHU";
       const imageRef = stripTag(getSceneImage(scene, "hello-world"));
       const btnText = scene.btn_text || `$ docker run --rm ${imageRef}`;
+      const command = cleanCommand(btnText) || `docker run --rm ${imageRef}`;
+      const cards = getSceneCards(scene, 3);
+      const runCards = cards.length > 0 ? cards : [
+        { title: "Dry run", body: "Chay voi --rm truoc khi dua vao compose." },
+        { title: "Logs", body: "Doc log khoi dong de bat loi config." },
+        { title: "Stop", body: "Dung container sau khi test xong." },
+      ];
       html = `
-        <div class="main-glow-icon" id="glow-${sceneId}">
-          <div class="glow-svg-container">
-            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-        </div>
-        <div class="headline-container" id="head-${sceneId}">
+        <div class="headline-container" style="top: 165px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}" style="font-size: 28px; max-width: 920px;">
-          <span class="action-icon" style="color: #0db7ed;">🐳</span> ${btnText}
+        <div class="terminal-frame" id="runterm-${sceneId}" style="top: 455px; height: 520px; width: 920px;">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            </div>
+            <div class="terminal-title">bash — docker run</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-content">
+              <div class="terminal-line" id="rt-${sceneId}-1">
+                <span class="t-prompt">user@host:~$</span>
+                <span class="t-cmd">${escapeHtml(command)}</span>
+              </div>
+              <div class="terminal-line" id="rt-${sceneId}-2" style="opacity:0;">
+                <span class="t-success">✔ Container created for local verification</span>
+              </div>
+              <div class="terminal-line" id="rt-${sceneId}-3" style="opacity:0;">
+                <span class="t-info">Reading startup logs before deployment...</span>
+              </div>
+              <div class="terminal-line" id="rt-${sceneId}-4" style="opacity:0;">
+                <span class="t-success">✔ Remove or stop test container after checking</span>
+                <span class="t-cursor" id="cursor-${sceneId}"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bento-container" style="top: 1010px; width: 920px;" id="runcheck-${sceneId}">
+          ${runCards.slice(0, 3).map((card, idx) => `
+          <div class="step-card" id="runstep-${sceneId}-${idx + 1}" style="margin-bottom: 16px;">
+            <div class="step-number">${idx + 1}</div>
+            <div>
+              <div class="step-title">${card.title}</div>
+              <div class="step-desc">${card.body}</div>
+            </div>
+          </div>`).join("")}
         </div>
       `;
       gsap = `
-        tl.from("#glow-${sceneId}", { scale: 0.7, y: 30, opacity: 0, duration: 0.35, ease: "back.out(1.4)" }, ${start});
-        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
-        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
-        tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.35});
+        tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
+        tl.from("#runterm-${sceneId}", { y: 30, opacity: 0, duration: 0.3, ease: "back.out(1.2)" }, ${start + 0.1});
+        tl.to("#rt-${sceneId}-2", { opacity: 1, duration: 0.15 }, ${start + 0.8});
+        tl.to("#rt-${sceneId}-3", { opacity: 1, duration: 0.15 }, ${start + 1.3});
+        tl.to("#rt-${sceneId}-4", { opacity: 1, duration: 0.15 }, ${start + 1.8});
+        ${runCards.slice(0, 3).map((_, idx) =>
+          `tl.from("#runstep-${sceneId}-${idx + 1}", { y: 18, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.35 + idx * 0.08});`
+        ).join("\n        ")}
+        tl.to("#cursor-${sceneId}", { opacity: 0, repeat: ${Math.max(0, Math.ceil((sceneDuration - 2) / 1) - 1)}, yoyo: true, duration: 0.5 }, ${start + 2});
       `;
       break;
     }
-
     case 7: {
       // Scene 8: Outro — star/docs/test CTA
       const hl1 = scene.headline_line1 || "STAR VÀ ĐỌC DOCS";

@@ -1,4 +1,5 @@
-body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Space Grotesk", Arial, sans-serif; }
+:root { --font-sans: "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif; --font-mono: "Cascadia Mono", Consolas, "Liberation Mono", monospace; }
+body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: var(--font-sans); }
 .bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a1a0d 0%, #050505 80%); }
 
 .source-web .bg {
@@ -86,26 +87,26 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: "Space Grotesk", Arial, sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* Main Glow Icon & Vector Container */
-.main-glow-icon { 
-  position: absolute; 
-  top: 280px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  width: 200px; 
-  height: 200px; 
-  border-radius: 60px; 
-  background: rgba(253, 240, 28, 0.03); 
-  border: 2px solid rgba(253, 240, 28, 0.25); 
-  box-shadow: 0 0 80px rgba(253, 240, 28, 0.25), inset 0 0 40px rgba(253, 240, 28, 0.08); 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  font-size: 90px; 
-  z-index: 20; 
+.main-glow-icon {
+  position: absolute;
+  top: 280px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 60px;
+  background: rgba(253, 240, 28, 0.03);
+  border: 2px solid rgba(253, 240, 28, 0.25);
+  box-shadow: 0 0 80px rgba(253, 240, 28, 0.25), inset 0 0 40px rgba(253, 240, 28, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90px;
+  z-index: 20;
 }
 
 /* Highly-polished SVG Glow Illustration */
@@ -316,20 +317,20 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   font-size: 76px;
   line-height: 1.14;
   font-weight: 800;
-  font-family: "Space Grotesk", Arial, sans-serif;
+  font-family: var(--font-sans);
   color: #ffffff;
   text-shadow: 0 5px 20px rgba(0,0,0,0.5);
   letter-spacing: 0;
 }
-.headline-line2 { 
-  font-size: 72px; 
+.headline-line2 {
+  font-size: 72px;
   line-height: 1.14;
-  font-weight: 900; 
-  font-family: "Space Grotesk", Arial, sans-serif;
-  background: linear-gradient(90deg, #fdf01c, #00d2ff); 
+  font-weight: 900;
+  font-family: var(--font-sans);
+  background: linear-gradient(90deg, #fdf01c, #00d2ff);
   -webkit-background-clip: text;
-  background-clip: text; 
-  -webkit-text-fill-color: transparent; 
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 5px 15px rgba(253,240,28,0.35));
   letter-spacing: 0;
 }
@@ -446,7 +447,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   color: rgba(255,255,255,0.62);
 }
 .step-command {
-  font-family: "Cascadia Mono", Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 25px;
   line-height: 1.35;
   color: #00ff88;
@@ -533,27 +534,27 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 .character { position: absolute; bottom: 0px; right: -50px; width: 450px; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); z-index: 40; opacity: 0.8; }
 
 /* Subtitle */
-.captions { 
-  position: absolute; 
-  bottom: 120px; 
-  left: 60px; 
-  width: 660px; 
-  text-align: center; 
-  z-index: 1000; 
-  min-height: 132px; 
-  max-height: 188px; 
-  height: auto; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  flex-wrap: wrap; 
-  background: rgba(10, 10, 10, 0.85); 
-  backdrop-filter: blur(15px); 
-  border-radius: 30px; 
-  border: 2px solid rgba(253, 240, 28, 0.25); 
-  box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(253, 240, 28, 0.05); 
-  padding: 25px 30px; 
-  box-sizing: border-box; 
+.captions {
+  position: absolute;
+  bottom: 120px;
+  left: 60px;
+  width: 660px;
+  text-align: center;
+  z-index: 1000;
+  min-height: 132px;
+  max-height: 188px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+  border: 2px solid rgba(253, 240, 28, 0.25);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(253, 240, 28, 0.05);
+  padding: 25px 30px;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -604,7 +605,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 .browser-address {
   background: #0d1117;
   color: rgba(255, 255, 255, 0.6);
-  font-family: monospace;
+  font-family: var(--font-mono);
   font-size: 24px;
   padding: 8px 30px;
   border-radius: 14px;

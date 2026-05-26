@@ -117,6 +117,35 @@ test("G3_web question scene renders step bodies from dynamic content", () => {
   assert.doesNotMatch(result.html, /Định nghĩa vấn đề cơ bản/);
 });
 
+test("G3_web action scene includes concrete next-step cards", () => {
+  const scene = {
+    headline_line1: "OPEN DOCS",
+    headline_line2: "VERIFY FIRST",
+    btn_text: "Open original source",
+    steps: [
+      { title: "Open", body: "Read the original docs before applying." },
+      { title: "Check", body: "Verify pricing, auth, and limits." },
+      { title: "Test", body: "Run a small example first." },
+    ],
+  };
+
+  const result = getHyperframesReviewScene(4, scene, "scene5", 0);
+
+  assert.match(result.html, /web-action-panel/);
+  assert.match(result.html, /Read the original docs/);
+  assert.match(result.html, /Verify pricing, auth, and limits/);
+  assert.match(result.html, /Open original source/);
+});
+
+test("G3_web outro animation script does not contain control characters", () => {
+  const result = getHyperframesReviewScene(5, {
+    headline_line1: "SAVE SOURCE",
+    headline_line2: "VERIFY FIRST",
+  }, "scene6", 0);
+
+  assert.doesNotMatch(result.gsap, /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/);
+});
+
 test("normalizeWebScenes replaces generic action headlines with source-aware copy", () => {
   const scenes = normalizeWebScenes(
     [
@@ -140,4 +169,34 @@ test("normalizeWebScenes replaces generic action headlines with source-aware cop
   assert.notEqual(scenes[4].headline_line1, "HÀNH ĐỘNG TIẾP");
   assert.notEqual(scenes[4].headline_line2, "TÙY THEO NGUỒN");
   assert.match(scenes[4].headline_line1, /DART|DOCS|NGUỒN/);
+});
+
+test("normalizeWebScenes replaces angle-bracket schema placeholders", () => {
+  const scenes = normalizeWebScenes(
+    [
+      { headline_line1: "TIÊU ĐỀ TRANG WEB (VIẾT HOA)", headline_line2: "WEB CONTEXT DIGEST" },
+      {
+        headline_line1: "NỘI DUNG CHÍNH",
+        headline_line2: "CẦN GIẢI THÍCH",
+        steps: [{ title: "<bước 1>", body: "<hành động đầu tiên nên làm>" }],
+      },
+      {
+        headline_line1: "BA CÂU HỎI",
+        headline_line2: "PHẢI TRẢ LỜI",
+        steps: [{ title: "<câu hỏi 1>", body: "<điều cần xác định>" }],
+      },
+      {},
+      { headline_line1: "<nguồn hoặc hành động cụ thể>", headline_line2: "<việc nên làm tiếp theo>" },
+    ],
+    {
+      title: "Dart documentation",
+      sourceLabel: "dart.dev",
+      sourceUrl: "dart.dev/guides",
+    },
+  );
+
+  const serialized = JSON.stringify(scenes);
+  assert.doesNotMatch(serialized, /<[^>]+>/);
+  assert.match(scenes[0].headline_line1, /DART|DOCS|WEB/);
+  assert.equal(scenes[1].steps[0].title, "Điểm 1");
 });

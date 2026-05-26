@@ -1,4 +1,4 @@
-﻿import { getHyperframesReviewScene } from "./scenes.mjs";
+import { getHyperframesReviewScene } from "./scenes.mjs";
 
 export default function (data, css) {
   const duration = data.duration || 10;
@@ -180,14 +180,14 @@ export default function (data, css) {
       <div class="bg"></div>
       <div class="grid-dots"></div>
       ${particlesHTML}
-      
+
       <div class="top-header">
         <img class="top-avatar" src="./assets/logo/shiba.png" />
         <div class="top-username">SHIBA NEWS 24H</div>
       </div>
-      
+
       ${scenesHTML}
-      
+
       <!-- Subtitles Area -->
       <div id="captions" class="captions"></div>
     </div>
@@ -195,22 +195,22 @@ export default function (data, css) {
   <script>
     window.__timelines = window.__timelines || {};
     const tl = gsap.timeline({ paused: true });
-    
+
     // Animate Particles Floating
     gsap.utils.toArray('.p-anim').forEach((p, i) => {
       const pDur = 3 + (i % 4);
       const pRepeat = Math.max(1, Math.floor(${duration} / pDur) - 1);
-      tl.to(p, { 
-        y: "-=100", 
+      tl.to(p, {
+        y: "-=100",
         x: (i%2===0 ? "+=30" : "-=30"),
-        opacity: 0.1 + (i % 5) * 0.2, 
-        duration: pDur, 
-        repeat: pRepeat, 
-        yoyo: true, 
-        ease: "sine.inOut" 
+        opacity: 0.1 + (i % 5) * 0.2,
+        duration: pDur,
+        repeat: pRepeat,
+        yoyo: true,
+        ease: "sine.inOut"
       }, 0);
     });
-    
+
     ${jsTimelines}
 
     // Karaoke Subtitles Grouping by Scene (Complete Sentences)
@@ -231,9 +231,9 @@ export default function (data, css) {
         if (activeBlock) {
           let html = activeBlock.words.map(w => {
             let isActive = (time >= w.start && time <= w.end);
-            return '<span style="font-family: Space Grotesk, sans-serif; font-size: 34px; font-weight: 800; text-transform: uppercase; margin: 0 7px; display: inline-block; transition: all 0.08s; ' + 
-                   (isActive ? 'color: #0db7ed; text-shadow: 0 0 20px #0db7ed, 0 0 5px #0db7ed; transform: scale(1.1); font-weight: 900;' 
-                            : 'color: rgba(232,244,253,0.7); transform: scale(1.0);') + 
+            return '<span style="font-family: var(--font-sans); font-size: 34px; font-weight: 800; text-transform: uppercase; margin: 0 7px; display: inline-block; transition: all 0.08s; ' +
+                   (isActive ? 'color: #0db7ed; text-shadow: 0 0 20px #0db7ed, 0 0 5px #0db7ed; transform: scale(1.1); font-weight: 900;'
+                            : 'color: rgba(232,244,253,0.7); transform: scale(1.0);') +
                    '">' + escapeHtml(w.text.toUpperCase()) + '</span>';
           }).join(" ");
           capContainer.innerHTML = html;

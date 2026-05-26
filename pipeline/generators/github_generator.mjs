@@ -308,7 +308,7 @@ export async function generateScenes(rawData, format) {
       isJson: true,
       onLog: (msg) => console.log(msg)
     });
-    
+
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;
     if (!Array.isArray(scenes)) {
@@ -324,7 +324,7 @@ export async function generateScenes(rawData, format) {
         }
       }
     }
-    
+
     scenes = normalizeGithubScenes(scenes, {
       repoName: repoData.name || target.repo,
       repoFullName: `${target.owner}/${target.repo}`,

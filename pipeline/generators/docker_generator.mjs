@@ -88,6 +88,15 @@ function softLimit(value, max) {
   return `${sliced.slice(0, lastSpace > 10 ? lastSpace : max).trim()}...`;
 }
 
+
+function isSchemaPlaceholder(value) {
+  return /^<[^>]+>$/.test(String(value || "").trim());
+}
+
+function cleanSchemaValue(value, fallback = "") {
+  return isSchemaPlaceholder(value) ? fallback : value;
+}
+
 function normalizeCards(scene) {
   const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
     ? scene.steps
@@ -101,8 +110,8 @@ function normalizeCards(scene) {
           .filter((card) => card.title || card.body);
 
   return rawCards.slice(0, 4).map((card, idx) => ({
-    title: softLimit(card.title || `Bước ${idx + 1}`, 16),
-    body: softLimit(card.body || card.desc || card.description || "Kiểm tra Docker Hub trước khi chạy.", 75),
+    title: softLimit(cleanSchemaValue(card.title, "") || `Bước ${idx + 1}`, 16),
+    body: softLimit(cleanSchemaValue(card.body || card.desc || card.description, "") || "Kiểm tra Docker Hub trước khi chạy.", 75),
   }));
 }
 
@@ -117,16 +126,26 @@ function dockerImageName(context = {}) {
 }
 
 function isGenericDockerHeadline(value) {
-  const text = String(value || "").toUpperCase();
+  const text = String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase();
   return [
     "DOCKER QUICK START",
+    "CHON TAG",
     "CHỌN TAG",
+    "ROI PULL IMAGE",
     "RỒI PULL IMAGE",
+    "CAU HINH",
     "CẤU HÌNH",
+    "PORT, VOLUME VA ENV",
     "PORT, VOLUME VÀ ENV",
+    "RUN THU",
     "RUN THỬ",
+    "TRUOC KHI DEPLOY",
     "TRƯỚC KHI DEPLOY",
     "PRODUCTION",
+    "CHECKLIST VA BACKUP",
     "CHECKLIST VÀ BACKUP",
   ].some((generic) => text === generic || text.includes(generic));
 }
@@ -171,14 +190,19 @@ export function normalizeDockerScenes(scenes, context = {}) {
       merged[`bento${n}_desc`] = card.body;
     });
 
-    if (isGenericDockerHeadline(merged.headline_line1) || isGenericDockerHeadline(merged.headline_line2)) {
+    if (
+      isGenericDockerHeadline(merged.headline_line1) ||
+      isGenericDockerHeadline(merged.headline_line2) ||
+      isSchemaPlaceholder(merged.headline_line1) ||
+      isSchemaPlaceholder(merged.headline_line2)
+    ) {
       const [headline1, headline2] = dockerHeadlinePair(idx, context);
       merged.headline_line1 = headline1;
       merged.headline_line2 = headline2;
     }
 
-    merged.headline_line1 = softLimit(merged.headline_line1 || context.imageRef || "DOCKER", 20);
-    merged.headline_line2 = softLimit(merged.headline_line2 || schema.headline_line2 || "KIỂM TRA IMAGE", 32);
+    merged.headline_line1 = softLimit(cleanSchemaValue(merged.headline_line1, "") || context.imageRef || "DOCKER", 20);
+    merged.headline_line2 = softLimit(cleanSchemaValue(merged.headline_line2, "") || "KIỂM TRA IMAGE", 32);
     return merged;
   });
 
@@ -240,7 +264,7 @@ export async function generateScenes(rawData, format) {
       isJson: true,
       onLog: (msg) => console.log(msg)
     });
-    
+
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;
     if (!Array.isArray(scenes)) {
@@ -256,7 +280,7 @@ export async function generateScenes(rawData, format) {
         }
       }
     }
-    
+
     scenes = normalizeDockerScenes(scenes, {
       imageRef,
       repoUrl: `hub.docker.com/r/${imageRef}`.toLowerCase(),
