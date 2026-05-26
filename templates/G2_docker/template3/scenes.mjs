@@ -104,19 +104,20 @@ export function getSceneCards(scene, limit = 4) {
 
   const fallbackTitle = scene.headline_line2 || scene.headline_line1 || scene.title || "Nội dung chính";
   const fallbackBody = scene.central_text || scene.summary || scene.description || scene.text || "Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.";
-  const fallbackCards = Array.from({ length: Math.max(3, Math.min(limit, 4)) }, (_, idx) => ({
-    title: `Mục ${idx + 1}`,
+  const fallbackNames = ["Image", "Cấu hình", "Kiểm tra", "Vận hành"];
+  const fallbackCards = Array.from({ length: Math.max(3, limit) }, (_, idx) => ({
+    title: fallbackNames[idx] || "Bước tiếp",
     body: idx === 0 ? fallbackTitle : fallbackBody,
   }));
   const meaningfulCards = rawCards.filter((card) => {
     const body = card.body || card.desc || card.description;
-    return isMeaningfulCardText(body) || !isGenericCardTitle(card.title);
+    return isMeaningfulCardText(body) && !isGenericCardTitle(card.title);
   });
-  const safeCards = meaningfulCards.length > 0 ? meaningfulCards : fallbackCards;
+  const safeCards = [...meaningfulCards, ...fallbackCards].slice(0, Math.max(3, limit));
 
   return safeCards.slice(0, limit).map((card, idx) => {
     const body = card.body || card.desc || card.description;
-    const title = card.title && !isGenericCardTitle(card.title) ? card.title : `Mục ${idx + 1}`;
+    const title = card.title && !isGenericCardTitle(card.title) ? card.title : (fallbackNames[idx] || "Bước tiếp");
     return {
       title: escapeHtml(title),
       body: escapeHtml(isMeaningfulCardText(body) ? body : (idx === 0 ? fallbackTitle : fallbackBody)),
@@ -174,10 +175,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 2: Stack layer / bento cards
       const hl1 = scene.headline_line1 || "NẰM Ở LỚP NÀO";
       const hl2 = scene.headline_line2 || "TRONG TECH STACK?";
-      const b1t = scene.bento1_title || "Image";
-      const b1d = scene.bento1_desc || "Base layer, runtime, deps";
-      const b2t = scene.bento2_title || "Container";
-      const b3t = scene.bento3_title || "Compose";
+      const cards = getSceneCards(scene, 3);
+      const b1t = cards[0]?.title || "Image";
+      const b1d = cards[0]?.body || "Base layer, runtime, deps";
+      const b2t = cards[1]?.title || "Container";
+      const b3t = cards[2]?.title || "Compose";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
@@ -375,11 +377,12 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 5: Checklist before production — 4 bento cards
       const hl1 = scene.headline_line1 || "CHECKLIST";
       const hl2 = scene.headline_line2 || "TRƯỚC KHI TÍCH HỢP";
-      const b1t = scene.bento1_title || "Pin tag";
-      const b2t = scene.bento2_title || "Backup";
-      const b3t = scene.bento3_title || "Healthcheck";
-      const b4t = scene.bento4_title || "Update";
       const cards = getSceneCards(scene, 4);
+      const defaultTitles = ["Pin tag", "Backup", "Healthcheck", "Update"];
+      const b1t = cards[0]?.title === "Image" ? defaultTitles[0] : (cards[0]?.title || defaultTitles[0]);
+      const b2t = cards[1]?.title === "Cấu hình" ? defaultTitles[1] : (cards[1]?.title || defaultTitles[1]);
+      const b3t = cards[2]?.title === "Kiểm tra" ? defaultTitles[2] : (cards[2]?.title || defaultTitles[2]);
+      const b4t = cards[3]?.title === "Vận hành" ? defaultTitles[3] : (cards[3]?.title || defaultTitles[3]);
       const b1d = cards[0]?.body;
       const b2d = cards[1]?.body;
       const b3d = cards[2]?.body;
@@ -392,39 +395,22 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="bento-container" style="top: 540px;" id="bento-${sceneId}">
-          <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-1">
-              <div class="card-icon-svg">
-                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px;">${b1t}</div>
-              <div class="card-desc" style="font-size: 22px;">${b1d || pinnedImage}</div>
+        <div class="workflow-gate-list" style="position:absolute; top:520px; left:50%; transform:translateX(-50%); width:920px; z-index:30;" id="gates-${sceneId}">
+          ${[
+            [b1t, b1d || pinnedImage, "PIN"],
+            [b2t, b2d || "Volumes & data", "DATA"],
+            [b3t, b3d || "HEALTHCHECK CMD", "HEALTH"],
+            [b4t, b4d || `docker pull ${stripTag(imageRef)}`, "UPDATE"],
+          ].map(([title, body, tag], idx) => `
+          <div class="workflow-gate" id="gate-${sceneId}-${idx + 1}">
+            <div class="workflow-gate-index">${idx + 1}</div>
+            <div class="workflow-gate-copy">
+              <div class="workflow-gate-label">${tag}</div>
+              <div class="workflow-gate-title">${title}</div>
+              <div class="workflow-gate-desc">${body}</div>
             </div>
-            <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
-              <div class="card-icon-svg">
-                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px;">${b2t}</div>
-              <div class="card-desc" style="font-size: 22px;">${b2d || "Volumes & data"}</div>
-            </div>
-          </div>
-          <div class="bento-grid-2">
-            <div class="bento-card half card-accent-yellow" id="bc-${sceneId}-3">
-              <div class="card-icon-svg">
-                <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px;">${b3t}</div>
-              <div class="card-desc" style="font-size: 22px;">${b3d || "HEALTHCHECK CMD"}</div>
-            </div>
-            <div class="bento-card half card-accent-red" id="bc-${sceneId}-4">
-              <div class="card-icon-svg">
-                <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px;">${b4t}</div>
-              <div class="card-desc" style="font-size: 22px;">${b4d || `docker pull ${stripTag(imageRef)}`}</div>
-            </div>
-          </div>
+            <div class="workflow-gate-pill">PASS</div>
+          </div>`).join("")}
         </div>
         <div class="action-btn" id="btn-${sceneId}" style="top: 1418px; font-size: 26px; max-width: 900px;">
           <span class="action-icon">✓</span> ${btnText}
@@ -433,11 +419,10 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       gsap = `
         tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#bc-${sceneId}-1", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.1});
-        tl.from("#bc-${sceneId}-2", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.15});
-        tl.from("#bc-${sceneId}-3", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
-        tl.from("#bc-${sceneId}-4", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.25});
-        tl.from("#btn-${sceneId}", { y: 18, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.35});
+        ${[1, 2, 3, 4].map((n, idx) =>
+          `tl.from("#gate-${sceneId}-${n}", { y: 24, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.35 + idx * 0.36});`
+        ).join("\n        ")}
+        tl.from("#btn-${sceneId}", { y: 18, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 1.84});
       `;
       break;
     }
@@ -527,9 +512,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const command = cleanCommand(btnText) || `docker run --rm ${imageRef}`;
       const cards = getSceneCards(scene, 3);
       const runCards = cards.length > 0 ? cards : [
-        { title: "Dry run", body: "Chay voi --rm truoc khi dua vao compose." },
-        { title: "Logs", body: "Doc log khoi dong de bat loi config." },
-        { title: "Stop", body: "Dung container sau khi test xong." },
+        { title: "Dry run", body: "Chạy với --rm trước khi đưa vào compose." },
+        { title: "Logs", body: "Đọc log khởi động để bắt lỗi config." },
+        { title: "Stop", body: "Dừng container sau khi test xong." },
       ];
       html = `
         <div class="headline-container" style="top: 165px;">
@@ -581,7 +566,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.to("#rt-${sceneId}-3", { opacity: 1, duration: 0.15 }, ${start + 1.3});
         tl.to("#rt-${sceneId}-4", { opacity: 1, duration: 0.15 }, ${start + 1.8});
         ${runCards.slice(0, 3).map((_, idx) =>
-          `tl.from("#runstep-${sceneId}-${idx + 1}", { y: 18, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.35 + idx * 0.08});`
+          `tl.from("#runstep-${sceneId}-${idx + 1}", { y: 18, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.55 + idx * 0.36});`
         ).join("\n        ")}
         tl.to("#cursor-${sceneId}", { opacity: 0, repeat: ${Math.max(0, Math.ceil((sceneDuration - 2) / 1) - 1)}, yoyo: true, duration: 0.5 }, ${start + 2});
       `;
@@ -591,10 +576,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 8: Outro — star/docs/test CTA
       const hl1 = scene.headline_line1 || "STAR VÀ ĐỌC DOCS";
       const hl2 = scene.headline_line2 || "TRƯỚC KHI DÙNG THẬT";
-      const b1t = scene.bento1_title || "Pull";
-      const b2t = scene.bento2_title || "Run";
-      const b3t = scene.bento3_title || "Docs";
-      const b4t = scene.bento4_title || "Test";
+      const cards = getSceneCards(scene, 4);
+      const b1t = cards[0]?.title || "Pull";
+      const b2t = cards[1]?.title || "Run";
+      const b3t = cards[2]?.title || "Docs";
+      const b4t = cards[3]?.title || "Test";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
@@ -672,7 +658,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
   html = `<div class="dev-workflow-template workflow-card">${html}</div>`;
   if (/class="(?:bento-card|step-card|web-card|terminal-frame)/.test(html)) {
-    gsap += `\n        tl.from("#${sceneId} .workflow-card .bento-card, #${sceneId} .workflow-card .step-card, #${sceneId} .workflow-card .web-card, #${sceneId} .workflow-card .terminal-frame", { x: 32, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, ${start + 0.14});`;
+    gsap += `\n        tl.from("#${sceneId} .workflow-card .bento-card, #${sceneId} .workflow-card .step-card, #${sceneId} .workflow-card .web-card, #${sceneId} .workflow-card .terminal-frame", { x: 32, duration: 0.22, stagger: 0.05, ease: "power3.out" }, ${start + 0.14});`;
   }
   return { html, gsap };
 }

@@ -687,3 +687,180 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
 }
 
+/* Safe dense layout: keep every generated card visible in vertical renders. */
+.bento-container,
+.step-container,
+.repo-proof-panel,
+.web-action-panel {
+  max-height: 870px;
+}
+
+.bento-container {
+  gap: 18px !important;
+}
+
+.bento-grid-2 {
+  gap: 18px !important;
+}
+
+.bento-card {
+  min-height: 118px !important;
+  padding: 20px 24px !important;
+  box-sizing: border-box !important;
+}
+
+.bento-card.half {
+  min-height: 205px !important;
+  padding: 22px 18px !important;
+  gap: 10px !important;
+}
+
+.card-icon-svg {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 16px !important;
+  margin-right: 16px !important;
+  flex-shrink: 0 !important;
+}
+
+.card-icon-svg svg {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+.bento-card.half .card-icon-svg {
+  margin: 0 auto 8px auto !important;
+}
+
+.card-title,
+.bento-card .card-title {
+  font-size: 29px !important;
+  line-height: 1.16 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.card-desc,
+.bento-card .card-desc {
+  font-size: 20px !important;
+  line-height: 1.28 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.step-container {
+  gap: 14px !important;
+}
+
+.step-card {
+  min-height: 116px !important;
+  padding: 18px 24px !important;
+  grid-template-columns: 58px 1fr !important;
+  gap: 18px !important;
+}
+
+.step-number {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 14px !important;
+  font-size: 24px !important;
+  flex-shrink: 0 !important;
+}
+
+.step-title {
+  font-size: 28px !important;
+  line-height: 1.16 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.step-desc {
+  margin-top: 6px !important;
+  font-size: 20px !important;
+  line-height: 1.28 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.step-command {
+  font-size: 21px !important;
+  padding: 12px 16px !important;
+  margin-top: 10px !important;
+}
+
+.repo-badge,
+.docker-stats-card {
+  padding: 18px 24px !important;
+  gap: 18px !important;
+}
+
+.repo-name,
+.docker-image-name {
+  font-size: 30px !important;
+  overflow-wrap: anywhere !important;
+}
+
+.repo-meta,
+.docker-meta {
+  font-size: 22px !important;
+}
+
+.github-star-crop {
+  max-height: 150px !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  background: rgba(8, 12, 18, 0.88) !important;
+}
+
+.headline-container {
+  padding-left: 58px !important;
+  padding-right: 58px !important;
+}
+
+.headline-line1 {
+  line-height: 1.1 !important;
+}
+
+.headline-line2 {
+  line-height: 1.1 !important;
+}
+
+.github-star-wrap {
+  margin-top: 18px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 22px !important;
+  background: rgba(8, 12, 18, 0.88) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32) !important;
+  overflow: hidden !important;
+}
+
+.github-star-wrap .github-star-crop {
+  margin-top: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.github-star-fallback {
+  display: flex;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 18px !important;
+  padding: 14px 22px !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.github-star-wrap.has-star-image .github-star-fallback {
+  display: none !important;
+}
+
+.github-star-fallback span {
+  color: rgba(255,255,255,0.62) !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+.github-star-fallback strong {
+  color: #f3ca56 !important;
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 14px rgba(243,202,86,0.35) !important;
+}

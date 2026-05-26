@@ -104,19 +104,20 @@ export function getSceneCards(scene, limit = 4) {
 
   const fallbackTitle = scene.headline_line2 || scene.headline_line1 || scene.title || "Nội dung chính";
   const fallbackBody = scene.central_text || scene.summary || scene.description || scene.text || "Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.";
-  const fallbackCards = Array.from({ length: Math.max(3, Math.min(limit, 4)) }, (_, idx) => ({
-    title: `Mục ${idx + 1}`,
+  const fallbackNames = ["Image", "Cấu hình", "Kiểm tra", "Vận hành"];
+  const fallbackCards = Array.from({ length: Math.max(3, limit) }, (_, idx) => ({
+    title: fallbackNames[idx] || "Bước tiếp",
     body: idx === 0 ? fallbackTitle : fallbackBody,
   }));
   const meaningfulCards = rawCards.filter((card) => {
     const body = card.body || card.desc || card.description;
-    return isMeaningfulCardText(body) || !isGenericCardTitle(card.title);
+    return isMeaningfulCardText(body) && !isGenericCardTitle(card.title);
   });
-  const safeCards = meaningfulCards.length > 0 ? meaningfulCards : fallbackCards;
+  const safeCards = [...meaningfulCards, ...fallbackCards].slice(0, Math.max(3, limit));
 
   return safeCards.slice(0, limit).map((card, idx) => {
     const body = card.body || card.desc || card.description;
-    const title = card.title && !isGenericCardTitle(card.title) ? card.title : `Mục ${idx + 1}`;
+    const title = card.title && !isGenericCardTitle(card.title) ? card.title : (fallbackNames[idx] || "Bước tiếp");
     return {
       title: escapeHtml(title),
       body: escapeHtml(isMeaningfulCardText(body) ? body : (idx === 0 ? fallbackTitle : fallbackBody)),
@@ -174,10 +175,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 2: Stack layer / bento cards
       const hl1 = scene.headline_line1 || "NẰM Ở LỚP NÀO";
       const hl2 = scene.headline_line2 || "TRONG TECH STACK?";
-      const b1t = scene.bento1_title || "Image";
-      const b1d = scene.bento1_desc || "Base layer, runtime, deps";
-      const b2t = scene.bento2_title || "Container";
-      const b3t = scene.bento3_title || "Compose";
+      const cards = getSceneCards(scene, 3);
+      const b1t = cards[0]?.title || "Image";
+      const b1d = cards[0]?.body || "Base layer, runtime, deps";
+      const b2t = cards[1]?.title || "Container";
+      const b3t = cards[2]?.title || "Compose";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
@@ -375,11 +377,12 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 5: Checklist before production — 4 bento cards
       const hl1 = scene.headline_line1 || "CHECKLIST";
       const hl2 = scene.headline_line2 || "TRƯỚC KHI TÍCH HỢP";
-      const b1t = scene.bento1_title || "Pin tag";
-      const b2t = scene.bento2_title || "Backup";
-      const b3t = scene.bento3_title || "Healthcheck";
-      const b4t = scene.bento4_title || "Update";
       const cards = getSceneCards(scene, 4);
+      const defaultTitles = ["Pin tag", "Backup", "Healthcheck", "Update"];
+      const b1t = cards[0]?.title === "Image" ? defaultTitles[0] : (cards[0]?.title || defaultTitles[0]);
+      const b2t = cards[1]?.title === "Cấu hình" ? defaultTitles[1] : (cards[1]?.title || defaultTitles[1]);
+      const b3t = cards[2]?.title === "Kiểm tra" ? defaultTitles[2] : (cards[2]?.title || defaultTitles[2]);
+      const b4t = cards[3]?.title === "Vận hành" ? defaultTitles[3] : (cards[3]?.title || defaultTitles[3]);
       const b1d = cards[0]?.body;
       const b2d = cards[1]?.body;
       const b3d = cards[2]?.body;
@@ -527,9 +530,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const command = cleanCommand(btnText) || `docker run --rm ${imageRef}`;
       const cards = getSceneCards(scene, 3);
       const runCards = cards.length > 0 ? cards : [
-        { title: "Dry run", body: "Chay voi --rm truoc khi dua vao compose." },
-        { title: "Logs", body: "Doc log khoi dong de bat loi config." },
-        { title: "Stop", body: "Dung container sau khi test xong." },
+        { title: "Dry run", body: "Chạy với --rm trước khi đưa vào compose." },
+        { title: "Logs", body: "Đọc log khởi động để bắt lỗi config." },
+        { title: "Stop", body: "Dừng container sau khi test xong." },
       ];
       html = `
         <div class="headline-container" style="top: 165px;">
@@ -581,7 +584,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.to("#rt-${sceneId}-3", { opacity: 1, duration: 0.15 }, ${start + 1.3});
         tl.to("#rt-${sceneId}-4", { opacity: 1, duration: 0.15 }, ${start + 1.8});
         ${runCards.slice(0, 3).map((_, idx) =>
-          `tl.from("#runstep-${sceneId}-${idx + 1}", { y: 18, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.35 + idx * 0.08});`
+          `tl.from("#runstep-${sceneId}-${idx + 1}", { y: 18, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.55 + idx * 0.36});`
         ).join("\n        ")}
         tl.to("#cursor-${sceneId}", { opacity: 0, repeat: ${Math.max(0, Math.ceil((sceneDuration - 2) / 1) - 1)}, yoyo: true, duration: 0.5 }, ${start + 2});
       `;
@@ -591,10 +594,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 8: Outro — star/docs/test CTA
       const hl1 = scene.headline_line1 || "STAR VÀ ĐỌC DOCS";
       const hl2 = scene.headline_line2 || "TRƯỚC KHI DÙNG THẬT";
-      const b1t = scene.bento1_title || "Pull";
-      const b2t = scene.bento2_title || "Run";
-      const b3t = scene.bento3_title || "Docs";
-      const b4t = scene.bento4_title || "Test";
+      const cards = getSceneCards(scene, 4);
+      const b1t = cards[0]?.title || "Pull";
+      const b2t = cards[1]?.title || "Run";
+      const b3t = cards[2]?.title || "Docs";
+      const b4t = cards[3]?.title || "Test";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>

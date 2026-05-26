@@ -104,19 +104,20 @@ export function getSceneCards(scene, limit = 4) {
 
   const fallbackTitle = scene.headline_line2 || scene.headline_line1 || scene.title || "Nội dung chính";
   const fallbackBody = scene.central_text || scene.summary || scene.description || scene.text || "Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.";
-  const fallbackCards = Array.from({ length: Math.max(3, Math.min(limit, 4)) }, (_, idx) => ({
-    title: `Mục ${idx + 1}`,
+  const fallbackNames = ["Image", "Cấu hình", "Kiểm tra", "Vận hành"];
+  const fallbackCards = Array.from({ length: Math.max(3, limit) }, (_, idx) => ({
+    title: fallbackNames[idx] || "Bước tiếp",
     body: idx === 0 ? fallbackTitle : fallbackBody,
   }));
   const meaningfulCards = rawCards.filter((card) => {
     const body = card.body || card.desc || card.description;
-    return isMeaningfulCardText(body) || !isGenericCardTitle(card.title);
+    return isMeaningfulCardText(body) && !isGenericCardTitle(card.title);
   });
-  const safeCards = meaningfulCards.length > 0 ? meaningfulCards : fallbackCards;
+  const safeCards = [...meaningfulCards, ...fallbackCards].slice(0, Math.max(3, limit));
 
   return safeCards.slice(0, limit).map((card, idx) => {
     const body = card.body || card.desc || card.description;
-    const title = card.title && !isGenericCardTitle(card.title) ? card.title : `Mục ${idx + 1}`;
+    const title = card.title && !isGenericCardTitle(card.title) ? card.title : (fallbackNames[idx] || "Bước tiếp");
     return {
       title: escapeHtml(title),
       body: escapeHtml(isMeaningfulCardText(body) ? body : (idx === 0 ? fallbackTitle : fallbackBody)),
@@ -174,10 +175,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 2: Stack layer / bento cards
       const hl1 = scene.headline_line1 || "NẰM Ở LỚP NÀO";
       const hl2 = scene.headline_line2 || "TRONG TECH STACK?";
-      const b1t = scene.bento1_title || "Image";
-      const b1d = scene.bento1_desc || "Base layer, runtime, deps";
-      const b2t = scene.bento2_title || "Container";
-      const b3t = scene.bento3_title || "Compose";
+      const cards = getSceneCards(scene, 3);
+      const b1t = cards[0]?.title || "Image";
+      const b1d = cards[0]?.body || "Base layer, runtime, deps";
+      const b2t = cards[1]?.title || "Container";
+      const b3t = cards[2]?.title || "Compose";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
@@ -327,32 +329,20 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${hl2}</div>
         </div>
-        <div class="bento-container" style="top: 790px;" id="bento-${sceneId}">
-          <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-${sceneId}-1">
-              <div class="card-icon-svg">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 28px;">${card1Title}</div>
-              <div class="card-desc" style="font-size: 20px;">${card1Body}</div>
+        <div class="deploy-spec-table" style="position:absolute; top:760px; left:50%; transform:translateX(-50%); width:920px; z-index:30;" id="spec-${sceneId}">
+          ${[
+            [card1Title, card1Body, "PORT"],
+            [card2Title, card2Body, "VOLUME"],
+            [card3Title, card3Body, "ENV"],
+          ].map(([title, body, tag], idx) => `
+          <div class="deploy-spec-row" id="spec-${sceneId}-${idx + 1}">
+            <div class="deploy-spec-tag">${tag}</div>
+            <div class="deploy-spec-main">
+              <div class="deploy-spec-title">${title}</div>
+              <div class="deploy-spec-desc">${body}</div>
             </div>
-            <div class="bento-card half card-accent-green" id="bc-${sceneId}-2">
-              <div class="card-icon-svg">
-                <svg viewBox="0 0 24 24"><path d="M5 3a2 2 0 0 0-2 2"/><path d="M19 3a2 2 0 0 1 2 2"/><path d="M21 19a2 2 0 0 1-2 2"/><path d="M5 21a2 2 0 0 1-2-2"/><path d="M9 3h1"/><path d="M9 21h1"/><path d="M14 3h1"/><path d="M14 21h1"/><path d="M3 9v1"/><path d="M21 9v1"/><path d="M3 14v1"/><path d="M21 14v1"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 28px;">${card2Title}</div>
-              <div class="card-desc" style="font-size: 20px;">${card2Body}</div>
-            </div>
-          </div>
-          <div class="bento-card full card-accent-yellow" id="bc-${sceneId}-3">
-            <div class="card-icon-svg">
-              <svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h6"/><circle cx="18" cy="16" r="3"/><path d="M18 13v3l1.5 1.5"/></svg>
-            </div>
-            <div class="card-text-group">
-              <div class="card-title">${card3Title}</div>
-              <div class="card-desc">${card3Body}</div>
-            </div>
-          </div>
+            <div class="deploy-spec-status">READY</div>
+          </div>`).join("")}
         </div>
         <div class="action-btn" id="btn-${sceneId}" style="top: 1430px; font-size: 26px;">
           <span class="action-icon">⚠</span> ${btnText}
@@ -362,9 +352,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.from("#glow-${sceneId}", { scale: 0.7, y: 30, opacity: 0, duration: 0.35, ease: "back.out(1.4)" }, ${start});
         tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
         tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2});
-        tl.from("#bc-${sceneId}-1", { x: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.35});
-        tl.from("#bc-${sceneId}-2", { x: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.35});
-        tl.from("#bc-${sceneId}-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.45});
+        tl.from("#spec-${sceneId}-1", { x: -24, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.35});
+        tl.from("#spec-${sceneId}-2", { x: -24, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.71});
+        tl.from("#spec-${sceneId}-3", { x: -24, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 1.07});
         tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.55});
       `;
       break;
@@ -375,11 +365,12 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 5: Checklist before production — 4 bento cards
       const hl1 = scene.headline_line1 || "CHECKLIST";
       const hl2 = scene.headline_line2 || "TRƯỚC KHI TÍCH HỢP";
-      const b1t = scene.bento1_title || "Pin tag";
-      const b2t = scene.bento2_title || "Backup";
-      const b3t = scene.bento3_title || "Healthcheck";
-      const b4t = scene.bento4_title || "Update";
       const cards = getSceneCards(scene, 4);
+      const defaultTitles = ["Pin tag", "Backup", "Healthcheck", "Update"];
+      const b1t = cards[0]?.title === "Image" ? defaultTitles[0] : (cards[0]?.title || defaultTitles[0]);
+      const b2t = cards[1]?.title === "Cấu hình" ? defaultTitles[1] : (cards[1]?.title || defaultTitles[1]);
+      const b3t = cards[2]?.title === "Kiểm tra" ? defaultTitles[2] : (cards[2]?.title || defaultTitles[2]);
+      const b4t = cards[3]?.title === "Vận hành" ? defaultTitles[3] : (cards[3]?.title || defaultTitles[3]);
       const b1d = cards[0]?.body;
       const b2d = cards[1]?.body;
       const b3d = cards[2]?.body;
@@ -527,9 +518,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const command = cleanCommand(btnText) || `docker run --rm ${imageRef}`;
       const cards = getSceneCards(scene, 3);
       const runCards = cards.length > 0 ? cards : [
-        { title: "Dry run", body: "Chay voi --rm truoc khi dua vao compose." },
-        { title: "Logs", body: "Doc log khoi dong de bat loi config." },
-        { title: "Stop", body: "Dung container sau khi test xong." },
+        { title: "Dry run", body: "Chạy với --rm trước khi đưa vào compose." },
+        { title: "Logs", body: "Đọc log khởi động để bắt lỗi config." },
+        { title: "Stop", body: "Dừng container sau khi test xong." },
       ];
       html = `
         <div class="headline-container" style="top: 165px;">
@@ -581,7 +572,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.to("#rt-${sceneId}-3", { opacity: 1, duration: 0.15 }, ${start + 1.3});
         tl.to("#rt-${sceneId}-4", { opacity: 1, duration: 0.15 }, ${start + 1.8});
         ${runCards.slice(0, 3).map((_, idx) =>
-          `tl.from("#runstep-${sceneId}-${idx + 1}", { y: 18, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.35 + idx * 0.08});`
+          `tl.from("#runstep-${sceneId}-${idx + 1}", { y: 18, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.55 + idx * 0.36});`
         ).join("\n        ")}
         tl.to("#cursor-${sceneId}", { opacity: 0, repeat: ${Math.max(0, Math.ceil((sceneDuration - 2) / 1) - 1)}, yoyo: true, duration: 0.5 }, ${start + 2});
       `;
@@ -591,10 +582,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 8: Outro — star/docs/test CTA
       const hl1 = scene.headline_line1 || "STAR VÀ ĐỌC DOCS";
       const hl2 = scene.headline_line2 || "TRƯỚC KHI DÙNG THẬT";
-      const b1t = scene.bento1_title || "Pull";
-      const b2t = scene.bento2_title || "Run";
-      const b3t = scene.bento3_title || "Docs";
-      const b4t = scene.bento4_title || "Test";
+      const cards = getSceneCards(scene, 4);
+      const b1t = cards[0]?.title || "Pull";
+      const b2t = cards[1]?.title || "Run";
+      const b3t = cards[2]?.title || "Docs";
+      const b4t = cards[3]?.title || "Test";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${hl1}</div>
@@ -672,7 +664,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
   html = `<div class="self-host-template deploy-card">${html}</div>`;
   if (/class="(?:bento-card|step-card|web-card|terminal-frame)/.test(html)) {
-    gsap += `\n        tl.from("#${sceneId} .deploy-card .bento-card, #${sceneId} .deploy-card .step-card, #${sceneId} .deploy-card .web-card, #${sceneId} .deploy-card .terminal-frame", { y: 28, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, ${start + 0.14});`;
+    gsap += `\n        tl.from("#${sceneId} .deploy-card .bento-card, #${sceneId} .deploy-card .step-card, #${sceneId} .deploy-card .web-card, #${sceneId} .deploy-card .terminal-frame", { y: 28, duration: 0.22, stagger: 0.05, ease: "power3.out" }, ${start + 0.14});`;
   }
   return { html, gsap };
 }

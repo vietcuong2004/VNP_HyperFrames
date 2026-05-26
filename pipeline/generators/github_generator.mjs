@@ -80,18 +80,18 @@ export const GITHUB_LAYOUT_SCHEMA = [
     headline_line2: "BẮT ĐẦU NHANH",
     content_mode: "steps",
     steps: [
-      { title: "Buoc 1", body: "Viec can lam dau tien" },
-      { title: "Buoc 2", body: "Lenh hoac thao tac tiep theo" },
-      { title: "Buoc 3", body: "Cach kiem tra ket qua" }
+      { title: "Bước 1", body: "Việc cần làm đầu tiên" },
+      { title: "Bước 2", body: "Lệnh hoặc thao tác tiếp theo" },
+      { title: "Bước 3", body: "Cách kiểm tra kết quả" }
     ],
     bento1_title: "Bước 1",
-    bento1_desc: "Noi dung buoc 1",
+    bento1_desc: "Nội dung bước 1",
     bento2_title: "Bước 2",
-    bento2_desc: "Noi dung buoc 2",
+    bento2_desc: "Nội dung bước 2",
     bento3_title: "Bước 3",
-    bento3_desc: "Noi dung buoc 3",
+    bento3_desc: "Nội dung bước 3",
     bento4_title: "Bước 4",
-    bento4_desc: "Noi dung buoc 4"
+    bento4_desc: "Nội dung bước 4"
   },
   {
     scene: 4,
@@ -130,34 +130,34 @@ export const GITHUB_LAYOUT_SCHEMA = [
   {
     scene: 7,
     layout: "clone",
-    voice: "Huong dan clone repo, doc README va chay thu trong mot project phu truoc khi tich hop that...",
-    visual: "Hien thi lenh git clone va checklist chay thu toi gian.",
+    voice: "Hướng dẫn clone repo, đọc README và chạy thử trong một project phụ trước khi tích hợp thật...",
+    visual: "Hiển thị lệnh git clone và checklist chạy thử tối giản.",
     headline_line1: "CLONE REPO",
-    headline_line2: "CHAY THU AN TOAN",
+    headline_line2: "CHẠY THỬ AN TOÀN",
     btn_text: "$ git clone github.com/owner/repo"
   },
   {
     scene: 8,
     layout: "outro",
-    voice: "Ket lai bang loi khuyen kiem tra license, issue, release va star repo neu thay huu ich...",
-    visual: "Outro nhac star, binh luan va luu repo de xem lai.",
-    headline_line1: "TONG KET",
-    headline_line2: "LUU LAI NEU HUU ICH",
+    voice: "Kết lại bằng lời khuyên kiểm tra license, issue, release và star repo nếu thấy hữu ích...",
+    visual: "Outro nhắc star, bình luận và lưu repo để xem lại.",
+    headline_line1: "TỔNG KẾT",
+    headline_line2: "LƯU LẠI NẾU HỮU ÍCH",
     content_mode: "steps",
     steps: [
-      { title: "Star", body: "Luu repo neu phu hop" },
-      { title: "Issue", body: "Doc issue truoc khi dung" },
-      { title: "Release", body: "Kiem tra ban phat hanh" },
-      { title: "License", body: "Xac nhan license" }
+      { title: "Star", body: "Lưu repo nếu phù hợp" },
+      { title: "Issue", body: "Đọc issue trước khi dùng" },
+      { title: "Release", body: "Kiểm tra bản phát hành" },
+      { title: "License", body: "Xác nhận license" }
     ],
     bento1_title: "Star",
-    bento1_desc: "Luu repo neu phu hop",
+    bento1_desc: "Lưu repo nếu phù hợp",
     bento2_title: "Fork",
-    bento2_desc: "Thu nghiem rieng",
+    bento2_desc: "Thử nghiệm riêng",
     bento3_title: "Issue",
-    bento3_desc: "Doc issue truoc khi dung",
-    bento4_title: "Theo doi",
-    bento4_desc: "Theo doi release moi"
+    bento3_desc: "Đọc issue trước khi dùng",
+    bento4_title: "Theo dõi",
+    bento4_desc: "Theo dõi release mới"
   }
 ];
 
@@ -180,7 +180,7 @@ function normalizeCards(scene, limit = 4) {
           .filter((card) => card.title || card.body);
 
   return source.slice(0, limit).map((card, idx) => ({
-    title: softLimit(card.title || `Buoc ${idx + 1}`, 18),
+    title: softLimit(card.title || `Bước ${idx + 1}`, 18),
     body: softLimit(card.body || card.desc || card.description || "", 90),
   }));
 }
@@ -228,13 +228,13 @@ function githubHeadlinePair(idx, context = {}) {
   const repo = softLimit(repoShortName(context), 16);
   return [
     [repo, "REPO GITHUB"],
-    ["USE CASE", `${repo} GIUP GI`],
-    [`RUN ${repo}`, "BAT DAU AN TOAN"],
-    ["DIEM MANH", `${repo} NOI BAT`],
-    ["CHECKLIST", "TRUOC KHI DUNG"],
-    ["STATS", "TIN HIEU GITHUB"],
-    [`CLONE ${repo}`, "CHAY THU RIENG"],
-    ["LUU REPO", "DOC README KY"],
+    ["USE CASE", `${repo} GIÚP GÌ`],
+    [`RUN ${repo}`, "BẮT ĐẦU AN TOÀN"],
+    ["ĐIỂM MẠNH", `${repo} NỔI BẬT`],
+    ["CHECKLIST", "TRƯỚC KHI DÙNG"],
+    ["STATS", "TÍN HIỆU GITHUB"],
+    [`CLONE ${repo}`, "CHẠY THỬ RIÊNG"],
+    ["LƯU REPO", "ĐỌC README KỸ"],
   ][idx] || [repo, "REPO GITHUB"];
 }
 
@@ -316,9 +316,9 @@ export async function generateScenes(rawData, format, subtemplate = "template1")
          - "bento1_desc": tối đa 70 ký tự.
          - "bento1_title" đến "bento4_title": tối đa 12 ký tự.
          - "btn_text": Lệnh CLI hoặc chuỗi cực ngắn (<= 30 ký tự).
-      4. Khong copy nguyen placeholder headline nhu "CAI DAT / LO TRINH", "BAT DAU NHANH", "TONG KET"; hay viet theo ten repo va ngu canh thật.
-      5. Voi canh cai dat, clone, demo, checklist hoac outro, dien "content_mode": "steps" va mang "steps" gom 3-4 object { "title", "body" }. Cac bento_title/bento_desc nen khop voi cac step nay.
-      6. Khong bia lenh install, API key, port, config, price hoac benchmark neu README khong neu. Neu README thieu lenh, dung buoc an toan nhu "Doc README", "Kiem tra release", "Chay demo nho".
+      4. Không copy nguyên placeholder headline như "CÀI ĐẶT / LỘ TRÌNH", "BẮT ĐẦU NHANH", "TỔNG KẾT"; hãy viết theo tên repo và ngữ cảnh thật.
+      5. Với cảnh cài đặt, clone, demo, checklist hoặc outro, điền "content_mode": "steps" và mảng "steps" gồm 3-4 object { "title", "body" }. Các bento_title/bento_desc nên khớp với các step này.
+      6. Không bịa lệnh install, API key, port, config, price hoặc benchmark nếu README không nêu. Nếu README thiếu lệnh, dùng bước an toàn như "Đọc README", "Kiểm tra release", "Chạy demo nhỏ".
       7. Thong tin Scene 6 (stats) phai chinh xac:
          - "repo_name": "${target.owner}/${target.repo}".toLowerCase()
          - "repo_lang": "${repoData.language || "N/A"}"

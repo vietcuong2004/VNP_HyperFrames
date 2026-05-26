@@ -233,14 +233,14 @@ export function normalizeWebScenes(scenes, context = {}) {
     if (idx !== 4 && (isGenericWebHeadline(merged.headline_line1) || isGenericWebHeadline(merged.headline_line2))) {
       const source = actionHeadline(context);
       const pairs = [
-        [source, "WEB CAN KIEM TRA"],
-        ["TOM TAT", `${source} NOI GI`],
-        ["CAU HOI", "DOC TRUOC KHI DUNG"],
-        ["DIEM CHINH", "RUT TU NGUON WEB"],
-        [source, "KIEM TRA TRUOC"],
-        ["LUU LINK", "KIEM CHUNG LAI"],
+        [source, "WEB CẦN KIỂM TRA"],
+        ["TÓM TẮT", `${source} NÓI GÌ`],
+        ["CÂU HỎI", "ĐỌC TRƯỚC KHI DÙNG"],
+        ["ĐIỂM CHÍNH", "RÚT TỪ NGUỒN WEB"],
+        [source, "KIỂM TRA TRƯỚC"],
+        ["LƯU LINK", "KIỂM CHỨNG LẠI"],
       ];
-      [merged.headline_line1, merged.headline_line2] = pairs[idx] || [source, "KIEM TRA NGUON"];
+      [merged.headline_line1, merged.headline_line2] = pairs[idx] || [source, "KIỂM TRA NGUỒN"];
     }
 
     if (

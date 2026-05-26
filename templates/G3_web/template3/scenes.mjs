@@ -41,19 +41,20 @@ export function getSceneCards(scene, limit = 4) {
 
   const fallbackTitle = scene.headline_line2 || scene.headline_line1 || scene.title || "Nội dung chính";
   const fallbackBody = scene.central_text || scene.summary || scene.description || scene.text || "Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.";
-  const fallbackCards = Array.from({ length: Math.max(3, Math.min(limit, 4)) }, (_, idx) => ({
-    title: `Ý chính ${idx + 1}`,
+  const fallbackNames = ["Tóm tắt", "Ngữ cảnh", "Kiểm chứng", "Bước tiếp"];
+  const fallbackCards = Array.from({ length: Math.max(3, limit) }, (_, idx) => ({
+    title: fallbackNames[idx] || "Bước tiếp",
     body: idx === 0 ? fallbackTitle : fallbackBody,
   }));
   const meaningfulCards = rawCards.filter((card) => {
     const body = card.body || card.desc || card.description;
-    return isMeaningfulCardText(body) || !isGenericCardTitle(card.title);
+    return isMeaningfulCardText(body) && !isGenericCardTitle(card.title);
   });
-  const safeCards = meaningfulCards.length > 0 ? meaningfulCards : fallbackCards;
+  const safeCards = [...meaningfulCards, ...fallbackCards].slice(0, Math.max(3, limit));
 
   return safeCards.slice(0, limit).map((card, idx) => {
     const body = card.body || card.desc || card.description;
-    const title = card.title && !isGenericCardTitle(card.title) ? card.title : `Ý chính ${idx + 1}`;
+    const title = card.title && !isGenericCardTitle(card.title) ? card.title : (fallbackNames[idx] || "Bước tiếp");
     return {
       title: escapeHtml(title),
       body: escapeHtml(isMeaningfulCardText(body) ? body : (idx === 0 ? fallbackTitle : fallbackBody)),
@@ -226,9 +227,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const title2 = scene.headline_line2 || "RÚT TỪ NGUỒN WEB";
       const cards = getSceneCards(scene, 3);
       const evidenceCards = cards.length > 0 ? cards : [
-        { title: "Key point", body: "Tom tat diem dang chu y nhat tu nguon." },
-        { title: "Evidence", body: "Can doi chieu voi trang goc truoc khi dung." },
-        { title: "Limit", body: "Gia, API, quota co the thay doi theo thoi gian." },
+        { title: "Key point", body: "Tóm tắt điểm đáng chú ý nhất từ nguồn." },
+        { title: "Evidence", body: "Cần đối chiếu với trang gốc trước khi dùng." },
+        { title: "Limit", body: "Giá, API, quota có thể thay đổi theo thời gian." },
       ];
       html = `
         <div class="metric-layout-title"><span class="headline-line1" id="hl1-${sceneId}" style="font-size:inherit; line-height:inherit; font-weight:inherit; color:inherit; text-shadow:none;">${title1}</span><br/><span class="headline-line2" id="hl2-${sceneId}" style="font-size:inherit; line-height:inherit; font-weight:inherit; color: #fdf01c; background:none; -webkit-text-fill-color:#fdf01c; filter:none;">${title2}</span></div>
@@ -246,7 +247,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       gsap = `
         tl.from(".metric-layout-title", { y: -20, opacity: 0, duration: 0.3, ease: "power3.out" }, ${start});
         ${evidenceCards.slice(0, 3).map((_, idx) =>
-          `tl.from("#ev-${sceneId}-${idx + 1}", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.1 + idx * 0.1});`
+          `tl.from("#ev-${sceneId}-${idx + 1}", { y: 22, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.35 + idx * 0.36});`
         ).join("\n        ")}
       `;
       break;
@@ -254,26 +255,27 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Scene 5: Concrete next action
       const title1 = scene.headline_line1 || "HÀNH ĐỘNG TIẾP";
       const title2 = scene.headline_line2 || "KIỂM TRA NGUỒN";
-      const btnText = escapeHtml(scene.btn_text || "Mo nguon va kiem chung");
+      const btnText = escapeHtml(scene.btn_text || "Mở nguồn và kiểm chứng");
       const cards = getSceneCards(scene, 3);
       const actionCards = cards.length > 0 ? cards : [
-        { title: "Open", body: "Mo link goc de doi chieu noi dung." },
-        { title: "Check", body: "Kiem tra ngay thang, gia va gioi han." },
-        { title: "Test", body: "Thu mot vi du nho truoc khi ap dung." },
+        { title: "Open", body: "Mở link gốc để đối chiếu nội dung." },
+        { title: "Check", body: "Kiểm tra ngày tháng, giá và giới hạn." },
+        { title: "Test", body: "Thử một ví dụ nhỏ trước khi áp dụng." },
       ];
       html = `
         <div class="headline-container" style="top: 165px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="web-action-panel" style="position:absolute; top:455px; left:50%; transform:translateX(-50%); width:920px; z-index:30;">
+        <div class="web-action-panel action-console-list" style="position:absolute; top:455px; left:50%; transform:translateX(-50%); width:920px; z-index:30;">
           ${actionCards.slice(0, 3).map((card, idx) => `
-          <div class="step-card" id="act-${sceneId}-${idx + 1}" style="margin-bottom:24px;">
-            <div class="step-number">${idx + 1}</div>
-            <div>
-              <div class="step-title">${card.title}</div>
-              <div class="step-desc">${card.body}</div>
+          <div class="action-console-row" id="act-${sceneId}-${idx + 1}">
+            <div class="action-console-prompt">run.${idx + 1}</div>
+            <div class="action-console-copy">
+              <div class="action-console-title">${card.title}</div>
+              <div class="action-console-desc">${card.body}</div>
             </div>
+            <div class="action-console-state">QUEUE</div>
           </div>`).join("")}
         </div>
         <div class="action-btn" id="btn-${sceneId}" style="top: 1235px; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #ff4757; box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);">
@@ -284,9 +286,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.from("#hl1-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#hl2-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start});
         ${actionCards.slice(0, 3).map((_, idx) =>
-          `tl.from("#act-${sceneId}-${idx + 1}", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.1 + idx * 0.1});`
+          `tl.from("#act-${sceneId}-${idx + 1}", { y: 22, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.35 + idx * 0.36});`
         ).join("\n        ")}
-        tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 0.45});
+        tl.from("#btn-${sceneId}", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, ${start + 1.48});
       `;
       break;
     }
@@ -296,10 +298,10 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const title2 = scene.headline_line2 || "KIỂM CHỨNG TRƯỚC KHI DÙNG";
       const cards = getSceneCards(scene, 4);
       const outroCards = cards.length > 0 ? cards : [
-        { title: scene.bento1_title || "Nguon chinh", body: scene.bento1_desc || "Luu link goc de doi chieu." },
-        { title: scene.bento2_title || "Tom tat", body: scene.bento2_desc || "Dung nhu diem bat dau." },
-        { title: scene.bento3_title || "Kiem chung", body: scene.bento3_desc || "Doc lai pricing, ngay thang va gioi han." },
-        { title: scene.bento4_title || "Ap dung", body: scene.bento4_desc || "Thu nho truoc khi rollout." },
+        { title: scene.bento1_title || "Nguồn chính", body: scene.bento1_desc || "Lưu link gốc để đối chiếu." },
+        { title: scene.bento2_title || "Tóm tắt", body: scene.bento2_desc || "Dùng như điểm bắt đầu." },
+        { title: scene.bento3_title || "Kiểm chứng", body: scene.bento3_desc || "Đọc lại pricing, ngày tháng và giới hạn." },
+        { title: scene.bento4_title || "Áp dụng", body: scene.bento4_desc || "Thử nhỏ trước khi rollout." },
       ];
       html = `
         <div class="headline-container" style="top: 185px;">
@@ -356,7 +358,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Cảnh 7: Quick Start
       const title1 = scene.headline_line1 || "ĐỌC NGUỒN";
       const title2 = scene.headline_line2 || "KIỂM CHỨNG TIẾP";
-      const btnText = scene.btn_text || "Mo link goc va doc chi tiet";
+      const btnText = scene.btn_text || "Mở link gốc và đọc chi tiết";
+      const cards = getSceneCards(scene, 3);
       html = `
         <div class="main-glow-icon" id="glow-${sceneId}">
           <div class="glow-svg-container">
@@ -367,7 +370,17 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
           <div class="headline-line2" id="hl2-${sceneId}">${title2}</div>
         </div>
-        <div class="action-btn" id="btn-${sceneId}" style="font-family: monospace; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #00ff88;">
+        <div class="web-action-panel" style="position:absolute; top:500px; left:50%; transform:translateX(-50%); width:920px; z-index:30;">
+          ${cards.slice(0, 3).map((card, idx) => `
+          <div class="step-card" id="read-${sceneId}-${idx + 1}" style="margin-bottom:22px;">
+            <div class="step-number">${idx + 1}</div>
+            <div>
+              <div class="step-title">${card.title}</div>
+              <div class="step-desc">${card.body}</div>
+            </div>
+          </div>`).join("")}
+        </div>
+        <div class="action-btn" id="btn-${sceneId}" style="top:1235px; font-family: monospace; font-size: 28px; background: rgba(0,0,0,0.4); border: 2px solid #00ff88;">
           ${btnText}
         </div>
       `;
@@ -375,7 +388,10 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.from("#glow-${sceneId}", { y: 30, duration: 0.3, ease: "back.out(1.2)" }, ${start});
         tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
-        tl.from("#btn-${sceneId}", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, ${start});
+        ${cards.slice(0, 3).map((_, idx) =>
+          `tl.from("#read-${sceneId}-${idx + 1}", { y: 22, opacity: 0, duration: 0.24, ease: "power3.out" }, ${start + 0.35 + idx * 0.36});`
+        ).join("\n        ")}
+        tl.from("#btn-${sceneId}", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, ${start + 1.48});
       `;
       break;
     }
@@ -384,10 +400,11 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Cảnh 8: Outro Github Star
       const title1 = scene.headline_line1 || "ỦNG HỘ REPO";
       const title2 = scene.headline_line2 || "THẢ 1 SAO GITHUB NHÉ!";
-      const bento1Title = scene.bento1_title || "Thả 1 Star";
-      const bento2Title = scene.bento2_title || "Yêu thích";
-      const bento3Title = scene.bento3_title || "Bình luận ngay";
-      const bento4Title = scene.bento4_title || "Đăng ký kênh";
+      const cards = getSceneCards(scene, 4);
+      const bento1Title = cards[0]?.title || "Lưu nguồn";
+      const bento2Title = cards[1]?.title || "Tóm tắt";
+      const bento3Title = cards[2]?.title || "Kiểm chứng";
+      const bento4Title = cards[3]?.title || "Áp dụng";
       html = `
         <div class="headline-container" style="top: 185px;">
           <div class="headline-line1" id="hl1-${sceneId}">${title1}</div>
@@ -438,7 +455,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
   html = `<div class="tool-action-template action-brief-card">${html}</div>`;
   if (/class="(?:bento-card|step-card|web-card|terminal-frame)/.test(html)) {
-    gsap += `\n        tl.from("#${sceneId} .action-brief-card .bento-card, #${sceneId} .action-brief-card .step-card, #${sceneId} .action-brief-card .web-card, #${sceneId} .action-brief-card .terminal-frame", { scale: 0.94, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, ${start + 0.14});`;
+    gsap += `\n        tl.from("#${sceneId} .action-brief-card .bento-card, #${sceneId} .action-brief-card .step-card, #${sceneId} .action-brief-card .web-card, #${sceneId} .action-brief-card .terminal-frame", { scale: 0.94, duration: 0.22, stagger: 0.05, ease: "power3.out" }, ${start + 0.14});`;
   }
   return { html, gsap };
 }

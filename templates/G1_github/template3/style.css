@@ -727,3 +727,282 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 }
 \n/* Developer-brief template cards */\n.developer-brief-template .bento-card, .developer-brief-template .step-card { border-left-width: 6px !important; }\n.developer-brief-template .step-command { box-shadow: inset 0 0 0 1px rgba(0,255,136,0.22), 0 0 28px rgba(0,255,136,0.12); }\n.developer-brief-template .card-icon-svg { transform: rotate(-3deg); }\n
 
+/* Safe dense layout: keep every generated card visible in vertical renders. */
+.bento-container,
+.step-container,
+.repo-proof-panel,
+.web-action-panel {
+  max-height: 870px;
+}
+
+.bento-container {
+  gap: 18px !important;
+}
+
+.bento-grid-2 {
+  gap: 18px !important;
+}
+
+.bento-card {
+  min-height: 118px !important;
+  padding: 20px 24px !important;
+  box-sizing: border-box !important;
+}
+
+.bento-card.half {
+  min-height: 205px !important;
+  padding: 22px 18px !important;
+  gap: 10px !important;
+}
+
+.card-icon-svg {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 16px !important;
+  margin-right: 16px !important;
+  flex-shrink: 0 !important;
+}
+
+.card-icon-svg svg {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+.bento-card.half .card-icon-svg {
+  margin: 0 auto 8px auto !important;
+}
+
+.card-title,
+.bento-card .card-title {
+  font-size: 29px !important;
+  line-height: 1.16 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.card-desc,
+.bento-card .card-desc {
+  font-size: 20px !important;
+  line-height: 1.28 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.step-container {
+  gap: 14px !important;
+}
+
+.step-card {
+  min-height: 116px !important;
+  padding: 18px 24px !important;
+  grid-template-columns: 58px 1fr !important;
+  gap: 18px !important;
+}
+
+.step-number {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 14px !important;
+  font-size: 24px !important;
+  flex-shrink: 0 !important;
+}
+
+.step-title {
+  font-size: 28px !important;
+  line-height: 1.16 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.step-desc {
+  margin-top: 6px !important;
+  font-size: 20px !important;
+  line-height: 1.28 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.step-command {
+  font-size: 21px !important;
+  padding: 12px 16px !important;
+  margin-top: 10px !important;
+}
+
+.repo-badge,
+.docker-stats-card {
+  padding: 18px 24px !important;
+  gap: 18px !important;
+}
+
+.repo-name,
+.docker-image-name {
+  font-size: 30px !important;
+  overflow-wrap: anywhere !important;
+}
+
+.repo-meta,
+.docker-meta {
+  font-size: 22px !important;
+}
+
+.github-star-crop {
+  max-height: 150px !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  background: rgba(8, 12, 18, 0.88) !important;
+}
+
+.headline-container {
+  padding-left: 58px !important;
+  padding-right: 58px !important;
+}
+
+.headline-line1 {
+  line-height: 1.1 !important;
+}
+
+.headline-line2 {
+  line-height: 1.1 !important;
+}
+
+.github-star-wrap {
+  margin-top: 18px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 22px !important;
+  background: rgba(8, 12, 18, 0.88) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32) !important;
+  overflow: hidden !important;
+}
+
+.github-star-wrap .github-star-crop {
+  margin-top: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.github-star-fallback {
+  display: flex;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 18px !important;
+  padding: 14px 22px !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.github-star-wrap.has-star-image .github-star-fallback {
+  display: none !important;
+}
+
+.github-star-fallback span {
+  color: rgba(255,255,255,0.62) !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+.github-star-fallback strong {
+  color: #f3ca56 !important;
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 14px rgba(243,202,86,0.35) !important;
+}
+
+/* Template3 visual system: developer brief command panels. */
+.developer-brief-template .bento-container,
+.developer-brief-template .repo-proof-panel,
+.developer-brief-template .repo-check-panel {
+  padding: 16px !important;
+  border: 1.5px solid rgba(0, 210, 255, 0.2) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, rgba(6, 18, 26, 0.88), rgba(3, 5, 8, 0.9)) !important;
+  box-shadow: inset 0 48px 0 rgba(255, 255, 255, 0.025), 0 24px 48px rgba(0, 0, 0, 0.52) !important;
+}
+
+.developer-brief-template .repo-proof-panel::before,
+.developer-brief-template .repo-check-panel::before,
+.developer-brief-template .bento-container::before {
+  content: "RUNBOOK";
+  position: absolute;
+  top: -32px;
+  left: 16px;
+  color: #00d2ff;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.developer-brief-template .brief-command-card,
+.developer-brief-template .bento-card,
+.developer-brief-template .step-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 8px !important;
+  border-left: 8px solid #ff4757 !important;
+  background:
+    linear-gradient(90deg, rgba(0, 210, 255, 0.1), transparent 42%),
+    rgba(7, 12, 18, 0.9) !important;
+}
+
+.developer-brief-template .bento-card::before,
+.developer-brief-template .step-card::before {
+  content: "RUNBOOK";
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  color: rgba(255, 71, 87, 0.72);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.developer-brief-template .step-number {
+  border-radius: 8px !important;
+  background: #00d2ff !important;
+  color: #031018 !important;
+}
+
+.developer-brief-template .step-command {
+  border-radius: 6px !important;
+  color: #caffdf !important;
+}
+
+.developer-brief-template .brief-command-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.developer-brief-template .brief-check-command {
+  grid-template-columns: 58px 1fr 92px !important;
+  min-height: 124px !important;
+  padding: 20px 22px !important;
+  border-left-width: 8px !important;
+}
+
+.developer-brief-template .brief-command-copy {
+  min-width: 0;
+}
+
+.developer-brief-template .brief-prompt {
+  color: #00d2ff;
+  font-family: var(--font-mono);
+  margin-right: 8px;
+}
+
+.developer-brief-template .brief-command-status {
+  color: #031018;
+  background: #00d2ff;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.developer-brief-template .check-title {
+  font-size: 29px !important;
+}
+
+.developer-brief-template .check-desc {
+  font-size: 20px !important;
+}
