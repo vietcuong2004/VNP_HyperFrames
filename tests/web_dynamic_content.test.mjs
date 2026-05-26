@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { normalizeWebScenes } from "../pipeline/generators/web_generator.mjs";
-import { getHyperframesReviewScene, getSceneCards } from "../templates/G3_web/scenes.mjs";
+import { getHyperframesReviewScene, getSceneCards } from "../templates/G3_web/template1/scenes.mjs";
 
 test("normalizeWebScenes preserves dynamic step cards for Web guide scenes", () => {
   const scenes = normalizeWebScenes(

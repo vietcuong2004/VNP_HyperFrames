@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="../../">
+  <meta charset="UTF-8">
+  <style>﻿@font-face {
+  font-family: "Be Vietnam Pro";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("./assets/fonts/be-vietnam-pro-vietnamese-400-normal.woff2") format("woff2");
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("./assets/fonts/be-vietnam-pro-vietnamese-700-normal.woff2") format("woff2");
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+  src: url("./assets/fonts/be-vietnam-pro-vietnamese-800-normal.woff2") format("woff2");
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 900;
+  src: url("./assets/fonts/be-vietnam-pro-vietnamese-900-normal.woff2") format("woff2");
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+:root { --font-sans: "Be Vietnam Pro", "Be Vietnam", Arial, "Liberation Sans", "Noto Sans", "Segoe UI", sans-serif; --font-mono: "Cascadia Mono", Consolas, "Liberation Mono", monospace; }
+/* =============================================
+   G2_DOCKER - Terminal / Console Aesthetic
+   Color palette: Docker Blue #0db7ed / #2496ed
+   Background: Deep Navy #060d14 ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ #0a1628
+   ============================================= */
+
+body {
+  margin: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: #060d14;
+  color: #e8f4fd;
+  font-family: var(--font-sans);
+}
+
+/* === BACKGROUND === */
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(13, 183, 237, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 80%, rgba(36, 150, 237, 0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at 100% 20%, rgba(13, 183, 237, 0.08) 0%, transparent 40%),
+    linear-gradient(180deg, #060d14 0%, #0a1628 60%, #060d14 100%);
+}
+
+/* Scanline overlay for terminal feel */
+.bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.08) 3px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* === GRID DOTS === */
+.grid-dots {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(13, 183, 237, 0.12) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+/* === PARTICLES === */
+.particles-container {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.particle-star {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.particle-green  { background: #0db7ed; box-shadow: 0 0 8px #0db7ed; }
+.particle-purple { background: #2496ed; box-shadow: 0 0 8px #2496ed; }
+.particle-white  { background: rgba(255,255,255,0.7); box-shadow: 0 0 6px rgba(255,255,255,0.4); }
+
+/* === HEADER BADGE === */
+.top-header {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 10000;
+  background: rgba(6, 13, 20, 0.9);
+  border: 2px solid rgba(13, 183, 237, 0.5);
+  box-shadow: 0 0 30px rgba(13, 183, 237, 0.25), 0 8px 32px rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 10px 22px 10px 12px;
+  backdrop-filter: blur(16px);
+}
+.scene .top-header { display: none !important; }
+
+.top-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  border: 2px solid rgba(13, 183, 237, 0.4);
+  object-fit: cover;
+}
+.top-username {
+  font-size: 30px;
+  font-weight: 800;
+  color: #0db7ed;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--font-mono);
+  text-shadow: 0 0 20px rgba(13, 183, 237, 0.6);
+}
+
+/* === TERMINAL WINDOW (replaces browser-frame) === */
+.terminal-frame {
+  position: absolute;
+  top: 190px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 960px;
+  height: 840px;
+  background: #0d1117;
+  border: 2px solid rgba(13, 183, 237, 0.35);
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 1px rgba(13, 183, 237, 0.1),
+    0 40px 100px rgba(0, 0, 0, 0.95),
+    0 0 60px rgba(13, 183, 237, 0.15),
+    inset 0 1px 0 rgba(13, 183, 237, 0.1);
+  overflow: hidden;
+  z-index: 20;
+}
+
+.terminal-header {
+  height: 52px;
+  background: linear-gradient(180deg, #1a2332 0%, #141f2e 100%);
+  border-bottom: 1.5px solid rgba(13, 183, 237, 0.2);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 12px;
+  position: relative;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  left: 20px;
+}
+.terminal-dots .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+.terminal-dots .dot.red    { background: #ff5f56; box-shadow: 0 0 6px rgba(255,95,86,0.5); }
+.terminal-dots .dot.yellow { background: #ffbd2e; box-shadow: 0 0 6px rgba(255,189,46,0.5); }
+.terminal-dots .dot.green  { background: #27c93f; box-shadow: 0 0 6px rgba(39,201,63,0.5); }
+
+.terminal-title {
+  margin: 0 auto;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(13, 183, 237, 0.7);
+  letter-spacing: 1px;
+}
+
+.terminal-body {
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  background: #0d1117;
+  font-family: var(--font-mono);
+}
+
+/* Scrolling screenshot inside terminal */
+.docker-scroll-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 25;
+}
+
+/* Terminal content overlay */
+.terminal-content {
+  position: absolute;
+  inset: 0;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.terminal-line {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.t-prompt { color: #27c93f; font-weight: 700; }
+.t-cmd    { color: #e8f4fd; font-weight: 500; }
+.t-flag   { color: #0db7ed; font-weight: 600; }
+.t-image  { color: #f3ca56; font-weight: 700; }
+.t-output { color: rgba(232, 244, 253, 0.6); font-size: 22px; }
+.t-success { color: #27c93f; }
+.t-info   { color: #0db7ed; }
+.t-warn   { color: #f3ca56; }
+.t-cursor {
+  display: inline-block;
+  width: 14px;
+  height: 26px;
+  background: #0db7ed;
+  vertical-align: middle;
+  margin-left: 4px;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(13, 183, 237, 0.7);
+}
+
+/* === MAIN GLOW ICON === */
+.main-glow-icon {
+  position: absolute;
+  top: 280px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 56px;
+  background: rgba(13, 183, 237, 0.04);
+  border: 2px solid rgba(13, 183, 237, 0.3);
+  box-shadow:
+    0 0 80px rgba(13, 183, 237, 0.25),
+    inset 0 0 40px rgba(13, 183, 237, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90px;
+  z-index: 20;
+}
+
+.glow-svg-container {
+  width: 130px;
+  height: 130px;
+  border-radius: 36px;
+  background: rgba(13, 183, 237, 0.06);
+  border: 2px solid rgba(13, 183, 237, 0.35);
+  box-shadow: 0 0 40px rgba(13, 183, 237, 0.3), inset 0 0 20px rgba(13, 183, 237, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.glow-svg-container svg {
+  width: 68px;
+  height: 68px;
+  fill: none;
+  stroke: #0db7ed;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 14px rgba(13, 183, 237, 0.9));
+}
+
+/* === HEADLINE === */
+.headline-container {
+  position: absolute;
+  top: 500px;
+  width: 100%;
+  text-align: center;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 64px;
+  box-sizing: border-box;
+}
+.headline-line1 {
+  font-size: 74px;
+  line-height: 0.98;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -1px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  font-family: var(--font-sans);
+}
+.headline-line2 {
+  font-size: 68px;
+  line-height: 0.98;
+  font-weight: 900;
+  background: linear-gradient(90deg, #0db7ed, #2496ed, #0db7ed);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 16px rgba(13, 183, 237, 0.4));
+  font-family: var(--font-sans);
+}
+
+/* === ACTION BUTTON (Docker command style) === */
+.action-btn {
+  position: absolute;
+  top: 780px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px 50px;
+  border-radius: 14px;
+  background: rgba(13, 183, 237, 0.05);
+  border: 2px solid rgba(13, 183, 237, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 34px;
+  font-weight: 700;
+  color: #0db7ed;
+  z-index: 30;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(13, 183, 237, 0.1);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  max-width: 960px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.action-icon { font-size: 40px; color: #27c93f; }
+
+/* === BENTO CARDS === */
+.bento-container {
+  position: absolute;
+  top: 1000px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 30;
+}
+
+.bento-card {
+  background: rgba(13, 20, 35, 0.8) !important;
+  border: 1.5px solid rgba(13, 183, 237, 0.15) !important;
+  border-radius: 20px !important;
+  padding: 28px 32px !important;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(13,183,237,0.05) !important;
+  backdrop-filter: blur(16px) !important;
+  transition: all 0.3s ease;
+}
+
+.bento-card.full { width: 100%; box-sizing: border-box; gap: 24px; }
+
+.bento-grid-2 { display: flex; gap: 24px; width: 100%; }
+.bento-card.half {
+  flex: 1;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 30px 20px !important;
+  gap: 16px !important;
+}
+
+/* Card icon container */
+.card-icon-svg {
+  width: 84px;
+  height: 84px;
+  border-radius: 20px;
+  background: rgba(13, 183, 237, 0.08);
+  border: 2px solid rgba(13, 183, 237, 0.25);
+  box-shadow: 0 0 20px rgba(13, 183, 237, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+.bento-card.half .card-icon-svg {
+  margin: 0 auto 8px auto !important;
+}
+.card-icon-svg svg {
+  width: 42px;
+  height: 42px;
+  fill: none;
+  stroke: #0db7ed;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 10px rgba(13, 183, 237, 0.8));
+}
+
+/* Accent colors for cards */
+.card-accent-green .card-icon-svg {
+  background: rgba(39, 201, 63, 0.08) !important;
+  border-color: rgba(39, 201, 63, 0.3) !important;
+  box-shadow: 0 0 20px rgba(39, 201, 63, 0.15) !important;
+}
+.card-accent-green .card-icon-svg svg {
+  stroke: #27c93f !important;
+  filter: drop-shadow(0 0 10px rgba(39, 201, 63, 0.8)) !important;
+}
+.card-accent-yellow .card-icon-svg {
+  background: rgba(243, 202, 86, 0.08) !important;
+  border-color: rgba(243, 202, 86, 0.3) !important;
+  box-shadow: 0 0 20px rgba(243, 202, 86, 0.15) !important;
+}
+.card-accent-yellow .card-icon-svg svg {
+  stroke: #f3ca56 !important;
+  filter: drop-shadow(0 0 10px rgba(243, 202, 86, 0.8)) !important;
+}
+.card-accent-red .card-icon-svg {
+  background: rgba(255, 71, 87, 0.08) !important;
+  border-color: rgba(255, 71, 87, 0.3) !important;
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.15) !important;
+}
+.card-accent-red .card-icon-svg svg {
+  stroke: #ff4757 !important;
+  filter: drop-shadow(0 0 10px rgba(255, 71, 87, 0.8)) !important;
+}
+
+.card-text-group { display: flex; flex-direction: column; gap: 6px; }
+.card-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #e8f4fd;
+  font-family: var(--font-sans);
+}
+.card-desc {
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(232, 244, 253, 0.5);
+  font-family: var(--font-mono);
+  line-height: 1.4;
+}
+
+/* === DOCKER STATS CARD === */
+.docker-stats-card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: rgba(13, 183, 237, 0.04);
+  border: 2px solid rgba(13, 183, 237, 0.2);
+  border-radius: 28px;
+  padding: 28px 36px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.docker-logo-container {
+  width: 90px;
+  height: 90px;
+  border-radius: 22px;
+  background: rgba(13, 183, 237, 0.1);
+  border: 2px solid rgba(13, 183, 237, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 30px rgba(13, 183, 237, 0.2);
+}
+.docker-logo-container svg {
+  width: 52px;
+  height: 52px;
+  fill: #0db7ed;
+  filter: drop-shadow(0 0 10px rgba(13, 183, 237, 0.7));
+}
+.docker-info { display: flex; flex-direction: column; gap: 4px; }
+.docker-image-name {
+  font-size: 40px;
+  font-weight: 800;
+  color: #e8f4fd;
+  font-family: var(--font-mono);
+}
+.docker-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 26px;
+  color: rgba(232, 244, 253, 0.5);
+  font-family: var(--font-mono);
+}
+.docker-pulls {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 32px;
+  font-weight: 700;
+  color: #0db7ed;
+  text-shadow: 0 0 16px rgba(13, 183, 237, 0.5);
+}
+.docker-pulls-label {
+  font-size: 22px;
+  color: rgba(13, 183, 237, 0.6);
+  font-family: var(--font-mono);
+}
+
+/* === CHARACTER === */
+.character {
+  position: absolute;
+  bottom: 34px;
+  right: 18px;
+  width: 430px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+  z-index: 40;
+  opacity: 0.82;
+}
+
+/* === CAPTIONS / SUBTITLES === */
+.captions {
+  position: absolute;
+  bottom: 120px;
+  left: 60px;
+  width: 660px;
+  text-align: center;
+  z-index: 1000;
+  min-height: 132px;
+  max-height: 188px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(6, 13, 20, 0.92);
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  border: 2px solid rgba(13, 183, 237, 0.22);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(13, 183, 237, 0.04);
+  padding: 22px 28px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Variant template2: self-host setup guide */
+.bg {
+  background:
+    linear-gradient(90deg, rgba(20, 184, 166, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(13, 183, 237, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 24% 22%, rgba(20, 184, 166, 0.22), transparent 34%),
+    radial-gradient(circle at 78% 34%, rgba(255, 255, 255, 0.1), transparent 30%),
+    linear-gradient(180deg, #061817 0%, #050505 78%);
+  background-size: 90px 90px, 90px 90px, auto, auto, auto;
+}
+.top-header,
+.terminal-frame,
+.bento-card,
+.step-card,
+.captions {
+  border-color: rgba(20, 184, 166, 0.34) !important;
+}
+.headline-line2 {
+  background: linear-gradient(90deg, #14b8a6, #0db7ed, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.terminal-frame {
+  border-radius: 22px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 54px rgba(20, 184, 166, 0.16);
+}
+.step-number {
+  background: linear-gradient(135deg, #14b8a6, #0db7ed);
+}
+.action-btn {
+  background: rgba(20, 184, 166, 0.08);
+  border-color: rgba(20, 184, 166, 0.38);
+}
+\n/* Self-host deployment template cards */\n.self-host-template .bento-card, .self-host-template .step-card { border-style: dashed !important; }\n.self-host-template .step-card { grid-template-columns: 86px 1fr; }\n.self-host-template .terminal-frame { border-left: 7px solid rgba(20,184,166,0.55) !important; }\n
+
+</style>
+  <script src="./vendor/gsap.min.js"></script>
+</head>
+<body>
+  <div id="root" class="source-docker format-self_host_setup_guide theme-template2" data-composition-id="docker-multi" data-duration="48" data-width="1080" data-height="1920" data-start="0">
+    <audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="48" data-volume="0.3" loop></audio>
+
+
+    <div id="main-clip" class="clip" data-start="0" data-duration="48" data-track-index="3">
+      <div class="bg"></div>
+      <div class="grid-dots"></div>
+      <div class="particles-container"><div class="particle-star particle-green p-anim" style="width:2px; height:2px; top:1535.5259029250192px; left:588.9586788280576px;"></div><div class="particle-star particle-green p-anim" style="width:3.569890517434942px; height:3.569890517434942px; top:632.6718196883576px; left:564.6973520454776px;"></div><div class="particle-star particle-green p-anim" style="width:5.880993330547426px; height:5.880993330547426px; top:1766.284509041543px; left:797.7507367319777px;"></div><div class="particle-star particle-green p-anim" style="width:5.674001668463916px; height:5.674001668463916px; top:1145.1231563722104px; left:360.1147201735148px;"></div><div class="particle-star particle-white p-anim" style="width:3.6885709907046476px; height:3.6885709907046476px; top:224.27374659860106px; left:407.89639844377234px;"></div><div class="particle-star particle-purple p-anim" style="width:4.662801010879775px; height:4.662801010879775px; top:455.35559069928695px; left:21.23276730206271px;"></div><div class="particle-star particle-green p-anim" style="width:5.332718809853759px; height:5.332718809853759px; top:1536.730279927201px; left:364.20659095929295px;"></div><div class="particle-star particle-purple p-anim" style="width:2.431763400373711px; height:2.431763400373711px; top:1413.7129213923345px; left:524.7595076730795px;"></div><div class="particle-star particle-purple p-anim" style="width:4.690272104100586px; height:4.690272104100586px; top:1528.785507073212px; left:634.6024329709326px;"></div><div class="particle-star particle-green p-anim" style="width:4.83496910073336px; height:4.83496910073336px; top:1571.8122668458136px; left:829.1233232848754px;"></div><div class="particle-star particle-purple p-anim" style="width:3.5884565074029524px; height:3.5884565074029524px; top:1230.2568547147985px; left:207.29236457424122px;"></div><div class="particle-star particle-purple p-anim" style="width:5.668708344712286px; height:5.668708344712286px; top:189.40121615183898px; left:991.5646523256873px;"></div><div class="particle-star particle-green p-anim" style="width:3.7885677438189305px; height:3.7885677438189305px; top:1632.5659832752308px; left:207.78043110905855px;"></div><div class="particle-star particle-green p-anim" style="width:2.655247746628447px; height:2.655247746628447px; top:1741.3322435210603px; left:85.06296351828496px;"></div><div class="particle-star particle-green p-anim" style="width:2.969836048725483px; height:2.969836048725483px; top:195.76452651078853px; left:775.7141000385309px;"></div><div class="particle-star particle-white p-anim" style="width:5.426804031838401px; height:5.426804031838401px; top:174.63485295288024px; left:355.1076229717728px;"></div><div class="particle-star particle-white p-anim" style="width:2.7135204296719166px; height:2.7135204296719166px; top:1355.647688683166px; left:21.580439099489013px;"></div><div class="particle-star particle-purple p-anim" style="width:3.509769967673492px; height:3.509769967673492px; top:1665.665646303924px; left:976.3216972953524px;"></div><div class="particle-star particle-purple p-anim" style="width:4.487277313852246px; height:4.487277313852246px; top:780.9357763713535px; left:263.2599087196286px;"></div><div class="particle-star particle-purple p-anim" style="width:2.3092366739983845px; height:2.3092366739983845px; top:127.31628965545667px; left:128.94814866565866px;"></div><div class="particle-star particle-green p-anim" style="width:5.629847360720305px; height:5.629847360720305px; top:1130.5035517027904px; left:742.447420430326px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0938556615874404px; height:3.0938556615874404px; top:1716.259190737776px; left:195.2082629036886px;"></div><div class="particle-star particle-purple p-anim" style="width:3.3361033271394263px; height:3.3361033271394263px; top:1560.6371598624548px; left:740.9506847751618px;"></div><div class="particle-star particle-green p-anim" style="width:2.981082994971075px; height:2.981082994971075px; top:340.21059454044007px; left:475.54250945300737px;"></div><div class="particle-star particle-white p-anim" style="width:2.6425008613077807px; height:2.6425008613077807px; top:1232.298306504208px; left:616.8762158707614px;"></div><div class="particle-star particle-green p-anim" style="width:2.9228469061708893px; height:2.9228469061708893px; top:415.1907554643117px; left:304.7443614471922px;"></div><div class="particle-star particle-purple p-anim" style="width:4.412972973270371px; height:4.412972973270371px; top:1068.37534038566px; left:760.7136744288073px;"></div><div class="particle-star particle-white p-anim" style="width:3.6916789999486355px; height:3.6916789999486355px; top:1122.7608525493224px; left:87.99790379453043px;"></div><div class="particle-star particle-white p-anim" style="width:5.325307687064196px; height:5.325307687064196px; top:260.9009332248206px; left:551.3295157581888px;"></div><div class="particle-star particle-white p-anim" style="width:5.867347892552061px; height:5.867347892552061px; top:1667.2163794618655px; left:256.8303267231022px;"></div><div class="particle-star particle-purple p-anim" style="width:5.8580470264969335px; height:5.8580470264969335px; top:1528.216142326005px; left:431.8811632851066px;"></div><div class="particle-star particle-purple p-anim" style="width:5.824032719079696px; height:5.824032719079696px; top:1282.716862806683px; left:224.99064055640702px;"></div><div class="particle-star particle-white p-anim" style="width:2.2779440263730066px; height:2.2779440263730066px; top:622.0607916782683px; left:865.66315070575px;"></div><div class="particle-star particle-purple p-anim" style="width:3.718072432315239px; height:3.718072432315239px; top:990.331940667761px; left:464.2661541623238px;"></div><div class="particle-star particle-white p-anim" style="width:2.628012898090674px; height:2.628012898090674px; top:334.5703136134716px; left:251.8968664185104px;"></div><div class="particle-star particle-green p-anim" style="width:3.4763252035190817px; height:3.4763252035190817px; top:104.98406753008567px; left:420.2484337896567px;"></div><div class="particle-star particle-purple p-anim" style="width:2.71620581739262px; height:2.71620581739262px; top:1755.1594550569007px; left:121.47569184503482px;"></div><div class="particle-star particle-green p-anim" style="width:4.7851705267239595px; height:4.7851705267239595px; top:1492.2684012358786px; left:588.0606005231914px;"></div><div class="particle-star particle-green p-anim" style="width:2.104748047007888px; height:2.104748047007888px; top:777.2735692683909px; left:972.6774501627324px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0801848282280844px; height:3.0801848282280844px; top:1075.1307716375777px; left:428.0579328452359px;"></div><div class="particle-star particle-white p-anim" style="width:4.1001612631371245px; height:4.1001612631371245px; top:354.9885848517988px; left:186.85617354039096px;"></div><div class="particle-star particle-green p-anim" style="width:5.53651949671621px; height:5.53651949671621px; top:90.38502802313815px; left:441.5138155709792px;"></div><div class="particle-star particle-green p-anim" style="width:3.744003027342842px; height:3.744003027342842px; top:1759.4411675504944px; left:344.1252548768898px;"></div><div class="particle-star particle-white p-anim" style="width:3.060008282023773px; height:3.060008282023773px; top:1595.0515123047808px; left:86.30311745526342px;"></div><div class="particle-star particle-white p-anim" style="width:3.8043483396759257px; height:3.8043483396759257px; top:1085.071066021601px; left:899.0440741810016px;"></div><div class="particle-star particle-white p-anim" style="width:2.2790289679760463px; height:2.2790289679760463px; top:1722.4989058748179px; left:892.5950869757799px;"></div><div class="particle-star particle-green p-anim" style="width:2.768037130474113px; height:2.768037130474113px; top:1505.6581586905395px; left:256.3201799959279px;"></div><div class="particle-star particle-green p-anim" style="width:5.5371421122254105px; height:5.5371421122254105px; top:188.3722487646537px; left:218.56782913586358px;"></div><div class="particle-star particle-white p-anim" style="width:2.83370940318855px; height:2.83370940318855px; top:1030.1372938413806px; left:966.5390627094894px;"></div><div class="particle-star particle-green p-anim" style="width:2.8865274695999688px; height:2.8865274695999688px; top:296.29052856698763px; left:606.1563656924045px;"></div><div class="particle-star particle-white p-anim" style="width:5.9056475347679225px; height:5.9056475347679225px; top:1258.1746374035447px; left:361.9334793071539px;"></div><div class="particle-star particle-purple p-anim" style="width:4.082236481510336px; height:4.082236481510336px; top:193.2978819973414px; left:416.846187156043px;"></div><div class="particle-star particle-green p-anim" style="width:5.588442979067622px; height:5.588442979067622px; top:385.4899108153404px; left:952.2041783677923px;"></div><div class="particle-star particle-purple p-anim" style="width:2.577276928444917px; height:2.577276928444917px; top:1625.0531419507752px; left:67.52407750307611px;"></div><div class="particle-star particle-purple p-anim" style="width:3.1825023104902357px; height:3.1825023104902357px; top:208.90961308673468px; left:20.403730133039062px;"></div><div class="particle-star particle-white p-anim" style="width:3.518543511752796px; height:3.518543511752796px; top:1190.7431957914014px; left:986.3978321271134px;"></div><div class="particle-star particle-purple p-anim" style="width:3.6804051938161138px; height:3.6804051938161138px; top:881.1370745273052px; left:1058.8949897472048px;"></div><div class="particle-star particle-green p-anim" style="width:3.743605762036168px; height:3.743605762036168px; top:847.7063941152664px; left:408.9962966384337px;"></div><div class="particle-star particle-purple p-anim" style="width:3.7641244805054157px; height:3.7641244805054157px; top:915.2259827631497px; left:245.39551275243866px;"></div><div class="particle-star particle-white p-anim" style="width:3.7783622700808337px; height:3.7783622700808337px; top:915.7530612154005px; left:734.2609291146073px;"></div></div>
+
+      <div class="top-header">
+        <img class="top-avatar" src="./assets/logo/shiba.png" />
+        <div class="top-username">SHIBA NEWS 24H</div>
+      </div>
+
+      
+      <div id="scene1" class="scene variant-scene variant-1" style="position:absolute; inset:0; opacity:0; display:none; z-index: 10;">
+        <div class="self-host-template deploy-card">
+        <div class="terminal-frame" id="term-scene1">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="terminal-title">hub.docker.com — hub.docker.com/_/nginx</div>
+          </div>
+          <div class="terminal-body">
+            <img class="docker-scroll-image" id="scroll-img-scene1" src="./assets/images/github_repo.png" />
+          </div>
+        </div>
+        <div class="headline-container" style="top: 1075px; gap: 8px;">
+          <div class="headline-line1" id="hl1-scene1" style="font-size: 62px;">NGINX IMAGE</div>
+          <div class="headline-line2" id="hl2-scene1" style="font-size: 44px;">CHAY CONTAINER</div>
+        </div>
+        <div class="action-btn" id="btn-scene1" style="top: 1262px; font-size: 28px; padding: 14px 36px;">
+          <span class="action-icon">🐳</span> hub.docker.com/_/nginx
+        </div>
+      </div>
+        <img class="character" id="char-scene1" src="./assets/character/shiba/character shiba cheerfully talking.png" />
+      </div>
+      <div id="scene2" class="scene variant-scene variant-4" style="position:absolute; inset:0; opacity:0; display:none; z-index: 11;">
+        <div class="self-host-template deploy-card">
+        <div class="headline-container" style="top: 165px;">
+          <div class="headline-line1" id="hl1-scene2">COMPOSE</div>
+          <div class="headline-line2" id="hl2-scene2">DEPLOY DE KIEM SOAT</div>
+        </div>
+        <div class="terminal-frame" id="runterm-scene2" style="top: 455px; height: 520px; width: 920px;">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            </div>
+            <div class="terminal-title">bash — docker run</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-content">
+              <div class="terminal-line" id="rt-scene2-1">
+                <span class="t-prompt">user@host:~$</span>
+                <span class="t-cmd">docker compose config</span>
+              </div>
+              <div class="terminal-line" id="rt-scene2-2" style="opacity:0;">
+                <span class="t-success">✔ Container created for local verification</span>
+              </div>
+              <div class="terminal-line" id="rt-scene2-3" style="opacity:0;">
+                <span class="t-info">Reading startup logs before deployment...</span>
+              </div>
+              <div class="terminal-line" id="rt-scene2-4" style="opacity:0;">
+                <span class="t-success">✔ Remove or stop test container after checking</span>
+                <span class="t-cursor" id="cursor-scene2"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bento-container" style="top: 1010px; width: 920px;" id="runcheck-scene2">
+          
+          <div class="step-card" id="runstep-scene2-1" style="margin-bottom: 16px;">
+            <div class="step-number">1</div>
+            <div>
+              <div class="step-title">Mục 1</div>
+              <div class="step-desc">DEPLOY DE KIEM SOAT</div>
+            </div>
+          </div>
+          <div class="step-card" id="runstep-scene2-2" style="margin-bottom: 16px;">
+            <div class="step-number">2</div>
+            <div>
+              <div class="step-title">Mục 2</div>
+              <div class="step-desc">Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.</div>
+            </div>
+          </div>
+          <div class="step-card" id="runstep-scene2-3" style="margin-bottom: 16px;">
+            <div class="step-number">3</div>
+            <div>
+              <div class="step-title">Mục 3</div>
+              <div class="step-desc">Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene2" src="./assets/character/shiba/character shiba wearing stylish glasses.png" />
+      </div>
+      <div id="scene3" class="scene variant-scene variant-2" style="position:absolute; inset:0; opacity:0; display:none; z-index: 12;">
+        <div class="self-host-template deploy-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene3">SELF HOST</div>
+          <div class="headline-line2" id="hl2-scene3">CHON TAG ON DINH</div>
+        </div>
+        <div class="terminal-frame" id="term-scene3" style="top: 490px; height: 660px; width: 920px;">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            </div>
+            <div class="terminal-title">bash — docker</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-content">
+              <div class="terminal-line" id="tl1-scene3">
+                <span class="t-prompt">user@host:~$</span>
+                <span class="t-cmd">docker</span>
+                <span class="t-flag">pull</span>
+                <span class="t-image">nginx:1.27-alpine</span>
+              </div>
+              <div class="terminal-line" id="tl2-scene3" style="opacity:0;">
+                <span class="t-info">Using tag: 1.27-alpine</span>
+              </div>
+              <div class="terminal-line" id="tl3-scene3" style="opacity:0;">
+                <span class="t-output">1.27-alpine: Pulling from library/nginx</span>
+              </div>
+              <div class="terminal-line" id="tl4-scene3" style="opacity:0;">
+                <span class="t-output">Digest: sha256:a3...</span>
+              </div>
+              <div class="terminal-line" id="tl5-scene3" style="opacity:0;">
+                <span class="t-success">✔ Status: Downloaded newer image</span>
+              </div>
+              <div class="terminal-line" id="tl6-scene3" style="opacity:0; margin-top: 16px;">
+                <span class="t-prompt">user@host:~$</span>
+                
+                <span class="t-cmd">docker</span>
+                <span class="t-flag">image</span>
+                <span class="t-flag">inspect</span>
+                <span class="t-image">nginx:1.27-alpine</span>
+              </div>
+              <div class="terminal-line" id="tl7-scene3" style="opacity:0;">
+                <span class="t-success">✔ Tag metadata ready</span>
+                <span class="t-cursor" id="cursor-scene3"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene3" src="./assets/character/shiba/character shiba thinking.png" />
+      </div>
+      <div id="scene4" class="scene variant-scene variant-3" style="position:absolute; inset:0; opacity:0; display:none; z-index: 13;">
+        <div class="self-host-template deploy-card">
+        <div class="main-glow-icon" id="glow-scene4">
+          <div class="glow-svg-container">
+            <svg viewBox="0 0 24 24"><path d="M17 11h1a3 3 0 0 1 0 6h-1"/><path d="M11 12H3"/><path d="M16 6H3"/><path d="M16 18H3"/><rect x="1" y="3" width="15" height="18" rx="2"/></svg>
+          </div>
+        </div>
+        <div class="headline-container" id="head-scene4">
+          <div class="headline-line1" id="hl1-scene4">PERSISTENCE</div>
+          <div class="headline-line2" id="hl2-scene4">CONFIG PHAI LUU</div>
+        </div>
+        <div class="bento-container" style="top: 790px;" id="bento-scene4">
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-scene4-1">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 28px;">Volume</div>
+              <div class="card-desc" style="font-size: 20px;">Mount config, cert va static asset tu thu muc rieng.</div>
+            </div>
+            <div class="bento-card half card-accent-green" id="bc-scene4-2">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M5 3a2 2 0 0 0-2 2"/><path d="M19 3a2 2 0 0 1 2 2"/><path d="M21 19a2 2 0 0 1-2 2"/><path d="M5 21a2 2 0 0 1-2-2"/><path d="M9 3h1"/><path d="M9 21h1"/><path d="M14 3h1"/><path d="M14 21h1"/><path d="M3 9v1"/><path d="M21 9v1"/><path d="M3 14v1"/><path d="M21 14v1"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 28px;">Backup</div>
+              <div class="card-desc" style="font-size: 20px;">Luu file config truoc moi lan update.</div>
+            </div>
+          </div>
+          <div class="bento-card full card-accent-yellow" id="bc-scene4-3">
+            <div class="card-icon-svg">
+              <svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h6"/><circle cx="18" cy="16" r="3"/><path d="M18 13v3l1.5 1.5"/></svg>
+            </div>
+            <div class="card-text-group">
+              <div class="card-title">Secret</div>
+              <div class="card-desc">Khong hardcode secret trong lenh run.</div>
+            </div>
+          </div>
+        </div>
+        <div class="action-btn" id="btn-scene4" style="top: 1430px; font-size: 26px;">
+          <span class="action-icon">⚠</span> Đọc docs trước khi deploy production
+        </div>
+      </div>
+        <img class="character" id="char-scene4" src="./assets/character/shiba/character shiba explaining something.png" />
+      </div>
+      <div id="scene5" class="scene variant-scene variant-5" style="position:absolute; inset:0; opacity:0; display:none; z-index: 14;">
+        <div class="self-host-template deploy-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene5">CHECK DEPLOY</div>
+          <div class="headline-line2" id="hl2-scene5">BACKUP ROI UPDATE</div>
+        </div>
+        <div class="bento-container" style="top: 540px;" id="bento-scene5">
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-scene5-1">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px;">Pin tag</div>
+              <div class="card-desc" style="font-size: 22px;">Sao luu config va volume truoc.</div>
+            </div>
+            <div class="bento-card half card-accent-green" id="bc-scene5-2">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px;">Backup</div>
+              <div class="card-desc" style="font-size: 22px;">Giu tag cu de quay lai nhanh.</div>
+            </div>
+          </div>
+          <div class="bento-grid-2">
+            <div class="bento-card half card-accent-yellow" id="bc-scene5-3">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px;">Healthcheck</div>
+              <div class="card-desc" style="font-size: 22px;">Kiem tra cert va reverse proxy.</div>
+            </div>
+            <div class="bento-card half card-accent-red" id="bc-scene5-4">
+              <div class="card-icon-svg">
+                <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px;">Update</div>
+              <div class="card-desc" style="font-size: 22px;">Theo doi log sau khi update.</div>
+            </div>
+          </div>
+        </div>
+        <div class="action-btn" id="btn-scene5" style="top: 1418px; font-size: 26px; max-width: 900px;">
+          <span class="action-icon">✓</span> $ docker compose config
+        </div>
+      </div>
+        <img class="character" id="char-scene5" src="./assets/character/shiba/character shiba using a magnifying glass to look closely.png" />
+      </div>
+
+      <!-- Subtitles Area -->
+      <div id="captions" class="captions"></div>
+    </div>
+  </div>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Animate Particles Floating
+    gsap.utils.toArray('.p-anim').forEach((p, i) => {
+      const pDur = 3 + (i % 4);
+      const pRepeat = Math.max(1, Math.floor(48 / pDur) - 1);
+      tl.to(p, {
+        y: "-=100",
+        x: (i%2===0 ? "+=30" : "-=30"),
+        opacity: 0.1 + (i % 5) * 0.2,
+        duration: pDur,
+        repeat: pRepeat,
+        yoyo: true,
+        ease: "sine.inOut"
+      }, 0);
+    });
+
+    
+      // Scene 1
+      tl.set("#scene1", { display: "block", zIndex: 100 }, 0);
+      tl.to("#scene1", { opacity: 1, duration: 0.1 }, 0);
+      tl.from("#scene1", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, -0.08);
+      
+        tl.from("#term-scene1", { scale: 0.88, y: 30, duration: 0.4, ease: "back.out(1.2)" }, 0);
+        tl.from("#hl1-scene1", { y: -20, opacity: 0, duration: 0.25, ease: "power3.out" }, 0.3);
+        tl.from("#hl2-scene1", { y: 20, opacity: 0, duration: 0.25, ease: "power3.out" }, 0.3);
+        tl.from("#btn-scene1", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, 0.5);
+        tl.fromTo("#scroll-img-scene1", { y: 0 }, { y: -2000, duration: 9, ease: "power1.inOut" }, 1.2);
+      
+        tl.from("#scene1 .deploy-card .bento-card, #scene1 .deploy-card .step-card, #scene1 .deploy-card .web-card, #scene1 .deploy-card .terminal-frame", { y: 28, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 0.14);
+      
+        tl.from("#char-scene1", { y: 20, duration: 0.2, ease: "power2.out" }, 0);
+        tl.to("#char-scene1", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 0.2);
+        tl.to("#scene1", { opacity: 0, duration: 0.1 }, 5.85);
+tl.set("#scene1", { display: "none", zIndex: 10 }, 5.95);
+
+      // Scene 2
+      tl.set("#scene2", { display: "block", zIndex: 101 }, 6);
+      tl.to("#scene2", { opacity: 1, duration: 0.1 }, 6);
+      tl.from("#scene2", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 5.92);
+      
+        tl.from("#hl1-scene2", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, 6);
+        tl.from("#hl2-scene2", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 6);
+        tl.from("#runterm-scene2", { y: 30, opacity: 0, duration: 0.3, ease: "back.out(1.2)" }, 6.1);
+        tl.to("#rt-scene2-2", { opacity: 1, duration: 0.15 }, 6.8);
+        tl.to("#rt-scene2-3", { opacity: 1, duration: 0.15 }, 7.3);
+        tl.to("#rt-scene2-4", { opacity: 1, duration: 0.15 }, 7.8);
+        tl.from("#runstep-scene2-1", { y: 18, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.35);
+        tl.from("#runstep-scene2-2", { y: 18, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.43);
+        tl.from("#runstep-scene2-3", { y: 18, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.51);
+        tl.to("#cursor-scene2", { opacity: 0, repeat: 3, yoyo: true, duration: 0.5 }, 8);
+      
+        tl.from("#scene2 .deploy-card .bento-card, #scene2 .deploy-card .step-card, #scene2 .deploy-card .web-card, #scene2 .deploy-card .terminal-frame", { y: 28, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 6.14);
+      
+        tl.from("#char-scene2", { y: 20, duration: 0.2, ease: "power2.out" }, 6);
+        tl.to("#char-scene2", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 6.2);
+        tl.to("#scene2", { opacity: 0, duration: 0.1 }, 11.85);
+tl.set("#scene2", { display: "none", zIndex: 11 }, 11.95);
+
+      // Scene 3
+      tl.set("#scene3", { display: "block", zIndex: 102 }, 12);
+      tl.to("#scene3", { opacity: 1, duration: 0.1 }, 12);
+      tl.from("#scene3", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 11.92);
+      
+        tl.from("#hl1-scene3", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, 12);
+        tl.from("#hl2-scene3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 12);
+        tl.from("#term-scene3", { y: 30, opacity: 0, duration: 0.3, ease: "back.out(1.2)" }, 12.1);
+        tl.to("#tl2-scene3", { opacity: 1, duration: 0.15 }, 12.8);
+        tl.to("#tl3-scene3", { opacity: 1, duration: 0.15 }, 13.2);
+        tl.to("#tl4-scene3", { opacity: 1, duration: 0.15 }, 13.6);
+        tl.to("#tl5-scene3", { opacity: 1, duration: 0.15 }, 14.1);
+        tl.to("#tl6-scene3", { opacity: 1, duration: 0.15 }, 14.8);
+        tl.to("#tl7-scene3", { opacity: 1, duration: 0.15 }, 15.4);
+        tl.to("#cursor-scene3", { opacity: 0, repeat: 2, yoyo: true, duration: 0.5 }, 15.6);
+      
+        tl.from("#scene3 .deploy-card .bento-card, #scene3 .deploy-card .step-card, #scene3 .deploy-card .web-card, #scene3 .deploy-card .terminal-frame", { y: 28, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 12.14);
+      
+        tl.from("#char-scene3", { y: 20, duration: 0.2, ease: "power2.out" }, 12);
+        tl.to("#char-scene3", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 12.2);
+        tl.to("#scene3", { opacity: 0, duration: 0.1 }, 17.85);
+tl.set("#scene3", { display: "none", zIndex: 12 }, 17.95);
+
+      // Scene 4
+      tl.set("#scene4", { display: "block", zIndex: 103 }, 18);
+      tl.to("#scene4", { opacity: 1, duration: 0.1 }, 18);
+      tl.from("#scene4", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 17.92);
+      
+        tl.from("#glow-scene4", { scale: 0.7, y: 30, opacity: 0, duration: 0.35, ease: "back.out(1.4)" }, 18);
+        tl.from("#hl1-scene4", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.2);
+        tl.from("#hl2-scene4", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.2);
+        tl.from("#bc-scene4-1", { x: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.35);
+        tl.from("#bc-scene4-2", { x: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.35);
+        tl.from("#bc-scene4-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.45);
+        tl.from("#btn-scene4", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, 18.55);
+      
+        tl.from("#scene4 .deploy-card .bento-card, #scene4 .deploy-card .step-card, #scene4 .deploy-card .web-card, #scene4 .deploy-card .terminal-frame", { y: 28, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 18.14);
+      
+        tl.from("#char-scene4", { y: 20, duration: 0.2, ease: "power2.out" }, 18);
+        tl.to("#char-scene4", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 18.2);
+        tl.to("#scene4", { opacity: 0, duration: 0.1 }, 23.85);
+tl.set("#scene4", { display: "none", zIndex: 13 }, 23.95);
+
+      // Scene 5
+      tl.set("#scene5", { display: "block", zIndex: 104 }, 24);
+      tl.to("#scene5", { opacity: 1, duration: 0.1 }, 24);
+      tl.from("#scene5", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 23.92);
+      
+        tl.from("#hl1-scene5", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, 24);
+        tl.from("#hl2-scene5", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 24);
+        tl.from("#bc-scene5-1", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.1);
+        tl.from("#bc-scene5-2", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.15);
+        tl.from("#bc-scene5-3", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.2);
+        tl.from("#bc-scene5-4", { y: 25, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.25);
+        tl.from("#btn-scene5", { y: 18, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, 24.35);
+      
+        tl.from("#scene5 .deploy-card .bento-card, #scene5 .deploy-card .step-card, #scene5 .deploy-card .web-card, #scene5 .deploy-card .terminal-frame", { y: 28, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 24.14);
+      
+        tl.from("#char-scene5", { y: 20, duration: 0.2, ease: "power2.out" }, 24);
+        tl.to("#char-scene5", { y: -30, duration: 2, repeat: 11, yoyo: true, ease: "sine.inOut" }, 24.2);
+        
+
+    // Karaoke Subtitles Grouping by Scene (Complete Sentences)
+    const subtitleBlocks = [];
+    if (subtitleBlocks.length > 0) {
+      const capContainer = document.getElementById("captions");
+      const escapeHtml = (value) => String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+
+      tl.eventCallback("onUpdate", () => {
+        let time = tl.time();
+        // Find the active block
+        let activeBlock = subtitleBlocks.find(b => time >= b.start - 0.08 && time <= b.end + 0.12);
+        if (activeBlock) {
+          let html = activeBlock.words.map(w => {
+            let isActive = (time >= w.start && time <= w.end);
+            return '<span style="font-family: var(--font-sans); font-size: 34px; font-weight: 800; text-transform: uppercase; margin: 0 7px; display: inline-block; transition: all 0.08s; ' +
+                   (isActive ? 'color: #0db7ed; text-shadow: 0 0 20px #0db7ed, 0 0 5px #0db7ed; transform: scale(1.1); font-weight: 900;'
+                            : 'color: rgba(232,244,253,0.7); transform: scale(1.0);') +
+                   '">' + escapeHtml(w.text.toUpperCase()) + '</span>';
+          }).join(" ");
+          capContainer.innerHTML = html;
+        } else {
+          capContainer.innerHTML = "";
+        }
+      });
+    }
+
+    window.__timelines["docker-multi"] = tl;
+  </script>
+  <script>
+    window.addEventListener("load", () => {
+      window.setTimeout(() => {
+        const timelines = window.__timelines || {};
+        const timeline = timelines["news-multi"] || timelines["docker-multi"] || timelines.main;
+        if (timeline && typeof timeline.play === "function") {
+          timeline.timeScale(0.85);
+          timeline.play(0);
+        }
+      }, 120);
+    });
+  </script>
+</body>
+</html>

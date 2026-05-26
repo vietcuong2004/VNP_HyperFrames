@@ -1,0 +1,199 @@
+{
+  "template": "G1_github",
+  "subtemplate": "template3",
+  "platform": "github",
+  "video_format": "developer_integration_brief",
+  "visual_theme": "template3",
+  "duration": 48,
+  "scenes": [
+    {
+      "scene": 1,
+      "audio_start": 0,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "transcript": [],
+      "repo_url": "github.com/keon/awesome-nlp",
+      "headline_line1": "AWESOME NLP",
+      "headline_line2": "BAN DO HOC NLP"
+    },
+    {
+      "scene": 2,
+      "audio_start": 6,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "transcript": [],
+      "headline_line1": "TASK THUC TE",
+      "headline_line2": "LAY GI DE LAM?",
+      "bento1_title": "Prototype",
+      "bento1_desc": "Tim nhanh repo/paper de dung trong mot demo NLP.",
+      "bento2_title": "Compare",
+      "bento2_desc": "So sanh nhieu cach giai cung mot bai toan.",
+      "bento3_title": "Ship",
+      "bento3_desc": "Chon nguon co code, license ro va con duoc duy tri."
+    },
+    {
+      "scene": 3,
+      "audio_start": 12,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "transcript": [],
+      "headline_line1": "WORKFLOW DEV",
+      "headline_line2": "TU LINK DEN DEMO",
+      "content_mode": "steps",
+      "steps": [
+        {
+          "title": "Pick",
+          "body": "Chon mot bai toan cu the nhu sentiment hoac QA."
+        },
+        {
+          "title": "Run",
+          "body": "Mo repo co code mau de chay thu nho."
+        },
+        {
+          "title": "Measure",
+          "body": "Ghi lai input, output, loi va gioi han."
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "audio_start": 18,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "transcript": [],
+      "headline_line1": "TICH HOP",
+      "headline_line2": "CAN KIEM TRA GI?",
+      "btn_text": "Chay demo nho truoc",
+      "steps": [
+        {
+          "title": "API",
+          "body": "Doc cach goi model hoac thu vien."
+        },
+        {
+          "title": "Data",
+          "body": "Kiem tra format du lieu dau vao."
+        },
+        {
+          "title": "Risk",
+          "body": "Xem license va bias truoc khi dung that."
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "audio_start": 24,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "transcript": [],
+      "headline_line1": "CARD REVIEW",
+      "headline_line2": "QUYET DINH NHANH",
+      "cards": [
+        {
+          "title": "Setup",
+          "body": "Mat bao lau de chay duoc vi du dau tien?"
+        },
+        {
+          "title": "Quality",
+          "body": "Ket qua co du tot cho bai toan demo khong?"
+        },
+        {
+          "title": "Maintain",
+          "body": "Repo con song, issue co duoc tra loi khong?"
+        },
+        {
+          "title": "Fit",
+          "body": "Co can qua nhieu dependency khong?"
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "audio_start": 30,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba showing surprise.png"
+      ],
+      "transcript": [],
+      "headline_line1": "TIN HIEU SHIP",
+      "headline_line2": "SAO CHUA DU",
+      "repo_name": "keon/awesome-nlp",
+      "repo_lang": "Markdown",
+      "repo_stars": "18k+ stars",
+      "repo_trend": "Use with checks",
+      "repo_trend_label": "GitHub"
+    },
+    {
+      "scene": 7,
+      "audio_start": 36,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing a cassock like it has become enlightened.png"
+      ],
+      "transcript": [],
+      "headline_line1": "SANDBOX",
+      "headline_line2": "THU RIENG TRUOC",
+      "btn_text": "$ git clone github.com/keon/awesome-nlp",
+      "steps": [
+        {
+          "title": "Branch",
+          "body": "Tao nhanh thu nghiem rieng."
+        },
+        {
+          "title": "Example",
+          "body": "Lay mot input nho de kiem output."
+        },
+        {
+          "title": "Decide",
+          "body": "Chi tich hop khi demo tra loi dung nhu cau."
+        }
+      ]
+    },
+    {
+      "scene": 8,
+      "audio_start": 42,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba smiling brightly.png"
+      ],
+      "transcript": [],
+      "headline_line1": "NEXT ACTION",
+      "headline_line2": "CHON MOT DEMO",
+      "cards": [
+        {
+          "title": "Star",
+          "body": "Luu repo de quay lai."
+        },
+        {
+          "title": "Issue",
+          "body": "Doc loi thuong gap truoc."
+        },
+        {
+          "title": "Demo",
+          "body": "Chay thu voi du lieu cua ban."
+        },
+        {
+          "title": "Share",
+          "body": "Gui link cho team neu thay co gia tri."
+        }
+      ]
+    }
+  ]
+}

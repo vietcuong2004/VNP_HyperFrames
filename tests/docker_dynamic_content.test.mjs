@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { normalizeDockerScenes } from "../pipeline/generators/docker_generator.mjs";
-import { getHyperframesReviewScene, getSceneCards } from "../templates/G2_docker/scenes.mjs";
+import { getHyperframesReviewScene, getSceneCards } from "../templates/G2_docker/template1/scenes.mjs";
 
 test("normalizeDockerScenes preserves config steps and maps them to bento fields", () => {
   const scenes = normalizeDockerScenes(

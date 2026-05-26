@@ -420,11 +420,12 @@ export async function buildGithubData(target) {
 
   // Dynamic import G1_github generator
   const { generateScenes } = await import("./generators/github_generator.mjs");
-  const scenes = await generateScenes({ target, repoData, readme, rootFiles }, classification.videoFormat);
+  const subtemplate = selectTemplateVariant("github", classification.videoFormat);
+  const scenes = await generateScenes({ target, repoData, readme, rootFiles }, classification.videoFormat, subtemplate);
 
   return {
     template: "G1_github",
-    subtemplate: selectTemplateVariant("github", classification.videoFormat),
+    subtemplate,
     source_url: target.url,
     platform: "github",
     content_type: classification.contentType,
@@ -463,11 +464,12 @@ export async function buildDockerData(target) {
 
   // Dynamic import G2_docker generator
   const { generateScenes } = await import("./generators/docker_generator.mjs");
-  const scenes = await generateScenes({ target, info }, classification.videoFormat);
+  const subtemplate = selectTemplateVariant("docker", classification.videoFormat);
+  const scenes = await generateScenes({ target, info }, classification.videoFormat, subtemplate);
 
   return {
     template: "G2_docker",
-    subtemplate: selectTemplateVariant("docker", classification.videoFormat),
+    subtemplate,
     source_url: target.url,
     platform: "docker",
     content_type: classification.contentType,
@@ -555,11 +557,12 @@ export async function buildWebData(target) {
 
   // Dynamic import G3_web generator
   const { generateScenes } = await import("./generators/web_generator.mjs");
-  const scenes = await generateScenes({ target, webInfo: { title, description, answer, results } }, classification.videoFormat);
+  const subtemplate = selectTemplateVariant("web", classification.videoFormat);
+  const scenes = await generateScenes({ target, webInfo: { title, description, answer, results } }, classification.videoFormat, subtemplate);
 
   return {
     template: "G3_web",
-    subtemplate: selectTemplateVariant("web", classification.videoFormat),
+    subtemplate,
     source_url: target.url,
     platform: "web",
     content_type: classification.contentType,

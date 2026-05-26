@@ -1,0 +1,116 @@
+{
+  "template": "G2_docker",
+  "subtemplate": "template3",
+  "platform": "docker",
+  "video_format": "dev_workflow_image_brief",
+  "visual_theme": "template3",
+  "duration": 48,
+  "scenes": [
+    {
+      "scene": 1,
+      "audio_start": 0,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "transcript": [],
+      "layout": "intro_docker",
+      "repo_url": "hub.docker.com/_/nginx",
+      "headline_line1": "NGINX IMAGE",
+      "headline_line2": "CHAY CONTAINER"
+    },
+    {
+      "scene": 2,
+      "audio_start": 6,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "transcript": [],
+      "layout": "docker_tag",
+      "headline_line1": "DEV WORKFLOW",
+      "headline_line2": "PIN RUNTIME",
+      "btn_text": "$ docker pull nginx:1.27-alpine",
+      "steps": [
+        {
+          "title": "Runtime",
+          "body": "Co dinh version de team dung cung moi truong."
+        },
+        {
+          "title": "Mount",
+          "body": "Mount project local vao container khi test."
+        },
+        {
+          "title": "CI",
+          "body": "Dung cung tag trong pipeline."
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "audio_start": 12,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "transcript": [],
+      "layout": "docker_config",
+      "headline_line1": "DEV CONFIG",
+      "headline_line2": "LAP LAI DUOC",
+      "bento1_title": "Bind",
+      "bento1_desc": "Mount thu muc code de reload nhanh.",
+      "bento2_title": "Cache",
+      "bento2_desc": "Tach cache de CI khong cham bat thuong.",
+      "bento3_title": "Command",
+      "bento3_desc": "Ghi lenh test ro trong script."
+    },
+    {
+      "scene": 4,
+      "audio_start": 18,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "transcript": [],
+      "layout": "terminal_docker",
+      "headline_line1": "RUN TEST",
+      "headline_line2": "GIONG CI",
+      "btn_text": "$ docker run --rm nginx:1.27-alpine nginx -v"
+    },
+    {
+      "scene": 5,
+      "audio_start": 24,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "transcript": [],
+      "layout": "outro_docker",
+      "headline_line1": "SHIP WORKFLOW",
+      "headline_line2": "KHONG LECH ENV",
+      "cards": [
+        {
+          "title": "Tag",
+          "body": "Dev va CI dung cung tag."
+        },
+        {
+          "title": "Script",
+          "body": "Lenh run nam trong repo."
+        },
+        {
+          "title": "Logs",
+          "body": "Luu log loi de debug."
+        },
+        {
+          "title": "Clean",
+          "body": "Xoa container tam sau test."
+        }
+      ]
+    }
+  ]
+}

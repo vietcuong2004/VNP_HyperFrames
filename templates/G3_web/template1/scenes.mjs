@@ -7,6 +7,26 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+function stripVietnameseMarks(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D");
+}
+
+function isGenericCardTitle(value) {
+  const text = stripVietnameseMarks(value).trim().toLowerCase();
+  return /^(buoc|step|diem|muc|y chinh)\s*\d+$/.test(text);
+}
+
+function isMeaningfulCardText(value) {
+  const text = String(value || "").trim();
+  if (text.length < 6) return false;
+  const normalized = stripVietnameseMarks(text).toLowerCase();
+  return !/^(noi dung|noidung|mo ta|placeholder|viec can lam|cach kiem tra|lenh hoac thao tac)(\s|$)/.test(normalized);
+}
+
 export function getSceneCards(scene, limit = 4) {
   const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
     ? scene.steps
@@ -19,10 +39,26 @@ export function getSceneCards(scene, limit = 4) {
           }))
           .filter((card) => card.title || card.body);
 
-  return rawCards.slice(0, limit).map((card, idx) => ({
-    title: escapeHtml(card.title || `Điểm ${idx + 1}`),
-    body: escapeHtml(card.body || card.desc || card.description || ""),
+  const fallbackTitle = scene.headline_line2 || scene.headline_line1 || scene.title || "Nội dung chính";
+  const fallbackBody = scene.central_text || scene.summary || scene.description || scene.text || "Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.";
+  const fallbackCards = Array.from({ length: Math.max(3, Math.min(limit, 4)) }, (_, idx) => ({
+    title: `Ý chính ${idx + 1}`,
+    body: idx === 0 ? fallbackTitle : fallbackBody,
   }));
+  const meaningfulCards = rawCards.filter((card) => {
+    const body = card.body || card.desc || card.description;
+    return isMeaningfulCardText(body) || !isGenericCardTitle(card.title);
+  });
+  const safeCards = meaningfulCards.length > 0 ? meaningfulCards : fallbackCards;
+
+  return safeCards.slice(0, limit).map((card, idx) => {
+    const body = card.body || card.desc || card.description;
+    const title = card.title && !isGenericCardTitle(card.title) ? card.title : `Ý chính ${idx + 1}`;
+    return {
+      title: escapeHtml(title),
+      body: escapeHtml(isMeaningfulCardText(body) ? body : (idx === 0 ? fallbackTitle : fallbackBody)),
+    };
+  });
 }
 
 export function getHyperframesReviewScene(i, scene, sceneId, start) {
@@ -33,8 +69,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 0: {
       // Cảnh 1: Giới thiệu HyperFrames
       const repoUrl = scene.repo_url || "example.com";
-      const headlineLine1 = scene.headline_line1 || "NGUON WEB";
-      const headlineLine2 = scene.headline_line2 || "CAN KIEM TRA GI?";
+      const headlineLine1 = scene.headline_line1 || "NGUỒN WEB";
+      const headlineLine2 = scene.headline_line2 || "CẦN KIỂM TRA GÌ?";
       html = `
         <div class="browser-frame" id="browser-${sceneId}">
           <div class="browser-header">
@@ -87,7 +123,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       const bento5Title = cards[4]?.title || scene.bento5_title || "Tiếp theo";
       const bento5Desc = cards[4]?.body || scene.bento5_desc || "Mở nguồn và kiểm chứng";
       html = `
-        <div class="grid-layout-title">${title1}<br/><span style="color: #fdf01c">${title2}</span></div>
+        <div class="grid-layout-title"><span class="headline-line1" id="hl1-${sceneId}" style="font-size:inherit; line-height:inherit; font-weight:inherit; color:inherit; text-shadow:none;">${title1}</span><br/><span class="headline-line2" id="hl2-${sceneId}" style="font-size:inherit; line-height:inherit; font-weight:inherit; color: #fdf01c; background:none; -webkit-text-fill-color:#fdf01c; filter:none;">${title2}</span></div>
         <div class="feature-grid">
           <div class="feature-item" id="fi-${sceneId}-1">
             <div class="feature-icon-wrapper neon-green"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg></div>
@@ -195,7 +231,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         { title: "Limit", body: "Gia, API, quota co the thay doi theo thoi gian." },
       ];
       html = `
-        <div class="metric-layout-title">${title1}<br/><span style="color: #fdf01c">${title2}</span></div>
+        <div class="metric-layout-title"><span class="headline-line1" id="hl1-${sceneId}" style="font-size:inherit; line-height:inherit; font-weight:inherit; color:inherit; text-shadow:none;">${title1}</span><br/><span class="headline-line2" id="hl2-${sceneId}" style="font-size:inherit; line-height:inherit; font-weight:inherit; color: #fdf01c; background:none; -webkit-text-fill-color:#fdf01c; filter:none;">${title2}</span></div>
         <div class="web-evidence-panel" style="position:absolute; top:455px; left:50%; transform:translateX(-50%); width:920px; z-index:30;">
           ${evidenceCards.slice(0, 3).map((card, idx) => `
           <div class="step-card" id="ev-${sceneId}-${idx + 1}" style="margin-bottom:24px;">
@@ -216,8 +252,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       break;
     }    case 4: {
       // Scene 5: Concrete next action
-      const title1 = scene.headline_line1 || "HANH DONG TIEP";
-      const title2 = scene.headline_line2 || "KIEM TRA NGUON";
+      const title1 = scene.headline_line1 || "HÀNH ĐỘNG TIẾP";
+      const title2 = scene.headline_line2 || "KIỂM TRA NGUỒN";
       const btnText = escapeHtml(scene.btn_text || "Mo nguon va kiem chung");
       const cards = getSceneCards(scene, 3);
       const actionCards = cards.length > 0 ? cards : [
@@ -318,8 +354,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
     case 6: {
       // Cảnh 7: Quick Start
-      const title1 = scene.headline_line1 || "DOC NGUON";
-      const title2 = scene.headline_line2 || "KIEM CHUNG TIEP";
+      const title1 = scene.headline_line1 || "ĐỌC NGUỒN";
+      const title2 = scene.headline_line2 || "KIỂM CHỨNG TIẾP";
       const btnText = scene.btn_text || "Mo link goc va doc chi tiet";
       html = `
         <div class="main-glow-icon" id="glow-${sceneId}">

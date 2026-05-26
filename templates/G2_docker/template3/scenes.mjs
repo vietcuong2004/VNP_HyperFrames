@@ -70,6 +70,26 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+function stripVietnameseMarks(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D");
+}
+
+function isGenericCardTitle(value) {
+  const text = stripVietnameseMarks(value).trim().toLowerCase();
+  return /^(buoc|step|diem|muc|y chinh)\s*\d+$/.test(text);
+}
+
+function isMeaningfulCardText(value) {
+  const text = String(value || "").trim();
+  if (text.length < 6) return false;
+  const normalized = stripVietnameseMarks(text).toLowerCase();
+  return !/^(noi dung|noidung|mo ta|placeholder|viec can lam|cach kiem tra|lenh hoac thao tac)(\s|$)/.test(normalized);
+}
+
 export function getSceneCards(scene, limit = 4) {
   const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
     ? scene.steps
@@ -82,10 +102,26 @@ export function getSceneCards(scene, limit = 4) {
           }))
           .filter((card) => card.title || card.body);
 
-  return rawCards.slice(0, limit).map((card, idx) => ({
-    title: escapeHtml(card.title || `Bước ${idx + 1}`),
-    body: escapeHtml(card.body || card.desc || card.description || ""),
+  const fallbackTitle = scene.headline_line2 || scene.headline_line1 || scene.title || "Nội dung chính";
+  const fallbackBody = scene.central_text || scene.summary || scene.description || scene.text || "Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.";
+  const fallbackCards = Array.from({ length: Math.max(3, Math.min(limit, 4)) }, (_, idx) => ({
+    title: `Mục ${idx + 1}`,
+    body: idx === 0 ? fallbackTitle : fallbackBody,
   }));
+  const meaningfulCards = rawCards.filter((card) => {
+    const body = card.body || card.desc || card.description;
+    return isMeaningfulCardText(body) || !isGenericCardTitle(card.title);
+  });
+  const safeCards = meaningfulCards.length > 0 ? meaningfulCards : fallbackCards;
+
+  return safeCards.slice(0, limit).map((card, idx) => {
+    const body = card.body || card.desc || card.description;
+    const title = card.title && !isGenericCardTitle(card.title) ? card.title : `Mục ${idx + 1}`;
+    return {
+      title: escapeHtml(title),
+      body: escapeHtml(isMeaningfulCardText(body) ? body : (idx === 0 ? fallbackTitle : fallbackBody)),
+    };
+  });
 }
 
 export function getHyperframesReviewScene(i, scene, sceneId, start) {
@@ -485,7 +521,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 6: {
       // Scene 4: Run safely in a terminal
       const hl1 = scene.headline_line1 || "RUN IMAGE";
-      const hl2 = scene.headline_line2 || "THU TREN MAY PHU";
+      const hl2 = scene.headline_line2 || "THỬ TRÊN MÁY PHỤ";
       const imageRef = stripTag(getSceneImage(scene, "hello-world"));
       const btnText = scene.btn_text || `$ docker run --rm ${imageRef}`;
       const command = cleanCommand(btnText) || `docker run --rm ${imageRef}`;
@@ -634,5 +670,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     }
   }
 
+  html = `<div class="dev-workflow-template workflow-card">${html}</div>`;
+  if (/class="(?:bento-card|step-card|web-card|terminal-frame)/.test(html)) {
+    gsap += `\n        tl.from("#${sceneId} .workflow-card .bento-card, #${sceneId} .workflow-card .step-card, #${sceneId} .workflow-card .web-card, #${sceneId} .workflow-card .terminal-frame", { x: 32, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, ${start + 0.14});`;
+  }
   return { html, gsap };
 }

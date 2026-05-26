@@ -7,6 +7,26 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+function stripVietnameseMarks(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D");
+}
+
+function isGenericCardTitle(value) {
+  const text = stripVietnameseMarks(value).trim().toLowerCase();
+  return /^(buoc|step|diem|muc|y chinh)\s*\d+$/.test(text);
+}
+
+function isMeaningfulCardText(value) {
+  const text = String(value || "").trim();
+  if (text.length < 6) return false;
+  const normalized = stripVietnameseMarks(text).toLowerCase();
+  return !/^(noi dung|noidung|mo ta|placeholder|viec can lam|cach kiem tra|lenh hoac thao tac)(\s|$)/.test(normalized);
+}
+
 export function getSceneCards(scene, limit = 4) {
   const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
     ? scene.steps
@@ -19,10 +39,26 @@ export function getSceneCards(scene, limit = 4) {
           }))
           .filter((card) => card.title || card.body);
 
-  return rawCards.slice(0, limit).map((card, idx) => ({
-    title: escapeHtml(card.title || `Step ${idx + 1}`),
-    body: escapeHtml(card.body || card.desc || card.description || ""),
+  const fallbackTitle = scene.headline_line2 || scene.headline_line1 || scene.title || "Nội dung chính";
+  const fallbackBody = scene.central_text || scene.summary || scene.description || scene.text || "Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.";
+  const fallbackCards = Array.from({ length: Math.max(3, Math.min(limit, 4)) }, (_, idx) => ({
+    title: `Ý chính ${idx + 1}`,
+    body: idx === 0 ? fallbackTitle : fallbackBody,
   }));
+  const meaningfulCards = rawCards.filter((card) => {
+    const body = card.body || card.desc || card.description;
+    return isMeaningfulCardText(body) || !isGenericCardTitle(card.title);
+  });
+  const safeCards = meaningfulCards.length > 0 ? meaningfulCards : fallbackCards;
+
+  return safeCards.slice(0, limit).map((card, idx) => {
+    const body = card.body || card.desc || card.description;
+    const title = card.title && !isGenericCardTitle(card.title) ? card.title : `Ý chính ${idx + 1}`;
+    return {
+      title: escapeHtml(title),
+      body: escapeHtml(isMeaningfulCardText(body) ? body : (idx === 0 ? fallbackTitle : fallbackBody)),
+    };
+  });
 }
 
 function renderStepCards(scene, sceneId, limit = 4, options = {}) {
@@ -61,7 +97,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Cảnh 1: Giới thiệu HyperFrames
       const repoUrl = scene.repo_url || "github.com/owner/repo";
       const headlineLine1 = scene.headline_line1 || "REPO GITHUB";
-      const headlineLine2 = scene.headline_line2 || "CO GI DANG CHU Y?";
+      const headlineLine2 = scene.headline_line2 || "CÓ GÌ ĐÁNG CHÚ Ý?";
       html = `
         <div class="browser-frame" id="browser-${sceneId}">
           <div class="browser-header">
@@ -234,11 +270,13 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
     case 3: {
       // Cảnh 4: Deterministic Rendering (Siêu ổn định)
-      const title1 = scene.headline_line1 || "DIEM MANH";
-      const title2 = scene.headline_line2 || "CO DANG DUNG?";
+      const title1 = scene.headline_line1 || "ĐIỂM MẠNH";
+      const title2 = scene.headline_line2 || "CÓ ĐÁNG DÙNG?";
       const btnText = escapeHtml(scene.btn_text || "Doc README va chay vi du nho");
-      const cards = getSceneCards(scene, 3);
-      const proofCards = cards.length > 0 ? cards : [
+      const hasProvidedCards = (Array.isArray(scene.steps) && scene.steps.length > 0)
+        || (Array.isArray(scene.cards) && scene.cards.length > 0)
+        || [1, 2, 3, 4].some((idx) => scene[`bento${idx}_title`] || scene[`bento${idx}_desc`]);
+      const proofCards = hasProvidedCards ? getSceneCards(scene, 3) : [
         { title: "Use case", body: "Noi ro repo giai quyet viec gi." },
         { title: "Evidence", body: "Tim vi du, docs va release gan day." },
         { title: "Fit", body: "Thu trong project phu truoc khi tich hop." },
@@ -276,7 +314,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 4: {
       // Cảnh 5: Frame Adapter Pattern
       const title1 = scene.headline_line1 || "CHECKLIST";
-      const title2 = scene.headline_line2 || "TRUOC KHI DUNG";
+      const title2 = scene.headline_line2 || "TRƯỚC KHI DÙNG";
       const cards = getSceneCards(scene, 4);
       const checkCards = cards.length > 0 ? cards : [
         { title: "License", body: "Kiem tra dieu kien su dung." },
@@ -324,8 +362,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
     case 5: {
       // Scene 6: Repo signal check
-      const title1 = scene.headline_line1 || "TIN HIEU REPO";
-      const title2 = scene.headline_line2 || "DOC TRUOC KHI DUNG";
+      const title1 = scene.headline_line1 || "TÍN HIỆU REPO";
+      const title2 = scene.headline_line2 || "ĐỌC TRƯỚC KHI DÙNG";
       const repoName = scene.repo_name || scene.repo_url || "owner/repo";
       const repoLang = scene.repo_lang || "N/A";
       const repoStars = scene.repo_stars || "★ 0";
@@ -361,6 +399,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
               <span class="trend-label">${escapeHtml(repoTrendLabel)}</span>
             </div>
           </div>
+          <img class="github-star-crop" id="star-${sceneId}" src="./assets/images/github_star.png" onerror="this.style.display='none'" />
           <div class="bento-grid-2" style="margin-top: 24px;">
             ${signalCards.slice(0, 2).map((card, idx) => `
             <div class="bento-card half" id="sig-${sceneId}-${idx + 1}">
@@ -381,6 +420,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
         tl.from("#hl1-${sceneId}", { y: -20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#hl2-${sceneId}", { y: 20, duration: 0.2, ease: "power3.out" }, ${start});
         tl.from("#rb-${sceneId}", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.1});
+        tl.from("#star-${sceneId}", { y: 16, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.16});
         ${signalCards.map((_, idx) =>
           `tl.from("#sig-${sceneId}-${idx + 1}", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, ${start + 0.2 + idx * 0.06});`
         ).join("\n        ")}
@@ -390,10 +430,12 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 6: {
       // Scene 7: Clone and test safely
       const title1 = scene.headline_line1 || "CLONE REPO";
-      const title2 = scene.headline_line2 || "CHAY THU RIENG";
+      const title2 = scene.headline_line2 || "CHẠY THỬ RIÊNG";
       const btnText = scene.btn_text || "$ git clone github.com/owner/repo";
-      const cards = getSceneCards(scene, 3);
-      const cloneCards = cards.length > 0 ? cards : [
+      const hasProvidedCards = (Array.isArray(scene.steps) && scene.steps.length > 0)
+        || (Array.isArray(scene.cards) && scene.cards.length > 0)
+        || [1, 2, 3, 4].some((idx) => scene[`bento${idx}_title`] || scene[`bento${idx}_desc`]);
+      const cloneCards = hasProvidedCards ? getSceneCards(scene, 3) : [
         { title: "Clone", body: "Lay source ve mot thu muc rieng." },
         { title: "Read README", body: "Doc cach cai dat va yeu cau moi truong." },
         { title: "Run test", body: "Chay vi du nho, roi check license truoc khi dung." },
@@ -478,5 +520,9 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     }
   }
 
+  html = `<div class="developer-brief-template dev-brief-card">${html}</div>`;
+  if (/class="(?:bento-card|step-card|web-card|terminal-frame)/.test(html)) {
+    gsap += `\n        tl.from("#${sceneId} .dev-brief-card .bento-card, #${sceneId} .dev-brief-card .step-card, #${sceneId} .dev-brief-card .web-card, #${sceneId} .dev-brief-card .terminal-frame", { y: -24, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, ${start + 0.14});`;
+  }
   return { html, gsap };
 }

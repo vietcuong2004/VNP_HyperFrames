@@ -22,6 +22,27 @@ const STORYTELLING_GUIDELINES = {
   `
 };
 
+const TEMPLATE_CONTENT_PROFILES = {
+  template1: `
+    - Content angle: quick-start operator path.
+    - Scene 2 should make tag selection simple and concrete.
+    - Scene 3-4 should focus on pull, run, port mapping, and the smallest safe local test.
+    - Keep the viewer thinking: "Can I run this image locally in a few minutes?"
+  `,
+  template2: `
+    - Content angle: self-host deployment path.
+    - Scene 2 should frame the image as something that needs stable deployment decisions.
+    - Scene 3-4 should focus on volumes, env, backups, secrets, rollback, and compose validation.
+    - Keep the viewer thinking: "What must be protected before production?"
+  `,
+  template3: `
+    - Content angle: dev or CI workflow image brief.
+    - Scene 2 should explain how the image keeps development environments reproducible.
+    - Scene 3-4 should focus on pinned tags, bind mounts, commands, cache, and pipeline consistency.
+    - Keep the viewer thinking: "Can this remove environment drift for the team?"
+  `,
+};
+
 // Cấu trúc 5 cảnh (scenes) cố định cho Group 2 (Docker Hub)
 export const DOCKER_LAYOUT_SCHEMA = [
   {
@@ -219,10 +240,11 @@ export function normalizeDockerScenes(scenes, context = {}) {
   return normalized;
 }
 
-export async function generateScenes(rawData, format) {
+export async function generateScenes(rawData, format, subtemplate = "template1") {
   const { target, info } = rawData;
   const imageRef = `${target.namespace}/${target.image}`;
   const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.container_overview;
+  const templateProfile = TEMPLATE_CONTENT_PROFILES[subtemplate] || TEMPLATE_CONTENT_PROFILES.template1;
 
   const prompt = `
       Bạn là chuyên gia DevOps và làm video hướng dẫn. Hãy viết kịch bản voice-over tiếng Việt và tiêu đề màn hình cho video giới thiệu Docker Image sau:
@@ -233,6 +255,9 @@ export async function generateScenes(rawData, format) {
 
       HƯỚNG DẪN KỂ CHUYỆN BẮT BUỘC CHO FORMAT "${format}":
       ${guideline}
+
+      TEMPLATE CONTENT PROFILE FOR "${subtemplate}":
+      ${templateProfile}
 
       BẠN PHẢI TRẢ VỀ MỘT JSON OBJECT theo đúng cấu trúc mẫu dưới đây (chứa key "scenes" là mảng 5 cảnh):
       {
@@ -255,6 +280,7 @@ export async function generateScenes(rawData, format) {
          Ví dụ với Ubuntu không viết "DOCKER QUICK START", "CHỌN TAG", "CẤU HÌNH"; hãy viết kiểu "UBUNTU", "PIN TAG", "CONFIG UBUNTU".
       7. Với scene chọn tag, cấu hình, docker run hoặc production checklist, ưu tiên "content_mode": "steps" và sinh các bước cụ thể.
       8. Nếu không đủ dữ liệu chắc chắn, hãy viết theo hướng kiểm tra docs; không bịa port, env, password, volume path hoặc command.
+      9. Every headline, step, bento card, and voice line must follow this template content profile. Do not reuse the same scene angle across template1/template2/template3.
     `;
 
   try {

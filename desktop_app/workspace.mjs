@@ -108,6 +108,7 @@ export async function prepareWorkspaceRuntime(paths) {
     copyDirectoryIfExists(path.join(paths.sourceAssetsDir, "background-music"), path.join(paths.workspaceAssetsDir, "background-music")),
     copyDirectoryIfExists(path.join(paths.sourceAssetsDir, "sound-effect"), path.join(paths.workspaceAssetsDir, "sound-effect")),
     copyDirectoryIfExists(path.join(paths.sourceAssetsDir, "logo"), path.join(paths.workspaceAssetsDir, "logo")),
+    copyDirectoryIfExists(path.join(paths.sourceAssetsDir, "fonts"), path.join(paths.workspaceAssetsDir, "fonts")),
     copyDirectoryIfExists(paths.compositionsDir, path.join(paths.workspaceRoot, "compositions")),
   ]);
 

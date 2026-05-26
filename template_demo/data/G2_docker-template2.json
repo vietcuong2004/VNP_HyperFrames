@@ -1,0 +1,116 @@
+{
+  "template": "G2_docker",
+  "subtemplate": "template2",
+  "platform": "docker",
+  "video_format": "self_host_setup_guide",
+  "visual_theme": "template2",
+  "duration": 48,
+  "scenes": [
+    {
+      "scene": 1,
+      "audio_start": 0,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "transcript": [],
+      "layout": "intro_docker",
+      "repo_url": "hub.docker.com/_/nginx",
+      "headline_line1": "NGINX IMAGE",
+      "headline_line2": "CHAY CONTAINER"
+    },
+    {
+      "scene": 2,
+      "audio_start": 6,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "transcript": [],
+      "layout": "docker_tag",
+      "headline_line1": "SELF HOST",
+      "headline_line2": "CHON TAG ON DINH",
+      "btn_text": "$ docker pull nginx:1.27-alpine",
+      "steps": [
+        {
+          "title": "Version",
+          "body": "Dung tag co version de rollback duoc."
+        },
+        {
+          "title": "Digest",
+          "body": "Ghi digest neu can build lap lai."
+        },
+        {
+          "title": "Policy",
+          "body": "Len lich update thay vi keo moi tuy hung."
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "audio_start": 12,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "transcript": [],
+      "layout": "docker_config",
+      "headline_line1": "PERSISTENCE",
+      "headline_line2": "CONFIG PHAI LUU",
+      "bento1_title": "Volume",
+      "bento1_desc": "Mount config, cert va static asset tu thu muc rieng.",
+      "bento2_title": "Backup",
+      "bento2_desc": "Luu file config truoc moi lan update.",
+      "bento3_title": "Secret",
+      "bento3_desc": "Khong hardcode secret trong lenh run."
+    },
+    {
+      "scene": 4,
+      "audio_start": 18,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "transcript": [],
+      "layout": "terminal_docker",
+      "headline_line1": "COMPOSE",
+      "headline_line2": "DEPLOY DE KIEM SOAT",
+      "btn_text": "$ docker compose config"
+    },
+    {
+      "scene": 5,
+      "audio_start": 24,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "transcript": [],
+      "layout": "outro_docker",
+      "headline_line1": "CHECK DEPLOY",
+      "headline_line2": "BACKUP ROI UPDATE",
+      "cards": [
+        {
+          "title": "Backup",
+          "body": "Sao luu config va volume truoc."
+        },
+        {
+          "title": "Rollback",
+          "body": "Giu tag cu de quay lai nhanh."
+        },
+        {
+          "title": "TLS",
+          "body": "Kiem tra cert va reverse proxy."
+        },
+        {
+          "title": "Monitor",
+          "body": "Theo doi log sau khi update."
+        }
+      ]
+    }
+  ]
+}

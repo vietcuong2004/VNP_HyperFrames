@@ -28,6 +28,27 @@ const STORYTELLING_GUIDELINES = {
   `
 };
 
+const TEMPLATE_CONTENT_PROFILES = {
+  template1: `
+    - Content angle: repo overview and practical use cases.
+    - Scene 2 should answer who this repo helps and what problem it solves.
+    - Scene 3-5 should become an adoption checklist: read path, main value, risks before use.
+    - Keep the viewer thinking: "Should I save this repo for my current work?"
+  `,
+  template2: `
+    - Content angle: knowledge map, resource digest, or dataset explainer.
+    - Scene 2 should explain how the information is grouped, not only what the repo is.
+    - Scene 3-5 should guide the viewer through a learning path, source filtering, evidence checks, and notes.
+    - Keep the viewer thinking: "How do I turn this repo into a study plan?"
+  `,
+  template3: `
+    - Content angle: developer action brief and quick demo planning.
+    - Scene 2 should start from a concrete task a developer wants to solve.
+    - Scene 3-5 should focus on install/run/integration checks, sandbox testing, and production risks.
+    - Keep the viewer thinking: "What is the next safe step to try this in code?"
+  `,
+};
+
 // Cấu trúc 8 cảnh (scenes) cố định cho Group 1 (GitHub)
 export const GITHUB_LAYOUT_SCHEMA = [
   {
@@ -261,9 +282,10 @@ export function normalizeGithubScenes(scenes, context = {}) {
   return normalized;
 }
 
-export async function generateScenes(rawData, format) {
+export async function generateScenes(rawData, format, subtemplate = "template1") {
   const { target, repoData, readme } = rawData;
   const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.repo_overview_with_use_cases;
+  const templateProfile = TEMPLATE_CONTENT_PROFILES[subtemplate] || TEMPLATE_CONTENT_PROFILES.template1;
 
   const prompt = `
       Bạn là chuyên gia biên tập video công nghệ có kinh nghiệm. Hãy viết kịch bản voice-over tiếng Việt và các tiêu đề màn hình cho video giới thiệu repo GitHub sau:
@@ -276,6 +298,9 @@ export async function generateScenes(rawData, format) {
 
       HƯỚNG DẪN KỂ CHUYỆN (STORYTELLING GUIDELINE) BẮT BUỘC CHO FORMAT "${format}":
       ${guideline}
+
+      TEMPLATE CONTENT PROFILE FOR "${subtemplate}":
+      ${templateProfile}
 
       BẠN PHẢI TRẢ VỀ MỘT JSON OBJECT theo đúng cấu trúc mẫu dưới đây (chứa key "scenes" là mảng 8 cảnh):
       {
@@ -299,6 +324,7 @@ export async function generateScenes(rawData, format) {
          - "repo_lang": "${repoData.language || "N/A"}"
          - "repo_stars": "★ ${(repoData.stargazers_count || 0).toLocaleString("vi-VN")}"
       8. Đối với Scene 7, điền "btn_text" là lệnh git clone chính xác: "$ git clone github.com/${target.owner}/${target.repo}".toLowerCase()
+      9. Every headline, step, bento card, and voice line must follow this template content profile. Do not reuse the same scene angle across template1/template2/template3.
     `;
 
   try {

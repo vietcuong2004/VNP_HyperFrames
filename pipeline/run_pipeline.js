@@ -248,6 +248,7 @@ async function main() {
         env: {
           APP_ROOT: appRoot,
           SCREENSHOT_PATH: screenshotPath,
+          STAR_SCREENSHOT_PATH: path.join(paths.imageDir, 'github_star.png'),
         },
       });
       console.log(`[Pipeline] Chup anh man hinh thanh cong.`);

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { getHyperframesReviewScene, getSceneCards } from "../templates/G1_github/scenes.mjs";
+import { getHyperframesReviewScene, getSceneCards } from "../templates/G1_github/template1/scenes.mjs";
 import renderGithubTemplate from "../templates/G1_github/template1/template.mjs";
 
 test("G1_github install renderer uses dynamic step cards instead of fixed feature copy", () => {
