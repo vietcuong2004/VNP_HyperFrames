@@ -30,15 +30,12 @@ const templateFiles = [
 ];
 
 const styleFiles = [
-  "templates/G1_github/style.css",
   "templates/G1_github/template1/style.css",
   "templates/G1_github/template2/style.css",
   "templates/G1_github/template3/style.css",
-  "templates/G2_docker/style.css",
   "templates/G2_docker/template1/style.css",
   "templates/G2_docker/template2/style.css",
   "templates/G2_docker/template3/style.css",
-  "templates/G3_web/style.css",
   "templates/G3_web/template1/style.css",
   "templates/G3_web/template2/style.css",
   "templates/G3_web/template3/style.css",

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import https from 'https';
 import { fileURLToPath } from 'url';
+import os from 'os';
 import { runCommand } from '../desktop_app/command_runner.mjs';
 import { createNodePackageBinCommand } from '../desktop_app/runtime_binaries.mjs';
 import { createWorkspacePaths, prepareWorkspaceRuntime } from '../desktop_app/workspace.mjs';
@@ -12,6 +13,7 @@ import { generateTTS } from '../agents/ttsAgent.js';
 import { transcribeToSRT } from '../agents/whisperAgent.js';
 import { fixSRTWithAI } from '../agents/srtFixAgent.js';
 import { parseTargetUrl, buildGithubData, buildDockerData, buildWebData, selectTemplateVariant } from './main_generateContent.js';
+import { updateJobProgress, saveVideoScriptAndStructure, updateSceneAudioAndSrt } from '../services/dbService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -86,6 +88,16 @@ async function main() {
 
   await prepareWorkspaceRuntime(paths);
 
+  const jobId = process.env.JOB_ID;
+  async function dbProgress(progress, stage, updates = {}) {
+    if (!jobId) return;
+    try {
+      await updateJobProgress(jobId, { progress, current_stage: stage, ...updates });
+    } catch (err) {
+      console.warn(`[DB Progress] Lỗi cập nhật CSDL: ${err.message}`);
+    }
+  }
+
   // Load .env from workspace if running in CLI mode
   const dotenvPath = path.join(workspaceRoot, '.env');
   if (fs.existsSync(dotenvPath)) {
@@ -136,6 +148,7 @@ async function main() {
 
   // Step 1: Sinh kich ban JSON qua cac content generator hoac cache
   console.log('Step 1: Sinh kich ban JSON qua các content generator...');
+  await dbProgress(10, 'generating_script');
   let scriptData = null;
 
   if (!scriptData) {
@@ -238,6 +251,15 @@ async function main() {
     console.log(`[Pipeline] Da luu file kich ban JSON tai: ${jsonPath}`);
   }
 
+  if (jobId && scriptData) {
+    try {
+      console.log(`[Pipeline] Đang lưu cấu trúc kịch bản và phân cảnh lên Supabase cho job ${jobId}...`);
+      await saveVideoScriptAndStructure(jobId, scriptData);
+    } catch (dbErr) {
+      console.error(`[DB Error] Lưu kịch bản lên Supabase thất bại: ${dbErr.message}`);
+    }
+  }
+
   // Chụp ảnh màn hình cho tất cả các loại URL (GitHub, Docker, Web)
   if (urlOrTopic.startsWith('http://') || urlOrTopic.startsWith('https://')) {
     try {
@@ -258,22 +280,25 @@ async function main() {
 
   const ttsProviderLabel = keys.useLarVoice ? 'LarVoice' : 'Edge TTS';
   console.log(`\nStep 2: Sinh giong doc (${ttsProviderLabel}) va phu de (Whisper/LarVoice Subtitle)...`);
+  await dbProgress(40, 'generating_audio', {
+    template_group: scriptData.template,
+    template_name: scriptData.subtemplate
+  });
   const scenes = scriptData.scenes;
   let accumulatedTimeMs = 0;
 
-  for (const scene of scenes) {
-    console.log(`\n--- Xy ly Canh ${scene.stt || scene.scene}/${scenes.length} ---`);
+  // Xử lý song song TTS, Whisper và AI SRT Fix cho tất cả các cảnh để tiết kiệm thời gian
+  console.log(`[Pipeline] Bắt đầu xử lý song song ${scenes.length} phân cảnh...`);
+  await Promise.all(scenes.map(async (scene, index) => {
     scene.stt = scene.stt || scene.scene;
     const audioPath = path.join(paths.audioDir, `scene_${scene.stt}.mp3`);
     const srtPath = path.join(paths.audioDir, `scene_${scene.stt}.srt`);
 
     // 2a. TTS
-    console.log(`[Pipeline] Sinh giong doc Canh ${scene.stt}...`);
     const ttsResult = await generateTTS(scene.voice, audioPath, onLog, keys);
     const duration = ttsResult.duration; // thoi luong (s) cua file am thanh
-
     const roundedDuration = Math.round(duration * 1000) / 1000;
-    scene.audio_start = Math.round(accumulatedTimeMs) / 1000;
+    
     scene.audio_duration = Math.max(0.1, roundedDuration - 0.005);
     scene.audio_path = `assets/audio/scene_${scene.stt}.mp3`;
     scene.duration = roundedDuration;
@@ -281,7 +306,6 @@ async function main() {
     // 2b. Karaoke Timestamps
     let rawSrt = '';
     if (ttsResult.subtitleUrl) {
-      console.log(`[Pipeline] Lay phu de co san tu LarVoice cho Canh ${scene.stt}...`);
       const dlSrt = await getUrlContent(ttsResult.subtitleUrl);
       if (dlSrt && dlSrt.includes('-->')) {
         rawSrt = dlSrt;
@@ -289,20 +313,17 @@ async function main() {
     }
 
     if (!rawSrt) {
-      console.log(`[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh ${scene.stt}...`);
       try {
         await transcribeToSRT(audioPath, srtPath, onLog, 'vi', 'main');
         if (fs.existsSync(srtPath)) {
           rawSrt = fs.readFileSync(srtPath, 'utf8');
         }
       } catch (err) {
-        console.warn(`[Pipeline] Whisper loi: ${err.message}. Lay sub tu am thanh fail, dung fallback.`);
         rawSrt = `1\n00:00:00,000 --> 00:00:${Math.min(9, Math.floor(duration)).toString().padStart(2, '0')},000\n${scene.voice}`;
       }
     }
 
     // 2c. Rà soát sửa lỗi phụ đề bằng SRTFixAgent
-    console.log(`[Pipeline] Ra soat loi chinh ta phu de Canh ${scene.stt}...`);
     let fixedSrt = rawSrt;
     try {
       fixedSrt = await fixSRTWithAI({
@@ -314,14 +335,30 @@ async function main() {
         onLog
       });
     } catch (err) {
-      console.warn(`[Pipeline] [Warning] Ra soat loi chinh ta phu de that bai: ${err.message}. Su dung phu de raw.`);
+      console.warn(`[Pipeline] [Warning] Ra soat loi chinh ta phu de that bai cho Canh ${scene.stt}: ${err.message}. Su dung phu de raw.`);
     }
 
     scene.srt = fixedSrt;
     fs.writeFileSync(srtPath, fixedSrt, 'utf8');
 
+    if (scene.id) {
+      try {
+        await updateSceneAudioAndSrt(scene.id, scene.audio_path, `assets/audio/scene_${scene.stt}.srt`, fixedSrt);
+      } catch (dbErr) {
+        console.error(`[DB Error] Lỗi cập nhật phân cảnh ${scene.stt} lên CSDL: ${dbErr.message}`);
+      }
+    }
+    
+    console.log(`[Pipeline] Hoàn tất xử lý audio & phụ đề cho Canh ${scene.stt}`);
+  }));
+
+  // Tính toán audio_start và word timing transcript tuần tự
+  for (let i = 0; i < scenes.length; i++) {
+    const scene = scenes[i];
+    scene.audio_start = Math.round(accumulatedTimeMs) / 1000;
+    
     scene.transcript = [];
-    const blocks = fixedSrt.trim().split(/\r?\n\r?\n/);
+    const blocks = scene.srt.trim().split(/\r?\n\r?\n/);
     const srtTextLines = [];
     for (const block of blocks) {
       const lines = block.split(/\r?\n/);
@@ -331,7 +368,7 @@ async function main() {
     }
     const cleanText = srtTextLines.join(' ').trim() || scene.voice;
     const words = cleanText.split(/\s+/).filter(Boolean);
-    const effectiveTextDuration = duration * 0.90; // Phân bổ chữ đều trên 90% thời lượng của giọng đọc
+    const effectiveTextDuration = scene.duration * 0.90;
     const timePerWord = effectiveTextDuration / words.length;
     let wordStart = scene.audio_start;
 
@@ -345,7 +382,7 @@ async function main() {
       return item;
     });
 
-    accumulatedTimeMs += Math.round(duration * 1000);
+    accumulatedTimeMs += Math.round(scene.duration * 1000);
   }
 
   const totalDurationSec = accumulatedTimeMs / 1000;
@@ -353,6 +390,7 @@ async function main() {
   fs.writeFileSync(jsonPath, JSON.stringify(scriptData, null, 2), 'utf-8');
 
   console.log('\nStep 3: Bien dich index.html composition chinh tu template...');
+  await dbProgress(75, 'compiling_template');
   const templateName = scriptData.template || 'G3_web';
   const templatePaths = resolveTemplatePaths({
     appRoot,
@@ -382,6 +420,7 @@ async function main() {
 
 
   console.log('\nStep 4: Kiem tra composition bang HyperFrames...');
+  await dbProgress(80, 'validating_composition');
   const hyperframesValidate = createNodePackageBinCommand({
     appRoot,
     packageName: 'hyperframes',
@@ -392,19 +431,25 @@ async function main() {
   run(hyperframesValidate.command, hyperframesValidate.args, { cwd: workspaceRoot });
 
   console.log('\nStep 5: Ket xuat video MP4...');
+  await dbProgress(85, 'rendering_video');
+  const cpuCores = os.cpus().length;
+  const workers = Math.min(8, Math.max(2, cpuCores - 2));
+  console.log(`[Pipeline] Su dung ${workers} luong render song song (phat hien ${cpuCores} cores CPU)`);
   const hyperframesRender = createNodePackageBinCommand({
     appRoot,
     packageName: 'hyperframes',
     binRelativePath: path.join('dist', 'cli.js'),
-    args: ['render', '--workers=2'],
+    args: ['render', `--workers=${workers}`],
     nodePath: nodeBin,
   });
   run(hyperframesRender.command, hyperframesRender.args, { cwd: workspaceRoot });
 
   console.log('\nStep 6: Doi ten video theo dung dinh dang...');
   const latestMp4 = findLatestMp4(paths.rendersDir);
+  let finalVideoName = '';
   if (latestMp4) {
     const newMp4Name = buildFinalVideoName({ safeTopicName, runId });
+    finalVideoName = newMp4Name;
     const oldPath = path.join(paths.rendersDir, latestMp4);
     const newPath = path.join(paths.rendersDir, newMp4Name);
     if (latestMp4 !== newMp4Name) {
@@ -413,7 +458,18 @@ async function main() {
     } else {
       console.log(`→ ${newMp4Name}`);
     }
+
+    if (jobId) {
+      try {
+        const stats = fs.statSync(newPath);
+        const { registerRender } = await import('../services/dbService.js');
+        await registerRender(jobId, newMp4Name, `/renders/${newMp4Name}`, stats.size, scriptData.duration || 0);
+      } catch (dbErr) {
+        console.error(`[DB Error] Đăng ký tệp render lên Supabase thất bại: ${dbErr.message}`);
+      }
+    }
   }
+  await dbProgress(100, 'completed', { status: 'completed' });
 
   console.log('\nStep 7: Don dep file am thanh tam...');
   if (fs.existsSync(paths.audioDir)) {
@@ -442,8 +498,21 @@ function srtToMs(t) {
 const isCli = process.argv[1] && path.resolve(process.argv[1]) === __filename;
 
 if (isCli) {
-  main().catch((error) => {
+  main().catch(async (error) => {
     console.error('\nGap loi trong qua trinh chay Agent pipeline:', error);
+    const jobId = process.env.JOB_ID;
+    if (jobId) {
+      try {
+        const { updateJobProgress } = await import('../services/dbService.js');
+        await updateJobProgress(jobId, {
+          status: 'failed',
+          current_stage: 'failed',
+          error_message: error.message || String(error)
+        });
+      } catch (dbErr) {
+        console.error(`[DB Error] Lỗi cập nhật trạng thái thất bại cho job: ${dbErr.message}`);
+      }
+    }
     process.exit(1);
   });
 }

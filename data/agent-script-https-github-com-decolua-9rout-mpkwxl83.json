@@ -1,0 +1,1924 @@
+{
+  "template": "G1_github",
+  "source_url": "https://github.com/decolua/9router",
+  "platform": "github",
+  "content_type": "library_framework",
+  "video_format": "developer_integration_brief",
+  "classification_reason": "Repo có dấu hiệu là thư viện/framework để tích hợp vào code.",
+  "metadata": {
+    "owner": "decolua",
+    "repo": "9router",
+    "description": "Unlimited FREE AI coding. Connect Claude Code, Codex, Cursor, Cline, Copilot, Antigravity to FREE Claude/GPT/Gemini via 40+ providers. Auto-fallback, RTK -40% tokens, never hit limits.",
+    "stars": 14096,
+    "language": "JavaScript",
+    "topics": [
+      "ai-agents",
+      "ai-gateway",
+      "anthropic",
+      "chatgpt",
+      "claude",
+      "claude-code",
+      "cline",
+      "codex",
+      "copilot",
+      "cursor",
+      "deepseek",
+      "free-ai",
+      "gemini",
+      "gemini-cli",
+      "llm",
+      "llm-gateway",
+      "openai",
+      "openai-proxy",
+      "qwen",
+      "token-saver"
+    ],
+    "readme_headings": [
+      "🤔 Why 9Router?",
+      "🔄 How It Works",
+      "⚡ Quick Start",
+      "Video Guides",
+      "🛠️ Supported CLI Tools",
+      "🌐 Supported Providers",
+      "🔐 OAuth Providers",
+      "🆓 Free Providers",
+      "🔑 API Key Providers (40+)",
+      "💡 Key Features",
+      "🚀 RTK Token Saver",
+      "🎯 Smart 3-Tier Fallback"
+    ],
+    "root_files": [
+      ".dockerignore",
+      ".env.example",
+      ".github",
+      ".gitignore",
+      ".npmignore",
+      ".vscode",
+      "CHANGELOG.md",
+      "DOCKER.md",
+      "Dockerfile",
+      "LICENSE",
+      "README.md",
+      "README.zh-CN.md",
+      "captain-definition",
+      "cli",
+      "docs",
+      "eslint.config.mjs",
+      "gitbook",
+      "i18n",
+      "images",
+      "jsconfig.json",
+      "next.config.mjs",
+      "open-sse",
+      "package.json",
+      "postcss.config.mjs",
+      "public",
+      "scripts",
+      "skills",
+      "src",
+      "start.sh",
+      "tester",
+      "tests"
+    ]
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 1,
+      "layout": "intro",
+      "voice": "9Router là giải pháp định tuyến AI miễn phí giúp bạn kết nối các công cụ code AI như Claude Code, Cursor, Cline với hơn bốn mươi nhà cung cấp AI. Tiết kiệm hai mươi đến bốn mươi phần trăm token và không bao giờ bị giới hạn.",
+      "visual": "Chụp trang repo GitHub, phóng to tiêu đề và mô tả.",
+      "headline_line1": "9ROUTER",
+      "headline_line2": "AI ROUTER MIỄN PHÍ",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 1,
+      "audio_start": 0,
+      "audio_duration": 14.304,
+      "audio_path": "assets/audio/scene_1.mp3",
+      "duration": 14.304,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\n9Router là giải pháp định tuyến AI miễn phí giúp bạn kết nối các công cụ code AI như Claude Code, Cursor, Cline với hơn 40 nhà cung cấp AI. Tiết kiệm 20 đến 40 phần trăm token và không bao giờ bị giới hạn.\n",
+      "transcript": [
+        {
+          "text": "9Router",
+          "start": 0,
+          "end": 0.2
+        },
+        {
+          "text": "là",
+          "start": 0.2,
+          "end": 0.4
+        },
+        {
+          "text": "giải",
+          "start": 0.4,
+          "end": 0.6
+        },
+        {
+          "text": "pháp",
+          "start": 0.6,
+          "end": 0.8
+        },
+        {
+          "text": "định",
+          "start": 0.8,
+          "end": 1
+        },
+        {
+          "text": "tuyến",
+          "start": 1,
+          "end": 1.2
+        },
+        {
+          "text": "AI",
+          "start": 1.2,
+          "end": 1.4
+        },
+        {
+          "text": "miễn",
+          "start": 1.4,
+          "end": 1.6
+        },
+        {
+          "text": "phí",
+          "start": 1.6,
+          "end": 1.8
+        },
+        {
+          "text": "giúp",
+          "start": 1.8,
+          "end": 2
+        },
+        {
+          "text": "bạn",
+          "start": 2,
+          "end": 2.2
+        },
+        {
+          "text": "kết",
+          "start": 2.2,
+          "end": 2.4
+        },
+        {
+          "text": "nối",
+          "start": 2.4,
+          "end": 2.6
+        },
+        {
+          "text": "các",
+          "start": 2.6,
+          "end": 2.8
+        },
+        {
+          "text": "công",
+          "start": 2.8,
+          "end": 3
+        },
+        {
+          "text": "cụ",
+          "start": 3,
+          "end": 3.2
+        },
+        {
+          "text": "code",
+          "start": 3.2,
+          "end": 3.4
+        },
+        {
+          "text": "AI",
+          "start": 3.4,
+          "end": 3.6
+        },
+        {
+          "text": "như",
+          "start": 3.6,
+          "end": 3.8
+        },
+        {
+          "text": "Claude",
+          "start": 3.8,
+          "end": 4
+        },
+        {
+          "text": "Code,",
+          "start": 4,
+          "end": 4.2
+        },
+        {
+          "text": "Cursor,",
+          "start": 4.2,
+          "end": 4.4
+        },
+        {
+          "text": "Cline",
+          "start": 4.4,
+          "end": 4.6
+        },
+        {
+          "text": "với",
+          "start": 4.6,
+          "end": 4.8
+        },
+        {
+          "text": "hơn",
+          "start": 4.8,
+          "end": 5
+        },
+        {
+          "text": "40",
+          "start": 5,
+          "end": 5.2
+        },
+        {
+          "text": "nhà",
+          "start": 5.2,
+          "end": 5.4
+        },
+        {
+          "text": "cung",
+          "start": 5.4,
+          "end": 5.6
+        },
+        {
+          "text": "cấp",
+          "start": 5.6,
+          "end": 5.8
+        },
+        {
+          "text": "AI.",
+          "start": 5.8,
+          "end": 6
+        },
+        {
+          "text": "Tiết",
+          "start": 6,
+          "end": 6.2
+        },
+        {
+          "text": "kiệm",
+          "start": 6.2,
+          "end": 6.4
+        },
+        {
+          "text": "20",
+          "start": 6.4,
+          "end": 6.6
+        },
+        {
+          "text": "đến",
+          "start": 6.6,
+          "end": 6.8
+        },
+        {
+          "text": "40",
+          "start": 6.8,
+          "end": 7
+        },
+        {
+          "text": "phần",
+          "start": 7,
+          "end": 7.2
+        },
+        {
+          "text": "trăm",
+          "start": 7.2,
+          "end": 7.4
+        },
+        {
+          "text": "token",
+          "start": 7.4,
+          "end": 7.6
+        },
+        {
+          "text": "và",
+          "start": 7.6,
+          "end": 7.8
+        },
+        {
+          "text": "không",
+          "start": 7.8,
+          "end": 8
+        },
+        {
+          "text": "bao",
+          "start": 8,
+          "end": 8.2
+        },
+        {
+          "text": "giờ",
+          "start": 8.2,
+          "end": 8.4
+        },
+        {
+          "text": "bị",
+          "start": 8.4,
+          "end": 8.6
+        },
+        {
+          "text": "giới",
+          "start": 8.6,
+          "end": 8.8
+        },
+        {
+          "text": "hạn.",
+          "start": 8.8,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 2,
+      "layout": "problem",
+      "voice": "9Router nằm ở tầng middleware, đóng vai trò cầu nối giữa các IDE code AI và các API provider. Giải quyết vấn đề tốn kém token, giới hạn quota và phải chuyển đổi provider thủ công khi code.",
+      "visual": "Bento card tóm tắt usecase chính của dự án.",
+      "headline_line1": "MIDDLEWARE LAYER",
+      "headline_line2": "ĐỊNH TUYẾN THÔNG MINH",
+      "bento1_title": "Kết nối",
+      "bento1_desc": "Nối tất cả AI code tools với 40+ providers và 100+ models",
+      "bento2_title": "Tiết kiệm",
+      "bento3_title": "Auto-fallback",
+      "repo_url": "github.com/decolua/9router",
+      "bento2_desc": "",
+      "bento3_desc": "",
+      "steps": [
+        {
+          "title": "Kết nối",
+          "body": "Nối tất cả AI code tools với 40+ providers và 100+ models"
+        },
+        {
+          "title": "Tiết kiệm",
+          "body": ""
+        },
+        {
+          "title": "Auto-fallback",
+          "body": ""
+        }
+      ],
+      "content_mode": "steps",
+      "stt": 2,
+      "audio_start": 14.304,
+      "audio_duration": 13.296,
+      "audio_path": "assets/audio/scene_2.mp3",
+      "duration": 13.296,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\n9Router nằm ở tầng middleware, đóng vai trò cầu nối giữa các IDE code AI và các API provider. Giải quyết vấn đề tốn kém token, giới hạn quota và phải chuyển đổi provider thủ công khi code.\n",
+      "transcript": [
+        {
+          "text": "9Router",
+          "start": 0,
+          "end": 0.23684210526315788
+        },
+        {
+          "text": "nằm",
+          "start": 0.23684210526315788,
+          "end": 0.47368421052631576
+        },
+        {
+          "text": "ở",
+          "start": 0.47368421052631576,
+          "end": 0.7105263157894737
+        },
+        {
+          "text": "tầng",
+          "start": 0.7105263157894737,
+          "end": 0.9473684210526315
+        },
+        {
+          "text": "middleware,",
+          "start": 0.9473684210526315,
+          "end": 1.1842105263157894
+        },
+        {
+          "text": "đóng",
+          "start": 1.1842105263157894,
+          "end": 1.4210526315789473
+        },
+        {
+          "text": "vai",
+          "start": 1.4210526315789473,
+          "end": 1.6578947368421053
+        },
+        {
+          "text": "trò",
+          "start": 1.6578947368421053,
+          "end": 1.894736842105263
+        },
+        {
+          "text": "cầu",
+          "start": 1.894736842105263,
+          "end": 2.131578947368421
+        },
+        {
+          "text": "nối",
+          "start": 2.131578947368421,
+          "end": 2.3684210526315788
+        },
+        {
+          "text": "giữa",
+          "start": 2.3684210526315788,
+          "end": 2.6052631578947367
+        },
+        {
+          "text": "các",
+          "start": 2.6052631578947367,
+          "end": 2.8421052631578947
+        },
+        {
+          "text": "IDE",
+          "start": 2.8421052631578947,
+          "end": 3.0789473684210527
+        },
+        {
+          "text": "code",
+          "start": 3.0789473684210527,
+          "end": 3.3157894736842106
+        },
+        {
+          "text": "AI",
+          "start": 3.3157894736842106,
+          "end": 3.552631578947368
+        },
+        {
+          "text": "và",
+          "start": 3.552631578947368,
+          "end": 3.789473684210526
+        },
+        {
+          "text": "các",
+          "start": 3.789473684210526,
+          "end": 4.026315789473684
+        },
+        {
+          "text": "API",
+          "start": 4.026315789473684,
+          "end": 4.263157894736842
+        },
+        {
+          "text": "provider.",
+          "start": 4.263157894736842,
+          "end": 4.5
+        },
+        {
+          "text": "Giải",
+          "start": 4.5,
+          "end": 4.7368421052631575
+        },
+        {
+          "text": "quyết",
+          "start": 4.7368421052631575,
+          "end": 4.973684210526316
+        },
+        {
+          "text": "vấn",
+          "start": 4.973684210526316,
+          "end": 5.2105263157894735
+        },
+        {
+          "text": "đề",
+          "start": 5.2105263157894735,
+          "end": 5.447368421052632
+        },
+        {
+          "text": "tốn",
+          "start": 5.447368421052632,
+          "end": 5.684210526315789
+        },
+        {
+          "text": "kém",
+          "start": 5.684210526315789,
+          "end": 5.921052631578948
+        },
+        {
+          "text": "token,",
+          "start": 5.921052631578948,
+          "end": 6.157894736842105
+        },
+        {
+          "text": "giới",
+          "start": 6.157894736842105,
+          "end": 6.394736842105264
+        },
+        {
+          "text": "hạn",
+          "start": 6.394736842105264,
+          "end": 6.631578947368421
+        },
+        {
+          "text": "quota",
+          "start": 6.631578947368421,
+          "end": 6.868421052631579
+        },
+        {
+          "text": "và",
+          "start": 6.868421052631579,
+          "end": 7.105263157894736
+        },
+        {
+          "text": "phải",
+          "start": 7.105263157894736,
+          "end": 7.342105263157895
+        },
+        {
+          "text": "chuyển",
+          "start": 7.342105263157895,
+          "end": 7.578947368421052
+        },
+        {
+          "text": "đổi",
+          "start": 7.578947368421052,
+          "end": 7.81578947368421
+        },
+        {
+          "text": "provider",
+          "start": 7.81578947368421,
+          "end": 8.052631578947368
+        },
+        {
+          "text": "thủ",
+          "start": 8.052631578947368,
+          "end": 8.289473684210527
+        },
+        {
+          "text": "công",
+          "start": 8.289473684210527,
+          "end": 8.526315789473683
+        },
+        {
+          "text": "khi",
+          "start": 8.526315789473683,
+          "end": 8.763157894736842
+        },
+        {
+          "text": "code.",
+          "start": 8.763157894736842,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 3,
+      "layout": "install",
+      "voice": "Để bắt đầu, clone repo về máy, cài đặt dependencies bằng npm install, sau đó cấu hình các API key của providers bạn muốn dùng trong file config. Cuối cùng khởi động server và trỏ IDE của bạn về endpoint này.",
+      "visual": "Snippet code cài đặt tối giản hoặc cách tiếp cận.",
+      "headline_line1": "TÍCH HỢP NHANH",
+      "headline_line2": "BA BƯỚC CƠ BẢN",
+      "content_mode": "steps",
+      "steps": [
+        {
+          "title": "Clone repo",
+          "body": "git clone và npm install dependencies"
+        },
+        {
+          "title": "Cấu hình",
+          "body": "Thêm API keys vào file config"
+        },
+        {
+          "title": "Khởi động",
+          "body": "Chạy server và trỏ IDE về endpoint"
+        }
+      ],
+      "bento1_title": "Clone repo",
+      "bento1_desc": "git clone và npm install dependencies",
+      "bento2_title": "Cấu hình",
+      "bento2_desc": "Thêm API keys vào file config",
+      "bento3_title": "Khởi động",
+      "bento3_desc": "Chạy server và trỏ IDE về endpoint",
+      "bento4_title": "Kết nối",
+      "bento4_desc": "Trỏ Cursor hoặc Cline về local endpoint",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 3,
+      "audio_start": 27.6,
+      "audio_duration": 13.992,
+      "audio_path": "assets/audio/scene_3.mp3",
+      "duration": 13.992,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nĐể bắt đầu, clone repo về máy, cài đặt dependencies bằng npm install, sau đó cấu hình các API key của providers bạn muốn dùng trong file config. Cuối cùng khởi động server và trỏ IDE của bạn về endpoint này.\n",
+      "transcript": [
+        {
+          "text": "Để",
+          "start": 0,
+          "end": 0.21951219512195122
+        },
+        {
+          "text": "bắt",
+          "start": 0.21951219512195122,
+          "end": 0.43902439024390244
+        },
+        {
+          "text": "đầu,",
+          "start": 0.43902439024390244,
+          "end": 0.6585365853658536
+        },
+        {
+          "text": "clone",
+          "start": 0.6585365853658536,
+          "end": 0.8780487804878049
+        },
+        {
+          "text": "repo",
+          "start": 0.8780487804878049,
+          "end": 1.097560975609756
+        },
+        {
+          "text": "về",
+          "start": 1.097560975609756,
+          "end": 1.3170731707317072
+        },
+        {
+          "text": "máy,",
+          "start": 1.3170731707317072,
+          "end": 1.5365853658536586
+        },
+        {
+          "text": "cài",
+          "start": 1.5365853658536586,
+          "end": 1.7560975609756098
+        },
+        {
+          "text": "đặt",
+          "start": 1.7560975609756098,
+          "end": 1.975609756097561
+        },
+        {
+          "text": "dependencies",
+          "start": 1.975609756097561,
+          "end": 2.195121951219512
+        },
+        {
+          "text": "bằng",
+          "start": 2.195121951219512,
+          "end": 2.4146341463414633
+        },
+        {
+          "text": "npm",
+          "start": 2.4146341463414633,
+          "end": 2.6341463414634143
+        },
+        {
+          "text": "install,",
+          "start": 2.6341463414634143,
+          "end": 2.8536585365853657
+        },
+        {
+          "text": "sau",
+          "start": 2.8536585365853657,
+          "end": 3.073170731707317
+        },
+        {
+          "text": "đó",
+          "start": 3.073170731707317,
+          "end": 3.292682926829268
+        },
+        {
+          "text": "cấu",
+          "start": 3.292682926829268,
+          "end": 3.5121951219512195
+        },
+        {
+          "text": "hình",
+          "start": 3.5121951219512195,
+          "end": 3.7317073170731705
+        },
+        {
+          "text": "các",
+          "start": 3.7317073170731705,
+          "end": 3.951219512195122
+        },
+        {
+          "text": "API",
+          "start": 3.951219512195122,
+          "end": 4.170731707317072
+        },
+        {
+          "text": "key",
+          "start": 4.170731707317072,
+          "end": 4.390243902439024
+        },
+        {
+          "text": "của",
+          "start": 4.390243902439024,
+          "end": 4.609756097560976
+        },
+        {
+          "text": "providers",
+          "start": 4.609756097560976,
+          "end": 4.829268292682927
+        },
+        {
+          "text": "bạn",
+          "start": 4.829268292682927,
+          "end": 5.048780487804877
+        },
+        {
+          "text": "muốn",
+          "start": 5.048780487804877,
+          "end": 5.268292682926829
+        },
+        {
+          "text": "dùng",
+          "start": 5.268292682926829,
+          "end": 5.487804878048781
+        },
+        {
+          "text": "trong",
+          "start": 5.487804878048781,
+          "end": 5.7073170731707314
+        },
+        {
+          "text": "file",
+          "start": 5.7073170731707314,
+          "end": 5.926829268292682
+        },
+        {
+          "text": "config.",
+          "start": 5.926829268292682,
+          "end": 6.146341463414634
+        },
+        {
+          "text": "Cuối",
+          "start": 6.146341463414634,
+          "end": 6.365853658536586
+        },
+        {
+          "text": "cùng",
+          "start": 6.365853658536586,
+          "end": 6.585365853658536
+        },
+        {
+          "text": "khởi",
+          "start": 6.585365853658536,
+          "end": 6.804878048780487
+        },
+        {
+          "text": "động",
+          "start": 6.804878048780487,
+          "end": 7.024390243902439
+        },
+        {
+          "text": "server",
+          "start": 7.024390243902439,
+          "end": 7.2439024390243905
+        },
+        {
+          "text": "và",
+          "start": 7.2439024390243905,
+          "end": 7.463414634146341
+        },
+        {
+          "text": "trỏ",
+          "start": 7.463414634146341,
+          "end": 7.6829268292682915
+        },
+        {
+          "text": "IDE",
+          "start": 7.6829268292682915,
+          "end": 7.902439024390244
+        },
+        {
+          "text": "của",
+          "start": 7.902439024390244,
+          "end": 8.121951219512194
+        },
+        {
+          "text": "bạn",
+          "start": 8.121951219512194,
+          "end": 8.341463414634145
+        },
+        {
+          "text": "về",
+          "start": 8.341463414634145,
+          "end": 8.560975609756097
+        },
+        {
+          "text": "endpoint",
+          "start": 8.560975609756097,
+          "end": 8.780487804878048
+        },
+        {
+          "text": "này.",
+          "start": 8.780487804878048,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 4,
+      "layout": "feature",
+      "voice": "Tính năng nổi bật nhất là RTK Token Saver, tự động nén kết quả từ các lệnh tool như git diff hay grep, giúp tiết kiệm hai mươi đến bốn mươi phần trăm token mỗi request. Kết hợp với auto-fallback từ subscription xuống cheap rồi free models.",
+      "visual": "Sơ đồ hoặc biểu tượng trực quan mô tả tính năng.",
+      "headline_line1": "RTK TOKEN SAVER",
+      "headline_line2": "TIẾT KIỆM 20-40% TOKEN",
+      "btn_text": "Auto compress tool outputs",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 4,
+      "audio_start": 41.592,
+      "audio_duration": 14.568,
+      "audio_path": "assets/audio/scene_4.mp3",
+      "duration": 14.568,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTính năng nổi bật nhất là RTK Token Saver, tự động nén kết quả từ các lệnh tool như git diff hay grep, giúp tiết kiệm 20 đến 40% token mỗi request. Kết hợp với auto-fallback từ subscription xuống cheap rồi free models.\n",
+      "transcript": [
+        {
+          "text": "Tính",
+          "start": 0,
+          "end": 0.20930232558139533
+        },
+        {
+          "text": "năng",
+          "start": 0.20930232558139533,
+          "end": 0.41860465116279066
+        },
+        {
+          "text": "nổi",
+          "start": 0.41860465116279066,
+          "end": 0.627906976744186
+        },
+        {
+          "text": "bật",
+          "start": 0.627906976744186,
+          "end": 0.8372093023255813
+        },
+        {
+          "text": "nhất",
+          "start": 0.8372093023255813,
+          "end": 1.0465116279069766
+        },
+        {
+          "text": "là",
+          "start": 1.0465116279069766,
+          "end": 1.255813953488372
+        },
+        {
+          "text": "RTK",
+          "start": 1.255813953488372,
+          "end": 1.4651162790697674
+        },
+        {
+          "text": "Token",
+          "start": 1.4651162790697674,
+          "end": 1.6744186046511627
+        },
+        {
+          "text": "Saver,",
+          "start": 1.6744186046511627,
+          "end": 1.883720930232558
+        },
+        {
+          "text": "tự",
+          "start": 1.883720930232558,
+          "end": 2.093023255813953
+        },
+        {
+          "text": "động",
+          "start": 2.093023255813953,
+          "end": 2.302325581395349
+        },
+        {
+          "text": "nén",
+          "start": 2.302325581395349,
+          "end": 2.511627906976744
+        },
+        {
+          "text": "kết",
+          "start": 2.511627906976744,
+          "end": 2.7209302325581395
+        },
+        {
+          "text": "quả",
+          "start": 2.7209302325581395,
+          "end": 2.9302325581395348
+        },
+        {
+          "text": "từ",
+          "start": 2.9302325581395348,
+          "end": 3.13953488372093
+        },
+        {
+          "text": "các",
+          "start": 3.13953488372093,
+          "end": 3.3488372093023253
+        },
+        {
+          "text": "lệnh",
+          "start": 3.3488372093023253,
+          "end": 3.558139534883721
+        },
+        {
+          "text": "tool",
+          "start": 3.558139534883721,
+          "end": 3.767441860465116
+        },
+        {
+          "text": "như",
+          "start": 3.767441860465116,
+          "end": 3.9767441860465116
+        },
+        {
+          "text": "git",
+          "start": 3.9767441860465116,
+          "end": 4.186046511627906
+        },
+        {
+          "text": "diff",
+          "start": 4.186046511627906,
+          "end": 4.395348837209302
+        },
+        {
+          "text": "hay",
+          "start": 4.395348837209302,
+          "end": 4.604651162790698
+        },
+        {
+          "text": "grep,",
+          "start": 4.604651162790698,
+          "end": 4.813953488372093
+        },
+        {
+          "text": "giúp",
+          "start": 4.813953488372093,
+          "end": 5.023255813953488
+        },
+        {
+          "text": "tiết",
+          "start": 5.023255813953488,
+          "end": 5.232558139534883
+        },
+        {
+          "text": "kiệm",
+          "start": 5.232558139534883,
+          "end": 5.441860465116279
+        },
+        {
+          "text": "20",
+          "start": 5.441860465116279,
+          "end": 5.651162790697674
+        },
+        {
+          "text": "đến",
+          "start": 5.651162790697674,
+          "end": 5.8604651162790695
+        },
+        {
+          "text": "40%",
+          "start": 5.8604651162790695,
+          "end": 6.069767441860464
+        },
+        {
+          "text": "token",
+          "start": 6.069767441860464,
+          "end": 6.27906976744186
+        },
+        {
+          "text": "mỗi",
+          "start": 6.27906976744186,
+          "end": 6.488372093023256
+        },
+        {
+          "text": "request.",
+          "start": 6.488372093023256,
+          "end": 6.697674418604651
+        },
+        {
+          "text": "Kết",
+          "start": 6.697674418604651,
+          "end": 6.9069767441860455
+        },
+        {
+          "text": "hợp",
+          "start": 6.9069767441860455,
+          "end": 7.116279069767442
+        },
+        {
+          "text": "với",
+          "start": 7.116279069767442,
+          "end": 7.325581395348837
+        },
+        {
+          "text": "auto-fallback",
+          "start": 7.325581395348837,
+          "end": 7.534883720930232
+        },
+        {
+          "text": "từ",
+          "start": 7.534883720930232,
+          "end": 7.7441860465116275
+        },
+        {
+          "text": "subscription",
+          "start": 7.7441860465116275,
+          "end": 7.953488372093023
+        },
+        {
+          "text": "xuống",
+          "start": 7.953488372093023,
+          "end": 8.162790697674417
+        },
+        {
+          "text": "cheap",
+          "start": 8.162790697674417,
+          "end": 8.372093023255813
+        },
+        {
+          "text": "rồi",
+          "start": 8.372093023255813,
+          "end": 8.581395348837209
+        },
+        {
+          "text": "free",
+          "start": 8.581395348837209,
+          "end": 8.790697674418604
+        },
+        {
+          "text": "models.",
+          "start": 8.790697674418604,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 5,
+      "layout": "checklist",
+      "voice": "Trước khi tích hợp vào dự án thật, hãy kiểm tra license MIT cho phép sử dụng thương mại, đọc qua các issue để biết bug đã biết, và xem release notes để chọn phiên bản ổn định nhất.",
+      "visual": "Checklist các điểm cần lưu ý trước khi dùng.",
+      "headline_line1": "KIỂM TRA TRƯỚC",
+      "headline_line2": "ĐẢM BẢO AN TOÀN",
+      "bento1_title": "MIT License",
+      "bento1_desc": "Cho phép sử dụng thương mại và modify tự do",
+      "bento2_title": "Release",
+      "bento3_title": "Issues",
+      "repo_url": "github.com/decolua/9router",
+      "bento2_desc": "",
+      "bento3_desc": "",
+      "steps": [
+        {
+          "title": "MIT License",
+          "body": "Cho phép sử dụng thương mại và modify tự do"
+        },
+        {
+          "title": "Release",
+          "body": ""
+        },
+        {
+          "title": "Issues",
+          "body": ""
+        }
+      ],
+      "content_mode": "steps",
+      "stt": 5,
+      "audio_start": 56.16,
+      "audio_duration": 10.2,
+      "audio_path": "assets/audio/scene_5.mp3",
+      "duration": 10.2,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTrước khi tích hợp vào dự án thật, hãy kiểm tra license MIT cho phép sử dụng thương mại, đọc qua các issue để biết bug đã biết, và xem release notes để chọn phiên bản ổn định nhất.\n",
+      "transcript": [
+        {
+          "text": "Trước",
+          "start": 0,
+          "end": 0.23076923076923078
+        },
+        {
+          "text": "khi",
+          "start": 0.23076923076923078,
+          "end": 0.46153846153846156
+        },
+        {
+          "text": "tích",
+          "start": 0.46153846153846156,
+          "end": 0.6923076923076924
+        },
+        {
+          "text": "hợp",
+          "start": 0.6923076923076924,
+          "end": 0.9230769230769231
+        },
+        {
+          "text": "vào",
+          "start": 0.9230769230769231,
+          "end": 1.1538461538461537
+        },
+        {
+          "text": "dự",
+          "start": 1.1538461538461537,
+          "end": 1.3846153846153848
+        },
+        {
+          "text": "án",
+          "start": 1.3846153846153848,
+          "end": 1.6153846153846154
+        },
+        {
+          "text": "thật,",
+          "start": 1.6153846153846154,
+          "end": 1.8461538461538463
+        },
+        {
+          "text": "hãy",
+          "start": 1.8461538461538463,
+          "end": 2.076923076923077
+        },
+        {
+          "text": "kiểm",
+          "start": 2.076923076923077,
+          "end": 2.3076923076923075
+        },
+        {
+          "text": "tra",
+          "start": 2.3076923076923075,
+          "end": 2.5384615384615388
+        },
+        {
+          "text": "license",
+          "start": 2.5384615384615388,
+          "end": 2.7692307692307696
+        },
+        {
+          "text": "MIT",
+          "start": 2.7692307692307696,
+          "end": 3
+        },
+        {
+          "text": "cho",
+          "start": 3,
+          "end": 3.230769230769231
+        },
+        {
+          "text": "phép",
+          "start": 3.230769230769231,
+          "end": 3.4615384615384612
+        },
+        {
+          "text": "sử",
+          "start": 3.4615384615384612,
+          "end": 3.6923076923076925
+        },
+        {
+          "text": "dụng",
+          "start": 3.6923076923076925,
+          "end": 3.9230769230769234
+        },
+        {
+          "text": "thương",
+          "start": 3.9230769230769234,
+          "end": 4.153846153846154
+        },
+        {
+          "text": "mại,",
+          "start": 4.153846153846154,
+          "end": 4.384615384615385
+        },
+        {
+          "text": "đọc",
+          "start": 4.384615384615385,
+          "end": 4.615384615384615
+        },
+        {
+          "text": "qua",
+          "start": 4.615384615384615,
+          "end": 4.846153846153847
+        },
+        {
+          "text": "các",
+          "start": 4.846153846153847,
+          "end": 5.0769230769230775
+        },
+        {
+          "text": "issue",
+          "start": 5.0769230769230775,
+          "end": 5.3076923076923075
+        },
+        {
+          "text": "để",
+          "start": 5.3076923076923075,
+          "end": 5.538461538461539
+        },
+        {
+          "text": "biết",
+          "start": 5.538461538461539,
+          "end": 5.769230769230769
+        },
+        {
+          "text": "bug",
+          "start": 5.769230769230769,
+          "end": 6
+        },
+        {
+          "text": "đã",
+          "start": 6,
+          "end": 6.230769230769231
+        },
+        {
+          "text": "biết,",
+          "start": 6.230769230769231,
+          "end": 6.461538461538462
+        },
+        {
+          "text": "và",
+          "start": 6.461538461538462,
+          "end": 6.6923076923076925
+        },
+        {
+          "text": "xem",
+          "start": 6.6923076923076925,
+          "end": 6.9230769230769225
+        },
+        {
+          "text": "release",
+          "start": 6.9230769230769225,
+          "end": 7.153846153846154
+        },
+        {
+          "text": "notes",
+          "start": 7.153846153846154,
+          "end": 7.384615384615385
+        },
+        {
+          "text": "để",
+          "start": 7.384615384615385,
+          "end": 7.615384615384615
+        },
+        {
+          "text": "chọn",
+          "start": 7.615384615384615,
+          "end": 7.846153846153847
+        },
+        {
+          "text": "phiên",
+          "start": 7.846153846153847,
+          "end": 8.076923076923077
+        },
+        {
+          "text": "bản",
+          "start": 8.076923076923077,
+          "end": 8.307692307692308
+        },
+        {
+          "text": "ổn",
+          "start": 8.307692307692308,
+          "end": 8.538461538461538
+        },
+        {
+          "text": "định",
+          "start": 8.538461538461538,
+          "end": 8.76923076923077
+        },
+        {
+          "text": "nhất.",
+          "start": 8.76923076923077,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 6,
+      "layout": "stats",
+      "voice": "Repo đã thu hút hơn mười bốn nghìn sao trên GitHub, viết bằng JavaScript, cho thấy sức hút mạnh mẽ từ cộng đồng developer đang tìm giải pháp tiết kiệm chi phí AI coding.",
+      "visual": "Thẻ stats của repo với số sao, ngôn ngữ.",
+      "headline_line1": "GITHUB STATS",
+      "headline_line2": "CỘNG ĐỒNG ĐÔNG ĐẢO",
+      "repo_name": "decolua/9router",
+      "repo_lang": "JavaScript",
+      "repo_stars": "★ 14.096",
+      "repo_trend": "▲ Trending",
+      "repo_trend_label": "GitHub",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 6,
+      "audio_start": 66.36,
+      "audio_duration": 10.488,
+      "audio_path": "assets/audio/scene_6.mp3",
+      "duration": 10.488,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nRepo đã thu hút hơn 14.000 sao trên GitHub, viết bằng JavaScript, cho thấy sức hút mạnh mẽ từ cộng đồng developer đang tìm giải pháp tiết kiệm chi phí AI coding.\n",
+      "transcript": [
+        {
+          "text": "Repo",
+          "start": 0,
+          "end": 0.28125
+        },
+        {
+          "text": "đã",
+          "start": 0.28125,
+          "end": 0.5625
+        },
+        {
+          "text": "thu",
+          "start": 0.5625,
+          "end": 0.84375
+        },
+        {
+          "text": "hút",
+          "start": 0.84375,
+          "end": 1.125
+        },
+        {
+          "text": "hơn",
+          "start": 1.125,
+          "end": 1.40625
+        },
+        {
+          "text": "14.000",
+          "start": 1.40625,
+          "end": 1.6875
+        },
+        {
+          "text": "sao",
+          "start": 1.6875,
+          "end": 1.96875
+        },
+        {
+          "text": "trên",
+          "start": 1.96875,
+          "end": 2.25
+        },
+        {
+          "text": "GitHub,",
+          "start": 2.25,
+          "end": 2.53125
+        },
+        {
+          "text": "viết",
+          "start": 2.53125,
+          "end": 2.8125
+        },
+        {
+          "text": "bằng",
+          "start": 2.8125,
+          "end": 3.09375
+        },
+        {
+          "text": "JavaScript,",
+          "start": 3.09375,
+          "end": 3.375
+        },
+        {
+          "text": "cho",
+          "start": 3.375,
+          "end": 3.65625
+        },
+        {
+          "text": "thấy",
+          "start": 3.65625,
+          "end": 3.9375
+        },
+        {
+          "text": "sức",
+          "start": 3.9375,
+          "end": 4.21875
+        },
+        {
+          "text": "hút",
+          "start": 4.21875,
+          "end": 4.5
+        },
+        {
+          "text": "mạnh",
+          "start": 4.5,
+          "end": 4.78125
+        },
+        {
+          "text": "mẽ",
+          "start": 4.78125,
+          "end": 5.0625
+        },
+        {
+          "text": "từ",
+          "start": 5.0625,
+          "end": 5.34375
+        },
+        {
+          "text": "cộng",
+          "start": 5.34375,
+          "end": 5.625
+        },
+        {
+          "text": "đồng",
+          "start": 5.625,
+          "end": 5.90625
+        },
+        {
+          "text": "developer",
+          "start": 5.90625,
+          "end": 6.1875
+        },
+        {
+          "text": "đang",
+          "start": 6.1875,
+          "end": 6.46875
+        },
+        {
+          "text": "tìm",
+          "start": 6.46875,
+          "end": 6.75
+        },
+        {
+          "text": "giải",
+          "start": 6.75,
+          "end": 7.03125
+        },
+        {
+          "text": "pháp",
+          "start": 7.03125,
+          "end": 7.3125
+        },
+        {
+          "text": "tiết",
+          "start": 7.3125,
+          "end": 7.59375
+        },
+        {
+          "text": "kiệm",
+          "start": 7.59375,
+          "end": 7.875
+        },
+        {
+          "text": "chi",
+          "start": 7.875,
+          "end": 8.15625
+        },
+        {
+          "text": "phí",
+          "start": 8.15625,
+          "end": 8.4375
+        },
+        {
+          "text": "AI",
+          "start": 8.4375,
+          "end": 8.71875
+        },
+        {
+          "text": "coding.",
+          "start": 8.71875,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 7,
+      "layout": "clone",
+      "voice": "Trước khi tích hợp vào production, nên clone repo về, đọc kỹ README để hiểu cấu trúc config, chạy thử trong một project phụ để kiểm nghiệm khả năng fallback và token saving thực tế.",
+      "visual": "Hiển thị lệnh git clone và checklist chạy thử tối giản.",
+      "headline_line1": "THỬ NGHIỆM",
+      "headline_line2": "PROJECT PHỤ TRƯỚC",
+      "btn_text": "$ git clone github.com/decolua/9router",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 7,
+      "audio_start": 76.848,
+      "audio_duration": 11.544,
+      "audio_path": "assets/audio/scene_7.mp3",
+      "duration": 11.544,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTrước khi tích hợp vào production, nên clone repo về, đọc kỹ README để hiểu cấu trúc config, chạy thử trong một project phụ để kiểm nghiệm khả năng fallback và token saving thực tế.\n",
+      "transcript": [
+        {
+          "text": "Trước",
+          "start": 0,
+          "end": 0.2571428571428572
+        },
+        {
+          "text": "khi",
+          "start": 0.2571428571428572,
+          "end": 0.5142857142857143
+        },
+        {
+          "text": "tích",
+          "start": 0.5142857142857143,
+          "end": 0.7714285714285716
+        },
+        {
+          "text": "hợp",
+          "start": 0.7714285714285716,
+          "end": 1.0285714285714287
+        },
+        {
+          "text": "vào",
+          "start": 1.0285714285714287,
+          "end": 1.2857142857142858
+        },
+        {
+          "text": "production,",
+          "start": 1.2857142857142858,
+          "end": 1.5428571428571431
+        },
+        {
+          "text": "nên",
+          "start": 1.5428571428571431,
+          "end": 1.8000000000000003
+        },
+        {
+          "text": "clone",
+          "start": 1.8000000000000003,
+          "end": 2.0571428571428574
+        },
+        {
+          "text": "repo",
+          "start": 2.0571428571428574,
+          "end": 2.3142857142857145
+        },
+        {
+          "text": "về,",
+          "start": 2.3142857142857145,
+          "end": 2.5714285714285716
+        },
+        {
+          "text": "đọc",
+          "start": 2.5714285714285716,
+          "end": 2.8285714285714287
+        },
+        {
+          "text": "kỹ",
+          "start": 2.8285714285714287,
+          "end": 3.0857142857142863
+        },
+        {
+          "text": "README",
+          "start": 3.0857142857142863,
+          "end": 3.342857142857143
+        },
+        {
+          "text": "để",
+          "start": 3.342857142857143,
+          "end": 3.6000000000000005
+        },
+        {
+          "text": "hiểu",
+          "start": 3.6000000000000005,
+          "end": 3.857142857142857
+        },
+        {
+          "text": "cấu",
+          "start": 3.857142857142857,
+          "end": 4.114285714285715
+        },
+        {
+          "text": "trúc",
+          "start": 4.114285714285715,
+          "end": 4.371428571428572
+        },
+        {
+          "text": "config,",
+          "start": 4.371428571428572,
+          "end": 4.628571428571429
+        },
+        {
+          "text": "chạy",
+          "start": 4.628571428571429,
+          "end": 4.885714285714286
+        },
+        {
+          "text": "thử",
+          "start": 4.885714285714286,
+          "end": 5.142857142857143
+        },
+        {
+          "text": "trong",
+          "start": 5.142857142857143,
+          "end": 5.400000000000001
+        },
+        {
+          "text": "một",
+          "start": 5.400000000000001,
+          "end": 5.6571428571428575
+        },
+        {
+          "text": "project",
+          "start": 5.6571428571428575,
+          "end": 5.914285714285715
+        },
+        {
+          "text": "phụ",
+          "start": 5.914285714285715,
+          "end": 6.171428571428573
+        },
+        {
+          "text": "để",
+          "start": 6.171428571428573,
+          "end": 6.42857142857143
+        },
+        {
+          "text": "kiểm",
+          "start": 6.42857142857143,
+          "end": 6.685714285714286
+        },
+        {
+          "text": "nghiệm",
+          "start": 6.685714285714286,
+          "end": 6.942857142857143
+        },
+        {
+          "text": "khả",
+          "start": 6.942857142857143,
+          "end": 7.200000000000001
+        },
+        {
+          "text": "năng",
+          "start": 7.200000000000001,
+          "end": 7.457142857142858
+        },
+        {
+          "text": "fallback",
+          "start": 7.457142857142858,
+          "end": 7.714285714285714
+        },
+        {
+          "text": "và",
+          "start": 7.714285714285714,
+          "end": 7.971428571428572
+        },
+        {
+          "text": "token",
+          "start": 7.971428571428572,
+          "end": 8.22857142857143
+        },
+        {
+          "text": "saving",
+          "start": 8.22857142857143,
+          "end": 8.485714285714286
+        },
+        {
+          "text": "thực",
+          "start": 8.485714285714286,
+          "end": 8.742857142857144
+        },
+        {
+          "text": "tế.",
+          "start": 8.742857142857144,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 8,
+      "layout": "outro",
+      "voice": "Tóm lại, 9Router là middleware đáng thử cho developer muốn tối ưu chi phí AI coding. Nhớ kiểm tra license MIT, đọc issue để tránh bug, theo dõi release mới, và star repo nếu thấy hữu ích cho workflow của bạn.",
+      "visual": "Outro nhắc star, bình luận và lưu repo để xem lại.",
+      "headline_line1": "KẾT LUẬN",
+      "headline_line2": "LƯU LẠI NẾU CẦN",
+      "content_mode": "steps",
+      "steps": [
+        {
+          "title": "Star repo",
+          "body": "Lưu lại nếu phù hợp với workflow"
+        },
+        {
+          "title": "Đọc issue",
+          "body": "Kiểm tra bug đã biết trước khi dùng"
+        },
+        {
+          "title": "Theo dõi",
+          "body": "Watch release để cập nhật tính năng mới"
+        },
+        {
+          "title": "MIT License",
+          "body": "Xác nhận quyền sử dụng thương mại"
+        }
+      ],
+      "bento1_title": "Star repo",
+      "bento1_desc": "Lưu lại nếu phù hợp với workflow",
+      "bento2_title": "Đọc issue",
+      "bento2_desc": "Kiểm tra bug đã biết trước khi dùng",
+      "bento3_title": "Theo dõi",
+      "bento3_desc": "Watch release để cập nhật tính năng mới",
+      "bento4_title": "MIT License",
+      "bento4_desc": "Xác nhận quyền sử dụng thương mại",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 8,
+      "audio_start": 88.392,
+      "audio_duration": 14.52,
+      "audio_path": "assets/audio/scene_8.mp3",
+      "duration": 14.52,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTóm lại, 9Router là middleware đáng thử cho developer muốn tối ưu chi phí AI coding. Nhớ kiểm tra license MIT, đọc issue để tránh bug, theo dõi release mới, và star repo nếu thấy hữu ích cho workflow của bạn.\n",
+      "transcript": [
+        {
+          "text": "Tóm",
+          "start": 0,
+          "end": 0.21951219512195122
+        },
+        {
+          "text": "lại,",
+          "start": 0.21951219512195122,
+          "end": 0.43902439024390244
+        },
+        {
+          "text": "9Router",
+          "start": 0.43902439024390244,
+          "end": 0.6585365853658536
+        },
+        {
+          "text": "là",
+          "start": 0.6585365853658536,
+          "end": 0.8780487804878049
+        },
+        {
+          "text": "middleware",
+          "start": 0.8780487804878049,
+          "end": 1.097560975609756
+        },
+        {
+          "text": "đáng",
+          "start": 1.097560975609756,
+          "end": 1.3170731707317072
+        },
+        {
+          "text": "thử",
+          "start": 1.3170731707317072,
+          "end": 1.5365853658536586
+        },
+        {
+          "text": "cho",
+          "start": 1.5365853658536586,
+          "end": 1.7560975609756098
+        },
+        {
+          "text": "developer",
+          "start": 1.7560975609756098,
+          "end": 1.975609756097561
+        },
+        {
+          "text": "muốn",
+          "start": 1.975609756097561,
+          "end": 2.195121951219512
+        },
+        {
+          "text": "tối",
+          "start": 2.195121951219512,
+          "end": 2.4146341463414633
+        },
+        {
+          "text": "ưu",
+          "start": 2.4146341463414633,
+          "end": 2.6341463414634143
+        },
+        {
+          "text": "chi",
+          "start": 2.6341463414634143,
+          "end": 2.8536585365853657
+        },
+        {
+          "text": "phí",
+          "start": 2.8536585365853657,
+          "end": 3.073170731707317
+        },
+        {
+          "text": "AI",
+          "start": 3.073170731707317,
+          "end": 3.292682926829268
+        },
+        {
+          "text": "coding.",
+          "start": 3.292682926829268,
+          "end": 3.5121951219512195
+        },
+        {
+          "text": "Nhớ",
+          "start": 3.5121951219512195,
+          "end": 3.7317073170731705
+        },
+        {
+          "text": "kiểm",
+          "start": 3.7317073170731705,
+          "end": 3.951219512195122
+        },
+        {
+          "text": "tra",
+          "start": 3.951219512195122,
+          "end": 4.170731707317072
+        },
+        {
+          "text": "license",
+          "start": 4.170731707317072,
+          "end": 4.390243902439024
+        },
+        {
+          "text": "MIT,",
+          "start": 4.390243902439024,
+          "end": 4.609756097560976
+        },
+        {
+          "text": "đọc",
+          "start": 4.609756097560976,
+          "end": 4.829268292682927
+        },
+        {
+          "text": "issue",
+          "start": 4.829268292682927,
+          "end": 5.048780487804877
+        },
+        {
+          "text": "để",
+          "start": 5.048780487804877,
+          "end": 5.268292682926829
+        },
+        {
+          "text": "tránh",
+          "start": 5.268292682926829,
+          "end": 5.487804878048781
+        },
+        {
+          "text": "bug,",
+          "start": 5.487804878048781,
+          "end": 5.7073170731707314
+        },
+        {
+          "text": "theo",
+          "start": 5.7073170731707314,
+          "end": 5.926829268292682
+        },
+        {
+          "text": "dõi",
+          "start": 5.926829268292682,
+          "end": 6.146341463414634
+        },
+        {
+          "text": "release",
+          "start": 6.146341463414634,
+          "end": 6.365853658536586
+        },
+        {
+          "text": "mới,",
+          "start": 6.365853658536586,
+          "end": 6.585365853658536
+        },
+        {
+          "text": "và",
+          "start": 6.585365853658536,
+          "end": 6.804878048780487
+        },
+        {
+          "text": "star",
+          "start": 6.804878048780487,
+          "end": 7.024390243902439
+        },
+        {
+          "text": "repo",
+          "start": 7.024390243902439,
+          "end": 7.2439024390243905
+        },
+        {
+          "text": "nếu",
+          "start": 7.2439024390243905,
+          "end": 7.463414634146341
+        },
+        {
+          "text": "thấy",
+          "start": 7.463414634146341,
+          "end": 7.6829268292682915
+        },
+        {
+          "text": "hữu",
+          "start": 7.6829268292682915,
+          "end": 7.902439024390244
+        },
+        {
+          "text": "ích",
+          "start": 7.902439024390244,
+          "end": 8.121951219512194
+        },
+        {
+          "text": "cho",
+          "start": 8.121951219512194,
+          "end": 8.341463414634145
+        },
+        {
+          "text": "workflow",
+          "start": 8.341463414634145,
+          "end": 8.560975609756097
+        },
+        {
+          "text": "của",
+          "start": 8.560975609756097,
+          "end": 8.780487804878048
+        },
+        {
+          "text": "bạn.",
+          "start": 8.780487804878048,
+          "end": 9
+        }
+      ]
+    }
+  ],
+  "duration": 102.912
+}

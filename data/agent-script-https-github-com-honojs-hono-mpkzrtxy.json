@@ -1,0 +1,2247 @@
+{
+  "template": "G1_github",
+  "source_url": "https://github.com/honojs/hono",
+  "platform": "github",
+  "content_type": "library_framework",
+  "video_format": "developer_integration_brief",
+  "classification_reason": "Repo có dấu hiệu là thư viện/framework để tích hợp vào code.",
+  "metadata": {
+    "owner": "honojs",
+    "repo": "hono",
+    "description": "Web framework built on Web Standards",
+    "stars": 30597,
+    "language": "TypeScript",
+    "topics": [
+      "aws-lambda",
+      "bun",
+      "cloudflare",
+      "cloudflare-workers",
+      "deno",
+      "npm",
+      "router",
+      "typescript",
+      "web-framework"
+    ],
+    "readme_headings": [
+      "Quick Start",
+      "Features",
+      "Documentation",
+      "Migration",
+      "Communication",
+      "Contributing",
+      "Contributors",
+      "Authors",
+      "License"
+    ],
+    "root_files": [
+      ".devcontainer",
+      ".editorconfig",
+      ".github",
+      ".gitignore",
+      ".gitpod.yml",
+      ".prettierrc",
+      ".tool-versions",
+      ".vscode",
+      "LICENSE",
+      "README.md",
+      "benchmarks",
+      "build",
+      "bun.lock",
+      "bunfig.toml",
+      "codecov.yml",
+      "docs",
+      "eslint.config.mjs",
+      "jsr.json",
+      "package.cjs.json",
+      "package.json",
+      "perf-measures",
+      "runtime-tests",
+      "src",
+      "tsconfig.base.json",
+      "tsconfig.build.json",
+      "tsconfig.json",
+      "tsconfig.spec.json",
+      "vitest.config.ts"
+    ]
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 1,
+      "layout": "intro",
+      "voice": "Hono là web framework TypeScript siêu nhẹ và cực nhanh, được xây dựng trên Web Standards. Với hơn ba mươi nghìn sao trên GitHub, Hono hỗ trợ đa nền tảng từ Cloudflare Workers đến Node.js, mang đến trải nghiệm phát triển tuyệt vời cho mọi JavaScript runtime.",
+      "visual": "Chụp trang repo GitHub, phóng to tiêu đề và mô tả.",
+      "headline_line1": "HONO FRAMEWORK",
+      "headline_line2": "WEB STANDARDS ULTRAFAST",
+      "repo_url": "github.com/honojs/hono",
+      "stt": 1,
+      "audio_start": 0,
+      "audio_duration": 15.84,
+      "audio_path": "assets/audio/scene_1.mp3",
+      "duration": 15.84,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nHono là web framework TypeScript siêu nhẹ và cực nhanh, được xây dựng trên Web Standards. Với hơn ba mươi nghìn sao trên GitHub, Hono hỗ trợ đa nền tảng từ Cloudflare Workers đến Node.js, mang đến trải nghiệm phát triển tuyệt vời cho mọi JavaScript runtime.\n",
+      "transcript": [
+        {
+          "text": "Hono",
+          "start": 0,
+          "end": 0.3
+        },
+        {
+          "text": "là",
+          "start": 0.3,
+          "end": 0.61
+        },
+        {
+          "text": "web",
+          "start": 0.61,
+          "end": 0.91
+        },
+        {
+          "text": "framework",
+          "start": 0.91,
+          "end": 1.21
+        },
+        {
+          "text": "TypeScript",
+          "start": 1.21,
+          "end": 1.52
+        },
+        {
+          "text": "siêu",
+          "start": 1.52,
+          "end": 1.82
+        },
+        {
+          "text": "nhẹ",
+          "start": 1.82,
+          "end": 2.12
+        },
+        {
+          "text": "và",
+          "start": 2.12,
+          "end": 2.43
+        },
+        {
+          "text": "cực",
+          "start": 2.43,
+          "end": 2.73
+        },
+        {
+          "text": "nhanh,",
+          "start": 2.73,
+          "end": 3.03
+        },
+        {
+          "text": "được",
+          "start": 3.03,
+          "end": 3.34
+        },
+        {
+          "text": "xây",
+          "start": 3.34,
+          "end": 3.64
+        },
+        {
+          "text": "dựng",
+          "start": 3.64,
+          "end": 3.94
+        },
+        {
+          "text": "trên",
+          "start": 3.94,
+          "end": 4.25
+        },
+        {
+          "text": "Web",
+          "start": 4.25,
+          "end": 4.55
+        },
+        {
+          "text": "Standards.",
+          "start": 4.55,
+          "end": 4.85
+        },
+        {
+          "text": "Với",
+          "start": 4.85,
+          "end": 5.16
+        },
+        {
+          "text": "hơn",
+          "start": 5.16,
+          "end": 5.46
+        },
+        {
+          "text": "ba",
+          "start": 5.46,
+          "end": 5.76
+        },
+        {
+          "text": "mươi",
+          "start": 5.76,
+          "end": 6.07
+        },
+        {
+          "text": "nghìn",
+          "start": 6.07,
+          "end": 6.37
+        },
+        {
+          "text": "sao",
+          "start": 6.37,
+          "end": 6.67
+        },
+        {
+          "text": "trên",
+          "start": 6.67,
+          "end": 6.98
+        },
+        {
+          "text": "GitHub,",
+          "start": 6.98,
+          "end": 7.28
+        },
+        {
+          "text": "Hono",
+          "start": 7.28,
+          "end": 7.58
+        },
+        {
+          "text": "hỗ",
+          "start": 7.58,
+          "end": 7.89
+        },
+        {
+          "text": "trợ",
+          "start": 7.89,
+          "end": 8.19
+        },
+        {
+          "text": "đa",
+          "start": 8.19,
+          "end": 8.49
+        },
+        {
+          "text": "nền",
+          "start": 8.49,
+          "end": 8.8
+        },
+        {
+          "text": "tảng",
+          "start": 8.8,
+          "end": 9.1
+        },
+        {
+          "text": "từ",
+          "start": 9.1,
+          "end": 9.4
+        },
+        {
+          "text": "Cloudflare",
+          "start": 9.4,
+          "end": 9.71
+        },
+        {
+          "text": "Workers",
+          "start": 9.71,
+          "end": 10.01
+        },
+        {
+          "text": "đến",
+          "start": 10.01,
+          "end": 10.31
+        },
+        {
+          "text": "Node.js,",
+          "start": 10.31,
+          "end": 10.62
+        },
+        {
+          "text": "mang",
+          "start": 10.62,
+          "end": 10.92
+        },
+        {
+          "text": "đến",
+          "start": 10.92,
+          "end": 11.22
+        },
+        {
+          "text": "trải",
+          "start": 11.22,
+          "end": 11.53
+        },
+        {
+          "text": "nghiệm",
+          "start": 11.53,
+          "end": 11.83
+        },
+        {
+          "text": "phát",
+          "start": 11.83,
+          "end": 12.13
+        },
+        {
+          "text": "triển",
+          "start": 12.13,
+          "end": 12.44
+        },
+        {
+          "text": "tuyệt",
+          "start": 12.44,
+          "end": 12.74
+        },
+        {
+          "text": "vời",
+          "start": 12.74,
+          "end": 13.04
+        },
+        {
+          "text": "cho",
+          "start": 13.04,
+          "end": 13.35
+        },
+        {
+          "text": "mọi",
+          "start": 13.35,
+          "end": 13.65
+        },
+        {
+          "text": "JavaScript",
+          "start": 13.65,
+          "end": 13.95
+        },
+        {
+          "text": "runtime.",
+          "start": 13.95,
+          "end": 14.26
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 2,
+      "layout": "problem",
+      "voice": "Hono nằm ở tầng backend framework, giải quyết bài toán xây dựng API và web server hiệu năng cao trên nhiều runtime khác nhau. Với router RegExpRouter không dùng vòng lặp tuyến tính, Hono mang lại tốc độ vượt trội mà vẫn giữ bundle size dưới mười hai kilobyte.",
+      "visual": "Bento card tóm tắt usecase chính của dự án.",
+      "headline_line1": "BACKEND FRAMEWORK",
+      "headline_line2": "ĐA NỀN TẢNG RUNTIME",
+      "bento1_title": "API Server",
+      "bento1_desc": "Xây dựng REST API và web server hiệu năng cao đa runtime",
+      "bento2_title": "Edge Ready",
+      "bento3_title": "Zero Deps",
+      "repo_url": "github.com/honojs/hono",
+      "bento2_desc": "",
+      "bento3_desc": "",
+      "steps": [
+        {
+          "title": "API Server",
+          "body": "Xây dựng REST API và web server hiệu năng cao đa runtime"
+        },
+        {
+          "title": "Edge Ready",
+          "body": ""
+        },
+        {
+          "title": "Zero Deps",
+          "body": ""
+        }
+      ],
+      "content_mode": "steps",
+      "stt": 2,
+      "audio_start": 15.84,
+      "audio_duration": 15.528,
+      "audio_path": "assets/audio/scene_2.mp3",
+      "duration": 15.528,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nHono nằm ở tầng backend framework, giải quyết bài toán xây dựng API và web server hiệu năng cao trên nhiều runtime khác nhau. Với router RegExpRouter không dùng vòng lặp tuyến tính, Hono mang lại tốc độ vượt trội mà vẫn giữ bundle size dưới 12KB.\n",
+      "transcript": [
+        {
+          "text": "Hono",
+          "start": 15.84,
+          "end": 16.14
+        },
+        {
+          "text": "nằm",
+          "start": 16.14,
+          "end": 16.43
+        },
+        {
+          "text": "ở",
+          "start": 16.43,
+          "end": 16.73
+        },
+        {
+          "text": "tầng",
+          "start": 16.73,
+          "end": 17.03
+        },
+        {
+          "text": "backend",
+          "start": 17.03,
+          "end": 17.33
+        },
+        {
+          "text": "framework,",
+          "start": 17.33,
+          "end": 17.62
+        },
+        {
+          "text": "giải",
+          "start": 17.62,
+          "end": 17.92
+        },
+        {
+          "text": "quyết",
+          "start": 17.92,
+          "end": 18.22
+        },
+        {
+          "text": "bài",
+          "start": 18.22,
+          "end": 18.52
+        },
+        {
+          "text": "toán",
+          "start": 18.52,
+          "end": 18.81
+        },
+        {
+          "text": "xây",
+          "start": 18.81,
+          "end": 19.11
+        },
+        {
+          "text": "dựng",
+          "start": 19.11,
+          "end": 19.41
+        },
+        {
+          "text": "API",
+          "start": 19.41,
+          "end": 19.71
+        },
+        {
+          "text": "và",
+          "start": 19.71,
+          "end": 20
+        },
+        {
+          "text": "web",
+          "start": 20,
+          "end": 20.3
+        },
+        {
+          "text": "server",
+          "start": 20.3,
+          "end": 20.6
+        },
+        {
+          "text": "hiệu",
+          "start": 20.6,
+          "end": 20.89
+        },
+        {
+          "text": "năng",
+          "start": 20.89,
+          "end": 21.19
+        },
+        {
+          "text": "cao",
+          "start": 21.19,
+          "end": 21.49
+        },
+        {
+          "text": "trên",
+          "start": 21.49,
+          "end": 21.79
+        },
+        {
+          "text": "nhiều",
+          "start": 21.79,
+          "end": 22.08
+        },
+        {
+          "text": "runtime",
+          "start": 22.08,
+          "end": 22.38
+        },
+        {
+          "text": "khác",
+          "start": 22.38,
+          "end": 22.68
+        },
+        {
+          "text": "nhau.",
+          "start": 22.68,
+          "end": 22.98
+        },
+        {
+          "text": "Với",
+          "start": 22.98,
+          "end": 23.27
+        },
+        {
+          "text": "router",
+          "start": 23.27,
+          "end": 23.57
+        },
+        {
+          "text": "RegExpRouter",
+          "start": 23.57,
+          "end": 23.87
+        },
+        {
+          "text": "không",
+          "start": 23.87,
+          "end": 24.17
+        },
+        {
+          "text": "dùng",
+          "start": 24.17,
+          "end": 24.46
+        },
+        {
+          "text": "vòng",
+          "start": 24.46,
+          "end": 24.76
+        },
+        {
+          "text": "lặp",
+          "start": 24.76,
+          "end": 25.06
+        },
+        {
+          "text": "tuyến",
+          "start": 25.06,
+          "end": 25.36
+        },
+        {
+          "text": "tính,",
+          "start": 25.36,
+          "end": 25.65
+        },
+        {
+          "text": "Hono",
+          "start": 25.65,
+          "end": 25.95
+        },
+        {
+          "text": "mang",
+          "start": 25.95,
+          "end": 26.25
+        },
+        {
+          "text": "lại",
+          "start": 26.25,
+          "end": 26.54
+        },
+        {
+          "text": "tốc",
+          "start": 26.54,
+          "end": 26.84
+        },
+        {
+          "text": "độ",
+          "start": 26.84,
+          "end": 27.14
+        },
+        {
+          "text": "vượt",
+          "start": 27.14,
+          "end": 27.44
+        },
+        {
+          "text": "trội",
+          "start": 27.44,
+          "end": 27.73
+        },
+        {
+          "text": "mà",
+          "start": 27.73,
+          "end": 28.03
+        },
+        {
+          "text": "vẫn",
+          "start": 28.03,
+          "end": 28.33
+        },
+        {
+          "text": "giữ",
+          "start": 28.33,
+          "end": 28.63
+        },
+        {
+          "text": "bundle",
+          "start": 28.63,
+          "end": 28.92
+        },
+        {
+          "text": "size",
+          "start": 28.92,
+          "end": 29.22
+        },
+        {
+          "text": "dưới",
+          "start": 29.22,
+          "end": 29.52
+        },
+        {
+          "text": "12KB.",
+          "start": 29.52,
+          "end": 29.82
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 3,
+      "layout": "install",
+      "voice": "Bắt đầu với Hono cực kỳ đơn giản. Cài đặt qua npm, yarn hoặc bun, sau đó tạo file TypeScript với vài dòng code để khởi chạy server đầu tiên. Hono hỗ trợ sẵn TypeScript types nên bạn có autocomplete ngay từ đầu.",
+      "visual": "Snippet code cài đặt tối giản hoặc cách tiếp cận.",
+      "headline_line1": "CÀI ĐẶT NHANH",
+      "headline_line2": "BẮT ĐẦU VỚI HONO",
+      "content_mode": "steps",
+      "steps": [
+        {
+          "title": "Cài đặt",
+          "body": "npm install hono hoặc bun add hono"
+        },
+        {
+          "title": "Tạo app",
+          "body": "Import Hono và khởi tạo instance mới"
+        },
+        {
+          "title": "Chạy thử",
+          "body": "Định nghĩa route và start server"
+        }
+      ],
+      "bento1_title": "Cài đặt",
+      "bento1_desc": "npm install hono hoặc bun add hono",
+      "bento2_title": "Tạo app",
+      "bento2_desc": "Import Hono và khởi tạo instance mới",
+      "bento3_title": "Chạy thử",
+      "bento3_desc": "Định nghĩa route và start server",
+      "bento4_title": "TypeScript",
+      "bento4_desc": "Types sẵn có ngay",
+      "repo_url": "github.com/honojs/hono",
+      "stt": 3,
+      "audio_start": 31.368,
+      "audio_duration": 15.096,
+      "audio_path": "assets/audio/scene_3.mp3",
+      "duration": 15.096,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nBắt đầu với Hono cực kỳ đơn giản. Cài đặt qua npm, yarn hoặc bun, sau đó tạo file TypeScript với vài dòng code để khởi chạy server đầu tiên. Hono hỗ trợ sẵn TypeScript types nên bạn có autocomplete ngay từ đầu.\n",
+      "transcript": [
+        {
+          "text": "Bắt",
+          "start": 31.37,
+          "end": 31.68
+        },
+        {
+          "text": "đầu",
+          "start": 31.68,
+          "end": 32
+        },
+        {
+          "text": "với",
+          "start": 32,
+          "end": 32.32
+        },
+        {
+          "text": "Hono",
+          "start": 32.32,
+          "end": 32.63
+        },
+        {
+          "text": "cực",
+          "start": 32.63,
+          "end": 32.95
+        },
+        {
+          "text": "kỳ",
+          "start": 32.95,
+          "end": 33.26
+        },
+        {
+          "text": "đơn",
+          "start": 33.26,
+          "end": 33.58
+        },
+        {
+          "text": "giản.",
+          "start": 33.58,
+          "end": 33.9
+        },
+        {
+          "text": "Cài",
+          "start": 33.9,
+          "end": 34.21
+        },
+        {
+          "text": "đặt",
+          "start": 34.21,
+          "end": 34.53
+        },
+        {
+          "text": "qua",
+          "start": 34.53,
+          "end": 34.84
+        },
+        {
+          "text": "npm,",
+          "start": 34.84,
+          "end": 35.16
+        },
+        {
+          "text": "yarn",
+          "start": 35.16,
+          "end": 35.48
+        },
+        {
+          "text": "hoặc",
+          "start": 35.48,
+          "end": 35.79
+        },
+        {
+          "text": "bun,",
+          "start": 35.79,
+          "end": 36.11
+        },
+        {
+          "text": "sau",
+          "start": 36.11,
+          "end": 36.42
+        },
+        {
+          "text": "đó",
+          "start": 36.42,
+          "end": 36.74
+        },
+        {
+          "text": "tạo",
+          "start": 36.74,
+          "end": 37.06
+        },
+        {
+          "text": "file",
+          "start": 37.06,
+          "end": 37.37
+        },
+        {
+          "text": "TypeScript",
+          "start": 37.37,
+          "end": 37.69
+        },
+        {
+          "text": "với",
+          "start": 37.69,
+          "end": 38
+        },
+        {
+          "text": "vài",
+          "start": 38,
+          "end": 38.32
+        },
+        {
+          "text": "dòng",
+          "start": 38.32,
+          "end": 38.64
+        },
+        {
+          "text": "code",
+          "start": 38.64,
+          "end": 38.95
+        },
+        {
+          "text": "để",
+          "start": 38.95,
+          "end": 39.27
+        },
+        {
+          "text": "khởi",
+          "start": 39.27,
+          "end": 39.58
+        },
+        {
+          "text": "chạy",
+          "start": 39.58,
+          "end": 39.9
+        },
+        {
+          "text": "server",
+          "start": 39.9,
+          "end": 40.21
+        },
+        {
+          "text": "đầu",
+          "start": 40.21,
+          "end": 40.53
+        },
+        {
+          "text": "tiên.",
+          "start": 40.53,
+          "end": 40.85
+        },
+        {
+          "text": "Hono",
+          "start": 40.85,
+          "end": 41.16
+        },
+        {
+          "text": "hỗ",
+          "start": 41.16,
+          "end": 41.48
+        },
+        {
+          "text": "trợ",
+          "start": 41.48,
+          "end": 41.79
+        },
+        {
+          "text": "sẵn",
+          "start": 41.79,
+          "end": 42.11
+        },
+        {
+          "text": "TypeScript",
+          "start": 42.11,
+          "end": 42.43
+        },
+        {
+          "text": "types",
+          "start": 42.43,
+          "end": 42.74
+        },
+        {
+          "text": "nên",
+          "start": 42.74,
+          "end": 43.06
+        },
+        {
+          "text": "bạn",
+          "start": 43.06,
+          "end": 43.37
+        },
+        {
+          "text": "có",
+          "start": 43.37,
+          "end": 43.69
+        },
+        {
+          "text": "autocomplete",
+          "start": 43.69,
+          "end": 44.01
+        },
+        {
+          "text": "ngay",
+          "start": 44.01,
+          "end": 44.32
+        },
+        {
+          "text": "từ",
+          "start": 44.32,
+          "end": 44.64
+        },
+        {
+          "text": "đầu.",
+          "start": 44.64,
+          "end": 44.95
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 4,
+      "layout": "feature",
+      "voice": "Điểm nổi bật của Hono là khả năng chạy trên mọi JavaScript runtime với cùng một codebase. Từ Cloudflare Workers, Deno, Bun đến AWS Lambda và Node.js, bạn viết code một lần và deploy ở bất kỳ đâu. Middleware tích hợp sẵn và hệ sinh thái phong phú giúp phát triển nhanh chóng.",
+      "visual": "Sơ đồ hoặc biểu tượng trực quan mô tả tính năng.",
+      "headline_line1": "ĐA NỀN TẢNG",
+      "headline_line2": "MỘT CODE CHẠY MỌI NƠI",
+      "btn_text": "hono.dev/docs",
+      "repo_url": "github.com/honojs/hono",
+      "stt": 4,
+      "audio_start": 46.464,
+      "audio_duration": 18.936,
+      "audio_path": "assets/audio/scene_4.mp3",
+      "duration": 18.936,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nĐiểm nổi bật của Hono là khả năng chạy trên mọi JavaScript runtime với cùng một codebase. Từ Cloudflare Workers, Deno, Bun đến AWS Lambda và Node.js, bạn viết code một lần và deploy ở bất kỳ đâu. Middleware tích hợp sẵn và hệ sinh thái phong phú giúp phát triển nhanh chóng.\n",
+      "transcript": [
+        {
+          "text": "Điểm",
+          "start": 46.46,
+          "end": 46.79
+        },
+        {
+          "text": "nổi",
+          "start": 46.79,
+          "end": 47.11
+        },
+        {
+          "text": "bật",
+          "start": 47.11,
+          "end": 47.43
+        },
+        {
+          "text": "của",
+          "start": 47.43,
+          "end": 47.75
+        },
+        {
+          "text": "Hono",
+          "start": 47.75,
+          "end": 48.07
+        },
+        {
+          "text": "là",
+          "start": 48.07,
+          "end": 48.39
+        },
+        {
+          "text": "khả",
+          "start": 48.39,
+          "end": 48.71
+        },
+        {
+          "text": "năng",
+          "start": 48.71,
+          "end": 49.04
+        },
+        {
+          "text": "chạy",
+          "start": 49.04,
+          "end": 49.36
+        },
+        {
+          "text": "trên",
+          "start": 49.36,
+          "end": 49.68
+        },
+        {
+          "text": "mọi",
+          "start": 49.68,
+          "end": 50
+        },
+        {
+          "text": "JavaScript",
+          "start": 50,
+          "end": 50.32
+        },
+        {
+          "text": "runtime",
+          "start": 50.32,
+          "end": 50.64
+        },
+        {
+          "text": "với",
+          "start": 50.64,
+          "end": 50.97
+        },
+        {
+          "text": "cùng",
+          "start": 50.97,
+          "end": 51.29
+        },
+        {
+          "text": "một",
+          "start": 51.29,
+          "end": 51.61
+        },
+        {
+          "text": "codebase.",
+          "start": 51.61,
+          "end": 51.93
+        },
+        {
+          "text": "Từ",
+          "start": 51.93,
+          "end": 52.25
+        },
+        {
+          "text": "Cloudflare",
+          "start": 52.25,
+          "end": 52.57
+        },
+        {
+          "text": "Workers,",
+          "start": 52.57,
+          "end": 52.9
+        },
+        {
+          "text": "Deno,",
+          "start": 52.9,
+          "end": 53.22
+        },
+        {
+          "text": "Bun",
+          "start": 53.22,
+          "end": 53.54
+        },
+        {
+          "text": "đến",
+          "start": 53.54,
+          "end": 53.86
+        },
+        {
+          "text": "AWS",
+          "start": 53.86,
+          "end": 54.18
+        },
+        {
+          "text": "Lambda",
+          "start": 54.18,
+          "end": 54.5
+        },
+        {
+          "text": "và",
+          "start": 54.5,
+          "end": 54.82
+        },
+        {
+          "text": "Node.js,",
+          "start": 54.82,
+          "end": 55.15
+        },
+        {
+          "text": "bạn",
+          "start": 55.15,
+          "end": 55.47
+        },
+        {
+          "text": "viết",
+          "start": 55.47,
+          "end": 55.79
+        },
+        {
+          "text": "code",
+          "start": 55.79,
+          "end": 56.11
+        },
+        {
+          "text": "một",
+          "start": 56.11,
+          "end": 56.43
+        },
+        {
+          "text": "lần",
+          "start": 56.43,
+          "end": 56.75
+        },
+        {
+          "text": "và",
+          "start": 56.75,
+          "end": 57.08
+        },
+        {
+          "text": "deploy",
+          "start": 57.08,
+          "end": 57.4
+        },
+        {
+          "text": "ở",
+          "start": 57.4,
+          "end": 57.72
+        },
+        {
+          "text": "bất",
+          "start": 57.72,
+          "end": 58.04
+        },
+        {
+          "text": "kỳ",
+          "start": 58.04,
+          "end": 58.36
+        },
+        {
+          "text": "đâu.",
+          "start": 58.36,
+          "end": 58.68
+        },
+        {
+          "text": "Middleware",
+          "start": 58.68,
+          "end": 59
+        },
+        {
+          "text": "tích",
+          "start": 59,
+          "end": 59.33
+        },
+        {
+          "text": "hợp",
+          "start": 59.33,
+          "end": 59.65
+        },
+        {
+          "text": "sẵn",
+          "start": 59.65,
+          "end": 59.97
+        },
+        {
+          "text": "và",
+          "start": 59.97,
+          "end": 60.29
+        },
+        {
+          "text": "hệ",
+          "start": 60.29,
+          "end": 60.61
+        },
+        {
+          "text": "sinh",
+          "start": 60.61,
+          "end": 60.93
+        },
+        {
+          "text": "thái",
+          "start": 60.93,
+          "end": 61.26
+        },
+        {
+          "text": "phong",
+          "start": 61.26,
+          "end": 61.58
+        },
+        {
+          "text": "phú",
+          "start": 61.58,
+          "end": 61.9
+        },
+        {
+          "text": "giúp",
+          "start": 61.9,
+          "end": 62.22
+        },
+        {
+          "text": "phát",
+          "start": 62.22,
+          "end": 62.54
+        },
+        {
+          "text": "triển",
+          "start": 62.54,
+          "end": 62.86
+        },
+        {
+          "text": "nhanh",
+          "start": 62.86,
+          "end": 63.18
+        },
+        {
+          "text": "chóng.",
+          "start": 63.18,
+          "end": 63.51
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 5,
+      "layout": "checklist",
+      "voice": "Trước khi tích hợp Hono vào dự án, hãy kiểm tra license MIT cho phép sử dụng thương mại tự do. Xem qua issues để nắm các vấn đề đã biết và theo dõi release notes để cập nhật tính năng mới. Hono có tài liệu chi tiết tại hono.dev.",
+      "visual": "Checklist các điểm cần lưu ý trước khi dùng.",
+      "headline_line1": "KIỂM TRA TRƯỚC",
+      "headline_line2": "ĐÁNH GIÁ DỰ ÁN",
+      "bento1_title": "MIT License",
+      "bento1_desc": "Sử dụng tự do cho mọi mục đích",
+      "bento2_title": "Release",
+      "bento3_title": "Issues",
+      "repo_url": "github.com/honojs/hono",
+      "bento2_desc": "",
+      "bento3_desc": "",
+      "steps": [
+        {
+          "title": "MIT License",
+          "body": "Sử dụng tự do cho mọi mục đích"
+        },
+        {
+          "title": "Release",
+          "body": ""
+        },
+        {
+          "title": "Issues",
+          "body": ""
+        }
+      ],
+      "content_mode": "steps",
+      "stt": 5,
+      "audio_start": 65.4,
+      "audio_duration": 16.08,
+      "audio_path": "assets/audio/scene_5.mp3",
+      "duration": 16.08,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTrước khi tích hợp Hono vào dự án, hãy kiểm tra license MIT cho phép sử dụng thương mại tự do. Xem qua issues để nắm các vấn đề đã biết và theo dõi release notes để cập nhật tính năng mới. Hono có tài liệu chi tiết tại hono.dev.\n",
+      "transcript": [
+        {
+          "text": "Trước",
+          "start": 65.4,
+          "end": 65.69
+        },
+        {
+          "text": "khi",
+          "start": 65.69,
+          "end": 65.98
+        },
+        {
+          "text": "tích",
+          "start": 65.98,
+          "end": 66.27
+        },
+        {
+          "text": "hợp",
+          "start": 66.27,
+          "end": 66.56
+        },
+        {
+          "text": "Hono",
+          "start": 66.56,
+          "end": 66.85
+        },
+        {
+          "text": "vào",
+          "start": 66.85,
+          "end": 67.14
+        },
+        {
+          "text": "dự",
+          "start": 67.14,
+          "end": 67.43
+        },
+        {
+          "text": "án,",
+          "start": 67.43,
+          "end": 67.72
+        },
+        {
+          "text": "hãy",
+          "start": 67.72,
+          "end": 68
+        },
+        {
+          "text": "kiểm",
+          "start": 68,
+          "end": 68.29
+        },
+        {
+          "text": "tra",
+          "start": 68.29,
+          "end": 68.58
+        },
+        {
+          "text": "license",
+          "start": 68.58,
+          "end": 68.87
+        },
+        {
+          "text": "MIT",
+          "start": 68.87,
+          "end": 69.16
+        },
+        {
+          "text": "cho",
+          "start": 69.16,
+          "end": 69.45
+        },
+        {
+          "text": "phép",
+          "start": 69.45,
+          "end": 69.74
+        },
+        {
+          "text": "sử",
+          "start": 69.74,
+          "end": 70.03
+        },
+        {
+          "text": "dụng",
+          "start": 70.03,
+          "end": 70.32
+        },
+        {
+          "text": "thương",
+          "start": 70.32,
+          "end": 70.61
+        },
+        {
+          "text": "mại",
+          "start": 70.61,
+          "end": 70.9
+        },
+        {
+          "text": "tự",
+          "start": 70.9,
+          "end": 71.19
+        },
+        {
+          "text": "do.",
+          "start": 71.19,
+          "end": 71.48
+        },
+        {
+          "text": "Xem",
+          "start": 71.48,
+          "end": 71.77
+        },
+        {
+          "text": "qua",
+          "start": 71.77,
+          "end": 72.06
+        },
+        {
+          "text": "issues",
+          "start": 72.06,
+          "end": 72.35
+        },
+        {
+          "text": "để",
+          "start": 72.35,
+          "end": 72.64
+        },
+        {
+          "text": "nắm",
+          "start": 72.64,
+          "end": 72.93
+        },
+        {
+          "text": "các",
+          "start": 72.93,
+          "end": 73.21
+        },
+        {
+          "text": "vấn",
+          "start": 73.21,
+          "end": 73.5
+        },
+        {
+          "text": "đề",
+          "start": 73.5,
+          "end": 73.79
+        },
+        {
+          "text": "đã",
+          "start": 73.79,
+          "end": 74.08
+        },
+        {
+          "text": "biết",
+          "start": 74.08,
+          "end": 74.37
+        },
+        {
+          "text": "và",
+          "start": 74.37,
+          "end": 74.66
+        },
+        {
+          "text": "theo",
+          "start": 74.66,
+          "end": 74.95
+        },
+        {
+          "text": "dõi",
+          "start": 74.95,
+          "end": 75.24
+        },
+        {
+          "text": "release",
+          "start": 75.24,
+          "end": 75.53
+        },
+        {
+          "text": "notes",
+          "start": 75.53,
+          "end": 75.82
+        },
+        {
+          "text": "để",
+          "start": 75.82,
+          "end": 76.11
+        },
+        {
+          "text": "cập",
+          "start": 76.11,
+          "end": 76.4
+        },
+        {
+          "text": "nhật",
+          "start": 76.4,
+          "end": 76.69
+        },
+        {
+          "text": "tính",
+          "start": 76.69,
+          "end": 76.98
+        },
+        {
+          "text": "năng",
+          "start": 76.98,
+          "end": 77.27
+        },
+        {
+          "text": "mới.",
+          "start": 77.27,
+          "end": 77.56
+        },
+        {
+          "text": "Hono",
+          "start": 77.56,
+          "end": 77.85
+        },
+        {
+          "text": "có",
+          "start": 77.85,
+          "end": 78.14
+        },
+        {
+          "text": "tài",
+          "start": 78.14,
+          "end": 78.42
+        },
+        {
+          "text": "liệu",
+          "start": 78.42,
+          "end": 78.71
+        },
+        {
+          "text": "chi",
+          "start": 78.71,
+          "end": 79
+        },
+        {
+          "text": "tiết",
+          "start": 79,
+          "end": 79.29
+        },
+        {
+          "text": "tại",
+          "start": 79.29,
+          "end": 79.58
+        },
+        {
+          "text": "hono.dev.",
+          "start": 79.58,
+          "end": 79.87
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba expressing unbelievable emotions.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 6,
+      "layout": "stats",
+      "voice": "Với hơn ba mươi nghìn sao trên GitHub và cộng đồng đông đảo, Hono đang là lựa chọn được tin dùng cho các dự án web hiện đại. Được viết bằng TypeScript, framework này đảm bảo type safety và developer experience tốt nhất.",
+      "visual": "Thẻ stats của repo với số sao, ngôn ngữ.",
+      "headline_line1": "STATS",
+      "headline_line2": "TIN HIEU GITHUB",
+      "repo_name": "honojs/hono",
+      "repo_lang": "TypeScript",
+      "repo_stars": "★ 30,597",
+      "repo_trend": "▲ Trending",
+      "repo_trend_label": "GitHub",
+      "repo_url": "github.com/honojs/hono",
+      "stt": 6,
+      "audio_start": 81.48,
+      "audio_duration": 13.824,
+      "audio_path": "assets/audio/scene_6.mp3",
+      "duration": 13.824,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nVới hơn 30 nghìn sao trên GitHub và cộng đồng đông đảo, Hono đang là lựa chọn được tin dùng cho các dự án web hiện đại. Được viết bằng TypeScript, framework này đảm bảo type safety và developer experience tốt nhất.\n",
+      "transcript": [
+        {
+          "text": "Với",
+          "start": 81.48,
+          "end": 81.78
+        },
+        {
+          "text": "hơn",
+          "start": 81.78,
+          "end": 82.07
+        },
+        {
+          "text": "30",
+          "start": 82.07,
+          "end": 82.37
+        },
+        {
+          "text": "nghìn",
+          "start": 82.37,
+          "end": 82.66
+        },
+        {
+          "text": "sao",
+          "start": 82.66,
+          "end": 82.96
+        },
+        {
+          "text": "trên",
+          "start": 82.96,
+          "end": 83.26
+        },
+        {
+          "text": "GitHub",
+          "start": 83.26,
+          "end": 83.55
+        },
+        {
+          "text": "và",
+          "start": 83.55,
+          "end": 83.85
+        },
+        {
+          "text": "cộng",
+          "start": 83.85,
+          "end": 84.15
+        },
+        {
+          "text": "đồng",
+          "start": 84.15,
+          "end": 84.44
+        },
+        {
+          "text": "đông",
+          "start": 84.44,
+          "end": 84.74
+        },
+        {
+          "text": "đảo,",
+          "start": 84.74,
+          "end": 85.03
+        },
+        {
+          "text": "Hono",
+          "start": 85.03,
+          "end": 85.33
+        },
+        {
+          "text": "đang",
+          "start": 85.33,
+          "end": 85.63
+        },
+        {
+          "text": "là",
+          "start": 85.63,
+          "end": 85.92
+        },
+        {
+          "text": "lựa",
+          "start": 85.92,
+          "end": 86.22
+        },
+        {
+          "text": "chọn",
+          "start": 86.22,
+          "end": 86.52
+        },
+        {
+          "text": "được",
+          "start": 86.52,
+          "end": 86.81
+        },
+        {
+          "text": "tin",
+          "start": 86.81,
+          "end": 87.11
+        },
+        {
+          "text": "dùng",
+          "start": 87.11,
+          "end": 87.4
+        },
+        {
+          "text": "cho",
+          "start": 87.4,
+          "end": 87.7
+        },
+        {
+          "text": "các",
+          "start": 87.7,
+          "end": 88
+        },
+        {
+          "text": "dự",
+          "start": 88,
+          "end": 88.29
+        },
+        {
+          "text": "án",
+          "start": 88.29,
+          "end": 88.59
+        },
+        {
+          "text": "web",
+          "start": 88.59,
+          "end": 88.89
+        },
+        {
+          "text": "hiện",
+          "start": 88.89,
+          "end": 89.18
+        },
+        {
+          "text": "đại.",
+          "start": 89.18,
+          "end": 89.48
+        },
+        {
+          "text": "Được",
+          "start": 89.48,
+          "end": 89.77
+        },
+        {
+          "text": "viết",
+          "start": 89.77,
+          "end": 90.07
+        },
+        {
+          "text": "bằng",
+          "start": 90.07,
+          "end": 90.37
+        },
+        {
+          "text": "TypeScript,",
+          "start": 90.37,
+          "end": 90.66
+        },
+        {
+          "text": "framework",
+          "start": 90.66,
+          "end": 90.96
+        },
+        {
+          "text": "này",
+          "start": 90.96,
+          "end": 91.26
+        },
+        {
+          "text": "đảm",
+          "start": 91.26,
+          "end": 91.55
+        },
+        {
+          "text": "bảo",
+          "start": 91.55,
+          "end": 91.85
+        },
+        {
+          "text": "type",
+          "start": 91.85,
+          "end": 92.14
+        },
+        {
+          "text": "safety",
+          "start": 92.14,
+          "end": 92.44
+        },
+        {
+          "text": "và",
+          "start": 92.44,
+          "end": 92.74
+        },
+        {
+          "text": "developer",
+          "start": 92.74,
+          "end": 93.03
+        },
+        {
+          "text": "experience",
+          "start": 93.03,
+          "end": 93.33
+        },
+        {
+          "text": "tốt",
+          "start": 93.33,
+          "end": 93.63
+        },
+        {
+          "text": "nhất.",
+          "start": 93.63,
+          "end": 93.92
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba meditating in zen state.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 7,
+      "layout": "clone",
+      "voice": "Clone repo về máy để khám phá source code và chạy thử các example có sẵn. Đọc kỹ README và migration guide trước khi tích hợp vào production. Nên tạo một dự án phụ nhỏ để test các tính năng và đảm bảo tương thích với runtime bạn đang dùng.",
+      "visual": "Hiển thị lệnh git clone và checklist chạy thử tối giản.",
+      "headline_line1": "CLONE VỀ MÁY",
+      "headline_line2": "THỬ NGHIỆM AN TOÀN",
+      "btn_text": "$ git clone github.com/honojs/hono",
+      "repo_url": "github.com/honojs/hono",
+      "stt": 7,
+      "audio_start": 95.304,
+      "audio_duration": 16.104,
+      "audio_path": "assets/audio/scene_7.mp3",
+      "duration": 16.104,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nClone repo về máy để khám phá source code và chạy thử các example có sẵn. Đọc kỹ README và migration guide trước khi tích hợp vào production. Nên tạo một dự án phụ nhỏ để test các tính năng và đảm bảo tương thích với runtime bạn đang dùng.\n",
+      "transcript": [
+        {
+          "text": "Clone",
+          "start": 95.3,
+          "end": 95.59
+        },
+        {
+          "text": "repo",
+          "start": 95.59,
+          "end": 95.88
+        },
+        {
+          "text": "về",
+          "start": 95.88,
+          "end": 96.17
+        },
+        {
+          "text": "máy",
+          "start": 96.17,
+          "end": 96.46
+        },
+        {
+          "text": "để",
+          "start": 96.46,
+          "end": 96.75
+        },
+        {
+          "text": "khám",
+          "start": 96.75,
+          "end": 97.04
+        },
+        {
+          "text": "phá",
+          "start": 97.04,
+          "end": 97.33
+        },
+        {
+          "text": "source",
+          "start": 97.33,
+          "end": 97.62
+        },
+        {
+          "text": "code",
+          "start": 97.62,
+          "end": 97.91
+        },
+        {
+          "text": "và",
+          "start": 97.91,
+          "end": 98.2
+        },
+        {
+          "text": "chạy",
+          "start": 98.2,
+          "end": 98.49
+        },
+        {
+          "text": "thử",
+          "start": 98.49,
+          "end": 98.78
+        },
+        {
+          "text": "các",
+          "start": 98.78,
+          "end": 99.07
+        },
+        {
+          "text": "example",
+          "start": 99.07,
+          "end": 99.36
+        },
+        {
+          "text": "có",
+          "start": 99.36,
+          "end": 99.65
+        },
+        {
+          "text": "sẵn.",
+          "start": 99.65,
+          "end": 99.94
+        },
+        {
+          "text": "Đọc",
+          "start": 99.94,
+          "end": 100.23
+        },
+        {
+          "text": "kỹ",
+          "start": 100.23,
+          "end": 100.52
+        },
+        {
+          "text": "README",
+          "start": 100.52,
+          "end": 100.81
+        },
+        {
+          "text": "và",
+          "start": 100.81,
+          "end": 101.1
+        },
+        {
+          "text": "migration",
+          "start": 101.1,
+          "end": 101.39
+        },
+        {
+          "text": "guide",
+          "start": 101.39,
+          "end": 101.68
+        },
+        {
+          "text": "trước",
+          "start": 101.68,
+          "end": 101.97
+        },
+        {
+          "text": "khi",
+          "start": 101.97,
+          "end": 102.26
+        },
+        {
+          "text": "tích",
+          "start": 102.26,
+          "end": 102.55
+        },
+        {
+          "text": "hợp",
+          "start": 102.55,
+          "end": 102.84
+        },
+        {
+          "text": "vào",
+          "start": 102.84,
+          "end": 103.13
+        },
+        {
+          "text": "production.",
+          "start": 103.13,
+          "end": 103.42
+        },
+        {
+          "text": "Nên",
+          "start": 103.42,
+          "end": 103.71
+        },
+        {
+          "text": "tạo",
+          "start": 103.71,
+          "end": 104
+        },
+        {
+          "text": "một",
+          "start": 104,
+          "end": 104.29
+        },
+        {
+          "text": "dự",
+          "start": 104.29,
+          "end": 104.58
+        },
+        {
+          "text": "án",
+          "start": 104.58,
+          "end": 104.87
+        },
+        {
+          "text": "phụ",
+          "start": 104.87,
+          "end": 105.16
+        },
+        {
+          "text": "nhỏ",
+          "start": 105.16,
+          "end": 105.45
+        },
+        {
+          "text": "để",
+          "start": 105.45,
+          "end": 105.74
+        },
+        {
+          "text": "test",
+          "start": 105.74,
+          "end": 106.03
+        },
+        {
+          "text": "các",
+          "start": 106.03,
+          "end": 106.32
+        },
+        {
+          "text": "tính",
+          "start": 106.32,
+          "end": 106.61
+        },
+        {
+          "text": "năng",
+          "start": 106.61,
+          "end": 106.9
+        },
+        {
+          "text": "và",
+          "start": 106.9,
+          "end": 107.19
+        },
+        {
+          "text": "đảm",
+          "start": 107.19,
+          "end": 107.48
+        },
+        {
+          "text": "bảo",
+          "start": 107.48,
+          "end": 107.77
+        },
+        {
+          "text": "tương",
+          "start": 107.77,
+          "end": 108.06
+        },
+        {
+          "text": "thích",
+          "start": 108.06,
+          "end": 108.35
+        },
+        {
+          "text": "với",
+          "start": 108.35,
+          "end": 108.64
+        },
+        {
+          "text": "runtime",
+          "start": 108.64,
+          "end": 108.93
+        },
+        {
+          "text": "bạn",
+          "start": 108.93,
+          "end": 109.22
+        },
+        {
+          "text": "đang",
+          "start": 109.22,
+          "end": 109.51
+        },
+        {
+          "text": "dùng.",
+          "start": 109.51,
+          "end": 109.8
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba smiling brightly.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 8,
+      "layout": "outro",
+      "voice": "Tóm lại, Hono là framework đáng thử nếu bạn cần hiệu năng cao và tính linh hoạt đa nền tảng. Hãy star repo nếu thấy hữu ích, đọc qua issues để nắm tình trạng dự án, và kiểm tra release notes trước khi deploy production. Chúc bạn code vui vẻ!",
+      "visual": "Outro nhắc star, bình luận và lưu repo để xem lại.",
+      "headline_line1": "LUU REPO",
+      "headline_line2": "DOC README KY",
+      "content_mode": "steps",
+      "steps": [
+        {
+          "title": "Star repo",
+          "body": "Đánh dấu nếu dự án phù hợp"
+        },
+        {
+          "title": "Đọc docs",
+          "body": "Tài liệu chi tiết tại hono.dev"
+        },
+        {
+          "title": "Xem issues",
+          "body": "Nắm các vấn đề đã biết"
+        },
+        {
+          "title": "Theo dõi",
+          "body": "Cập nhật release mới nhất"
+        }
+      ],
+      "bento1_title": "Star repo",
+      "bento1_desc": "Đánh dấu nếu dự án phù hợp",
+      "bento2_title": "Đọc docs",
+      "bento2_desc": "Tài liệu chi tiết tại hono.dev",
+      "bento3_title": "Xem issues",
+      "bento3_desc": "Nắm các vấn đề đã biết",
+      "bento4_title": "Theo dõi",
+      "bento4_desc": "Cập nhật release mới nhất",
+      "repo_url": "github.com/honojs/hono",
+      "stt": 8,
+      "audio_start": 111.408,
+      "audio_duration": 16.224,
+      "audio_path": "assets/audio/scene_8.mp3",
+      "duration": 16.224,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTóm lại, Hono là framework đáng thử nếu bạn cần hiệu năng cao và tính linh hoạt đa nền tảng. Hãy star repo nếu thấy hữu ích, đọc qua issues để nắm tình trạng dự án, và kiểm tra release notes trước khi deploy production. Chúc bạn code vui vẻ!\n",
+      "transcript": [
+        {
+          "text": "Tóm",
+          "start": 111.41,
+          "end": 111.7
+        },
+        {
+          "text": "lại,",
+          "start": 111.7,
+          "end": 111.99
+        },
+        {
+          "text": "Hono",
+          "start": 111.99,
+          "end": 112.28
+        },
+        {
+          "text": "là",
+          "start": 112.28,
+          "end": 112.58
+        },
+        {
+          "text": "framework",
+          "start": 112.58,
+          "end": 112.87
+        },
+        {
+          "text": "đáng",
+          "start": 112.87,
+          "end": 113.16
+        },
+        {
+          "text": "thử",
+          "start": 113.16,
+          "end": 113.45
+        },
+        {
+          "text": "nếu",
+          "start": 113.45,
+          "end": 113.74
+        },
+        {
+          "text": "bạn",
+          "start": 113.74,
+          "end": 114.04
+        },
+        {
+          "text": "cần",
+          "start": 114.04,
+          "end": 114.33
+        },
+        {
+          "text": "hiệu",
+          "start": 114.33,
+          "end": 114.62
+        },
+        {
+          "text": "năng",
+          "start": 114.62,
+          "end": 114.91
+        },
+        {
+          "text": "cao",
+          "start": 114.91,
+          "end": 115.2
+        },
+        {
+          "text": "và",
+          "start": 115.2,
+          "end": 115.5
+        },
+        {
+          "text": "tính",
+          "start": 115.5,
+          "end": 115.79
+        },
+        {
+          "text": "linh",
+          "start": 115.79,
+          "end": 116.08
+        },
+        {
+          "text": "hoạt",
+          "start": 116.08,
+          "end": 116.37
+        },
+        {
+          "text": "đa",
+          "start": 116.37,
+          "end": 116.66
+        },
+        {
+          "text": "nền",
+          "start": 116.66,
+          "end": 116.96
+        },
+        {
+          "text": "tảng.",
+          "start": 116.96,
+          "end": 117.25
+        },
+        {
+          "text": "Hãy",
+          "start": 117.25,
+          "end": 117.54
+        },
+        {
+          "text": "star",
+          "start": 117.54,
+          "end": 117.83
+        },
+        {
+          "text": "repo",
+          "start": 117.83,
+          "end": 118.12
+        },
+        {
+          "text": "nếu",
+          "start": 118.12,
+          "end": 118.42
+        },
+        {
+          "text": "thấy",
+          "start": 118.42,
+          "end": 118.71
+        },
+        {
+          "text": "hữu",
+          "start": 118.71,
+          "end": 119
+        },
+        {
+          "text": "ích,",
+          "start": 119,
+          "end": 119.29
+        },
+        {
+          "text": "đọc",
+          "start": 119.29,
+          "end": 119.58
+        },
+        {
+          "text": "qua",
+          "start": 119.58,
+          "end": 119.88
+        },
+        {
+          "text": "issues",
+          "start": 119.88,
+          "end": 120.17
+        },
+        {
+          "text": "để",
+          "start": 120.17,
+          "end": 120.46
+        },
+        {
+          "text": "nắm",
+          "start": 120.46,
+          "end": 120.75
+        },
+        {
+          "text": "tình",
+          "start": 120.75,
+          "end": 121.05
+        },
+        {
+          "text": "trạng",
+          "start": 121.05,
+          "end": 121.34
+        },
+        {
+          "text": "dự",
+          "start": 121.34,
+          "end": 121.63
+        },
+        {
+          "text": "án,",
+          "start": 121.63,
+          "end": 121.92
+        },
+        {
+          "text": "và",
+          "start": 121.92,
+          "end": 122.21
+        },
+        {
+          "text": "kiểm",
+          "start": 122.21,
+          "end": 122.51
+        },
+        {
+          "text": "tra",
+          "start": 122.51,
+          "end": 122.8
+        },
+        {
+          "text": "release",
+          "start": 122.8,
+          "end": 123.09
+        },
+        {
+          "text": "notes",
+          "start": 123.09,
+          "end": 123.38
+        },
+        {
+          "text": "trước",
+          "start": 123.38,
+          "end": 123.67
+        },
+        {
+          "text": "khi",
+          "start": 123.67,
+          "end": 123.97
+        },
+        {
+          "text": "deploy",
+          "start": 123.97,
+          "end": 124.26
+        },
+        {
+          "text": "production.",
+          "start": 124.26,
+          "end": 124.55
+        },
+        {
+          "text": "Chúc",
+          "start": 124.55,
+          "end": 124.84
+        },
+        {
+          "text": "bạn",
+          "start": 124.84,
+          "end": 125.13
+        },
+        {
+          "text": "code",
+          "start": 125.13,
+          "end": 125.43
+        },
+        {
+          "text": "vui",
+          "start": 125.43,
+          "end": 125.72
+        },
+        {
+          "text": "vẻ!",
+          "start": 125.72,
+          "end": 126.01
+        }
+      ]
+    }
+  ],
+  "duration": 127.632
+}

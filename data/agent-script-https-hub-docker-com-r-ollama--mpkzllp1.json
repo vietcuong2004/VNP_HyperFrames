@@ -1,0 +1,1294 @@
+{
+  "template": "G2_docker",
+  "source_url": "https://hub.docker.com/r/ollama/ollama",
+  "platform": "docker",
+  "content_type": "docker_self_hosted_app",
+  "video_format": "self_host_setup_guide",
+  "classification_reason": "Image có vẻ dùng để chạy một ứng dụng self-hosted.",
+  "metadata": {
+    "namespace": "ollama",
+    "image": "ollama",
+    "description": "The easiest way to get up and running with large language models. ",
+    "star_count": 1576,
+    "pull_count": 137764035
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 1,
+      "layout": "intro_docker",
+      "voice": "Ollama là giải pháp đơn giản nhất để chạy các mô hình ngôn ngữ lớn như Llama, Mistral hay Gemma ngay trên máy của bạn. Với hơn 137 triệu lượt tải, đây là công cụ self-hosted được cộng đồng tin dùng để triển khai AI local một cách dễ dàng và bảo mật.",
+      "visual": "Chụp trang Docker Hub, phóng to thông tin image.",
+      "headline_line1": "OLLAMA",
+      "headline_line2": "CHẠY LLM LOCAL DỄ DÀNG",
+      "repo_url": "hub.docker.com/r/ollama/ollama",
+      "stt": 1,
+      "audio_start": 0,
+      "audio_duration": 16.056,
+      "audio_path": "assets/audio/scene_1.mp3",
+      "duration": 16.056,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nOllama là giải pháp đơn giản nhất để chạy các mô hình ngôn ngữ lớn như Llama, Mistral hay Gemma ngay trên máy của bạn. Với hơn 137 triệu lượt tải, đây là công cụ self-hosted được cộng đồng tin dùng để triển khai AI local một cách dễ dàng và bảo mật.\n",
+      "transcript": [
+        {
+          "text": "Ollama",
+          "start": 0,
+          "end": 0.27
+        },
+        {
+          "text": "là",
+          "start": 0.27,
+          "end": 0.55
+        },
+        {
+          "text": "giải",
+          "start": 0.55,
+          "end": 0.82
+        },
+        {
+          "text": "pháp",
+          "start": 0.82,
+          "end": 1.09
+        },
+        {
+          "text": "đơn",
+          "start": 1.09,
+          "end": 1.36
+        },
+        {
+          "text": "giản",
+          "start": 1.36,
+          "end": 1.64
+        },
+        {
+          "text": "nhất",
+          "start": 1.64,
+          "end": 1.91
+        },
+        {
+          "text": "để",
+          "start": 1.91,
+          "end": 2.18
+        },
+        {
+          "text": "chạy",
+          "start": 2.18,
+          "end": 2.45
+        },
+        {
+          "text": "các",
+          "start": 2.45,
+          "end": 2.73
+        },
+        {
+          "text": "mô",
+          "start": 2.73,
+          "end": 3
+        },
+        {
+          "text": "hình",
+          "start": 3,
+          "end": 3.27
+        },
+        {
+          "text": "ngôn",
+          "start": 3.27,
+          "end": 3.54
+        },
+        {
+          "text": "ngữ",
+          "start": 3.54,
+          "end": 3.82
+        },
+        {
+          "text": "lớn",
+          "start": 3.82,
+          "end": 4.09
+        },
+        {
+          "text": "như",
+          "start": 4.09,
+          "end": 4.36
+        },
+        {
+          "text": "Llama,",
+          "start": 4.36,
+          "end": 4.64
+        },
+        {
+          "text": "Mistral",
+          "start": 4.64,
+          "end": 4.91
+        },
+        {
+          "text": "hay",
+          "start": 4.91,
+          "end": 5.18
+        },
+        {
+          "text": "Gemma",
+          "start": 5.18,
+          "end": 5.45
+        },
+        {
+          "text": "ngay",
+          "start": 5.45,
+          "end": 5.73
+        },
+        {
+          "text": "trên",
+          "start": 5.73,
+          "end": 6
+        },
+        {
+          "text": "máy",
+          "start": 6,
+          "end": 6.27
+        },
+        {
+          "text": "của",
+          "start": 6.27,
+          "end": 6.54
+        },
+        {
+          "text": "bạn.",
+          "start": 6.54,
+          "end": 6.82
+        },
+        {
+          "text": "Với",
+          "start": 6.82,
+          "end": 7.09
+        },
+        {
+          "text": "hơn",
+          "start": 7.09,
+          "end": 7.36
+        },
+        {
+          "text": "137",
+          "start": 7.36,
+          "end": 7.63
+        },
+        {
+          "text": "triệu",
+          "start": 7.63,
+          "end": 7.91
+        },
+        {
+          "text": "lượt",
+          "start": 7.91,
+          "end": 8.18
+        },
+        {
+          "text": "tải,",
+          "start": 8.18,
+          "end": 8.45
+        },
+        {
+          "text": "đây",
+          "start": 8.45,
+          "end": 8.72
+        },
+        {
+          "text": "là",
+          "start": 8.72,
+          "end": 9
+        },
+        {
+          "text": "công",
+          "start": 9,
+          "end": 9.27
+        },
+        {
+          "text": "cụ",
+          "start": 9.27,
+          "end": 9.54
+        },
+        {
+          "text": "self-hosted",
+          "start": 9.54,
+          "end": 9.82
+        },
+        {
+          "text": "được",
+          "start": 9.82,
+          "end": 10.09
+        },
+        {
+          "text": "cộng",
+          "start": 10.09,
+          "end": 10.36
+        },
+        {
+          "text": "đồng",
+          "start": 10.36,
+          "end": 10.63
+        },
+        {
+          "text": "tin",
+          "start": 10.63,
+          "end": 10.91
+        },
+        {
+          "text": "dùng",
+          "start": 10.91,
+          "end": 11.18
+        },
+        {
+          "text": "để",
+          "start": 11.18,
+          "end": 11.45
+        },
+        {
+          "text": "triển",
+          "start": 11.45,
+          "end": 11.72
+        },
+        {
+          "text": "khai",
+          "start": 11.72,
+          "end": 12
+        },
+        {
+          "text": "AI",
+          "start": 12,
+          "end": 12.27
+        },
+        {
+          "text": "local",
+          "start": 12.27,
+          "end": 12.54
+        },
+        {
+          "text": "một",
+          "start": 12.54,
+          "end": 12.81
+        },
+        {
+          "text": "cách",
+          "start": 12.81,
+          "end": 13.09
+        },
+        {
+          "text": "dễ",
+          "start": 13.09,
+          "end": 13.36
+        },
+        {
+          "text": "dàng",
+          "start": 13.36,
+          "end": 13.63
+        },
+        {
+          "text": "và",
+          "start": 13.63,
+          "end": 13.91
+        },
+        {
+          "text": "bảo",
+          "start": 13.91,
+          "end": 14.18
+        },
+        {
+          "text": "mật.",
+          "start": 14.18,
+          "end": 14.45
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 2,
+      "layout": "docker_tag",
+      "content_mode": "steps",
+      "voice": "Khi pull image Ollama, bạn nên chọn tag cụ thể thay vì dùng latest để đảm bảo tính ổn định. Kiểm tra trang Docker Hub để chọn phiên bản phù hợp với GPU hoặc CPU của bạn, tránh bất ngờ khi image tự động cập nhật.",
+      "visual": "Terminal hiển thị lệnh pull image kèm tag cụ thể.",
+      "headline_line1": "PIN TAG",
+      "headline_line2": "OLLAMA ỔN ĐỊNH",
+      "btn_text": "$ docker pull ollama/ollama",
+      "steps": [
+        {
+          "title": "Kiểm tra tags",
+          "body": "Truy cập Docker Hub để xem danh sách tag có sẵn cho CPU hoặc GPU"
+        },
+        {
+          "title": "Pull tag cụ thể",
+          "body": "Dùng lệnh docker pull ollama/ollama:0.1.26 thay vì latest"
+        },
+        {
+          "title": "Verify image",
+          "body": "Chạy docker images để xác nhận tag đã pull về đúng"
+        }
+      ],
+      "repo_url": "hub.docker.com/r/ollama/ollama",
+      "bento1_title": "Kiểm tra tags",
+      "bento1_desc": "Truy cập Docker Hub để xem danh sách tag có sẵn cho CPU hoặc GPU",
+      "bento2_title": "Pull tag cụ thể",
+      "bento2_desc": "Dùng lệnh docker pull ollama/ollama:0.1.26 thay vì latest",
+      "bento3_title": "Verify image",
+      "bento3_desc": "Chạy docker images để xác nhận tag đã pull về đúng",
+      "stt": 2,
+      "audio_start": 16.056,
+      "audio_duration": 13.968,
+      "audio_path": "assets/audio/scene_2.mp3",
+      "duration": 13.968,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nKhi pull image Ollama, bạn nên chọn tag cụ thể thay vì dùng latest để đảm bảo tính ổn định. Kiểm tra trang Docker Hub để chọn phiên bản phù hợp với GPU hoặc CPU của bạn, tránh bất ngờ khi image tự động cập nhật.\n",
+      "transcript": [
+        {
+          "text": "Khi",
+          "start": 16.06,
+          "end": 16.33
+        },
+        {
+          "text": "pull",
+          "start": 16.33,
+          "end": 16.6
+        },
+        {
+          "text": "image",
+          "start": 16.6,
+          "end": 16.88
+        },
+        {
+          "text": "Ollama,",
+          "start": 16.88,
+          "end": 17.15
+        },
+        {
+          "text": "bạn",
+          "start": 17.15,
+          "end": 17.42
+        },
+        {
+          "text": "nên",
+          "start": 17.42,
+          "end": 17.7
+        },
+        {
+          "text": "chọn",
+          "start": 17.7,
+          "end": 17.97
+        },
+        {
+          "text": "tag",
+          "start": 17.97,
+          "end": 18.24
+        },
+        {
+          "text": "cụ",
+          "start": 18.24,
+          "end": 18.52
+        },
+        {
+          "text": "thể",
+          "start": 18.52,
+          "end": 18.79
+        },
+        {
+          "text": "thay",
+          "start": 18.79,
+          "end": 19.06
+        },
+        {
+          "text": "vì",
+          "start": 19.06,
+          "end": 19.34
+        },
+        {
+          "text": "dùng",
+          "start": 19.34,
+          "end": 19.61
+        },
+        {
+          "text": "latest",
+          "start": 19.61,
+          "end": 19.88
+        },
+        {
+          "text": "để",
+          "start": 19.88,
+          "end": 20.16
+        },
+        {
+          "text": "đảm",
+          "start": 20.16,
+          "end": 20.43
+        },
+        {
+          "text": "bảo",
+          "start": 20.43,
+          "end": 20.7
+        },
+        {
+          "text": "tính",
+          "start": 20.7,
+          "end": 20.98
+        },
+        {
+          "text": "ổn",
+          "start": 20.98,
+          "end": 21.25
+        },
+        {
+          "text": "định.",
+          "start": 21.25,
+          "end": 21.52
+        },
+        {
+          "text": "Kiểm",
+          "start": 21.52,
+          "end": 21.8
+        },
+        {
+          "text": "tra",
+          "start": 21.8,
+          "end": 22.07
+        },
+        {
+          "text": "trang",
+          "start": 22.07,
+          "end": 22.34
+        },
+        {
+          "text": "Docker",
+          "start": 22.34,
+          "end": 22.61
+        },
+        {
+          "text": "Hub",
+          "start": 22.61,
+          "end": 22.89
+        },
+        {
+          "text": "để",
+          "start": 22.89,
+          "end": 23.16
+        },
+        {
+          "text": "chọn",
+          "start": 23.16,
+          "end": 23.43
+        },
+        {
+          "text": "phiên",
+          "start": 23.43,
+          "end": 23.71
+        },
+        {
+          "text": "bản",
+          "start": 23.71,
+          "end": 23.98
+        },
+        {
+          "text": "phù",
+          "start": 23.98,
+          "end": 24.25
+        },
+        {
+          "text": "hợp",
+          "start": 24.25,
+          "end": 24.53
+        },
+        {
+          "text": "với",
+          "start": 24.53,
+          "end": 24.8
+        },
+        {
+          "text": "GPU",
+          "start": 24.8,
+          "end": 25.07
+        },
+        {
+          "text": "hoặc",
+          "start": 25.07,
+          "end": 25.35
+        },
+        {
+          "text": "CPU",
+          "start": 25.35,
+          "end": 25.62
+        },
+        {
+          "text": "của",
+          "start": 25.62,
+          "end": 25.89
+        },
+        {
+          "text": "bạn,",
+          "start": 25.89,
+          "end": 26.17
+        },
+        {
+          "text": "tránh",
+          "start": 26.17,
+          "end": 26.44
+        },
+        {
+          "text": "bất",
+          "start": 26.44,
+          "end": 26.71
+        },
+        {
+          "text": "ngờ",
+          "start": 26.71,
+          "end": 26.99
+        },
+        {
+          "text": "khi",
+          "start": 26.99,
+          "end": 27.26
+        },
+        {
+          "text": "image",
+          "start": 27.26,
+          "end": 27.53
+        },
+        {
+          "text": "tự",
+          "start": 27.53,
+          "end": 27.81
+        },
+        {
+          "text": "động",
+          "start": 27.81,
+          "end": 28.08
+        },
+        {
+          "text": "cập",
+          "start": 28.08,
+          "end": 28.35
+        },
+        {
+          "text": "nhật.",
+          "start": 28.35,
+          "end": 28.63
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 3,
+      "layout": "docker_config",
+      "content_mode": "steps",
+      "voice": "Cấu hình Ollama cần chú ý ba điểm: mount volume để lưu models đã tải, expose port 11434 cho API, và nếu dùng GPU thì cần thêm runtime nvidia. Volume giúp bạn không mất models khi restart container.",
+      "visual": "Sơ đồ docker run mô tả ánh xạ port, volume và môi trường.",
+      "headline_line1": "CONFIG OLLAMA",
+      "headline_line2": "KIỂM TRA TRƯỚC",
+      "bento1_title": "Map port API",
+      "bento1_desc": "Dùng -p 11434:11434 để expose API endpoint cho client kết nối",
+      "bento2_title": "Mount volume",
+      "bento3_title": "GPU support",
+      "steps": [
+        {
+          "title": "Map port API",
+          "body": "Dùng -p 11434:11434 để expose API endpoint cho client kết nối"
+        },
+        {
+          "title": "Mount volume",
+          "body": "Tạo volume -v ollama:/root/.ollama để lưu models persistent"
+        },
+        {
+          "title": "GPU support",
+          "body": "Thêm --gpus=all nếu dùng NVIDIA GPU để tăng tốc inference"
+        }
+      ],
+      "repo_url": "hub.docker.com/r/ollama/ollama",
+      "bento2_desc": "Tạo volume -v ollama:/root/.ollama để lưu models persistent",
+      "bento3_desc": "Thêm --gpus=all nếu dùng NVIDIA GPU để tăng tốc inference",
+      "stt": 3,
+      "audio_start": 30.024,
+      "audio_duration": 15.336,
+      "audio_path": "assets/audio/scene_3.mp3",
+      "duration": 15.336,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nCấu hình Ollama cần chú ý ba điểm: mount volume để lưu models đã tải, expose port 11434 cho API, và nếu dùng GPU thì cần thêm runtime nvidia. Volume giúp bạn không mất models khi restart container.\n",
+      "transcript": [
+        {
+          "text": "Cấu",
+          "start": 30.02,
+          "end": 30.39
+        },
+        {
+          "text": "hình",
+          "start": 30.39,
+          "end": 30.75
+        },
+        {
+          "text": "Ollama",
+          "start": 30.75,
+          "end": 31.11
+        },
+        {
+          "text": "cần",
+          "start": 31.11,
+          "end": 31.48
+        },
+        {
+          "text": "chú",
+          "start": 31.48,
+          "end": 31.84
+        },
+        {
+          "text": "ý",
+          "start": 31.84,
+          "end": 32.2
+        },
+        {
+          "text": "ba",
+          "start": 32.2,
+          "end": 32.57
+        },
+        {
+          "text": "điểm:",
+          "start": 32.57,
+          "end": 32.93
+        },
+        {
+          "text": "mount",
+          "start": 32.93,
+          "end": 33.29
+        },
+        {
+          "text": "volume",
+          "start": 33.29,
+          "end": 33.66
+        },
+        {
+          "text": "để",
+          "start": 33.66,
+          "end": 34.02
+        },
+        {
+          "text": "lưu",
+          "start": 34.02,
+          "end": 34.38
+        },
+        {
+          "text": "models",
+          "start": 34.38,
+          "end": 34.75
+        },
+        {
+          "text": "đã",
+          "start": 34.75,
+          "end": 35.11
+        },
+        {
+          "text": "tải,",
+          "start": 35.11,
+          "end": 35.47
+        },
+        {
+          "text": "expose",
+          "start": 35.47,
+          "end": 35.84
+        },
+        {
+          "text": "port",
+          "start": 35.84,
+          "end": 36.2
+        },
+        {
+          "text": "11434",
+          "start": 36.2,
+          "end": 36.56
+        },
+        {
+          "text": "cho",
+          "start": 36.56,
+          "end": 36.93
+        },
+        {
+          "text": "API,",
+          "start": 36.93,
+          "end": 37.29
+        },
+        {
+          "text": "và",
+          "start": 37.29,
+          "end": 37.65
+        },
+        {
+          "text": "nếu",
+          "start": 37.65,
+          "end": 38.01
+        },
+        {
+          "text": "dùng",
+          "start": 38.01,
+          "end": 38.38
+        },
+        {
+          "text": "GPU",
+          "start": 38.38,
+          "end": 38.74
+        },
+        {
+          "text": "thì",
+          "start": 38.74,
+          "end": 39.1
+        },
+        {
+          "text": "cần",
+          "start": 39.1,
+          "end": 39.47
+        },
+        {
+          "text": "thêm",
+          "start": 39.47,
+          "end": 39.83
+        },
+        {
+          "text": "runtime",
+          "start": 39.83,
+          "end": 40.19
+        },
+        {
+          "text": "nvidia.",
+          "start": 40.19,
+          "end": 40.56
+        },
+        {
+          "text": "Volume",
+          "start": 40.56,
+          "end": 40.92
+        },
+        {
+          "text": "giúp",
+          "start": 40.92,
+          "end": 41.28
+        },
+        {
+          "text": "bạn",
+          "start": 41.28,
+          "end": 41.65
+        },
+        {
+          "text": "không",
+          "start": 41.65,
+          "end": 42.01
+        },
+        {
+          "text": "mất",
+          "start": 42.01,
+          "end": 42.37
+        },
+        {
+          "text": "models",
+          "start": 42.37,
+          "end": 42.74
+        },
+        {
+          "text": "khi",
+          "start": 42.74,
+          "end": 43.1
+        },
+        {
+          "text": "restart",
+          "start": 43.1,
+          "end": 43.46
+        },
+        {
+          "text": "container.",
+          "start": 43.46,
+          "end": 43.83
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 4,
+      "layout": "terminal_docker",
+      "voice": "Đây là lệnh chạy thử Ollama với volume và port mapping cơ bản. Sau khi container khởi động, bạn có thể exec vào container và chạy ollama run llama2 để tải và test model ngay lập tức.",
+      "visual": "Màn hình terminal đang khởi chạy container.",
+      "headline_line1": "CHẠY THỬ",
+      "headline_line2": "KHỞI ĐỘNG CONTAINER",
+      "btn_text": "$ docker run -d -v ollama:/root/.ollama -p 11434:11434 ollama/ollama",
+      "repo_url": "hub.docker.com/r/ollama/ollama",
+      "stt": 4,
+      "audio_start": 45.36,
+      "audio_duration": 12.6,
+      "audio_path": "assets/audio/scene_4.mp3",
+      "duration": 12.6,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nĐây là lệnh chạy thử Ollama với volume và port mapping cơ bản. Sau khi container khởi động, bạn có thể exec vào container và chạy ollama run llama2 để tải và test model ngay lập tức.\n",
+      "transcript": [
+        {
+          "text": "Đây",
+          "start": 45.36,
+          "end": 45.67
+        },
+        {
+          "text": "là",
+          "start": 45.67,
+          "end": 45.97
+        },
+        {
+          "text": "lệnh",
+          "start": 45.97,
+          "end": 46.28
+        },
+        {
+          "text": "chạy",
+          "start": 46.28,
+          "end": 46.59
+        },
+        {
+          "text": "thử",
+          "start": 46.59,
+          "end": 46.89
+        },
+        {
+          "text": "Ollama",
+          "start": 46.89,
+          "end": 47.2
+        },
+        {
+          "text": "với",
+          "start": 47.2,
+          "end": 47.51
+        },
+        {
+          "text": "volume",
+          "start": 47.51,
+          "end": 47.81
+        },
+        {
+          "text": "và",
+          "start": 47.81,
+          "end": 48.12
+        },
+        {
+          "text": "port",
+          "start": 48.12,
+          "end": 48.42
+        },
+        {
+          "text": "mapping",
+          "start": 48.42,
+          "end": 48.73
+        },
+        {
+          "text": "cơ",
+          "start": 48.73,
+          "end": 49.04
+        },
+        {
+          "text": "bản.",
+          "start": 49.04,
+          "end": 49.34
+        },
+        {
+          "text": "Sau",
+          "start": 49.34,
+          "end": 49.65
+        },
+        {
+          "text": "khi",
+          "start": 49.65,
+          "end": 49.96
+        },
+        {
+          "text": "container",
+          "start": 49.96,
+          "end": 50.26
+        },
+        {
+          "text": "khởi",
+          "start": 50.26,
+          "end": 50.57
+        },
+        {
+          "text": "động,",
+          "start": 50.57,
+          "end": 50.88
+        },
+        {
+          "text": "bạn",
+          "start": 50.88,
+          "end": 51.18
+        },
+        {
+          "text": "có",
+          "start": 51.18,
+          "end": 51.49
+        },
+        {
+          "text": "thể",
+          "start": 51.49,
+          "end": 51.8
+        },
+        {
+          "text": "exec",
+          "start": 51.8,
+          "end": 52.1
+        },
+        {
+          "text": "vào",
+          "start": 52.1,
+          "end": 52.41
+        },
+        {
+          "text": "container",
+          "start": 52.41,
+          "end": 52.72
+        },
+        {
+          "text": "và",
+          "start": 52.72,
+          "end": 53.02
+        },
+        {
+          "text": "chạy",
+          "start": 53.02,
+          "end": 53.33
+        },
+        {
+          "text": "ollama",
+          "start": 53.33,
+          "end": 53.64
+        },
+        {
+          "text": "run",
+          "start": 53.64,
+          "end": 53.94
+        },
+        {
+          "text": "llama2",
+          "start": 53.94,
+          "end": 54.25
+        },
+        {
+          "text": "để",
+          "start": 54.25,
+          "end": 54.55
+        },
+        {
+          "text": "tải",
+          "start": 54.55,
+          "end": 54.86
+        },
+        {
+          "text": "và",
+          "start": 54.86,
+          "end": 55.17
+        },
+        {
+          "text": "test",
+          "start": 55.17,
+          "end": 55.47
+        },
+        {
+          "text": "model",
+          "start": 55.47,
+          "end": 55.78
+        },
+        {
+          "text": "ngay",
+          "start": 55.78,
+          "end": 56.09
+        },
+        {
+          "text": "lập",
+          "start": 56.09,
+          "end": 56.39
+        },
+        {
+          "text": "tức.",
+          "start": 56.39,
+          "end": 56.7
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba smiling brightly.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 5,
+      "layout": "outro_docker",
+      "content_mode": "steps",
+      "voice": "Trước khi đưa lên production, hãy kiểm tra volume backup, giới hạn tài nguyên CPU và RAM, và cân nhắc dùng reverse proxy như Nginx để bảo mật API endpoint. Đừng quên cập nhật image định kỳ để nhận các bản vá bảo mật mới nhất.",
+      "visual": "Bento card checklist backup và bảo mật.",
+      "headline_line1": "TRƯỚC PROD",
+      "headline_line2": "BACKUP VÀ UPDATE",
+      "bento1_title": "Backup volume",
+      "bento2_title": "Resource limit",
+      "bento3_title": "Reverse proxy",
+      "bento4_title": "Update định kỳ",
+      "steps": [
+        {
+          "title": "Backup volume",
+          "body": "Sao lưu thư mục /root/.ollama chứa models đã tải về"
+        },
+        {
+          "title": "Resource limit",
+          "body": "Dùng --memory và --cpus để giới hạn tài nguyên container"
+        },
+        {
+          "title": "Reverse proxy",
+          "body": "Đặt Nginx hoặc Traefik phía trước để bảo mật và rate limit API"
+        },
+        {
+          "title": "Update định kỳ",
+          "body": "Pull image mới và restart container để nhận bản vá bảo mật"
+        }
+      ],
+      "repo_url": "hub.docker.com/r/ollama/ollama",
+      "bento1_desc": "Sao lưu thư mục /root/.ollama chứa models đã tải về",
+      "bento2_desc": "Dùng --memory và --cpus để giới hạn tài nguyên container",
+      "bento3_desc": "Đặt Nginx hoặc Traefik phía trước để bảo mật và rate limit API",
+      "bento4_desc": "Pull image mới và restart container để nhận bản vá bảo mật",
+      "stt": 5,
+      "audio_start": 57.96,
+      "audio_duration": 14.688,
+      "audio_path": "assets/audio/scene_5.mp3",
+      "duration": 14.688,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTrước khi đưa lên production, hãy kiểm tra volume backup, giới hạn tài nguyên CPU và RAM, và cân nhắc dùng reverse proxy như Nginx để bảo mật API endpoint. Đừng quên cập nhật image định kỳ để nhận các bản vá bảo mật mới nhất.\n",
+      "transcript": [
+        {
+          "text": "Trước",
+          "start": 57.96,
+          "end": 58.25
+        },
+        {
+          "text": "khi",
+          "start": 58.25,
+          "end": 58.53
+        },
+        {
+          "text": "đưa",
+          "start": 58.53,
+          "end": 58.82
+        },
+        {
+          "text": "lên",
+          "start": 58.82,
+          "end": 59.11
+        },
+        {
+          "text": "production,",
+          "start": 59.11,
+          "end": 59.4
+        },
+        {
+          "text": "hãy",
+          "start": 59.4,
+          "end": 59.68
+        },
+        {
+          "text": "kiểm",
+          "start": 59.68,
+          "end": 59.97
+        },
+        {
+          "text": "tra",
+          "start": 59.97,
+          "end": 60.26
+        },
+        {
+          "text": "volume",
+          "start": 60.26,
+          "end": 60.55
+        },
+        {
+          "text": "backup,",
+          "start": 60.55,
+          "end": 60.83
+        },
+        {
+          "text": "giới",
+          "start": 60.83,
+          "end": 61.12
+        },
+        {
+          "text": "hạn",
+          "start": 61.12,
+          "end": 61.41
+        },
+        {
+          "text": "tài",
+          "start": 61.41,
+          "end": 61.7
+        },
+        {
+          "text": "nguyên",
+          "start": 61.7,
+          "end": 61.98
+        },
+        {
+          "text": "CPU",
+          "start": 61.98,
+          "end": 62.27
+        },
+        {
+          "text": "và",
+          "start": 62.27,
+          "end": 62.56
+        },
+        {
+          "text": "RAM,",
+          "start": 62.56,
+          "end": 62.85
+        },
+        {
+          "text": "và",
+          "start": 62.85,
+          "end": 63.13
+        },
+        {
+          "text": "cân",
+          "start": 63.13,
+          "end": 63.42
+        },
+        {
+          "text": "nhắc",
+          "start": 63.42,
+          "end": 63.71
+        },
+        {
+          "text": "dùng",
+          "start": 63.71,
+          "end": 63.99
+        },
+        {
+          "text": "reverse",
+          "start": 63.99,
+          "end": 64.28
+        },
+        {
+          "text": "proxy",
+          "start": 64.28,
+          "end": 64.57
+        },
+        {
+          "text": "như",
+          "start": 64.57,
+          "end": 64.86
+        },
+        {
+          "text": "Nginx",
+          "start": 64.86,
+          "end": 65.14
+        },
+        {
+          "text": "để",
+          "start": 65.14,
+          "end": 65.43
+        },
+        {
+          "text": "bảo",
+          "start": 65.43,
+          "end": 65.72
+        },
+        {
+          "text": "mật",
+          "start": 65.72,
+          "end": 66.01
+        },
+        {
+          "text": "API",
+          "start": 66.01,
+          "end": 66.29
+        },
+        {
+          "text": "endpoint.",
+          "start": 66.29,
+          "end": 66.58
+        },
+        {
+          "text": "Đừng",
+          "start": 66.58,
+          "end": 66.87
+        },
+        {
+          "text": "quên",
+          "start": 66.87,
+          "end": 67.16
+        },
+        {
+          "text": "cập",
+          "start": 67.16,
+          "end": 67.44
+        },
+        {
+          "text": "nhật",
+          "start": 67.44,
+          "end": 67.73
+        },
+        {
+          "text": "image",
+          "start": 67.73,
+          "end": 68.02
+        },
+        {
+          "text": "định",
+          "start": 68.02,
+          "end": 68.31
+        },
+        {
+          "text": "kỳ",
+          "start": 68.31,
+          "end": 68.59
+        },
+        {
+          "text": "để",
+          "start": 68.59,
+          "end": 68.88
+        },
+        {
+          "text": "nhận",
+          "start": 68.88,
+          "end": 69.17
+        },
+        {
+          "text": "các",
+          "start": 69.17,
+          "end": 69.45
+        },
+        {
+          "text": "bản",
+          "start": 69.45,
+          "end": 69.74
+        },
+        {
+          "text": "vá",
+          "start": 69.74,
+          "end": 70.03
+        },
+        {
+          "text": "bảo",
+          "start": 70.03,
+          "end": 70.32
+        },
+        {
+          "text": "mật",
+          "start": 70.32,
+          "end": 70.6
+        },
+        {
+          "text": "mới",
+          "start": 70.6,
+          "end": 70.89
+        },
+        {
+          "text": "nhất.",
+          "start": 70.89,
+          "end": 71.18
+        }
+      ]
+    }
+  ],
+  "duration": 72.648
+}

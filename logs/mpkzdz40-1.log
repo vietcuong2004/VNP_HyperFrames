@@ -1,0 +1,131 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://hub.docker.com/r/ollama/ollama
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+Step 1: Sinh kich ban JSON qua các content generator...
+Đang phân tích Docker image: ollama/ollama
+> Đang gọi custom API để sinh kịch bản Docker cho format: self_host_setup_guide...
+[AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=true)...
+[Pipeline] Da luu file kich ban JSON tai: C:\CONG_VIEC\VNP_HyperFrames\data\agent-script-https-hub-docker-com-r-ollama--mpkzllp1.json
+
+--- Xy ly Canh 1/5 ---
+
+Step 2: Sinh giong doc (Edge TTS) va phu de (Whisper/LarVoice Subtitle)...
+[Pipeline] Sinh giong doc Canh 1...
+[Agent Log] TTS Edge: "Ollama là giải pháp đơn giản nhất để chạy các mô hình ngôn n..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 16.1s audio (94 KB) | 11.4s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 1...
+[Agent Log] Whisper: scene_1.mp3 (lang=vi)
+[Pipeline] Ra soat loi chinh ta phu de Canh 1...
+[Agent Log] AI SRT fix cảnh 1 (VI, 1 blocks)...
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 1: OK (1 blocks)
+
+--- Xy ly Canh 2/5 ---
+[Pipeline] Sinh giong doc Canh 2...
+[Agent Log] TTS Edge: "Khi pull image Ollama, bạn nên chọn tag cụ thể thay vì dùng ..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 14.0s audio (82 KB) | 9.8s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 2...
+[Agent Log] Whisper: scene_2.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 2...
+[Agent Log] AI SRT fix cảnh 2 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 2: OK (1 blocks)
+
+--- Xy ly Canh 3/5 ---
+[Pipeline] Sinh giong doc Canh 3...
+[Agent Log] TTS Edge: "Cấu hình Ollama cần chú ý ba điểm: mount volume để lưu model..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 15.3s audio (90 KB) | 8.1s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 3...
+[Agent Log] Whisper: scene_3.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 3...
+[Agent Log] AI SRT fix cảnh 3 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 3: OK (1 blocks)
+
+--- Xy ly Canh 4/5 ---
+[Pipeline] Sinh giong doc Canh 4...
+[Agent Log] TTS Edge: "Đây là lệnh chạy thử Ollama với volume và port mapping cơ bả..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 12.6s audio (74 KB) | 7.4s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 4...
+[Agent Log] Whisper: scene_4.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 4...
+[Agent Log] AI SRT fix cảnh 4 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 4: OK (1 blocks)
+
+--- Xy ly Canh 5/5 ---
+[Pipeline] Sinh giong doc Canh 5...
+[Agent Log] TTS Edge: "Trước khi đưa lên production, hãy kiểm tra volume backup, gi..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 14.7s audio (86 KB) | 8.9s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 5...
+[Agent Log] Whisper: scene_5.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 5...
+[Agent Log] AI SRT fix cảnh 5 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 5: OK (1 blocks)
+
+Step 3: Bien dich index.html composition chinh tu template...
+[Pipeline] Da ghi de index.html composition tai: C:\CONG_VIEC\VNP_HyperFrames\index.html
+
+Step 4: Kiem tra composition bang HyperFrames...
+◆  Validating VNP_HyperFrames in headless Chrome
+[StaticGuard] Invalid HyperFrame contract: GSAP tween uses `repeat: -1` (infinite). Infinite repeats break the deterministic capture engine which seeks to exact frame times. Use a finite repeat count calculated from the composition duration: `repeat: Math.floor(duration / cycleDuration) - 1`.
+
+
+  ⚠ WCAG AA contrast warnings (2):
+    · div.terminal-title "hub.docker.com — hub.docker.com/r/ollama/ollama" — 4.1:1 (need 4.5:1, t=7.265s)
+    · div.terminal-title "bash — docker" — 4.1:1 (need 4.5:1, t=21.794s)
+
+◇  0 error(s), 0 warning(s), 2 contrast warning(s)
+
+Step 5: Ket xuat video MP4...
+
+◆  Rendering VNP_HyperFrames → C:\CONG_VIEC\VNP_HyperFrames\renders\VNP_HyperFrames_2026-05-25_16-13-04.mp4
+   30fps · standard · 2 workers
+   GPU: browser GPU (auto-detect)
+
+[?25l│
+◇  Browser: cache
+[?25h
+  ✗ gsap_infinite_repeat: GSAP tween uses `repeat: -1` (infinite). Infinite repeats break the deterministic capture engine which seeks to exact frame times. Use a finite repeat count calculated from the composition duration: `repeat: Math.floor(duration / cycleDuration) - 1`.
+    Fix: Replace `repeat: -1` with a finite count, e.g. `repeat: Math.floor(totalDuration / singleCycleDuration) - 1`. Use Math.floor (not Math.ceil) to ensure the animation fits within the total duration.
+  ⚠ composition_file_too_large: This HTML composition file has 359 lines. Smaller sub-compositions are easier to read, iterate on, and diff.
+    Fix: Split coherent scenes or layers into separate .html files under compositions/, then mount them from the parent with data-composition-src so each file stays small enough to inspect, revise, and validate independently.
+  Continuing render despite lint issues. Use --strict to block.
+
+[2K  █░░░░░░░░░░░░░░░░░░░░░░░░  5%  Compiling composition[Compiler] Fetched 15 font face(s) for "Space Grotesk" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\space-grotesk)
+[Compiler] Fetched 60 font face(s) for "JetBrains Mono" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\jetbrains-mono)
+[Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] Compiled composition metadata {"entryFile":"index.html","staticDuration":72.648,"width":1080,"height":1920,"videoCount":0,"audioCount":8,"renderModeHints":{"recommendScreenshot":false,"reasons":[]}}
+[2K  ██░░░░░░░░░░░░░░░░░░░░░░░  10%  Extracting video frames[INFO] [Render] No HDR sources detected — rendering SDR
+[2K  █████░░░░░░░░░░░░░░░░░░░░  20%  Processing audio tracks[2K  ██████░░░░░░░░░░░░░░░░░░░  25%  Starting frame capture[INFO] streaming-encode gate {"enabled":false,"configFlag":true,"outputFormat":"mp4","workerCount":2,"durationSeconds":72.648,"maxDurationSeconds":240}
+[hyperframes] browserGpuMode auto → hardware (WebGL probe succeeded)
+[2K  ██████░░░░░░░░░░░░░░░░░░░  26%  Capturing frame 30/2180 (2 workers)[2K  ██████░░░░░░░░░░░░░░░░░░░  26%  Capturing frame 60/2180 (2 workers)[2K  ██████░░░░░░░░░░░░░░░░░░░  27%  Capturing frame 90/2180 (2 workers)[2K  ██████░░░░░░░░░░░░░░░░░░░  27%  Capturing frame 120/2180 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  28%  Capturing frame 150/2180 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  29%  Capturing frame 180/2180 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  29%  Capturing frame 210/2180 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  30%  Capturing frame 240/2180 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  31%  Capturing frame 270/2180 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  31%  Capturing frame 300/2180 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  32%  Capturing frame 330/2180 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  32%  Capturing frame 360/2180 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  33%  Capturing frame 390/2180 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  34%  Capturing frame 420/2180 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  34%  Capturing frame 450/2180 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  35%  Capturing frame 480/2180 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  36%  Capturing frame 510/2180 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  36%  Capturing frame 540/2180 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  37%  Capturing frame 570/2180 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  37%  Capturing frame 600/2180 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  38%  Capturing frame 630/2180 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  39%  Capturing frame 660/2180 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  39%  Capturing frame 690/2180 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  40%  Capturing frame 720/2180 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  40%  Capturing frame 750/2180 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  41%  Capturing frame 780/2180 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  42%  Capturing frame 810/2180 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  42%  Capturing frame 840/2180 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  43%  Capturing frame 870/2180 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  44%  Capturing frame 900/2180 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  44%  Capturing frame 930/2180 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  45%  Capturing frame 960/2180 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  45%  Capturing frame 990/2180 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  46%  Capturing frame 1020/2180 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  47%  Capturing frame 1050/2180 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  47%  Capturing frame 1080/2180 (2 workers)[2K  ████████████░░░░░░░░░░░░░  48%  Capturing frame 1110/2180 (2 workers)[2K  ████████████░░░░░░░░░░░░░  49%  Capturing frame 1140/2180 (2 workers)[2K  ████████████░░░░░░░░░░░░░  49%  Capturing frame 1170/2180 (2 workers)[2K  ████████████░░░░░░░░░░░░░  50%  Capturing frame 1200/2180 (2 workers)[2K  ████████████░░░░░░░░░░░░░  50%  Capturing frame 1230/2180 (2 workers)[2K  ████████████░░░░░░░░░░░░░  51%  Capturing frame 1260/2180 (2 workers)[2K  █████████████░░░░░░░░░░░░  52%  Capturing frame 1290/2180 (2 workers)[2K  █████████████░░░░░░░░░░░░  52%  Capturing frame 1320/2180 (2 workers)[2K  █████████████░░░░░░░░░░░░  53%  Capturing frame 1350/2180 (2 workers)[2K  █████████████░░░░░░░░░░░░  53%  Capturing frame 1380/2180 (2 workers)[2K  █████████████░░░░░░░░░░░░  54%  Capturing frame 1410/2180 (2 workers)[2K  █████████████░░░░░░░░░░░░  55%  Capturing frame 1440/2180 (2 workers)[2K  █████████████░░░░░░░░░░░░  55%  Capturing frame 1470/2180 (2 workers)[2K  ██████████████░░░░░░░░░░░  56%  Capturing frame 1500/2180 (2 workers)[2K  ██████████████░░░░░░░░░░░  57%  Capturing frame 1530/2180 (2 workers)[2K  ██████████████░░░░░░░░░░░  57%  Capturing frame 1560/2180 (2 workers)[2K  ██████████████░░░░░░░░░░░  58%  Capturing frame 1590/2180 (2 workers)[2K  ██████████████░░░░░░░░░░░  58%  Capturing frame 1620/2180 (2 workers)[2K  ██████████████░░░░░░░░░░░  59%  Capturing frame 1650/2180 (2 workers)[2K  ███████████████░░░░░░░░░░  60%  Capturing frame 1680/2180 (2 workers)[2K  ███████████████░░░░░░░░░░  60%  Capturing frame 1710/2180 (2 workers)[2K  ███████████████░░░░░░░░░░  61%  Capturing frame 1740/2180 (2 workers)[2K  ███████████████░░░░░░░░░░  62%  Capturing frame 1770/2180 (2 workers)[2K  ███████████████░░░░░░░░░░  62%  Capturing frame 1800/2180 (2 workers)[2K  ███████████████░░░░░░░░░░  63%  Capturing frame 1830/2180 (2 workers)[2K  ███████████████░░░░░░░░░░  63%  Capturing frame 1860/2180 (2 workers)[2K  ████████████████░░░░░░░░░  64%  Capturing frame 1890/2180 (2 workers)[2K  ████████████████░░░░░░░░░  65%  Capturing frame 1920/2180 (2 workers)[2K  ████████████████░░░░░░░░░  65%  Capturing frame 1950/2180 (2 workers)[2K  ████████████████░░░░░░░░░  66%  Capturing frame 1980/2180 (2 workers)[2K  ████████████████░░░░░░░░░  66%  Capturing frame 2010/2180 (2 workers)[2K  ████████████████░░░░░░░░░  67%  Capturing frame 2040/2180 (2 workers)[2K  █████████████████░░░░░░░░  68%  Capturing frame 2070/2180 (2 workers)[2K  █████████████████░░░░░░░░  68%  Capturing frame 2100/2180 (2 workers)[2K  █████████████████░░░░░░░░  69%  Capturing frame 2130/2180 (2 workers)[2K  █████████████████░░░░░░░░  70%  Capturing frame 2160/2180 (2 workers)[2K  █████████████████░░░░░░░░  70%  Capturing frame 2180/2180 (2 workers)[2K  ██████████████████░░░░░░░  75%  Encoding video[2K  ██████████████████████░░░  90%  Assembling final video[2K  █████████████████████████  100%  Render complete
+◇  C:\CONG_VIEC\VNP_HyperFrames\renders\VNP_HyperFrames_2026-05-25_16-13-04.mp4
+   22.2 MB · 3m 12.6s · completed
+
+Step 6: Doi ten video theo dung dinh dang...
+-> agent-video-https-hub-docker-com-r-ollama-_25-05-2026-16-16.mp4
+
+Step 7: Don dep file am thanh tam...
+Da xoa 10 file tam trong thu muc assets/audio.
+
+==================================================
+AGENT PIPELINE DA HOAN THANH CONG!
+==================================================
+

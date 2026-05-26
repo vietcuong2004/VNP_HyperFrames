@@ -1,0 +1,103 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://hub.docker.com/r/ollama/ollama
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames\tmp_workspace_mpl0zcwv-1
+==================================================
+
+Step 1: Sinh kich ban JSON qua các content generator...
+Đang phân tích Docker image: ollama/ollama
+> Đang gọi custom API để sinh kịch bản Docker cho format: self_host_setup_guide...
+[AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=true)...
+[Pipeline] Da luu file kich ban JSON tai: C:\CONG_VIEC\VNP_HyperFrames\tmp_workspace_mpl0zcwv-1\data\agent-script-https-hub-docker-com-r-ollama--mpl0zd3m.json
+[Agent Log] TTS Edge: "Ollama là giải pháp đơn giản nhất để chạy các mô hình ngôn n..." (voice=vi-VN-NamMinhNeural, lang=vi)
+
+Step 2: Sinh giong doc (Edge TTS) va phu de (Whisper/LarVoice Subtitle)...
+
+--- Xy ly Canh 1/5 ---
+[Pipeline] Sinh giong doc Canh 1...
+[Agent Log] TTS Edge xong: 15.2s audio (89 KB) | 13.4s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 1...
+[Agent Log] Whisper: scene_1.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 1...
+[Agent Log] AI SRT fix cảnh 1 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 1: OK (1 blocks)
+
+--- Xy ly Canh 2/5 ---
+[Pipeline] Sinh giong doc Canh 2...
+[Agent Log] TTS Edge: "Khi pull image Ollama, bạn nên chọn tag cụ thể thay vì lates..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 16.1s audio (94 KB) | 10.9s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 2...
+[Agent Log] Whisper: scene_2.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 2...
+[Agent Log] AI SRT fix cảnh 2 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 2: OK (1 blocks)
+
+--- Xy ly Canh 3/5 ---
+[Pipeline] Sinh giong doc Canh 3...
+[Agent Log] TTS Edge: "Cấu hình quan trọng nhất là mount volume để lưu trữ các mode..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 17.6s audio (103 KB) | 14.9s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 3...
+[Agent Log] Whisper: scene_3.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 3...
+[Agent Log] AI SRT fix cảnh 3 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 3: OK (1 blocks)
+
+--- Xy ly Canh 4/5 ---
+[Pipeline] Sinh giong doc Canh 4...
+[Agent Log] TTS Edge: "Đây là lệnh chạy Ollama với volume persistent và port mappin..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 16.3s audio (96 KB) | 13.2s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 4...
+[Agent Log] Whisper: scene_4.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 4...
+[Agent Log] AI SRT fix cảnh 4 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 4: OK (1 blocks)
+
+--- Xy ly Canh 5/5 ---
+[Pipeline] Sinh giong doc Canh 5...
+[Agent Log] TTS Edge: "Trước khi đưa lên production, hãy đảm bảo volume được backup..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge: voice vi-VN-NamMinhNeural loi: undefined
+[Agent Log] TTS Edge: "Trước khi đưa lên production, hãy đảm bảo volume được backup..." (voice=vi-VN-HoaiMyNeural, lang=vi)
+[Agent Log] TTS Edge xong: 16.4s audio (96 KB) | 1m17s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 5...
+[Agent Log] Whisper: scene_5.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 5...
+[Agent Log] AI SRT fix cảnh 5 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 5: OK (1 blocks)
+
+Step 3: Bien dich index.html composition chinh tu template...
+[Pipeline] Da ghi de index.html composition tai: C:\CONG_VIEC\VNP_HyperFrames\tmp_workspace_mpl0zcwv-1\index.html
+
+Step 4: Kiem tra composition bang HyperFrames...
+◆  Validating tmp_workspace_mpl0zcwv-1 in headless Chrome
+[StaticGuard] Invalid HyperFrame contract: GSAP tween uses `repeat: -1` (infinite). Infinite repeats break the deterministic capture engine which seeks to exact frame times. Use a finite repeat count calculated from the composition duration: `repeat: Math.floor(duration / cycleDuration) - 1`.
+
+  ✗ 404 loading assets/images/github_repo.png
+
+  ⚠ WCAG AA contrast warnings (2):
+    · div.terminal-title "hub.docker.com — hub.docker.com/r/ollama/ollama" — 4.1:1 (need 4.5:1, t=8.165s)
+    · div.terminal-title "bash — docker" — 4.1:1 (need 4.5:1, t=24.494s)
+
+◇  1 error(s), 0 warning(s), 2 contrast warning(s)
+
+Gap loi trong qua trinh chay Agent pipeline: Error: Command C:\CONG_VIEC\VNP_HyperFrames\node_modules\node\bin\node.exe failed with exit code 1
+    at runCommand (file:///C:/CONG_VIEC/VNP_HyperFrames/desktop_app/command_runner.mjs:33:11)
+    at run (file:///C:/CONG_VIEC/VNP_HyperFrames/pipeline/run_pipeline.js:23:10)
+    at main (file:///C:/CONG_VIEC/VNP_HyperFrames/pipeline/run_pipeline.js:368:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)

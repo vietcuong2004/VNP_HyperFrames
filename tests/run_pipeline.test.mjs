@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { findJsonPath } from "../pipeline/run_pipeline.js";
-import { getHyperframesReviewScene } from "../templates/G2_docker/scenes.mjs";
+import { getHyperframesReviewScene } from "../templates/G2_docker/template1/scenes.mjs";
 
 test("findJsonPath extracts only the generated JSON path from Vietnamese output", () => {
   const output = [

@@ -11,6 +11,7 @@ import { inspectEnvironment } from "./environment.mjs";
 import { createNodeScriptCommand } from "./runtime_binaries.mjs";
 import { createWorkspacePaths, ensureWorkspace } from "./workspace.mjs";
 import { loadWorkspaceEnv, saveWorkspaceEnv } from "./settings.mjs";
+import { syncTemplates, createJob, updateJobProgress } from "../services/dbService.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,8 +32,50 @@ function findLatestMp4(rendersDir) {
 }
 
 export function createJobId(index, now = Date.now()) {
-  return `${now.toString(36)}-${process.pid}-${index}-${randomUUID().slice(0, 8)}`;
+  return randomUUID();
 }
+
+async function cleanUpTempWorkspace(workspacePath) {
+  try {
+    // 1. Unlink junctions/symlinks first to avoid recursive traversal issues on Windows
+    const symlinks = [
+      path.join(workspacePath, "assets", "character"),
+      path.join(workspacePath, "assets", "background-music"),
+      path.join(workspacePath, "assets", "sound-effect"),
+      path.join(workspacePath, "assets", "logo"),
+      path.join(workspacePath, "compositions"),
+      path.join(workspacePath, "vendor"),
+    ];
+
+    for (const link of symlinks) {
+      try {
+        const stat = await fsp.lstat(link).catch(() => null);
+        if (stat && (stat.isSymbolicLink() || stat.isDirectory())) {
+          await fsp.unlink(link).catch(async () => {
+            await fsp.rmdir(link).catch(() => {});
+          });
+        }
+      } catch (e) {}
+    }
+
+    // 2. Perform a retry-based rm on the main directory (with brief delay to release locks)
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        await fsp.rm(workspacePath, { recursive: true, force: true });
+        return;
+      } catch (err) {
+        if (attempt === 3) {
+          console.warn(`[desktop] Failed to clean up temp workspace ${workspacePath} after 3 attempts:`, err.message);
+        } else {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+      }
+    }
+  } catch (err) {
+    console.warn(`[desktop] Exception during temp workspace cleanup ${workspacePath}:`, err.message);
+  }
+}
+
 
 function openFolder(folderPath) {
   const command = process.platform === "win32" ? "explorer.exe" : process.platform === "darwin" ? "open" : "xdg-open";
@@ -69,12 +112,13 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
 
     const { url, id } = job;
     
-    // Tạo thư mục workspace cô lập cho tiến trình chạy song song này
-    const jobWorkspaceRoot = path.join(workspaceRoot, `tmp_workspace_${id}`);
+    // Tạo thư mục workspace cô lập cho tiến trình chạy song song này trong renders/tmp
+    const jobWorkspaceRoot = path.join(paths.rendersDir, "tmp", `tmp_workspace_${id}`);
     await fsp.mkdir(jobWorkspaceRoot, { recursive: true });
 
     const logPath = path.join(paths.logsDir, `${id}.log`);
     io.emit("job_start", { id, url });
+    await updateJobProgress(id, { status: "running", current_stage: "starting", progress: 5 }).catch(() => {});
 
     try {
       if (browserRuntime) {
@@ -117,6 +161,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
       const message = error instanceof Error ? error.message : String(error);
       await fsp.appendFile(logPath, `[desktop] Temporary workspace setup failed: ${message}\n`, "utf-8").catch(() => {});
       io.emit("job_error", { id, error: `Workspace setup failed: ${message}`, logPath });
+      await updateJobProgress(id, { status: "failed", current_stage: "failed", error_message: `Workspace setup failed: ${message}` }).catch(() => {});
       
       // Clean up workspace if setup fails
       await fsp.rm(jobWorkspaceRoot, { recursive: true, force: true }).catch(() => {});
@@ -202,28 +247,45 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
         io.emit("job_done", { id, videoPath: relativeVideoPath, logPath });
       } else {
         io.emit("job_error", { id, error: `Process exited with code ${code}`, logPath });
+        await updateJobProgress(id, { status: "failed", current_stage: "failed", error_message: `Tiến trình render thất bại với mã lỗi ${code}` }).catch(() => {});
       }
 
-      // Clean up the temporary workspace directory
-      await fsp.rm(jobWorkspaceRoot, { recursive: true, force: true }).catch((err) => {
-        console.warn(`[desktop] Failed to clean up temp workspace ${jobWorkspaceRoot}:`, err.message);
-      });
+      // Clean up the temporary workspace directory robustly
+      await cleanUpTempWorkspace(jobWorkspaceRoot);
 
       activeJobsCount--;
       processQueue();
     });
   }
 
-  app.post("/api/generate", (req, res) => {
+  function detectPlatform(url) {
+    if (!url) return "web";
+    const lower = url.toLowerCase();
+    if (lower.includes("github.com")) return "github";
+    if (lower.includes("hub.docker.com") || lower.includes("docker.io") || lower.includes("docker")) return "docker";
+    return "web";
+  }
+
+  app.post("/api/generate", async (req, res) => {
     const { urls } = req.body;
     if (!urls || !Array.isArray(urls)) {
       return res.status(400).json({ error: "Invalid urls" });
     }
 
-    const jobs = urls.map((url, index) => ({
-      id: createJobId(index),
-      url,
-    }));
+    const jobs = [];
+    for (let index = 0; index < urls.length; index++) {
+      const url = urls[index];
+      const jobId = createJobId(index);
+      const platform = detectPlatform(url);
+
+      try {
+        await createJob(jobId, url, platform, null, null);
+      } catch (dbErr) {
+        console.error(`[DB Error] Đăng ký job ${jobId} lên Supabase thất bại:`, dbErr.message);
+      }
+
+      jobs.push({ id: jobId, url });
+    }
 
     jobQueue.push(...jobs);
     processQueue();
@@ -319,6 +381,9 @@ export async function startServer(options = {}) {
     browserRuntime: options.browserRuntime,
   });
   await ensureWorkspace(paths);
+  await syncTemplates(paths.templatesDir).catch((err) => {
+    console.error("[desktop] Đồng bộ templates thất bại:", err.message);
+  });
 
   await new Promise((resolve, reject) => {
     server.once("error", reject);
