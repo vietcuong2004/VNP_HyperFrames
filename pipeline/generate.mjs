@@ -41,7 +41,11 @@ async function generate() {
 
   let styleContent = '';
   if (fs.existsSync(templatePaths.stylePath)) {
-    styleContent = stripNetworkCssImports(fs.readFileSync(templatePaths.stylePath, 'utf-8'));
+    styleContent = fs.readFileSync(templatePaths.stylePath, 'utf-8');
+    if (styleContent.startsWith('\uFEFF')) {
+      styleContent = styleContent.slice(1);
+    }
+    styleContent = stripNetworkCssImports(styleContent);
   }
 
   const html = templateModule.default(data, styleContent);

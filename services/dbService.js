@@ -290,3 +290,20 @@ export async function updateSceneAudioAndSrt(sceneId, audioPath, srtPath, srtCon
     console.error(`[DB Error] Lỗi cập nhật scene ${sceneId}:`, error.message);
   }
 }
+
+/**
+ * 6. Lấy danh sách 20 Jobs gần đây nhất kèm theo tệp Render (nếu có)
+ */
+export async function getRecentJobs(limit = 20) {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from('jobs')
+    .select('*, renders(file_path)')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  if (error) {
+    console.error('[DB Error] Lỗi lấy danh sách job:', error.message);
+    return [];
+  }
+  return data;
+}

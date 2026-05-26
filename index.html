@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <style>﻿@font-face {
+  <style>@font-face {
   font-family: "Be Vietnam Pro";
   font-style: normal;
   font-display: swap;
@@ -678,37 +678,43 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   z-index: 25;
 }
 
-/* Variant template2: knowledge map and dataset digest */
+/* Variant template3: developer integration and quick demo */
 .bg {
   background:
-    linear-gradient(90deg, rgba(0, 255, 136, 0.08) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(0, 210, 255, 0.07) 1px, transparent 1px),
-    radial-gradient(circle at 22% 18%, rgba(0, 255, 136, 0.22), transparent 32%),
-    radial-gradient(circle at 78% 28%, rgba(253, 240, 28, 0.18), transparent 30%),
-    linear-gradient(180deg, #06120f 0%, #050505 78%);
-  background-size: 78px 78px, 78px 78px, auto, auto, auto;
+    radial-gradient(circle at 16% 20%, rgba(0, 210, 255, 0.24), transparent 34%),
+    radial-gradient(circle at 86% 18%, rgba(255, 71, 87, 0.18), transparent 30%),
+    linear-gradient(180deg, #071017 0%, #050505 80%);
 }
 .top-header {
-  border-color: rgba(0, 255, 136, 0.7);
-  box-shadow: 0 0 30px rgba(0, 255, 136, 0.22), 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 210, 255, 0.65);
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.22), 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+.headline-line1 {
+  color: #dff8ff;
 }
 .headline-line2 {
-  background: linear-gradient(90deg, #00ff88, #fdf01c, #ffffff);
+  background: linear-gradient(90deg, #00d2ff, #ff4757, #ffffff);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.browser-frame,
+.browser-frame {
+  border-radius: 18px;
+  border-color: rgba(0, 210, 255, 0.28);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 52px rgba(0, 210, 255, 0.18);
+}
+.action-btn,
+.step-command {
+  border-color: rgba(255, 71, 87, 0.4) !important;
+  background: rgba(255, 71, 87, 0.08) !important;
+}
 .bento-card,
 .step-card {
-  border-color: rgba(0, 255, 136, 0.24) !important;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.56), 0 0 34px rgba(0, 255, 136, 0.08) !important;
-}
-.step-number {
-  background: linear-gradient(135deg, #00ff88, #fdf01c);
+  border-radius: 14px !important;
 }
 .captions {
-  border-color: rgba(0, 255, 136, 0.35);
+  border-color: rgba(0, 210, 255, 0.34);
 }
 
 
@@ -723,17 +729,29 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   border-radius: 22px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
 }
-\n/* Knowledge-map template cards */\n.knowledge-map-template .bento-card, .knowledge-map-template .step-card { border-style: dashed !important; }\n.knowledge-map-template .step-card { grid-template-columns: 92px 1fr; }\n.knowledge-map-template .step-number::after { content: ""; position: absolute; width: 2px; height: 68px; background: rgba(0,210,255,0.35); transform: translateY(66px); }\n
+\n/* Developer-brief template cards */\n.developer-brief-template .bento-card, .developer-brief-template .step-card { border-left-width: 6px !important; }\n.developer-brief-template .step-command { box-shadow: inset 0 0 0 1px rgba(0,255,136,0.22), 0 0 28px rgba(0,255,136,0.12); }\n.developer-brief-template .card-icon-svg { transform: rotate(-3deg); }\n
 
 </style>
   <script src="./vendor/gsap.min.js"></script>
 </head>
 <body>
-  <div id="root" class="source-github format-knowledge_map_resource_digest theme-template2" data-composition-id="news-multi" data-duration="48" data-width="1080" data-height="1920" data-start="0">
-    <audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="48" data-volume="0.3" loop></audio>
+  <div id="root" class="source-github format-developer_integration_brief theme-github" data-composition-id="news-multi" data-duration="114.48" data-width="1080" data-height="1920" data-start="0">
+    <audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="114.48" data-volume="0.3" loop></audio>
+<audio id="tts-scene1" src="./assets/audio/scene_1.mp3" data-track-index="1" data-start="0" data-duration="15.834999999999999" data-volume="1.0"></audio>
+<audio id="sfx-scene1" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="0" data-duration="1" data-volume="0.8"></audio>
+<audio id="tts-scene2" src="./assets/audio/scene_6.mp3" data-track-index="1" data-start="15.834999999999999" data-duration="13.699" data-volume="1.0"></audio>
+<audio id="tts-scene3" src="./assets/audio/scene_3.mp3" data-track-index="1" data-start="29.534" data-duration="12.834999999999999" data-volume="1.0"></audio>
+<audio id="sfx-scene3" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="29.534" data-duration="1" data-volume="0.8"></audio>
+<audio id="tts-scene4" src="./assets/audio/scene_5.mp3" data-track-index="1" data-start="42.369" data-duration="14.059" data-volume="1.0"></audio>
+<audio id="tts-scene5" src="./assets/audio/scene_2.mp3" data-track-index="1" data-start="56.428" data-duration="16.531000000000002" data-volume="1.0"></audio>
+<audio id="tts-scene6" src="./assets/audio/scene_7.mp3" data-track-index="1" data-start="72.959" data-duration="14.322999999999999" data-volume="1.0"></audio>
+<audio id="sfx-scene6" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="72.959" data-duration="1" data-volume="0.8"></audio>
+<audio id="tts-scene7" src="./assets/audio/scene_4.mp3" data-track-index="1" data-start="87.282" data-duration="13.626999999999999" data-volume="1.0"></audio>
+<audio id="tts-scene8" src="./assets/audio/scene_8.mp3" data-track-index="1" data-start="100.90899999999999" data-duration="13.530999999999999" data-volume="1.0"></audio>
+<audio id="sfx-scene8" src="./assets/sound-effect/Ding 2.mp3" data-track-index="2" data-start="100.90899999999999" data-duration="1" data-volume="0.8"></audio>
 
 
-    <div id="main-clip" class="clip" data-start="0" data-duration="48" data-track-index="3">
+    <div id="main-clip" class="clip" data-start="0" data-duration="114.48" data-track-index="3">
       <div class="bg"></div>
       <div class="particles-container"><div class="particle-star particle-green p-anim" style="width:2px; height:2px; top:1535.5259029250192px; left:588.9586788280576px;"></div><div class="particle-star particle-green p-anim" style="width:3.569890517434942px; height:3.569890517434942px; top:632.6718196883576px; left:564.6973520454776px;"></div><div class="particle-star particle-green p-anim" style="width:5.880993330547426px; height:5.880993330547426px; top:1766.284509041543px; left:797.7507367319777px;"></div><div class="particle-star particle-green p-anim" style="width:5.674001668463916px; height:5.674001668463916px; top:1145.1231563722104px; left:360.1147201735148px;"></div><div class="particle-star particle-white p-anim" style="width:3.6885709907046476px; height:3.6885709907046476px; top:224.27374659860106px; left:407.89639844377234px;"></div><div class="particle-star particle-purple p-anim" style="width:4.662801010879775px; height:4.662801010879775px; top:455.35559069928695px; left:21.23276730206271px;"></div><div class="particle-star particle-green p-anim" style="width:5.332718809853759px; height:5.332718809853759px; top:1536.730279927201px; left:364.20659095929295px;"></div><div class="particle-star particle-purple p-anim" style="width:2.431763400373711px; height:2.431763400373711px; top:1413.7129213923345px; left:524.7595076730795px;"></div><div class="particle-star particle-purple p-anim" style="width:4.690272104100586px; height:4.690272104100586px; top:1528.785507073212px; left:634.6024329709326px;"></div><div class="particle-star particle-green p-anim" style="width:4.83496910073336px; height:4.83496910073336px; top:1571.8122668458136px; left:829.1233232848754px;"></div><div class="particle-star particle-purple p-anim" style="width:3.5884565074029524px; height:3.5884565074029524px; top:1230.2568547147985px; left:207.29236457424122px;"></div><div class="particle-star particle-purple p-anim" style="width:5.668708344712286px; height:5.668708344712286px; top:189.40121615183898px; left:991.5646523256873px;"></div><div class="particle-star particle-green p-anim" style="width:3.7885677438189305px; height:3.7885677438189305px; top:1632.5659832752308px; left:207.78043110905855px;"></div><div class="particle-star particle-green p-anim" style="width:2.655247746628447px; height:2.655247746628447px; top:1741.3322435210603px; left:85.06296351828496px;"></div><div class="particle-star particle-green p-anim" style="width:2.969836048725483px; height:2.969836048725483px; top:195.76452651078853px; left:775.7141000385309px;"></div><div class="particle-star particle-white p-anim" style="width:5.426804031838401px; height:5.426804031838401px; top:174.63485295288024px; left:355.1076229717728px;"></div><div class="particle-star particle-white p-anim" style="width:2.7135204296719166px; height:2.7135204296719166px; top:1355.647688683166px; left:21.580439099489013px;"></div><div class="particle-star particle-purple p-anim" style="width:3.509769967673492px; height:3.509769967673492px; top:1665.665646303924px; left:976.3216972953524px;"></div><div class="particle-star particle-purple p-anim" style="width:4.487277313852246px; height:4.487277313852246px; top:780.9357763713535px; left:263.2599087196286px;"></div><div class="particle-star particle-purple p-anim" style="width:2.3092366739983845px; height:2.3092366739983845px; top:127.31628965545667px; left:128.94814866565866px;"></div><div class="particle-star particle-green p-anim" style="width:5.629847360720305px; height:5.629847360720305px; top:1130.5035517027904px; left:742.447420430326px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0938556615874404px; height:3.0938556615874404px; top:1716.259190737776px; left:195.2082629036886px;"></div><div class="particle-star particle-purple p-anim" style="width:3.3361033271394263px; height:3.3361033271394263px; top:1560.6371598624548px; left:740.9506847751618px;"></div><div class="particle-star particle-green p-anim" style="width:2.981082994971075px; height:2.981082994971075px; top:340.21059454044007px; left:475.54250945300737px;"></div><div class="particle-star particle-white p-anim" style="width:2.6425008613077807px; height:2.6425008613077807px; top:1232.298306504208px; left:616.8762158707614px;"></div><div class="particle-star particle-green p-anim" style="width:2.9228469061708893px; height:2.9228469061708893px; top:415.1907554643117px; left:304.7443614471922px;"></div><div class="particle-star particle-purple p-anim" style="width:4.412972973270371px; height:4.412972973270371px; top:1068.37534038566px; left:760.7136744288073px;"></div><div class="particle-star particle-white p-anim" style="width:3.6916789999486355px; height:3.6916789999486355px; top:1122.7608525493224px; left:87.99790379453043px;"></div><div class="particle-star particle-white p-anim" style="width:5.325307687064196px; height:5.325307687064196px; top:260.9009332248206px; left:551.3295157581888px;"></div><div class="particle-star particle-white p-anim" style="width:5.867347892552061px; height:5.867347892552061px; top:1667.2163794618655px; left:256.8303267231022px;"></div><div class="particle-star particle-purple p-anim" style="width:5.8580470264969335px; height:5.8580470264969335px; top:1528.216142326005px; left:431.8811632851066px;"></div><div class="particle-star particle-purple p-anim" style="width:5.824032719079696px; height:5.824032719079696px; top:1282.716862806683px; left:224.99064055640702px;"></div><div class="particle-star particle-white p-anim" style="width:2.2779440263730066px; height:2.2779440263730066px; top:622.0607916782683px; left:865.66315070575px;"></div><div class="particle-star particle-purple p-anim" style="width:3.718072432315239px; height:3.718072432315239px; top:990.331940667761px; left:464.2661541623238px;"></div><div class="particle-star particle-white p-anim" style="width:2.628012898090674px; height:2.628012898090674px; top:334.5703136134716px; left:251.8968664185104px;"></div><div class="particle-star particle-green p-anim" style="width:3.4763252035190817px; height:3.4763252035190817px; top:104.98406753008567px; left:420.2484337896567px;"></div><div class="particle-star particle-purple p-anim" style="width:2.71620581739262px; height:2.71620581739262px; top:1755.1594550569007px; left:121.47569184503482px;"></div><div class="particle-star particle-green p-anim" style="width:4.7851705267239595px; height:4.7851705267239595px; top:1492.2684012358786px; left:588.0606005231914px;"></div><div class="particle-star particle-green p-anim" style="width:2.104748047007888px; height:2.104748047007888px; top:777.2735692683909px; left:972.6774501627324px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0801848282280844px; height:3.0801848282280844px; top:1075.1307716375777px; left:428.0579328452359px;"></div><div class="particle-star particle-white p-anim" style="width:4.1001612631371245px; height:4.1001612631371245px; top:354.9885848517988px; left:186.85617354039096px;"></div><div class="particle-star particle-green p-anim" style="width:5.53651949671621px; height:5.53651949671621px; top:90.38502802313815px; left:441.5138155709792px;"></div><div class="particle-star particle-green p-anim" style="width:3.744003027342842px; height:3.744003027342842px; top:1759.4411675504944px; left:344.1252548768898px;"></div><div class="particle-star particle-white p-anim" style="width:3.060008282023773px; height:3.060008282023773px; top:1595.0515123047808px; left:86.30311745526342px;"></div><div class="particle-star particle-white p-anim" style="width:3.8043483396759257px; height:3.8043483396759257px; top:1085.071066021601px; left:899.0440741810016px;"></div><div class="particle-star particle-white p-anim" style="width:2.2790289679760463px; height:2.2790289679760463px; top:1722.4989058748179px; left:892.5950869757799px;"></div><div class="particle-star particle-green p-anim" style="width:2.768037130474113px; height:2.768037130474113px; top:1505.6581586905395px; left:256.3201799959279px;"></div><div class="particle-star particle-green p-anim" style="width:5.5371421122254105px; height:5.5371421122254105px; top:188.3722487646537px; left:218.56782913586358px;"></div><div class="particle-star particle-white p-anim" style="width:2.83370940318855px; height:2.83370940318855px; top:1030.1372938413806px; left:966.5390627094894px;"></div><div class="particle-star particle-green p-anim" style="width:2.8865274695999688px; height:2.8865274695999688px; top:296.29052856698763px; left:606.1563656924045px;"></div><div class="particle-star particle-white p-anim" style="width:5.9056475347679225px; height:5.9056475347679225px; top:1258.1746374035447px; left:361.9334793071539px;"></div><div class="particle-star particle-purple p-anim" style="width:4.082236481510336px; height:4.082236481510336px; top:193.2978819973414px; left:416.846187156043px;"></div><div class="particle-star particle-green p-anim" style="width:5.588442979067622px; height:5.588442979067622px; top:385.4899108153404px; left:952.2041783677923px;"></div><div class="particle-star particle-purple p-anim" style="width:2.577276928444917px; height:2.577276928444917px; top:1625.0531419507752px; left:67.52407750307611px;"></div><div class="particle-star particle-purple p-anim" style="width:3.1825023104902357px; height:3.1825023104902357px; top:208.90961308673468px; left:20.403730133039062px;"></div><div class="particle-star particle-white p-anim" style="width:3.518543511752796px; height:3.518543511752796px; top:1190.7431957914014px; left:986.3978321271134px;"></div><div class="particle-star particle-purple p-anim" style="width:3.6804051938161138px; height:3.6804051938161138px; top:881.1370745273052px; left:1058.8949897472048px;"></div><div class="particle-star particle-green p-anim" style="width:3.743605762036168px; height:3.743605762036168px; top:847.7063941152664px; left:408.9962966384337px;"></div><div class="particle-star particle-purple p-anim" style="width:3.7641244805054157px; height:3.7641244805054157px; top:915.2259827631497px; left:245.39551275243866px;"></div><div class="particle-star particle-white p-anim" style="width:3.7783622700808337px; height:3.7783622700808337px; top:915.7530612154005px; left:734.2609291146073px;"></div></div>
 
@@ -744,7 +762,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 
       
       <div id="scene1" class="scene variant-scene variant-1" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
-        <div class="knowledge-map-template knowledge-map-card">
+        <div class="developer-brief-template dev-brief-card">
         <div class="browser-frame" id="browser-scene1">
           <div class="browser-header">
             <div class="browser-dots">
@@ -752,7 +770,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <span class="dot yellow"></span>
               <span class="dot green"></span>
             </div>
-            <div class="browser-address">github.com/keon/awesome-nlp</div>
+            <div class="browser-address">github.com/honojs/hono</div>
           </div>
           <div class="browser-inner" data-layout-allow-overflow>
             <img class="github-scroll-image" id="scroll-img-scene1" src="./assets/images/github_repo.png" />
@@ -760,181 +778,183 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
           <div class="browser-glass-shine"></div>
         </div>
         <div class="headline-container" style="top: 1085px; gap: 8px;">
-          <div class="headline-line1" id="hl1-scene1" style="font-size: 64px; letter-spacing: 1px;">AWESOME NLP</div>
-          <div class="headline-line2" id="hl2-scene1" style="font-size: 44px; font-weight: 800;">BAN DO HOC NLP</div>
+          <div class="headline-line1" id="hl1-scene1" style="font-size: 64px; letter-spacing: 1px;">HONO FRAMEWORK</div>
+          <div class="headline-line2" id="hl2-scene1" style="font-size: 44px; font-weight: 800;">WEB STANDARDS NATIVE</div>
         </div>
         <div class="action-btn" id="btn-scene1" style="top: 1265px; padding: 12px 30px; font-size: 25px; border-radius: 20px;">
-          <span class="action-icon" style="font-size: 30px; margin-right: 5px;">🔗</span> github.com/keon/awesome-nlp
+          <span class="action-icon" style="font-size: 30px; margin-right: 5px;">🔗</span> github.com/honojs/hono
         </div>
       </div>
         <img class="character" id="char-scene1" src="./assets/character/shiba/character shiba cheerfully talking.png" />
       </div>
-      <div id="scene2" class="scene variant-scene variant-4" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
-        <div class="knowledge-map-template knowledge-map-card">
-        <div class="headline-container" style="top: 165px;">
-          <div class="headline-line1" id="hl1-scene2">CHON NGUON</div>
-          <div class="headline-line2" id="hl2-scene2">KHONG DOC LAN MAN</div>
-        </div>
-        <div class="repo-proof-panel" id="proof-scene2" style="position:absolute; top:500px; left:50%; transform:translateX(-50%); width:920px; z-index:30;">
-          
-          <div class="step-card" id="proof-scene2-1" style="margin-bottom:22px;">
-            <div class="step-number">1</div>
-            <div>
-              <div class="step-title">Tin cay</div>
-              <div class="step-desc">Uu tien nguon co tac gia, nam cap nhat va citation.</div>
-            </div>
-          </div>
-          <div class="step-card" id="proof-scene2-2" style="margin-bottom:22px;">
-            <div class="step-number">2</div>
-            <div>
-              <div class="step-title">Gan muc tieu</div>
-              <div class="step-desc">Chi luu link lien quan bai toan dang hoc.</div>
-            </div>
-          </div>
-          <div class="step-card" id="proof-scene2-3" style="margin-bottom:22px;">
-            <div class="step-number">3</div>
-            <div>
-              <div class="step-title">Co vi du</div>
-              <div class="step-desc">Nguon co notebook hoac code mau de kiem chung.</div>
-            </div>
-          </div>
-        </div>
-        <div class="action-btn" id="btn-scene2" style="top: 1245px; max-width: 880px; font-size: 28px;">
-          <span class="action-icon">✓</span> Chon 3 link cho 1 chu de
-        </div>
-      </div>
-        <img class="character" id="char-scene2" src="./assets/character/shiba/character shiba wearing stylish glasses.png" />
-      </div>
-      <div id="scene3" class="scene variant-scene variant-2" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
-        <div class="knowledge-map-template knowledge-map-card">
-        <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-scene3">BAN DO TRI THUC</div>
-          <div class="headline-line2" id="hl2-scene3">CHIA NHANH THE NAO?</div>
-        </div>
-        <div class="bento-container" style="top: 525px;" id="bento-scene3">
-          <div class="bento-card full" id="bc-scene3-1">
-            <div class="card-icon-svg">
-              <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-            </div>
-            <div class="card-text-group">
-              <div class="card-title">Core NLP</div>
-              <div class="card-desc">Nhan dien cac mang nen tang nhu tokenization, parsing, embeddings.</div>
-            </div>
-          </div>
-          <div class="bento-grid-2">
-            <div class="bento-card half" id="bc-scene3-2">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">Tasks</div>
-              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Tach nhom theo bai toan: sentiment, QA, chatbots, summarization.</div>
-            </div>
-            <div class="bento-card half" id="bc-scene3-3">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
-                <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 32px; text-align: center;">Research</div>
-              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Danh dau paper va survey de doc sau.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-        <img class="character" id="char-scene3" src="./assets/character/shiba/character shiba thinking.png" />
-      </div>
-      <div id="scene4" class="scene variant-scene variant-6" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
-        <div class="knowledge-map-template knowledge-map-card">
+      <div id="scene2" class="scene variant-scene variant-6" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="developer-brief-template dev-brief-card">
         <div class="headline-container" style="top: 165px; gap: 5px;">
-          <div class="headline-line1" id="hl1-scene4" style="font-size: 54px;">DO PHU</div>
-          <div class="headline-line2" id="hl2-scene4" style="font-size: 48px;">NHIN QUA STARS</div>
+          <div class="headline-line1" id="hl1-scene2" style="font-size: 54px;">CỘNG ĐỒNG MẠNH</div>
+          <div class="headline-line2" id="hl2-scene2" style="font-size: 48px;">30K+ SAO GITHUB</div>
         </div>
-        <div class="repo-signal-panel bento-container" style="top: 430px; width: 960px;" id="signals-scene4">
-          <div class="repo-badge" id="rb-scene4">
+        <div class="repo-signal-panel bento-container" style="top: 430px; width: 960px;" id="signals-scene2">
+          <div class="repo-badge" id="rb-scene2">
             <div class="crown-container">
               <svg class="crown-svg" viewBox="0 0 24 24"><path d="M12 2 4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
               <div class="rank-text">GH</div>
             </div>
             <div class="repo-info">
-              <div class="repo-name">keon/awesome-nlp</div>
+              <div class="repo-name">honojs/hono</div>
               <div class="repo-meta">
                 <span class="meta-dot"></span>
-                <span>Markdown</span>
-                <span>18k+ stars</span>
+                <span>TypeScript</span>
+                <span>★ 30,621</span>
               </div>
             </div>
             <div class="repo-trend">
-              <span>Resource map</span>
+              <span>▲ Trending</span>
               <span class="trend-label">GitHub</span>
             </div>
           </div>
-          <img class="github-star-crop" id="star-scene4" src="./assets/images/github_star.png" onerror="this.style.display='none'" />
+          <img class="github-star-crop" id="star-scene2" src="./assets/images/github_star.png" onerror="this.style.display='none'" />
           <div class="bento-grid-2" style="margin-top: 24px;">
             
-            <div class="bento-card half" id="sig-scene4-1">
+            <div class="bento-card half" id="sig-scene2-1">
               <div class="card-title" style="font-size: 28px; text-align:center;">Stars</div>
-              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">18k+ stars</div>
+              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">★ 30,621</div>
             </div>
-            <div class="bento-card half" id="sig-scene4-2">
+            <div class="bento-card half" id="sig-scene2-2">
               <div class="card-title" style="font-size: 28px; text-align:center;">Language</div>
-              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">Markdown</div>
+              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">TypeScript</div>
             </div>
           </div>
           <div class="bento-grid-2">
             
-            <div class="bento-card half" id="sig-scene4-3">
+            <div class="bento-card half" id="sig-scene2-3">
               <div class="card-title" style="font-size: 28px; text-align:center;">Source</div>
               <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">GitHub</div>
             </div>
-            <div class="bento-card half" id="sig-scene4-4">
+            <div class="bento-card half" id="sig-scene2-4">
               <div class="card-title" style="font-size: 28px; text-align:center;">Status</div>
-              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">Resource map</div>
+              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">▲ Trending</div>
             </div>
           </div>
         </div>
       </div>
-        <img class="character" id="char-scene4" src="./assets/character/shiba/character shiba showing surprise.png" />
+        <img class="character" id="char-scene2" src="./assets/character/shiba/character shiba showing surprise.png" />
       </div>
-      <div id="scene5" class="scene variant-scene variant-3" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
-        <div class="knowledge-map-template knowledge-map-card">
+      <div id="scene3" class="scene variant-scene variant-3" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="developer-brief-template dev-brief-card">
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-scene5">DOC THEO TANG</div>
-          <div class="headline-line2" id="hl2-scene5">TU DE DEN KHO</div>
+          <div class="headline-line1" id="hl1-scene3">CÀI ĐẶT NHANH</div>
+          <div class="headline-line2" id="hl2-scene3">BA BƯỚC KHỞI TẠO</div>
         </div>
         
-        <div class="step-container" id="steps-scene5" style="top: 525px;">
+        <div class="step-container" id="steps-scene3" style="top: 525px;">
           
-          <div class="step-card" id="st-scene5-1">
+          <div class="step-card" id="st-scene3-1">
             <div class="step-number">1</div>
             <div>
-              <div class="step-title">Tang 1</div>
-              <div class="step-desc">Doc course va tutorial de co khung khai niem.</div>
+              <div class="step-title">Cài package</div>
+              <div class="step-desc">npm install hono hoặc yarn add hono</div>
               
             </div>
           </div>
-          <div class="step-card" id="st-scene5-2">
+          <div class="step-card" id="st-scene3-2">
             <div class="step-number">2</div>
             <div>
-              <div class="step-title">Tang 2</div>
-              <div class="step-desc">Mo paper goc khi da hieu bai toan.</div>
+              <div class="step-title">Tạo server</div>
+              <div class="step-desc">Import Hono, định nghĩa route GET đơn giản</div>
               
             </div>
           </div>
-          <div class="step-card" id="st-scene5-3">
+          <div class="step-card" id="st-scene3-3">
             <div class="step-number">3</div>
             <div>
-              <div class="step-title">Tang 3</div>
-              <div class="step-desc">Chay repo demo de thay trade-off that.</div>
+              <div class="step-title">Chạy thử</div>
+              <div class="step-desc">Dùng Node.js, Bun hoặc Deno để start server</div>
               
             </div>
           </div>
         </div>
       </div>
-        <img class="character" id="char-scene5" src="./assets/character/shiba/character shiba explaining something.png" />
+        <img class="character" id="char-scene3" src="./assets/character/shiba/character shiba explaining something.png" />
+      </div>
+      <div id="scene4" class="scene variant-scene variant-5" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="developer-brief-template dev-brief-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene4">KIỂM TRA TRƯỚC</div>
+          <div class="headline-line2" id="hl2-scene4">LICENSE VÀ RELEASE</div>
+        </div>
+        <div class="repo-check-panel bento-container" style="top: 515px;" id="check-scene4">
+          <div class="bento-grid-2">
+            
+            <div class="bento-card half" id="check-scene4-1">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px; text-align:center;">MIT License</div>
+              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Cho phép dùng thương mại và sửa đổi tự do</div>
+            </div>
+            <div class="bento-card half" id="check-scene4-2">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px; text-align:center;">Release</div>
+              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.</div>
+            </div>
+          </div>
+          <div class="bento-grid-2">
+            
+            <div class="bento-card half" id="check-scene4-3">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px; text-align:center;">TypeScript</div>
+              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Tóm tắt ý chính để người xem vẫn nắm được nội dung scene.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene4" src="./assets/character/shiba/character shiba using a magnifying glass to look closely.png" />
+      </div>
+      <div id="scene5" class="scene variant-scene variant-2" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="developer-brief-template dev-brief-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene5">BACKEND LAYER</div>
+          <div class="headline-line2" id="hl2-scene5">ĐA NỀN TẢNG RUNTIME</div>
+        </div>
+        <div class="bento-container" style="top: 525px;" id="bento-scene5">
+          <div class="bento-card full" id="bc-scene5-1">
+            <div class="card-icon-svg">
+              <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+            </div>
+            <div class="card-text-group">
+              <div class="card-title">Multi-runtime</div>
+              <div class="card-desc">Một code base chạy trên Cloudflare, Deno, Bun, Node.js</div>
+            </div>
+          </div>
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-scene5-2">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center;">Web Standard</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Chọn điểm đáng thử thay vì chỉ nhìn số sao.</div>
+            </div>
+            <div class="bento-card half" id="bc-scene5-3">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center;">Zero deps</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Chạy ví dụ nhỏ trước khi đưa vào dự án thật.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene5" src="./assets/character/shiba/character shiba thinking.png" />
       </div>
       <div id="scene6" class="scene variant-scene variant-7" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
-        <div class="knowledge-map-template knowledge-map-card">
+        <div class="developer-brief-template dev-brief-card">
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-scene6">TAO PLAYLIST</div>
-          <div class="headline-line2" id="hl2-scene6">HOC THEO NHANH</div>
+          <div class="headline-line1" id="hl1-scene6">CLONE VỀ MÁY</div>
+          <div class="headline-line2" id="hl2-scene6">THỬ NGHIỆM AN TOÀN</div>
         </div>
         
         <div class="step-container" id="steps-scene6" style="top: 560px;">
@@ -942,25 +962,25 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
           <div class="step-card" id="st-scene6-1">
             <div class="step-number">1</div>
             <div>
-              <div class="step-title">Fork</div>
-              <div class="step-desc">Tao ban note rieng neu can them danh dau.</div>
+              <div class="step-title">Clone</div>
+              <div class="step-desc">Lay source ve mot thu muc rieng.</div>
               
-          <div class="step-command" id="cmd-scene6">Fork note hoc rieng</div>
+          <div class="step-command" id="cmd-scene6">$ git clone github.com/honojs/hono</div>
             </div>
           </div>
           <div class="step-card" id="st-scene6-2">
             <div class="step-number">2</div>
             <div>
-              <div class="step-title">Label</div>
-              <div class="step-desc">Gan nhan beginner, paper, code cho tung link.</div>
+              <div class="step-title">Read README</div>
+              <div class="step-desc">Doc cach cai dat va yeu cau moi truong.</div>
               
             </div>
           </div>
           <div class="step-card" id="st-scene6-3">
             <div class="step-number">3</div>
             <div>
-              <div class="step-title">Review</div>
-              <div class="step-desc">Cuoi tuan xoa link khong con phu hop.</div>
+              <div class="step-title">Run test</div>
+              <div class="step-desc">Chay vi du nho, roi check license truoc khi dung.</div>
               
             </div>
           </div>
@@ -968,56 +988,47 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
       </div>
         <img class="character" id="char-scene6" src="./assets/character/shiba/character shiba wearing a cassock like it has become enlightened.png" />
       </div>
-      <div id="scene7" class="scene variant-scene variant-5" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
-        <div class="knowledge-map-template knowledge-map-card">
-        <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-scene7">NOTE HOC TAP</div>
-          <div class="headline-line2" id="hl2-scene7">BIEN LIST THAN PLAN</div>
+      <div id="scene7" class="scene variant-scene variant-4" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="developer-brief-template dev-brief-card">
+        <div class="headline-container" style="top: 165px;">
+          <div class="headline-line1" id="hl1-scene7">ROUTER SIÊU TỐC</div>
+          <div class="headline-line2" id="hl2-scene7">REGEXPROUTER ENGINE</div>
         </div>
-        <div class="repo-check-panel bento-container" style="top: 515px;" id="check-scene7">
-          <div class="bento-grid-2">
-            
-            <div class="bento-card half" id="check-scene7-1">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
-                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px; text-align:center;">Chu de</div>
-              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Moi buoi chi chon mot nhanh nho.</div>
-            </div>
-            <div class="bento-card half" id="check-scene7-2">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
-                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px; text-align:center;">Nguon goc</div>
-              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Gan link paper/course goc vao note.</div>
+        <div class="repo-proof-panel" id="proof-scene7" style="position:absolute; top:500px; left:50%; transform:translateX(-50%); width:920px; z-index:30;">
+          
+          <div class="step-card" id="proof-scene7-1" style="margin-bottom:22px;">
+            <div class="step-number">1</div>
+            <div>
+              <div class="step-title">Use case</div>
+              <div class="step-desc">Noi ro repo giai quyet viec gi.</div>
             </div>
           </div>
-          <div class="bento-grid-2">
-            
-            <div class="bento-card half" id="check-scene7-3">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
-                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px; text-align:center;">Cau hoi</div>
-              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Ghi cau hoi can tra loi sau khi doc.</div>
-            </div>
-            <div class="bento-card half" id="check-scene7-4">
-              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
-                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <div class="card-title" style="font-size: 30px; text-align:center;">Ket qua</div>
-              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Tong ket dieu da hieu bang 3 gach dau dong.</div>
+          <div class="step-card" id="proof-scene7-2" style="margin-bottom:22px;">
+            <div class="step-number">2</div>
+            <div>
+              <div class="step-title">Evidence</div>
+              <div class="step-desc">Tim vi du, docs va release gan day.</div>
             </div>
           </div>
+          <div class="step-card" id="proof-scene7-3" style="margin-bottom:22px;">
+            <div class="step-number">3</div>
+            <div>
+              <div class="step-title">Fit</div>
+              <div class="step-desc">Thu trong project phu truoc khi tich hop.</div>
+            </div>
+          </div>
+        </div>
+        <div class="action-btn" id="btn-scene7" style="top: 1245px; max-width: 880px; font-size: 28px;">
+          <span class="action-icon">✓</span> hono/tiny &lt; 12kB
         </div>
       </div>
-        <img class="character" id="char-scene7" src="./assets/character/shiba/character shiba using a magnifying glass to look closely.png" />
+        <img class="character" id="char-scene7" src="./assets/character/shiba/character shiba wearing stylish glasses.png" />
       </div>
       <div id="scene8" class="scene variant-scene variant-8" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
-        <div class="knowledge-map-template knowledge-map-card">
+        <div class="developer-brief-template dev-brief-card">
         <div class="headline-container" style="top: 185px;">
-          <div class="headline-line1" id="hl1-scene8">KET LUAN</div>
-          <div class="headline-line2" id="hl2-scene8">DAY LA BAN DO</div>
+          <div class="headline-line1" id="hl1-scene8">KẾT LUẬN</div>
+          <div class="headline-line2" id="hl2-scene8">LƯU LẠI NẾU PHÙ HỢP</div>
         </div>
         <div class="bento-container" style="top: 460px;" id="bento-scene8">
           <div class="bento-grid-2">
@@ -1025,15 +1036,15 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(243,202,86,0.06); border: 2px solid rgba(243,202,86,0.25);">
                 <svg viewBox="0 0 24 24" style="stroke: #f3ca56; filter: drop-shadow(0 0 8px rgba(243,202,86,0.8));"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center; color: #f3ca56; font-weight: 800;">Hoc</div>
-              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Dung de lap lo trinh NLP.</div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #f3ca56; font-weight: 800;">Star repo</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Đánh dấu nếu dự án phù hợp với stack của bạn</div>
             </div>
             <div class="bento-card half" id="bc-scene8-2" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
               <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
                 <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">Loc</div>
-              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Khong coi moi link deu dang doc.</div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">Đọc issues</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Kiểm tra bug và limitation trước khi dùng</div>
             </div>
           </div>
           <div class="bento-grid-2">
@@ -1041,15 +1052,15 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
               <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(0,210,255,0.06); border: 2px solid rgba(0,210,255,0.25);">
                 <svg viewBox="0 0 24 24" style="stroke: #00d2ff; filter: drop-shadow(0 0 8px rgba(0,210,255,0.8));"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center; color: #00d2ff; font-weight: 800;">Kiem</div>
-              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Mo nguon goc truoc khi tin.</div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #00d2ff; font-weight: 800;">Xem release</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Theo dõi breaking changes và tính năng mới</div>
             </div>
             <div class="bento-card half" id="bc-scene8-4" style="border: 2px solid rgba(224, 86, 253, 0.4); background: rgba(224, 86, 253, 0.02);">
               <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(224,86,253,0.06); border: 2px solid rgba(224,86,253,0.25);">
                 <svg viewBox="0 0 24 24" style="stroke: #e056fd; filter: drop-shadow(0 0 8px rgba(224,86,253,0.8));"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
               </div>
-              <div class="card-title" style="font-size: 32px; text-align: center; color: #e056fd; font-weight: 800;">Luu</div>
-              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Star neu muon quay lai sau.</div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #e056fd; font-weight: 800;">Thử demo</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Clone và chạy examples trước khi tích hợp</div>
             </div>
           </div>
         </div>
@@ -1068,7 +1079,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
     // Animate Particles Floating
     gsap.utils.toArray('.p-anim').forEach((p, i) => {
       const pDur = 3 + (i % 4);
-      const pRepeat = Math.max(1, Math.floor(48 / pDur) - 1);
+      const pRepeat = Math.max(1, Math.floor(114.48 / pDur) - 1);
       tl.to(p, {
         y: "-=100",
         x: (i%2===0 ? "+=30" : "-=30"),
@@ -1084,7 +1095,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
       // Scene 1
       tl.set("#scene1", { visibility: "visible" }, 0);
       tl.to("#scene1", { opacity: 1, duration: 0.1 }, -0.1);
-      tl.from("#scene1", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, -0.08);
+      tl.from("#scene1", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, -0.08);
       
         tl.from("#browser-scene1", { scale: 0.85, y: 30, duration: 0.4, ease: "back.out(1.2)" }, 0);
         tl.from("#hl1-scene1", { y: -20, duration: 0.2, ease: "power3.out" }, 0.2);
@@ -1098,144 +1109,143 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
       
       
         tl.from("#char-scene1", { y: 20, duration: 0.2, ease: "power2.out" }, 0);
-        tl.to("#char-scene1", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 0.2);
-        tl.to("#scene1", { opacity: 0, duration: 0.3 }, 5.7);
-tl.set("#scene1", { visibility: "hidden" }, 6);
+        tl.to("#char-scene1", { y: -30, duration: 2, repeat: 6, yoyo: true, ease: "sine.inOut" }, 0.2);
+        tl.to("#scene1", { opacity: 0, duration: 0.3 }, 15.534999999999998);
+tl.set("#scene1", { visibility: "hidden" }, 15.834999999999999);
 
       // Scene 2
-      tl.set("#scene2", { visibility: "visible" }, 5.88);
-      tl.to("#scene2", { opacity: 1, duration: 0.1 }, 5.9);
-      tl.from("#scene2", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 5.92);
+      tl.set("#scene2", { visibility: "visible" }, 15.715);
+      tl.to("#scene2", { opacity: 1, duration: 0.1 }, 15.735);
+      tl.from("#scene2", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, 15.754999999999999);
       
-        tl.from("#hl1-scene2", { y: -20, duration: 0.2, ease: "power3.out" }, 6);
-        tl.from("#hl2-scene2", { y: 20, duration: 0.2, ease: "power3.out" }, 6);
-        tl.from("#proof-scene2-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.1);
-        tl.from("#proof-scene2-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.199999999999999);
-        tl.from("#proof-scene2-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.3);
-        tl.from("#btn-scene2", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, 6.45);
+        tl.from("#hl1-scene2", { y: -20, duration: 0.2, ease: "power3.out" }, 15.834999999999999);
+        tl.from("#hl2-scene2", { y: 20, duration: 0.2, ease: "power3.out" }, 15.834999999999999);
+        tl.from("#rb-scene2", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, 15.934999999999999);
+        tl.from("#star-scene2", { y: 16, opacity: 0, duration: 0.2, ease: "power3.out" }, 15.995);
+        tl.from("#sig-scene2-1", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 16.035);
+        tl.from("#sig-scene2-2", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 16.095);
+        tl.from("#sig-scene2-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 16.155);
+        tl.from("#sig-scene2-4", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 16.215);
       
-        tl.from("#scene2 .knowledge-map-card .bento-card, #scene2 .knowledge-map-card .step-card, #scene2 .knowledge-map-card .web-card, #scene2 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 6.14);
+        tl.from("#scene2 .dev-brief-card .bento-card, #scene2 .dev-brief-card .step-card, #scene2 .dev-brief-card .web-card, #scene2 .dev-brief-card .terminal-frame", { y: -24, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 15.975);
       
-        tl.from("#char-scene2", { y: 20, duration: 0.2, ease: "power2.out" }, 6);
-        tl.to("#char-scene2", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 6.2);
-        tl.to("#scene2", { opacity: 0, duration: 0.3 }, 11.7);
-tl.set("#scene2", { visibility: "hidden" }, 12);
+        tl.from("#char-scene2", { y: 20, duration: 0.2, ease: "power2.out" }, 15.834999999999999);
+        tl.to("#char-scene2", { y: -30, duration: 2, repeat: 5, yoyo: true, ease: "sine.inOut" }, 16.035);
+        tl.to("#scene2", { opacity: 0, duration: 0.3 }, 29.233999999999998);
+tl.set("#scene2", { visibility: "hidden" }, 29.534);
 
       // Scene 3
-      tl.set("#scene3", { visibility: "visible" }, 11.88);
-      tl.to("#scene3", { opacity: 1, duration: 0.1 }, 11.9);
-      tl.from("#scene3", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 11.92);
+      tl.set("#scene3", { visibility: "visible" }, 29.413999999999998);
+      tl.to("#scene3", { opacity: 1, duration: 0.1 }, 29.433999999999997);
+      tl.from("#scene3", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, 29.454);
       
-        tl.from("#hl1-scene3", { y: -20, duration: 0.2, ease: "power3.out" }, 12);
-        tl.from("#hl2-scene3", { y: 20, duration: 0.2, ease: "power3.out" }, 12);
-        tl.from("#bc-scene3-1", { y: 20, duration: 0.2, ease: "power3.out" }, 12);
-        tl.from("#bc-scene3-2", { y: 20, duration: 0.2, ease: "power3.out" }, 12);
-        tl.from("#bc-scene3-3", { y: 20, duration: 0.2, ease: "power3.out" }, 12);
+        tl.from("#hl1-scene3", { y: -20, duration: 0.2, ease: "power3.out" }, 29.534);
+        tl.from("#hl2-scene3", { y: 20, duration: 0.2, ease: "power3.out" }, 29.534);
+        tl.from("#st-scene3-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 29.634);
+        tl.from("#st-scene3-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 29.714);
+        tl.from("#st-scene3-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 29.794);
       
-        tl.from("#scene3 .knowledge-map-card .bento-card, #scene3 .knowledge-map-card .step-card, #scene3 .knowledge-map-card .web-card, #scene3 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 12.14);
+        tl.from("#scene3 .dev-brief-card .bento-card, #scene3 .dev-brief-card .step-card, #scene3 .dev-brief-card .web-card, #scene3 .dev-brief-card .terminal-frame", { y: -24, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 29.674);
       
-        tl.from("#char-scene3", { y: 20, duration: 0.2, ease: "power2.out" }, 12);
-        tl.to("#char-scene3", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 12.2);
-        tl.to("#scene3", { opacity: 0, duration: 0.3 }, 17.7);
-tl.set("#scene3", { visibility: "hidden" }, 18);
+        tl.from("#char-scene3", { y: 20, duration: 0.2, ease: "power2.out" }, 29.534);
+        tl.to("#char-scene3", { y: -30, duration: 2, repeat: 5, yoyo: true, ease: "sine.inOut" }, 29.733999999999998);
+        tl.to("#scene3", { opacity: 0, duration: 0.3 }, 42.069);
+tl.set("#scene3", { visibility: "hidden" }, 42.369);
 
       // Scene 4
-      tl.set("#scene4", { visibility: "visible" }, 17.88);
-      tl.to("#scene4", { opacity: 1, duration: 0.1 }, 17.9);
-      tl.from("#scene4", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 17.92);
+      tl.set("#scene4", { visibility: "visible" }, 42.249);
+      tl.to("#scene4", { opacity: 1, duration: 0.1 }, 42.269);
+      tl.from("#scene4", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, 42.289);
       
-        tl.from("#hl1-scene4", { y: -20, duration: 0.2, ease: "power3.out" }, 18);
-        tl.from("#hl2-scene4", { y: 20, duration: 0.2, ease: "power3.out" }, 18);
-        tl.from("#rb-scene4", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.1);
-        tl.from("#star-scene4", { y: 16, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.16);
-        tl.from("#sig-scene4-1", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.2);
-        tl.from("#sig-scene4-2", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.259999999999998);
-        tl.from("#sig-scene4-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.32);
-        tl.from("#sig-scene4-4", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.38);
+        tl.from("#hl1-scene4", { y: -20, duration: 0.2, ease: "power3.out" }, 42.369);
+        tl.from("#hl2-scene4", { y: 20, duration: 0.2, ease: "power3.out" }, 42.369);
+        tl.from("#check-scene4-1", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 42.469);
+        tl.from("#check-scene4-2", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 42.529);
+        tl.from("#check-scene4-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 42.589);
       
-        tl.from("#scene4 .knowledge-map-card .bento-card, #scene4 .knowledge-map-card .step-card, #scene4 .knowledge-map-card .web-card, #scene4 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 18.14);
+        tl.from("#scene4 .dev-brief-card .bento-card, #scene4 .dev-brief-card .step-card, #scene4 .dev-brief-card .web-card, #scene4 .dev-brief-card .terminal-frame", { y: -24, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 42.509);
       
-        tl.from("#char-scene4", { y: 20, duration: 0.2, ease: "power2.out" }, 18);
-        tl.to("#char-scene4", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 18.2);
-        tl.to("#scene4", { opacity: 0, duration: 0.3 }, 23.7);
-tl.set("#scene4", { visibility: "hidden" }, 24);
+        tl.from("#char-scene4", { y: 20, duration: 0.2, ease: "power2.out" }, 42.369);
+        tl.to("#char-scene4", { y: -30, duration: 2, repeat: 6, yoyo: true, ease: "sine.inOut" }, 42.569);
+        tl.to("#scene4", { opacity: 0, duration: 0.3 }, 56.128);
+tl.set("#scene4", { visibility: "hidden" }, 56.428);
 
       // Scene 5
-      tl.set("#scene5", { visibility: "visible" }, 23.88);
-      tl.to("#scene5", { opacity: 1, duration: 0.1 }, 23.9);
-      tl.from("#scene5", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 23.92);
+      tl.set("#scene5", { visibility: "visible" }, 56.308);
+      tl.to("#scene5", { opacity: 1, duration: 0.1 }, 56.327999999999996);
+      tl.from("#scene5", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, 56.348);
       
-        tl.from("#hl1-scene5", { y: -20, duration: 0.2, ease: "power3.out" }, 24);
-        tl.from("#hl2-scene5", { y: 20, duration: 0.2, ease: "power3.out" }, 24);
-        tl.from("#st-scene5-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.1);
-        tl.from("#st-scene5-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.18);
-        tl.from("#st-scene5-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.26);
+        tl.from("#hl1-scene5", { y: -20, duration: 0.2, ease: "power3.out" }, 56.428);
+        tl.from("#hl2-scene5", { y: 20, duration: 0.2, ease: "power3.out" }, 56.428);
+        tl.from("#bc-scene5-1", { y: 20, duration: 0.2, ease: "power3.out" }, 56.428);
+        tl.from("#bc-scene5-2", { y: 20, duration: 0.2, ease: "power3.out" }, 56.428);
+        tl.from("#bc-scene5-3", { y: 20, duration: 0.2, ease: "power3.out" }, 56.428);
       
-        tl.from("#scene5 .knowledge-map-card .bento-card, #scene5 .knowledge-map-card .step-card, #scene5 .knowledge-map-card .web-card, #scene5 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 24.14);
+        tl.from("#scene5 .dev-brief-card .bento-card, #scene5 .dev-brief-card .step-card, #scene5 .dev-brief-card .web-card, #scene5 .dev-brief-card .terminal-frame", { y: -24, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 56.568);
       
-        tl.from("#char-scene5", { y: 20, duration: 0.2, ease: "power2.out" }, 24);
-        tl.to("#char-scene5", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 24.2);
-        tl.to("#scene5", { opacity: 0, duration: 0.3 }, 29.7);
-tl.set("#scene5", { visibility: "hidden" }, 30);
+        tl.from("#char-scene5", { y: 20, duration: 0.2, ease: "power2.out" }, 56.428);
+        tl.to("#char-scene5", { y: -30, duration: 2, repeat: 7, yoyo: true, ease: "sine.inOut" }, 56.628);
+        tl.to("#scene5", { opacity: 0, duration: 0.3 }, 72.659);
+tl.set("#scene5", { visibility: "hidden" }, 72.959);
 
       // Scene 6
-      tl.set("#scene6", { visibility: "visible" }, 29.88);
-      tl.to("#scene6", { opacity: 1, duration: 0.1 }, 29.9);
-      tl.from("#scene6", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 29.92);
+      tl.set("#scene6", { visibility: "visible" }, 72.839);
+      tl.to("#scene6", { opacity: 1, duration: 0.1 }, 72.85900000000001);
+      tl.from("#scene6", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, 72.879);
       
-        tl.from("#hl1-scene6", { y: -20, duration: 0.2, ease: "power3.out" }, 30);
-        tl.from("#hl2-scene6", { y: 20, duration: 0.2, ease: "power3.out" }, 30);
-        tl.from("#st-scene6-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 30.1);
-        tl.from("#st-scene6-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 30.18);
-        tl.from("#st-scene6-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 30.26);
-        tl.from("#cmd-scene6", { y: 10, opacity: 0, duration: 0.2, ease: "power3.out" }, 30.45);
+        tl.from("#hl1-scene6", { y: -20, duration: 0.2, ease: "power3.out" }, 72.959);
+        tl.from("#hl2-scene6", { y: 20, duration: 0.2, ease: "power3.out" }, 72.959);
+        tl.from("#st-scene6-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 73.059);
+        tl.from("#st-scene6-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 73.139);
+        tl.from("#st-scene6-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 73.219);
+        tl.from("#cmd-scene6", { y: 10, opacity: 0, duration: 0.2, ease: "power3.out" }, 73.409);
       
-        tl.from("#scene6 .knowledge-map-card .bento-card, #scene6 .knowledge-map-card .step-card, #scene6 .knowledge-map-card .web-card, #scene6 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 30.14);
+        tl.from("#scene6 .dev-brief-card .bento-card, #scene6 .dev-brief-card .step-card, #scene6 .dev-brief-card .web-card, #scene6 .dev-brief-card .terminal-frame", { y: -24, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 73.099);
       
-        tl.from("#char-scene6", { y: 20, duration: 0.2, ease: "power2.out" }, 30);
-        tl.to("#char-scene6", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 30.2);
-        tl.to("#scene6", { opacity: 0, duration: 0.3 }, 35.7);
-tl.set("#scene6", { visibility: "hidden" }, 36);
+        tl.from("#char-scene6", { y: 20, duration: 0.2, ease: "power2.out" }, 72.959);
+        tl.to("#char-scene6", { y: -30, duration: 2, repeat: 6, yoyo: true, ease: "sine.inOut" }, 73.159);
+        tl.to("#scene6", { opacity: 0, duration: 0.3 }, 86.982);
+tl.set("#scene6", { visibility: "hidden" }, 87.282);
 
       // Scene 7
-      tl.set("#scene7", { visibility: "visible" }, 35.88);
-      tl.to("#scene7", { opacity: 1, duration: 0.1 }, 35.9);
-      tl.from("#scene7", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 35.92);
+      tl.set("#scene7", { visibility: "visible" }, 87.16199999999999);
+      tl.to("#scene7", { opacity: 1, duration: 0.1 }, 87.182);
+      tl.from("#scene7", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, 87.202);
       
-        tl.from("#hl1-scene7", { y: -20, duration: 0.2, ease: "power3.out" }, 36);
-        tl.from("#hl2-scene7", { y: 20, duration: 0.2, ease: "power3.out" }, 36);
-        tl.from("#check-scene7-1", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 36.1);
-        tl.from("#check-scene7-2", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 36.160000000000004);
-        tl.from("#check-scene7-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 36.22);
-        tl.from("#check-scene7-4", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 36.28);
+        tl.from("#hl1-scene7", { y: -20, duration: 0.2, ease: "power3.out" }, 87.282);
+        tl.from("#hl2-scene7", { y: 20, duration: 0.2, ease: "power3.out" }, 87.282);
+        tl.from("#proof-scene7-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 87.38199999999999);
+        tl.from("#proof-scene7-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 87.48199999999999);
+        tl.from("#proof-scene7-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 87.582);
+        tl.from("#btn-scene7", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, 87.732);
       
-        tl.from("#scene7 .knowledge-map-card .bento-card, #scene7 .knowledge-map-card .step-card, #scene7 .knowledge-map-card .web-card, #scene7 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 36.14);
+        tl.from("#scene7 .dev-brief-card .bento-card, #scene7 .dev-brief-card .step-card, #scene7 .dev-brief-card .web-card, #scene7 .dev-brief-card .terminal-frame", { y: -24, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 87.422);
       
-        tl.from("#char-scene7", { y: 20, duration: 0.2, ease: "power2.out" }, 36);
-        tl.to("#char-scene7", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 36.2);
-        tl.to("#scene7", { opacity: 0, duration: 0.3 }, 41.7);
-tl.set("#scene7", { visibility: "hidden" }, 42);
+        tl.from("#char-scene7", { y: 20, duration: 0.2, ease: "power2.out" }, 87.282);
+        tl.to("#char-scene7", { y: -30, duration: 2, repeat: 5, yoyo: true, ease: "sine.inOut" }, 87.482);
+        tl.to("#scene7", { opacity: 0, duration: 0.3 }, 100.609);
+tl.set("#scene7", { visibility: "hidden" }, 100.90899999999999);
 
       // Scene 8
-      tl.set("#scene8", { visibility: "visible" }, 41.88);
-      tl.to("#scene8", { opacity: 1, duration: 0.1 }, 41.9);
-      tl.from("#scene8", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 41.92);
+      tl.set("#scene8", { visibility: "visible" }, 100.78899999999999);
+      tl.to("#scene8", { opacity: 1, duration: 0.1 }, 100.809);
+      tl.from("#scene8", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, 100.829);
       
-        tl.from("#hl1-scene8", { y: -20, duration: 0.2, ease: "power3.out" }, 42);
-        tl.from("#hl2-scene8", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
-        tl.from("#bc-scene8-1", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
-        tl.from("#bc-scene8-2", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
-        tl.from("#bc-scene8-3", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
-        tl.from("#bc-scene8-4", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
+        tl.from("#hl1-scene8", { y: -20, duration: 0.2, ease: "power3.out" }, 100.90899999999999);
+        tl.from("#hl2-scene8", { y: 20, duration: 0.2, ease: "power3.out" }, 100.90899999999999);
+        tl.from("#bc-scene8-1", { y: 20, duration: 0.2, ease: "power3.out" }, 100.90899999999999);
+        tl.from("#bc-scene8-2", { y: 20, duration: 0.2, ease: "power3.out" }, 100.90899999999999);
+        tl.from("#bc-scene8-3", { y: 20, duration: 0.2, ease: "power3.out" }, 100.90899999999999);
+        tl.from("#bc-scene8-4", { y: 20, duration: 0.2, ease: "power3.out" }, 100.90899999999999);
       
-        tl.from("#scene8 .knowledge-map-card .bento-card, #scene8 .knowledge-map-card .step-card, #scene8 .knowledge-map-card .web-card, #scene8 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 42.14);
+        tl.from("#scene8 .dev-brief-card .bento-card, #scene8 .dev-brief-card .step-card, #scene8 .dev-brief-card .web-card, #scene8 .dev-brief-card .terminal-frame", { y: -24, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 101.04899999999999);
       
-        tl.from("#char-scene8", { y: 20, duration: 0.2, ease: "power2.out" }, 42);
-        tl.to("#char-scene8", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 42.2);
+        tl.from("#char-scene8", { y: 20, duration: 0.2, ease: "power2.out" }, 100.90899999999999);
+        tl.to("#char-scene8", { y: -30, duration: 2, repeat: 5, yoyo: true, ease: "sine.inOut" }, 101.109);
         
 
     // Karaoke Subtitles Grouping by Scene (Complete Sentences)
-    const subtitleBlocks = [];
+    const subtitleBlocks = [{"words":[{"text":"Hono","start":0,"end":0.34},{"text":"là","start":0.34,"end":0.68},{"text":"web","start":0.68,"end":1.02},{"text":"framework","start":1.02,"end":1.36},{"text":"TypeScript","start":1.36,"end":1.7},{"text":"siêu","start":1.7,"end":2.04}],"start":0,"end":2.04},{"words":[{"text":"nhẹ,","start":2.04,"end":2.38},{"text":"chạy","start":2.38,"end":2.72},{"text":"trên","start":2.72,"end":3.05},{"text":"mọi","start":3.05,"end":3.39},{"text":"JavaScript","start":3.39,"end":3.73},{"text":"runtime","start":3.73,"end":4.07}],"start":2.04,"end":4.07},{"words":[{"text":"từ","start":4.07,"end":4.41},{"text":"Cloudflare","start":4.41,"end":4.75},{"text":"Workers","start":4.75,"end":5.09},{"text":"đến","start":5.09,"end":5.43},{"text":"Node.js.","start":5.43,"end":5.77},{"text":"Với","start":5.77,"end":6.11}],"start":4.07,"end":6.11},{"words":[{"text":"router","start":6.11,"end":6.45},{"text":"cực","start":6.45,"end":6.79},{"text":"nhanh","start":6.79,"end":7.13},{"text":"và","start":7.13,"end":7.47},{"text":"zero","start":7.47,"end":7.81},{"text":"dependencies,","start":7.81,"end":8.15}],"start":6.11,"end":8.15},{"words":[{"text":"Hono","start":8.15,"end":8.49},{"text":"đang","start":8.49,"end":8.83},{"text":"thu","start":8.83,"end":9.16},{"text":"hút","start":9.16,"end":9.5},{"text":"hơn","start":9.5,"end":9.84},{"text":"30,000","start":9.84,"end":10.18}],"start":8.15,"end":10.18},{"words":[{"text":"sao","start":10.18,"end":10.52},{"text":"trên","start":10.52,"end":10.86},{"text":"GitHub","start":10.86,"end":11.2},{"text":"nhờ","start":11.2,"end":11.54},{"text":"hiệu","start":11.54,"end":11.88},{"text":"năng","start":11.88,"end":12.22}],"start":10.18,"end":12.22},{"words":[{"text":"vượt","start":12.22,"end":12.56},{"text":"trội","start":12.56,"end":12.9},{"text":"và","start":12.9,"end":13.24},{"text":"API","start":13.24,"end":13.58},{"text":"đơn","start":13.58,"end":13.92},{"text":"giản.","start":13.92,"end":14.26}],"start":12.22,"end":14.26},{"words":[{"text":"Với","start":15.83299999999999,"end":16.13299999999999},{"text":"hơn","start":16.13299999999999,"end":16.433},{"text":"ba","start":16.433,"end":16.732999999999997},{"text":"mươi","start":16.732999999999997,"end":17.043},{"text":"nghìn","start":17.043,"end":17.342999999999996},{"text":"sao","start":17.342999999999996,"end":17.642999999999994}],"start":15.83299999999999,"end":17.642999999999994},{"words":[{"text":"trên","start":17.642999999999994,"end":17.94299999999999},{"text":"GitHub","start":17.94299999999999,"end":18.242999999999988},{"text":"và","start":18.242999999999988,"end":18.543},{"text":"cộng","start":18.543,"end":18.842999999999996},{"text":"đồng","start":18.842999999999996,"end":19.142999999999994},{"text":"tích","start":19.142999999999994,"end":19.44299999999999}],"start":17.642999999999994,"end":19.44299999999999},{"words":[{"text":"cực","start":19.44299999999999,"end":19.742999999999988},{"text":"trên","start":19.742999999999988,"end":20.043},{"text":"Discord,","start":20.043,"end":20.342999999999996},{"text":"Hono","start":20.342999999999996,"end":20.653},{"text":"đang","start":20.653,"end":20.952999999999996},{"text":"là","start":20.952999999999996,"end":21.252999999999993}],"start":19.44299999999999,"end":21.252999999999993},{"words":[{"text":"lựa","start":21.252999999999993,"end":21.55299999999999},{"text":"chọn","start":21.55299999999999,"end":21.853},{"text":"đáng","start":21.853,"end":22.153},{"text":"tin","start":22.153,"end":22.452999999999996},{"text":"cậy","start":22.452999999999996,"end":22.752999999999993},{"text":"cho","start":22.752999999999993,"end":23.05299999999999}],"start":21.252999999999993,"end":23.05299999999999},{"words":[{"text":"các","start":23.05299999999999,"end":23.353},{"text":"dự","start":23.353,"end":23.653},{"text":"án","start":23.653,"end":23.952999999999996},{"text":"production.","start":23.952999999999996,"end":24.252999999999993},{"text":"TypeScript","start":24.252999999999993,"end":24.562999999999995},{"text":"là","start":24.562999999999995,"end":24.862999999999992}],"start":23.05299999999999,"end":24.862999999999992},{"words":[{"text":"ngôn","start":24.862999999999992,"end":25.16299999999999},{"text":"ngữ","start":25.16299999999999,"end":25.463},{"text":"chính,","start":25.463,"end":25.762999999999998},{"text":"đảm","start":25.762999999999998,"end":26.062999999999995},{"text":"bảo","start":26.062999999999995,"end":26.362999999999992},{"text":"type","start":26.362999999999992,"end":26.66299999999999}],"start":24.862999999999992,"end":26.66299999999999},{"words":[{"text":"safety","start":26.66299999999999,"end":26.963},{"text":"và","start":26.963,"end":27.262999999999998},{"text":"developer","start":27.262999999999998,"end":27.562999999999995},{"text":"experience","start":27.562999999999995,"end":27.862999999999992},{"text":"tốt.","start":27.862999999999992,"end":28.172999999999995}],"start":26.66299999999999,"end":28.172999999999995},{"words":[{"text":"Để","start":29.538000000000004,"end":29.817999999999998},{"text":"bắt","start":29.817999999999998,"end":30.108000000000004},{"text":"đầu,","start":30.108000000000004,"end":30.398000000000003},{"text":"cài","start":30.398000000000003,"end":30.688000000000002},{"text":"Hono","start":30.688000000000002,"end":30.978},{"text":"qua","start":30.978,"end":31.268}],"start":29.538000000000004,"end":31.268},{"words":[{"text":"npm","start":31.268,"end":31.558},{"text":"hoặc","start":31.558,"end":31.848},{"text":"yarn,","start":31.848,"end":32.138},{"text":"tạo","start":32.138,"end":32.418},{"text":"file","start":32.418,"end":32.708},{"text":"server","start":32.708,"end":32.998000000000005}],"start":31.268,"end":32.998000000000005},{"words":[{"text":"đơn","start":32.998000000000005,"end":33.288000000000004},{"text":"giản","start":33.288000000000004,"end":33.578},{"text":"với","start":33.578,"end":33.868},{"text":"vài","start":33.868,"end":34.158},{"text":"dòng","start":34.158,"end":34.448},{"text":"code,","start":34.448,"end":34.738}],"start":32.998000000000005,"end":34.738},{"words":[{"text":"rồi","start":34.738,"end":35.028},{"text":"chạy","start":35.028,"end":35.308},{"text":"thử","start":35.308,"end":35.598},{"text":"bằng","start":35.598,"end":35.888},{"text":"runtime","start":35.888,"end":36.178000000000004},{"text":"bạn","start":36.178000000000004,"end":36.468}],"start":34.738,"end":36.468},{"words":[{"text":"chọn.","start":36.468,"end":36.758},{"text":"Toàn","start":36.758,"end":37.048},{"text":"bộ","start":37.048,"end":37.338},{"text":"quá","start":37.338,"end":37.628},{"text":"trình","start":37.628,"end":37.908},{"text":"mất","start":37.908,"end":38.198}],"start":36.468,"end":38.198},{"words":[{"text":"chưa","start":38.198,"end":38.488},{"text":"đầy","start":38.488,"end":38.778},{"text":"ba","start":38.778,"end":39.068},{"text":"phút","start":39.068,"end":39.358000000000004},{"text":"để","start":39.358000000000004,"end":39.648},{"text":"có","start":39.648,"end":39.938}],"start":38.198,"end":39.938},{"words":[{"text":"server","start":39.938,"end":40.228},{"text":"API","start":40.228,"end":40.508},{"text":"đầu","start":40.508,"end":40.798},{"text":"tiên.","start":40.798,"end":41.088}],"start":39.938,"end":41.088},{"words":[{"text":"Trước","start":42.371,"end":42.661},{"text":"khi","start":42.661,"end":42.961},{"text":"tích","start":42.961,"end":43.251},{"text":"hợp,","start":43.251,"end":43.551},{"text":"kiểm","start":43.551,"end":43.841},{"text":"tra","start":43.841,"end":44.131}],"start":42.371,"end":44.131},{"words":[{"text":"license","start":44.131,"end":44.431},{"text":"MIT","start":44.431,"end":44.721000000000004},{"text":"cho","start":44.721000000000004,"end":45.021},{"text":"phép","start":45.021,"end":45.311},{"text":"dùng","start":45.311,"end":45.611000000000004},{"text":"thương","start":45.611000000000004,"end":45.901}],"start":44.131,"end":45.901},{"words":[{"text":"mại,","start":45.901,"end":46.191},{"text":"xem","start":46.191,"end":46.491},{"text":"release","start":46.491,"end":46.781},{"text":"notes","start":46.781,"end":47.081},{"text":"để","start":47.081,"end":47.371},{"text":"biết","start":47.371,"end":47.67100000000001}],"start":45.901,"end":47.67100000000001},{"words":[{"text":"breaking","start":47.67100000000001,"end":47.961},{"text":"changes,","start":47.961,"end":48.260999999999996},{"text":"và","start":48.260999999999996,"end":48.551},{"text":"đọc","start":48.551,"end":48.840999999999994},{"text":"issues","start":48.840999999999994,"end":49.141000000000005},{"text":"để","start":49.141000000000005,"end":49.431}],"start":47.67100000000001,"end":49.431},{"words":[{"text":"tránh","start":49.431,"end":49.730999999999995},{"text":"bug","start":49.730999999999995,"end":50.021},{"text":"đã","start":50.021,"end":50.321},{"text":"biết.","start":50.321,"end":50.611000000000004},{"text":"Hono","start":50.611000000000004,"end":50.900999999999996},{"text":"có","start":50.900999999999996,"end":51.20100000000001}],"start":49.431,"end":51.20100000000001},{"words":[{"text":"TypeScript","start":51.20100000000001,"end":51.491},{"text":"support","start":51.491,"end":51.791},{"text":"tốt","start":51.791,"end":52.081},{"text":"nên","start":52.081,"end":52.381},{"text":"bạn","start":52.381,"end":52.67100000000001},{"text":"sẽ","start":52.67100000000001,"end":52.971000000000004}],"start":51.20100000000001,"end":52.971000000000004},{"words":[{"text":"được","start":52.971000000000004,"end":53.260999999999996},{"text":"gợi","start":53.260999999999996,"end":53.551},{"text":"ý","start":53.551,"end":53.851},{"text":"type","start":53.851,"end":54.141000000000005},{"text":"ngay","start":54.141000000000005,"end":54.441},{"text":"trong","start":54.441,"end":54.730999999999995}],"start":52.971000000000004,"end":54.730999999999995},{"words":[{"text":"editor.","start":54.730999999999995,"end":55.031000000000006}],"start":54.730999999999995,"end":55.031000000000006},{"words":[{"text":"Hono","start":56.428,"end":56.748},{"text":"nằm","start":56.748,"end":57.077999999999996},{"text":"ở","start":57.077999999999996,"end":57.397999999999996},{"text":"tầng","start":57.397999999999996,"end":57.717999999999996},{"text":"backend","start":57.717999999999996,"end":58.048},{"text":"framework,","start":58.048,"end":58.367999999999995}],"start":56.428,"end":58.367999999999995},{"words":[{"text":"giải","start":58.367999999999995,"end":58.688},{"text":"quyết","start":58.688,"end":59.018},{"text":"bài","start":59.018,"end":59.337999999999994},{"text":"toán","start":59.337999999999994,"end":59.66799999999999},{"text":"xây","start":59.66799999999999,"end":59.988},{"text":"dựng","start":59.988,"end":60.30799999999999}],"start":58.367999999999995,"end":60.30799999999999},{"words":[{"text":"API","start":60.30799999999999,"end":60.638},{"text":"và","start":60.638,"end":60.958},{"text":"web","start":60.958,"end":61.278},{"text":"server","start":61.278,"end":61.608},{"text":"đa","start":61.608,"end":61.928},{"text":"nền","start":61.928,"end":62.248}],"start":60.30799999999999,"end":62.248},{"words":[{"text":"tảng.","start":62.248,"end":62.577999999999996},{"text":"Thay","start":62.577999999999996,"end":62.897999999999996},{"text":"vì","start":62.897999999999996,"end":63.217999999999996},{"text":"viết","start":63.217999999999996,"end":63.548},{"text":"code","start":63.548,"end":63.867999999999995},{"text":"riêng","start":63.867999999999995,"end":64.188}],"start":62.248,"end":64.188},{"words":[{"text":"cho","start":64.188,"end":64.518},{"text":"từng","start":64.518,"end":64.838},{"text":"runtime,","start":64.838,"end":65.16799999999999},{"text":"bạn","start":65.16799999999999,"end":65.488},{"text":"viết","start":65.488,"end":65.80799999999999},{"text":"một","start":65.80799999999999,"end":66.138}],"start":64.188,"end":66.138},{"words":[{"text":"lần","start":66.138,"end":66.458},{"text":"và","start":66.458,"end":66.77799999999999},{"text":"deploy","start":66.77799999999999,"end":67.108},{"text":"lên","start":67.108,"end":67.428},{"text":"Cloudflare,","start":67.428,"end":67.74799999999999},{"text":"Deno,","start":67.74799999999999,"end":68.078}],"start":66.138,"end":68.078},{"words":[{"text":"Bun,","start":68.078,"end":68.398},{"text":"AWS","start":68.398,"end":68.71799999999999},{"text":"Lambda","start":68.71799999999999,"end":69.048},{"text":"hay","start":69.048,"end":69.368},{"text":"Node.js","start":69.368,"end":69.688},{"text":"mà","start":69.688,"end":70.018}],"start":68.078,"end":70.018},{"words":[{"text":"không","start":70.018,"end":70.338},{"text":"cần","start":70.338,"end":70.66799999999999},{"text":"sửa","start":70.66799999999999,"end":70.988},{"text":"gì.","start":70.988,"end":71.30799999999999}],"start":70.018,"end":71.30799999999999},{"words":[{"text":"Clone","start":72.96300000000001,"end":73.27300000000001},{"text":"repo","start":73.27300000000001,"end":73.593},{"text":"về","start":73.593,"end":73.903},{"text":"máy,","start":73.903,"end":74.21300000000001},{"text":"đọc","start":74.21300000000001,"end":74.533},{"text":"kỹ","start":74.533,"end":74.843}],"start":72.96300000000001,"end":74.843},{"words":[{"text":"README","start":74.843,"end":75.163},{"text":"và","start":75.163,"end":75.473},{"text":"examples","start":75.473,"end":75.793},{"text":"folder,","start":75.793,"end":76.10300000000001},{"text":"rồi","start":76.10300000000001,"end":76.423},{"text":"chạy","start":76.423,"end":76.733}],"start":74.843,"end":76.733},{"words":[{"text":"thử","start":76.733,"end":77.043},{"text":"trong","start":77.043,"end":77.363},{"text":"một","start":77.363,"end":77.673},{"text":"project","start":77.673,"end":77.99300000000001},{"text":"phụ","start":77.99300000000001,"end":78.303},{"text":"trước","start":78.303,"end":78.623}],"start":76.733,"end":78.623},{"words":[{"text":"khi","start":78.623,"end":78.933},{"text":"tích","start":78.933,"end":79.253},{"text":"hợp","start":79.253,"end":79.563},{"text":"vào","start":79.563,"end":79.88300000000001},{"text":"production.","start":79.88300000000001,"end":80.193},{"text":"Kiểm","start":80.193,"end":80.503}],"start":78.623,"end":80.503},{"words":[{"text":"tra","start":80.503,"end":80.82300000000001},{"text":"xem","start":80.82300000000001,"end":81.13300000000001},{"text":"runtime","start":81.13300000000001,"end":81.453},{"text":"bạn","start":81.453,"end":81.763},{"text":"dùng","start":81.763,"end":82.083},{"text":"có","start":82.083,"end":82.393}],"start":80.503,"end":82.393},{"words":[{"text":"được","start":82.393,"end":82.71300000000001},{"text":"support","start":82.71300000000001,"end":83.02300000000001},{"text":"đầy","start":83.02300000000001,"end":83.343},{"text":"đủ","start":83.343,"end":83.653},{"text":"không,","start":83.653,"end":83.96300000000001},{"text":"và","start":83.96300000000001,"end":84.283}],"start":82.393,"end":84.283},{"words":[{"text":"test","start":84.283,"end":84.593},{"text":"các","start":84.593,"end":84.913},{"text":"middleware","start":84.913,"end":85.223},{"text":"cần","start":85.223,"end":85.543},{"text":"thiết.","start":85.543,"end":85.85300000000001}],"start":84.283,"end":85.85300000000001},{"words":[{"text":"Điểm","start":87.286,"end":87.566},{"text":"nổi","start":87.566,"end":87.856},{"text":"bật","start":87.856,"end":88.136},{"text":"của","start":88.136,"end":88.42599999999999},{"text":"Hono","start":88.42599999999999,"end":88.70599999999999},{"text":"là","start":88.70599999999999,"end":88.996}],"start":87.286,"end":88.996},{"words":[{"text":"router","start":88.996,"end":89.276},{"text":"RegExpRouter","start":89.276,"end":89.566},{"text":"cực","start":89.566,"end":89.846},{"text":"nhanh,","start":89.846,"end":90.136},{"text":"không","start":90.136,"end":90.416},{"text":"dùng","start":90.416,"end":90.70599999999999}],"start":88.996,"end":90.70599999999999},{"words":[{"text":"vòng","start":90.70599999999999,"end":90.996},{"text":"lặp","start":90.996,"end":91.276},{"text":"tuyến","start":91.276,"end":91.566},{"text":"tính.","start":91.566,"end":91.846},{"text":"Kết","start":91.846,"end":92.136},{"text":"hợp","start":92.136,"end":92.416}],"start":90.70599999999999,"end":92.416},{"words":[{"text":"với","start":92.416,"end":92.70599999999999},{"text":"kích","start":92.70599999999999,"end":92.98599999999999},{"text":"thước","start":92.98599999999999,"end":93.276},{"text":"dưới","start":93.276,"end":93.556},{"text":"12","start":93.556,"end":93.846},{"text":"kilobyte","start":93.846,"end":94.126}],"start":92.416,"end":94.126},{"words":[{"text":"cho","start":94.126,"end":94.416},{"text":"preset","start":94.416,"end":94.696},{"text":"tiny,","start":94.696,"end":94.98599999999999},{"text":"Hono","start":94.98599999999999,"end":95.26599999999999},{"text":"mang","start":95.26599999999999,"end":95.556},{"text":"lại","start":95.556,"end":95.846}],"start":94.126,"end":95.846},{"words":[{"text":"hiệu","start":95.846,"end":96.126},{"text":"năng","start":96.126,"end":96.416},{"text":"cao","start":96.416,"end":96.696},{"text":"mà","start":96.696,"end":96.98599999999999},{"text":"vẫn","start":96.98599999999999,"end":97.26599999999999},{"text":"giữ","start":97.26599999999999,"end":97.556}],"start":95.846,"end":97.556},{"words":[{"text":"code","start":97.556,"end":97.836},{"text":"base","start":97.836,"end":98.126},{"text":"gọn","start":98.126,"end":98.406},{"text":"nhẹ","start":98.406,"end":98.696},{"text":"và","start":98.696,"end":98.976},{"text":"dễ","start":98.976,"end":99.26599999999999}],"start":97.556,"end":99.26599999999999},{"words":[{"text":"maintain.","start":99.26599999999999,"end":99.54599999999999}],"start":99.26599999999999,"end":99.54599999999999},{"words":[{"text":"Tóm","start":100.90499999999999,"end":101.17499999999998},{"text":"lại,","start":101.17499999999998,"end":101.45499999999998},{"text":"Hono","start":101.45499999999998,"end":101.725},{"text":"là","start":101.725,"end":101.99499999999999},{"text":"framework","start":101.99499999999999,"end":102.26499999999999},{"text":"đáng","start":102.26499999999999,"end":102.53499999999998}],"start":100.90499999999999,"end":102.53499999999998},{"words":[{"text":"thử","start":102.53499999999998,"end":102.80499999999999},{"text":"nếu","start":102.80499999999999,"end":103.07499999999999},{"text":"bạn","start":103.07499999999999,"end":103.34499999999998},{"text":"cần","start":103.34499999999998,"end":103.615},{"text":"hiệu","start":103.615,"end":103.88499999999999},{"text":"năng","start":103.88499999999999,"end":104.15499999999999}],"start":102.53499999999998,"end":104.15499999999999},{"words":[{"text":"cao","start":104.15499999999999,"end":104.42499999999998},{"text":"và","start":104.42499999999998,"end":104.695},{"text":"tính","start":104.695,"end":104.96499999999999},{"text":"linh","start":104.96499999999999,"end":105.24499999999999},{"text":"hoạt","start":105.24499999999999,"end":105.51499999999999},{"text":"đa","start":105.51499999999999,"end":105.78499999999998}],"start":104.15499999999999,"end":105.78499999999998},{"words":[{"text":"nền","start":105.78499999999998,"end":106.05499999999999},{"text":"tảng.","start":106.05499999999999,"end":106.32499999999999},{"text":"Nhớ","start":106.32499999999999,"end":106.59499999999998},{"text":"star","start":106.59499999999998,"end":106.865},{"text":"repo","start":106.865,"end":107.13499999999999},{"text":"nếu","start":107.13499999999999,"end":107.40499999999999}],"start":105.78499999999998,"end":107.40499999999999},{"words":[{"text":"thấy","start":107.40499999999999,"end":107.67499999999998},{"text":"hữu","start":107.67499999999998,"end":107.945},{"text":"ích,","start":107.945,"end":108.21499999999999},{"text":"đọc","start":108.21499999999999,"end":108.48499999999999},{"text":"issues","start":108.48499999999999,"end":108.755},{"text":"để","start":108.755,"end":109.03499999999998}],"start":107.40499999999999,"end":109.03499999999998},{"words":[{"text":"tránh","start":109.03499999999998,"end":109.30499999999999},{"text":"lỗi","start":109.30499999999999,"end":109.57499999999999},{"text":"phổ","start":109.57499999999999,"end":109.84499999999998},{"text":"biến,","start":109.84499999999998,"end":110.115},{"text":"và","start":110.115,"end":110.38499999999999},{"text":"theo","start":110.38499999999999,"end":110.65499999999999}],"start":109.03499999999998,"end":110.65499999999999},{"words":[{"text":"dõi","start":110.65499999999999,"end":110.92499999999998},{"text":"release","start":110.92499999999998,"end":111.195},{"text":"để","start":111.195,"end":111.46499999999999},{"text":"cập","start":111.46499999999999,"end":111.73499999999999},{"text":"nhật","start":111.73499999999999,"end":112.005},{"text":"tính","start":112.005,"end":112.27499999999999}],"start":110.65499999999999,"end":112.27499999999999},{"words":[{"text":"năng","start":112.27499999999999,"end":112.54499999999999},{"text":"mới","start":112.54499999999999,"end":112.82499999999999},{"text":"nhất.","start":112.82499999999999,"end":113.09499999999998}],"start":112.27499999999999,"end":113.09499999999998}];
     if (subtitleBlocks.length > 0) {
       const capContainer = document.getElementById("captions");
       const escapeHtml = (value) => String(value)

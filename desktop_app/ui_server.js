@@ -11,7 +11,7 @@ import { inspectEnvironment } from "./environment.mjs";
 import { createNodeScriptCommand } from "./runtime_binaries.mjs";
 import { createWorkspacePaths, ensureWorkspace } from "./workspace.mjs";
 import { loadWorkspaceEnv, saveWorkspaceEnv } from "./settings.mjs";
-import { syncTemplates, createJob, updateJobProgress } from "../services/dbService.js";
+import { syncTemplates, createJob, updateJobProgress, getRecentJobs } from "../services/dbService.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -189,6 +189,8 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
         APP_ROOT: appRoot,
         WORKSPACE_DIR: jobWorkspaceRoot,
         JOB_ID: id,
+        TEMPLATE_OVERRIDE: job.template || "",
+        SUBTEMPLATE_OVERRIDE: job.subtemplate || "",
       },
     });
 
@@ -203,9 +205,9 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
       io.emit("job_output", { id, text });
 
       const renameMatch =
-        text.match(/->\s+([\w\-.]+\.mp4)/) ||
-        text.match(/→\s+([\w\-.]+\.mp4)/) ||
-        text.match(/â†’\s+([\w\-.]+\.mp4)/);
+        text.match(/->\s+([^\r\n]+\.mp4)/) ||
+        text.match(/→\s+([^\r\n]+\.mp4)/) ||
+        text.match(/â†’\s+([^\r\n]+\.mp4)/);
       if (renameMatch) {
         videoPath = path.join(jobWorkspaceRoot, "renders", renameMatch[1].trim());
       }
@@ -224,7 +226,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
 
     child.on("close", async (code) => {
       if (code === 0) {
-        if (!videoPath) {
+        if (!videoPath || !fs.existsSync(videoPath)) {
           videoPath = findLatestMp4(path.join(jobWorkspaceRoot, "renders"));
         }
 
@@ -267,30 +269,72 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
   }
 
   app.post("/api/generate", async (req, res) => {
-    const { urls } = req.body;
+    const { urls, template, subtemplate } = req.body;
     if (!urls || !Array.isArray(urls)) {
       return res.status(400).json({ error: "Invalid urls" });
     }
 
     const jobs = [];
     for (let index = 0; index < urls.length; index++) {
-      const url = urls[index];
+      const urlEntry = urls[index];
+      const url = typeof urlEntry === "string" ? urlEntry : urlEntry.url;
+      const jobTemplate = typeof urlEntry === "object" && urlEntry.template ? urlEntry.template : (template || null);
+      const jobSubtemplate = typeof urlEntry === "object" && urlEntry.subtemplate ? urlEntry.subtemplate : (subtemplate || null);
+
       const jobId = createJobId(index);
       const platform = detectPlatform(url);
 
       try {
-        await createJob(jobId, url, platform, null, null);
+        await createJob(jobId, url, platform, jobTemplate, jobSubtemplate);
       } catch (dbErr) {
         console.error(`[DB Error] Đăng ký job ${jobId} lên Supabase thất bại:`, dbErr.message);
       }
 
-      jobs.push({ id: jobId, url });
+      jobs.push({ 
+        id: jobId, 
+        url, 
+        template: jobTemplate, 
+        subtemplate: jobSubtemplate 
+      });
     }
 
     jobQueue.push(...jobs);
     processQueue();
 
     return res.json({ success: true, jobs });
+  });
+
+  app.get("/api/jobs", async (req, res) => {
+    try {
+      const dbJobs = await getRecentJobs(50);
+      let completedCount = 0;
+      const filteredJobs = (dbJobs || []).filter(job => {
+        if (job.status === 'running' || job.status === 'queued') {
+          return true;
+        }
+        if (job.status === 'completed' && completedCount < 3) {
+          completedCount++;
+          return true;
+        }
+        return false;
+      });
+
+      const formattedJobs = filteredJobs.map(job => ({
+        id: job.id,
+        url: job.target_url,
+        platform: job.platform,
+        status: job.status,
+        progress: job.progress,
+        current_stage: job.current_stage,
+        template: job.template_group,
+        subtemplate: job.template_name,
+        error_message: job.error_message,
+        videoPath: job.renders?.[0]?.file_path || null
+      }));
+      return res.json(formattedJobs);
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   });
 
   app.get("/api/recent-videos", (req, res) => {

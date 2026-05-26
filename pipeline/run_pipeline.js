@@ -59,22 +59,20 @@ function toWebPath(...parts) {
   return parts.join('/').replace(/\\/g, '/');
 }
 
-export function buildFinalVideoName({ safeTopicName, date = new Date(), runId } = {}) {
+export function buildFinalVideoName({ topicName, safeTopicName, templateGroup = 'G3', templateName = 'template1', date = new Date(), runId } = {}) {
   const pad = (n) => String(n).padStart(2, '0');
-  const dateStr = [
-    pad(date.getDate()),
-    pad(date.getMonth() + 1),
-    date.getFullYear(),
-    pad(date.getHours()),
-    pad(date.getMinutes()),
-    pad(date.getSeconds()),
-  ].join('-');
-  const safeRunId = String(runId || process.pid || 'run')
-    .replace(/[^a-zA-Z0-9_-]+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 48) || 'run';
-  return `agent-video-${safeTopicName || 'video'}_${dateStr}-${safeRunId}.mp4`;
+  const dateStr = `${pad(date.getDate())}-${pad(date.getMonth() + 1)}-${date.getFullYear()}`;
+  const timeStr = `${pad(date.getHours())}-${pad(date.getMinutes())}`;
+  
+  const rawTopic = topicName || safeTopicName || 'video';
+  const cleanTopic = rawTopic
+    .replace(/[^a-zA-Z0-9_.-]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_+|_+$/g, '');
+
+  const groupPart = `[${templateGroup}-${templateName}]`;
+  const suffix = runId ? `_${runId}` : '';
+  return `${dateStr}_${timeStr}_${groupPart}_${cleanTopic}${suffix}.mp4`;
 }
 
 async function main() {
@@ -388,6 +386,17 @@ async function main() {
 
   const totalDurationSec = accumulatedTimeMs / 1000;
   scriptData.duration = totalDurationSec;
+
+  if (process.env.TEMPLATE_OVERRIDE) {
+    scriptData.template = process.env.TEMPLATE_OVERRIDE;
+    console.log(`[Pipeline] Template OVERRIDE active: ${process.env.TEMPLATE_OVERRIDE}`);
+  }
+  if (process.env.SUBTEMPLATE_OVERRIDE) {
+    scriptData.subtemplate = process.env.SUBTEMPLATE_OVERRIDE;
+    scriptData.template_variant = process.env.SUBTEMPLATE_OVERRIDE;
+    console.log(`[Pipeline] Subtemplate OVERRIDE active: ${process.env.SUBTEMPLATE_OVERRIDE}`);
+  }
+
   fs.writeFileSync(jsonPath, JSON.stringify(scriptData, null, 2), 'utf-8');
 
   console.log('\nStep 3: Bien dich index.html composition chinh tu template...');
@@ -411,6 +420,9 @@ async function main() {
   let styleContent = '';
   if (fs.existsSync(templatePaths.stylePath)) {
     styleContent = fs.readFileSync(templatePaths.stylePath, 'utf-8');
+    if (styleContent.startsWith('\uFEFF')) {
+      styleContent = styleContent.slice(1);
+    }
     styleContent = styleContent.replace(/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com\/[^'"]+['"]\);\s*/g, '');
   }
 
@@ -449,7 +461,14 @@ async function main() {
   const latestMp4 = findLatestMp4(paths.rendersDir);
   let finalVideoName = '';
   if (latestMp4) {
-    const newMp4Name = buildFinalVideoName({ safeTopicName, runId });
+    const templateGroup = (scriptData.template || '').split('_')[0] || 'G3';
+    const templateName = scriptData.subtemplate || 'template1';
+    const newMp4Name = buildFinalVideoName({ 
+      topicName: urlOrTopic, 
+      templateGroup, 
+      templateName, 
+      runId 
+    });
     finalVideoName = newMp4Name;
     const oldPath = path.join(paths.rendersDir, latestMp4);
     const newPath = path.join(paths.rendersDir, newMp4Name);
