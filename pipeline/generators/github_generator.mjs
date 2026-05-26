@@ -152,11 +152,11 @@ function normalizeCards(scene, limit = 4) {
     : Array.isArray(scene.cards) && scene.cards.length > 0
       ? scene.cards
       : [1, 2, 3, 4]
-          .map((idx) => ({
-            title: scene[`bento${idx}_title`],
-            body: scene[`bento${idx}_desc`],
-          }))
-          .filter((card) => card.title || card.body);
+        .map((idx) => ({
+          title: scene[`bento${idx}_title`],
+          body: scene[`bento${idx}_desc`],
+        }))
+        .filter((card) => card.title || card.body);
 
   return source.slice(0, limit).map((card, idx) => ({
     title: softLimit(card.title || `Buoc ${idx + 1}`, 18),

@@ -485,15 +485,15 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 6: {
       // Scene 4: Run safely in a terminal
       const hl1 = scene.headline_line1 || "RUN IMAGE";
-      const hl2 = scene.headline_line2 || "THU TREN MAY PHU";
+      const hl2 = scene.headline_line2 || "THỬ TRÊN MÁY PHỤ";
       const imageRef = stripTag(getSceneImage(scene, "hello-world"));
       const btnText = scene.btn_text || `$ docker run --rm ${imageRef}`;
       const command = cleanCommand(btnText) || `docker run --rm ${imageRef}`;
       const cards = getSceneCards(scene, 3);
       const runCards = cards.length > 0 ? cards : [
-        { title: "Dry run", body: "Chay voi --rm truoc khi dua vao compose." },
-        { title: "Logs", body: "Doc log khoi dong de bat loi config." },
-        { title: "Stop", body: "Dung container sau khi test xong." },
+        { title: "Dry run", body: "Chạy với --rm trước khi đưa vào compose." },
+        { title: "Logs", body: "Đọc log khởi động để bắt lỗi config." },
+        { title: "Stop", body: "Dừng container sau khi test xong." },
       ];
       html = `
         <div class="headline-container" style="top: 165px;">

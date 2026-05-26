@@ -33,8 +33,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 0: {
       // Cảnh 1: Giới thiệu HyperFrames
       const repoUrl = scene.repo_url || "example.com";
-      const headlineLine1 = scene.headline_line1 || "NGUON WEB";
-      const headlineLine2 = scene.headline_line2 || "CAN KIEM TRA GI?";
+      const headlineLine1 = scene.headline_line1 || "NGUỒN WEB";
+      const headlineLine2 = scene.headline_line2 || "CẦN KIỂM TRA GÌ?";
       html = `
         <div class="browser-frame" id="browser-${sceneId}">
           <div class="browser-header">

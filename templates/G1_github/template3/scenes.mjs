@@ -61,7 +61,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
       // Cảnh 1: Giới thiệu HyperFrames
       const repoUrl = scene.repo_url || "github.com/owner/repo";
       const headlineLine1 = scene.headline_line1 || "REPO GITHUB";
-      const headlineLine2 = scene.headline_line2 || "CO GI DANG CHU Y?";
+      const headlineLine2 = scene.headline_line2 || "CÓ GÌ ĐÁNG CHÚ Ý?";
       html = `
         <div class="browser-frame" id="browser-${sceneId}">
           <div class="browser-header">
@@ -234,14 +234,14 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
     case 3: {
       // Cảnh 4: Deterministic Rendering (Siêu ổn định)
-      const title1 = scene.headline_line1 || "DIEM MANH";
-      const title2 = scene.headline_line2 || "CO DANG DUNG?";
-      const btnText = escapeHtml(scene.btn_text || "Doc README va chay vi du nho");
+      const title1 = scene.headline_line1 || "ĐIỂM MẠNH";
+      const title2 = scene.headline_line2 || "CÓ ĐÁNG DÙNG?";
+      const btnText = escapeHtml(scene.btn_text || "Đọc README và chạy ví dụ nhỏ");
       const cards = getSceneCards(scene, 3);
       const proofCards = cards.length > 0 ? cards : [
-        { title: "Use case", body: "Noi ro repo giai quyet viec gi." },
-        { title: "Evidence", body: "Tim vi du, docs va release gan day." },
-        { title: "Fit", body: "Thu trong project phu truoc khi tich hop." },
+        { title: "Use case", body: "Nói rõ repo giải quyết việc gì." },
+        { title: "Evidence", body: "Tìm ví dụ, docs và release gần đây." },
+        { title: "Fit", body: "Thử trong project phụ trước khi tích hợp." },
       ];
       html = `
         <div class="headline-container" style="top: 165px;">
@@ -276,13 +276,13 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 4: {
       // Cảnh 5: Frame Adapter Pattern
       const title1 = scene.headline_line1 || "CHECKLIST";
-      const title2 = scene.headline_line2 || "TRUOC KHI DUNG";
+      const title2 = scene.headline_line2 || "TRƯỚC KHI DÙNG";
       const cards = getSceneCards(scene, 4);
       const checkCards = cards.length > 0 ? cards : [
-        { title: "License", body: "Kiem tra dieu kien su dung." },
-        { title: "Release", body: "Xem release va commit gan day." },
-        { title: "Issues", body: "Doc loi dang mo truoc khi adopt." },
-        { title: "Docs", body: "Chay vi du nho trong README." },
+        { title: "License", body: "Kiểm tra điều kiện sử dụng." },
+        { title: "Release", body: "Xem release và commit gần đây." },
+        { title: "Issues", body: "Đọc lỗi đang mở trước khi adopt." },
+        { title: "Docs", body: "Chạy ví dụ nhỏ trong README." },
       ];
       html = `
         <div class="headline-container" style="top: 185px;">
@@ -324,8 +324,8 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
     case 5: {
       // Scene 6: Repo signal check
-      const title1 = scene.headline_line1 || "TIN HIEU REPO";
-      const title2 = scene.headline_line2 || "DOC TRUOC KHI DUNG";
+      const title1 = scene.headline_line1 || "TÌM HIỂU REPO";
+      const title2 = scene.headline_line2 || "ĐỌC TRƯỚC KHI DÙNG";
       const repoName = scene.repo_name || scene.repo_url || "owner/repo";
       const repoLang = scene.repo_lang || "N/A";
       const repoStars = scene.repo_stars || "★ 0";
@@ -390,13 +390,13 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
     case 6: {
       // Scene 7: Clone and test safely
       const title1 = scene.headline_line1 || "CLONE REPO";
-      const title2 = scene.headline_line2 || "CHAY THU RIENG";
+      const title2 = scene.headline_line2 || "CHẠY THỬ RIÊNG";
       const btnText = scene.btn_text || "$ git clone github.com/owner/repo";
       const cards = getSceneCards(scene, 3);
       const cloneCards = cards.length > 0 ? cards : [
-        { title: "Clone", body: "Lay source ve mot thu muc rieng." },
-        { title: "Read README", body: "Doc cach cai dat va yeu cau moi truong." },
-        { title: "Run test", body: "Chay vi du nho, roi check license truoc khi dung." },
+        { title: "Clone", body: "Lấy source về một thư mục riêng." },
+        { title: "Read README", body: "Đọc cách cài đặt và yêu cầu môi trường." },
+        { title: "Run test", body: "Chạy ví dụ nhỏ, rồi check license trước khi dùng." },
       ];
       html = `
         <div class="headline-container" style="top: 185px;">
