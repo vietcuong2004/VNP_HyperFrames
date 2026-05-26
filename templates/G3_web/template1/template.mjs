@@ -123,7 +123,7 @@ export default function (data, css) {
       const sceneGsap = result.gsap;
 
       scenesHTML += `
-      <div id="${sceneId}" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+      <div id="${sceneId}" class="scene" style="position:absolute; inset:0; opacity:0; display:none; z-index: ${10 + i};">
         ${sceneVisualHtml}
         ${charHtml}
       </div>`;
@@ -131,8 +131,8 @@ export default function (data, css) {
       // GSAP JS
       jsTimelines += `
       // Scene ${i + 1}
-      tl.set("#${sceneId}", { visibility: "visible" }, ${Math.max(0, start - 0.12)});
-      tl.to("#${sceneId}", { opacity: 1, duration: 0.1 }, ${start - 0.1});
+      tl.set("#${sceneId}", { display: "block", zIndex: ${100 + i} }, ${start});
+      tl.to("#${sceneId}", { opacity: 1, duration: 0.1 }, ${start});
       ${sceneGsap}
       `;
       if (charHtml) {
@@ -147,8 +147,8 @@ export default function (data, css) {
       // Fade out scene
       if (i < data.scenes.length - 1) {
         const nextStart = data.scenes[i + 1].audio_start;
-        jsTimelines += `tl.to("#${sceneId}", { opacity: 0, duration: 0.3 }, ${nextStart - 0.3});\n`;
-        jsTimelines += `tl.set("#${sceneId}", { visibility: "hidden" }, ${nextStart});\n`;
+        jsTimelines += `tl.to("#${sceneId}", { opacity: 0, duration: 0.1 }, ${nextStart - 0.15});\n`;
+        jsTimelines += `tl.set("#${sceneId}", { display: "none", zIndex: ${10 + i} }, ${nextStart - 0.05});\n`;
       }
     });
   }

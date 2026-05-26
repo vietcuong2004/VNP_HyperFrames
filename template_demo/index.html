@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Template Demo Overview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0c10;
+      --panel: #111620;
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f4f7fb;
+      --muted: rgba(244, 247, 251, 0.62);
+      --accent: #fdf01c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .page {
+      width: min(1800px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 22px 0 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .hint {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .refresh {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid rgba(253, 240, 28, 0.28);
+      border-radius: 6px;
+      padding: 9px 12px;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .preview-card {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .preview-card header {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .preview-card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border: 0;
+      background: #050505;
+    }
+
+    @media (max-width: 1180px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100vw - 18px, 560px);
+      }
+
+      .topbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <div>
+        <h1>Template Demo Overview</h1>
+        <p class="hint">Hiển thị đồng thời 9 template bằng data mock, không cần render video.</p>
+      </div>
+      <a class="refresh" href="index.html">Restart all</a>
+    </div>
+    <div class="grid">
+
+      <section class="preview-card">
+        <header>
+          <strong>G1_github/template1</strong>
+          <a href="rendered/G1_github-template1.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G1_github-template1.html" title="G1_github/template1" loading="eager"></iframe>
+      </section>
+      <section class="preview-card">
+        <header>
+          <strong>G1_github/template2</strong>
+          <a href="rendered/G1_github-template2.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G1_github-template2.html" title="G1_github/template2" loading="eager"></iframe>
+      </section>
+      <section class="preview-card">
+        <header>
+          <strong>G1_github/template3</strong>
+          <a href="rendered/G1_github-template3.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G1_github-template3.html" title="G1_github/template3" loading="eager"></iframe>
+      </section>
+      <section class="preview-card">
+        <header>
+          <strong>G2_docker/template1</strong>
+          <a href="rendered/G2_docker-template1.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G2_docker-template1.html" title="G2_docker/template1" loading="eager"></iframe>
+      </section>
+      <section class="preview-card">
+        <header>
+          <strong>G2_docker/template2</strong>
+          <a href="rendered/G2_docker-template2.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G2_docker-template2.html" title="G2_docker/template2" loading="eager"></iframe>
+      </section>
+      <section class="preview-card">
+        <header>
+          <strong>G2_docker/template3</strong>
+          <a href="rendered/G2_docker-template3.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G2_docker-template3.html" title="G2_docker/template3" loading="eager"></iframe>
+      </section>
+      <section class="preview-card">
+        <header>
+          <strong>G3_web/template1</strong>
+          <a href="rendered/G3_web-template1.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G3_web-template1.html" title="G3_web/template1" loading="eager"></iframe>
+      </section>
+      <section class="preview-card">
+        <header>
+          <strong>G3_web/template2</strong>
+          <a href="rendered/G3_web-template2.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G3_web-template2.html" title="G3_web/template2" loading="eager"></iframe>
+      </section>
+      <section class="preview-card">
+        <header>
+          <strong>G3_web/template3</strong>
+          <a href="rendered/G3_web-template3.html" target="_blank" rel="noreferrer">Open</a>
+        </header>
+        <iframe src="rendered/G3_web-template3.html" title="G3_web/template3" loading="eager"></iframe>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

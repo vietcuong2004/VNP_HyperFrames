@@ -137,7 +137,7 @@ function createApp({ appRoot, workspaceRoot, runtimeEnv = {}, isPackaged = false
       // Link static assets into the temporary workspace assets directory to save space and time
       await fsp.mkdir(path.join(jobWorkspaceRoot, "assets"), { recursive: true });
       const symlinkType = process.platform === "win32" ? "junction" : "dir";
-      const assetSubdirs = ["character", "background-music", "sound-effect", "logo"];
+      const assetSubdirs = ["character", "background-music", "sound-effect", "logo", "fonts"];
       
       for (const dir of assetSubdirs) {
         const srcDir = path.join(workspaceRoot, "assets", dir);

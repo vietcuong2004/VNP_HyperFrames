@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { createWorkspacePaths, ensureWorkspace } from "../desktop_app/workspace.mjs";
+import { createWorkspacePaths, ensureWorkspace, prepareWorkspaceRuntime } from "../desktop_app/workspace.mjs";
 
 test("createWorkspacePaths keeps resources separate from runtime output", () => {
   const appRoot = path.resolve("app-root");
@@ -44,9 +44,28 @@ test("ensureWorkspace creates runtime output directories", async () => {
     ];
 
     for (const dir of expectedDirs) {
-      const stat = await import("node:fs/promises").then((fs) => fs.stat(dir));
-      assert.equal(stat.isDirectory(), true);
+      const dirStat = await stat(dir);
+      assert.equal(dirStat.isDirectory(), true);
     }
+  } finally {
+    await rm(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test("prepareWorkspaceRuntime copies local font assets for rendered compositions", async () => {
+  const tempRoot = await mkdtemp(path.join(os.tmpdir(), "hf-workspace-fonts-"));
+  const appRoot = path.join(tempRoot, "app");
+  const workspaceRoot = path.join(tempRoot, "workspace");
+
+  try {
+    await mkdir(path.join(appRoot, "assets", "fonts"), { recursive: true });
+    await writeFile(path.join(appRoot, "assets", "fonts", "be-vietnam-pro-vietnamese-800-normal.woff2"), "font");
+
+    const paths = createWorkspacePaths({ appRoot, workspaceRoot });
+    await prepareWorkspaceRuntime(paths);
+
+    const copied = await stat(path.join(workspaceRoot, "assets", "fonts", "be-vietnam-pro-vietnamese-800-normal.woff2"));
+    assert.equal(copied.isFile(), true);
   } finally {
     await rm(tempRoot, { recursive: true, force: true });
   }

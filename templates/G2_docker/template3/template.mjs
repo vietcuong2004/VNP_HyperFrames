@@ -1,4 +1,38 @@
-import { getHyperframesReviewScene } from "./scenes.mjs";
+﻿import { getHyperframesReviewScene } from "./scenes.mjs";
+
+const SCENE_ORDER = [0, 5, 2, 4, 1, 6, 3, 7];
+
+function sceneLength(scene) {
+  const value = Number(scene?.audio_duration ?? scene?.duration);
+  return Number.isFinite(value) && value > 0 ? value : 6;
+}
+
+function orderScenes(scenes) {
+  if (!Array.isArray(scenes)) return [];
+  let cursor = 0;
+  return SCENE_ORDER.filter((sourceIndex) => sourceIndex < scenes.length).map((sourceIndex) => {
+    const source = scenes[sourceIndex];
+    const sourceStart = Number(source?.audio_start) || 0;
+    const length = sceneLength(source);
+    const shiftedTranscript = Array.isArray(source.transcript)
+      ? source.transcript.map((word) => ({
+          ...word,
+          start: Number(word.start) - sourceStart + cursor,
+          end: Number(word.end) - sourceStart + cursor,
+        }))
+      : source.transcript;
+    const scene = {
+      ...source,
+      visual_index: sourceIndex,
+      audio_start: cursor,
+      audio_duration: length,
+      duration: length,
+      transcript: shiftedTranscript,
+    };
+    cursor += length;
+    return scene;
+  }).filter(Boolean);
+}
 
 export default function (data, css) {
   const duration = data.duration || 10;
@@ -26,8 +60,10 @@ export default function (data, css) {
   audioTags += `<audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="${duration}" data-volume="0.3" loop></audio>
 `;
 
-  if (data.scenes && data.scenes.length > 0) {
-    data.scenes.forEach((scene, i) => {
+  const orderedScenes = orderScenes(data.scenes);
+
+  if (orderedScenes.length > 0) {
+    orderedScenes.forEach((scene, i) => {
       // Normalize character asset names to prevent any 404 errors in avatars or scenes
       if (scene.assets && scene.assets.length > 0) {
         let assetName = scene.assets[0];
@@ -118,12 +154,13 @@ export default function (data, css) {
       }
 
       // Build premium dynamic visuals by delegating layout rendering to dedicated layout modules
-      const result = getHyperframesReviewScene(i, scene, sceneId, start);
+      const visualIndex = Number.isInteger(scene.visual_index) ? scene.visual_index : i;
+      const result = getHyperframesReviewScene(visualIndex, scene, sceneId, start);
       const sceneVisualHtml = result.html;
       const sceneGsap = result.gsap;
 
       scenesHTML += `
-      <div id="${sceneId}" class="scene" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+      <div id="${sceneId}" class="scene variant-scene variant-${visualIndex + 1}" style="position:absolute; inset:0; opacity:0; display:none; z-index: ${10 + i};">
         ${sceneVisualHtml}
         ${charHtml}
       </div>`;
@@ -131,13 +168,14 @@ export default function (data, css) {
       // GSAP JS
       jsTimelines += `
       // Scene ${i + 1}
-      tl.set("#${sceneId}", { visibility: "visible" }, ${Math.max(0, start - 0.12)});
-      tl.to("#${sceneId}", { opacity: 1, duration: 0.1 }, ${start - 0.1});
+      tl.set("#${sceneId}", { display: "block", zIndex: ${100 + i} }, ${start});
+      tl.to("#${sceneId}", { opacity: 1, duration: 0.1 }, ${start});
+      tl.from("#${sceneId}", { scale: 1.06, filter: "blur(10px)", duration: 0.28, ease: "power2.out" }, ${start - 0.08});
       ${sceneGsap}
       `;
       if (charHtml) {
         const sceneDuration =
-          i === data.scenes.length - 1 ? duration - start : data.scenes[i + 1].audio_start - start;
+          i === orderedScenes.length - 1 ? duration - start : orderedScenes[i + 1].audio_start - start;
         const charRepeat = Math.max(1, Math.floor(sceneDuration / 2.0) - 1);
         jsTimelines += `
         tl.from("#char-${sceneId}", { y: 20, duration: 0.2, ease: "power2.out" }, ${start});
@@ -145,10 +183,10 @@ export default function (data, css) {
         `;
       }
       // Fade out scene
-      if (i < data.scenes.length - 1) {
-        const nextStart = data.scenes[i + 1].audio_start;
-        jsTimelines += `tl.to("#${sceneId}", { opacity: 0, duration: 0.3 }, ${nextStart - 0.3});\n`;
-        jsTimelines += `tl.set("#${sceneId}", { visibility: "hidden" }, ${nextStart});\n`;
+      if (i < orderedScenes.length - 1) {
+        const nextStart = orderedScenes[i + 1].audio_start;
+        jsTimelines += `tl.to("#${sceneId}", { opacity: 0, duration: 0.1 }, ${nextStart - 0.15});\n`;
+        jsTimelines += `tl.set("#${sceneId}", { display: "none", zIndex: ${10 + i} }, ${nextStart - 0.05});\n`;
       }
     });
   }
@@ -248,3 +286,5 @@ export default function (data, css) {
 </body>
 </html>`;
 }
+
+

@@ -24,6 +24,27 @@ const STORYTELLING_GUIDELINES = {
   `
 };
 
+const TEMPLATE_CONTENT_PROFILES = {
+  template1: `
+    - Content angle: web context digest.
+    - Scene 2 should explain the main claim, target audience, and what the viewer should verify.
+    - Scene 3-4 should turn the page into practical questions and source checks.
+    - Keep the viewer thinking: "What does this page say, and what should I verify first?"
+  `,
+  template2: `
+    - Content angle: docs or article reading path.
+    - Scene 2 should explain how to read the source in order, not only summarize it.
+    - Scene 3-4 should focus on key sections, evidence, examples, compatibility, and source quality.
+    - Keep the viewer thinking: "How do I extract reliable notes from this page?"
+  `,
+  template3: `
+    - Content angle: tool or product action brief.
+    - Scene 2 should connect the page to a concrete user job or product decision.
+    - Scene 3-4 should focus on demo checks, pricing/API/support risks, and a next action.
+    - Keep the viewer thinking: "Should I try this tool, and what is the first test?"
+  `,
+};
+
 // Cấu trúc 6 cảnh (scenes) cố định cho Group 3 (Web)
 export const WEB_LAYOUT_SCHEMA = [
   {
@@ -252,11 +273,12 @@ export function normalizeWebScenes(scenes, context = {}) {
   return normalized;
 }
 
-export async function generateScenes(rawData, format) {
+export async function generateScenes(rawData, format, subtemplate = "template1") {
   const { target, webInfo } = rawData;
   const title = webInfo.title || target.host;
   const sourceLabel = target.host.replace(/^www\./, "");
   const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.web_context_digest;
+  const templateProfile = TEMPLATE_CONTENT_PROFILES[subtemplate] || TEMPLATE_CONTENT_PROFILES.template1;
 
   const prompt = `
       Bạn là chuyên gia phân tích và tóm tắt thông tin công nghệ. Hãy viết kịch bản voice-over tiếng Việt và tiêu đề màn hình cho video review trang web sau:
@@ -268,6 +290,9 @@ export async function generateScenes(rawData, format) {
 
       HƯỚNG DẪN KỂ CHUYỆN BẮT BUỘC CHO FORMAT "${format}":
       ${guideline}
+
+      TEMPLATE CONTENT PROFILE FOR "${subtemplate}":
+      ${templateProfile}
 
       BẠN PHẢI TRẢ VỀ MỘT JSON OBJECT theo đúng cấu trúc mẫu dưới đây (chứa key "scenes" là mảng 6 cảnh):
       {
@@ -288,6 +313,7 @@ export async function generateScenes(rawData, format) {
       5. Không copy placeholder trong schema. Mọi headline, bento title, bento desc và step phải viết lại theo context thật của trang.
       6. Với scene hướng dẫn đọc docs, quickstart, cấu hình hoặc hành động tiếp theo, ưu tiên "content_mode": "steps" và sinh 3 bước cụ thể.
       7. Nếu không đủ dữ liệu chắc chắn, hãy viết theo hướng kiểm tra/tư vấn; không bịa API, giá, port, lệnh hoặc cấu hình.
+      8. Every headline, step, bento card, and voice line must follow this template content profile. Do not reuse the same scene angle across template1/template2/template3.
     `;
 
   try {

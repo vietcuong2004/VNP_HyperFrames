@@ -7,7 +7,8 @@ const css = readFileSync(new URL("../templates/G1_github/template1/style.css", i
 test("G1_github uses local Vietnamese-safe font stack for headlines", () => {
   assert.doesNotMatch(css, /fonts\.googleapis\.com/);
   assert.doesNotMatch(css, /Space Grotesk/);
-  assert.match(css, /--font-sans:\s*"Segoe UI",\s*"Noto Sans",\s*"Helvetica Neue",\s*Arial,\s*sans-serif/);
+  assert.match(css, /@font-face[\s\S]*be-vietnam-pro-vietnamese-800-normal\.woff2/);
+  assert.match(css, /--font-sans:\s*"Be Vietnam Pro",\s*"Be Vietnam",\s*Arial,\s*"Liberation Sans",\s*"Noto Sans",\s*"Segoe UI",\s*sans-serif/);
   assert.match(css, /\.headline-line1[\s\S]*font-family:\s*var\(--font-sans\)/);
   assert.match(css, /\.headline-line2[\s\S]*font-family:\s*var\(--font-sans\)/);
 });
