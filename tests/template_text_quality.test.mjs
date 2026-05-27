@@ -336,7 +336,7 @@ test("step and checklist animations reveal items one by one with readable spacin
   for (const [name, renderScene, sceneIndexes] of renderers) {
     for (const index of sceneIndexes) {
       const { gsap } = renderScene(index, scene, `seq-${name.replace(/\s+/g, "-")}-${index}`, 10);
-      const times = [...gsap.matchAll(/tl\.(?:from|to)\("#(?:st|proof|check|runstep|ev|act|read)-[^"]+",\s*\{[^}]*opacity:\s*(?:0|1)[^}]*\},\s*([0-9.]+)/g)]
+      const times = [...gsap.matchAll(/tl\.(?:from|to)\("#(?:st|proof|check|runstep|ev|act|read|spec|gate)-[^"]+",\s*\{[^}]*opacity:\s*(?:0|1)[^}]*\},\s*([0-9.]+)/g)]
         .map((match) => Number(match[1]))
         .sort((a, b) => a - b);
       if (times.length < 3) continue;

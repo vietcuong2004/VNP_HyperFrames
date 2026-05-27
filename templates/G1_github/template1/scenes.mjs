@@ -95,7 +95,7 @@ export function getHyperframesReviewScene(i, scene, sceneId, start) {
 
   switch (i) {
     case 0: {
-      // Cảnh 1: Giới thiệu HyperFrames
+      // Cảnh 1: Giới thiệu repo
       const repoUrl = scene.repo_url || "github.com/owner/repo";
       const headlineLine1 = scene.headline_line1 || "REPO GITHUB";
       const headlineLine2 = scene.headline_line2 || "CÓ GÌ ĐÁNG CHÚ Ý?";
