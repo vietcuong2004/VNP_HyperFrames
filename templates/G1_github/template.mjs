@@ -1,4 +1,4 @@
-import { getHyperframesReviewScene } from "./hyperframesReview.mjs";
+import { getHyperframesReviewScene } from "./scenes.mjs";
 
 export default function (data, css) {
   const duration = data.duration || 10;
@@ -169,7 +169,7 @@ export default function (data, css) {
 <head>
   <meta charset="UTF-8">
   <style>${css}</style>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="./vendor/gsap.min.js"></script>
 </head>
 <body>
   <div id="root" class="${rootClasses}" data-composition-id="news-multi" data-duration="${duration}" data-width="1080" data-height="1920" data-start="0">

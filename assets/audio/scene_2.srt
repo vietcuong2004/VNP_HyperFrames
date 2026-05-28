@@ -1,0 +1,3 @@
+1
+00:00:00,000 --> 00:00:09,000
+Dự án edge-tts trên GitHub của rany2 làm được điều đó! Nó khai thác dịch vụ text-to-speech online của Microsoft Edge hoàn toàn miễn phí, chạy được trên mọi hệ điều hành.

@@ -1,44 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap');
 
 body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: "Plus Jakarta Sans", "Space Grotesk", "Inter", sans-serif; }
-.bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a1a0d 0%, #050505 80%); }
+.bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a0505 0%, #050505 80%); }
 
 .source-web .bg {
   background:
-    radial-gradient(circle at 20% 18%, rgba(0, 210, 255, 0.22) 0%, rgba(0, 210, 255, 0) 34%),
-    radial-gradient(circle at 82% 30%, rgba(253, 240, 28, 0.18) 0%, rgba(253, 240, 28, 0) 32%),
-    linear-gradient(180deg, #071017 0%, #050505 78%);
+    radial-gradient(circle at 20% 18%, rgba(255, 71, 87, 0.22) 0%, rgba(255, 71, 87, 0) 34%),
+    radial-gradient(circle at 82% 30%, rgba(255, 71, 87, 0.18) 0%, rgba(255, 71, 87, 0) 32%),
+    linear-gradient(180deg, #170707 0%, #050505 78%);
 }
 
 .source-web .headline-line2 {
-  background: linear-gradient(90deg, #00d2ff, #fdf01c, #ffffff);
+  background: linear-gradient(90deg, #ff4757, #ff6b81, #ffffff);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .source-web .browser-frame {
-  border-color: rgba(0, 210, 255, 0.24);
-  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 55px rgba(0, 210, 255, 0.18);
+  border-color: rgba(255, 71, 87, 0.24);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 55px rgba(255, 71, 87, 0.18);
 }
 
 .source-web .browser-header {
-  background: #0b1720;
+  background: #200b0b;
 }
 
 .source-web .action-btn {
-  border-color: rgba(0, 210, 255, 0.35);
-  background: rgba(0, 210, 255, 0.06);
+  border-color: rgba(255, 71, 87, 0.35);
+  background: rgba(255, 71, 87, 0.06);
 }
 
 .source-web .captions {
-  border-color: rgba(0, 210, 255, 0.28);
+  border-color: rgba(255, 71, 87, 0.28);
 }
 
 /* Animated Star Particles */
 .particles-container { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .particle-star { position: absolute; border-radius: 50%; opacity: 0.6; }
-.particle-green { background: #fdf01c; box-shadow: 0 0 10px #fdf01c; }
+.particle-green { background: #ff4757; box-shadow: 0 0 10px #ff4757; }
 .particle-purple { background: #9b59b6; box-shadow: 0 0 10px #9b59b6; }
 .particle-white { background: #ffffff; box-shadow: 0 0 10px #ffffff; }
 
@@ -69,8 +69,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   gap: 20px;
   z-index: 10000;
   background: rgba(10, 10, 10, 0.8);
-  border: 2.5px solid #fdf01c;
-  box-shadow: 0 0 25px rgba(253, 240, 28, 0.3), 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 2.5px solid #ff4757;
+  box-shadow: 0 0 25px rgba(255, 71, 87, 0.3), 0 10px 30px rgba(0, 0, 0, 0.5);
   border-radius: 25px;
   padding: 12px 25px 12px 15px;
   backdrop-filter: blur(12px);
@@ -100,9 +100,9 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   width: 200px; 
   height: 200px; 
   border-radius: 60px; 
-  background: rgba(253, 240, 28, 0.03); 
-  border: 2px solid rgba(253, 240, 28, 0.25); 
-  box-shadow: 0 0 80px rgba(253, 240, 28, 0.25), inset 0 0 40px rgba(253, 240, 28, 0.08); 
+  background: rgba(255, 71, 87, 0.03); 
+  border: 2px solid rgba(255, 71, 87, 0.25); 
+  box-shadow: 0 0 80px rgba(255, 71, 87, 0.25), inset 0 0 40px rgba(255, 71, 87, 0.08); 
   display: flex; 
   justify-content: center; 
   align-items: center; 
@@ -115,9 +115,9 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   width: 140px;
   height: 140px;
   border-radius: 40px;
-  background: rgba(253, 240, 28, 0.04);
-  border: 2px solid rgba(253, 240, 28, 0.3);
-  box-shadow: 0 0 40px rgba(253, 240, 28, 0.25), inset 0 0 15px rgba(253, 240, 28, 0.1);
+  background: rgba(255, 71, 87, 0.04);
+  border: 2px solid rgba(255, 71, 87, 0.3);
+  box-shadow: 0 0 40px rgba(255, 71, 87, 0.25), inset 0 0 15px rgba(255, 71, 87, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,11 +126,11 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   width: 70px;
   height: 70px;
   fill: none;
-  stroke: #fdf01c;
+  stroke: #ff4757;
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 12px rgba(253, 240, 28, 0.85));
+  filter: drop-shadow(0 0 12px rgba(255, 71, 87, 0.85));
 }
 
 /* Bento Card Vector Icon */
@@ -148,11 +148,11 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   width: 45px;
   height: 45px;
   fill: none;
-  stroke: #fdf01c;
+  stroke: #ff4757;
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 8px rgba(253, 240, 28, 0.85));
+  filter: drop-shadow(0 0 8px rgba(255, 71, 87, 0.85));
 }
 
 /* Premium Candlestick Chart Visualization */
@@ -293,7 +293,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   align-items: flex-end;
   font-size: 30px;
   font-weight: 700;
-  color: #fdf01c;
+  color: #ff4757;
 }
 .trend-label {
   font-size: 24px;
@@ -324,11 +324,11 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   font-size: 72px; 
   line-height: 0.98;
   font-weight: 900; 
-  background: linear-gradient(90deg, #fdf01c, #00d2ff); 
+  background: linear-gradient(90deg, #ff4757, #ff6b81); 
   -webkit-background-clip: text;
   background-clip: text; 
   -webkit-text-fill-color: transparent; 
-  filter: drop-shadow(0 5px 15px rgba(253,240,28,0.35));
+  filter: drop-shadow(0 5px 15px rgba(255, 71, 87, 0.35));
 }
 
 /* Action Button */
@@ -339,8 +339,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   transform: translateX(-50%);
   padding: 25px 60px;
   border-radius: 40px;
-  background: rgba(253, 240, 28, 0.05);
-  border: 3px solid rgba(253, 240, 28, 0.3);
+  background: rgba(255, 71, 87, 0.05);
+  border: 3px solid rgba(255, 71, 87, 0.3);
   display: flex;
   align-items: center;
   gap: 20px;
@@ -350,7 +350,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   z-index: 30;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-.action-icon { font-size: 45px; color: #fdf01c; }
+.action-icon { font-size: 45px; color: #ff4757; }
 
 /* Bento Box Layout */
 .bento-container {
@@ -439,7 +439,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 #bc-scene3-3 .card-icon-svg svg,
 #bc-scene5-1 .card-icon-svg svg,
 #bc-scene8-1 .card-icon-svg svg {
-  stroke: #fdf01c !important;
+  stroke: #ff4757 !important;
   filter: drop-shadow(0 0 10px rgba(253, 240, 28, 0.85)) !important;
 }
 
@@ -457,7 +457,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 }
 
 /* Card Content Styles */
-.card-icon { width: 90px; height: 90px; border-radius: 22px; background: rgba(253, 240, 28, 0.1); display: flex; justify-content: center; align-items: center; font-size: 45px; color: #fdf01c; border: 1px solid rgba(253, 240, 28, 0.2); }
+.card-icon { width: 90px; height: 90px; border-radius: 22px; background: rgba(255, 71, 87, 0.1); display: flex; justify-content: center; align-items: center; font-size: 45px; color: #ff4757; border: 1px solid rgba(255, 71, 87, 0.2); }
 .card-text-group { display: flex; flex-direction: column; gap: 8px; }
 .card-title { font-size: 38px; font-weight: 800; color: #fff; }
 .card-desc { font-size: 26px; font-weight: 500; color: rgba(255,255,255,0.55); }
@@ -483,8 +483,8 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   background: rgba(10, 10, 10, 0.85); 
   backdrop-filter: blur(15px); 
   border-radius: 30px; 
-  border: 2px solid rgba(253, 240, 28, 0.25); 
-  box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(253, 240, 28, 0.05); 
+  border: 2px solid rgba(255, 71, 87, 0.25); 
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(255, 71, 87, 0.05); 
   padding: 25px 30px; 
   box-sizing: border-box; 
   overflow: hidden;
@@ -501,7 +501,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   background: #0d1117;
   border: 3px solid rgba(255, 255, 255, 0.12);
   border-radius: 32px;
-  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(253, 240, 28, 0.18);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 71, 87, 0.18);
   overflow: hidden;
   z-index: 20;
 }
@@ -617,7 +617,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
 .feature-icon-wrapper.neon-green { background: rgba(0, 255, 136, 0.08); border: 2px solid rgba(0, 255, 136, 0.2); }
 .feature-icon-wrapper.neon-green svg { stroke: #00ff88; fill: none; }
 .feature-icon-wrapper.neon-yellow { background: rgba(253, 240, 28, 0.08); border: 2px solid rgba(253, 240, 28, 0.2); }
-.feature-icon-wrapper.neon-yellow svg { stroke: #fdf01c; fill: none; }
+.feature-icon-wrapper.neon-yellow svg { stroke: #ff4757; fill: none; }
 .feature-icon-wrapper.neon-purple { background: rgba(155, 89, 182, 0.08); border: 2px solid rgba(155, 89, 182, 0.2); }
 .feature-icon-wrapper.neon-purple svg { stroke: #9b59b6; fill: none; }
 .feature-icon-wrapper.neon-blue { background: rgba(0, 210, 255, 0.08); border: 2px solid rgba(0, 210, 255, 0.2); }
@@ -748,7 +748,7 @@ body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #
   color: #888;
   letter-spacing: 1px;
 }
-.metric-label-small .highlight { color: #fdf01c; }
+.metric-label-small .highlight { color: #ff4757; }
 .metric-value-small {
   font-size: 65px;
   font-weight: 900;

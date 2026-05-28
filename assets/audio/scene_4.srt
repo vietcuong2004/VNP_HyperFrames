@@ -1,0 +1,3 @@
+1
+00:00:00,000 --> 00:00:09,000
+Ghé ngay github.com/rany2/edge-tts để khám phá! Dự án mã nguồn mở, cộng đồng active, tài liệu đầy đủ. Đừng bỏ lỡ công cụ text-to-speech miễn phí mạnh mẽ này nhé!

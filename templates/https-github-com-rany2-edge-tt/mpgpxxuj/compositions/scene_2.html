@@ -1,0 +1,117 @@
+```html
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js">
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+</script>
+<style>
+*{box-sizing:border-box}
+html,body{width:1080px;height:1920px;margin:0;padding:0;overflow:hidden;background:#0a0a14;font-family:'Be Vietnam Pro',Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+#stage{position:absolute;inset:0;width:1080px;height:1920px;overflow:hidden;background:#0a0a14;color:#fff}
+#particles-bg{position:absolute;inset:0;z-index:1;pointer-events:none}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(247,181,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(247,181,0,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:2}
+.txt{display:block;line-height:1.5;overflow:visible;padding-top:0.15em;padding-bottom:0.05em;letter-spacing:0.3px}
+.vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 55%,rgba(0,0,0,0.75));pointer-events:none;z-index:90}
+.scan{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,0.025) 0px,rgba(255,255,255,0.025) 2px,transparent 2px,transparent 4px);pointer-events:none;z-index:91}
+.noise{position:absolute;inset:0;opacity:.07;pointer-events:none;z-index:92;background-image:url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC45IiBudW1PY3RhdmVzPSIzIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbHRlcj0idXJsKCNuKSIgb3BhY2l0eT0iMC42Ii8+PC9zdmc+')}
+.progress{position:absolute;bottom:0;left:0;height:6px;background:linear-gradient(90deg,#F7B500,#FFD93D);width:0;z-index:99;box-shadow:0 0 20px #F7B500}
+#content{position:absolute;inset:10px;overflow:visible;z-index:3;pointer-events:none}
+.layer-far{position:absolute;z-index:5;will-change:transform}
+.layer-mid{position:absolute;z-index:15;will-change:transform}
+.layer-near{position:absolute;z-index:35;will-change:transform}
+.light-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;will-change:transform,opacity}
+.card{position:absolute;background:rgba(30,41,59,0.6);border:1px solid rgba(247,181,0,0.2);border-radius:16px;backdrop-filter:blur(20px);padding:32px;will-change:transform,opacity}
+.icon-wrap{position:absolute;display:flex;align-items:center;justify-content:center;will-change:transform}
+.code-line{font-family:'IBM Plex Mono',monospace;font-size:18px;color:rgba(255,255,255,0.7);opacity:0;will-change:transform,opacity}
+.connection-line{position:absolute;height:2px;background:linear-gradient(90deg,transparent,#F7B500,transparent);opacity:0;will-change:transform,opacity}
+.floating{will-change:transform}
+.pulse{will-change:transform}
+
+/* Vietnamese diacritics fix — prevent clipping */
+#content{overflow:visible!important}
+.hero-wrap,.hero-label,.hero-num,.hero-sub,
+[class*="title"],[class*="label"],[class*="text"],[class*="heading"],
+[class*="hero"],[class*="stat"],[class*="num"],[class*="keyword"]{
+  overflow:visible!important;line-height:1.5!important;padding-top:0.15em!important;
+}
+</style></head><body>
+<div id="stage">
+  <div id="particles-bg"></div>
+  <div class="grid-bg"></div>
+  
+  <div class="light-glow layer-far" id="glow1" style="width:600px;height:600px;background:radial-gradient(circle,rgba(34,197,94,0.3),transparent);top:200px;left:-100px"></div>
+  <div class="light-glow layer-far" id="glow2" style="width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,0.25),transparent);top:800px;right:-80px"></div>
+  
+  <div id="content">
+    <div class="layer-far" id="network-bg" style="top:0;left:0;width:100%;height:100%;opacity:0.15">
+      <svg width="1060" height="1900" style="position:absolute">
+        <defs>
+          <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+            <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(247,181,0,0.1)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="1060" height="1900" fill="url(#grid)"/>
+      </svg>
+    </div>
+    
+    <div class="layer-mid card" id="card1" style="top:280px;left:70px;width:420px;height:340px;opacity:0">
+      <div class="icon-wrap" style="width:80px;height:80px;margin-bottom:24px">
+        <svg viewBox="0 0 64 64" width="80" height="80">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="#F7B500" stroke-width="3"/>
+          <path d="M32 12 L32 32 L44 44" stroke="#F7B500" stroke-width="3" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="txt" style="font-size:32px;font-weight:700;color:#F7B500;margin-bottom:12px">PYTHON</div>
+      <div class="txt" style="font-size:20px;color:rgba(255,255,255,0.8)">Mã nguồn mở</div>
+    </div>
+    
+    <div class="layer-mid card" id="card2" style="top:680px;right:70px;width:420px;height:340px;opacity:0">
+      <div class="icon-wrap" style="width:80px;height:80px;margin-bottom:24px">
+        <svg viewBox="0 0 64 64" width="80" height="80">
+          <rect x="8" y="16" width="48" height="32" rx="4" fill="none" stroke="#22c55e" stroke-width="3"/>
+          <path d="M20 28 L28 36 L44 20" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="txt" style="font-size:32px;font-weight:700;color:#22c55e;margin-bottom:12px">MICROSOFT</div>
+      <div class="txt" style="font-size:20px;color:rgba(255,255,255,0.8)">Edge TTS</div>
+    </div>
+    
+    <div class="layer-mid card" id="card3" style="top:1080px;left:70px;width:420px;height:340px;opacity:0">
+      <div class="icon-wrap" style="width:80px;height:80px;margin-bottom:24px">
+        <svg viewBox="0 0 64 64" width="80" height="80">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="#3b82f6" stroke-width="3"/>
+          <text x="32" y="42" text-anchor="middle" font-family="IBM Plex Mono" font-size="32" font-weight="700" fill="#3b82f6">0₫</text>
+        </svg>
+      </div>
+      <div class="txt" style="font-size:48px;font-weight:900;color:#3b82f6;margin-bottom:12px">FREE</div>
+      <div class="txt" style="font-size:20px;color:rgba(255,255,255,0.8)">Hoàn toàn miễn phí</div>
+    </div>
+    
+    <div class="layer-near" id="center-logo" style="top:50%;left:50%;transform:translate(-50%,-50%);opacity:0">
+      <div style="position:relative;width:280px;height:280px">
+        <div class="icon-wrap floating" style="position:absolute;top:0;left:0;width:280px;height:280px">
+          <svg viewBox="0 0 120 120" width="280" height="280">
+            <defs>
+              <linearGradient id="pyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#F7B500;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#FFD93D;stop-opacity:1"/>
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r="54" fill="url(#pyGrad)" opacity="0.2"/>
+            <path d="M40 30 L60 20 L80 30 L80 50 L60 60 L40 50 Z" fill="url(#pyGrad)" stroke="#F7B500" stroke-width="2"/>
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#F7B500" stroke-width="3" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="pulse" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:320px;height:320px;border:2px solid #F7B500;border-radius:50%;opacity:0.3"></div>
+      </div>
+    </div>
+    
+    <div class="connection-line layer-mid" id="line1" style="top:450px;left:490px;width:0;transform-origin:left center"></div>
+    <div class="connection-line layer-mid" id="line2" style="top:850px;right:490px;width:0;transform-origin:right center"></div>
+    <div class="connection-line layer-mid" id="line3" style="top:1250px;left:490px;width:0;transform-origin:left center"></div>
+    
+    <div class="layer-near" id="keyword-free" style="top:180px;left:50%;transform:translateX(-50%);opacity:0">
+      <div class="txt" style="font-size:96px;font-weight:900;color:#F7B500;text-align:center;text-shadow:0 0 40px rgba(247,181,0,0.6),0 0 80px rgba(247,181,0,0.3);letter-spacing:8px">FREE</div>
+    </div>
+    
+    <div class="layer-mid code-line" id="code1" style="top:1520px;left:90px">import edge_

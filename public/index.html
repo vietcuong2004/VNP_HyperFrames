@@ -206,6 +206,48 @@
       transform: none;
     }
 
+    .utility-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .environment-panel {
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .environment-panel strong {
+      color: var(--text);
+    }
+
+    .environment-ok {
+      color: var(--neon-green);
+    }
+
+    .environment-error {
+      color: var(--neon-red);
+    }
+
     .logs-section {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -385,6 +427,129 @@
     .video-overlay-btn:hover {
       background: rgba(255, 255, 255, 0.2);
     }
+
+    /* Settings Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: rgba(22, 27, 34, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      width: 500px;
+      padding: 30px;
+      box-shadow: 0 0 50px rgba(253, 240, 28, 0.15);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 15px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #fff, var(--neon-yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .btn-close-modal:hover {
+      color: #fff;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-group input {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+      font-family: monospace;
+    }
+
+    .form-group input:focus {
+      border-color: var(--neon-yellow);
+      box-shadow: 0 0 10px rgba(253, 240, 28, 0.2);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 15px;
+      margin-top: 10px;
+    }
+
+    .btn-save-settings {
+      background: var(--neon-yellow);
+      color: #000;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      outline: none;
+    }
+
+    .btn-save-settings:hover {
+      box-shadow: 0 0 15px rgba(253, 240, 28, 0.4);
+    }
   </style>
 </head>
 
@@ -409,6 +574,12 @@
 
         <button class="btn btn-add" onclick="addUrlInput()">+ Add More URL</button>
         <button class="btn btn-generate" id="generateBtn" onclick="generateVideos()">Generate Video</button>
+        <div class="utility-row" style="grid-template-columns: 1fr 1fr 1fr;">
+          <button class="btn btn-secondary" onclick="refreshEnvironment()">Check Runtime</button>
+          <button class="btn btn-secondary" onclick="openRenders()">Open Renders</button>
+          <button class="btn btn-secondary" onclick="toggleSettingsModal()">Settings</button>
+        </div>
+        <div class="environment-panel" id="environmentPanel">Checking runtime...</div>
       </div>
 
       <div class="logs-section">
@@ -427,6 +598,40 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">API Settings</div>
+        <button class="btn-close-modal" onclick="toggleSettingsModal()">×</button>
+      </div>
+      <div class="form-group">
+        <label for="openaiApiKey">OpenAI API Key</label>
+        <input type="password" id="openaiApiKey" placeholder="sk-..." />
+      </div>
+      <div class="form-group">
+        <label for="openrouterApiKey">OpenRouter API Key</label>
+        <input type="password" id="openrouterApiKey" placeholder="sk-or-v1-..." />
+      </div>
+      <div class="form-group">
+        <label for="tavilyApiKey">Tavily API Key</label>
+        <input type="password" id="tavilyApiKey" placeholder="tvly-..." />
+      </div>
+      <div class="form-group">
+        <label for="larvoiceApiKey">LarVoice API Key</label>
+        <input type="password" id="larvoiceApiKey" placeholder="lar-key1,lar-key2" />
+      </div>
+      <div class="form-group">
+        <label for="larvoiceVoiceId">LarVoice Voice ID</label>
+        <input type="text" id="larvoiceVoiceId" placeholder="1" value="1" />
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="toggleSettingsModal()">Cancel</button>
+        <button class="btn btn-save-settings" onclick="saveSettings()">Save Settings</button>
+      </div>
+    </div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
@@ -455,6 +660,36 @@
     }
 
     let activeJobs = 0;
+
+    function renderEnvironment(data) {
+      const panel = document.getElementById('environmentPanel');
+      const missing = data.checks.filter(check => check.required && !check.ok);
+      const status = data.ok
+        ? '<span class="environment-ok">Ready</span>'
+        : '<span class="environment-error">Missing runtime</span>';
+      const details = missing.length
+        ? missing.map(check => `${check.label}: ${check.fix}`).join('<br>')
+        : `Workspace: ${data.workspaceRoot}`;
+      panel.innerHTML = `<strong>Runtime:</strong> ${status}<br>${details}`;
+    }
+
+    async function refreshEnvironment() {
+      try {
+        const res = await fetch('/api/environment');
+        renderEnvironment(await res.json());
+      } catch (err) {
+        document.getElementById('environmentPanel').innerHTML =
+          '<strong>Runtime:</strong> <span class="environment-error">Cannot inspect environment</span>';
+      }
+    }
+
+    async function openRenders() {
+      try {
+        await fetch('/api/open-renders', { method: 'POST' });
+      } catch (err) {
+        appendLog('\n[SYSTEM ERROR] Could not open renders folder.\n');
+      }
+    }
 
     async function generateVideos() {
       const inputs = document.querySelectorAll('.url-input');
@@ -573,6 +808,62 @@
         btn.innerText = `Running... (${activeJobs} active)`;
       }
     });
+
+    function toggleSettingsModal() {
+      const modal = document.getElementById('settingsModal');
+      const isActive = modal.classList.contains('active');
+      if (!isActive) {
+        loadSettings();
+      }
+      modal.classList.toggle('active');
+    }
+
+    async function loadSettings() {
+      try {
+        const res = await fetch('/api/settings');
+        const data = await res.json();
+        document.getElementById('openaiApiKey').value = data.openaiApiKey || '';
+        document.getElementById('openrouterApiKey').value = data.openrouterApiKey || '';
+        document.getElementById('tavilyApiKey').value = data.tavilyApiKey || '';
+        document.getElementById('larvoiceApiKey').value = data.larvoiceApiKey || '';
+        document.getElementById('larvoiceVoiceId').value = data.larvoiceVoiceId || '1';
+      } catch (err) {
+        appendLog('\n[SYSTEM ERROR] Failed to load settings from server.\n');
+      }
+    }
+
+    async function saveSettings() {
+      const openaiApiKey = document.getElementById('openaiApiKey').value.trim();
+      const openrouterApiKey = document.getElementById('openrouterApiKey').value.trim();
+      const tavilyApiKey = document.getElementById('tavilyApiKey').value.trim();
+      const larvoiceApiKey = document.getElementById('larvoiceApiKey').value.trim();
+      const larvoiceVoiceId = document.getElementById('larvoiceVoiceId').value.trim();
+
+      try {
+        const res = await fetch('/api/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            openaiApiKey,
+            openrouterApiKey,
+            tavilyApiKey,
+            larvoiceApiKey,
+            larvoiceVoiceId
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          appendLog('\n[SYSTEM] API settings saved successfully.\n');
+          toggleSettingsModal();
+        } else {
+          alert('Failed to save settings: ' + data.error);
+        }
+      } catch (err) {
+        alert('Failed to connect to server');
+      }
+    }
+
+    refreshEnvironment();
   </script>
 </body>
 

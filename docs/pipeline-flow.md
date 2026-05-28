@@ -1,275 +1,167 @@
-# Luồng Chạy Pipeline Tạo Video Từ URL
-
-## Mục tiêu
-
-Tài liệu này mô tả luồng hiện tại để biến một URL công nghệ thành video MP4 bằng HyperFrames.
+# Luồng pipeline hiện tại
 
 Entry point chính:
 
 ```bash
-node run_pipeline.js <url>
+npm run start
 ```
 
-Ví dụ:
+UI desktop/server gọi pipeline:
 
 ```bash
-node run_pipeline.js https://github.com/heygen-com/hyperframes
-node run_pipeline.js https://hub.docker.com/_/nginx
-node run_pipeline.js https://example.com/some-tech-article
+node pipeline/run_agent_pipeline.js <url-or-topic>
 ```
 
-## Tổng quan luồng
+## Tổng quan
 
-Pipeline hiện tại gồm 7 bước chính:
+```txt
+URL/topic
+  -> fetch metadata + screenshot
+  -> ScriptAgent sinh JSON scenes
+  -> TTS + SRT/transcript
+  -> Visual Planner tạo visual_brief
+  -> Scene HTML Agent sinh từng composition
+  -> htmlValidator auto-fix + strict checks
+  -> local fallback nếu AI fail
+  -> lắp index.html
+  -> hyperframes validate
+  -> hyperframes render
+  -> đổi tên MP4
+```
 
-1. Phân tích URL và sinh kịch bản JSON.
-2. Chụp ảnh trang nguồn.
-3. Tạo giọng đọc (TTS) và timing phụ đề.
-4. Generate `index.html` từ template.
-5. Kiểm tra composition bằng HyperFrames.
-6. Render MP4 và đổi tên theo quy tắc.
-7. Dọn dẹp file audio tạm.
+## 1. Input và source context
 
-## Bước 1: Phân tích URL
+`pipeline/run_agent_pipeline.js` nhận URL hoặc topic.
 
-Script:
+Nếu là URL:
+
+- Lấy `<title>` và meta description.
+- Chụp screenshot bằng `pipeline/capture_github.js`.
+- Lưu screenshot vào `assets/images/github_repo.png`.
+- Thêm screenshot vào `projectAssets`.
+
+Quy tắc quan trọng: scene cần browser/screenshot/scroll chỉ được nhận screenshot nguồn và logo, không được dùng ảnh bất kỳ trong `assets/images`.
+
+## 2. Script generation
+
+`agents/scriptAgent.js` sinh script JSON gồm các scene:
+
+- `stt`
+- `voice`
+- `visual`
+- thumbnail metadata
+
+`visual` vẫn là text brief tự do. Pipeline sẽ chuẩn hóa nó thành `visual_brief` ở bước sau.
+
+## 3. TTS và subtitle
+
+`agents/ttsAgent.js` chọn provider:
+
+- LarVoice nếu có `LARVOICE_API_KEY` và `USE_LARVOICE` không phải `false`.
+- Edge TTS Node fallback nếu không dùng LarVoice.
+- Google Translate TTS fallback nếu Edge TTS lỗi.
+
+Pipeline tạo SRT/transcript, gắn vào từng scene:
+
+- `audio_start`
+- `audio_duration`
+- `audio_path`
+- `duration`
+- `srt`
+- `transcript`
+
+## 4. Visual Planner
+
+`agents/scene/visualPlanner.js` tạo `visual_brief` trước khi sinh HTML.
+
+Vai trò hiện tại:
+
+- Tách nội dung được phép hiện trên màn hình khỏi `voice`.
+- Chọn `layout_intent` ban đầu: `browser_scroll`, `terminal_steps`, `architecture_map`, `metric_cards`, `feature_cards`, `checklist`.
+- Tạo `primary_text`, `secondary_labels`, `facts`, `main_subject`.
+- Loại text yếu như `HTML`, `Scene 1`, `Focus`.
+- Loại mô tả art direction như `gradient xanh`, `[ENVIRONMENT]`, `[MOTION]`.
+
+Trong `pipeline/run_agent_pipeline.js`, mỗi scene được gắn `scene.visual_brief` trước khi chọn asset và gọi scene generator.
+
+## 5. Scene HTML generation
+
+`agents/scene/generate.js` tạo prompt HyperFrames và gọi AI sinh HTML từng scene.
+
+Prompt hiện có guard:
+
+- Main content phải dựa trên visual copy block từ `visual_brief`.
+- Không copy nguyên câu voice/SRT vào main content.
+- Không dùng `drawSVG`.
+- Asset trong scene HTML phải dùng path tương đối hợp lệ.
+
+Cần nâng cấp tiếp: chuyển `visual_brief` thành schema nghiêm ngặt hơn và giảm thêm phần prompt tự do.
+
+## 6. Validation và auto-fix
+
+`agents/scene/htmlValidator.js` xử lý:
+
+- Thiếu `window.__timelines`.
+- Thiếu `paused: true`.
+- `repeat:-1`.
+- Path sai trong scene: `./assets/...` -> `../assets/...`.
+- `drawSVG` unsupported.
+- Voice leak trong main visual DOM.
+
+`pipeline/run_agent_pipeline.js` có strict checks:
+
+- Logo phải có.
+- Scene cần screenshot phải dùng `../assets/images/github_repo.png`.
+- Không còn copy fallback cũ.
+- Không leak voice vào hero/card/title.
+
+Nếu AI HTML fail, pipeline thử gọi `editSceneHTML`. Nếu vẫn fail, dùng `generateLocalFallbackHTML`.
+
+## 7. Local fallback
+
+`pipeline/localFallbackGenerator.js` là fallback an toàn, không phải hướng sản phẩm cuối.
+
+Fallback hiện tại:
+
+- Dùng `visual_brief` nếu có.
+- Không dùng các title cũ như `Infinite Possibilities`, `Automated Screenshots`, `HTML -> VIDEO`.
+- Không lấy nguyên voice làm card/title.
+- Không biến mô tả thiết kế thành nội dung chính.
+- Scene screenshot chỉ dùng `github_repo.png`.
+
+Cần nâng cấp tiếp: fallback render theo `layout_intent` thay vì một bộ layout generic.
+
+## 8. Lắp composition tổng
+
+Pipeline ghi:
+
+- `compositions/scene_<n>.html`
+- `compositions/thumbnail.html`
+- `index.html`
+- template snapshot trong `templates/<safe-topic>/<timestamp>/`
+- script data trong `data/`
+
+Lưu ý: các file này là output của mỗi lần gen, không nên xem là source chính khi phát triển.
+
+## 9. Validate và render
+
+Pipeline chạy HyperFrames local:
 
 ```bash
-node generate_repo_data.js <url>
+npx hyperframes validate
+npx hyperframes render --workers=2
 ```
 
-Nhiệm vụ:
+Trong code packaged, pipeline gọi file CLI trong `node_modules/hyperframes/dist/cli.js`.
 
-- Nhận URL đầu vào.
-- Xác định nền tảng: GitHub, Docker hoặc web.
-- Gọi API nguồn nếu có thể.
-- Với URL web không rõ ràng, gọi Tavily nếu có `TAVILY_API_KEY`.
-- Lấy metadata cơ bản.
-- Phân loại nội dung.
-- Chọn `video_format` và `template` tương ứng.
-- Sinh file JSON tại thư mục `data/`.
+`npm run check` hiện quét cả nhiều composition cũ trong repo, nên có thể fail vì lint legacy. Khi debug pipeline runtime, ưu tiên xem output của `hyperframes validate` trong Step 6.
 
-### Quy tắc đặt tên file JSON
+## Hướng tiếp theo
 
-Nội dung để gen video sẽ lưu vào file JSON được đặt tên theo định dạng:
+Việc cần làm tiếp không phải thêm template, mà là làm `visual_brief` mạnh hơn:
 
 ```txt
-data/<tên-video>-<DD>-<MM>-<YYYY>-<HH>-<mm>.json
+script scene -> deterministic visual planner -> AI visual planner -> visual_brief validator -> scene HTML agent
 ```
 
-Ví dụ:
-
-```txt
-data/edge-tts-20-05-2026-16-06.json
-data/nginx-20-05-2026-16-06.json
-data/pnpm-20-05-2026-16-06.json
-```
-
-Tên video được lấy từ metadata: tên repo (GitHub), tên image (Docker) hoặc tiêu đề trang (web).
-
-### Các template hiện có
-
-| Template | Nền tảng | Thư mục |
-|---|---|---|
-| `G1_github` | GitHub | `templates/G1_github/` |
-| `G2_docker` | Docker Hub | `templates/G2_docker/` |
-| `G3_web` | Web bất kỳ | `templates/G3_web/` |
-
-### Các format video theo nền tảng
-
-**GitHub:**
-
-- `tool_review_quick_demo` — Repo dạng tool/app/CLI
-- `developer_integration_brief` — Repo dạng thư viện/framework
-- `knowledge_map_resource_digest` — Repo dạng awesome/curated list
-- `dataset_explainer` — Repo dạng dataset/benchmark
-- `repo_overview_with_use_cases` — Repo không xác định rõ
-
-**Docker:**
-
-- `container_quick_start` — Official/base image
-- `self_host_setup_guide` — Ứng dụng self-hosted
-- `dev_workflow_image_brief` — Dev/CI runtime
-- `container_overview` — Image không xác định rõ
-
-**Web:**
-
-- `web_docs_explainer` — Trang tài liệu
-- `web_tool_overview` — Trang tool/SDK
-- `web_article_digest` — Bài viết/phân tích
-- `web_product_brief` — Trang sản phẩm
-- `web_context_digest` — Web không xác định rõ
-
-## Tavily cho URL không rõ ràng
-
-Tavily chỉ được dùng cho URL không thuộc GitHub/Docker. Điều này giúp giữ luồng GitHub/Docker ổn định và deterministic hơn.
-
-Thiết lập key trong file `.env`:
-
-```txt
-TAVILY_API_KEY=your_api_key_here
-```
-
-Khi có key, pipeline sẽ gọi Tavily để lấy tóm tắt nội dung, nguồn liên quan và ngữ cảnh. Khi không có key, pipeline fallback sang `<title>` và meta description của trang.
-
-## Bước 2: Chụp ảnh trang nguồn
-
-Script:
-
-```bash
-node capture_github.js <url>
-```
-
-Nhiệm vụ:
-
-- Mở URL bằng Puppeteer.
-- Dùng viewport dọc cố định.
-- Ẩn header, footer, banner và popup gây nhiễu.
-- Chụp ảnh màn hình.
-- Lưu ảnh chính tại:
-
-```txt
-assets/images/github_repo.png
-```
-
-## Bước 3: Tạo TTS và timing phụ đề
-
-Script:
-
-```bash
-py gen_assets.py <đường_dẫn_file_json>
-```
-
-Nhiệm vụ:
-
-- Đọc từng scene trong JSON.
-- Tạo audio voice-over tiếng Việt bằng **edge-tts** (giọng `vi-VN-NamMinhNeural` — giọng nam miền Nam).
-- Sử dụng cờ `--file` thay vì `--text` để tránh lỗi mã hóa UTF-8 trên Windows.
-- Tăng tốc audio theo `SPEECH_SPEED` (hiện tại: 1.18x) bằng ffmpeg.
-- Dùng `ffprobe` để lấy duration thật.
-- Tính toán transcript word-level với hệ số 85% thời lượng audio (để text chạy nhanh hơn, khớp với giọng đọc).
-- Gắn `audio_start`, `audio_duration`, `audio_path`, `transcript` vào từng scene.
-
-### Cấu hình TTS
-
-| Tham số | Giá trị |
-|---|---|
-| Engine | `edge-tts` (Microsoft Edge TTS) |
-| Giọng đọc | `vi-VN-NamMinhNeural` (nam, miền Nam) |
-| Tốc độ tăng | 1.18x |
-| Hệ số text pacing | 85% thời lượng audio |
-
-## Quy tắc viết lời đọc và phụ đề
-
-Lời đọc trong field `voice` phải được viết từ góc nhìn của một người xem lần đầu gặp nội dung, không viết từ góc nhìn của hệ thống đang tạo video.
-
-Nên viết:
-
-- "Nếu bạn vừa mở trang này, điều đầu tiên cần nắm là..."
-- "Điểm đáng chú ý nằm ở..."
-- "Trước khi áp dụng, hãy kiểm tra..."
-
-Không nên viết:
-
-- "Tavily cho thấy..."
-- "Metadata trang cho thấy..."
-- "Scene này nên..."
-- "Mình đang phân tích link..."
-
-## Bước 4: Generate HTML composition
-
-Script:
-
-```bash
-node generate.mjs <đường_dẫn_file_json>
-```
-
-Nhiệm vụ:
-
-- Đọc field `template` trong JSON.
-- Load template tương ứng trong `templates/`.
-- Sinh `index.html`.
-
-Mỗi template bao gồm:
-
-```txt
-templates/<tên_template>/
-├── template.mjs          # Cấu trúc HTML chính
-├── style.css             # CSS thiết kế
-└── hyperframesReview.mjs # Layout cho từng scene
-```
-
-## Bước 5: Kiểm tra composition
-
-Command:
-
-```bash
-npm run check
-```
-
-Yêu cầu: không được có error. Warning có thể tồn tại tạm thời.
-
-## Bước 6: Render MP4 và đổi tên
-
-Command:
-
-```bash
-npm run render
-```
-
-Sau khi render xong, pipeline tự động đổi tên file MP4 mới nhất trong `renders/` theo cùng quy tắc với file JSON:
-
-```txt
-renders/<tên-video>-<DD>-<MM>-<YYYY>-<HH>-<mm>.mp4
-```
-
-Ví dụ:
-
-```txt
-renders/nginx-20-05-2026-16-06.mp4
-renders/edge-tts-20-05-2026-16-06.mp4
-```
-
-## Bước 7: Dọn dẹp
-
-Pipeline tự động xóa các file `.wav` trong `assets/audio/` sau khi render thành công.
-
-## Preview local
-
-Command:
-
-```bash
-npm run dev
-```
-
-Server preview chạy tại:
-
-```txt
-http://localhost:3002
-```
-
-## Luồng đầy đủ trong `run_pipeline.js`
-
-```txt
-generate_repo_data.js   → Sinh JSON kịch bản
-capture_github.js       → Chụp ảnh trang nguồn
-gen_assets.py           → TTS + timing phụ đề
-generate.mjs            → Biên dịch HTML
-hyperframes validate    → Kiểm tra composition
-npm run render          → Kết xuất MP4
-(đổi tên MP4)           → Theo quy tắc tên-video-date-time
-(dọn dẹp audio)         → Xóa file .wav tạm
-```
-
-## Vai trò của từng file chính
-
-| File | Vai trò |
-|---|---|
-| `run_pipeline.js` | Entry point tự động chạy toàn bộ luồng |
-| `generate_repo_data.js` | Phân tích URL, phân loại nội dung, sinh scene JSON |
-| `capture_github.js` | Chụp ảnh trang nguồn bằng Puppeteer |
-| `gen_assets.py` | Tạo TTS bằng edge-tts, tính duration và transcript |
-| `generate.mjs` | Biên dịch JSON + template thành `index.html` |
-| `templates/G1_github/` | Template cho video GitHub |
-| `templates/G2_docker/` | Template cho video Docker (phong cách Terminal) |
-| `templates/G3_web/` | Template cho video web |
+Mục tiêu là để phần nội dung giữa video có nghĩa với người xem lần đầu, không còn label rỗng nghĩa như `HTML`, `Scene 1`, `Focus`, và không để mô tả giao diện như `gradient xanh` lọt thành nội dung.

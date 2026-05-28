@@ -1,6 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
+function stripNetworkCssImports(css) {
+  return css.replace(/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com\/[^'"]+['"]\);\s*/g, '');
+}
+
 async function generate() {
   const dataPath = process.argv[2];
   if (!dataPath) {
@@ -17,9 +21,10 @@ async function generate() {
     process.exit(1);
   }
 
-  const cwd = process.cwd();
-  const templatePath = 'file://' + path.join(cwd, 'templates', templateName, 'template.mjs').replace(/\\/g, '/');
-  const stylePath = path.join(cwd, 'templates', templateName, 'style.css');
+  const appRoot = process.env.APP_ROOT || process.cwd();
+  const outputPath = process.env.COMPOSITION_PATH || path.join(process.cwd(), 'index.html');
+  const templatePath = 'file://' + path.join(appRoot, 'templates', templateName, 'template.mjs').replace(/\\/g, '/');
+  const stylePath = path.join(appRoot, 'templates', templateName, 'style.css');
   
   let templateModule;
   try {
@@ -31,12 +36,13 @@ async function generate() {
 
   let styleContent = '';
   if (fs.existsSync(stylePath)) {
-    styleContent = fs.readFileSync(stylePath, 'utf-8');
+    styleContent = stripNetworkCssImports(fs.readFileSync(stylePath, 'utf-8'));
   }
 
   const html = templateModule.default(data, styleContent);
-  fs.writeFileSync('index.html', html, 'utf-8');
-  console.log('Successfully generated index.html using template: ' + templateName);
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, html, 'utf-8');
+  console.log('Successfully generated ' + outputPath + ' using template: ' + templateName);
 }
 
 generate();

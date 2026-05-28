@@ -1,12 +1,23 @@
 node_modules/
 .thumbnails/
 .waveform-cache/
+.puppeteer-cache/
 renders/
+dist/
 preview.log
 preview.err.log
 .env
 .env.*
+desktop_app/app.env
 npm-debug.log*
 .DS_Store
 Thumbs.db
 
+# Pipeline generated outputs
+logs/
+data/agent-script-*.json
+assets/audio/scene_*.mp3
+assets/audio/scene_*.srt
+assets/audio/scene_*.temp.mp3
+assets/images/github_repo.png
+templates/https-*/

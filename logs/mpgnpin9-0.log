@@ -1,0 +1,34 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://github.com/rany2/edge-tts
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+[Pipeline] Phat hien URL. Dang lay thong tin tu trang web...
+[Pipeline] Context trich xuat tu URL: "GitHub - rany2/edge-tts: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key · GitHub" | "Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or..."
+
+[Pipeline] Tien hanh chup anh man hinh trang nguon...
+Đang mở trình duyệt headless bằng Puppeteer...
+Đang mở trang https://github.com/rany2/edge-tts...
+Đang ẩn header/footer/banner để ảnh chụp sạch hơn...
+Đang chụp ảnh màn hình vào C:\CONG_VIEC\VNP_HyperFrames\assets\images\github_repo.png...
+Đã chụp và lưu ảnh thành công.
+[Pipeline] Chup anh man hinh thanh cong. Da them vao project assets: github_repo.png
+Step 1: Sinh kich ban JSON qua ScriptAgent...
+[Agent Log] Tạo kịch bản cho chủ đề: "Gioi thieu du an/website tai dia chi https://github.com/rany2/edge-tts. Tiêu đề: GitHub - rany2/edge-tts: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key · GitHub. Mô tả: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key - rany2/edge-tts." | 4 cảnh x 8s
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" (Lần thử 1/1, isJson=true)...
+[Agent Log] ✓ Kịch bản: 4 cảnh
+[Pipeline] Da luu file kich ban JSON tai: C:\CONG_VIEC\VNP_HyperFrames\data\agent-script-https-github-com-rany2-edge-tt-mpgnqdyq.json
+
+Step 2: Sinh giong doc (LarVoice) va phu de (Whisper/LarVoice Subtitle)...
+
+--- Xy ly Canh 1/4 ---
+[Pipeline] Sinh giong doc Canh 1...
+
+Gap loi trong qua trinh chay Agent pipeline: Error: Thiếu LarVoice API key — nhập key trên giao diện
+    at generateTTS_LarVoice (file:///C:/CONG_VIEC/VNP_HyperFrames/agents/ttsAgent.js:168:11)
+    at file:///C:/CONG_VIEC/VNP_HyperFrames/agents/ttsAgent.js:34:39
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\win\async.c, line 76

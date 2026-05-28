@@ -1,0 +1,46 @@
+{
+  "scenes": [
+    {
+      "stt": 1,
+      "voice": "Bạn muốn tạo giọng đọc tự nhiên cho ứng dụng Python mà không cần cài Microsoft Edge, không cần Windows, thậm chí không cần API key? Nghe có vẻ khó tin nhỉ?",
+      "visual": "[ENVIRONMENT] Gradient tím đen tối, 3 lớp depth: far=code matrix mờ, mid=floating hexagons, near=glow particles. Atmosphere: cyan dust particles nhẹ. [MAIN FOCUS] Icon Python logo lớn center-left, dominant scale. [CAMERA] Slow zoom-in 8% suốt cảnh. [MOTION] Entry: Python logo glitch-in + screen flash. Idle: logo float nhẹ, question marks '???' popup stagger từ phải. Exit: scale-out + blur. [LIGHTING] Purple-cyan glow halo sau logo, light sweep từ trái qua. [TEXT] '???' bold kinetic typography pulse. [MOOD] Dark, mysterious, tech.",
+      "ttsVoice": "Bạn muốn tạo giọng đọc tự nhiên cho ứng dụng Python mà không cần cài Microsoft Edge, không cần Windows, thậm chí không cần API key? Nghe có vẻ khó tin nhỉ?",
+      "assets": [
+        "character shiba showing surprise.png"
+      ]
+    },
+    {
+      "stt": 2,
+      "voice": "Dự án edge-tts trên GitHub của rany2 làm được điều đó! Nó khai thác dịch vụ text-to-speech online của Microsoft Edge hoàn toàn miễn phí, chạy được trên mọi hệ điều hành.",
+      "visual": "[ENVIRONMENT] Nền đen deep space, far=GitHub grid pattern mờ, mid=connection nodes animate, near=code snippets float. [MAIN FOCUS] Text 'edge-tts' vàng center, dominant bold. [CAMERA] Parallax shift — text gần drift chậm phải, background xa drift trái. [MOTION] Entry: text scale 0→1.2→1 elastic bounce. Idle: text glow pulse, GitHub logo nhỏ orbit quanh. Microsoft Edge icon slide-in từ trên. Exit: giữ (climax). [LIGHTING] Gold-green radial glow sau text, flare sweep. [TEXT] 'FREE' badge kinetic appear góc phải trên. [MOOD] Epic, cinematic, premium.",
+      "ttsVoice": "Dự án edge-tts trên GitHub của rany2 làm được điều đó! Nó khai thác dịch vụ text-to-speech online của Microsoft Edge hoàn toàn miễn phí, chạy được trên mọi hệ điều hành.",
+      "assets": [
+        "character shiba explaining something.png",
+        "github_repo.png"
+      ]
+    },
+    {
+      "stt": 3,
+      "voice": "Cài đặt siêu đơn giản qua pip, hỗ trợ hàng trăm giọng đọc đa ngôn ngữ, có cả tiếng Việt tự nhiên. Bạn có thể tạo file audio hoặc stream trực tiếp chỉ với vài dòng code Python.",
+      "visual": "[ENVIRONMENT] Gradient xanh lá đen, 3 lớp: far=terminal lines scroll, mid=language flags float, near=sound waves. Atmosphere: green particles drift. [MAIN FOCUS] Terminal window center với code 'pip install edge-tts', scale medium. [CAMERA] Slow pan right 10%. [MOTION] Entry: terminal slide-up + typing animation. Idle: code cursor blink, flags (VN, US, JP) stagger slide-in từ trái. Sound wave bars animate pulse. Exit: terminal fade + blur. [LIGHTING] Green screen glow, soft shadow depth. [TEXT] 'pip install' monospace font, '100+ voices' badge top-right. [MOOD] Clean, developer-friendly, energetic.",
+      "ttsVoice": "Cài đặt siêu đơn giản qua pip, hỗ trợ hàng trăm giọng đọc đa ngôn ngữ, có cả tiếng Việt tự nhiên. Bạn có thể tạo file audio hoặc stream trực tiếp chỉ với vài dòng code Python.",
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ]
+    },
+    {
+      "stt": 4,
+      "voice": "Ghé ngay github.com/rany2/edge-tts để khám phá! Dự án mã nguồn mở, cộng đồng active, tài liệu đầy đủ. Đừng bỏ lỡ công cụ text-to-speech miễn phí mạnh mẽ này nhé!",
+      "visual": "[ENVIRONMENT] Nền đen với gradient vàng, far=star particles, mid=GitHub social proof (stars count), near=CTA glow. [MAIN FOCUS] Text 'github.com/rany2/edge-tts' center, bold white. [CAMERA] Zoom-out 12% tạo không gian. [MOTION] Entry: URL text glitch-in + flash. Idle: star icon rain từ trên xuống, counter '⭐ 5.2k' count-up animation. Arrow pointer pulse ở URL. Exit: full screen glow burst. [LIGHTING] Gold radial burst center, light rays expand. [TEXT] 'FREE & OPEN SOURCE' kinetic badge bottom. [MOOD] Cinematic, call-to-action, bright.",
+      "ttsVoice": "Ghé ngay github.com/rany2/edge-tts để khám phá! Dự án mã nguồn mở, cộng đồng active, tài liệu đầy đủ. Đừng bỏ lỡ công cụ text-to-speech miễn phí mạnh mẽ này nhé!",
+      "assets": [
+        "character shiba smiling brightly.png",
+        "character shiba throwing money happily.png"
+      ]
+    }
+  ],
+  "thumbnail": {
+    "title": "Edge-TTS Miễn Phí",
+    "prompt": "Thumbnail tĩnh 9:16 phong cách cinematic tech. Nền: gradient tím-xanh đen với glow vàng. Chủ thể chính: logo Python lớn bên trái, logo Microsoft Edge nhỏ bên phải, giữa có sóng âm thanh stylized màu vàng. Text overlay lớn: 'EDGE-TTS MIỄN PHÍ' màu vàng sáng ở nửa trên, font bold. Badge nhỏ góc dưới: 'Không cần API key'. Icon GitHub star ở góc trên phải. Bố cục rõ ràng, tương phản mạnh, cảm giác công nghệ và miễn phí."
+  }
+}

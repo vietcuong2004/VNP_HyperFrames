@@ -1,0 +1,210 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://github.com/rany2/edge-tts
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+[Pipeline] Phat hien URL. Dang lay thong tin tu trang web...
+[Pipeline] Context trich xuat tu URL: "GitHub - rany2/edge-tts: Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or Windows or an API key · GitHub" | "Use Microsoft Edge&#39;s online text-to-speech service from Python WITHOUT needing Microsoft Edge or..."
+
+[Pipeline] Tien hanh chup anh man hinh trang nguon...
+Đang mở trình duyệt headless bằng Puppeteer...
+Đang mở trang https://github.com/rany2/edge-tts...
+Đang ẩn header/footer/banner để ảnh chụp sạch hơn...
+Đang chụp ảnh màn hình vào C:\CONG_VIEC\VNP_HyperFrames\assets\images\github_repo.png...
+Đã chụp và lưu ảnh thành công.
+[Pipeline] Chup anh man hinh thanh cong. Da them vao project assets: github_repo.png
+Step 1: Sinh kich ban JSON qua ScriptAgent...
+[Pipeline] [Caching] Tim thay kich ban JSON tu truoc tai: C:\CONG_VIEC\VNP_HyperFrames\data\agent-script-https-github-com-rany2-edge-tt-mpgok45f.json
+[Pipeline] Da luu file kich ban JSON tai: C:\CONG_VIEC\VNP_HyperFrames\data\agent-script-https-github-com-rany2-edge-tt-mpgpcfs3.json
+
+Step 2: Sinh giong doc (LarVoice) va phu de (Whisper/LarVoice Subtitle)...
+
+--- Xy ly Canh 1/4 ---
+[Pipeline] Sinh giong doc Canh 1...
+[Agent Log] TTS Edge: "Bạn muốn tích hợp text-to-speech vào Python nhưng không muốn…" (voice=vi-VN-HoaiMyNeural, lang=vi)
+[Agent Log] ✓ TTS Edge xong: 9.3s audio (74 KB) | 3.5s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 1...
+[Agent Log] Whisper: scene_1.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 1...
+[Agent Log] AI SRT fix cảnh 1 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" (Lần thử 1/1, isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 1: OK (1 blocks)
+
+--- Xy ly Canh 2/4 ---
+[Pipeline] Sinh giong doc Canh 2...
+[Agent Log] TTS Edge: "edge-tts là thư viện Python mã nguồn mở cho phép bạn sử dụng…" (voice=vi-VN-HoaiMyNeural, lang=vi)
+[Agent Log] ✓ TTS Edge xong: 9.4s audio (77 KB) | 1.7s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 2...
+[Agent Log] Whisper: scene_2.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 2...
+[Agent Log] AI SRT fix cảnh 2 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" (Lần thử 1/1, isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 2: OK (1 blocks)
+
+--- Xy ly Canh 3/4 ---
+[Pipeline] Sinh giong doc Canh 3...
+[Agent Log] TTS Edge: "Chỉ cần vài dòng code đơn giản, bạn có thể chuyển đổi text t…" (voice=vi-VN-HoaiMyNeural, lang=vi)
+[Agent Log] ✓ TTS Edge xong: 8.9s audio (74 KB) | 1.6s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 3...
+[Agent Log] Whisper: scene_3.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 3...
+[Agent Log] AI SRT fix cảnh 3 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" (Lần thử 1/1, isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 3: OK (1 blocks)
+
+--- Xy ly Canh 4/4 ---
+[Pipeline] Sinh giong doc Canh 4...
+[Agent Log] TTS Edge: "Truy cập ngay github.com/rany2/edge-tts để khám phá và bắt đ…" (voice=vi-VN-HoaiMyNeural, lang=vi)
+[Agent Log] ✓ TTS Edge xong: 9.5s audio (78 KB) | 1.4s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 4...
+[Agent Log] Whisper: scene_4.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 4...
+[Agent Log] AI SRT fix cảnh 4 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" (Lần thử 1/1, isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 4: OK (1 blocks)
+
+Step 3: Bien dich kich ban sang HTML template (G1_github)...
+Successfully generated C:\CONG_VIEC\VNP_HyperFrames\index.html using template: G1_github
+
+Step 4: Kiem tra composition bang HyperFrames...
+◆  Validating VNP_HyperFrames in headless Chrome
+◇  No console errors · 32 text elements pass WCAG AA
+
+Step 5: Ket xuat video MP4...
+
+◆  Rendering VNP_HyperFrames → C:\CONG_VIEC\VNP_HyperFrames\renders\VNP_HyperFrames_2026-05-22_16-13-48.mp4
+   30fps · standard · 2 workers
+   GPU: browser GPU (auto-detect)
+
+[?25l[90m│[39m
+[32m◇[39m  Browser: cache
+[?25h
+  ⚠ [compositions/captions.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #captions for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/captions.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #captions for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/captions.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #captions for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/captions.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #captions for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/captions.html] caption_transcript_parse_error: Inline TRANSCRIPT array is not valid JSON. The studio caption editor may fail to parse it. Common cause: unquoted property keys with apostrophes in text.
+    Fix: Use JSON-quoted keys: { "text": "don't", "start": 0, "end": 1 } instead of { text: "don't", start: 0, end: 1 }.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/graphics.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #graphics for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ⚠ [compositions/intro.html] composition_self_attribute_selector: Selector matches the block's own id; will leak to sibling instances when the block is embedded twice.
+    Fix: Use #intro for clearer authoring intent and instance-isolated styling.
+  ✗ [compositions/scene_1.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_1.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/scene_2.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_2.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/scene_3.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_3.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/scene_4.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_4.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/scene_5.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_5.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/scene_5.html] timeline_id_mismatch: Timeline registered as "main" but no element has data-composition-id="main". The runtime cannot auto-nest this timeline.
+    Fix: Change window.__timelines["main"] to match the data-composition-id attribute, or vice versa.
+  ✗ [compositions/scene_6.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_6.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/scene_7.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_7.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/scene_8.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_8.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/scene_9.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/scene_9.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/thumbnail.html] root_missing_composition_id [stage]: Root composition is missing `data-composition-id`.
+    Fix: Add a stable `data-composition-id` to the entry composition wrapper.
+  ✗ [compositions/thumbnail.html] root_missing_dimensions [stage]: Root composition is missing `data-width` or `data-height`.
+    Fix: Set numeric `data-width` and `data-height` on the entry composition root.
+  ✗ [compositions/thumbnail.html] missing_timeline_registry: Missing `window.__timelines` registration.
+    Fix: Register each composition timeline on `window.__timelines[compositionId]`.
+  Continuing render despite lint issues. Use --strict to block.
+
+[2K  █░░░░░░░░░░░░░░░░░░░░░░░░  5%  Compiling composition[Compiler] Fetched 80 font face(s) for "Cascadia Mono" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\cascadia-mono)
+[Compiler] Fetched 4 font face(s) for "Consolas" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\consolas)
+[Compiler] Fetched 15 font face(s) for "Space Grotesk" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\space-grotesk)
+[Compiler] Injected deterministic @font-face rules for 5 requested font families
+[INFO] Compiled composition metadata {"entryFile":"index.html","staticDuration":37.08,"width":1080,"height":1920,"videoCount":0,"audioCount":5,"renderModeHints":{"recommendScreenshot":false,"reasons":[]}}
+[2K  ██░░░░░░░░░░░░░░░░░░░░░░░  10%  Extracting video frames[INFO] [Render] No HDR sources detected — rendering SDR
+[2K  █████░░░░░░░░░░░░░░░░░░░░  20%  Processing audio tracks[2K  ██████░░░░░░░░░░░░░░░░░░░  25%  Starting frame capture[INFO] streaming-encode gate {"enabled":false,"configFlag":true,"outputFormat":"mp4","workerCount":2,"durationSeconds":37.08,"maxDurationSeconds":240}
+[hyperframes] browserGpuMode auto → hardware (WebGL probe succeeded)
+[2K  ██████░░░░░░░░░░░░░░░░░░░  26%  Capturing frame 30/1113 (2 workers)[2K  ██████░░░░░░░░░░░░░░░░░░░  27%  Capturing frame 60/1113 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  29%  Capturing frame 90/1113 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  30%  Capturing frame 120/1113 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  31%  Capturing frame 150/1113 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  32%  Capturing frame 180/1113 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  33%  Capturing frame 210/1113 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  35%  Capturing frame 240/1113 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  36%  Capturing frame 270/1113 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  37%  Capturing frame 300/1113 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  38%  Capturing frame 330/1113 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  40%  Capturing frame 360/1113 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  41%  Capturing frame 390/1113 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  42%  Capturing frame 420/1113 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  43%  Capturing frame 450/1113 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  44%  Capturing frame 480/1113 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  46%  Capturing frame 510/1113 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  47%  Capturing frame 540/1113 (2 workers)[2K  ████████████░░░░░░░░░░░░░  48%  Capturing frame 570/1113 (2 workers)[2K  ████████████░░░░░░░░░░░░░  49%  Capturing frame 600/1113 (2 workers)[2K  ████████████░░░░░░░░░░░░░  50%  Capturing frame 630/1113 (2 workers)[2K  █████████████░░░░░░░░░░░░  52%  Capturing frame 660/1113 (2 workers)[2K  █████████████░░░░░░░░░░░░  53%  Capturing frame 690/1113 (2 workers)[2K  █████████████░░░░░░░░░░░░  54%  Capturing frame 720/1113 (2 workers)[2K  █████████████░░░░░░░░░░░░  55%  Capturing frame 750/1113 (2 workers)[2K  ██████████████░░░░░░░░░░░  57%  Capturing frame 780/1113 (2 workers)[2K  ██████████████░░░░░░░░░░░  58%  Capturing frame 810/1113 (2 workers)[2K  ██████████████░░░░░░░░░░░  59%  Capturing frame 840/1113 (2 workers)[2K  ███████████████░░░░░░░░░░  60%  Capturing frame 870/1113 (2 workers)[2K  ███████████████░░░░░░░░░░  61%  Capturing frame 900/1113 (2 workers)[2K  ███████████████░░░░░░░░░░  63%  Capturing frame 930/1113 (2 workers)[2K  ████████████████░░░░░░░░░  64%  Capturing frame 960/1113 (2 workers)[2K  ████████████████░░░░░░░░░  65%  Capturing frame 990/1113 (2 workers)[2K  ████████████████░░░░░░░░░  66%  Capturing frame 1020/1113 (2 workers)[2K  ████████████████░░░░░░░░░  67%  Capturing frame 1050/1113 (2 workers)[2K  █████████████████░░░░░░░░  69%  Capturing frame 1080/1113 (2 workers)[2K  █████████████████░░░░░░░░  70%  Capturing frame 1110/1113 (2 workers)[2K  █████████████████░░░░░░░░  70%  Capturing frame 1113/1113 (2 workers)[2K  ██████████████████░░░░░░░  75%  Encoding video[2K  ██████████████████████░░░  90%  Assembling final video[2K  █████████████████████████  100%  Render complete
+◇  C:\CONG_VIEC\VNP_HyperFrames\renders\VNP_HyperFrames_2026-05-22_16-13-48.mp4
+   7.6 MB · 1m 38.1s · completed
+
+Step 6: Doi ten video theo dung dinh dang...
+-> agent-video-https-github-com-rany2-edge-tt-mpgpcfs3.mp4
+
+Step 7: Don dep file am thanh tam...
+Da xoa 0 file .wav trong thu muc assets/audio.
+
+==================================================
+AGENT PIPELINE DA HOAN THANH CONG!
+==================================================
+

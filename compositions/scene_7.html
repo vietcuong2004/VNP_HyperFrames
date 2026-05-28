@@ -1,0 +1,215 @@
+```html
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<!-- THÊM GSAP PLUGINS NẾU CẦN (tối đa 4 CDN) -->
+<style>
+*{box-sizing:border-box}
+html,body{width:1080px;height:1920px;margin:0;padding:0;overflow:hidden;background:#1e293b;font-family:'Be Vietnam Pro',Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+#stage{position:absolute;inset:0;width:1080px;height:1920px;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#1a1a2e 0%,#0a0a14 60%,#05050a 100%);color:#fff}
+#particles-bg{position:absolute;inset:0;z-index:1;pointer-events:none}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(247,181,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(247,181,0,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:2}
+.txt{display:block;line-height:1.5;overflow:visible;padding-top:0.15em;padding-bottom:0.05em;letter-spacing:0.3px}
+.vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 55%,rgba(0,0,0,0.75));pointer-events:none;z-index:90}
+.scan{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,0.025) 0px,rgba(255,255,255,0.025) 2px,transparent 2px,transparent 4px);pointer-events:none;z-index:91}
+.noise{position:absolute;inset:0;opacity:.07;pointer-events:none;z-index:92;background-image:url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC45IiBudW1PY3RhdmVzPSIzIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbHRlcj0idXJsKCNuKSIgb3BhY2l0eT0iMC42Ii8+PC9zdmc+')}
+.progress{position:absolute;bottom:0;left:0;height:6px;background:linear-gradient(90deg,#F7B500,#FFD93D);width:0;z-index:99;box-shadow:0 0 20px #F7B500}
+#content{position:absolute;inset:10px;overflow:visible;z-index:3;pointer-events:none}
+
+/* Custom styles for this cinematic */
+.layer-far {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255,0,0,0.05) 0%, rgba(0,0,0,0.5) 70%);
+  z-index: 0;
+  filter: blur(5px);
+}
+
+.layer-mid {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  opacity: 0.3;
+}
+
+.layer-near {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.smoke {
+  position: absolute;
+  inset: 0;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJzSURBVHgB7doxDoMwEATB3f+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+p/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+l/Z+/wA2a5/4q2j2AAAAAElFTkSuQmCC');
+  background-size: cover;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.gear-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+
+.gear {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gear::before {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+.gear.small {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(255, 0, 0, 0.08);
+}
+
+.gear.small::before {
+  width: 70%;
+  height: 70%;
+}
+
+.question-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 300px;
+  font-weight: 900;
+  color: #ef4444; /* Red for danger/challenge */
+  text-shadow: 0 0 50px rgba(239, 68, 68, 0.8), 0 0 100px rgba(239, 68, 68, 0.5);
+  z-index: 30;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  opacity: 0;
+}
+
+.glitch-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+
+.red-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  z-index: 20;
+}
+
+.data-lines {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(0deg, rgba(239, 68, 68, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(239, 68, 68, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0;
+  z-index: 1;
+}
+
+.text-overlay {
+  position: absolute;
+  bottom: 200px; /* Above lower third */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 830px; /* {{TEXT_MAX_W}} */
+  text-align: center;
+  color: #ffffff;
+  font-size: 48px; /* Subtitle size */
+  font-weight: 600;
+  opacity: 0;
+  z-index: 40;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+
+/* Vietnamese diacritics fix — prevent clipping */
+#content{overflow:visible!important}
+.hero-wrap,.hero-label,.hero-num,.hero-sub,
+[class*="title"],[class*="label"],[class*="text"],[class*="heading"],
+[class*="hero"],[class*="stat"],[class*="num"],[class*="keyword"]{
+  overflow:visible!important;line-height:1.5!important;padding-top:0.15em!important;
+}
+</style></head><body>
+<div id="stage">
+  <div id="particles-bg"></div>
+  <div class="grid-bg"></div>
+
+  <div class="layer-far data-lines"></div>
+  <div class="layer-mid smoke"></div>
+  <div class="layer-mid gear-container">
+    <div class="gear large" style="top: 20%; left: 30%;"></div>
+    <div class="gear small" style="top: 60%; left: 70%;"></div>
+    <div class="gear large" style="top: 70%; left: 20%;"></div>
+    <div class="gear small" style="top: 30%; left: 60%;"></div>
+  </div>
+  <div class="red-glow"></div>
+
+  <div id="content">
+    <div class="question-mark" id="questionMark">?</div>
+    <div class="text-overlay txt" id="challengeText">THÁCH THỨC</div>
+  </div>
+
+  <div class="vignette"></div><div class="scan"></div><div class="noise"></div>
+  <div class="progress" id="progress"></div>
+</div>
+<script>
+window.__timelines = window.__timelines || {};
+var tl = gsap.timeline({ paused: true });
+var DUR = 15000/1000;
+
+tl.to('#progress',{width:1080,duration:DUR,ease:'none'},0);
+
+// FAKE CAMERA: Slow zoom out
+tl.to('#stage', {
+  scale: 1.04,
+  duration: DUR,
+  ease: 'none',
+  transformOrigin: 'center center'
+}, 0);
+
+// Ambient motion for gears
+var gearCycles = Math.ceil(DUR / 10);
+tl.to('.gear.large', {
+  rotation: 360,
+  duration: 10,
+  repeat: gearCycles - 1,
+  ease: 'linear'
+}, 0);
+tl.to('.gear.small', {
+  rotation: -360,
+  duration: 8,
+  repeat: gearCycles - 1,
+  ease: 'linear'
+}, 0);
+
+// Ambient motion for data lines flicker
+var dataLineCycles = Math.ceil(DUR /
