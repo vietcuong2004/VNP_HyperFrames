@@ -112,7 +112,7 @@ async function fetchOptionalText(url, fallback, headers = {}) {
   }
 }
 
-function parseTargetUrl(value) {
+export function parseTargetUrl(value) {
   let url;
   try {
     url = new URL(value);
@@ -343,6 +343,29 @@ function classifyDockerImage(info, target) {
 }
 
 // Xuất các helpers dùng chung cho các Generators
+export function selectTemplateVariant(platform, videoFormat) {
+  const variants = {
+    github: {
+      knowledge_map_resource_digest: "template2",
+      dataset_explainer: "template2",
+      developer_integration_brief: "template3",
+      tool_review_quick_demo: "template3",
+    },
+    docker: {
+      self_host_setup_guide: "template2",
+      dev_workflow_image_brief: "template3",
+    },
+    web: {
+      web_docs_explainer: "template2",
+      web_article_digest: "template2",
+      web_tool_overview: "template3",
+      web_product_brief: "template3",
+    },
+  };
+
+  return variants[platform]?.[videoFormat] || "template1";
+}
+
 export function short(value, max = 120) {
   const clean = stripMarkdown(value || "");
   if (clean.length <= max) return clean;
@@ -372,7 +395,7 @@ export function githubStatsScene(repoData, owner, repo, headlineLine2) {
 }
 
 // Builders đóng vai trò nạp dữ liệu thô và gọi Group Generator tương ứng
-async function buildGithubData(target) {
+export async function buildGithubData(target) {
   const { owner, repo } = target;
   console.log(`Đang phân tích GitHub repo: ${owner}/${repo}`);
 
@@ -397,10 +420,12 @@ async function buildGithubData(target) {
 
   // Dynamic import G1_github generator
   const { generateScenes } = await import("./generators/github_generator.mjs");
-  const scenes = await generateScenes({ target, repoData, readme, rootFiles }, classification.videoFormat);
+  const subtemplate = selectTemplateVariant("github", classification.videoFormat);
+  const scenes = await generateScenes({ target, repoData, readme, rootFiles }, classification.videoFormat, subtemplate);
 
   return {
     template: "G1_github",
+    subtemplate,
     source_url: target.url,
     platform: "github",
     content_type: classification.contentType,
@@ -420,7 +445,7 @@ async function buildGithubData(target) {
   };
 }
 
-async function buildDockerData(target) {
+export async function buildDockerData(target) {
   console.log(`Đang phân tích Docker image: ${target.namespace}/${target.image}`);
 
   const pathPart =
@@ -439,10 +464,12 @@ async function buildDockerData(target) {
 
   // Dynamic import G2_docker generator
   const { generateScenes } = await import("./generators/docker_generator.mjs");
-  const scenes = await generateScenes({ target, info }, classification.videoFormat);
+  const subtemplate = selectTemplateVariant("docker", classification.videoFormat);
+  const scenes = await generateScenes({ target, info }, classification.videoFormat, subtemplate);
 
   return {
     template: "G2_docker",
+    subtemplate,
     source_url: target.url,
     platform: "docker",
     content_type: classification.contentType,
@@ -505,7 +532,7 @@ function pickWebTitle(target, html, results) {
   return target.host;
 }
 
-async function buildWebData(target) {
+export async function buildWebData(target) {
   console.log(`Đang phân tích web URL: ${target.url}`);
 
   const html = await fetchOptionalText(target.url, "");
@@ -530,10 +557,12 @@ async function buildWebData(target) {
 
   // Dynamic import G3_web generator
   const { generateScenes } = await import("./generators/web_generator.mjs");
-  const scenes = await generateScenes({ target, webInfo: { title, description, answer, results } }, classification.videoFormat);
+  const subtemplate = selectTemplateVariant("web", classification.videoFormat);
+  const scenes = await generateScenes({ target, webInfo: { title, description, answer, results } }, classification.videoFormat, subtemplate);
 
   return {
     template: "G3_web",
+    subtemplate,
     source_url: target.url,
     platform: "web",
     content_type: classification.contentType,

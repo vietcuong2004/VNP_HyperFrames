@@ -1,0 +1,162 @@
+{
+  "template": "G3_web",
+  "subtemplate": "template2",
+  "platform": "web",
+  "video_format": "web_docs_explainer",
+  "visual_theme": "template2",
+  "duration": 36,
+  "scenes": [
+    {
+      "scene": 1,
+      "audio_start": 0,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "transcript": [],
+      "repo_url": "developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+      "headline_line1": "FETCH API",
+      "headline_line2": "CAN KIEM TRA GI?"
+    },
+    {
+      "scene": 2,
+      "audio_start": 6,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "transcript": [],
+      "headline_line1": "DOCS MAP",
+      "headline_line2": "DOC THEO LO TRINH",
+      "cards": [
+        {
+          "title": "Concept",
+          "body": "Hieu request, response va promise truoc."
+        },
+        {
+          "title": "Guide",
+          "body": "Doc vi du co ban trong docs."
+        },
+        {
+          "title": "Reference",
+          "body": "Tra option va method khi can."
+        },
+        {
+          "title": "Compat",
+          "body": "Kiem tra browser support sau cung."
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "audio_start": 12,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "transcript": [],
+      "headline_line1": "DOC SAU HON",
+      "headline_line2": "3 MOCCANH",
+      "steps": [
+        {
+          "title": "Syntax",
+          "body": "Nam cach goi fetch va doc JSON."
+        },
+        {
+          "title": "Errors",
+          "body": "Tu check response.ok cho HTTP error."
+        },
+        {
+          "title": "Abort",
+          "body": "Can timeout thi doc AbortController."
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "audio_start": 18,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "transcript": [],
+      "headline_line1": "BANG CHUNG",
+      "headline_line2": "LAY TU DOCS",
+      "cards": [
+        {
+          "title": "Example",
+          "body": "Vi du MDN cho thay flow promise."
+        },
+        {
+          "title": "Note",
+          "body": "Docs noi ro HTTP error khong reject."
+        },
+        {
+          "title": "Compat",
+          "body": "Bang support giup quyet dinh polyfill."
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "audio_start": 24,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "transcript": [],
+      "headline_line1": "NOTE KY THUAT",
+      "headline_line2": "TRUOC KHI CODE",
+      "btn_text": "Ghi 3 rule request",
+      "steps": [
+        {
+          "title": "Rule 1",
+          "body": "Luon check response.ok."
+        },
+        {
+          "title": "Rule 2",
+          "body": "Tach parse JSON khoi request."
+        },
+        {
+          "title": "Rule 3",
+          "body": "Xu ly CORS o server, khong do client."
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "audio_start": 30,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba showing surprise.png"
+      ],
+      "transcript": [],
+      "headline_line1": "KET LUAN DOCS",
+      "headline_line2": "DOC CO HE THONG",
+      "cards": [
+        {
+          "title": "Start",
+          "body": "Doc concept truoc."
+        },
+        {
+          "title": "Deep",
+          "body": "Dao vao error va abort."
+        },
+        {
+          "title": "Verify",
+          "body": "Kiem browser support."
+        },
+        {
+          "title": "Save",
+          "body": "Luu link reference de tra sau."
+        }
+      ]
+    }
+  ]
+}

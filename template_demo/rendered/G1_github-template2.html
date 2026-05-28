@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="../../">
+  <meta charset="UTF-8">
+  <style>﻿@font-face {
+  font-family: "Be Vietnam Pro";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("./assets/fonts/be-vietnam-pro-vietnamese-400-normal.woff2") format("woff2");
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("./assets/fonts/be-vietnam-pro-vietnamese-700-normal.woff2") format("woff2");
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+  src: url("./assets/fonts/be-vietnam-pro-vietnamese-800-normal.woff2") format("woff2");
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+@font-face {
+  font-family: "Be Vietnam Pro";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 900;
+  src: url("./assets/fonts/be-vietnam-pro-vietnamese-900-normal.woff2") format("woff2");
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+:root { --font-sans: "Be Vietnam Pro", "Be Vietnam", Arial, "Liberation Sans", "Noto Sans", "Segoe UI", sans-serif; --font-mono: "Cascadia Mono", Consolas, "Liberation Mono", monospace; }
+body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #050505; color: #fff; font-family: var(--font-sans); }
+.bg { position: absolute; inset: 0; background: radial-gradient(circle at center 30%, #1a1a0d 0%, #050505 80%); }
+
+.source-web .bg {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(0, 210, 255, 0.22) 0%, rgba(0, 210, 255, 0) 34%),
+    radial-gradient(circle at 82% 30%, rgba(253, 240, 28, 0.18) 0%, rgba(253, 240, 28, 0) 32%),
+    linear-gradient(180deg, #071017 0%, #050505 78%);
+}
+
+.source-web .headline-line2 {
+  background: linear-gradient(90deg, #00d2ff, #fdf01c, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.source-web .browser-frame {
+  border-color: rgba(0, 210, 255, 0.24);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 55px rgba(0, 210, 255, 0.18);
+}
+
+.source-web .browser-header {
+  background: #0b1720;
+}
+
+.source-web .action-btn {
+  border-color: rgba(0, 210, 255, 0.35);
+  background: rgba(0, 210, 255, 0.06);
+}
+
+.source-web .captions {
+  border-color: rgba(0, 210, 255, 0.28);
+}
+
+/* Animated Star Particles */
+.particles-container { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.particle-star { position: absolute; border-radius: 50%; opacity: 0.6; }
+.particle-green { background: #fdf01c; box-shadow: 0 0 10px #fdf01c; }
+.particle-purple { background: #9b59b6; box-shadow: 0 0 10px #9b59b6; }
+.particle-white { background: #ffffff; box-shadow: 0 0 10px #ffffff; }
+
+/* Permanent Shiba Logo top left */
+.permanent-logo {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  width: 100px;
+  height: 100px;
+  border-radius: 28px;
+  z-index: 10000;
+  box-shadow: 0 0 25px rgba(253, 240, 28, 0.4);
+  border: 3px solid #fdf01c;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+/* Top Header Info */
+.scene .top-header { display: none !important; }
+
+.top-header {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 10000;
+  background: rgba(10, 10, 10, 0.8);
+  border: 2.5px solid #fdf01c;
+  box-shadow: 0 0 25px rgba(253, 240, 28, 0.3), 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 25px;
+  padding: 12px 25px 12px 15px;
+  backdrop-filter: blur(12px);
+}
+.top-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  border: none;
+  object-fit: cover;
+}
+.top-username {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-sans);
+}
+
+/* Main Glow Icon & Vector Container */
+.main-glow-icon {
+  position: absolute;
+  top: 280px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 60px;
+  background: rgba(253, 240, 28, 0.03);
+  border: 2px solid rgba(253, 240, 28, 0.25);
+  box-shadow: 0 0 80px rgba(253, 240, 28, 0.25), inset 0 0 40px rgba(253, 240, 28, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90px;
+  z-index: 20;
+}
+
+/* Highly-polished SVG Glow Illustration */
+.glow-svg-container {
+  width: 140px;
+  height: 140px;
+  border-radius: 40px;
+  background: rgba(253, 240, 28, 0.04);
+  border: 2px solid rgba(253, 240, 28, 0.3);
+  box-shadow: 0 0 40px rgba(253, 240, 28, 0.25), inset 0 0 15px rgba(253, 240, 28, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.glow-svg-container svg {
+  width: 70px;
+  height: 70px;
+  fill: none;
+  stroke: #fdf01c;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 12px rgba(253, 240, 28, 0.85));
+}
+
+/* Bento Card Vector Icon */
+.card-icon-svg {
+  width: 90px;
+  height: 90px;
+  border-radius: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  transition: all 0.3s ease;
+}
+.card-icon-svg svg {
+  width: 45px;
+  height: 45px;
+  fill: none;
+  stroke: #fdf01c;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px rgba(253, 240, 28, 0.85));
+}
+
+/* Premium Candlestick Chart Visualization */
+.financial-chart {
+  position: relative;
+  width: 100%;
+  height: 330px;
+  border-left: 2px solid rgba(255,255,255,0.15);
+  border-bottom: 2px solid rgba(255,255,255,0.15);
+  margin-top: 40px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 40px 20px 40px;
+}
+.chart-trendline {
+  position: absolute;
+  top: 140px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #00d2ff, #fdf01c);
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+  transform: rotate(-10deg);
+}
+.candlestick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  position: relative;
+}
+.candlestick-wick {
+  width: 3px;
+  height: 220px;
+  background: rgba(255,255,255,0.2);
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+.candlestick-body {
+  width: 50px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+}
+.candlestick.bullish .candlestick-body {
+  background: #fdf01c;
+  border: 2px solid #fdf01c;
+  box-shadow: 0 0 25px rgba(253, 240, 28, 0.45);
+  height: 140px;
+}
+.candlestick.bearish .candlestick-body {
+  background: #ff4757;
+  border: 2px solid #ff4757;
+  box-shadow: 0 0 25px rgba(255, 71, 87, 0.4);
+  height: 90px;
+}
+.robot-badge {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 210, 255, 0.1);
+  border: 2px solid #00d2ff;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+  z-index: 5;
+}
+.robot-badge svg {
+  width: 35px;
+  height: 35px;
+  fill: none;
+  stroke: #00d2ff;
+  stroke-width: 2.5;
+}
+
+/* Premium Repository Star Badge */
+.repo-badge {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 35px;
+  padding: 25px 40px;
+  backdrop-filter: blur(10px);
+  width: 100%;
+  box-sizing: border-box;
+}
+.crown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.crown-svg {
+  width: 70px;
+  height: 70px;
+  fill: #f3ca56;
+  filter: drop-shadow(0 0 10px rgba(243,202,86,0.6));
+}
+.rank-text {
+  font-size: 36px;
+  font-weight: 900;
+  color: #f3ca56;
+  margin-top: 5px;
+}
+.repo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.repo-name {
+  font-size: 38px;
+  font-weight: 800;
+  color: #fff;
+}
+.repo-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 28px;
+  color: rgba(255,255,255,0.6);
+}
+.meta-dot {
+  width: 12px;
+  height: 12px;
+  background: #3572A5;
+  border-radius: 50%;
+}
+.repo-trend {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fdf01c;
+}
+.trend-label {
+  font-size: 24px;
+  color: rgba(253, 240, 28, 0.7);
+}
+
+/* Headline */
+.headline-container {
+  position: absolute;
+  top: 470px;
+  width: 100%;
+  text-align: center;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 64px 18px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+.headline-line1 {
+  font-size: 76px;
+  line-height: 1.14;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  color: #ffffff;
+  text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  letter-spacing: 0;
+}
+.headline-line2 {
+  font-size: 72px;
+  line-height: 1.14;
+  font-weight: 900;
+  font-family: var(--font-sans);
+  background: linear-gradient(90deg, #fdf01c, #00d2ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 5px 15px rgba(253,240,28,0.35));
+  letter-spacing: 0;
+}
+
+/* Action Button */
+.action-btn {
+  position: absolute;
+  top: 775px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 25px 60px;
+  border-radius: 40px;
+  background: rgba(253, 240, 28, 0.05);
+  border: 3px solid rgba(253, 240, 28, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 40px;
+  font-weight: 800;
+  color: #fff;
+  z-index: 30;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.action-icon { font-size: 45px; color: #fdf01c; }
+
+/* Bento Box Layout */
+.bento-container {
+  position: absolute;
+  top: 980px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  z-index: 30;
+}
+.bento-card {
+  background: rgba(20, 20, 20, 0.65) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 24px !important;
+  padding: 30px 35px !important;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5) !important;
+  backdrop-filter: blur(15px) !important;
+  transition: all 0.3s ease;
+}
+.bento-card.full { width: 100%; box-sizing: border-box; gap: 30px; }
+.bento-grid-2 { display: flex; gap: 30px; width: 100%; }
+.bento-card.half {
+  flex: 1;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 35px 25px !important;
+  gap: 20px !important;
+}
+.bento-card.half .card-icon-svg {
+  margin: 0 auto 15px auto !important;
+  align-self: center !important;
+}
+
+/* Sequential Step Cards */
+.step-container {
+  position: absolute;
+  top: 525px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  z-index: 30;
+}
+.step-card {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 24px;
+  align-items: center;
+  min-height: 145px;
+  padding: 26px 32px;
+  box-sizing: border-box;
+  border-radius: 22px;
+  background: rgba(20, 20, 20, 0.68);
+  border: 1.5px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.48);
+  backdrop-filter: blur(15px);
+}
+.step-number {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #050505;
+  background: linear-gradient(135deg, #fdf01c, #00d2ff);
+  font-size: 30px;
+  font-weight: 900;
+}
+.step-title {
+  font-size: 34px;
+  line-height: 1.18;
+  font-weight: 850;
+  color: #ffffff;
+}
+.step-desc {
+  margin-top: 8px;
+  font-size: 23px;
+  line-height: 1.34;
+  font-weight: 500;
+  color: rgba(255,255,255,0.62);
+}
+.step-command {
+  font-family: var(--font-mono);
+  font-size: 25px;
+  line-height: 1.35;
+  color: #00ff88;
+  background: rgba(0,0,0,0.36);
+  border: 1.5px solid rgba(0,255,136,0.26);
+  border-radius: 16px;
+  padding: 16px 22px;
+  margin-top: 14px;
+  overflow-wrap: anywhere;
+}
+
+/* Custom Colored Icon Themes (Image 1 Style) */
+/* Cyan Icons */
+#bc-scene2-1 .card-icon-svg,
+#bc-scene3-1 .card-icon-svg,
+#bc-scene5-3 .card-icon-svg,
+#bc-scene8-3 .card-icon-svg {
+  background: rgba(0, 229, 255, 0.08) !important;
+  border: 2px solid rgba(0, 229, 255, 0.35) !important;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2) !important;
+}
+#bc-scene2-1 .card-icon-svg svg,
+#bc-scene3-1 .card-icon-svg svg,
+#bc-scene5-3 .card-icon-svg svg,
+#bc-scene8-3 .card-icon-svg svg {
+  stroke: #00e5ff !important;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.85)) !important;
+}
+
+/* Pink / Red Icons */
+#bc-scene2-2 .card-icon-svg,
+#bc-scene3-2 .card-icon-svg,
+#bc-scene5-2 .card-icon-svg,
+#bc-scene8-2 .card-icon-svg {
+  background: rgba(255, 42, 133, 0.08) !important;
+  border: 2px solid rgba(255, 42, 133, 0.35) !important;
+  box-shadow: 0 0 20px rgba(255, 42, 133, 0.2) !important;
+}
+#bc-scene2-2 .card-icon-svg svg,
+#bc-scene3-2 .card-icon-svg svg,
+#bc-scene5-2 .card-icon-svg svg,
+#bc-scene8-2 .card-icon-svg svg {
+  stroke: #ff2a85 !important;
+  filter: drop-shadow(0 0 10px rgba(255, 42, 133, 0.85)) !important;
+}
+
+/* Yellow / Gold Icons */
+#bc-scene2-3 .card-icon-svg,
+#bc-scene3-3 .card-icon-svg,
+#bc-scene5-1 .card-icon-svg,
+#bc-scene8-1 .card-icon-svg {
+  background: rgba(253, 240, 28, 0.08) !important;
+  border: 2px solid rgba(253, 240, 28, 0.35) !important;
+  box-shadow: 0 0 20px rgba(253, 240, 28, 0.2) !important;
+}
+#bc-scene2-3 .card-icon-svg svg,
+#bc-scene3-3 .card-icon-svg svg,
+#bc-scene5-1 .card-icon-svg svg,
+#bc-scene8-1 .card-icon-svg svg {
+  stroke: #fdf01c !important;
+  filter: drop-shadow(0 0 10px rgba(253, 240, 28, 0.85)) !important;
+}
+
+/* Purple Icons */
+#bc-scene3-4 .card-icon-svg,
+#bc-scene8-4 .card-icon-svg {
+  background: rgba(155, 89, 182, 0.08) !important;
+  border: 2px solid rgba(155, 89, 182, 0.35) !important;
+  box-shadow: 0 0 20px rgba(155, 89, 182, 0.2) !important;
+}
+#bc-scene3-4 .card-icon-svg svg,
+#bc-scene8-4 .card-icon-svg svg {
+  stroke: #9b59b6 !important;
+  filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.85)) !important;
+}
+
+/* Card Content Styles */
+.card-icon { width: 90px; height: 90px; border-radius: 22px; background: rgba(253, 240, 28, 0.1); display: flex; justify-content: center; align-items: center; font-size: 45px; color: #fdf01c; border: 1px solid rgba(253, 240, 28, 0.2); }
+.card-text-group { display: flex; flex-direction: column; gap: 8px; }
+.card-title { font-size: 38px; font-weight: 800; color: #fff; }
+.card-desc { font-size: 26px; font-weight: 500; color: rgba(255,255,255,0.55); }
+
+/* Character */
+.character { position: absolute; bottom: 34px; right: 18px; width: 450px; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); z-index: 40; opacity: 0.8; }
+
+/* Subtitle */
+.captions {
+  position: absolute;
+  bottom: 120px;
+  left: 60px;
+  width: 660px;
+  text-align: center;
+  z-index: 1000;
+  min-height: 132px;
+  max-height: 188px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+  border: 2px solid rgba(253, 240, 28, 0.25);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(253, 240, 28, 0.05);
+  padding: 25px 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Browser Window Mockup for GitHub Repo */
+.browser-frame {
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 960px;
+  height: 860px;
+  background: #0d1117;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-radius: 32px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(253, 240, 28, 0.18);
+  overflow: hidden;
+  z-index: 20;
+}
+
+.browser-header {
+  height: 70px;
+  background: #161b22;
+  border-bottom: 2.5px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  position: relative;
+  z-index: 35;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 12px;
+  position: absolute;
+  left: 30px;
+}
+
+.browser-dots .dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.browser-dots .dot.red { background: #ff5f56; }
+.browser-dots .dot.yellow { background: #ffbd2e; }
+.browser-dots .dot.green { background: #27c93f; }
+
+.browser-address {
+  background: #0d1117;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-mono);
+  font-size: 24px;
+  padding: 8px 30px;
+  border-radius: 14px;
+  width: 480px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 0 auto;
+}
+
+.browser-inner {
+  position: absolute;
+  top: 70px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.browser-glass-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 60%);
+  pointer-events: none;
+  z-index: 30;
+}
+
+/* Scrolling Screenshot */
+.github-scroll-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 25;
+}
+
+/* Variant template2: knowledge map and dataset digest */
+.bg {
+  background:
+    linear-gradient(90deg, rgba(0, 255, 136, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0, 210, 255, 0.07) 1px, transparent 1px),
+    radial-gradient(circle at 22% 18%, rgba(0, 255, 136, 0.22), transparent 32%),
+    radial-gradient(circle at 78% 28%, rgba(253, 240, 28, 0.18), transparent 30%),
+    linear-gradient(180deg, #06120f 0%, #050505 78%);
+  background-size: 78px 78px, 78px 78px, auto, auto, auto;
+}
+.top-header {
+  border-color: rgba(0, 255, 136, 0.7);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.22), 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.headline-line2 {
+  background: linear-gradient(90deg, #00ff88, #fdf01c, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.browser-frame,
+.bento-card,
+.step-card {
+  border-color: rgba(0, 255, 136, 0.24) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.56), 0 0 34px rgba(0, 255, 136, 0.08) !important;
+}
+.step-number {
+  background: linear-gradient(135deg, #00ff88, #fdf01c);
+}
+.captions {
+  border-color: rgba(0, 255, 136, 0.35);
+}
+
+
+.github-star-crop {
+  display: block;
+  width: 100%;
+  max-height: 130px;
+  object-fit: cover;
+  object-position: left center;
+  margin-top: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+}
+\n/* Knowledge-map template cards */\n.knowledge-map-template .bento-card, .knowledge-map-template .step-card { border-style: dashed !important; }\n.knowledge-map-template .step-card { grid-template-columns: 92px 1fr; }\n.knowledge-map-template .step-number::after { content: ""; position: absolute; width: 2px; height: 68px; background: rgba(0,210,255,0.35); transform: translateY(66px); }\n
+
+</style>
+  <script src="./vendor/gsap.min.js"></script>
+</head>
+<body>
+  <div id="root" class="source-github format-knowledge_map_resource_digest theme-template2" data-composition-id="news-multi" data-duration="48" data-width="1080" data-height="1920" data-start="0">
+    <audio id="bg-audio" src="./assets/background-music/crypto news ambient background.mp3" data-track-index="0" data-start="0" data-duration="48" data-volume="0.3" loop></audio>
+
+
+    <div id="main-clip" class="clip" data-start="0" data-duration="48" data-track-index="3">
+      <div class="bg"></div>
+      <div class="particles-container"><div class="particle-star particle-green p-anim" style="width:2px; height:2px; top:1535.5259029250192px; left:588.9586788280576px;"></div><div class="particle-star particle-green p-anim" style="width:3.569890517434942px; height:3.569890517434942px; top:632.6718196883576px; left:564.6973520454776px;"></div><div class="particle-star particle-green p-anim" style="width:5.880993330547426px; height:5.880993330547426px; top:1766.284509041543px; left:797.7507367319777px;"></div><div class="particle-star particle-green p-anim" style="width:5.674001668463916px; height:5.674001668463916px; top:1145.1231563722104px; left:360.1147201735148px;"></div><div class="particle-star particle-white p-anim" style="width:3.6885709907046476px; height:3.6885709907046476px; top:224.27374659860106px; left:407.89639844377234px;"></div><div class="particle-star particle-purple p-anim" style="width:4.662801010879775px; height:4.662801010879775px; top:455.35559069928695px; left:21.23276730206271px;"></div><div class="particle-star particle-green p-anim" style="width:5.332718809853759px; height:5.332718809853759px; top:1536.730279927201px; left:364.20659095929295px;"></div><div class="particle-star particle-purple p-anim" style="width:2.431763400373711px; height:2.431763400373711px; top:1413.7129213923345px; left:524.7595076730795px;"></div><div class="particle-star particle-purple p-anim" style="width:4.690272104100586px; height:4.690272104100586px; top:1528.785507073212px; left:634.6024329709326px;"></div><div class="particle-star particle-green p-anim" style="width:4.83496910073336px; height:4.83496910073336px; top:1571.8122668458136px; left:829.1233232848754px;"></div><div class="particle-star particle-purple p-anim" style="width:3.5884565074029524px; height:3.5884565074029524px; top:1230.2568547147985px; left:207.29236457424122px;"></div><div class="particle-star particle-purple p-anim" style="width:5.668708344712286px; height:5.668708344712286px; top:189.40121615183898px; left:991.5646523256873px;"></div><div class="particle-star particle-green p-anim" style="width:3.7885677438189305px; height:3.7885677438189305px; top:1632.5659832752308px; left:207.78043110905855px;"></div><div class="particle-star particle-green p-anim" style="width:2.655247746628447px; height:2.655247746628447px; top:1741.3322435210603px; left:85.06296351828496px;"></div><div class="particle-star particle-green p-anim" style="width:2.969836048725483px; height:2.969836048725483px; top:195.76452651078853px; left:775.7141000385309px;"></div><div class="particle-star particle-white p-anim" style="width:5.426804031838401px; height:5.426804031838401px; top:174.63485295288024px; left:355.1076229717728px;"></div><div class="particle-star particle-white p-anim" style="width:2.7135204296719166px; height:2.7135204296719166px; top:1355.647688683166px; left:21.580439099489013px;"></div><div class="particle-star particle-purple p-anim" style="width:3.509769967673492px; height:3.509769967673492px; top:1665.665646303924px; left:976.3216972953524px;"></div><div class="particle-star particle-purple p-anim" style="width:4.487277313852246px; height:4.487277313852246px; top:780.9357763713535px; left:263.2599087196286px;"></div><div class="particle-star particle-purple p-anim" style="width:2.3092366739983845px; height:2.3092366739983845px; top:127.31628965545667px; left:128.94814866565866px;"></div><div class="particle-star particle-green p-anim" style="width:5.629847360720305px; height:5.629847360720305px; top:1130.5035517027904px; left:742.447420430326px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0938556615874404px; height:3.0938556615874404px; top:1716.259190737776px; left:195.2082629036886px;"></div><div class="particle-star particle-purple p-anim" style="width:3.3361033271394263px; height:3.3361033271394263px; top:1560.6371598624548px; left:740.9506847751618px;"></div><div class="particle-star particle-green p-anim" style="width:2.981082994971075px; height:2.981082994971075px; top:340.21059454044007px; left:475.54250945300737px;"></div><div class="particle-star particle-white p-anim" style="width:2.6425008613077807px; height:2.6425008613077807px; top:1232.298306504208px; left:616.8762158707614px;"></div><div class="particle-star particle-green p-anim" style="width:2.9228469061708893px; height:2.9228469061708893px; top:415.1907554643117px; left:304.7443614471922px;"></div><div class="particle-star particle-purple p-anim" style="width:4.412972973270371px; height:4.412972973270371px; top:1068.37534038566px; left:760.7136744288073px;"></div><div class="particle-star particle-white p-anim" style="width:3.6916789999486355px; height:3.6916789999486355px; top:1122.7608525493224px; left:87.99790379453043px;"></div><div class="particle-star particle-white p-anim" style="width:5.325307687064196px; height:5.325307687064196px; top:260.9009332248206px; left:551.3295157581888px;"></div><div class="particle-star particle-white p-anim" style="width:5.867347892552061px; height:5.867347892552061px; top:1667.2163794618655px; left:256.8303267231022px;"></div><div class="particle-star particle-purple p-anim" style="width:5.8580470264969335px; height:5.8580470264969335px; top:1528.216142326005px; left:431.8811632851066px;"></div><div class="particle-star particle-purple p-anim" style="width:5.824032719079696px; height:5.824032719079696px; top:1282.716862806683px; left:224.99064055640702px;"></div><div class="particle-star particle-white p-anim" style="width:2.2779440263730066px; height:2.2779440263730066px; top:622.0607916782683px; left:865.66315070575px;"></div><div class="particle-star particle-purple p-anim" style="width:3.718072432315239px; height:3.718072432315239px; top:990.331940667761px; left:464.2661541623238px;"></div><div class="particle-star particle-white p-anim" style="width:2.628012898090674px; height:2.628012898090674px; top:334.5703136134716px; left:251.8968664185104px;"></div><div class="particle-star particle-green p-anim" style="width:3.4763252035190817px; height:3.4763252035190817px; top:104.98406753008567px; left:420.2484337896567px;"></div><div class="particle-star particle-purple p-anim" style="width:2.71620581739262px; height:2.71620581739262px; top:1755.1594550569007px; left:121.47569184503482px;"></div><div class="particle-star particle-green p-anim" style="width:4.7851705267239595px; height:4.7851705267239595px; top:1492.2684012358786px; left:588.0606005231914px;"></div><div class="particle-star particle-green p-anim" style="width:2.104748047007888px; height:2.104748047007888px; top:777.2735692683909px; left:972.6774501627324px;"></div><div class="particle-star particle-purple p-anim" style="width:3.0801848282280844px; height:3.0801848282280844px; top:1075.1307716375777px; left:428.0579328452359px;"></div><div class="particle-star particle-white p-anim" style="width:4.1001612631371245px; height:4.1001612631371245px; top:354.9885848517988px; left:186.85617354039096px;"></div><div class="particle-star particle-green p-anim" style="width:5.53651949671621px; height:5.53651949671621px; top:90.38502802313815px; left:441.5138155709792px;"></div><div class="particle-star particle-green p-anim" style="width:3.744003027342842px; height:3.744003027342842px; top:1759.4411675504944px; left:344.1252548768898px;"></div><div class="particle-star particle-white p-anim" style="width:3.060008282023773px; height:3.060008282023773px; top:1595.0515123047808px; left:86.30311745526342px;"></div><div class="particle-star particle-white p-anim" style="width:3.8043483396759257px; height:3.8043483396759257px; top:1085.071066021601px; left:899.0440741810016px;"></div><div class="particle-star particle-white p-anim" style="width:2.2790289679760463px; height:2.2790289679760463px; top:1722.4989058748179px; left:892.5950869757799px;"></div><div class="particle-star particle-green p-anim" style="width:2.768037130474113px; height:2.768037130474113px; top:1505.6581586905395px; left:256.3201799959279px;"></div><div class="particle-star particle-green p-anim" style="width:5.5371421122254105px; height:5.5371421122254105px; top:188.3722487646537px; left:218.56782913586358px;"></div><div class="particle-star particle-white p-anim" style="width:2.83370940318855px; height:2.83370940318855px; top:1030.1372938413806px; left:966.5390627094894px;"></div><div class="particle-star particle-green p-anim" style="width:2.8865274695999688px; height:2.8865274695999688px; top:296.29052856698763px; left:606.1563656924045px;"></div><div class="particle-star particle-white p-anim" style="width:5.9056475347679225px; height:5.9056475347679225px; top:1258.1746374035447px; left:361.9334793071539px;"></div><div class="particle-star particle-purple p-anim" style="width:4.082236481510336px; height:4.082236481510336px; top:193.2978819973414px; left:416.846187156043px;"></div><div class="particle-star particle-green p-anim" style="width:5.588442979067622px; height:5.588442979067622px; top:385.4899108153404px; left:952.2041783677923px;"></div><div class="particle-star particle-purple p-anim" style="width:2.577276928444917px; height:2.577276928444917px; top:1625.0531419507752px; left:67.52407750307611px;"></div><div class="particle-star particle-purple p-anim" style="width:3.1825023104902357px; height:3.1825023104902357px; top:208.90961308673468px; left:20.403730133039062px;"></div><div class="particle-star particle-white p-anim" style="width:3.518543511752796px; height:3.518543511752796px; top:1190.7431957914014px; left:986.3978321271134px;"></div><div class="particle-star particle-purple p-anim" style="width:3.6804051938161138px; height:3.6804051938161138px; top:881.1370745273052px; left:1058.8949897472048px;"></div><div class="particle-star particle-green p-anim" style="width:3.743605762036168px; height:3.743605762036168px; top:847.7063941152664px; left:408.9962966384337px;"></div><div class="particle-star particle-purple p-anim" style="width:3.7641244805054157px; height:3.7641244805054157px; top:915.2259827631497px; left:245.39551275243866px;"></div><div class="particle-star particle-white p-anim" style="width:3.7783622700808337px; height:3.7783622700808337px; top:915.7530612154005px; left:734.2609291146073px;"></div></div>
+
+      <div class="top-header">
+        <img class="top-avatar" src="./assets/logo/shiba.png" />
+        <div class="top-username">SHIBA NEWS 24H</div>
+      </div>
+
+      
+      <div id="scene1" class="scene variant-scene variant-1" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="knowledge-map-template knowledge-map-card">
+        <div class="browser-frame" id="browser-scene1">
+          <div class="browser-header">
+            <div class="browser-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="browser-address">github.com/keon/awesome-nlp</div>
+          </div>
+          <div class="browser-inner" data-layout-allow-overflow>
+            <img class="github-scroll-image" id="scroll-img-scene1" src="./assets/images/github_repo.png" />
+          </div>
+          <div class="browser-glass-shine"></div>
+        </div>
+        <div class="headline-container" style="top: 1085px; gap: 8px;">
+          <div class="headline-line1" id="hl1-scene1" style="font-size: 64px; letter-spacing: 1px;">AWESOME NLP</div>
+          <div class="headline-line2" id="hl2-scene1" style="font-size: 44px; font-weight: 800;">BAN DO HOC NLP</div>
+        </div>
+        <div class="action-btn" id="btn-scene1" style="top: 1265px; padding: 12px 30px; font-size: 25px; border-radius: 20px;">
+          <span class="action-icon" style="font-size: 30px; margin-right: 5px;">🔗</span> github.com/keon/awesome-nlp
+        </div>
+      </div>
+        <img class="character" id="char-scene1" src="./assets/character/shiba/character shiba cheerfully talking.png" />
+      </div>
+      <div id="scene2" class="scene variant-scene variant-4" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="knowledge-map-template knowledge-map-card">
+        <div class="headline-container" style="top: 165px;">
+          <div class="headline-line1" id="hl1-scene2">CHON NGUON</div>
+          <div class="headline-line2" id="hl2-scene2">KHONG DOC LAN MAN</div>
+        </div>
+        <div class="repo-proof-panel" id="proof-scene2" style="position:absolute; top:500px; left:50%; transform:translateX(-50%); width:920px; z-index:30;">
+          
+          <div class="step-card" id="proof-scene2-1" style="margin-bottom:22px;">
+            <div class="step-number">1</div>
+            <div>
+              <div class="step-title">Tin cay</div>
+              <div class="step-desc">Uu tien nguon co tac gia, nam cap nhat va citation.</div>
+            </div>
+          </div>
+          <div class="step-card" id="proof-scene2-2" style="margin-bottom:22px;">
+            <div class="step-number">2</div>
+            <div>
+              <div class="step-title">Gan muc tieu</div>
+              <div class="step-desc">Chi luu link lien quan bai toan dang hoc.</div>
+            </div>
+          </div>
+          <div class="step-card" id="proof-scene2-3" style="margin-bottom:22px;">
+            <div class="step-number">3</div>
+            <div>
+              <div class="step-title">Co vi du</div>
+              <div class="step-desc">Nguon co notebook hoac code mau de kiem chung.</div>
+            </div>
+          </div>
+        </div>
+        <div class="action-btn" id="btn-scene2" style="top: 1245px; max-width: 880px; font-size: 28px;">
+          <span class="action-icon">✓</span> Chon 3 link cho 1 chu de
+        </div>
+      </div>
+        <img class="character" id="char-scene2" src="./assets/character/shiba/character shiba wearing stylish glasses.png" />
+      </div>
+      <div id="scene3" class="scene variant-scene variant-2" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="knowledge-map-template knowledge-map-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene3">BAN DO TRI THUC</div>
+          <div class="headline-line2" id="hl2-scene3">CHIA NHANH THE NAO?</div>
+        </div>
+        <div class="bento-container" style="top: 525px;" id="bento-scene3">
+          <div class="bento-card full" id="bc-scene3-1">
+            <div class="card-icon-svg">
+              <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+            </div>
+            <div class="card-text-group">
+              <div class="card-title">Core NLP</div>
+              <div class="card-desc">Nhan dien cac mang nen tang nhu tokenization, parsing, embeddings.</div>
+            </div>
+          </div>
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-scene3-2">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center;">Tasks</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Tach nhom theo bai toan: sentiment, QA, chatbots, summarization.</div>
+            </div>
+            <div class="bento-card half" id="bc-scene3-3">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center;">Research</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Danh dau paper va survey de doc sau.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene3" src="./assets/character/shiba/character shiba thinking.png" />
+      </div>
+      <div id="scene4" class="scene variant-scene variant-6" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="knowledge-map-template knowledge-map-card">
+        <div class="headline-container" style="top: 165px; gap: 5px;">
+          <div class="headline-line1" id="hl1-scene4" style="font-size: 54px;">DO PHU</div>
+          <div class="headline-line2" id="hl2-scene4" style="font-size: 48px;">NHIN QUA STARS</div>
+        </div>
+        <div class="repo-signal-panel bento-container" style="top: 430px; width: 960px;" id="signals-scene4">
+          <div class="repo-badge" id="rb-scene4">
+            <div class="crown-container">
+              <svg class="crown-svg" viewBox="0 0 24 24"><path d="M12 2 4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+              <div class="rank-text">GH</div>
+            </div>
+            <div class="repo-info">
+              <div class="repo-name">keon/awesome-nlp</div>
+              <div class="repo-meta">
+                <span class="meta-dot"></span>
+                <span>Markdown</span>
+                <span>18k+ stars</span>
+              </div>
+            </div>
+            <div class="repo-trend">
+              <span>Resource map</span>
+              <span class="trend-label">GitHub</span>
+            </div>
+          </div>
+          <img class="github-star-crop" id="star-scene4" src="./assets/images/github_star.png" onerror="this.style.display='none'" />
+          <div class="bento-grid-2" style="margin-top: 24px;">
+            
+            <div class="bento-card half" id="sig-scene4-1">
+              <div class="card-title" style="font-size: 28px; text-align:center;">Stars</div>
+              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">18k+ stars</div>
+            </div>
+            <div class="bento-card half" id="sig-scene4-2">
+              <div class="card-title" style="font-size: 28px; text-align:center;">Language</div>
+              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">Markdown</div>
+            </div>
+          </div>
+          <div class="bento-grid-2">
+            
+            <div class="bento-card half" id="sig-scene4-3">
+              <div class="card-title" style="font-size: 28px; text-align:center;">Source</div>
+              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">GitHub</div>
+            </div>
+            <div class="bento-card half" id="sig-scene4-4">
+              <div class="card-title" style="font-size: 28px; text-align:center;">Status</div>
+              <div class="card-desc" style="font-size: 24px; text-align:center; margin-top:10px; word-break: break-word;">Resource map</div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene4" src="./assets/character/shiba/character shiba showing surprise.png" />
+      </div>
+      <div id="scene5" class="scene variant-scene variant-3" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="knowledge-map-template knowledge-map-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene5">DOC THEO TANG</div>
+          <div class="headline-line2" id="hl2-scene5">TU DE DEN KHO</div>
+        </div>
+        
+        <div class="step-container" id="steps-scene5" style="top: 525px;">
+          
+          <div class="step-card" id="st-scene5-1">
+            <div class="step-number">1</div>
+            <div>
+              <div class="step-title">Tang 1</div>
+              <div class="step-desc">Doc course va tutorial de co khung khai niem.</div>
+              
+            </div>
+          </div>
+          <div class="step-card" id="st-scene5-2">
+            <div class="step-number">2</div>
+            <div>
+              <div class="step-title">Tang 2</div>
+              <div class="step-desc">Mo paper goc khi da hieu bai toan.</div>
+              
+            </div>
+          </div>
+          <div class="step-card" id="st-scene5-3">
+            <div class="step-number">3</div>
+            <div>
+              <div class="step-title">Tang 3</div>
+              <div class="step-desc">Chay repo demo de thay trade-off that.</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene5" src="./assets/character/shiba/character shiba explaining something.png" />
+      </div>
+      <div id="scene6" class="scene variant-scene variant-7" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="knowledge-map-template knowledge-map-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene6">TAO PLAYLIST</div>
+          <div class="headline-line2" id="hl2-scene6">HOC THEO NHANH</div>
+        </div>
+        
+        <div class="step-container" id="steps-scene6" style="top: 560px;">
+          
+          <div class="step-card" id="st-scene6-1">
+            <div class="step-number">1</div>
+            <div>
+              <div class="step-title">Fork</div>
+              <div class="step-desc">Tao ban note rieng neu can them danh dau.</div>
+              
+          <div class="step-command" id="cmd-scene6">Fork note hoc rieng</div>
+            </div>
+          </div>
+          <div class="step-card" id="st-scene6-2">
+            <div class="step-number">2</div>
+            <div>
+              <div class="step-title">Label</div>
+              <div class="step-desc">Gan nhan beginner, paper, code cho tung link.</div>
+              
+            </div>
+          </div>
+          <div class="step-card" id="st-scene6-3">
+            <div class="step-number">3</div>
+            <div>
+              <div class="step-title">Review</div>
+              <div class="step-desc">Cuoi tuan xoa link khong con phu hop.</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene6" src="./assets/character/shiba/character shiba wearing a cassock like it has become enlightened.png" />
+      </div>
+      <div id="scene7" class="scene variant-scene variant-5" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="knowledge-map-template knowledge-map-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene7">NOTE HOC TAP</div>
+          <div class="headline-line2" id="hl2-scene7">BIEN LIST THAN PLAN</div>
+        </div>
+        <div class="repo-check-panel bento-container" style="top: 515px;" id="check-scene7">
+          <div class="bento-grid-2">
+            
+            <div class="bento-card half" id="check-scene7-1">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px; text-align:center;">Chu de</div>
+              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Moi buoi chi chon mot nhanh nho.</div>
+            </div>
+            <div class="bento-card half" id="check-scene7-2">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px; text-align:center;">Nguon goc</div>
+              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Gan link paper/course goc vao note.</div>
+            </div>
+          </div>
+          <div class="bento-grid-2">
+            
+            <div class="bento-card half" id="check-scene7-3">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px; text-align:center;">Cau hoi</div>
+              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Ghi cau hoi can tra loi sau khi doc.</div>
+            </div>
+            <div class="bento-card half" id="check-scene7-4">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto;">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 30px; text-align:center;">Ket qua</div>
+              <div class="card-desc" style="font-size: 20px; text-align:center; margin-top:10px;">Tong ket dieu da hieu bang 3 gach dau dong.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene7" src="./assets/character/shiba/character shiba using a magnifying glass to look closely.png" />
+      </div>
+      <div id="scene8" class="scene variant-scene variant-8" style="position:absolute; inset:0; opacity:0; visibility:hidden; z-index: 10;">
+        <div class="knowledge-map-template knowledge-map-card">
+        <div class="headline-container" style="top: 185px;">
+          <div class="headline-line1" id="hl1-scene8">KET LUAN</div>
+          <div class="headline-line2" id="hl2-scene8">DAY LA BAN DO</div>
+        </div>
+        <div class="bento-container" style="top: 460px;" id="bento-scene8">
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-scene8-1" style="border: 2px solid rgba(243, 202, 86, 0.4); background: rgba(243, 202, 86, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(243,202,86,0.06); border: 2px solid rgba(243,202,86,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #f3ca56; filter: drop-shadow(0 0 8px rgba(243,202,86,0.8));"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #f3ca56; font-weight: 800;">Hoc</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Dung de lap lo trinh NLP.</div>
+            </div>
+            <div class="bento-card half" id="bc-scene8-2" style="border: 2px solid rgba(255, 71, 87, 0.4); background: rgba(255, 71, 87, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(255,71,87,0.06); border: 2px solid rgba(255,71,87,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #ff4757; filter: drop-shadow(0 0 8px rgba(255,71,87,0.8));"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #ff4757; font-weight: 800;">Loc</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Khong coi moi link deu dang doc.</div>
+            </div>
+          </div>
+          <div class="bento-grid-2">
+            <div class="bento-card half" id="bc-scene8-3" style="border: 2px solid rgba(0, 210, 255, 0.4); background: rgba(0, 210, 255, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(0,210,255,0.06); border: 2px solid rgba(0,210,255,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #00d2ff; filter: drop-shadow(0 0 8px rgba(0,210,255,0.8));"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #00d2ff; font-weight: 800;">Kiem</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Mo nguon goc truoc khi tin.</div>
+            </div>
+            <div class="bento-card half" id="bc-scene8-4" style="border: 2px solid rgba(224, 86, 253, 0.4); background: rgba(224, 86, 253, 0.02);">
+              <div class="card-icon-svg" style="margin: 0 auto 15px auto; background: rgba(224,86,253,0.06); border: 2px solid rgba(224,86,253,0.25);">
+                <svg viewBox="0 0 24 24" style="stroke: #e056fd; filter: drop-shadow(0 0 8px rgba(224,86,253,0.8));"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+              </div>
+              <div class="card-title" style="font-size: 32px; text-align: center; color: #e056fd; font-weight: 800;">Luu</div>
+              <div class="card-desc" style="font-size: 19px; text-align: center; margin-top: 10px;">Star neu muon quay lai sau.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <img class="character" id="char-scene8" src="./assets/character/shiba/character shiba smiling brightly.png" />
+      </div>
+
+      <!-- Subtitles Area -->
+      <div id="captions" class="captions"></div>
+    </div>
+  </div>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Animate Particles Floating
+    gsap.utils.toArray('.p-anim').forEach((p, i) => {
+      const pDur = 3 + (i % 4);
+      const pRepeat = Math.max(1, Math.floor(48 / pDur) - 1);
+      tl.to(p, {
+        y: "-=100",
+        x: (i%2===0 ? "+=30" : "-=30"),
+        opacity: 0.1 + (i % 5) * 0.2,
+        duration: pDur,
+        repeat: pRepeat,
+        yoyo: true,
+        ease: "sine.inOut"
+      }, 0);
+    });
+
+    
+      // Scene 1
+      tl.set("#scene1", { visibility: "visible" }, 0);
+      tl.to("#scene1", { opacity: 1, duration: 0.1 }, -0.1);
+      tl.from("#scene1", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, -0.08);
+      
+        tl.from("#browser-scene1", { scale: 0.85, y: 30, duration: 0.4, ease: "back.out(1.2)" }, 0);
+        tl.from("#hl1-scene1", { y: -20, duration: 0.2, ease: "power3.out" }, 0.2);
+        tl.from("#hl2-scene1", { y: 20, duration: 0.2, ease: "power3.out" }, 0.2);
+        tl.from("#btn-scene1", { y: 20, duration: 0.2, ease: "back.out(1.2)" }, 0.4);
+        tl.fromTo("#scroll-img-scene1",
+          { y: 0 },
+          { y: -2100, duration: 8.5, ease: "power1.inOut" },
+          1.5
+        );
+      
+      
+        tl.from("#char-scene1", { y: 20, duration: 0.2, ease: "power2.out" }, 0);
+        tl.to("#char-scene1", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 0.2);
+        tl.to("#scene1", { opacity: 0, duration: 0.3 }, 5.7);
+tl.set("#scene1", { visibility: "hidden" }, 6);
+
+      // Scene 2
+      tl.set("#scene2", { visibility: "visible" }, 5.88);
+      tl.to("#scene2", { opacity: 1, duration: 0.1 }, 5.9);
+      tl.from("#scene2", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 5.92);
+      
+        tl.from("#hl1-scene2", { y: -20, duration: 0.2, ease: "power3.out" }, 6);
+        tl.from("#hl2-scene2", { y: 20, duration: 0.2, ease: "power3.out" }, 6);
+        tl.from("#proof-scene2-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.1);
+        tl.from("#proof-scene2-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.199999999999999);
+        tl.from("#proof-scene2-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 6.3);
+        tl.from("#btn-scene2", { y: 20, opacity: 0, duration: 0.2, ease: "back.out(1.2)" }, 6.45);
+      
+        tl.from("#scene2 .knowledge-map-card .bento-card, #scene2 .knowledge-map-card .step-card, #scene2 .knowledge-map-card .web-card, #scene2 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 6.14);
+      
+        tl.from("#char-scene2", { y: 20, duration: 0.2, ease: "power2.out" }, 6);
+        tl.to("#char-scene2", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 6.2);
+        tl.to("#scene2", { opacity: 0, duration: 0.3 }, 11.7);
+tl.set("#scene2", { visibility: "hidden" }, 12);
+
+      // Scene 3
+      tl.set("#scene3", { visibility: "visible" }, 11.88);
+      tl.to("#scene3", { opacity: 1, duration: 0.1 }, 11.9);
+      tl.from("#scene3", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 11.92);
+      
+        tl.from("#hl1-scene3", { y: -20, duration: 0.2, ease: "power3.out" }, 12);
+        tl.from("#hl2-scene3", { y: 20, duration: 0.2, ease: "power3.out" }, 12);
+        tl.from("#bc-scene3-1", { y: 20, duration: 0.2, ease: "power3.out" }, 12);
+        tl.from("#bc-scene3-2", { y: 20, duration: 0.2, ease: "power3.out" }, 12);
+        tl.from("#bc-scene3-3", { y: 20, duration: 0.2, ease: "power3.out" }, 12);
+      
+        tl.from("#scene3 .knowledge-map-card .bento-card, #scene3 .knowledge-map-card .step-card, #scene3 .knowledge-map-card .web-card, #scene3 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 12.14);
+      
+        tl.from("#char-scene3", { y: 20, duration: 0.2, ease: "power2.out" }, 12);
+        tl.to("#char-scene3", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 12.2);
+        tl.to("#scene3", { opacity: 0, duration: 0.3 }, 17.7);
+tl.set("#scene3", { visibility: "hidden" }, 18);
+
+      // Scene 4
+      tl.set("#scene4", { visibility: "visible" }, 17.88);
+      tl.to("#scene4", { opacity: 1, duration: 0.1 }, 17.9);
+      tl.from("#scene4", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 17.92);
+      
+        tl.from("#hl1-scene4", { y: -20, duration: 0.2, ease: "power3.out" }, 18);
+        tl.from("#hl2-scene4", { y: 20, duration: 0.2, ease: "power3.out" }, 18);
+        tl.from("#rb-scene4", { y: -20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.1);
+        tl.from("#star-scene4", { y: 16, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.16);
+        tl.from("#sig-scene4-1", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.2);
+        tl.from("#sig-scene4-2", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.259999999999998);
+        tl.from("#sig-scene4-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.32);
+        tl.from("#sig-scene4-4", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 18.38);
+      
+        tl.from("#scene4 .knowledge-map-card .bento-card, #scene4 .knowledge-map-card .step-card, #scene4 .knowledge-map-card .web-card, #scene4 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 18.14);
+      
+        tl.from("#char-scene4", { y: 20, duration: 0.2, ease: "power2.out" }, 18);
+        tl.to("#char-scene4", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 18.2);
+        tl.to("#scene4", { opacity: 0, duration: 0.3 }, 23.7);
+tl.set("#scene4", { visibility: "hidden" }, 24);
+
+      // Scene 5
+      tl.set("#scene5", { visibility: "visible" }, 23.88);
+      tl.to("#scene5", { opacity: 1, duration: 0.1 }, 23.9);
+      tl.from("#scene5", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 23.92);
+      
+        tl.from("#hl1-scene5", { y: -20, duration: 0.2, ease: "power3.out" }, 24);
+        tl.from("#hl2-scene5", { y: 20, duration: 0.2, ease: "power3.out" }, 24);
+        tl.from("#st-scene5-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.1);
+        tl.from("#st-scene5-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.18);
+        tl.from("#st-scene5-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 24.26);
+      
+        tl.from("#scene5 .knowledge-map-card .bento-card, #scene5 .knowledge-map-card .step-card, #scene5 .knowledge-map-card .web-card, #scene5 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 24.14);
+      
+        tl.from("#char-scene5", { y: 20, duration: 0.2, ease: "power2.out" }, 24);
+        tl.to("#char-scene5", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 24.2);
+        tl.to("#scene5", { opacity: 0, duration: 0.3 }, 29.7);
+tl.set("#scene5", { visibility: "hidden" }, 30);
+
+      // Scene 6
+      tl.set("#scene6", { visibility: "visible" }, 29.88);
+      tl.to("#scene6", { opacity: 1, duration: 0.1 }, 29.9);
+      tl.from("#scene6", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 29.92);
+      
+        tl.from("#hl1-scene6", { y: -20, duration: 0.2, ease: "power3.out" }, 30);
+        tl.from("#hl2-scene6", { y: 20, duration: 0.2, ease: "power3.out" }, 30);
+        tl.from("#st-scene6-1", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 30.1);
+        tl.from("#st-scene6-2", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 30.18);
+        tl.from("#st-scene6-3", { y: 22, opacity: 0, duration: 0.2, ease: "power3.out" }, 30.26);
+        tl.from("#cmd-scene6", { y: 10, opacity: 0, duration: 0.2, ease: "power3.out" }, 30.45);
+      
+        tl.from("#scene6 .knowledge-map-card .bento-card, #scene6 .knowledge-map-card .step-card, #scene6 .knowledge-map-card .web-card, #scene6 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 30.14);
+      
+        tl.from("#char-scene6", { y: 20, duration: 0.2, ease: "power2.out" }, 30);
+        tl.to("#char-scene6", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 30.2);
+        tl.to("#scene6", { opacity: 0, duration: 0.3 }, 35.7);
+tl.set("#scene6", { visibility: "hidden" }, 36);
+
+      // Scene 7
+      tl.set("#scene7", { visibility: "visible" }, 35.88);
+      tl.to("#scene7", { opacity: 1, duration: 0.1 }, 35.9);
+      tl.from("#scene7", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 35.92);
+      
+        tl.from("#hl1-scene7", { y: -20, duration: 0.2, ease: "power3.out" }, 36);
+        tl.from("#hl2-scene7", { y: 20, duration: 0.2, ease: "power3.out" }, 36);
+        tl.from("#check-scene7-1", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 36.1);
+        tl.from("#check-scene7-2", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 36.160000000000004);
+        tl.from("#check-scene7-3", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 36.22);
+        tl.from("#check-scene7-4", { y: 20, opacity: 0, duration: 0.2, ease: "power3.out" }, 36.28);
+      
+        tl.from("#scene7 .knowledge-map-card .bento-card, #scene7 .knowledge-map-card .step-card, #scene7 .knowledge-map-card .web-card, #scene7 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 36.14);
+      
+        tl.from("#char-scene7", { y: 20, duration: 0.2, ease: "power2.out" }, 36);
+        tl.to("#char-scene7", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 36.2);
+        tl.to("#scene7", { opacity: 0, duration: 0.3 }, 41.7);
+tl.set("#scene7", { visibility: "hidden" }, 42);
+
+      // Scene 8
+      tl.set("#scene8", { visibility: "visible" }, 41.88);
+      tl.to("#scene8", { opacity: 1, duration: 0.1 }, 41.9);
+      tl.from("#scene8", { clipPath: "inset(0 0 100% 0)", duration: 0.24, ease: "power3.out" }, 41.92);
+      
+        tl.from("#hl1-scene8", { y: -20, duration: 0.2, ease: "power3.out" }, 42);
+        tl.from("#hl2-scene8", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
+        tl.from("#bc-scene8-1", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
+        tl.from("#bc-scene8-2", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
+        tl.from("#bc-scene8-3", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
+        tl.from("#bc-scene8-4", { y: 20, duration: 0.2, ease: "power3.out" }, 42);
+      
+        tl.from("#scene8 .knowledge-map-card .bento-card, #scene8 .knowledge-map-card .step-card, #scene8 .knowledge-map-card .web-card, #scene8 .knowledge-map-card .terminal-frame", { x: -34, opacity: 0, duration: 0.22, stagger: 0.05, ease: "power3.out" }, 42.14);
+      
+        tl.from("#char-scene8", { y: 20, duration: 0.2, ease: "power2.out" }, 42);
+        tl.to("#char-scene8", { y: -30, duration: 2, repeat: 2, yoyo: true, ease: "sine.inOut" }, 42.2);
+        
+
+    // Karaoke Subtitles Grouping by Scene (Complete Sentences)
+    const subtitleBlocks = [];
+    if (subtitleBlocks.length > 0) {
+      const capContainer = document.getElementById("captions");
+      const escapeHtml = (value) => String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+
+      tl.eventCallback("onUpdate", () => {
+        let time = tl.time();
+        // Find the active block
+        let activeBlock = subtitleBlocks.find(b => time >= b.start - 0.08 && time <= b.end + 0.12);
+        if (activeBlock) {
+          let html = activeBlock.words.map(w => {
+            let isActive = (time >= w.start && time <= w.end);
+            return '<span style="font-family: var(--font-sans); font-size: 34px; font-weight: 800; text-transform: uppercase; margin: 0 7px; display: inline-block; transition: all 0.08s; ' +
+                   (isActive ? 'color: #fdf01c; text-shadow: 0 0 20px #fdf01c, 0 0 5px #fdf01c; transform: scale(1.1); font-weight: 900;'
+                            : 'color: rgba(255,255,255,0.7); transform: scale(1.0);') +
+                   '">' + escapeHtml(w.text.toUpperCase()) + '</span>';
+          }).join(" ");
+          capContainer.innerHTML = html;
+        } else {
+          capContainer.innerHTML = "";
+        }
+      });
+    }
+
+    window.__timelines["news-multi"] = tl;
+  </script>
+  <script>
+    window.addEventListener("load", () => {
+      window.setTimeout(() => {
+        const timelines = window.__timelines || {};
+        const timeline = timelines["news-multi"] || timelines["docker-multi"] || timelines.main;
+        if (timeline && typeof timeline.play === "function") {
+          timeline.timeScale(0.85);
+          timeline.play(0);
+        }
+      }, 120);
+    });
+  </script>
+</body>
+</html>

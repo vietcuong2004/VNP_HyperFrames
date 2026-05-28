@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { callAI } from "../../services/aiRouter.js";
 import { short, baseScene } from "../main_generateContent.js";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của Web (Tavily/General URLs)
@@ -22,6 +22,27 @@ const STORYTELLING_GUIDELINES = {
   web_context_digest: `
     - Tóm tắt tổng quan thông tin hữu dụng nhất từ URL, đưa ra lời khuyên kiểm chứng trước khi áp dụng.
   `
+};
+
+const TEMPLATE_CONTENT_PROFILES = {
+  template1: `
+    - Content angle: web context digest.
+    - Scene 2 should explain the main claim, target audience, and what the viewer should verify.
+    - Scene 3-4 should turn the page into practical questions and source checks.
+    - Keep the viewer thinking: "What does this page say, and what should I verify first?"
+  `,
+  template2: `
+    - Content angle: docs or article reading path.
+    - Scene 2 should explain how to read the source in order, not only summarize it.
+    - Scene 3-4 should focus on key sections, evidence, examples, compatibility, and source quality.
+    - Keep the viewer thinking: "How do I extract reliable notes from this page?"
+  `,
+  template3: `
+    - Content angle: tool or product action brief.
+    - Scene 2 should connect the page to a concrete user job or product decision.
+    - Scene 3-4 should focus on demo checks, pricing/API/support risks, and a next action.
+    - Keep the viewer thinking: "Should I try this tool, and what is the first test?"
+  `,
 };
 
 // Cấu trúc 6 cảnh (scenes) cố định cho Group 3 (Web)
@@ -121,6 +142,15 @@ function softLimit(value, max) {
   return `${sliced.slice(0, lastSpace > 10 ? lastSpace : max).trim()}...`;
 }
 
+
+function isSchemaPlaceholder(value) {
+  return /^<[^>]+>$/.test(String(value || "").trim());
+}
+
+function cleanSchemaValue(value, fallback = "") {
+  return isSchemaPlaceholder(value) ? fallback : value;
+}
+
 function normalizeCards(scene) {
   const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
     ? scene.steps
@@ -134,14 +164,34 @@ function normalizeCards(scene) {
           .filter((card) => card.title || card.body);
 
   return rawCards.slice(0, 4).map((card, idx) => ({
-    title: softLimit(card.title || `Điểm ${idx + 1}`, 16),
-    body: softLimit(card.body || card.desc || card.description || "Kiểm tra trong nguồn chính.", 75),
+    title: softLimit(cleanSchemaValue(card.title, "") || `Điểm ${idx + 1}`, 16),
+    body: softLimit(cleanSchemaValue(card.body || card.desc || card.description, "") || "Kiểm tra trong nguồn chính.", 75),
   }));
 }
 
 function isGenericActionHeadline(value) {
+  const text = String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase();
+  return text.includes("HANH DONG") || text.includes("TUY THEO") || text.includes("HÀNH ĐỘNG") || text.includes("TÙY THEO") || text.includes("TUỲ THEO");
+}
+
+function isGenericWebHeadline(value) {
   const text = String(value || "").toUpperCase();
-  return text.includes("HÀNH ĐỘNG") || text.includes("TÙY THEO") || text.includes("TUỲ THEO");
+  return [
+    "TIÊU ĐỀ TRANG",
+    "TIÊU ĐỀ TRANG",
+    "WEB CONTEXT DIGEST",
+    "NỘI DUNG CHÍNH",
+    "NỘI DUNG CHÍNH",
+    "CẦN GIẢI THÍCH",
+    "CẦN GIẢI THÍCH",
+    "BA CÂU HỎI",
+    "BA CÂU HỎI",
+    "PHẢI TRẢ LỜI",
+    "PHẢI TRẢ LỜI",
+  ].some((generic) => text.includes(generic));
 }
 
 function actionHeadline(context) {
@@ -180,13 +230,34 @@ export function normalizeWebScenes(scenes, context = {}) {
       merged[`bento${n}_desc`] = card.body;
     });
 
-    if (idx === 4 && (isGenericActionHeadline(merged.headline_line1) || isGenericActionHeadline(merged.headline_line2))) {
+    if (idx !== 4 && (isGenericWebHeadline(merged.headline_line1) || isGenericWebHeadline(merged.headline_line2))) {
+      const source = actionHeadline(context);
+      const pairs = [
+        [source, "WEB CẦN KIỂM TRA"],
+        ["TÓM TẮT", `${source} NÓI GÌ`],
+        ["CÂU HỎI", "ĐỌC TRƯỚC KHI DÙNG"],
+        ["ĐIỂM CHÍNH", "RÚT TỪ NGUỒN WEB"],
+        [source, "KIỂM TRA TRƯỚC"],
+        ["LƯU LINK", "KIỂM CHỨNG LẠI"],
+      ];
+      [merged.headline_line1, merged.headline_line2] = pairs[idx] || [source, "KIỂM TRA NGUỒN"];
+    }
+
+    if (
+      idx === 4 &&
+      (
+        isGenericActionHeadline(merged.headline_line1) ||
+        isGenericActionHeadline(merged.headline_line2) ||
+        isSchemaPlaceholder(merged.headline_line1) ||
+        isSchemaPlaceholder(merged.headline_line2)
+      )
+    ) {
       merged.headline_line1 = actionHeadline(context);
       merged.headline_line2 = "KIỂM TRA TRƯỚC";
     }
 
-    merged.headline_line1 = softLimit(merged.headline_line1 || context.title || context.sourceLabel || "WEB", 20);
-    merged.headline_line2 = softLimit(merged.headline_line2 || schema.headline_line2 || "KIỂM TRA NGUỒN", 32);
+    merged.headline_line1 = softLimit(cleanSchemaValue(merged.headline_line1, "") || context.title || context.sourceLabel || "WEB", 20);
+    merged.headline_line2 = softLimit(cleanSchemaValue(merged.headline_line2, "") || "KIỂM TRA NGUỒN", 32);
     return merged;
   });
 
@@ -202,29 +273,14 @@ export function normalizeWebScenes(scenes, context = {}) {
   return normalized;
 }
 
-export async function generateScenes(rawData, format) {
+export async function generateScenes(rawData, format, subtemplate = "template1") {
   const { target, webInfo } = rawData;
-  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
-
   const title = webInfo.title || target.host;
   const sourceLabel = target.host.replace(/^www\./, "");
+  const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.web_context_digest;
+  const templateProfile = TEMPLATE_CONTENT_PROFILES[subtemplate] || TEMPLATE_CONTENT_PROFILES.template1;
 
-  if (!apiKey) {
-    throw new Error("Không tìm thấy OPENAI_API_KEY hoặc OPENROUTER_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
-  }
-
-  try {
-    console.log(`> Đang gọi OpenAI/OpenRouter để sinh kịch bản Web cho format: ${format}...`);
-    const isOpenRouter = apiKey.startsWith("sk-or-") || process.env.OPENROUTER_API_KEY;
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: isOpenRouter ? "https://openrouter.ai/api/v1" : undefined
-    });
-
-    const modelName = isOpenRouter ? "openai/gpt-4o-mini" : "gpt-4o-mini";
-    const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.web_context_digest;
-
-    const prompt = `
+  const prompt = `
       Bạn là chuyên gia phân tích và tóm tắt thông tin công nghệ. Hãy viết kịch bản voice-over tiếng Việt và tiêu đề màn hình cho video review trang web sau:
       - Tiêu đề Trang: ${title}
       - Domain: ${sourceLabel}
@@ -234,6 +290,9 @@ export async function generateScenes(rawData, format) {
 
       HƯỚNG DẪN KỂ CHUYỆN BẮT BUỘC CHO FORMAT "${format}":
       ${guideline}
+
+      TEMPLATE CONTENT PROFILE FOR "${subtemplate}":
+      ${templateProfile}
 
       BẠN PHẢI TRẢ VỀ MỘT JSON OBJECT theo đúng cấu trúc mẫu dưới đây (chứa key "scenes" là mảng 6 cảnh):
       {
@@ -254,19 +313,17 @@ export async function generateScenes(rawData, format) {
       5. Không copy placeholder trong schema. Mọi headline, bento title, bento desc và step phải viết lại theo context thật của trang.
       6. Với scene hướng dẫn đọc docs, quickstart, cấu hình hoặc hành động tiếp theo, ưu tiên "content_mode": "steps" và sinh 3 bước cụ thể.
       7. Nếu không đủ dữ liệu chắc chắn, hãy viết theo hướng kiểm tra/tư vấn; không bịa API, giá, port, lệnh hoặc cấu hình.
+      8. Every headline, step, bento card, and voice line must follow this template content profile. Do not reuse the same scene angle across template1/template2/template3.
     `;
 
-    const response = await client.chat.completions.create({
-      model: modelName,
-      messages: [
-        { role: "system", content: "You are a tech analyst script writer who outputs JSON strict format." },
-        { role: "user", content: prompt }
-      ],
-      response_format: { type: "json_object" }
+  try {
+    console.log(`> Đang gọi custom API để sinh kịch bản Web cho format: ${format}...`);
+    const { result: parsed } = await callAI({
+      prompt,
+      isJson: true,
+      onLog: (msg) => console.log(msg)
     });
 
-    const parsed = JSON.parse(response.choices[0].message.content);
-    
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;
     if (!Array.isArray(scenes)) {
@@ -282,7 +339,7 @@ export async function generateScenes(rawData, format) {
         }
       }
     }
-    
+
     scenes = normalizeWebScenes(scenes, {
       title,
       sourceLabel,
@@ -290,12 +347,19 @@ export async function generateScenes(rawData, format) {
     });
 
     if (Array.isArray(scenes) && scenes.length === 6) {
+      const shibaAssets = [
+        "character shiba using a magnifying glass to look closely.png", // Scene 1: intro
+        "character shiba explaining something.png",         // Scene 2: summary
+        "character shiba thinking.png",                   // Scene 3: questions
+        "character shiba wearing stylish glasses.png",      // Scene 4: notable points
+        "character shiba cheerfully talking.png",          // Scene 5: action
+        "character shiba smiling brightly.png"             // Scene 6: outro
+      ];
       return scenes.map((scene, idx) => {
         return baseScene({
           ...scene,
           scene: idx + 1,
-          // Giữ lại các assets/sfx mặc định hoặc lấy từ AI nếu hợp lệ
-          assets: scene.assets || ["character shiba explaining something.png"],
+          assets: [shibaAssets[idx] || "character shiba explaining something.png"],
           sfx: "Ding 2.mp3"
         });
       });

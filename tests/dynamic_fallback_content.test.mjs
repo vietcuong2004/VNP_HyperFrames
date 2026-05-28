@@ -8,7 +8,7 @@ import {
 } from "../pipeline/localFallbackGenerator.js";
 import { autoFixSceneHTML, containsVoiceLeak, validateSceneHTML } from "../agents/scene/htmlValidator.js";
 import { deriveSceneDisplayCopy } from "../agents/scene/generate.js";
-import { evaluateSceneHtmlRequirements } from "../pipeline/run_agent_pipeline.js";
+import { evaluateSceneHtmlRequirements } from "../pipeline/run_pipeline.js";
 
 const forbiddenCopy = [
   "OPEN SOURCE ENGINE",

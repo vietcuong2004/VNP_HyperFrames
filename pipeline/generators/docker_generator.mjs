@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { callAI } from "../../services/aiRouter.js";
 import { short, baseScene } from "../main_generateContent.js";
 
 // Hướng dẫn kể chuyện khác nhau cho từng format con của Docker Hub
@@ -20,6 +20,27 @@ const STORYTELLING_GUIDELINES = {
   container_overview: `
     - Hướng dẫn tổng quát các bước kiểm tra thông số Docker Hub, kiểm tra tag và chạy thử an toàn.
   `
+};
+
+const TEMPLATE_CONTENT_PROFILES = {
+  template1: `
+    - Content angle: quick-start operator path.
+    - Scene 2 should make tag selection simple and concrete.
+    - Scene 3-4 should focus on pull, run, port mapping, and the smallest safe local test.
+    - Keep the viewer thinking: "Can I run this image locally in a few minutes?"
+  `,
+  template2: `
+    - Content angle: self-host deployment path.
+    - Scene 2 should frame the image as something that needs stable deployment decisions.
+    - Scene 3-4 should focus on volumes, env, backups, secrets, rollback, and compose validation.
+    - Keep the viewer thinking: "What must be protected before production?"
+  `,
+  template3: `
+    - Content angle: dev or CI workflow image brief.
+    - Scene 2 should explain how the image keeps development environments reproducible.
+    - Scene 3-4 should focus on pinned tags, bind mounts, commands, cache, and pipeline consistency.
+    - Keep the viewer thinking: "Can this remove environment drift for the team?"
+  `,
 };
 
 // Cấu trúc 5 cảnh (scenes) cố định cho Group 2 (Docker Hub)
@@ -88,6 +109,15 @@ function softLimit(value, max) {
   return `${sliced.slice(0, lastSpace > 10 ? lastSpace : max).trim()}...`;
 }
 
+
+function isSchemaPlaceholder(value) {
+  return /^<[^>]+>$/.test(String(value || "").trim());
+}
+
+function cleanSchemaValue(value, fallback = "") {
+  return isSchemaPlaceholder(value) ? fallback : value;
+}
+
 function normalizeCards(scene) {
   const rawCards = Array.isArray(scene.steps) && scene.steps.length > 0
     ? scene.steps
@@ -101,8 +131,8 @@ function normalizeCards(scene) {
           .filter((card) => card.title || card.body);
 
   return rawCards.slice(0, 4).map((card, idx) => ({
-    title: softLimit(card.title || `Bước ${idx + 1}`, 16),
-    body: softLimit(card.body || card.desc || card.description || "Kiểm tra Docker Hub trước khi chạy.", 75),
+    title: softLimit(cleanSchemaValue(card.title, "") || `Bước ${idx + 1}`, 16),
+    body: softLimit(cleanSchemaValue(card.body || card.desc || card.description, "") || "Kiểm tra Docker Hub trước khi chạy.", 75),
   }));
 }
 
@@ -117,16 +147,26 @@ function dockerImageName(context = {}) {
 }
 
 function isGenericDockerHeadline(value) {
-  const text = String(value || "").toUpperCase();
+  const text = String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase();
   return [
     "DOCKER QUICK START",
+    "CHON TAG",
     "CHỌN TAG",
+    "ROI PULL IMAGE",
     "RỒI PULL IMAGE",
+    "CAU HINH",
     "CẤU HÌNH",
+    "PORT, VOLUME VA ENV",
     "PORT, VOLUME VÀ ENV",
+    "RUN THU",
     "RUN THỬ",
+    "TRUOC KHI DEPLOY",
     "TRƯỚC KHI DEPLOY",
     "PRODUCTION",
+    "CHECKLIST VA BACKUP",
     "CHECKLIST VÀ BACKUP",
   ].some((generic) => text === generic || text.includes(generic));
 }
@@ -171,14 +211,19 @@ export function normalizeDockerScenes(scenes, context = {}) {
       merged[`bento${n}_desc`] = card.body;
     });
 
-    if (isGenericDockerHeadline(merged.headline_line1) || isGenericDockerHeadline(merged.headline_line2)) {
+    if (
+      isGenericDockerHeadline(merged.headline_line1) ||
+      isGenericDockerHeadline(merged.headline_line2) ||
+      isSchemaPlaceholder(merged.headline_line1) ||
+      isSchemaPlaceholder(merged.headline_line2)
+    ) {
       const [headline1, headline2] = dockerHeadlinePair(idx, context);
       merged.headline_line1 = headline1;
       merged.headline_line2 = headline2;
     }
 
-    merged.headline_line1 = softLimit(merged.headline_line1 || context.imageRef || "DOCKER", 20);
-    merged.headline_line2 = softLimit(merged.headline_line2 || schema.headline_line2 || "KIỂM TRA IMAGE", 32);
+    merged.headline_line1 = softLimit(cleanSchemaValue(merged.headline_line1, "") || context.imageRef || "DOCKER", 20);
+    merged.headline_line2 = softLimit(cleanSchemaValue(merged.headline_line2, "") || "KIỂM TRA IMAGE", 32);
     return merged;
   });
 
@@ -195,28 +240,13 @@ export function normalizeDockerScenes(scenes, context = {}) {
   return normalized;
 }
 
-export async function generateScenes(rawData, format) {
+export async function generateScenes(rawData, format, subtemplate = "template1") {
   const { target, info } = rawData;
-  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
-
   const imageRef = `${target.namespace}/${target.image}`;
+  const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.container_overview;
+  const templateProfile = TEMPLATE_CONTENT_PROFILES[subtemplate] || TEMPLATE_CONTENT_PROFILES.template1;
 
-  if (!apiKey) {
-    throw new Error("Không tìm thấy OPENAI_API_KEY hoặc OPENROUTER_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.");
-  }
-
-  try {
-    console.log(`> Đang gọi OpenAI/OpenRouter để sinh kịch bản Docker cho format: ${format}...`);
-    const isOpenRouter = apiKey.startsWith("sk-or-") || process.env.OPENROUTER_API_KEY;
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: isOpenRouter ? "https://openrouter.ai/api/v1" : undefined
-    });
-
-    const modelName = isOpenRouter ? "openai/gpt-4o-mini" : "gpt-4o-mini";
-    const guideline = STORYTELLING_GUIDELINES[format] || STORYTELLING_GUIDELINES.container_overview;
-
-    const prompt = `
+  const prompt = `
       Bạn là chuyên gia DevOps và làm video hướng dẫn. Hãy viết kịch bản voice-over tiếng Việt và tiêu đề màn hình cho video giới thiệu Docker Image sau:
       - Tên Image: ${imageRef}
       - Mô tả: ${info.description || "Không có mô tả"}
@@ -225,6 +255,9 @@ export async function generateScenes(rawData, format) {
 
       HƯỚNG DẪN KỂ CHUYỆN BẮT BUỘC CHO FORMAT "${format}":
       ${guideline}
+
+      TEMPLATE CONTENT PROFILE FOR "${subtemplate}":
+      ${templateProfile}
 
       BẠN PHẢI TRẢ VỀ MỘT JSON OBJECT theo đúng cấu trúc mẫu dưới đây (chứa key "scenes" là mảng 5 cảnh):
       {
@@ -243,23 +276,21 @@ export async function generateScenes(rawData, format) {
          - "steps": Tối đa 3-4 object, mỗi object có "title" <= 16 ký tự và "body" <= 75 ký tự.
       4. Đối với Scene 1, điền chính xác "repo_url" là: "hub.docker.com/r/${imageRef}".toLowerCase()
       5. Đối với các scene có lệnh CLI, điền lệnh mẫu Docker thật hợp lý dựa vào tên image.
-      6. Không copy placeholder trong schema. Mọi headline, bento title, bento desc và step phải viết theo image thật.
+      6. Không copy placeholder trong schema. Mọi headline, bento title, bento desc và step phải viết lại theo image thật.
          Ví dụ với Ubuntu không viết "DOCKER QUICK START", "CHỌN TAG", "CẤU HÌNH"; hãy viết kiểu "UBUNTU", "PIN TAG", "CONFIG UBUNTU".
       7. Với scene chọn tag, cấu hình, docker run hoặc production checklist, ưu tiên "content_mode": "steps" và sinh các bước cụ thể.
       8. Nếu không đủ dữ liệu chắc chắn, hãy viết theo hướng kiểm tra docs; không bịa port, env, password, volume path hoặc command.
+      9. Every headline, step, bento card, and voice line must follow this template content profile. Do not reuse the same scene angle across template1/template2/template3.
     `;
 
-    const response = await client.chat.completions.create({
-      model: modelName,
-      messages: [
-        { role: "system", content: "You are a DevOps video script writer who outputs strict JSON structures." },
-        { role: "user", content: prompt }
-      ],
-      response_format: { type: "json_object" }
+  try {
+    console.log(`> Đang gọi custom API để sinh kịch bản Docker cho format: ${format}...`);
+    const { result: parsed } = await callAI({
+      prompt,
+      isJson: true,
+      onLog: (msg) => console.log(msg)
     });
 
-    const parsed = JSON.parse(response.choices[0].message.content);
-    
     // Trích xuất mảng scenes một cách an toàn và linh hoạt
     let scenes = parsed.scenes;
     if (!Array.isArray(scenes)) {
@@ -275,18 +306,25 @@ export async function generateScenes(rawData, format) {
         }
       }
     }
-    
+
     scenes = normalizeDockerScenes(scenes, {
       imageRef,
       repoUrl: `hub.docker.com/r/${imageRef}`.toLowerCase(),
     });
 
     if (Array.isArray(scenes) && scenes.length === 5) {
+      const shibaAssets = [
+        "character shiba cheerfully talking.png",          // Scene 1: intro
+        "character shiba thinking.png",                   // Scene 2: select tag
+        "character shiba using a magnifying glass to look closely.png", // Scene 3: config
+        "character shiba explaining something.png",         // Scene 4: run terminal
+        "character shiba smiling brightly.png"             // Scene 5: outro/checklist
+      ];
       return scenes.map((scene, idx) => {
         return baseScene({
           ...scene,
           scene: idx + 1,
-          assets: ["character shiba explaining something.png"],
+          assets: [shibaAssets[idx] || "character shiba explaining something.png"],
           sfx: "Ding 2.mp3"
         });
       });

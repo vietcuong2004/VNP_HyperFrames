@@ -21,3 +21,5 @@ assets/audio/scene_*.srt
 assets/audio/scene_*.temp.mp3
 assets/images/github_repo.png
 templates/https-*/
+
+.code-workspace

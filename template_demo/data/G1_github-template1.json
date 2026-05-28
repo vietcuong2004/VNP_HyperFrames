@@ -1,0 +1,199 @@
+{
+  "template": "G1_github",
+  "subtemplate": "template1",
+  "platform": "github",
+  "video_format": "repo_overview_with_use_cases",
+  "visual_theme": "template1",
+  "duration": 48,
+  "scenes": [
+    {
+      "scene": 1,
+      "audio_start": 0,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "transcript": [],
+      "repo_url": "github.com/keon/awesome-nlp",
+      "headline_line1": "AWESOME NLP",
+      "headline_line2": "BAN DO HOC NLP"
+    },
+    {
+      "scene": 2,
+      "audio_start": 6,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "transcript": [],
+      "headline_line1": "USE CASE",
+      "headline_line2": "AI CAN REPO NAY?",
+      "bento1_title": "Nguoi moi",
+      "bento1_desc": "Co ban do chu de de bat dau NLP ma khong bi lac.",
+      "bento2_title": "Builder",
+      "bento2_desc": "Tim nhanh paper, course va repo phu hop voi bai toan.",
+      "bento3_title": "Reviewer",
+      "bento3_desc": "Dung lam checklist khi danh gia nguon hoc."
+    },
+    {
+      "scene": 3,
+      "audio_start": 12,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "transcript": [],
+      "headline_line1": "LO TRINH",
+      "headline_line2": "DOC README",
+      "content_mode": "steps",
+      "steps": [
+        {
+          "title": "Muc luc",
+          "body": "Quet cac nhom NLP truoc khi mo tung link."
+        },
+        {
+          "title": "Chon nhanh",
+          "body": "Uu tien mot nhanh nho nhu embeddings hoac parsing."
+        },
+        {
+          "title": "Ghi chu",
+          "body": "Luu link goc va ly do vi sao can quay lai."
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "audio_start": 18,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "transcript": [],
+      "headline_line1": "DIEM MANH",
+      "headline_line2": "DUNG NHU BAN DO",
+      "btn_text": "Doc README roi chon 1 nhanh",
+      "steps": [
+        {
+          "title": "Rong",
+          "body": "Gom nhieu nguon NLP theo tung chu de."
+        },
+        {
+          "title": "Nhanh",
+          "body": "Giam thoi gian tim tai lieu tu dau."
+        },
+        {
+          "title": "Can loc",
+          "body": "Moi link van can kiem tra lai nguon goc."
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "audio_start": 24,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "transcript": [],
+      "headline_line1": "CHECKLIST",
+      "headline_line2": "TRUOC KHI DUNG",
+      "cards": [
+        {
+          "title": "License",
+          "body": "Kiem tra license cua tung repo hoac paper con."
+        },
+        {
+          "title": "Cap nhat",
+          "body": "Uu tien link con song va con duoc duy tri."
+        },
+        {
+          "title": "Do sau",
+          "body": "Chon nguon co vi du, paper goc hoac benchmark."
+        },
+        {
+          "title": "Muc tieu",
+          "body": "Doc theo bai toan dang lam, khong doc tran lan."
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "audio_start": 30,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba showing surprise.png"
+      ],
+      "transcript": [],
+      "headline_line1": "TIN HIEU REPO",
+      "headline_line2": "DOC TRUOC KHI LUU",
+      "repo_name": "keon/awesome-nlp",
+      "repo_lang": "Markdown",
+      "repo_stars": "18k+ stars",
+      "repo_trend": "Curated",
+      "repo_trend_label": "GitHub"
+    },
+    {
+      "scene": 7,
+      "audio_start": 36,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing a cassock like it has become enlightened.png"
+      ],
+      "transcript": [],
+      "headline_line1": "CLONE REPO",
+      "headline_line2": "DOC OFFLINE",
+      "btn_text": "$ git clone github.com/keon/awesome-nlp",
+      "steps": [
+        {
+          "title": "Clone",
+          "body": "Lay repo ve may de doc khi can."
+        },
+        {
+          "title": "Filter",
+          "body": "Loc mot chu de nho thay vi doc het."
+        },
+        {
+          "title": "Verify",
+          "body": "Mo nguon goc de kiem tra noi dung."
+        }
+      ]
+    },
+    {
+      "scene": 8,
+      "audio_start": 42,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba smiling brightly.png"
+      ],
+      "transcript": [],
+      "headline_line1": "LUU REPO",
+      "headline_line2": "DUNG NHU BAN DO",
+      "cards": [
+        {
+          "title": "Star",
+          "body": "Luu lai de tra cuu khi can hoc tiep."
+        },
+        {
+          "title": "Share",
+          "body": "Gui cho nguoi dang hoc NLP."
+        },
+        {
+          "title": "Comment",
+          "body": "Ghi lai nhanh ban muon hoc tiep."
+        },
+        {
+          "title": "Follow",
+          "body": "Theo doi video review repo tiep theo."
+        }
+      ]
+    }
+  ]
+}

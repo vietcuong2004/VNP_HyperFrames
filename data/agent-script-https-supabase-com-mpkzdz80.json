@@ -1,0 +1,1450 @@
+{
+  "template": "G3_web",
+  "source_url": "https://supabase.com/",
+  "platform": "web",
+  "content_type": "web_tool",
+  "video_format": "web_tool_overview",
+  "classification_reason": "Trang có tín hiệu là tool, SDK, API hoặc sản phẩm cho developer.",
+  "visual_theme": "web",
+  "metadata": {
+    "host": "supabase.com",
+    "title": "Supabase The Postgres Development Platform.",
+    "description": "Build production grade applications with a Postgres database, Authentication, instant APIs, Realtime, Functions, Storage and Vector embeddings. Start for free.",
+    "tavily_used": false,
+    "tavily_results": []
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 1,
+      "layout": "intro_web",
+      "voice": "Supabase là nền tảng phát triển ứng dụng mã nguồn mở dựa trên Postgres, cung cấp đầy đủ backend cho dự án của bạn. Hôm nay chúng ta sẽ khám phá các tính năng chính và cách bắt đầu nhanh với Supabase.",
+      "visual": "Chụp giao diện trang web, highlight tiêu đề chính.",
+      "headline_line1": "SUPABASE",
+      "headline_line2": "POSTGRES DEVELOPMENT PLATFORM",
+      "repo_url": "supabase.com/",
+      "stt": 1,
+      "audio_start": 0,
+      "audio_duration": 12.048,
+      "audio_path": "assets/audio/scene_1.mp3",
+      "duration": 12.048,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nSupabase là nền tảng phát triển ứng dụng mã nguồn mở dựa trên Postgres, cung cấp đầy đủ backend cho dự án của bạn. Hôm nay chúng ta sẽ khám phá các tính năng chính và cách bắt đầu nhanh với Supabase.\n",
+      "transcript": [
+        {
+          "text": "Supabase",
+          "start": 0,
+          "end": 0.26
+        },
+        {
+          "text": "là",
+          "start": 0.26,
+          "end": 0.52
+        },
+        {
+          "text": "nền",
+          "start": 0.52,
+          "end": 0.77
+        },
+        {
+          "text": "tảng",
+          "start": 0.77,
+          "end": 1.03
+        },
+        {
+          "text": "phát",
+          "start": 1.03,
+          "end": 1.29
+        },
+        {
+          "text": "triển",
+          "start": 1.29,
+          "end": 1.55
+        },
+        {
+          "text": "ứng",
+          "start": 1.55,
+          "end": 1.81
+        },
+        {
+          "text": "dụng",
+          "start": 1.81,
+          "end": 2.07
+        },
+        {
+          "text": "mã",
+          "start": 2.07,
+          "end": 2.32
+        },
+        {
+          "text": "nguồn",
+          "start": 2.32,
+          "end": 2.58
+        },
+        {
+          "text": "mở",
+          "start": 2.58,
+          "end": 2.84
+        },
+        {
+          "text": "dựa",
+          "start": 2.84,
+          "end": 3.1
+        },
+        {
+          "text": "trên",
+          "start": 3.1,
+          "end": 3.36
+        },
+        {
+          "text": "Postgres,",
+          "start": 3.36,
+          "end": 3.61
+        },
+        {
+          "text": "cung",
+          "start": 3.61,
+          "end": 3.87
+        },
+        {
+          "text": "cấp",
+          "start": 3.87,
+          "end": 4.13
+        },
+        {
+          "text": "đầy",
+          "start": 4.13,
+          "end": 4.39
+        },
+        {
+          "text": "đủ",
+          "start": 4.39,
+          "end": 4.65
+        },
+        {
+          "text": "backend",
+          "start": 4.65,
+          "end": 4.91
+        },
+        {
+          "text": "cho",
+          "start": 4.91,
+          "end": 5.16
+        },
+        {
+          "text": "dự",
+          "start": 5.16,
+          "end": 5.42
+        },
+        {
+          "text": "án",
+          "start": 5.42,
+          "end": 5.68
+        },
+        {
+          "text": "của",
+          "start": 5.68,
+          "end": 5.94
+        },
+        {
+          "text": "bạn.",
+          "start": 5.94,
+          "end": 6.2
+        },
+        {
+          "text": "Hôm",
+          "start": 6.2,
+          "end": 6.45
+        },
+        {
+          "text": "nay",
+          "start": 6.45,
+          "end": 6.71
+        },
+        {
+          "text": "chúng",
+          "start": 6.71,
+          "end": 6.97
+        },
+        {
+          "text": "ta",
+          "start": 6.97,
+          "end": 7.23
+        },
+        {
+          "text": "sẽ",
+          "start": 7.23,
+          "end": 7.49
+        },
+        {
+          "text": "khám",
+          "start": 7.49,
+          "end": 7.75
+        },
+        {
+          "text": "phá",
+          "start": 7.75,
+          "end": 8
+        },
+        {
+          "text": "các",
+          "start": 8,
+          "end": 8.26
+        },
+        {
+          "text": "tính",
+          "start": 8.26,
+          "end": 8.52
+        },
+        {
+          "text": "năng",
+          "start": 8.52,
+          "end": 8.78
+        },
+        {
+          "text": "chính",
+          "start": 8.78,
+          "end": 9.04
+        },
+        {
+          "text": "và",
+          "start": 9.04,
+          "end": 9.29
+        },
+        {
+          "text": "cách",
+          "start": 9.29,
+          "end": 9.55
+        },
+        {
+          "text": "bắt",
+          "start": 9.55,
+          "end": 9.81
+        },
+        {
+          "text": "đầu",
+          "start": 9.81,
+          "end": 10.07
+        },
+        {
+          "text": "nhanh",
+          "start": 10.07,
+          "end": 10.33
+        },
+        {
+          "text": "với",
+          "start": 10.33,
+          "end": 10.59
+        },
+        {
+          "text": "Supabase.",
+          "start": 10.59,
+          "end": 10.84
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 2,
+      "layout": "web_summary",
+      "voice": "Supabase là giải pháp thay thế mã nguồn mở cho Firebase, tập trung vào Postgres. Nền tảng này cung cấp database, authentication, realtime subscriptions, storage, và edge functions trong một gói hoàn chỉnh, giúp developer xây dựng ứng dụng production nhanh chóng.",
+      "visual": "Bento card tóm tắt nội dung chính và đối tượng phù hợp.",
+      "content_mode": "steps",
+      "headline_line1": "TÍNH NĂNG CHÍNH",
+      "headline_line2": "CỦA SUPABASE",
+      "steps": [
+        {
+          "title": "Tạo project",
+          "body": "Đăng ký tài khoản và tạo project mới, chọn region gần nhất"
+        },
+        {
+          "title": "Kết nối DB",
+          "body": "Sử dụng connection string hoặc SDK để kết nối Postgres database"
+        },
+        {
+          "title": "Thêm tính năng",
+          "body": "Bật Auth, Storage, Realtime theo nhu cầu từ dashboard"
+        }
+      ],
+      "bento1_title": "Tạo project",
+      "bento1_desc": "Đăng ký tài khoản và tạo project mới, chọn region gần nhất",
+      "bento2_title": "Kết nối DB",
+      "bento3_title": "Thêm tính năng",
+      "repo_url": "supabase.com/",
+      "bento2_desc": "Sử dụng connection string hoặc SDK để kết nối Postgres database",
+      "bento3_desc": "Bật Auth, Storage, Realtime theo nhu cầu từ dashboard",
+      "stt": 2,
+      "audio_start": 12.048,
+      "audio_duration": 16.656,
+      "audio_path": "assets/audio/scene_2.mp3",
+      "duration": 16.656,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nSupabase là giải pháp thay thế mã nguồn mở cho Firebase, tập trung vào Postgres. Nền tảng này cung cấp database, authentication, realtime subscriptions, storage, và edge functions trong một gói hoàn chỉnh, giúp developer xây dựng ứng dụng production nhanh chóng.\n",
+      "transcript": [
+        {
+          "text": "Supabase",
+          "start": 12.05,
+          "end": 12.4
+        },
+        {
+          "text": "là",
+          "start": 12.4,
+          "end": 12.76
+        },
+        {
+          "text": "giải",
+          "start": 12.76,
+          "end": 13.12
+        },
+        {
+          "text": "pháp",
+          "start": 13.12,
+          "end": 13.48
+        },
+        {
+          "text": "thay",
+          "start": 13.48,
+          "end": 13.83
+        },
+        {
+          "text": "thế",
+          "start": 13.83,
+          "end": 14.19
+        },
+        {
+          "text": "mã",
+          "start": 14.19,
+          "end": 14.55
+        },
+        {
+          "text": "nguồn",
+          "start": 14.55,
+          "end": 14.9
+        },
+        {
+          "text": "mở",
+          "start": 14.9,
+          "end": 15.26
+        },
+        {
+          "text": "cho",
+          "start": 15.26,
+          "end": 15.62
+        },
+        {
+          "text": "Firebase,",
+          "start": 15.62,
+          "end": 15.97
+        },
+        {
+          "text": "tập",
+          "start": 15.97,
+          "end": 16.33
+        },
+        {
+          "text": "trung",
+          "start": 16.33,
+          "end": 16.69
+        },
+        {
+          "text": "vào",
+          "start": 16.69,
+          "end": 17.04
+        },
+        {
+          "text": "Postgres.",
+          "start": 17.04,
+          "end": 17.4
+        },
+        {
+          "text": "Nền",
+          "start": 17.4,
+          "end": 17.76
+        },
+        {
+          "text": "tảng",
+          "start": 17.76,
+          "end": 18.12
+        },
+        {
+          "text": "này",
+          "start": 18.12,
+          "end": 18.47
+        },
+        {
+          "text": "cung",
+          "start": 18.47,
+          "end": 18.83
+        },
+        {
+          "text": "cấp",
+          "start": 18.83,
+          "end": 19.19
+        },
+        {
+          "text": "database,",
+          "start": 19.19,
+          "end": 19.54
+        },
+        {
+          "text": "authentication,",
+          "start": 19.54,
+          "end": 19.9
+        },
+        {
+          "text": "realtime",
+          "start": 19.9,
+          "end": 20.26
+        },
+        {
+          "text": "subscriptions,",
+          "start": 20.26,
+          "end": 20.61
+        },
+        {
+          "text": "storage,",
+          "start": 20.61,
+          "end": 20.97
+        },
+        {
+          "text": "và",
+          "start": 20.97,
+          "end": 21.33
+        },
+        {
+          "text": "edge",
+          "start": 21.33,
+          "end": 21.68
+        },
+        {
+          "text": "functions",
+          "start": 21.68,
+          "end": 22.04
+        },
+        {
+          "text": "trong",
+          "start": 22.04,
+          "end": 22.4
+        },
+        {
+          "text": "một",
+          "start": 22.4,
+          "end": 22.76
+        },
+        {
+          "text": "gói",
+          "start": 22.76,
+          "end": 23.11
+        },
+        {
+          "text": "hoàn",
+          "start": 23.11,
+          "end": 23.47
+        },
+        {
+          "text": "chỉnh,",
+          "start": 23.47,
+          "end": 23.83
+        },
+        {
+          "text": "giúp",
+          "start": 23.83,
+          "end": 24.18
+        },
+        {
+          "text": "developer",
+          "start": 24.18,
+          "end": 24.54
+        },
+        {
+          "text": "xây",
+          "start": 24.54,
+          "end": 24.9
+        },
+        {
+          "text": "dựng",
+          "start": 24.9,
+          "end": 25.25
+        },
+        {
+          "text": "ứng",
+          "start": 25.25,
+          "end": 25.61
+        },
+        {
+          "text": "dụng",
+          "start": 25.61,
+          "end": 25.97
+        },
+        {
+          "text": "production",
+          "start": 25.97,
+          "end": 26.32
+        },
+        {
+          "text": "nhanh",
+          "start": 26.32,
+          "end": 26.68
+        },
+        {
+          "text": "chóng.",
+          "start": 26.68,
+          "end": 27.04
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 3,
+      "layout": "web_questions",
+      "voice": "Ba câu hỏi quan trọng khi đánh giá Supabase: Nó khác gì Firebase? Có phù hợp với dự án của bạn không? Và làm sao để kiểm tra hiệu năng thực tế trước khi deploy production?",
+      "visual": "Ba thẻ câu hỏi: What, Why, Check.",
+      "content_mode": "steps",
+      "headline_line1": "BA CÂU HỎI",
+      "headline_line2": "TRƯỚC KHI DÙNG",
+      "steps": [
+        {
+          "title": "Khác Firebase?",
+          "body": "Postgres thay vì NoSQL, mã nguồn mở, self-host được"
+        },
+        {
+          "title": "Phù hợp khi nào?",
+          "body": "Cần SQL, quan hệ phức tạp, hoặc muốn kiểm soát data"
+        },
+        {
+          "title": "Test thế nào?",
+          "body": "Dùng free tier, benchmark query, test realtime với load thật"
+        }
+      ],
+      "bento1_title": "Khác Firebase?",
+      "bento2_title": "Phù hợp khi nào?",
+      "bento3_title": "Test thế nào?",
+      "bento4_title": "Next",
+      "repo_url": "supabase.com/",
+      "bento1_desc": "Postgres thay vì NoSQL, mã nguồn mở, self-host được",
+      "bento2_desc": "Cần SQL, quan hệ phức tạp, hoặc muốn kiểm soát data",
+      "bento3_desc": "Dùng free tier, benchmark query, test realtime với load thật",
+      "stt": 3,
+      "audio_start": 28.704,
+      "audio_duration": 11.736,
+      "audio_path": "assets/audio/scene_3.mp3",
+      "duration": 11.736,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nBa câu hỏi quan trọng khi đánh giá Supabase: Nó khác gì Firebase? Có phù hợp với dự án của bạn không? Và làm sao để kiểm tra hiệu năng thực tế trước khi deploy production?\n",
+      "transcript": [
+        {
+          "text": "Ba",
+          "start": 28.7,
+          "end": 29
+        },
+        {
+          "text": "câu",
+          "start": 29,
+          "end": 29.29
+        },
+        {
+          "text": "hỏi",
+          "start": 29.29,
+          "end": 29.58
+        },
+        {
+          "text": "quan",
+          "start": 29.58,
+          "end": 29.88
+        },
+        {
+          "text": "trọng",
+          "start": 29.88,
+          "end": 30.17
+        },
+        {
+          "text": "khi",
+          "start": 30.17,
+          "end": 30.46
+        },
+        {
+          "text": "đánh",
+          "start": 30.46,
+          "end": 30.76
+        },
+        {
+          "text": "giá",
+          "start": 30.76,
+          "end": 31.05
+        },
+        {
+          "text": "Supabase:",
+          "start": 31.05,
+          "end": 31.34
+        },
+        {
+          "text": "Nó",
+          "start": 31.34,
+          "end": 31.64
+        },
+        {
+          "text": "khác",
+          "start": 31.64,
+          "end": 31.93
+        },
+        {
+          "text": "gì",
+          "start": 31.93,
+          "end": 32.22
+        },
+        {
+          "text": "Firebase?",
+          "start": 32.22,
+          "end": 32.52
+        },
+        {
+          "text": "Có",
+          "start": 32.52,
+          "end": 32.81
+        },
+        {
+          "text": "phù",
+          "start": 32.81,
+          "end": 33.1
+        },
+        {
+          "text": "hợp",
+          "start": 33.1,
+          "end": 33.4
+        },
+        {
+          "text": "với",
+          "start": 33.4,
+          "end": 33.69
+        },
+        {
+          "text": "dự",
+          "start": 33.69,
+          "end": 33.99
+        },
+        {
+          "text": "án",
+          "start": 33.99,
+          "end": 34.28
+        },
+        {
+          "text": "của",
+          "start": 34.28,
+          "end": 34.57
+        },
+        {
+          "text": "bạn",
+          "start": 34.57,
+          "end": 34.87
+        },
+        {
+          "text": "không?",
+          "start": 34.87,
+          "end": 35.16
+        },
+        {
+          "text": "Và",
+          "start": 35.16,
+          "end": 35.45
+        },
+        {
+          "text": "làm",
+          "start": 35.45,
+          "end": 35.75
+        },
+        {
+          "text": "sao",
+          "start": 35.75,
+          "end": 36.04
+        },
+        {
+          "text": "để",
+          "start": 36.04,
+          "end": 36.33
+        },
+        {
+          "text": "kiểm",
+          "start": 36.33,
+          "end": 36.63
+        },
+        {
+          "text": "tra",
+          "start": 36.63,
+          "end": 36.92
+        },
+        {
+          "text": "hiệu",
+          "start": 36.92,
+          "end": 37.21
+        },
+        {
+          "text": "năng",
+          "start": 37.21,
+          "end": 37.51
+        },
+        {
+          "text": "thực",
+          "start": 37.51,
+          "end": 37.8
+        },
+        {
+          "text": "tế",
+          "start": 37.8,
+          "end": 38.09
+        },
+        {
+          "text": "trước",
+          "start": 38.09,
+          "end": 38.39
+        },
+        {
+          "text": "khi",
+          "start": 38.39,
+          "end": 38.68
+        },
+        {
+          "text": "deploy",
+          "start": 38.68,
+          "end": 38.97
+        },
+        {
+          "text": "production?",
+          "start": 38.97,
+          "end": 39.27
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 4,
+      "layout": "web_notable",
+      "voice": "Điểm nổi bật của Supabase là instant APIs tự động từ schema, realtime subscriptions không cần config phức tạp, và vector embeddings cho AI. Free tier rất hào phóng để bắt đầu, nhưng cần chú ý giới hạn về connection pooling và bandwidth.",
+      "visual": "Checklist các điểm quan trọng rút ra từ trang web.",
+      "headline_line1": "ĐIỂM NỔI BẬT",
+      "headline_line2": "CẦN LƯU Ý",
+      "bento1_title": "Auto APIs",
+      "bento1_desc": "REST và GraphQL tự động sinh từ Postgres schema của bạn",
+      "bento2_title": "Free tier",
+      "bento3_title": "Giới hạn",
+      "repo_url": "supabase.com/",
+      "cards": [
+        {
+          "title": "Auto APIs",
+          "body": "REST và GraphQL tự động sinh từ Postgres schema của bạn"
+        },
+        {
+          "title": "Free tier",
+          "body": "Kiểm tra trong nguồn chính."
+        },
+        {
+          "title": "Giới hạn",
+          "body": "Kiểm tra trong nguồn chính."
+        }
+      ],
+      "bento2_desc": "Kiểm tra trong nguồn chính.",
+      "bento3_desc": "Kiểm tra trong nguồn chính.",
+      "stt": 4,
+      "audio_start": 40.44,
+      "audio_duration": 15.552,
+      "audio_path": "assets/audio/scene_4.mp3",
+      "duration": 15.552,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nĐiểm nổi bật của Supabase là instant APIs tự động từ schema, realtime subscriptions không cần config phức tạp, và vector embeddings cho AI. Free tier rất hào phóng để bắt đầu, nhưng cần chú ý giới hạn về connection pooling và bandwidth.\n",
+      "transcript": [
+        {
+          "text": "Điểm",
+          "start": 40.44,
+          "end": 40.77
+        },
+        {
+          "text": "nổi",
+          "start": 40.77,
+          "end": 41.09
+        },
+        {
+          "text": "bật",
+          "start": 41.09,
+          "end": 41.42
+        },
+        {
+          "text": "của",
+          "start": 41.42,
+          "end": 41.74
+        },
+        {
+          "text": "Supabase",
+          "start": 41.74,
+          "end": 42.07
+        },
+        {
+          "text": "là",
+          "start": 42.07,
+          "end": 42.39
+        },
+        {
+          "text": "instant",
+          "start": 42.39,
+          "end": 42.72
+        },
+        {
+          "text": "APIs",
+          "start": 42.72,
+          "end": 43.04
+        },
+        {
+          "text": "tự",
+          "start": 43.04,
+          "end": 43.37
+        },
+        {
+          "text": "động",
+          "start": 43.37,
+          "end": 43.7
+        },
+        {
+          "text": "từ",
+          "start": 43.7,
+          "end": 44.02
+        },
+        {
+          "text": "schema,",
+          "start": 44.02,
+          "end": 44.35
+        },
+        {
+          "text": "realtime",
+          "start": 44.35,
+          "end": 44.67
+        },
+        {
+          "text": "subscriptions",
+          "start": 44.67,
+          "end": 45
+        },
+        {
+          "text": "không",
+          "start": 45,
+          "end": 45.32
+        },
+        {
+          "text": "cần",
+          "start": 45.32,
+          "end": 45.65
+        },
+        {
+          "text": "config",
+          "start": 45.65,
+          "end": 45.97
+        },
+        {
+          "text": "phức",
+          "start": 45.97,
+          "end": 46.3
+        },
+        {
+          "text": "tạp,",
+          "start": 46.3,
+          "end": 46.62
+        },
+        {
+          "text": "và",
+          "start": 46.62,
+          "end": 46.95
+        },
+        {
+          "text": "vector",
+          "start": 46.95,
+          "end": 47.28
+        },
+        {
+          "text": "embeddings",
+          "start": 47.28,
+          "end": 47.6
+        },
+        {
+          "text": "cho",
+          "start": 47.6,
+          "end": 47.93
+        },
+        {
+          "text": "AI.",
+          "start": 47.93,
+          "end": 48.25
+        },
+        {
+          "text": "Free",
+          "start": 48.25,
+          "end": 48.58
+        },
+        {
+          "text": "tier",
+          "start": 48.58,
+          "end": 48.9
+        },
+        {
+          "text": "rất",
+          "start": 48.9,
+          "end": 49.23
+        },
+        {
+          "text": "hào",
+          "start": 49.23,
+          "end": 49.55
+        },
+        {
+          "text": "phóng",
+          "start": 49.55,
+          "end": 49.88
+        },
+        {
+          "text": "để",
+          "start": 49.88,
+          "end": 50.21
+        },
+        {
+          "text": "bắt",
+          "start": 50.21,
+          "end": 50.53
+        },
+        {
+          "text": "đầu,",
+          "start": 50.53,
+          "end": 50.86
+        },
+        {
+          "text": "nhưng",
+          "start": 50.86,
+          "end": 51.18
+        },
+        {
+          "text": "cần",
+          "start": 51.18,
+          "end": 51.51
+        },
+        {
+          "text": "chú",
+          "start": 51.51,
+          "end": 51.83
+        },
+        {
+          "text": "ý",
+          "start": 51.83,
+          "end": 52.16
+        },
+        {
+          "text": "giới",
+          "start": 52.16,
+          "end": 52.48
+        },
+        {
+          "text": "hạn",
+          "start": 52.48,
+          "end": 52.81
+        },
+        {
+          "text": "về",
+          "start": 52.81,
+          "end": 53.13
+        },
+        {
+          "text": "connection",
+          "start": 53.13,
+          "end": 53.46
+        },
+        {
+          "text": "pooling",
+          "start": 53.46,
+          "end": 53.79
+        },
+        {
+          "text": "và",
+          "start": 53.79,
+          "end": 54.11
+        },
+        {
+          "text": "bandwidth.",
+          "start": 54.11,
+          "end": 54.44
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 5,
+      "layout": "action",
+      "voice": "Hành động tiếp theo: Truy cập supabase.com để tạo project miễn phí, đọc quickstart guide cho framework bạn đang dùng, và thử nghiệm với sample data. Kiểm tra pricing page để hiểu rõ giới hạn của từng tier trước khi scale.",
+      "visual": "Nút CTA kêu gọi hành động cụ thể.",
+      "headline_line1": "TẠO PROJECT",
+      "headline_line2": "THỬ NGAY MIỄN PHÍ",
+      "btn_text": "Truy cập supabase.com",
+      "repo_url": "supabase.com/",
+      "stt": 5,
+      "audio_start": 55.992,
+      "audio_duration": 13.944,
+      "audio_path": "assets/audio/scene_5.mp3",
+      "duration": 13.944,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nHành động tiếp theo: Truy cập supabase.com để tạo project miễn phí, đọc quickstart guide cho framework bạn đang dùng, và thử nghiệm với sample data. Kiểm tra pricing page để hiểu rõ giới hạn của từng tier trước khi scale.\n",
+      "transcript": [
+        {
+          "text": "Hành",
+          "start": 55.99,
+          "end": 56.3
+        },
+        {
+          "text": "động",
+          "start": 56.3,
+          "end": 56.6
+        },
+        {
+          "text": "tiếp",
+          "start": 56.6,
+          "end": 56.91
+        },
+        {
+          "text": "theo:",
+          "start": 56.91,
+          "end": 57.22
+        },
+        {
+          "text": "Truy",
+          "start": 57.22,
+          "end": 57.52
+        },
+        {
+          "text": "cập",
+          "start": 57.52,
+          "end": 57.83
+        },
+        {
+          "text": "supabase.com",
+          "start": 57.83,
+          "end": 58.13
+        },
+        {
+          "text": "để",
+          "start": 58.13,
+          "end": 58.44
+        },
+        {
+          "text": "tạo",
+          "start": 58.44,
+          "end": 58.75
+        },
+        {
+          "text": "project",
+          "start": 58.75,
+          "end": 59.05
+        },
+        {
+          "text": "miễn",
+          "start": 59.05,
+          "end": 59.36
+        },
+        {
+          "text": "phí,",
+          "start": 59.36,
+          "end": 59.67
+        },
+        {
+          "text": "đọc",
+          "start": 59.67,
+          "end": 59.97
+        },
+        {
+          "text": "quickstart",
+          "start": 59.97,
+          "end": 60.28
+        },
+        {
+          "text": "guide",
+          "start": 60.28,
+          "end": 60.58
+        },
+        {
+          "text": "cho",
+          "start": 60.58,
+          "end": 60.89
+        },
+        {
+          "text": "framework",
+          "start": 60.89,
+          "end": 61.2
+        },
+        {
+          "text": "bạn",
+          "start": 61.2,
+          "end": 61.5
+        },
+        {
+          "text": "đang",
+          "start": 61.5,
+          "end": 61.81
+        },
+        {
+          "text": "dùng,",
+          "start": 61.81,
+          "end": 62.11
+        },
+        {
+          "text": "và",
+          "start": 62.11,
+          "end": 62.42
+        },
+        {
+          "text": "thử",
+          "start": 62.42,
+          "end": 62.73
+        },
+        {
+          "text": "nghiệm",
+          "start": 62.73,
+          "end": 63.03
+        },
+        {
+          "text": "với",
+          "start": 63.03,
+          "end": 63.34
+        },
+        {
+          "text": "sample",
+          "start": 63.34,
+          "end": 63.64
+        },
+        {
+          "text": "data.",
+          "start": 63.64,
+          "end": 63.95
+        },
+        {
+          "text": "Kiểm",
+          "start": 63.95,
+          "end": 64.26
+        },
+        {
+          "text": "tra",
+          "start": 64.26,
+          "end": 64.56
+        },
+        {
+          "text": "pricing",
+          "start": 64.56,
+          "end": 64.87
+        },
+        {
+          "text": "page",
+          "start": 64.87,
+          "end": 65.17
+        },
+        {
+          "text": "để",
+          "start": 65.17,
+          "end": 65.48
+        },
+        {
+          "text": "hiểu",
+          "start": 65.48,
+          "end": 65.79
+        },
+        {
+          "text": "rõ",
+          "start": 65.79,
+          "end": 66.09
+        },
+        {
+          "text": "giới",
+          "start": 66.09,
+          "end": 66.4
+        },
+        {
+          "text": "hạn",
+          "start": 66.4,
+          "end": 66.71
+        },
+        {
+          "text": "của",
+          "start": 66.71,
+          "end": 67.01
+        },
+        {
+          "text": "từng",
+          "start": 67.01,
+          "end": 67.32
+        },
+        {
+          "text": "tier",
+          "start": 67.32,
+          "end": 67.62
+        },
+        {
+          "text": "trước",
+          "start": 67.62,
+          "end": 67.93
+        },
+        {
+          "text": "khi",
+          "start": 67.93,
+          "end": 68.24
+        },
+        {
+          "text": "scale.",
+          "start": 68.24,
+          "end": 68.54
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba smiling brightly.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 6,
+      "layout": "outro_web",
+      "voice": "Supabase là lựa chọn mạnh mẽ cho developer muốn backend đầy đủ với Postgres. Lưu lại link, đọc docs kỹ về security rules và RLS, test kỹ trước khi production. Đừng quên chia sẻ video nếu thấy hữu ích!",
+      "visual": "Màn hình outro hiển thị link và các nguồn tham khảo liên quan.",
+      "headline_line1": "LƯU LINK",
+      "headline_line2": "ĐỌC DOCS KỸ",
+      "bento1_title": "supabase.com",
+      "bento1_desc": "Trang chính thức với docs đầy đủ và examples",
+      "bento2_title": "Postgres BaaS",
+      "bento3_title": "Test free",
+      "bento4_title": "Check RLS",
+      "repo_url": "supabase.com/",
+      "cards": [
+        {
+          "title": "supabase.com",
+          "body": "Trang chính thức với docs đầy đủ và examples"
+        },
+        {
+          "title": "Postgres BaaS",
+          "body": "Kiểm tra trong nguồn chính."
+        },
+        {
+          "title": "Test free",
+          "body": "Kiểm tra trong nguồn chính."
+        },
+        {
+          "title": "Check RLS",
+          "body": "Kiểm tra trong nguồn chính."
+        }
+      ],
+      "bento2_desc": "Kiểm tra trong nguồn chính.",
+      "bento3_desc": "Kiểm tra trong nguồn chính.",
+      "bento4_desc": "Kiểm tra trong nguồn chính.",
+      "stt": 6,
+      "audio_start": 69.936,
+      "audio_duration": 14.52,
+      "audio_path": "assets/audio/scene_6.mp3",
+      "duration": 14.52,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nSupabase là lựa chọn mạnh mẽ cho developer muốn backend đầy đủ với Postgres. Lưu lại link, đọc docs kỹ về security rules và RLS, test kỹ trước khi production. Đừng quên chia sẻ video nếu thấy hữu ích!\n",
+      "transcript": [
+        {
+          "text": "Supabase",
+          "start": 69.94,
+          "end": 70.27
+        },
+        {
+          "text": "là",
+          "start": 70.27,
+          "end": 70.61
+        },
+        {
+          "text": "lựa",
+          "start": 70.61,
+          "end": 70.94
+        },
+        {
+          "text": "chọn",
+          "start": 70.94,
+          "end": 71.28
+        },
+        {
+          "text": "mạnh",
+          "start": 71.28,
+          "end": 71.61
+        },
+        {
+          "text": "mẽ",
+          "start": 71.61,
+          "end": 71.95
+        },
+        {
+          "text": "cho",
+          "start": 71.95,
+          "end": 72.28
+        },
+        {
+          "text": "developer",
+          "start": 72.28,
+          "end": 72.62
+        },
+        {
+          "text": "muốn",
+          "start": 72.62,
+          "end": 72.95
+        },
+        {
+          "text": "backend",
+          "start": 72.95,
+          "end": 73.29
+        },
+        {
+          "text": "đầy",
+          "start": 73.29,
+          "end": 73.62
+        },
+        {
+          "text": "đủ",
+          "start": 73.62,
+          "end": 73.96
+        },
+        {
+          "text": "với",
+          "start": 73.96,
+          "end": 74.29
+        },
+        {
+          "text": "Postgres.",
+          "start": 74.29,
+          "end": 74.63
+        },
+        {
+          "text": "Lưu",
+          "start": 74.63,
+          "end": 74.96
+        },
+        {
+          "text": "lại",
+          "start": 74.96,
+          "end": 75.3
+        },
+        {
+          "text": "link,",
+          "start": 75.3,
+          "end": 75.63
+        },
+        {
+          "text": "đọc",
+          "start": 75.63,
+          "end": 75.97
+        },
+        {
+          "text": "docs",
+          "start": 75.97,
+          "end": 76.3
+        },
+        {
+          "text": "kỹ",
+          "start": 76.3,
+          "end": 76.64
+        },
+        {
+          "text": "về",
+          "start": 76.64,
+          "end": 76.97
+        },
+        {
+          "text": "security",
+          "start": 76.97,
+          "end": 77.31
+        },
+        {
+          "text": "rules",
+          "start": 77.31,
+          "end": 77.64
+        },
+        {
+          "text": "và",
+          "start": 77.64,
+          "end": 77.98
+        },
+        {
+          "text": "RLS,",
+          "start": 77.98,
+          "end": 78.31
+        },
+        {
+          "text": "test",
+          "start": 78.31,
+          "end": 78.65
+        },
+        {
+          "text": "kỹ",
+          "start": 78.65,
+          "end": 78.98
+        },
+        {
+          "text": "trước",
+          "start": 78.98,
+          "end": 79.32
+        },
+        {
+          "text": "khi",
+          "start": 79.32,
+          "end": 79.65
+        },
+        {
+          "text": "production.",
+          "start": 79.65,
+          "end": 79.99
+        },
+        {
+          "text": "Đừng",
+          "start": 79.99,
+          "end": 80.32
+        },
+        {
+          "text": "quên",
+          "start": 80.32,
+          "end": 80.66
+        },
+        {
+          "text": "chia",
+          "start": 80.66,
+          "end": 80.99
+        },
+        {
+          "text": "sẻ",
+          "start": 80.99,
+          "end": 81.33
+        },
+        {
+          "text": "video",
+          "start": 81.33,
+          "end": 81.66
+        },
+        {
+          "text": "nếu",
+          "start": 81.66,
+          "end": 82
+        },
+        {
+          "text": "thấy",
+          "start": 82,
+          "end": 82.33
+        },
+        {
+          "text": "hữu",
+          "start": 82.33,
+          "end": 82.67
+        },
+        {
+          "text": "ích!",
+          "start": 82.67,
+          "end": 83
+        }
+      ]
+    }
+  ],
+  "duration": 84.456
+}

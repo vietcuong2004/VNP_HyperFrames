@@ -1,0 +1,1984 @@
+{
+  "template": "G1_github",
+  "source_url": "https://github.com/decolua/9router",
+  "platform": "github",
+  "content_type": "library_framework",
+  "video_format": "developer_integration_brief",
+  "classification_reason": "Repo có dấu hiệu là thư viện/framework để tích hợp vào code.",
+  "metadata": {
+    "owner": "decolua",
+    "repo": "9router",
+    "description": "Unlimited FREE AI coding. Connect Claude Code, Codex, Cursor, Cline, Copilot, Antigravity to FREE Claude/GPT/Gemini via 40+ providers. Auto-fallback, RTK -40% tokens, never hit limits.",
+    "stars": 14098,
+    "language": "JavaScript",
+    "topics": [
+      "ai-agents",
+      "ai-gateway",
+      "anthropic",
+      "chatgpt",
+      "claude",
+      "claude-code",
+      "cline",
+      "codex",
+      "copilot",
+      "cursor",
+      "deepseek",
+      "free-ai",
+      "gemini",
+      "gemini-cli",
+      "llm",
+      "llm-gateway",
+      "openai",
+      "openai-proxy",
+      "qwen",
+      "token-saver"
+    ],
+    "readme_headings": [
+      "🤔 Why 9Router?",
+      "🔄 How It Works",
+      "⚡ Quick Start",
+      "Video Guides",
+      "🛠️ Supported CLI Tools",
+      "🌐 Supported Providers",
+      "🔐 OAuth Providers",
+      "🆓 Free Providers",
+      "🔑 API Key Providers (40+)",
+      "💡 Key Features",
+      "🚀 RTK Token Saver",
+      "🎯 Smart 3-Tier Fallback"
+    ],
+    "root_files": [
+      ".dockerignore",
+      ".env.example",
+      ".github",
+      ".gitignore",
+      ".npmignore",
+      ".vscode",
+      "CHANGELOG.md",
+      "DOCKER.md",
+      "Dockerfile",
+      "LICENSE",
+      "README.md",
+      "README.zh-CN.md",
+      "captain-definition",
+      "cli",
+      "docs",
+      "eslint.config.mjs",
+      "gitbook",
+      "i18n",
+      "images",
+      "jsconfig.json",
+      "next.config.mjs",
+      "open-sse",
+      "package.json",
+      "postcss.config.mjs",
+      "public",
+      "scripts",
+      "skills",
+      "src",
+      "start.sh",
+      "tester",
+      "tests"
+    ]
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 1,
+      "layout": "intro",
+      "voice": "9Router là giải pháp định tuyến AI miễn phí giúp bạn kết nối các công cụ code AI như Claude Code, Cursor, Cline với hơn bốn mươi nhà cung cấp AI. Tiết kiệm hai mươi đến bốn mươi phần trăm token và không bao giờ bị giới hạn.",
+      "visual": "Chụp trang repo GitHub, phóng to tiêu đề và mô tả.",
+      "headline_line1": "9ROUTER",
+      "headline_line2": "AI ROUTER MIỄN PHÍ",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 1,
+      "audio_start": 0,
+      "audio_duration": 14.304,
+      "audio_path": "assets/audio/scene_1.mp3",
+      "duration": 14.304,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\n9Router là giải pháp định tuyến AI miễn phí giúp bạn kết nối các công cụ code AI như Claude Code, Cursor, Cline với hơn 40 nhà cung cấp AI. Tiết kiệm 20 đến 40% token và không bao giờ bị giới hạn.\n",
+      "transcript": [
+        {
+          "text": "9Router",
+          "start": 0,
+          "end": 0.3
+        },
+        {
+          "text": "là",
+          "start": 0.3,
+          "end": 0.6
+        },
+        {
+          "text": "giải",
+          "start": 0.6,
+          "end": 0.9
+        },
+        {
+          "text": "pháp",
+          "start": 0.9,
+          "end": 1.2
+        },
+        {
+          "text": "định",
+          "start": 1.2,
+          "end": 1.5
+        },
+        {
+          "text": "tuyến",
+          "start": 1.5,
+          "end": 1.8
+        },
+        {
+          "text": "AI",
+          "start": 1.8,
+          "end": 2.1
+        },
+        {
+          "text": "miễn",
+          "start": 2.1,
+          "end": 2.4
+        },
+        {
+          "text": "phí",
+          "start": 2.4,
+          "end": 2.69
+        },
+        {
+          "text": "giúp",
+          "start": 2.69,
+          "end": 2.99
+        },
+        {
+          "text": "bạn",
+          "start": 2.99,
+          "end": 3.29
+        },
+        {
+          "text": "kết",
+          "start": 3.29,
+          "end": 3.59
+        },
+        {
+          "text": "nối",
+          "start": 3.59,
+          "end": 3.89
+        },
+        {
+          "text": "các",
+          "start": 3.89,
+          "end": 4.19
+        },
+        {
+          "text": "công",
+          "start": 4.19,
+          "end": 4.49
+        },
+        {
+          "text": "cụ",
+          "start": 4.49,
+          "end": 4.79
+        },
+        {
+          "text": "code",
+          "start": 4.79,
+          "end": 5.09
+        },
+        {
+          "text": "AI",
+          "start": 5.09,
+          "end": 5.39
+        },
+        {
+          "text": "như",
+          "start": 5.39,
+          "end": 5.69
+        },
+        {
+          "text": "Claude",
+          "start": 5.69,
+          "end": 5.99
+        },
+        {
+          "text": "Code,",
+          "start": 5.99,
+          "end": 6.29
+        },
+        {
+          "text": "Cursor,",
+          "start": 6.29,
+          "end": 6.59
+        },
+        {
+          "text": "Cline",
+          "start": 6.59,
+          "end": 6.89
+        },
+        {
+          "text": "với",
+          "start": 6.89,
+          "end": 7.19
+        },
+        {
+          "text": "hơn",
+          "start": 7.19,
+          "end": 7.48
+        },
+        {
+          "text": "40",
+          "start": 7.48,
+          "end": 7.78
+        },
+        {
+          "text": "nhà",
+          "start": 7.78,
+          "end": 8.08
+        },
+        {
+          "text": "cung",
+          "start": 8.08,
+          "end": 8.38
+        },
+        {
+          "text": "cấp",
+          "start": 8.38,
+          "end": 8.68
+        },
+        {
+          "text": "AI.",
+          "start": 8.68,
+          "end": 8.98
+        },
+        {
+          "text": "Tiết",
+          "start": 8.98,
+          "end": 9.28
+        },
+        {
+          "text": "kiệm",
+          "start": 9.28,
+          "end": 9.58
+        },
+        {
+          "text": "20",
+          "start": 9.58,
+          "end": 9.88
+        },
+        {
+          "text": "đến",
+          "start": 9.88,
+          "end": 10.18
+        },
+        {
+          "text": "40%",
+          "start": 10.18,
+          "end": 10.48
+        },
+        {
+          "text": "token",
+          "start": 10.48,
+          "end": 10.78
+        },
+        {
+          "text": "và",
+          "start": 10.78,
+          "end": 11.08
+        },
+        {
+          "text": "không",
+          "start": 11.08,
+          "end": 11.38
+        },
+        {
+          "text": "bao",
+          "start": 11.38,
+          "end": 11.68
+        },
+        {
+          "text": "giờ",
+          "start": 11.68,
+          "end": 11.98
+        },
+        {
+          "text": "bị",
+          "start": 11.98,
+          "end": 12.27
+        },
+        {
+          "text": "giới",
+          "start": 12.27,
+          "end": 12.57
+        },
+        {
+          "text": "hạn.",
+          "start": 12.57,
+          "end": 12.87
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 2,
+      "layout": "problem",
+      "voice": "9Router nằm ở tầng middleware, đóng vai trò cầu nối giữa các IDE code AI và các API provider. Giải quyết vấn đề tốn kém token, giới hạn rate limit và lãng phí quota subscription hàng tháng khi code với AI.",
+      "visual": "Bento card tóm tắt usecase chính của dự án.",
+      "headline_line1": "MIDDLEWARE LAYER",
+      "headline_line2": "TIẾT KIỆM TOKEN & QUOTA",
+      "bento1_title": "Định tuyến",
+      "bento1_desc": "Tự động chuyển giữa subscription, cheap và free AI models",
+      "bento2_title": "Nén token",
+      "bento3_title": "Không giới hạn",
+      "bento2_desc": "RTK giảm 20-40% token từ tool outputs",
+      "bento3_desc": "Auto fallback khi hit rate limit",
+      "repo_url": "github.com/decolua/9router",
+      "steps": [
+        {
+          "title": "Định tuyến",
+          "body": "Tự động chuyển giữa subscription, cheap và free AI models"
+        },
+        {
+          "title": "Nén token",
+          "body": "RTK giảm 20-40% token từ tool outputs"
+        },
+        {
+          "title": "Không giới hạn",
+          "body": "Auto fallback khi hit rate limit"
+        }
+      ],
+      "content_mode": "steps",
+      "stt": 2,
+      "audio_start": 14.304,
+      "audio_duration": 14.28,
+      "audio_path": "assets/audio/scene_2.mp3",
+      "duration": 14.28,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\n9Router nằm ở tầng middleware, đóng vai trò cầu nối giữa các IDE code AI và các API provider. Giải quyết vấn đề tốn kém token, giới hạn rate limit và lãng phí quota subscription hàng tháng khi code với AI.\n",
+      "transcript": [
+        {
+          "text": "9Router",
+          "start": 14.3,
+          "end": 14.62
+        },
+        {
+          "text": "nằm",
+          "start": 14.62,
+          "end": 14.93
+        },
+        {
+          "text": "ở",
+          "start": 14.93,
+          "end": 15.24
+        },
+        {
+          "text": "tầng",
+          "start": 15.24,
+          "end": 15.56
+        },
+        {
+          "text": "middleware,",
+          "start": 15.56,
+          "end": 15.87
+        },
+        {
+          "text": "đóng",
+          "start": 15.87,
+          "end": 16.18
+        },
+        {
+          "text": "vai",
+          "start": 16.18,
+          "end": 16.5
+        },
+        {
+          "text": "trò",
+          "start": 16.5,
+          "end": 16.81
+        },
+        {
+          "text": "cầu",
+          "start": 16.81,
+          "end": 17.13
+        },
+        {
+          "text": "nối",
+          "start": 17.13,
+          "end": 17.44
+        },
+        {
+          "text": "giữa",
+          "start": 17.44,
+          "end": 17.75
+        },
+        {
+          "text": "các",
+          "start": 17.75,
+          "end": 18.07
+        },
+        {
+          "text": "IDE",
+          "start": 18.07,
+          "end": 18.38
+        },
+        {
+          "text": "code",
+          "start": 18.38,
+          "end": 18.69
+        },
+        {
+          "text": "AI",
+          "start": 18.69,
+          "end": 19.01
+        },
+        {
+          "text": "và",
+          "start": 19.01,
+          "end": 19.32
+        },
+        {
+          "text": "các",
+          "start": 19.32,
+          "end": 19.63
+        },
+        {
+          "text": "API",
+          "start": 19.63,
+          "end": 19.95
+        },
+        {
+          "text": "provider.",
+          "start": 19.95,
+          "end": 20.26
+        },
+        {
+          "text": "Giải",
+          "start": 20.26,
+          "end": 20.57
+        },
+        {
+          "text": "quyết",
+          "start": 20.57,
+          "end": 20.89
+        },
+        {
+          "text": "vấn",
+          "start": 20.89,
+          "end": 21.2
+        },
+        {
+          "text": "đề",
+          "start": 21.2,
+          "end": 21.51
+        },
+        {
+          "text": "tốn",
+          "start": 21.51,
+          "end": 21.83
+        },
+        {
+          "text": "kém",
+          "start": 21.83,
+          "end": 22.14
+        },
+        {
+          "text": "token,",
+          "start": 22.14,
+          "end": 22.45
+        },
+        {
+          "text": "giới",
+          "start": 22.45,
+          "end": 22.77
+        },
+        {
+          "text": "hạn",
+          "start": 22.77,
+          "end": 23.08
+        },
+        {
+          "text": "rate",
+          "start": 23.08,
+          "end": 23.39
+        },
+        {
+          "text": "limit",
+          "start": 23.39,
+          "end": 23.71
+        },
+        {
+          "text": "và",
+          "start": 23.71,
+          "end": 24.02
+        },
+        {
+          "text": "lãng",
+          "start": 24.02,
+          "end": 24.33
+        },
+        {
+          "text": "phí",
+          "start": 24.33,
+          "end": 24.65
+        },
+        {
+          "text": "quota",
+          "start": 24.65,
+          "end": 24.96
+        },
+        {
+          "text": "subscription",
+          "start": 24.96,
+          "end": 25.28
+        },
+        {
+          "text": "hàng",
+          "start": 25.28,
+          "end": 25.59
+        },
+        {
+          "text": "tháng",
+          "start": 25.59,
+          "end": 25.9
+        },
+        {
+          "text": "khi",
+          "start": 25.9,
+          "end": 26.22
+        },
+        {
+          "text": "code",
+          "start": 26.22,
+          "end": 26.53
+        },
+        {
+          "text": "với",
+          "start": 26.53,
+          "end": 26.84
+        },
+        {
+          "text": "AI.",
+          "start": 26.84,
+          "end": 27.16
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 3,
+      "layout": "install",
+      "voice": "Để bắt đầu, clone repo về máy, cài đặt dependencies bằng npm install, sau đó chạy npm start để khởi động router. Cuối cùng cấu hình IDE của bạn trỏ về localhost port mà router đang chạy.",
+      "visual": "Snippet code cài đặt tối giản hoặc cách tiếp cận.",
+      "headline_line1": "CÀI ĐẶT",
+      "headline_line2": "BA BƯỚC ĐƠN GIẢN",
+      "content_mode": "steps",
+      "steps": [
+        {
+          "title": "Clone repo",
+          "body": "git clone và cd vào thư mục 9router"
+        },
+        {
+          "title": "Cài đặt",
+          "body": "Chạy npm install để cài dependencies"
+        },
+        {
+          "title": "Khởi động",
+          "body": "npm start và cấu hình IDE trỏ về localhost"
+        }
+      ],
+      "bento1_title": "Clone repo",
+      "bento1_desc": "git clone và cd vào thư mục 9router",
+      "bento2_title": "Cài đặt",
+      "bento2_desc": "Chạy npm install để cài dependencies",
+      "bento3_title": "Khởi động",
+      "bento3_desc": "npm start và cấu hình IDE trỏ về localhost",
+      "bento4_title": "Kết nối IDE",
+      "bento4_desc": "Trỏ Cursor, Cline về endpoint local",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 3,
+      "audio_start": 28.584,
+      "audio_duration": 13.584,
+      "audio_path": "assets/audio/scene_3.mp3",
+      "duration": 13.584,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nĐể bắt đầu, clone repo về máy, cài đặt dependencies bằng npm install, sau đó chạy npm start để khởi động router. Cuối cùng cấu hình IDE của bạn trỏ về localhost port mà router đang chạy.\n",
+      "transcript": [
+        {
+          "text": "Để",
+          "start": 28.58,
+          "end": 28.91
+        },
+        {
+          "text": "bắt",
+          "start": 28.91,
+          "end": 29.24
+        },
+        {
+          "text": "đầu,",
+          "start": 29.24,
+          "end": 29.58
+        },
+        {
+          "text": "clone",
+          "start": 29.58,
+          "end": 29.91
+        },
+        {
+          "text": "repo",
+          "start": 29.91,
+          "end": 30.24
+        },
+        {
+          "text": "về",
+          "start": 30.24,
+          "end": 30.57
+        },
+        {
+          "text": "máy,",
+          "start": 30.57,
+          "end": 30.9
+        },
+        {
+          "text": "cài",
+          "start": 30.9,
+          "end": 31.23
+        },
+        {
+          "text": "đặt",
+          "start": 31.23,
+          "end": 31.56
+        },
+        {
+          "text": "dependencies",
+          "start": 31.56,
+          "end": 31.89
+        },
+        {
+          "text": "bằng",
+          "start": 31.89,
+          "end": 32.22
+        },
+        {
+          "text": "npm",
+          "start": 32.22,
+          "end": 32.55
+        },
+        {
+          "text": "install,",
+          "start": 32.55,
+          "end": 32.88
+        },
+        {
+          "text": "sau",
+          "start": 32.88,
+          "end": 33.21
+        },
+        {
+          "text": "đó",
+          "start": 33.21,
+          "end": 33.54
+        },
+        {
+          "text": "chạy",
+          "start": 33.54,
+          "end": 33.87
+        },
+        {
+          "text": "npm",
+          "start": 33.87,
+          "end": 34.2
+        },
+        {
+          "text": "start",
+          "start": 34.2,
+          "end": 34.53
+        },
+        {
+          "text": "để",
+          "start": 34.53,
+          "end": 34.86
+        },
+        {
+          "text": "khởi",
+          "start": 34.86,
+          "end": 35.19
+        },
+        {
+          "text": "động",
+          "start": 35.19,
+          "end": 35.52
+        },
+        {
+          "text": "router.",
+          "start": 35.52,
+          "end": 35.85
+        },
+        {
+          "text": "Cuối",
+          "start": 35.85,
+          "end": 36.18
+        },
+        {
+          "text": "cùng",
+          "start": 36.18,
+          "end": 36.51
+        },
+        {
+          "text": "cấu",
+          "start": 36.51,
+          "end": 36.84
+        },
+        {
+          "text": "hình",
+          "start": 36.84,
+          "end": 37.17
+        },
+        {
+          "text": "IDE",
+          "start": 37.17,
+          "end": 37.51
+        },
+        {
+          "text": "của",
+          "start": 37.51,
+          "end": 37.84
+        },
+        {
+          "text": "bạn",
+          "start": 37.84,
+          "end": 38.17
+        },
+        {
+          "text": "trỏ",
+          "start": 38.17,
+          "end": 38.5
+        },
+        {
+          "text": "về",
+          "start": 38.5,
+          "end": 38.83
+        },
+        {
+          "text": "localhost",
+          "start": 38.83,
+          "end": 39.16
+        },
+        {
+          "text": "port",
+          "start": 39.16,
+          "end": 39.49
+        },
+        {
+          "text": "mà",
+          "start": 39.49,
+          "end": 39.82
+        },
+        {
+          "text": "router",
+          "start": 39.82,
+          "end": 40.15
+        },
+        {
+          "text": "đang",
+          "start": 40.15,
+          "end": 40.48
+        },
+        {
+          "text": "chạy.",
+          "start": 40.48,
+          "end": 40.81
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 4,
+      "layout": "feature",
+      "voice": "Tính năng nổi bật nhất là RTK Token Saver tự động nén kết quả từ các lệnh git diff, grep, ls để giảm token tiêu thụ. Kết hợp với auto fallback thông minh giữa subscription, cheap và free models, bạn sẽ không bao giờ bị gián đoạn khi code.",
+      "visual": "Sơ đồ hoặc biểu tượng trực quan mô tả tính năng.",
+      "headline_line1": "RTK TOKEN SAVER",
+      "headline_line2": "NÉN THÔNG MINH 20-40%",
+      "btn_text": "npm start",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 4,
+      "audio_start": 42.168,
+      "audio_duration": 15.912,
+      "audio_path": "assets/audio/scene_4.mp3",
+      "duration": 15.912,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTính năng nổi bật nhất là RTK Token Saver tự động nén kết quả từ các lệnh git diff, grep, ls để giảm token tiêu thụ. Kết hợp với auto fallback thông minh giữa subscription, cheap và free models, bạn sẽ không bao giờ bị gián đoạn khi code.\n",
+      "transcript": [
+        {
+          "text": "Tính",
+          "start": 42.17,
+          "end": 42.46
+        },
+        {
+          "text": "năng",
+          "start": 42.46,
+          "end": 42.75
+        },
+        {
+          "text": "nổi",
+          "start": 42.75,
+          "end": 43.04
+        },
+        {
+          "text": "bật",
+          "start": 43.04,
+          "end": 43.34
+        },
+        {
+          "text": "nhất",
+          "start": 43.34,
+          "end": 43.63
+        },
+        {
+          "text": "là",
+          "start": 43.63,
+          "end": 43.92
+        },
+        {
+          "text": "RTK",
+          "start": 43.92,
+          "end": 44.21
+        },
+        {
+          "text": "Token",
+          "start": 44.21,
+          "end": 44.51
+        },
+        {
+          "text": "Saver",
+          "start": 44.51,
+          "end": 44.8
+        },
+        {
+          "text": "tự",
+          "start": 44.8,
+          "end": 45.09
+        },
+        {
+          "text": "động",
+          "start": 45.09,
+          "end": 45.38
+        },
+        {
+          "text": "nén",
+          "start": 45.38,
+          "end": 45.68
+        },
+        {
+          "text": "kết",
+          "start": 45.68,
+          "end": 45.97
+        },
+        {
+          "text": "quả",
+          "start": 45.97,
+          "end": 46.26
+        },
+        {
+          "text": "từ",
+          "start": 46.26,
+          "end": 46.55
+        },
+        {
+          "text": "các",
+          "start": 46.55,
+          "end": 46.84
+        },
+        {
+          "text": "lệnh",
+          "start": 46.84,
+          "end": 47.14
+        },
+        {
+          "text": "git",
+          "start": 47.14,
+          "end": 47.43
+        },
+        {
+          "text": "diff,",
+          "start": 47.43,
+          "end": 47.72
+        },
+        {
+          "text": "grep,",
+          "start": 47.72,
+          "end": 48.01
+        },
+        {
+          "text": "ls",
+          "start": 48.01,
+          "end": 48.31
+        },
+        {
+          "text": "để",
+          "start": 48.31,
+          "end": 48.6
+        },
+        {
+          "text": "giảm",
+          "start": 48.6,
+          "end": 48.89
+        },
+        {
+          "text": "token",
+          "start": 48.89,
+          "end": 49.18
+        },
+        {
+          "text": "tiêu",
+          "start": 49.18,
+          "end": 49.47
+        },
+        {
+          "text": "thụ.",
+          "start": 49.47,
+          "end": 49.77
+        },
+        {
+          "text": "Kết",
+          "start": 49.77,
+          "end": 50.06
+        },
+        {
+          "text": "hợp",
+          "start": 50.06,
+          "end": 50.35
+        },
+        {
+          "text": "với",
+          "start": 50.35,
+          "end": 50.64
+        },
+        {
+          "text": "auto",
+          "start": 50.64,
+          "end": 50.94
+        },
+        {
+          "text": "fallback",
+          "start": 50.94,
+          "end": 51.23
+        },
+        {
+          "text": "thông",
+          "start": 51.23,
+          "end": 51.52
+        },
+        {
+          "text": "minh",
+          "start": 51.52,
+          "end": 51.81
+        },
+        {
+          "text": "giữa",
+          "start": 51.81,
+          "end": 52.1
+        },
+        {
+          "text": "subscription,",
+          "start": 52.1,
+          "end": 52.4
+        },
+        {
+          "text": "cheap",
+          "start": 52.4,
+          "end": 52.69
+        },
+        {
+          "text": "và",
+          "start": 52.69,
+          "end": 52.98
+        },
+        {
+          "text": "free",
+          "start": 52.98,
+          "end": 53.27
+        },
+        {
+          "text": "models,",
+          "start": 53.27,
+          "end": 53.57
+        },
+        {
+          "text": "bạn",
+          "start": 53.57,
+          "end": 53.86
+        },
+        {
+          "text": "sẽ",
+          "start": 53.86,
+          "end": 54.15
+        },
+        {
+          "text": "không",
+          "start": 54.15,
+          "end": 54.44
+        },
+        {
+          "text": "bao",
+          "start": 54.44,
+          "end": 54.74
+        },
+        {
+          "text": "giờ",
+          "start": 54.74,
+          "end": 55.03
+        },
+        {
+          "text": "bị",
+          "start": 55.03,
+          "end": 55.32
+        },
+        {
+          "text": "gián",
+          "start": 55.32,
+          "end": 55.61
+        },
+        {
+          "text": "đoạn",
+          "start": 55.61,
+          "end": 55.9
+        },
+        {
+          "text": "khi",
+          "start": 55.9,
+          "end": 56.2
+        },
+        {
+          "text": "code.",
+          "start": 56.2,
+          "end": 56.49
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 5,
+      "layout": "checklist",
+      "voice": "Trước khi tích hợp, kiểm tra license MIT cho phép sử dụng thương mại. Đọc qua issues để nắm các vấn đề đã biết và theo dõi release notes để cập nhật tính năng mới cũng như bug fixes.",
+      "visual": "Checklist các điểm cần lưu ý trước khi dùng.",
+      "headline_line1": "KIỂM TRA",
+      "headline_line2": "TRƯỚC KHI TÍCH HỢP",
+      "bento1_title": "License",
+      "bento1_desc": "MIT License - tự do sử dụng và thương mại",
+      "bento2_title": "Release",
+      "bento3_title": "Issues",
+      "bento2_desc": "Theo dõi phiên bản mới",
+      "bento3_desc": "Đọc issues đã biết",
+      "repo_url": "github.com/decolua/9router",
+      "steps": [
+        {
+          "title": "License",
+          "body": "MIT License - tự do sử dụng và thương mại"
+        },
+        {
+          "title": "Release",
+          "body": "Theo dõi phiên bản mới"
+        },
+        {
+          "title": "Issues",
+          "body": "Đọc issues đã biết"
+        }
+      ],
+      "content_mode": "steps",
+      "stt": 5,
+      "audio_start": 58.08,
+      "audio_duration": 11.688,
+      "audio_path": "assets/audio/scene_5.mp3",
+      "duration": 11.688,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTrước khi tích hợp, kiểm tra license MIT cho phép sử dụng thương mại. Đọc qua issues để nắm các vấn đề đã biết và theo dõi release notes để cập nhật tính năng mới cũng như bug fixes.\n",
+      "transcript": [
+        {
+          "text": "Trước",
+          "start": 58.08,
+          "end": 58.35
+        },
+        {
+          "text": "khi",
+          "start": 58.35,
+          "end": 58.62
+        },
+        {
+          "text": "tích",
+          "start": 58.62,
+          "end": 58.89
+        },
+        {
+          "text": "hợp,",
+          "start": 58.89,
+          "end": 59.16
+        },
+        {
+          "text": "kiểm",
+          "start": 59.16,
+          "end": 59.43
+        },
+        {
+          "text": "tra",
+          "start": 59.43,
+          "end": 59.7
+        },
+        {
+          "text": "license",
+          "start": 59.7,
+          "end": 59.97
+        },
+        {
+          "text": "MIT",
+          "start": 59.97,
+          "end": 60.24
+        },
+        {
+          "text": "cho",
+          "start": 60.24,
+          "end": 60.51
+        },
+        {
+          "text": "phép",
+          "start": 60.51,
+          "end": 60.78
+        },
+        {
+          "text": "sử",
+          "start": 60.78,
+          "end": 61.05
+        },
+        {
+          "text": "dụng",
+          "start": 61.05,
+          "end": 61.32
+        },
+        {
+          "text": "thương",
+          "start": 61.32,
+          "end": 61.59
+        },
+        {
+          "text": "mại.",
+          "start": 61.59,
+          "end": 61.86
+        },
+        {
+          "text": "Đọc",
+          "start": 61.86,
+          "end": 62.13
+        },
+        {
+          "text": "qua",
+          "start": 62.13,
+          "end": 62.4
+        },
+        {
+          "text": "issues",
+          "start": 62.4,
+          "end": 62.67
+        },
+        {
+          "text": "để",
+          "start": 62.67,
+          "end": 62.94
+        },
+        {
+          "text": "nắm",
+          "start": 62.94,
+          "end": 63.2
+        },
+        {
+          "text": "các",
+          "start": 63.2,
+          "end": 63.47
+        },
+        {
+          "text": "vấn",
+          "start": 63.47,
+          "end": 63.74
+        },
+        {
+          "text": "đề",
+          "start": 63.74,
+          "end": 64.01
+        },
+        {
+          "text": "đã",
+          "start": 64.01,
+          "end": 64.28
+        },
+        {
+          "text": "biết",
+          "start": 64.28,
+          "end": 64.55
+        },
+        {
+          "text": "và",
+          "start": 64.55,
+          "end": 64.82
+        },
+        {
+          "text": "theo",
+          "start": 64.82,
+          "end": 65.09
+        },
+        {
+          "text": "dõi",
+          "start": 65.09,
+          "end": 65.36
+        },
+        {
+          "text": "release",
+          "start": 65.36,
+          "end": 65.63
+        },
+        {
+          "text": "notes",
+          "start": 65.63,
+          "end": 65.9
+        },
+        {
+          "text": "để",
+          "start": 65.9,
+          "end": 66.17
+        },
+        {
+          "text": "cập",
+          "start": 66.17,
+          "end": 66.44
+        },
+        {
+          "text": "nhật",
+          "start": 66.44,
+          "end": 66.71
+        },
+        {
+          "text": "tính",
+          "start": 66.71,
+          "end": 66.98
+        },
+        {
+          "text": "năng",
+          "start": 66.98,
+          "end": 67.25
+        },
+        {
+          "text": "mới",
+          "start": 67.25,
+          "end": 67.52
+        },
+        {
+          "text": "cũng",
+          "start": 67.52,
+          "end": 67.79
+        },
+        {
+          "text": "như",
+          "start": 67.79,
+          "end": 68.06
+        },
+        {
+          "text": "bug",
+          "start": 68.06,
+          "end": 68.33
+        },
+        {
+          "text": "fixes.",
+          "start": 68.33,
+          "end": 68.6
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba expressing unbelievable emotions.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 6,
+      "layout": "stats",
+      "voice": "Repo đã thu hút hơn mười bốn nghìn sao trên GitHub, chứng tỏ sức hút mạnh mẽ từ cộng đồng developer. Được viết chủ yếu bằng JavaScript, dễ dàng đọc code và customize theo nhu cầu dự án.",
+      "visual": "Thẻ stats của repo với số sao, ngôn ngữ.",
+      "headline_line1": "THỐNG KÊ",
+      "headline_line2": "SỨC HÚT CỘNG ĐỒNG",
+      "repo_name": "decolua/9router",
+      "repo_lang": "JavaScript",
+      "repo_stars": "★ 14.098",
+      "repo_trend": "▲ Trending",
+      "repo_trend_label": "GitHub",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 6,
+      "audio_start": 69.768,
+      "audio_duration": 12.36,
+      "audio_path": "assets/audio/scene_6.mp3",
+      "duration": 12.36,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nRepo đã thu hút hơn 14,000 sao trên GitHub, chứng tỏ sức hút mạnh mẽ từ cộng đồng developer. Được viết chủ yếu bằng JavaScript, dễ dàng đọc code và customize theo nhu cầu dự án.\n",
+      "transcript": [
+        {
+          "text": "Repo",
+          "start": 69.77,
+          "end": 70.08
+        },
+        {
+          "text": "đã",
+          "start": 70.08,
+          "end": 70.39
+        },
+        {
+          "text": "thu",
+          "start": 70.39,
+          "end": 70.69
+        },
+        {
+          "text": "hút",
+          "start": 70.69,
+          "end": 71
+        },
+        {
+          "text": "hơn",
+          "start": 71,
+          "end": 71.31
+        },
+        {
+          "text": "14,000",
+          "start": 71.31,
+          "end": 71.62
+        },
+        {
+          "text": "sao",
+          "start": 71.62,
+          "end": 71.93
+        },
+        {
+          "text": "trên",
+          "start": 71.93,
+          "end": 72.24
+        },
+        {
+          "text": "GitHub,",
+          "start": 72.24,
+          "end": 72.55
+        },
+        {
+          "text": "chứng",
+          "start": 72.55,
+          "end": 72.86
+        },
+        {
+          "text": "tỏ",
+          "start": 72.86,
+          "end": 73.17
+        },
+        {
+          "text": "sức",
+          "start": 73.17,
+          "end": 73.48
+        },
+        {
+          "text": "hút",
+          "start": 73.48,
+          "end": 73.78
+        },
+        {
+          "text": "mạnh",
+          "start": 73.78,
+          "end": 74.09
+        },
+        {
+          "text": "mẽ",
+          "start": 74.09,
+          "end": 74.4
+        },
+        {
+          "text": "từ",
+          "start": 74.4,
+          "end": 74.71
+        },
+        {
+          "text": "cộng",
+          "start": 74.71,
+          "end": 75.02
+        },
+        {
+          "text": "đồng",
+          "start": 75.02,
+          "end": 75.33
+        },
+        {
+          "text": "developer.",
+          "start": 75.33,
+          "end": 75.64
+        },
+        {
+          "text": "Được",
+          "start": 75.64,
+          "end": 75.95
+        },
+        {
+          "text": "viết",
+          "start": 75.95,
+          "end": 76.26
+        },
+        {
+          "text": "chủ",
+          "start": 76.26,
+          "end": 76.57
+        },
+        {
+          "text": "yếu",
+          "start": 76.57,
+          "end": 76.87
+        },
+        {
+          "text": "bằng",
+          "start": 76.87,
+          "end": 77.18
+        },
+        {
+          "text": "JavaScript,",
+          "start": 77.18,
+          "end": 77.49
+        },
+        {
+          "text": "dễ",
+          "start": 77.49,
+          "end": 77.8
+        },
+        {
+          "text": "dàng",
+          "start": 77.8,
+          "end": 78.11
+        },
+        {
+          "text": "đọc",
+          "start": 78.11,
+          "end": 78.42
+        },
+        {
+          "text": "code",
+          "start": 78.42,
+          "end": 78.73
+        },
+        {
+          "text": "và",
+          "start": 78.73,
+          "end": 79.04
+        },
+        {
+          "text": "customize",
+          "start": 79.04,
+          "end": 79.35
+        },
+        {
+          "text": "theo",
+          "start": 79.35,
+          "end": 79.66
+        },
+        {
+          "text": "nhu",
+          "start": 79.66,
+          "end": 79.96
+        },
+        {
+          "text": "cầu",
+          "start": 79.96,
+          "end": 80.27
+        },
+        {
+          "text": "dự",
+          "start": 80.27,
+          "end": 80.58
+        },
+        {
+          "text": "án.",
+          "start": 80.58,
+          "end": 80.89
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba meditating in zen state.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 7,
+      "layout": "clone",
+      "voice": "Clone repo về máy bằng git clone, đọc kỹ README để hiểu cấu trúc và cách config. Chạy thử trong một project phụ nhỏ trước khi tích hợp vào dự án production để đảm bảo tương thích và ổn định.",
+      "visual": "Hiển thị lệnh git clone và checklist chạy thử tối giản.",
+      "headline_line1": "CLONE & THỬ",
+      "headline_line2": "AN TOÀN TRƯỚC KHI DÙNG",
+      "btn_text": "$ git clone github.com/decolua/9router",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 7,
+      "audio_start": 82.128,
+      "audio_duration": 12.768,
+      "audio_path": "assets/audio/scene_7.mp3",
+      "duration": 12.768,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nClone repo về máy bằng git clone, đọc kỹ README để hiểu cấu trúc và cách config. Chạy thử trong một project phụ nhỏ trước khi tích hợp vào dự án production để đảm bảo tương thích và ổn định.\n",
+      "transcript": [
+        {
+          "text": "Clone",
+          "start": 82.13,
+          "end": 82.42
+        },
+        {
+          "text": "repo",
+          "start": 82.42,
+          "end": 82.7
+        },
+        {
+          "text": "về",
+          "start": 82.7,
+          "end": 82.99
+        },
+        {
+          "text": "máy",
+          "start": 82.99,
+          "end": 83.28
+        },
+        {
+          "text": "bằng",
+          "start": 83.28,
+          "end": 83.56
+        },
+        {
+          "text": "git",
+          "start": 83.56,
+          "end": 83.85
+        },
+        {
+          "text": "clone,",
+          "start": 83.85,
+          "end": 84.14
+        },
+        {
+          "text": "đọc",
+          "start": 84.14,
+          "end": 84.43
+        },
+        {
+          "text": "kỹ",
+          "start": 84.43,
+          "end": 84.71
+        },
+        {
+          "text": "README",
+          "start": 84.71,
+          "end": 85
+        },
+        {
+          "text": "để",
+          "start": 85,
+          "end": 85.29
+        },
+        {
+          "text": "hiểu",
+          "start": 85.29,
+          "end": 85.58
+        },
+        {
+          "text": "cấu",
+          "start": 85.58,
+          "end": 85.86
+        },
+        {
+          "text": "trúc",
+          "start": 85.86,
+          "end": 86.15
+        },
+        {
+          "text": "và",
+          "start": 86.15,
+          "end": 86.44
+        },
+        {
+          "text": "cách",
+          "start": 86.44,
+          "end": 86.72
+        },
+        {
+          "text": "config.",
+          "start": 86.72,
+          "end": 87.01
+        },
+        {
+          "text": "Chạy",
+          "start": 87.01,
+          "end": 87.3
+        },
+        {
+          "text": "thử",
+          "start": 87.3,
+          "end": 87.59
+        },
+        {
+          "text": "trong",
+          "start": 87.59,
+          "end": 87.87
+        },
+        {
+          "text": "một",
+          "start": 87.87,
+          "end": 88.16
+        },
+        {
+          "text": "project",
+          "start": 88.16,
+          "end": 88.45
+        },
+        {
+          "text": "phụ",
+          "start": 88.45,
+          "end": 88.74
+        },
+        {
+          "text": "nhỏ",
+          "start": 88.74,
+          "end": 89.02
+        },
+        {
+          "text": "trước",
+          "start": 89.02,
+          "end": 89.31
+        },
+        {
+          "text": "khi",
+          "start": 89.31,
+          "end": 89.6
+        },
+        {
+          "text": "tích",
+          "start": 89.6,
+          "end": 89.88
+        },
+        {
+          "text": "hợp",
+          "start": 89.88,
+          "end": 90.17
+        },
+        {
+          "text": "vào",
+          "start": 90.17,
+          "end": 90.46
+        },
+        {
+          "text": "dự",
+          "start": 90.46,
+          "end": 90.75
+        },
+        {
+          "text": "án",
+          "start": 90.75,
+          "end": 91.03
+        },
+        {
+          "text": "production",
+          "start": 91.03,
+          "end": 91.32
+        },
+        {
+          "text": "để",
+          "start": 91.32,
+          "end": 91.61
+        },
+        {
+          "text": "đảm",
+          "start": 91.61,
+          "end": 91.9
+        },
+        {
+          "text": "bảo",
+          "start": 91.9,
+          "end": 92.18
+        },
+        {
+          "text": "tương",
+          "start": 92.18,
+          "end": 92.47
+        },
+        {
+          "text": "thích",
+          "start": 92.47,
+          "end": 92.76
+        },
+        {
+          "text": "và",
+          "start": 92.76,
+          "end": 93.04
+        },
+        {
+          "text": "ổn",
+          "start": 93.04,
+          "end": 93.33
+        },
+        {
+          "text": "định.",
+          "start": 93.33,
+          "end": 93.62
+        }
+      ]
+    },
+    {
+      "assets": [
+        "character shiba smiling brightly.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "scene": 8,
+      "layout": "outro",
+      "voice": "Tóm lại, hãy star repo nếu thấy hữu ích, đọc issues để tránh lỗi đã biết, kiểm tra release notes cho updates mới và xác nhận license phù hợp với dự án của bạn. Chúc bạn code hiệu quả với 9Router.",
+      "visual": "Outro nhắc star, bình luận và lưu repo để xem lại.",
+      "headline_line1": "LUU REPO",
+      "headline_line2": "DOC README KY",
+      "content_mode": "steps",
+      "steps": [
+        {
+          "title": "Star repo",
+          "body": "Lưu lại nếu thấy phù hợp với dự án"
+        },
+        {
+          "title": "Đọc issues",
+          "body": "Nắm các vấn đề đã biết trước khi dùng"
+        },
+        {
+          "title": "Theo dõi",
+          "body": "Cập nhật release mới và bug fixes"
+        },
+        {
+          "title": "Xác nhận",
+          "body": "Kiểm tra MIT license cho use case của bạn"
+        }
+      ],
+      "bento1_title": "Star repo",
+      "bento1_desc": "Lưu lại nếu thấy phù hợp với dự án",
+      "bento2_title": "Đọc issues",
+      "bento2_desc": "Nắm các vấn đề đã biết trước khi dùng",
+      "bento3_title": "Theo dõi",
+      "bento3_desc": "Cập nhật release mới và bug fixes",
+      "bento4_title": "Xác nhận",
+      "bento4_desc": "Kiểm tra MIT license cho use case của bạn",
+      "repo_url": "github.com/decolua/9router",
+      "stt": 8,
+      "audio_start": 94.896,
+      "audio_duration": 12.576,
+      "audio_path": "assets/audio/scene_8.mp3",
+      "duration": 12.576,
+      "srt": "1\n00:00:00,000 --> 00:00:09,000\nTóm lại, hãy star repo nếu thấy hữu ích, đọc issues để tránh lỗi đã biết, kiểm tra release notes cho updates mới và xác nhận license phù hợp với dự án của bạn. Chúc bạn code hiệu quả với 9Router.\n",
+      "transcript": [
+        {
+          "text": "Tóm",
+          "start": 94.9,
+          "end": 95.17
+        },
+        {
+          "text": "lại,",
+          "start": 95.17,
+          "end": 95.45
+        },
+        {
+          "text": "hãy",
+          "start": 95.45,
+          "end": 95.72
+        },
+        {
+          "text": "star",
+          "start": 95.72,
+          "end": 96
+        },
+        {
+          "text": "repo",
+          "start": 96,
+          "end": 96.28
+        },
+        {
+          "text": "nếu",
+          "start": 96.28,
+          "end": 96.55
+        },
+        {
+          "text": "thấy",
+          "start": 96.55,
+          "end": 96.83
+        },
+        {
+          "text": "hữu",
+          "start": 96.83,
+          "end": 97.1
+        },
+        {
+          "text": "ích,",
+          "start": 97.1,
+          "end": 97.38
+        },
+        {
+          "text": "đọc",
+          "start": 97.38,
+          "end": 97.66
+        },
+        {
+          "text": "issues",
+          "start": 97.66,
+          "end": 97.93
+        },
+        {
+          "text": "để",
+          "start": 97.93,
+          "end": 98.21
+        },
+        {
+          "text": "tránh",
+          "start": 98.21,
+          "end": 98.48
+        },
+        {
+          "text": "lỗi",
+          "start": 98.48,
+          "end": 98.76
+        },
+        {
+          "text": "đã",
+          "start": 98.76,
+          "end": 99.04
+        },
+        {
+          "text": "biết,",
+          "start": 99.04,
+          "end": 99.31
+        },
+        {
+          "text": "kiểm",
+          "start": 99.31,
+          "end": 99.59
+        },
+        {
+          "text": "tra",
+          "start": 99.59,
+          "end": 99.87
+        },
+        {
+          "text": "release",
+          "start": 99.87,
+          "end": 100.14
+        },
+        {
+          "text": "notes",
+          "start": 100.14,
+          "end": 100.42
+        },
+        {
+          "text": "cho",
+          "start": 100.42,
+          "end": 100.69
+        },
+        {
+          "text": "updates",
+          "start": 100.69,
+          "end": 100.97
+        },
+        {
+          "text": "mới",
+          "start": 100.97,
+          "end": 101.25
+        },
+        {
+          "text": "và",
+          "start": 101.25,
+          "end": 101.52
+        },
+        {
+          "text": "xác",
+          "start": 101.52,
+          "end": 101.8
+        },
+        {
+          "text": "nhận",
+          "start": 101.8,
+          "end": 102.07
+        },
+        {
+          "text": "license",
+          "start": 102.07,
+          "end": 102.35
+        },
+        {
+          "text": "phù",
+          "start": 102.35,
+          "end": 102.63
+        },
+        {
+          "text": "hợp",
+          "start": 102.63,
+          "end": 102.9
+        },
+        {
+          "text": "với",
+          "start": 102.9,
+          "end": 103.18
+        },
+        {
+          "text": "dự",
+          "start": 103.18,
+          "end": 103.45
+        },
+        {
+          "text": "án",
+          "start": 103.45,
+          "end": 103.73
+        },
+        {
+          "text": "của",
+          "start": 103.73,
+          "end": 104.01
+        },
+        {
+          "text": "bạn.",
+          "start": 104.01,
+          "end": 104.28
+        },
+        {
+          "text": "Chúc",
+          "start": 104.28,
+          "end": 104.56
+        },
+        {
+          "text": "bạn",
+          "start": 104.56,
+          "end": 104.83
+        },
+        {
+          "text": "code",
+          "start": 104.83,
+          "end": 105.11
+        },
+        {
+          "text": "hiệu",
+          "start": 105.11,
+          "end": 105.39
+        },
+        {
+          "text": "quả",
+          "start": 105.39,
+          "end": 105.66
+        },
+        {
+          "text": "với",
+          "start": 105.66,
+          "end": 105.94
+        },
+        {
+          "text": "9Router.",
+          "start": 105.94,
+          "end": 106.21
+        }
+      ]
+    }
+  ],
+  "duration": 107.472
+}

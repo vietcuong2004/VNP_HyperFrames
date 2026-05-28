@@ -1,0 +1,183 @@
+{
+  "template": "G1_github",
+  "source_url": "https://github.com/rtk-ai/rtk",
+  "platform": "github",
+  "content_type": "library_framework",
+  "video_format": "developer_integration_brief",
+  "classification_reason": "Repo có dấu hiệu là thư viện/framework để tích hợp vào code.",
+  "metadata": {
+    "owner": "rtk-ai",
+    "repo": "rtk",
+    "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies",
+    "stars": 54433,
+    "language": "Rust",
+    "topics": [
+      "agentic-coding",
+      "ai-coding",
+      "anthropic",
+      "claude-code",
+      "cli",
+      "command-line-tool",
+      "cost-reduction",
+      "developer-tools",
+      "llm",
+      "open-source",
+      "productivity",
+      "rust",
+      "token-optimization"
+    ],
+    "readme_headings": [
+      "Token Savings (30-min Claude Code Session)",
+      "Installation",
+      "Homebrew (recommended)",
+      "Quick Install (Linux/macOS)",
+      "Cargo",
+      "Pre-built Binaries",
+      "Verify Installation",
+      "Quick Start",
+      "1. Install for your AI tool",
+      "2. Restart your AI tool, then test",
+      "How It Works",
+      "Commands"
+    ],
+    "root_files": [
+      ".claude",
+      ".github",
+      ".gitignore",
+      ".release-please-manifest.json",
+      ".rtk",
+      ".semgrep.yml",
+      "CHANGELOG.md",
+      "CLAUDE.md",
+      "CONTRIBUTING.md",
+      "Cargo.lock",
+      "Cargo.toml",
+      "DISCLAIMER.md",
+      "Formula",
+      "INSTALL.md",
+      "LICENSE",
+      "README.md",
+      "README_es.md",
+      "README_fr.md",
+      "README_ja.md",
+      "README_ko.md",
+      "README_zh.md",
+      "SECURITY.md",
+      "build.rs",
+      "docs",
+      "hooks",
+      "install.sh",
+      "openclaw",
+      "release-please-config.json",
+      "scripts",
+      "src",
+      "tests"
+    ]
+  },
+  "scenes": [
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "repo_url": "github.com/rtk-ai/rtk",
+      "headline_line1": "RTK",
+      "voice": "rtk là thứ developer nên nhìn từ góc độ tích hợp vào dự án thật: nó làm gì, cài ra sao, API dùng thế nào, và có đáng đưa vào stack hay không. CLI proxy that reduces LLM token consumption by 60 90% on common dev commands. Single Rus….",
+      "visual": "Chụp trang repo và highlight README/API.",
+      "headline_line2": "DEV INTEGRATION BRIEF"
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Trước tiên cần hiểu nó nằm ở lớp nào trong stack. Repo có các dấu hiệu như .claude, .github, .gitignore, .release-please-manifest.json, .rtk, nên hãy xem phần cài đặt và API trước.",
+      "visual": "Bento card stack layer, package file và API usage.",
+      "headline_line1": "NẰM Ở LỚP NÀO",
+      "headline_line2": "TRONG TECH STACK?",
+      "bento1_title": "Package",
+      "bento1_desc": ".claude, .github, .gitignore, .release please manifest.json, .rtk",
+      "bento2_title": "API",
+      "bento3_title": "Docs"
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Điểm cần xem ngay là lệnh cài đặt và ví dụ nhỏ nhất. Chỉ cần vài dòng đầu tiên, bạn đã biết thư viện này có dễ thử trong một project phụ hay không.",
+      "visual": "Terminal cài package và snippet code tối thiểu.",
+      "headline_line1": "CÀI ĐẶT",
+      "headline_line2": "RỒI TEST NHANH",
+      "bento1_title": "Install",
+      "bento2_title": "Import",
+      "bento3_title": "Minimal code",
+      "bento4_title": "Output"
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Sau đó mới nói tới điểm khác biệt: API tiện hơn, hiệu năng tốt hơn, hoặc tích hợp được với framework hiện đại. Đừng biến nó thành quảng cáo chung chung.",
+      "visual": "Sơ đồ integration từ app tới library/framework.",
+      "headline_line1": "GIÁ TRỊ CHÍNH",
+      "headline_line2": "NẰM Ở API",
+      "btn_text": "Đọc usage trước khi đưa vào production"
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Checklist trước khi dùng gồm license, release gần nhất, số issue mở, ví dụ code và mức độ bảo trì. Đây là phần rất quan trọng với repo library.",
+      "visual": "Checklist license, release, issues, examples.",
+      "headline_line1": "CHECKLIST",
+      "headline_line2": "TRƯỚC KHI TÍCH HỢP",
+      "bento1_title": "License",
+      "bento1_desc": "Apache License 2.0",
+      "bento2_title": "Release",
+      "bento3_title": "Issues"
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Về tín hiệu cộng đồng, rtk hiện có khoảng 54.433 sao, ngôn ngữ chính là Rust, và đây là điểm nên kiểm tra trước khi đưa vào dự án thật.",
+      "visual": "Thẻ thống kê repo với sao, ngôn ngữ, owner và trạng thái theo dõi.",
+      "headline_line1": "RTK STATS",
+      "headline_line2": "ĐỘ TIN CẬY BAN ĐẦU",
+      "repo_name": "rtk-ai/rtk",
+      "repo_lang": "Rust",
+      "repo_stars": "★ 54.433",
+      "repo_trend": "▲ Repo",
+      "repo_trend_label": "GitHub"
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Cách thử an toàn là tạo một project phụ, copy ví dụ nhỏ nhất, rồi đo xem nó giải quyết đúng vấn đề của mình không.",
+      "visual": "Terminal chạy project phụ.",
+      "headline_line1": "THỬ AN TOÀN",
+      "headline_line2": "TRONG PROJECT PHỤ",
+      "btn_text": "$ git clone github.com/rtk-ai/rtk"
+    },
+    {
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "sfx": "Ding 2.mp3",
+      "voice": "Nếu repo này khớp use case, hãy star để theo dõi update và đọc kỹ docs trước khi đưa vào hệ thống thật.",
+      "visual": "CTA star, docs, follow releases.",
+      "headline_line1": "STAR VÀ ĐỌC DOCS",
+      "headline_line2": "TRƯỚC KHI DÙNG THẬT",
+      "bento1_title": "Star",
+      "bento2_title": "Docs",
+      "bento3_title": "Release",
+      "bento4_title": "Test"
+    }
+  ]
+}

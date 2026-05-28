@@ -1,0 +1,16 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH TU DONG
+Target URL: https://vitejs.dev
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+Step 1: Phan tich URL va tao kich ban JSON...
+
+Gap loi trong qua trinh chay pipeline: Command C:\CONG_VIEC\VNP_HyperFrames\node_modules\node\bin\node.exe failed with exit code 1
+Đang phân tích web URL: https://vitejs.dev/
+
+Không có TAVILY_API_KEY, fallback sang title/meta HTML của URL.
+Lỗi: Không tìm thấy OPENAI_API_KEY hoặc OPENROUTER_API_KEY trong cấu hình .env để chạy luồng sinh kịch bản AI.
+

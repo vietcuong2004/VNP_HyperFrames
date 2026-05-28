@@ -730,24 +730,78 @@
       }
     }
 
+    function mapStatusClass(status) {
+      switch (status) {
+        case 'queued': return 'status-queued';
+        case 'running': return 'status-processing';
+        case 'completed': return 'status-done';
+        case 'failed': return 'status-error';
+        default: return 'status-queued';
+      }
+    }
+
+    function mapStatusText(status) {
+      switch (status) {
+        case 'queued': return 'Queued';
+        case 'running': return 'Processing';
+        case 'completed': return 'Done';
+        case 'failed': return 'Error';
+        default: return status;
+      }
+    }
+
     function createJobCard(job) {
       const grid = document.getElementById('jobsGrid');
+      if (document.getElementById(`job-${job.id}`)) return;
+
       const card = document.createElement('div');
       card.className = 'job-card';
       card.id = `job-${job.id}`;
+      
+      const statusClass = mapStatusClass(job.status || 'queued');
+      const statusText = mapStatusText(job.status || 'queued');
+      const hasVideo = job.videoPath ? 'block' : 'none';
+
       card.innerHTML = `
         <h4 style="color: #fff; margin-bottom: 5px; font-size: 18px;">${job.name}</h4>
         <div class="job-url">${job.url}</div>
-        <div class="job-status status-queued" id="status-${job.id}">Queued</div>
+        <div class="job-status ${statusClass}" id="status-${job.id}">${statusText}</div>
         
-        <div class="job-video" id="video-container-${job.id}">
-          <video id="video-${job.id}" controls playsinline preload="metadata"></video>
+        <div class="job-video" id="video-container-${job.id}" style="display: ${hasVideo}">
+          <video id="video-${job.id}" src="${job.videoPath || ''}" controls playsinline preload="metadata"></video>
         </div>
       `;
       grid.appendChild(card);
     }
 
+    async function loadExistingJobs() {
+      try {
+        const res = await fetch('/api/jobs');
+        const jobs = await res.json();
+        const sortedJobs = [...jobs].reverse();
+        sortedJobs.forEach(job => {
+          job.name = `Video ${jobCounter++}`;
+          createJobCard(job);
+        });
+
+        const runningCount = jobs.filter(j => j.status === 'running').length;
+        if (runningCount > 0) {
+          activeJobs = runningCount;
+          const btn = document.getElementById('generateBtn');
+          btn.disabled = true;
+          btn.innerText = `Running... (${activeJobs} active)`;
+        }
+      } catch (err) {
+        console.error("Failed to load existing jobs:", err);
+      }
+    }
+
     socket.on("job_start", ({ id, url }) => {
+      let card = document.getElementById(`job-${id}`);
+      if (!card) {
+        const job = { id, url, status: 'running', name: `Video ${jobCounter++}` };
+        createJobCard(job);
+      }
       const statusEl = document.getElementById(`status-${id}`);
       if (statusEl) {
         statusEl.className = 'job-status status-processing';
@@ -759,6 +813,7 @@
     socket.on("job_output", ({ id, text }) => {
       appendLog(text);
     });
+
     socket.on("job_done", ({ id, videoPath }) => {
       const statusEl = document.getElementById(`status-${id}`);
       if (statusEl) {
@@ -771,13 +826,14 @@
         const videoEl = document.getElementById(`video-${id}`);
 
         console.log('[job_done] videoPath:', videoPath);
-        videoContainer.style.display = 'block';
-        videoEl.setAttribute('src', videoPath);
-        videoEl.load();
+        if (videoContainer) videoContainer.style.display = 'block';
+        if (videoEl) {
+          videoEl.setAttribute('src', videoPath);
+          videoEl.load();
+        }
       }
       appendLog(`\n[SUCCESS] Job completed. Video: ${videoPath || 'path not found'}\n`);
 
-      // Re-enable button when all jobs done
       activeJobs = Math.max(0, activeJobs - 1);
       if (activeJobs === 0) {
         const btn = document.getElementById('generateBtn');
@@ -797,7 +853,6 @@
       }
       appendLog(`\n[ERROR] ${error}\n`);
 
-      // Re-enable button even on error
       activeJobs = Math.max(0, activeJobs - 1);
       if (activeJobs === 0) {
         const btn = document.getElementById('generateBtn');
@@ -864,6 +919,7 @@
     }
 
     refreshEnvironment();
+    loadExistingJobs();
   </script>
 </body>
 

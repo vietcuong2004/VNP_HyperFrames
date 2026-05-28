@@ -87,13 +87,13 @@ test("normalizeGithubScenes replaces generic schema headlines with repo-aware co
     scenes.map((scene) => [scene.headline_line1, scene.headline_line2]),
     [
       ["SUPERPOWERS", "REPO GITHUB"],
-      ["USE CASE", "SUPERPOWERS GIUP GI"],
-      ["RUN SUPERPOWERS", "BAT DAU AN TOAN"],
-      ["DIEM MANH", "SUPERPOWERS NOI BAT"],
-      ["CHECKLIST", "TRUOC KHI DUNG"],
-      ["STATS", "TIN HIEU GITHUB"],
-      ["CLONE SUPERPOWERS", "CHAY THU RIENG"],
-      ["LUU REPO", "DOC README KY"],
+      ["USE CASE", "SUPERPOWERS GIÚP GÌ"],
+      ["RUN SUPERPOWERS", "BẮT ĐẦU AN TOÀN"],
+      ["ĐIỂM MẠNH", "SUPERPOWERS NỔI BẬT"],
+      ["CHECKLIST", "TRƯỚC KHI DÙNG"],
+      ["STATS", "TÍN HIỆU GITHUB"],
+      ["CLONE SUPERPOWERS", "CHẠY THỬ RIÊNG"],
+      ["LƯU REPO", "ĐỌC README KỸ"],
     ],
   );
 });

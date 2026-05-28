@@ -1,0 +1,162 @@
+{
+  "template": "G3_web",
+  "subtemplate": "template3",
+  "platform": "web",
+  "video_format": "web_tool_overview",
+  "visual_theme": "template3",
+  "duration": 36,
+  "scenes": [
+    {
+      "scene": 1,
+      "audio_start": 0,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "transcript": [],
+      "repo_url": "developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+      "headline_line1": "FETCH API",
+      "headline_line2": "CAN KIEM TRA GI?"
+    },
+    {
+      "scene": 2,
+      "audio_start": 6,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "transcript": [],
+      "headline_line1": "ACTION BRIEF",
+      "headline_line2": "DUNG TRONG APP",
+      "cards": [
+        {
+          "title": "Value",
+          "body": "Goi API khong can thu vien ngoai."
+        },
+        {
+          "title": "Fit",
+          "body": "Tot cho request don gian va app hien dai."
+        },
+        {
+          "title": "Gap",
+          "body": "Can tu viet retry, timeout va error layer."
+        },
+        {
+          "title": "Decision",
+          "body": "Dung neu team muon API native."
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "audio_start": 12,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "transcript": [],
+      "headline_line1": "DEMO FLOW",
+      "headline_line2": "CHAY 5 PHUT",
+      "steps": [
+        {
+          "title": "GET",
+          "body": "Goi endpoint mau va in status."
+        },
+        {
+          "title": "Parse",
+          "body": "Doc JSON khi response.ok."
+        },
+        {
+          "title": "Fail",
+          "body": "Thu endpoint loi de xem handler."
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "audio_start": 18,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "transcript": [],
+      "headline_line1": "RISKS",
+      "headline_line2": "TRUOC KHI SHIP",
+      "cards": [
+        {
+          "title": "Timeout",
+          "body": "fetch khong co timeout mac dinh."
+        },
+        {
+          "title": "Retry",
+          "body": "Can tu them retry neu API chap chon."
+        },
+        {
+          "title": "CORS",
+          "body": "Loi cross-origin can sua server."
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "audio_start": 24,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "transcript": [],
+      "headline_line1": "NEXT STEP",
+      "headline_line2": "VIET HELPER",
+      "btn_text": "Build fetchJson()",
+      "steps": [
+        {
+          "title": "Input",
+          "body": "Nhan URL va option ro rang."
+        },
+        {
+          "title": "Status",
+          "body": "Nem loi khi response.ok false."
+        },
+        {
+          "title": "Log",
+          "body": "Ghi lai status va message de debug."
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "audio_start": 30,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba showing surprise.png"
+      ],
+      "transcript": [],
+      "headline_line1": "SHIP DECISION",
+      "headline_line2": "NATIVE HAY LIB",
+      "cards": [
+        {
+          "title": "Native",
+          "body": "Dung fetch neu nhu cau gon."
+        },
+        {
+          "title": "Library",
+          "body": "Can cache/retry phuc tap thi can lib."
+        },
+        {
+          "title": "Test",
+          "body": "Viet test cho helper request."
+        },
+        {
+          "title": "Review",
+          "body": "Doi chieu docs MDN khi browser doi."
+        }
+      ]
+    }
+  ]
+}

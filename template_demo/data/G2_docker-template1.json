@@ -1,0 +1,116 @@
+{
+  "template": "G2_docker",
+  "subtemplate": "template1",
+  "platform": "docker",
+  "video_format": "container_quick_start",
+  "visual_theme": "template1",
+  "duration": 48,
+  "scenes": [
+    {
+      "scene": 1,
+      "audio_start": 0,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "transcript": [],
+      "layout": "intro_docker",
+      "repo_url": "hub.docker.com/_/nginx",
+      "headline_line1": "NGINX IMAGE",
+      "headline_line2": "CHAY CONTAINER"
+    },
+    {
+      "scene": 2,
+      "audio_start": 6,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "transcript": [],
+      "layout": "docker_tag",
+      "headline_line1": "QUICK START",
+      "headline_line2": "PULL ROI RUN",
+      "btn_text": "$ docker pull nginx:1.27-alpine",
+      "steps": [
+        {
+          "title": "Pull",
+          "body": "Lay image voi tag cu the, tranh latest."
+        },
+        {
+          "title": "Run",
+          "body": "Map cong local de test trang mac dinh."
+        },
+        {
+          "title": "Stop",
+          "body": "Dung container sau khi kiem tra."
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "audio_start": 12,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "transcript": [],
+      "layout": "docker_config",
+      "headline_line1": "CONFIG CO BAN",
+      "headline_line2": "PORT VA VOLUME",
+      "bento1_title": "Port",
+      "bento1_desc": "-p 8080:80 de xem local.",
+      "bento2_title": "Volume",
+      "bento2_desc": "Mount thu muc html o che do read-only.",
+      "bento3_title": "Logs",
+      "bento3_desc": "Doc log khi container khoi dong loi."
+    },
+    {
+      "scene": 4,
+      "audio_start": 18,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "transcript": [],
+      "layout": "terminal_docker",
+      "headline_line1": "RUN LOCAL",
+      "headline_line2": "THU TREN MAY PHU",
+      "btn_text": "$ docker run --rm -p 8080:80 nginx:1.27-alpine"
+    },
+    {
+      "scene": 5,
+      "audio_start": 24,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "transcript": [],
+      "layout": "outro_docker",
+      "headline_line1": "TRUOC PROD",
+      "headline_line2": "PIN TAG VA TEST",
+      "cards": [
+        {
+          "title": "Pin tag",
+          "body": "Khong deploy bang latest."
+        },
+        {
+          "title": "Config",
+          "body": "Luu nginx.conf trong repo."
+        },
+        {
+          "title": "Health",
+          "body": "Them healthcheck neu chay dai han."
+        },
+        {
+          "title": "Update",
+          "body": "Test image moi truoc khi thay."
+        }
+      ]
+    }
+  ]
+}

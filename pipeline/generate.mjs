@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { resolveTemplatePaths } from './templateResolver.mjs';
 
 function stripNetworkCssImports(css) {
   return css.replace(/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com\/[^'"]+['"]\);\s*/g, '');
@@ -23,26 +24,34 @@ async function generate() {
 
   const appRoot = process.env.APP_ROOT || process.cwd();
   const outputPath = process.env.COMPOSITION_PATH || path.join(process.cwd(), 'index.html');
-  const templatePath = 'file://' + path.join(appRoot, 'templates', templateName, 'template.mjs').replace(/\\/g, '/');
-  const stylePath = path.join(appRoot, 'templates', templateName, 'style.css');
+  const templatePaths = resolveTemplatePaths({
+    appRoot,
+    templateName,
+    subtemplateName: data.subtemplate,
+    templateVariant: data.template_variant,
+  });
   
   let templateModule;
   try {
-    templateModule = await import(templatePath);
+    templateModule = await import(templatePaths.templateImportPath);
   } catch (e) {
     console.error('Error loading template module:', e);
     process.exit(1);
   }
 
   let styleContent = '';
-  if (fs.existsSync(stylePath)) {
-    styleContent = stripNetworkCssImports(fs.readFileSync(stylePath, 'utf-8'));
+  if (fs.existsSync(templatePaths.stylePath)) {
+    styleContent = fs.readFileSync(templatePaths.stylePath, 'utf-8');
+    if (styleContent.startsWith('\uFEFF')) {
+      styleContent = styleContent.slice(1);
+    }
+    styleContent = stripNetworkCssImports(styleContent);
   }
 
   const html = templateModule.default(data, styleContent);
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, html, 'utf-8');
-  console.log('Successfully generated ' + outputPath + ' using template: ' + templateName);
+  console.log('Successfully generated ' + outputPath + ' using template: ' + templateName + '/' + templatePaths.variantName);
 }
 
 generate();

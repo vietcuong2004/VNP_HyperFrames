@@ -2,13 +2,15 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 
-const css = readFileSync(new URL("../templates/G1_github/style.css", import.meta.url), "utf8");
+const css = readFileSync(new URL("../templates/G1_github/template1/style.css", import.meta.url), "utf8");
 
 test("G1_github uses local Vietnamese-safe font stack for headlines", () => {
   assert.doesNotMatch(css, /fonts\.googleapis\.com/);
-  assert.match(css, /font-family:\s*"Segoe UI"/);
-  assert.match(css, /\.headline-line1[\s\S]*font-family:\s*"Segoe UI"/);
-  assert.match(css, /\.headline-line2[\s\S]*font-family:\s*"Segoe UI"/);
+  assert.doesNotMatch(css, /Space Grotesk/);
+  assert.match(css, /@font-face[\s\S]*be-vietnam-pro-vietnamese-800-normal\.woff2/);
+  assert.match(css, /--font-sans:\s*"Be Vietnam Pro",\s*"Be Vietnam",\s*Arial,\s*"Liberation Sans",\s*"Noto Sans",\s*"Segoe UI",\s*sans-serif/);
+  assert.match(css, /\.headline-line1[\s\S]*font-family:\s*var\(--font-sans\)/);
+  assert.match(css, /\.headline-line2[\s\S]*font-family:\s*var\(--font-sans\)/);
 });
 
 test("G1_github headline line-height leaves room for Vietnamese diacritics", () => {

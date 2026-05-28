@@ -1,0 +1,162 @@
+{
+  "template": "G3_web",
+  "subtemplate": "template1",
+  "platform": "web",
+  "video_format": "web_context_digest",
+  "visual_theme": "template1",
+  "duration": 36,
+  "scenes": [
+    {
+      "scene": 1,
+      "audio_start": 0,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba cheerfully talking.png"
+      ],
+      "transcript": [],
+      "repo_url": "developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+      "headline_line1": "FETCH API",
+      "headline_line2": "CAN KIEM TRA GI?"
+    },
+    {
+      "scene": 2,
+      "audio_start": 6,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba thinking.png"
+      ],
+      "transcript": [],
+      "headline_line1": "TOM TAT",
+      "headline_line2": "NOI DUNG CHINH",
+      "cards": [
+        {
+          "title": "What",
+          "body": "Fetch API giup goi HTTP request trong trinh duyet."
+        },
+        {
+          "title": "Who",
+          "body": "Frontend dev can lay du lieu tu API."
+        },
+        {
+          "title": "Caution",
+          "body": "HTTP 4xx khong tu dong nem exception."
+        },
+        {
+          "title": "Next",
+          "body": "Chay mot request nho de kiem tra."
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "audio_start": 12,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba explaining something.png"
+      ],
+      "transcript": [],
+      "headline_line1": "BA CAU HOI",
+      "headline_line2": "TRUOC KHI DUNG",
+      "steps": [
+        {
+          "title": "What",
+          "body": "API nay thay the luong request nao?"
+        },
+        {
+          "title": "Why",
+          "body": "Co can thu vien ngoai khong?"
+        },
+        {
+          "title": "Check",
+          "body": "CORS va browser support ra sao?"
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "audio_start": 18,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba wearing stylish glasses.png"
+      ],
+      "transcript": [],
+      "headline_line1": "DIEM CHINH",
+      "headline_line2": "RUT TU MDN",
+      "cards": [
+        {
+          "title": "Promise",
+          "body": "fetch tra promise va can doc body rieng."
+        },
+        {
+          "title": "Error",
+          "body": "Network error moi reject."
+        },
+        {
+          "title": "CORS",
+          "body": "Phu thuoc header tu server."
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "audio_start": 24,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba using a magnifying glass to look closely.png"
+      ],
+      "transcript": [],
+      "headline_line1": "HANH DONG",
+      "headline_line2": "MO DOCS GOC",
+      "btn_text": "Doc MDN roi chay vi du",
+      "steps": [
+        {
+          "title": "Open",
+          "body": "Mo trang goc de doi chieu cu phap."
+        },
+        {
+          "title": "Test",
+          "body": "Goi endpoint nho truoc."
+        },
+        {
+          "title": "Wrap",
+          "body": "Viet helper xu ly loi nhat quan."
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "audio_start": 30,
+      "audio_duration": 6,
+      "duration": 6,
+      "assets": [
+        "character shiba showing surprise.png"
+      ],
+      "transcript": [],
+      "headline_line1": "LUU LINK",
+      "headline_line2": "KIEM CHUNG LAI",
+      "cards": [
+        {
+          "title": "Nguon",
+          "body": "MDN la nguon chinh."
+        },
+        {
+          "title": "Doc",
+          "body": "Doc error handling ky."
+        },
+        {
+          "title": "Apply",
+          "body": "Dung trong app sau khi test."
+        },
+        {
+          "title": "Share",
+          "body": "Gui cho team khi can chuan hoa request."
+        }
+      ]
+    }
+  ]
+}

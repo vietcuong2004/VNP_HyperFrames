@@ -1,0 +1,137 @@
+
+==================================================
+KHOI CHAY PIPELINE TAO VIDEO TECH DONG - AI AGENTS
+Dau vao: https://supabase.com
+App root: C:\CONG_VIEC\VNP_HyperFrames
+Workspace: C:\CONG_VIEC\VNP_HyperFrames
+==================================================
+
+Step 1: Sinh kich ban JSON qua các content generator...
+Đang phân tích web URL: https://supabase.com/
+Không có TAVILY_API_KEY, fallback sang title/meta HTML của URL.
+> Đang gọi custom API để sinh kịch bản Web cho format: web_tool_overview...
+[AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=true)...
+[Pipeline] Da luu file kich ban JSON tai: C:\CONG_VIEC\VNP_HyperFrames\data\agent-script-https-supabase-com-mpkzdz80.json
+
+Step 2: Sinh giong doc (Edge TTS) va phu de (Whisper/LarVoice Subtitle)...
+
+--- Xy ly Canh 1/6 ---
+[Pipeline] Sinh giong doc Canh 1...
+[Agent Log] TTS Edge: "Supabase là nền tảng phát triển ứng dụng mã nguồn mở dựa trê..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 12.0s audio (71 KB) | 4.9s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 1...
+[Agent Log] Whisper: scene_1.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 1...
+[Agent Log] AI SRT fix cảnh 1 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 1: OK (1 blocks)
+
+--- Xy ly Canh 2/6 ---
+[Pipeline] Sinh giong doc Canh 2...
+[Agent Log] TTS Edge: "Supabase là giải pháp thay thế mã nguồn mở cho Firebase, tập..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 16.7s audio (98 KB) | 7.9s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 2...
+[Agent Log] Whisper: scene_2.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 2...
+[Agent Log] AI SRT fix cảnh 2 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 2: OK (1 blocks)
+
+--- Xy ly Canh 3/6 ---
+[Pipeline] Sinh giong doc Canh 3...
+[Agent Log] TTS Edge: "Ba câu hỏi quan trọng khi đánh giá Supabase: Nó khác gì Fire..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 11.7s audio (69 KB) | 7.9s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 3...
+[Agent Log] Whisper: scene_3.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 3...
+[Agent Log] AI SRT fix cảnh 3 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 3: OK (1 blocks)
+
+--- Xy ly Canh 4/6 ---
+[Pipeline] Sinh giong doc Canh 4...
+[Agent Log] TTS Edge: "Điểm nổi bật của Supabase là instant APIs tự động từ schema,..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 15.6s audio (91 KB) | 8.0s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 4...
+[Agent Log] Whisper: scene_4.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 4...
+[Agent Log] AI SRT fix cảnh 4 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 4: OK (1 blocks)
+
+--- Xy ly Canh 5/6 ---
+[Pipeline] Sinh giong doc Canh 5...
+[Agent Log] TTS Edge: "Hành động tiếp theo: Truy cập supabase.com để tạo project mi..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 13.9s audio (82 KB) | 7.3s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 5...
+[Agent Log] Whisper: scene_5.mp3 (lang=vi)
+[Pipeline] Ra soat loi chinh ta phu de Canh 5...
+[Agent Log] AI SRT fix cảnh 5 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Agent Log] ✓ AI SRT fix cảnh 5: OK (1 blocks)
+
+--- Xy ly Canh 6/6 ---
+[Pipeline] Sinh giong doc Canh 6...
+[Agent Log] TTS Edge: "Supabase là lựa chọn mạnh mẽ cho developer muốn backend đầy ..." (voice=vi-VN-NamMinhNeural, lang=vi)
+[Agent Log] TTS Edge xong: 14.5s audio (85 KB) | 7.6s
+[Pipeline] Khong co sub tu LarVoice, tien hanh chay Whisper cho Canh 6...
+[Agent Log] Whisper: scene_6.mp3 (lang=vi)
+[Pipeline] Whisper loi: Không tìm thấy whisper model tại C:\CONG_VIEC\VNP_HyperFrames\binaries\whisper\ggml-base.bin.
+Chạy: node scripts/download-binaries.mjs để tải.. Lay sub tu am thanh fail, dung fallback.
+[Pipeline] Ra soat loi chinh ta phu de Canh 6...
+[Agent Log] AI SRT fix cảnh 6 (VI, 1 blocks)...
+[Agent Log] [AIRouter] Đang gọi model "claude-sonnet-4-6" qua custom API (isJson=false)...
+[Agent Log] ✓ AI SRT fix cảnh 6: OK (1 blocks)
+
+Step 3: Bien dich index.html composition chinh tu template...
+[Pipeline] Da ghi de index.html composition tai: C:\CONG_VIEC\VNP_HyperFrames\index.html
+
+Step 4: Kiem tra composition bang HyperFrames...
+◆  Validating VNP_HyperFrames in headless Chrome
+◇  No console errors · 39 text elements pass WCAG AA
+
+Step 5: Ket xuat video MP4...
+
+◆  Rendering VNP_HyperFrames → C:\CONG_VIEC\VNP_HyperFrames\renders\VNP_HyperFrames_2026-05-25_16-07-14.mp4
+   30fps · standard · 2 workers
+   GPU: browser GPU (auto-detect)
+
+[?25l│
+◇  Browser: cache
+[?25h
+  ⚠ composition_file_too_large: This HTML composition file has 367 lines. Smaller sub-compositions are easier to read, iterate on, and diff.
+    Fix: Split coherent scenes or layers into separate .html files under compositions/, then mount them from the parent with data-composition-src so each file stays small enough to inspect, revise, and validate independently.
+  Continuing render despite lint issues. Use --strict to block.
+
+[2K  █░░░░░░░░░░░░░░░░░░░░░░░░  5%  Compiling composition[Compiler] Fetched 36 font face(s) for "Plus Jakarta Sans" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\plus-jakarta-sans)
+[Compiler] Fetched 15 font face(s) for "Space Grotesk" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\space-grotesk)
+[Compiler] Fetched 77 font face(s) for "Inter" from Google Fonts (cached to C:\Users\ADMIN\.cache\hyperframes\fonts\inter)
+[Compiler] Injected deterministic @font-face rules for 3 requested font families
+[INFO] Compiled composition metadata {"entryFile":"index.html","staticDuration":84.456,"width":1080,"height":1920,"videoCount":0,"audioCount":10,"renderModeHints":{"recommendScreenshot":false,"reasons":[]}}
+[2K  ██░░░░░░░░░░░░░░░░░░░░░░░  10%  Extracting video frames[INFO] [Render] No HDR sources detected — rendering SDR
+[2K  █████░░░░░░░░░░░░░░░░░░░░  20%  Processing audio tracks[2K  ██████░░░░░░░░░░░░░░░░░░░  25%  Starting frame capture[INFO] streaming-encode gate {"enabled":false,"configFlag":true,"outputFormat":"mp4","workerCount":2,"durationSeconds":84.456,"maxDurationSeconds":240}
+[hyperframes] browserGpuMode auto → hardware (WebGL probe succeeded)
+[2K  ██████░░░░░░░░░░░░░░░░░░░  26%  Capturing frame 30/2534 (2 workers)[2K  ██████░░░░░░░░░░░░░░░░░░░  26%  Capturing frame 60/2534 (2 workers)[2K  ██████░░░░░░░░░░░░░░░░░░░  27%  Capturing frame 90/2534 (2 workers)[2K  ██████░░░░░░░░░░░░░░░░░░░  27%  Capturing frame 120/2534 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  28%  Capturing frame 150/2534 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  28%  Capturing frame 180/2534 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  29%  Capturing frame 210/2534 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  29%  Capturing frame 240/2534 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  30%  Capturing frame 270/2534 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  30%  Capturing frame 300/2534 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  31%  Capturing frame 330/2534 (2 workers)[2K  ███████░░░░░░░░░░░░░░░░░░  31%  Capturing frame 360/2534 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  32%  Capturing frame 390/2534 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  32%  Capturing frame 420/2534 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  33%  Capturing frame 450/2534 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  34%  Capturing frame 480/2534 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  34%  Capturing frame 510/2534 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  35%  Capturing frame 540/2534 (2 workers)[2K  ████████░░░░░░░░░░░░░░░░░  35%  Capturing frame 570/2534 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  36%  Capturing frame 600/2534 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  36%  Capturing frame 630/2534 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  37%  Capturing frame 660/2534 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  37%  Capturing frame 690/2534 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  38%  Capturing frame 720/2534 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  38%  Capturing frame 750/2534 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  39%  Capturing frame 780/2534 (2 workers)[2K  █████████░░░░░░░░░░░░░░░░  39%  Capturing frame 810/2534 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  40%  Capturing frame 840/2534 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  40%  Capturing frame 870/2534 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  41%  Capturing frame 900/2534 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  42%  Capturing frame 930/2534 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  42%  Capturing frame 960/2534 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  43%  Capturing frame 990/2534 (2 workers)[2K  ██████████░░░░░░░░░░░░░░░  43%  Capturing frame 1020/2534 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  44%  Capturing frame 1050/2534 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  44%  Capturing frame 1080/2534 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  45%  Capturing frame 1110/2534 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  45%  Capturing frame 1140/2534 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  46%  Capturing frame 1170/2534 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  46%  Capturing frame 1200/2534 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  47%  Capturing frame 1230/2534 (2 workers)[2K  ███████████░░░░░░░░░░░░░░  47%  Capturing frame 1260/2534 (2 workers)[2K  ████████████░░░░░░░░░░░░░  48%  Capturing frame 1290/2534 (2 workers)[2K  ████████████░░░░░░░░░░░░░  48%  Capturing frame 1320/2534 (2 workers)[2K  ████████████░░░░░░░░░░░░░  49%  Capturing frame 1350/2534 (2 workers)[2K  ████████████░░░░░░░░░░░░░  50%  Capturing frame 1380/2534 (2 workers)[2K  ████████████░░░░░░░░░░░░░  50%  Capturing frame 1410/2534 (2 workers)[2K  ████████████░░░░░░░░░░░░░  51%  Capturing frame 1440/2534 (2 workers)[2K  ████████████░░░░░░░░░░░░░  51%  Capturing frame 1470/2534 (2 workers)[2K  █████████████░░░░░░░░░░░░  52%  Capturing frame 1500/2534 (2 workers)[2K  █████████████░░░░░░░░░░░░  52%  Capturing frame 1530/2534 (2 workers)[2K  █████████████░░░░░░░░░░░░  53%  Capturing frame 1560/2534 (2 workers)[2K  █████████████░░░░░░░░░░░░  53%  Capturing frame 1590/2534 (2 workers)[2K  █████████████░░░░░░░░░░░░  54%  Capturing frame 1620/2534 (2 workers)[2K  █████████████░░░░░░░░░░░░  54%  Capturing frame 1650/2534 (2 workers)[2K  █████████████░░░░░░░░░░░░  55%  Capturing frame 1680/2534 (2 workers)[2K  █████████████░░░░░░░░░░░░  55%  Capturing frame 1710/2534 (2 workers)[2K  ██████████████░░░░░░░░░░░  56%  Capturing frame 1740/2534 (2 workers)[2K  ██████████████░░░░░░░░░░░  56%  Capturing frame 1770/2534 (2 workers)[2K  ██████████████░░░░░░░░░░░  57%  Capturing frame 1800/2534 (2 workers)[2K  ██████████████░░░░░░░░░░░  57%  Capturing frame 1830/2534 (2 workers)[2K  ██████████████░░░░░░░░░░░  58%  Capturing frame 1860/2534 (2 workers)[2K  ██████████████░░░░░░░░░░░  59%  Capturing frame 1890/2534 (2 workers)[2K  ██████████████░░░░░░░░░░░  59%  Capturing frame 1920/2534 (2 workers)[2K  ███████████████░░░░░░░░░░  60%  Capturing frame 1950/2534 (2 workers)[2K  ███████████████░░░░░░░░░░  60%  Capturing frame 1980/2534 (2 workers)[2K  ███████████████░░░░░░░░░░  61%  Capturing frame 2010/2534 (2 workers)[2K  ███████████████░░░░░░░░░░  61%  Capturing frame 2040/2534 (2 workers)[2K  ███████████████░░░░░░░░░░  62%  Capturing frame 2070/2534 (2 workers)[2K  ███████████████░░░░░░░░░░  62%  Capturing frame 2100/2534 (2 workers)[2K  ███████████████░░░░░░░░░░  63%  Capturing frame 2130/2534 (2 workers)[2K  ███████████████░░░░░░░░░░  63%  Capturing frame 2160/2534 (2 workers)[2K  ████████████████░░░░░░░░░  64%  Capturing frame 2190/2534 (2 workers)[2K  ████████████████░░░░░░░░░  64%  Capturing frame 2220/2534 (2 workers)[2K  ████████████████░░░░░░░░░  65%  Capturing frame 2250/2534 (2 workers)[2K  ████████████████░░░░░░░░░  65%  Capturing frame 2280/2534 (2 workers)[2K  ████████████████░░░░░░░░░  66%  Capturing frame 2310/2534 (2 workers)[2K  ████████████████░░░░░░░░░  67%  Capturing frame 2340/2534 (2 workers)[2K  ████████████████░░░░░░░░░  67%  Capturing frame 2370/2534 (2 workers)[2K  █████████████████░░░░░░░░  68%  Capturing frame 2400/2534 (2 workers)[2K  █████████████████░░░░░░░░  68%  Capturing frame 2430/2534 (2 workers)[2K  █████████████████░░░░░░░░  69%  Capturing frame 2460/2534 (2 workers)[2K  █████████████████░░░░░░░░  69%  Capturing frame 2490/2534 (2 workers)[2K  █████████████████░░░░░░░░  70%  Capturing frame 2520/2534 (2 workers)[2K  █████████████████░░░░░░░░  70%  Capturing frame 2534/2534 (2 workers)[2K  ██████████████████░░░░░░░  75%  Encoding video[2K  ██████████████████████░░░  90%  Assembling final video[2K  █████████████████████████  100%  Render complete
+◇  C:\CONG_VIEC\VNP_HyperFrames\renders\VNP_HyperFrames_2026-05-25_16-07-14.mp4
+   24.5 MB · 4m 12.0s · completed
+
+Step 6: Doi ten video theo dung dinh dang...
+-> agent-video-https-supabase-com_25-05-2026-16-11.mp4
+
+Step 7: Don dep file am thanh tam...
+Da xoa 12 file tam trong thu muc assets/audio.
+
+==================================================
+AGENT PIPELINE DA HOAN THANH CONG!
+==================================================
+
